@@ -1,0 +1,21 @@
+{
+  "grade": 6,
+  "field": "algebra",
+  "difficulty": 5,
+  "is_geometry": false,
+  "geometry_style": null,
+  "source": "Sigma Magazine – Problems Section",
+  "language_original": "mk",
+  "translated": false,
+  "tags": [
+    "telescoping_sum",
+    "fractions",
+    "olympiad"
+  ],
+  "problem_title": "Телескопска сума со квадрати",
+  "problem_text_mk": "string",
+  "problem_text_original": null,
+  "analysis_hint": "string",
+  "solution_strategy": "string",
+  "notes": null
+}
