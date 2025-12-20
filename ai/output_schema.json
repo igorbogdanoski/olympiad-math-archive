@@ -1,21 +1,36 @@
 {
-  "grade": 6,
-  "field": "algebra",
-  "difficulty": 5,
-  "is_geometry": false,
-  "geometry_style": null,
-  "source": "Sigma Magazine – Problems Section",
-  "language_original": "mk",
-  "translated": false,
-  "tags": [
-    "telescoping_sum",
-    "fractions",
-    "olympiad"
-  ],
-  "problem_title": "Телескопска сума со квадрати",
-  "problem_text_mk": "string",
-  "problem_text_original": null,
-  "analysis_hint": "string",
-  "solution_strategy": "string",
-  "notes": null
+  "type": "object",
+  "properties": {
+    "grade": { "type": "integer", "minimum": 1, "maximum": 12 },
+    "field": { "type": "string", "enum": ["algebra", "geometry", "number_theory", "combinatorics", "arithmetic", "logic"] },
+    "difficulty": { "type": "integer", "minimum": 1, "maximum": 10 },
+    "source": { "type": "string" },
+    "problem_id": { "type": "string" },
+    "language_original": { "type": "string" },
+    "translated": { "type": "boolean" },
+    
+    "primary_skill": { 
+      "type": "string", 
+      "description": "The main cognitive method used (e.g., 'invariants', 'pigeonhole_principle', 'telescoping', 'angle_chasing'). NOT the topic." 
+    },
+    "related_skills": { 
+      "type": "array", 
+      "items": { "type": "string" } 
+    },
+    "tags": { 
+      "type": "array", 
+      "items": { "type": "string" },
+      "description": "Mathematical topics (e.g., 'percentages', 'triangles', 'primes')."
+    },
+    
+    "is_geometry": { "type": "boolean" },
+    "geometry_style": { "type": "string", "enum": ["synthetic", "analytic", "mixed", null] },
+    
+    "problem_title": { "type": "string" },
+    "problem_text_mk": { "type": "string" },
+    "analysis_hint": { "type": "string", "description": "Intuition and strategy before solving." },
+    "solution_content": { "type": "string", "description": "Full solution in Markdown/LaTeX." },
+    "pedagogical_notes": { "type": "string", "description": "Notes for teachers/tutors." }
+  },
+  "required": ["grade", "field", "difficulty", "source", "primary_skill", "tags", "problem_title", "problem_text_mk", "solution_content"]
 }
