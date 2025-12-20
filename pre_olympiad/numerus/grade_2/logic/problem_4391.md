@@ -2,7 +2,7 @@
 grade: 2
 field: logic
 difficulty: 2
-source: "Numerus LI 51-2 (2025/2026), problem 4391". :contentReference[oaicite:1]{index=1}
+source: "Numerus LI 51-2 (2025/2026), problem 4391". [oaicite:1]{index=1}
 language_original: mk
 tags:
   - addition

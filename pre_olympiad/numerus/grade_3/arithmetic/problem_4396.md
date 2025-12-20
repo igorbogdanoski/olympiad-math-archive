@@ -2,7 +2,7 @@
 grade: 3
 field: arithmetic
 difficulty: 3
-source: "Numerus LI 51-2 (2025/2026), problem 4396". :contentReference[oaicite:3]{index=3}
+source: "Numerus LI 51-2 (2025/2026), problem 4396". [oaicite:3]{index=3}
 language_original: mk
 tags:
   - word_problem

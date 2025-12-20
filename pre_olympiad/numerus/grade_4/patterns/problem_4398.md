@@ -2,7 +2,7 @@
 grade: 4
 field: patterns
 difficulty: 3
-source: "Numerus LI 51-2 (2025/2026), problem 4398". :contentReference[oaicite:1]{index=1}
+source: "Numerus LI 51-2 (2025/2026), problem 4398". [oaicite:1]{index=1}
 problem_id: 4398
 language_original: mk
 tags:

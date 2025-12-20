@@ -2,7 +2,7 @@
 grade: 4
 field: logic
 difficulty: 3
-source: "Numerus LI 51-2 (2025/2026), problem 4397". :contentReference[oaicite:0]{index=0}
+source: "Numerus LI 51-2 (2025/2026), problem 4397". [oaicite:0]{index=0}
 problem_id: 4397
 language_original: mk
 tags:

@@ -2,7 +2,7 @@
 grade: 1
 field: logic
 difficulty: 1
-source: "Numerus LI 51-2 (2025/2026), problem 4386 (page 33)". :contentReference[oaicite:2]{index=2}
+source: "Numerus LI 51-2 (2025/2026), problem 4386 (page 33)". [oaicite:2]{index=2}
 language_original: mk
 tags:
   - number_sense

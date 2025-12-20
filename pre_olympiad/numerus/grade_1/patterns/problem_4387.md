@@ -2,7 +2,7 @@
 grade: 1
 field: patterns
 difficulty: 1
-source: "Numerus LI 51-2 (2025/2026), problem 4387 (page 33)". :contentReference[oaicite:3]{index=3}
+source: "Numerus LI 51-2 (2025/2026), problem 4387 (page 33)". [oaicite:3]{index=3}
 language_original: mk
 tags:
   - counting
