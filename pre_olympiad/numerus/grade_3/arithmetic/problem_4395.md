@@ -2,7 +2,7 @@
 grade: 3
 field: arithmetic
 difficulty: 2
-source: "Numerus LI 51-2 (2025/2026), problem 4395". [oaicite:2]{index=2}
+source: "Numerus LI 51-2 (2025/2026), problem 4395"
 language_original: mk
 tags:
   - sequences

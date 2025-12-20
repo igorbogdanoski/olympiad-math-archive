@@ -2,7 +2,7 @@
 grade: 4
 field: arithmetic
 difficulty: 3
-source: "Numerus LI 51-2 (2025/2026), problem 4399". [oaicite:2]{index=2}
+source: "Numerus LI 51-2 (2025/2026), problem 4399"
 problem_id: 4399
 language_original: mk
 tags:

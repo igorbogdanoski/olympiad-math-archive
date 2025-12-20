@@ -2,7 +2,7 @@
 grade: 2
 field: arithmetic
 difficulty: 2
-source: "Numerus LI 51-2 (2025/2026), problem 4390". [oaicite:1]{index=1}
+source: "Numerus LI 51-2 (2025/2026), problem 4390"
 language_original: mk
 tags:
   - place_value

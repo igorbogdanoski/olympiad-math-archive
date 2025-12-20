@@ -2,7 +2,7 @@
 grade: 4
 field: arithmetic
 difficulty: 3
-source: "Numerus LI 51-2 (2025/2026), problem 4400". [oaicite:3]{index=3}
+source: "Numerus LI 51-2 (2025/2026), problem 4400"
 problem_id: 4400
 language_original: mk
 tags:
