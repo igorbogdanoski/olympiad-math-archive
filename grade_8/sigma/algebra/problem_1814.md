@@ -8,9 +8,8 @@ language_original: mk
 translated: false
 tags:
   - geometric_progression
-  - sequences
-  - inequalities
-  - olympiad
+  - structural_thinking
+  - symmetry
 ---
 
 # Геометриска прогресија и услови

@@ -7,10 +7,9 @@ problem_id: 1811
 language_original: mk
 translated: false
 tags:
-  - exponents
-  - inequalities
   - monotonicity
-  - olympiad
+  - symmetry
+  - basic_inequalities
 ---
 
 # Експоненцијална неравенка

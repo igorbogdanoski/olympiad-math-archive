@@ -7,10 +7,9 @@ problem_id: 1805
 language_original: mk
 translated: false
 tags:
-  - symmetric_polynomials
-  - vieta
-  - inequalities
-  - olympiad
+  - symmetry
+  - structural_thinking
+  - extremal_principle
 ---
 
 # Минимална вредност на симетричен полином

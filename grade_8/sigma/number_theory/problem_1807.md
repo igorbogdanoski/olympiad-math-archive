@@ -7,10 +7,9 @@ problem_id: 1807
 language_original: mk
 translated: false
 tags:
-  - prime_numbers
   - divisibility
   - parity
-  - olympiad
+  - modular_thinking
 ---
 
 # Прости броеви и деливост

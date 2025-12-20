@@ -16,10 +16,9 @@ forbidden_tools:
   - vectors
   - complex_numbers
 tags:
-  - triangle
-  - trigonometry
-  - angle_relations
-  - olympiad
+  - trigonometric_relations
+  - angle_chasing
+  - structural_thinking
 ---
 
 # Тригонометриски односи во триаголник

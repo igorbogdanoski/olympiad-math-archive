@@ -7,10 +7,9 @@ problem_id: 1801
 language_original: mk
 translated: false
 tags:
-  - inequality
   - symmetry
-  - real_numbers
-  - olympiad
+  - extremal_principle
+  - boundary_cases
 ---
 
 # Максимална вредност на симетричен израз

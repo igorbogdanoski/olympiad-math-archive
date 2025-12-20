@@ -8,9 +8,8 @@ language_original: mk
 translated: false
 tags:
   - logarithms
-  - inequality
   - monotonicity
-  - olympiad
+  - algebraic_transformation
 ---
 
 # Логаритамска неравенка со параметар

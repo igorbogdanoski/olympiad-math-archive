@@ -17,10 +17,9 @@ forbidden_tools:
   - vectors
   - complex_numbers
 tags:
-  - right_triangle
-  - altitude
+  - triangle_geometry
   - centroid
-  - olympiad
+  - structural_thinking
 ---
 
 # Висина и тежиште во правоаголен триаголник

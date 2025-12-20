@@ -17,10 +17,9 @@ forbidden_tools:
   - vectors
   - complex_numbers
 tags:
-  - parallelogram
-  - circle
-  - right_angle
-  - olympiad
+  - angle_chasing
+  - circle_geometry
+  - structural_thinking
 ---
 
 # Паралелограм и кружница со дијаметар

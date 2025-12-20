@@ -7,10 +7,9 @@ problem_id: 1815
 language_original: mk
 translated: false
 tags:
-  - arithmetic_operations
   - invariants
   - transformations
-  - olympiad
+  - structural_thinking
 ---
 
 # Замена на броеви и инваријанта

@@ -7,10 +7,9 @@ problem_id: 1812
 language_original: mk
 translated: false
 tags:
+  - parameter_analysis
   - logarithms
-  - parameter
-  - inequalities
-  - olympiad
+  - boundary_cases
 ---
 
 # Логаритамска неравенка со параметар

@@ -7,10 +7,9 @@ problem_id: 1806
 language_original: mk
 translated: false
 tags:
-  - telescoping_sum
-  - fractions
-  - sequences
-  - olympiad
+  - telescoping
+  - algebraic_transformation
+  - pattern_recognition
 ---
 
 # Телескопска сума
