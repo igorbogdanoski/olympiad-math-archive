@@ -1,2 +1,8 @@
-# olympiad-math-archive
-Olympiad math problems and solutions (Grades 6–12)
+# Olympiad Math Archive
+
+Ова е архива на олимписки задачи и решенија по математика
+за ученици од Grade 6 до Grade 12.
+
+- Формат: Markdown + LaTeX
+- Геометрија: синтетички пристап
+- Намена: подготовка за натпревари и веб-публикација
