@@ -1,0 +1,218 @@
+
+<!DOCTYPE html>
+<html lang="mk">
+<head>
+    <meta charset="UTF-8">
+    <title>Математички Материјали</title>
+    <!-- MathJax Конфигурација за перфектни формули -->
+    <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true
+      },
+      chtml: { scale: 1 }
+    };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+    
+    <style>
+        /* --- ОСНОВЕН ДИЗАЈН (A4 ФОРМАТ) --- */
+        body { 
+            font-family: 'Calibri', 'Segoe UI', sans-serif; 
+            line-height: 1.6;
+            color: #333;
+            max-width: 210mm; 
+            margin: 0 auto; 
+            padding: 20px;
+            background: white;
+        }
+
+        /* Хедер за документи */
+        .header-box {
+            border: 2px solid #333;
+            padding: 15px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+        }
+        .header-row { display: flex; justify-content: space-between; margin-bottom: 10px; }
+        .header-line { border-bottom: 1px solid #999; width: 200px; display: inline-block; }
+
+        h1 { text-align: center; text-transform: uppercase; letter-spacing: 2px; color: #2c3e50; font-size: 24px; margin-bottom: 5px; }
+        h2 { font-size: 18px; color: #7f8c8d; margin-top: 0; border-bottom: 2px solid #27ae60; padding-bottom: 5px; }
+
+        /* --- СТИЛ ЗА ЗАДАЧИ --- */
+        .problem-container {
+            margin-bottom: 25px;
+            page-break-inside: avoid; /* Не ја сечи задачата на пола лист */
+        }
+        .problem-header {
+            font-weight: bold;
+            background-color: #eee;
+            padding: 5px 10px;
+            border-left: 5px solid #2980b9;
+            display: flex;
+            justify-content: space-between;
+        }
+        .problem-text {
+            padding: 10px;
+            border: 1px solid #eee;
+            border-left: 5px solid #eee;
+            font-size: 16px;
+        }
+        .workspace {
+            height: 150px; /* Простор за пишување */
+            border: 1px dashed #ccc;
+            margin-top: 10px;
+            position: relative;
+        }
+        .workspace::after {
+            content: "Простор за работа";
+            position: absolute;
+            bottom: 5px;
+            right: 10px;
+            color: #ccc;
+            font-size: 12px;
+        }
+
+        /* --- СТИЛ ЗА КАРТИЧКИ --- */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0; /* Без празнина, користиме border за сечење */
+            border-top: 1px dashed #999;
+            border-left: 1px dashed #999;
+        }
+        .card {
+            border-right: 1px dashed #999;
+            border-bottom: 1px dashed #999;
+            height: 280px; /* Фиксна висина */
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            page-break-inside: avoid;
+        }
+        .card-back { background-color: #f0fdf4; }
+        .cut-guide { font-size: 10px; color: #999; position: absolute; top: -15px; left: 0; }
+
+        /* --- ПЕЧАТЕЊЕ --- */
+        @media print {
+            .no-print { display: none !important; }
+            body { padding: 0; margin: 0; }
+            .page-break { page-break-after: always; }
+        }
+    </style>
+</head>
+<body>
+    <div class="no-print" style="background:#d1ecf1; color:#0c5460; padding:15px; margin-bottom:20px; border-radius:5px; text-align:center;">
+        <strong>🖨️ СПРЕМНО ЗА ПЕЧАТЕЊЕ!</strong><br>
+        Притисни <code>Ctrl + P</code> и избери <strong>"Save as PDF"</strong>.<br>
+        Во опциите (More settings), исклучи "Headers and footers" за почист изглед.
+    </div>
+
+    <div class="header-box">
+        <h1>РАБОТЕН ЛИСТ</h1>
+        <div style="text-align:center; color:#666; margin-bottom:15px;">Математички натпревари и вежби</div>
+        <div class="header-row">
+            <div>Име и Презиме: <span class="header-line"></span></div>
+            <div>Дата: <span class="header-line"></span></div>
+        </div>
+        <div class="header-row">
+            <div>Одделение: <span class="header-line"></span></div>
+            <div>Оценка: <span class="header-line"></span></div>
+        </div>
+    </div>
+    
+        <div class="problem-container">
+            <div class="problem-header">
+                <span>Задача 1</span>
+                <span style="font-weight:normal; font-size:0.9em;">Numerus | 2/10</span>
+            </div>
+            <div class="problem-text">
+                Еден правоаголник со две паралелни прави е поделен на три квадрати. Секој од квадратите има периметар 36 cm. Пресметај ја плоштината на правоаголникот.
+            </div>
+            <div class="workspace"></div>
+        </div>
+        
+        <div class="problem-container">
+            <div class="problem-header">
+                <span>Задача 2</span>
+                <span style="font-weight:normal; font-size:0.9em;">Numerus | 3/10</span>
+            </div>
+            <div class="problem-text">
+                Едно шише било полно со 3 литри сок. Ана испила 2/5 од сокот, а Петар испил 1/5 од сокот што останал по Ана. Колку литри сок останале во шишето на крајот?
+            </div>
+            <div class="workspace"></div>
+        </div>
+        
+        <div class="problem-container">
+            <div class="problem-header">
+                <span>Задача 3</span>
+                <span style="font-weight:normal; font-size:0.9em;">Numerus | 3/10</span>
+            </div>
+            <div class="problem-text">
+                Парк во форма на правоаголник е долг 36 m и широк 24 m. Околу целиот парк се прави патека широка 1 m (однадвор). Ако за бојадисување на патеката се потребни 0,5 литри боја за 1 m², тогаш колку литри боја се потребни за целата патека?
+            </div>
+            <div class="workspace"></div>
+        </div>
+        <div class="page-break"></div>
+        <div class="problem-container">
+            <div class="problem-header">
+                <span>Задача 4</span>
+                <span style="font-weight:normal; font-size:0.9em;">Numerus | 4/10</span>
+            </div>
+            <div class="problem-text">
+                Колку петцифрени броеви ги имаат следниве својства: почнуваат со цифрата 5, се деливи со 5, и немаат повторување на цифри (сите пет цифри се различни)?
+            </div>
+            <div class="workspace"></div>
+        </div>
+        
+        <div class="problem-container">
+            <div class="problem-header">
+                <span>Задача 5</span>
+                <span style="font-weight:normal; font-size:0.9em;">Numerus | 2/10</span>
+            </div>
+            <div class="problem-text">
+                Кој број е четири пати поголем од една третина од вредноста на изразот $15 \cdot 184 + 15 \cdot 16 - 15 \cdot 100 + 15$?
+            </div>
+            <div class="workspace"></div>
+        </div>
+        
+        <div class="problem-container">
+            <div class="problem-header">
+                <span>Задача 6</span>
+                <span style="font-weight:normal; font-size:0.9em;">Numerus | 4/10</span>
+            </div>
+            <div class="problem-text">
+                Десет ученици решиле вкупно 35 задачи. Помеѓу нив, имало барем еден ученик кој решил точно 1 задача, барем еден ученик кој решил точно 2 задачи и барем еден ученик кој решил точно 3 задачи. Докажи дека помеѓу учениците постои ученик кој решил барем 5 задачи.
+            </div>
+            <div class="workspace"></div>
+        </div>
+        <div class="page-break"></div>
+        <div class="problem-container">
+            <div class="problem-header">
+                <span>Задача 7</span>
+                <span style="font-weight:normal; font-size:0.9em;">Numerus | 5/10</span>
+            </div>
+            <div class="problem-text">
+                Нека $P$ е средишна точка на отсечката $AB$. На симетралата $S_{AB}$ на отсечката $AB$ е избрана точка $C$ таква што $AB=AC$. Нека средината на отсечката $AC$ е точката $M$ и нека пресечната точка на отсечката $MB$ со симетралата $S_{AB}$ е точката $Q$. Определи ја големината на $\angle PQB$.
+            </div>
+            <div class="workspace"></div>
+        </div>
+        
+        <div class="problem-container">
+            <div class="problem-header">
+                <span>Задача 8</span>
+                <span style="font-weight:normal; font-size:0.9em;">Numerus | 3/10</span>
+            </div>
+            <div class="problem-text">
+                Истите патики во две продавници на почеток чинеле иста цена. Во првата продавница, на цената ставиле 20% попуст, па на новата цена ставиле уште 20% попуст. Во втората продавница ставиле попуст од 40%. По попустите, цените се разликувале за 180 денари. Во која продавница, после попустот, патиките биле поевтини и која е нивната цена?
+            </div>
+            <div class="workspace"></div>
+        </div>
+        </body></html>
