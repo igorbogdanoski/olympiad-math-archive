@@ -1,0 +1,90 @@
+---
+grade: 9
+field: geometry
+difficulty: 6
+source: "<натпревар / списание / година>"
+problem_id: sigma_adv_08
+language_original: <mk | en | sr | hr | ...>
+translated: false
+
+# --- GEOMETRY SKILLS ---
+geometry_style: mixed # synthetic | analytic | mixed
+primary_skill: <main_tool> # e.g., angle_chasing, similarity, cyclic_quads
+related_skills:
+  - sine_rule
+  - angle_chasing
+
+allowed_tools:
+  - classical_euclidean
+  - similarity
+  - symmetry
+forbidden_tools:
+  - coordinate_geometry
+  - vectors
+  - complex_numbers
+tags:
+  - geometry
+  - olympiad
+---
+
+# Однос на отсечки во правоаголен триаголник
+
+## Текст на задачата
+Во правоаголен $\triangle ABC$ ($\angle A=90^\circ$), точката $D$ лежи на $AB$ така што $3\angle ACD = \angle ACB$ и $BC = 2BD$. Најди го односот $DB/DA$.
+
+## 📐 Скица / Конструкција
+<Опис на цртежот. Кои се клучните точки? Дали има помошни линии?>
+
+## 🧠 Анализа
+Означи $\angle ACD = \alpha$. Тогаш $\angle ACB = 3\alpha$, па $\angle DCB = 2\alpha$. Примени Синусна теорема во $\triangle BCD$ и $\triangle ACD$.
+
+## 📝 Решение (СИНТЕТИЧКО)
+Нека $\angle ACD = \alpha$. Тогаш $\angle ACB = 3\alpha$.
+Аголот $\angle DCB = 3\alpha - \alpha = 2\alpha$.
+Во правоаголниот $\triangle ABC$, $\angle B = 90^\circ - 3\alpha$.
+
+### Чекор 1: Синусна теорема за $\triangle BCD$
+$$ \frac{BD}{\sin(2\alpha)} = \frac{BC}{\sin(\angle BDC)} $$
+Дадено е $BC = 2BD$, па $\frac{BC}{BD} = 2$.
+$$ \frac{\sin(\angle BDC)}{\sin(2\alpha)} = 2 \implies \sin(\angle BDC) = 2\sin(2\alpha) $$
+
+Аголот $\angle BDC$ е надворешен за $\triangle ADC$, па $\angle BDC = 90^\circ + \alpha$ (бидејќи $\angle A=90$).
+Значи $\sin(90+\alpha) = \cos \alpha$.
+Равенката станува:
+$$ \cos \alpha = 2 \sin(2\alpha) = 4 \sin \alpha \cos \alpha $$
+Бидејќи $\alpha$ е остар агол, $\cos \alpha \ne 0$, па делиме:
+$$ 1 = 4 \sin \alpha \implies \sin \alpha = \frac{1}{4} $$
+
+### Чекор 2: Пресметка на односот
+Во правоаголниот $\triangle ADC$:
+$$ \frac{DA}{CD} = \sin \alpha = \frac{1}{4} \implies CD = 4DA $$
+$$ \frac{CA}{CD} = \cos \alpha $$
+
+Во $\triangle BCD$:
+$$ \frac{DB}{CD} = \frac{\sin(2\alpha)}{\sin B} = \frac{2\sin\alpha\cos\alpha}{\cos(3\alpha)} $$
+Ова е комплицирано. Полесно:
+$DB = \frac{1}{2} BC$. $BC = \frac{AC}{\cos(3\alpha)}$.
+
+Ајде преку тангенси.
+$DA = AC \tan \alpha$.
+$AB = AC \tan(3\alpha)$.
+$DB = AB - DA = AC(\tan 3\alpha - \tan \alpha)$.
+Бараме $\frac{DB}{DA} = \frac{\tan 3\alpha - \tan \alpha}{\tan \alpha} = \frac{\tan 3\alpha}{\tan \alpha} - 1$.
+
+Знаеме $\sin \alpha = 1/4$. Тогаш $\cos \alpha = \sqrt{15}/4$. $\tan \alpha = 1/\sqrt{15}$.
+Формула за $\tan 3\alpha = \frac{3\tan\alpha - \tan^3\alpha}{1 - 3\tan^2\alpha}$.
+Нека $t = \tan \alpha$. $\tan 3\alpha = \frac{3t - t^3}{1 - 3t^2}$.
+Односот е:
+$$ \frac{DB}{DA} = \frac{3t - t^3}{t(1 - 3t^2)} - 1 = \frac{3 - t^2}{1 - 3t^2} - 1 $$
+$$ = \frac{3 - t^2 - (1 - 3t^2)}{1 - 3t^2} = \frac{2 + 2t^2}{1 - 3t^2} $$
+
+Заменуваме $t^2 = 1/15$:
+$$ \frac{2 + 2/15}{1 - 3/15} = \frac{32/15}{12/15} = \frac{32}{12} = \frac{8}{3} $$
+
+**Резултат:** $DB/DA = 8/3$.
+
+## ⚠️ Аналитички пристап (само ако е неизбежен)
+<Ако мора да се користат координати, објасни зошто синтетичкиот пат е претежок.>
+
+## 🏁 Заклучок
+<Краен резултат.>
