@@ -1,0 +1,97 @@
+
+<!DOCTYPE html>
+<html lang="mk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Сокот во шишето | Математичка Архива</title>
+    <link rel="stylesheet" href="../style.css">
+    <!-- MathJax -->
+    <script>
+    window.MathJax = {
+      tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$']] },
+      chtml: { scale: 1 }
+    };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+    <!-- Font Awesome за икони -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="../index.html" class="logo"><i class="fas fa-cube"></i> МатАрхива</a>
+            <div class="nav-links">
+                <a href="../index.html">Почетна</a>
+                <a href="#">За Нас</a>
+            </div>
+        </div>
+    </nav>
+    <div class="container main-content">
+
+    <div class="problem-detail">
+        <div class="problem-header">
+            <span style="color: #7f8c8d;">ID: 4362 | Одделение: 5 | Тежина: 3/10</span>
+            <h1>Сокот во шишето</h1>
+            <div class="card-tags"><span>#word_problem</span><span>#remainders</span></div>
+        </div>
+        
+        <div class="problem-text">
+            Едно шише било полно со 3 литри сок. Ана испила 2/5 од сокот, а Петар испил 1/5 од сокот што останал по Ана. Колку литри сок останале во шишето на крајот?
+        </div>
+        
+        <div class="solution-section">
+            <button class="toggle-btn" onclick="document.getElementById('sol-4362').style.display = 'block'; this.style.display='none'">
+                <i class="fas fa-eye"></i> Покажи Решение
+            </button>
+            
+            <div id="sol-4362" class="hidden-content">
+                <h3>💡 Анализа</h3>
+                <p>Внимавај на зборовите 'од сокот што останал'. Не ги одземај дропките директно ($2/5 + 1/5$). Прво пресметај колку останало по Ана, па потоа пресметај го делот на Петар од тој остаток.</p>
+                <hr>
+                <h3>📝 Решение</h3>
+                <div>Одиме чекор по чекор:
+
+1.  **Почеток:** Шишето има 3 литри.
+
+2.  **Ана:** Испила $\frac{2}{5}$ од 3 литри.
+$$
+\frac{2}{5} \cdot 3 = \frac{6}{5} = 1,2 \text{ литри}
+$$
+    Останале по Ана:
+$$
+3 - 1,2 = 1,8 \text{ литри}
+$$
+
+3.  **Петар:** Испил $\frac{1}{5}$ од *остатокот* (1,8 литри).
+$$
+\frac{1}{5} \cdot 1,8 = 1,8 : 5 = 0,36 \text{ литри}
+$$
+
+4.  **Краен остаток:**
+    Од остатокот на Ана го одземаме делот на Петар:
+$$
+1,8 - 0,36 = 1,44 \text{ литри}
+$$
+
+Во шишето останале **1,44 литри**.</div>
+                <br>
+                <div style="font-size: 0.9rem; color: #c0392b;">
+                    <strong>👩‍🏫 За наставникот:</strong> Работата со децимални броеви овде е полесна отколку со дропки, бидејќи 3 не се дели со 5 без остаток. Ако учениците работат со дропки, крајниот резултат ќе биде $1 \frac{11}{25}$ литри.
+                </div>
+            </div>
+        </div>
+        
+        <div style="margin-top: 30px;">
+            <a href="../index.html" style="color: var(--accent);">&larr; Назад кон сите задачи</a>
+        </div>
+    </div>
+    
+    </div>
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Македонска Математичка Архива. Генерирано со Python.</p>
+        </div>
+    </footer>
+</body>
+</html>
