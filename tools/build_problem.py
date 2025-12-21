@@ -9,12 +9,6 @@ BASE_DIR = os.path.abspath(os.path.join(SCRIPT_DIR, "../"))
 TEMPLATES_DIR = os.path.join(BASE_DIR, "templates")
 INPUT_FILE = os.path.join(SCRIPT_DIR, "input.json")
 
-print(f"--- DEBUG INFO ---")
-print(f"📂 Работен директориум: {os.getcwd()}")
-print(f"📂 Папка на скриптата: {SCRIPT_DIR}")
-print(f"🔍 Барам фајл тука: {INPUT_FILE}")
-print(f"------------------")
-
 def slugify(text):
     if not text: return "unknown"
     text = str(text).lower()
@@ -26,11 +20,16 @@ def load_template(is_geometry):
     path = os.path.join(TEMPLATES_DIR, filename)
     if not os.path.exists(path):
         print(f"❌ ГРЕШКА: Не го наоѓам темплејтот: {path}")
-        sys.exit(1)
+        return None
     with open(path, 'r', encoding='utf-8') as f:
         return f.read()
 
 def create_problem_file(data):
+    # Валидација на податоци
+    if not data or 'grade' not in data:
+        print(f"⚠️ Прескокнувам невалиден запис (фали grade или е празен).")
+        return
+
     try:
         grade = int(data.get('grade', 0))
     except ValueError:
@@ -41,6 +40,7 @@ def create_problem_file(data):
     prob_id = str(data.get('problem_id', '000'))
     filename = f"{source_slug}_{prob_id}.md"
     
+    # Логика за папки
     if grade <= 5:
         output_dir = os.path.join(BASE_DIR, "pre_olympiad", f"grade_{grade}", field_dir)
     else:
@@ -50,7 +50,10 @@ def create_problem_file(data):
     output_path = os.path.join(output_dir, filename)
 
     is_geo = data.get('is_geometry', False)
-    content = load_template(is_geo)
+    template_content = load_template(is_geo)
+    if not template_content: return
+
+    content = template_content
 
     # MAPPING
     content = content.replace("<6-12>", str(grade))
@@ -95,18 +98,34 @@ def create_problem_file(data):
     print(f"✅ УСПЕХ! Креиран фајл: {output_path}")
 
 if __name__ == "__main__":
-    # ПРОВЕРКА НА ФАЈЛОТ
     if os.path.exists(INPUT_FILE):
-        print(f"✅ Го најдов фајлот 'input.json'. Обработувам...")
+        print(f"📂 Чitam од фајлот: {INPUT_FILE}")
         try:
             with open(INPUT_FILE, 'r', encoding='utf-8') as f:
                 json_data = json.load(f)
-            create_problem_file(json_data)
+            
+            # --- НОВА ЛОГИКА ЗА ЛИСТИ ---
+            if isinstance(json_data, list):
+                print(f"📦 Детектирав листа од {len(json_data)} задачи. Започнувам...")
+                for i, problem in enumerate(json_data, 1):
+                    print(f"--- Обработка на задача {i} ---")
+                    create_problem_file(problem)
+            else:
+                # Ако е само една задача (dictionary)
+                create_problem_file(json_data)
+                
         except json.JSONDecodeError as e:
-            print(f"❌ ГРЕШКА: Фајлот 'input.json' не е валиден JSON.\n{e}")
+            print(f"❌ ГРЕШКА во input.json: {e}")
     else:
-        print(f"❌ ГРЕШКА: Не го наоѓам фајлот 'input.json'.")
-        print(f"👉 Провери дали фајлот се вика 'input.json.txt'!")
-        print(f"📂 Листа на фајлови во {SCRIPT_DIR}:")
-        for f in os.listdir(SCRIPT_DIR):
-            print(f"   - {f}")
+        print("📥 Внеси JSON рачно (Ctrl+Z па Enter):")
+        # Истата логика и за рачен внес
+        try:
+            input_data = sys.stdin.read()
+            if input_data.strip():
+                json_data = json.loads(input_data)
+                if isinstance(json_data, list):
+                    for problem in json_data: create_problem_file(problem)
+                else:
+                    create_problem_file(json_data)
+        except Exception as e:
+            print(f"❌ ГРЕШКА: {e}")
