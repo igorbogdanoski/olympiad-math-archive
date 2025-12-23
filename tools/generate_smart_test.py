@@ -62,7 +62,7 @@ def find_problems(grade, field, difficulty_range):
                 candidates.append({'path': path, 'meta': meta, 'body': body})
     return candidates
 
-def format_problem_for_test(problem, index):
+def format_problem_for_student(problem, index):
     parts = problem['body'].split('## Решение')
     question_text = parts[0].strip()
     question_text = re.sub(r'^# .*?\n', '', question_text)
@@ -71,16 +71,16 @@ def format_problem_for_test(problem, index):
     question_text = question_text.replace("../../assets", "../assets")
     question_text = question_text.replace("../../../assets", "../assets")
 
-    return f"**{index}.** {question_text}\n\n\\vspace{{4cm}}\n"
+    return f"**{index}.** {question_text}\n\n\\vspace{{5cm}}\n"
 
-def format_solution_for_key(problem, index):
+def format_problem_for_teacher(problem, index):
     meta = problem['meta']
     body = problem['body'].replace("../../assets", "../assets")
     body = body.replace("../../../assets", "../assets")
 
     text = f"### Задача {index} (Извор: {meta.get('source', 'N/A')})\n"
     text += f"**Тежина:** {meta.get('difficulty')}/10 | **Skill:** {meta.get('primary_skill')}\n\n"
-    text += body + "\n\n***\n" # Користиме *** за сепаратор
+    text += body + "\n\n***\n"
     return text
 
 def generate_test(grade, field, count, difficulty, output_format):
@@ -104,8 +104,8 @@ def generate_test(grade, field, count, difficulty, output_format):
     date_str = datetime.datetime.now().strftime("%d.%m.%Y")
     field_name = field.capitalize() if field else "Општ тест"
     
-    # --- YAML HEADER ---
-    md_content = f"""---
+    # --- 1. ГЕНЕРИРАЊЕ НА СТУДЕНТСКИ ТЕСТ ---
+    student_md = f"""---
 title: "ТЕСТ ПО МАТЕМАТИКА"
 subtitle: "Одделение: {grade} | Област: {field_name}"
 date: "{date_str}"
@@ -120,32 +120,46 @@ mainfont: "Times New Roman"
 ***
 
 """
-    # --- ЗАДАЧИ ---
     for i, prob in enumerate(selected, 1):
-        md_content += format_problem_for_test(prob, i)
-        # ВАЖНО: Користиме *** наместо --- за да не го збуниме Pandoc
-        md_content += "\n***\n" 
+        student_md += format_problem_for_student(prob, i)
+        student_md += "\n***\n"
 
-    # --- ПРЕЛОМ ---
-    md_content += "\n\\newpage\n"
-    
-    # --- КЛУЧ ---
-    md_content += "# КЛУЧ СО РЕШЕНИЈА\n\n"
+    # --- 2. ГЕНЕРИРАЊЕ НА НАСТАВНИЧКИ КЛУЧ ---
+    teacher_md = f"""---
+title: "КЛУЧ СО РЕШЕНИЈА"
+subtitle: "За наставникот | Одделение: {grade}"
+date: "{date_str}"
+geometry: margin=1in
+mainfont: "Times New Roman"
+---
+
+"""
     for i, prob in enumerate(selected, 1):
-        md_content += format_solution_for_key(prob, i)
+        teacher_md += format_problem_for_teacher(prob, i)
 
-    # --- ЗАЧУВУВАЊЕ ---
-    filename = f"Test_Grade{grade}_{field if field else 'All'}_{difficulty}_{date_str.replace('.','')}.md"
-    output_path = os.path.join(SCRIPT_DIR, filename)
+    # --- ЗАЧУВУВАЊЕ И ЕКСПОРТ ---
+    base_name = f"Test_Grade{grade}_{field if field else 'All'}_{difficulty}_{date_str.replace('.','')}"
     
-    with open(output_path, 'w', encoding='utf-8') as f:
-        f.write(md_content)
+    # Student File
+    file_student = f"{base_name}_STUDENT.md"
+    path_student = os.path.join(SCRIPT_DIR, file_student)
+    with open(path_student, 'w', encoding='utf-8') as f:
+        f.write(student_md)
     
-    print(f"📄 Markdown фајлот е креиран: {filename}")
+    # Teacher File
+    file_teacher = f"{base_name}_TEACHER.md"
+    path_teacher = os.path.join(SCRIPT_DIR, file_teacher)
+    with open(path_teacher, 'w', encoding='utf-8') as f:
+        f.write(teacher_md)
+    
+    print(f"✅ Генерирани се 2 фајла:")
+    print(f"   1. {file_student}")
+    print(f"   2. {file_teacher}")
 
     if export_file:
-        print("⚙️ Стартувам конверзија...")
-        export_file(output_path, output_format)
+        print("⚙️ Стартувам конверзија во Word/PDF...")
+        export_file(path_student, output_format)
+        export_file(path_teacher, output_format)
     else:
         print("⚠️ export.py не е достапен.")
 
