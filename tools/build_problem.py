@@ -25,9 +25,8 @@ def load_template(is_geometry):
         return f.read()
 
 def create_problem_file(data):
-    # Валидација на податоци
     if not data or 'grade' not in data:
-        print(f"⚠️ Прескокнувам невалиден запис (фали grade или е празен).")
+        print(f"⚠️ Прескокнувам невалиден запис.")
         return
 
     try:
@@ -50,12 +49,10 @@ def create_problem_file(data):
     output_path = os.path.join(output_dir, filename)
 
     is_geo = data.get('is_geometry', False)
-    template_content = load_template(is_geo)
-    if not template_content: return
+    content = load_template(is_geo)
+    if not content: return
 
-    content = template_content
-
-    # MAPPING
+    # --- MAPPING ---
     content = content.replace("<6-12>", str(grade))
     content = content.replace("<algebra | geometry | number_theory | combinatorics>", field_dir)
     content = content.replace("<1-10>", str(data.get('difficulty', 1)))
@@ -64,6 +61,7 @@ def create_problem_file(data):
     content = content.replace("<mk | en | sr | hr | ru | ...>", data.get('language_original', 'mk'))
     content = content.replace("<main_cognitive_tool>", data.get('primary_skill', 'logic'))
 
+    # Lists
     related = data.get('related_skills', [])
     related_str = "\n".join([f"  - {s}" for s in related]) if related else "  - logic"
     content = content.replace("  - <skill_1>\n  - <skill_2>", related_str)
@@ -76,8 +74,34 @@ def create_problem_file(data):
         geo_style = data.get('geometry_style', 'synthetic') or 'synthetic'
         content = content.replace("geometry_style: synthetic", f"geometry_style: {geo_style}")
 
+    # --- VISUALS (СЛИКИ) ---
+    # Проверуваме дали има слика во assets/images/problem_id.png
+    image_filename = f"{prob_id}.png"
+    # Патеката што ќе ја бараме на дискот
+    image_abs_path = os.path.join(BASE_DIR, "assets", "images", image_filename)
+    # Патеката што ќе ја запишеме во Markdown (релативна)
+    # Треба да излеземе од grade_X/field (2 нивоа) за да дојдеме до root, па во assets
+    # Пример: ../../assets/images/4424.png
+    # За pre_olympiad е 3 нивоа: ../../../assets
+    
+    if grade <= 5:
+        image_rel_path = f"../../../assets/images/{image_filename}"
+    else:
+        image_rel_path = f"../../assets/images/{image_filename}"
+
+    visual_block = ""
+    if os.path.exists(image_abs_path):
+        visual_block = f"\n![Скица]({image_rel_path})\n"
+    elif data.get('visual_prompt'):
+        # Ако нема слика, го чуваме промптот како коментар за да знаеме да ја направиме
+        visual_block = f"\n<!-- VISUAL PROMPT: {data['visual_prompt']} -->\n"
+
+    # Вметнување на сликата пред Анализата
+    content = content.replace("## 🧠 Анализа", f"{visual_block}\n## 🧠 Анализа")
+
+    # --- TEXT CONTENT ---
     content = content.replace("<Наслов на задачата>", data.get('problem_title', 'Наслов'))
-    text_mk = data.get('problem_text_mk', '') or data.get('problem_text_original', '')
+    text_mk = data.get('problem_text_mk', '')
     content = content.replace("<Оригинален текст на задачата. Ако е превод, внимавај на терминологијата.>", text_mk)
     content = content.replace("<Текст.>", text_mk)
     
@@ -104,21 +128,17 @@ if __name__ == "__main__":
             with open(INPUT_FILE, 'r', encoding='utf-8') as f:
                 json_data = json.load(f)
             
-            # --- НОВА ЛОГИКА ЗА ЛИСТИ ---
             if isinstance(json_data, list):
                 print(f"📦 Детектирав листа од {len(json_data)} задачи. Започнувам...")
                 for i, problem in enumerate(json_data, 1):
-                    print(f"--- Обработка на задача {i} ---")
                     create_problem_file(problem)
             else:
-                # Ако е само една задача (dictionary)
                 create_problem_file(json_data)
                 
         except json.JSONDecodeError as e:
             print(f"❌ ГРЕШКА во input.json: {e}")
     else:
         print("📥 Внеси JSON рачно (Ctrl+Z па Enter):")
-        # Истата логика и за рачен внес
         try:
             input_data = sys.stdin.read()
             if input_data.strip():

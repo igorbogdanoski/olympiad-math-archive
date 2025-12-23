@@ -3,8 +3,10 @@ import os
 import datetime
 
 # --- КОНФИГУРАЦИЈА ---
-INPUT_FILE = "input.json"
-OUTPUT_DIR = "output_documents"
+# Патеките се релативни во однос на скриптата
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+INPUT_FILE = os.path.join(SCRIPT_DIR, "input.json")
+OUTPUT_DIR = os.path.join(SCRIPT_DIR, "output_documents")
 
 # Креирај папка за излез ако не постои
 if not os.path.exists(OUTPUT_DIR):
@@ -94,14 +96,16 @@ HTML_HEAD = """
         .cards-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 0; /* Без празнина, користиме border за сечење */
+            grid-template-rows: 1fr 1fr;
+            gap: 0; 
             border-top: 1px dashed #999;
             border-left: 1px dashed #999;
+            height: 260mm; /* Приближно A4 висина за 2 реда */
         }
         .card {
             border-right: 1px dashed #999;
             border-bottom: 1px dashed #999;
-            height: 280px; /* Фиксна висина */
+            height: 130mm; /* Пола страна */
             padding: 20px;
             display: flex;
             flex-direction: column;
@@ -109,10 +113,10 @@ HTML_HEAD = """
             align-items: center;
             text-align: center;
             page-break-inside: avoid;
+            position: relative;
         }
         .card-back { background-color: #f0fdf4; }
-        .cut-guide { font-size: 10px; color: #999; position: absolute; top: -15px; left: 0; }
-
+        
         /* --- ПЕЧАТЕЊЕ --- */
         @media print {
             .no-print { display: none !important; }
@@ -137,7 +141,6 @@ def load_data():
         return json.load(f)
 
 def get_header(title, subtitle=""):
-    """Го враќа блокот за име и презиме."""
     return f"""
     <div class="header-box">
         <h1>{title}</h1>
@@ -154,7 +157,6 @@ def get_header(title, subtitle=""):
     """
 
 def generate_worksheet(data):
-    """Генерира работен лист со многу простор за пишување."""
     html = HTML_HEAD + get_header("РАБОТЕН ЛИСТ", "Математички натпревари и вежби")
     
     for i, p in enumerate(data, 1):
@@ -162,7 +164,7 @@ def generate_worksheet(data):
         <div class="problem-container">
             <div class="problem-header">
                 <span>Задача {i}</span>
-                <span style="font-weight:normal; font-size:0.9em;">{p.get('source', 'Numerus')} | {p.get('difficulty')}/10</span>
+                <span style="font-weight:normal; font-size:0.9em;">{p.get('source', 'Numerus')} | Тежина: {p.get('difficulty')}/10</span>
             </div>
             <div class="problem-text">
                 {p.get('problem_text_mk', '')}
@@ -170,7 +172,6 @@ def generate_worksheet(data):
             <div class="workspace"></div>
         </div>
         """
-        # Нов лист на секои 3 задачи за да има место
         if i % 3 == 0 and i != len(data):
             html += '<div class="page-break"></div>'
             
@@ -178,7 +179,6 @@ def generate_worksheet(data):
     return html
 
 def generate_teacher_key(data):
-    """Генерира документ со решенија за наставникот."""
     html = HTML_HEAD 
     html += "<h1 style='color:#c0392b;'>КЛУЧ СО РЕШЕНИЈА (ЗА НАСТАВНИЦИ)</h1><hr>"
     
@@ -206,44 +206,50 @@ def generate_teacher_key(data):
     return html
 
 def generate_flashcards(data):
-    """Генерира картички со линии за сечење."""
-    html = HTML_HEAD + "<h1>✂️ КАРТИЧКИ ЗА СЕЧЕЊЕ</h1><p style='text-align:center'>Страна 1: Задачи | Страна 2: Решенија</p>"
+    html = HTML_HEAD + "<h1>✂️ КАРТИЧКИ ЗА СЕЧЕЊЕ</h1><p style='text-align:center'>Страна 1: Задачи | Страна 2: Решенија (Двострано печатење)</p>"
     
-    chunk_size = 4 # 4 картички по страна
+    chunk_size = 4 # 4 картички по страна (2x2)
     for i in range(0, len(data), chunk_size):
         chunk = data[i:i+chunk_size]
         
-        # --- ПРЕДНА СТРАНА ---
+        # Пополни празни места ако се помалку од 4 за да се задржи гридот
+        while len(chunk) < 4:
+            chunk.append(None) # Dummy
+            
+        # --- ПРЕДНА СТРАНА (ЗАДАЧИ) ---
         html += '<div class="cards-grid">'
         for p in chunk:
-            html += f"""
-            <div class="card">
-                <div style="color:#999; font-size:0.8em;">{p.get('source')}</div>
-                <h3>Задача {p.get('problem_id')}</h3>
-                <div style="overflow:hidden; max-height:180px;">{p.get('problem_text_mk')}</div>
-            </div>
-            """
-        # Пополни празни места ако се помалку од 4
-        while len(chunk) < 4:
-            html += '<div class="card" style="border:0;"></div>'
-            chunk.append({}) # Dummy
-            
+            if p:
+                html += f"""
+                <div class="card">
+                    <div style="color:#999; font-size:0.8em;">{p.get('source')}</div>
+                    <h3>Задача {p.get('problem_id')}</h3>
+                    <div style="overflow:hidden; max-height:180px;">{p.get('problem_text_mk')}</div>
+                </div>
+                """
+            else:
+                html += '<div class="card" style="border:0;"></div>'
         html += '</div><div class="page-break"></div>'
         
-        # --- ЗАДНА СТРАНА ---
-        html += '<div class="cards-grid">'
-        # Ги филтрираме празните dummy објекти
-        real_chunk = [c for c in chunk if c]
+        # --- ЗАДНА СТРАНА (РЕШЕНИЈА) ---
+        # ВАЖНО: За двострано печатење (flip on long edge), редоследот е обично:
+        # [1][2]  -> Back: [2][1]
+        # [3][4]  -> Back: [4][3]
+        # Но, за едноставно сечење, ќе ги оставиме исти, па наставникот може да лепи.
         
-        for p in real_chunk:
-            html += f"""
-            <div class="card card-back">
-                <h3 style="color:#27ae60;">Решение {p.get('problem_id')}</h3>
-                <div style="font-size:0.85em; overflow-y:auto; max-height:200px; width:100%;">
-                    {p.get('solution_content')}
+        html += '<div class="cards-grid">'
+        for p in chunk:
+            if p:
+                html += f"""
+                <div class="card card-back">
+                    <h3 style="color:#27ae60;">Решение {p.get('problem_id')}</h3>
+                    <div style="font-size:0.85em; overflow-y:auto; max-height:300px; width:100%; text-align:left;">
+                        {p.get('solution_content')}
+                    </div>
                 </div>
-            </div>
-            """
+                """
+            else:
+                html += '<div class="card" style="border:0;"></div>'
         html += '</div><div class="page-break"></div>'
 
     html += "</body></html>"
@@ -252,14 +258,14 @@ def generate_flashcards(data):
 if __name__ == "__main__":
     data = load_data()
     if data:
-        print(f"📦 Вчитани се {len(data)} задачи.")
+        print(f"📦 Вчитани се {len(data)} задачи од input.json.")
         
-        # 1. Работен лист (За ученици)
+        # 1. Работен лист
         path_ws = os.path.join(OUTPUT_DIR, "1_Raboten_List_Ucenici.html")
         with open(path_ws, "w", encoding="utf-8") as f:
             f.write(generate_worksheet(data))
             
-        # 2. Клуч со решенија (За наставници)
+        # 2. Клуч со решенија
         path_key = os.path.join(OUTPUT_DIR, "2_Kluc_Resenija_Nastavnici.html")
         with open(path_key, "w", encoding="utf-8") as f:
             f.write(generate_teacher_key(data))
@@ -269,5 +275,8 @@ if __name__ == "__main__":
         with open(path_cards, "w", encoding="utf-8") as f:
             f.write(generate_flashcards(data))
             
-        print(f"\n✅ УСПЕХ! Документите се во папката: {OUTPUT_DIR}/")
-        print("👉 Отвори ги фајловите во Chrome/Edge и избери 'Print to PDF'.")
+        print(f"\n✅ УСПЕХ! Генерирани се 3 документи во папката:")
+        print(f"   📂 {OUTPUT_DIR}")
+        print("\n👉 Упатство: Отвори ги HTML фајловите во прелистувач и избери 'Print to PDF'.")
+    else:
+        print("⚠️ Нема податоци во input.json. Внеси задачи прво.")

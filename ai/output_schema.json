@@ -1,36 +1,126 @@
 {
   "type": "object",
   "properties": {
-    "grade": { "type": "integer", "minimum": 1, "maximum": 12 },
-    "field": { "type": "string", "enum": ["algebra", "geometry", "number_theory", "combinatorics", "arithmetic", "logic"] },
-    "difficulty": { "type": "integer", "minimum": 1, "maximum": 10 },
-    "source": { "type": "string" },
-    "problem_id": { "type": "string" },
-    "language_original": { "type": "string" },
-    "translated": { "type": "boolean" },
-    
-    "primary_skill": { 
-      "type": "string", 
-      "description": "The main cognitive method used (e.g., 'invariants', 'pigeonhole_principle', 'telescoping', 'angle_chasing'). NOT the topic." 
+    "grade": {
+      "type": "integer",
+      "description": "Target grade level (1-12). Use 1-5 for Pre-Olympiad, 6-12 for Olympiad.",
+      "minimum": 1,
+      "maximum": 12
     },
-    "related_skills": { 
-      "type": "array", 
-      "items": { "type": "string" } 
+    "field": {
+      "type": "string",
+      "description": "The mathematical branch.",
+      "enum": [
+        "algebra",
+        "geometry",
+        "number_theory",
+        "combinatorics",
+        "arithmetic",
+        "logic"
+      ]
     },
-    "tags": { 
-      "type": "array", 
-      "items": { "type": "string" },
-      "description": "Mathematical topics (e.g., 'percentages', 'triangles', 'primes')."
+    "difficulty": {
+      "type": "integer",
+      "description": "Difficulty level from 1 (School) to 10 (IMO Gold).",
+      "minimum": 1,
+      "maximum": 10
     },
-    
-    "is_geometry": { "type": "boolean" },
-    "geometry_style": { "type": "string", "enum": ["synthetic", "analytic", "mixed", null] },
-    
-    "problem_title": { "type": "string" },
-    "problem_text_mk": { "type": "string" },
-    "analysis_hint": { "type": "string", "description": "Intuition and strategy before solving." },
-    "solution_content": { "type": "string", "description": "Full solution in Markdown/LaTeX." },
-    "pedagogical_notes": { "type": "string", "description": "Notes for teachers/tutors." }
+    "problem_type": {
+      "type": "string",
+      "description": "The nature of the task.",
+      "enum": [
+        "calculation",
+        "proof",
+        "construction",
+        "logic_puzzle"
+      ]
+    },
+    "source": {
+      "type": "string",
+      "description": "Origin of the problem (e.g., 'Numerus 2025', 'JBMO 2020')."
+    },
+    "problem_id": {
+      "type": "string",
+      "description": "Unique identifier (e.g., '4424', 'sigma_01'). Keep it short."
+    },
+    "language_original": {
+      "type": "string",
+      "description": "Original language code (e.g., 'mk', 'en')."
+    },
+    "translated": {
+      "type": "boolean",
+      "description": "True if the problem was translated to Macedonian."
+    },
+    "is_geometry": {
+      "type": "boolean",
+      "description": "Set to true if the problem requires a geometric figure."
+    },
+    "geometry_style": {
+      "type": ["string", "null"],
+      "description": "Method used for geometry problems. Default to 'synthetic'.",
+      "enum": [
+        "synthetic",
+        "analytic",
+        "mixed",
+        null
+      ]
+    },
+    "visual_prompt": {
+      "type": ["string", "null"],
+      "description": "REQUIRED FOR GEOMETRY. Step-by-step construction instructions in ENGLISH for an AI visualizer. Example: 'Draw acute triangle ABC. Mark incenter I.' Set to null for non-geometry."
+    },
+    "primary_skill": {
+      "type": "string",
+      "description": "The main cognitive skill/method from the Skill Map (e.g., 'invariants', 'angle_chasing', 'telescoping'). NOT the topic."
+    },
+    "related_skills": {
+      "type": "array",
+      "description": "List of secondary skills used.",
+      "items": {
+        "type": "string"
+      }
+    },
+    "tags": {
+      "type": "array",
+      "description": "Mathematical topics/objects (e.g., 'primes', 'circles', 'polynomials').",
+      "items": {
+        "type": "string"
+      }
+    },
+    "problem_title": {
+      "type": "string",
+      "description": "A short, descriptive title in Macedonian."
+    },
+    "problem_text_mk": {
+      "type": "string",
+      "description": "The full text of the problem in Macedonian. Use LaTeX for math ($...$)."
+    },
+    "analysis_hint": {
+      "type": "string",
+      "description": "Intuition, heuristics, and strategy before the formal solution. Explain 'Why' we do this."
+    },
+    "solution_content": {
+      "type": "string",
+      "description": "The complete, step-by-step solution in Macedonian. Use Markdown and LaTeX. If multiple approaches exist, include them all."
+    },
+    "pedagogical_notes": {
+      "type": "string",
+      "description": "Notes for teachers: common pitfalls, Socratic questions, and prerequisites."
+    }
   },
-  "required": ["grade", "field", "difficulty", "source", "primary_skill", "tags", "problem_title", "problem_text_mk", "solution_content"]
+  "required": [
+    "grade",
+    "field",
+    "difficulty",
+    "problem_type",
+    "source",
+    "problem_id",
+    "primary_skill",
+    "tags",
+    "problem_title",
+    "problem_text_mk",
+    "analysis_hint",
+    "solution_content",
+    "pedagogical_notes"
+  ]
 }

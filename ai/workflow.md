@@ -1,25 +1,53 @@
-# AI Workflow for Problem Classification & Generation
+# 🚀 Olympiad Archive Workflow (Оперативен Прирачник)
 
-## 1. Input Phase
-- **Source:** Raw text from PDF/Image (Numerus, Competitions).
-- **Tool:** Google AI Studio (Gemini 1.5 Pro).
-- **Configuration:** 
-  - System Prompt: `ai/system_prompt.md`
-  - Output Schema: `ai/output_schema.json`
+Овој документ го опишува процесот на додавање, обработка и публикување на задачи во архивата.
 
-## 2. Processing Phase (The "Brain")
-- Paste raw text into AI.
-- **Human Check:** Verify the `primary_skill` assignment. 
-  - *Does this really use Invariants, or just simple algebra?*
-- **Output:** Copy the generated JSON object.
+---
 
-## 3. Build Phase (The "Engine")
-- **Action:** Run `python tools/build_problem.py` (види подолу).
-- **Input:** Paste the JSON.
-- **Result:** The script automatically:
-  1. Selects the correct template (Geometry vs Standard).
-  2. Fills in all fields (Tags, Skills, Solution).
-  3. Creates the file at: `grade_{G}/{field}/{source_id}.md`.
+## 1. 📥 Внес на Задачи (Input Phase)
 
-## 4. Linking Phase (The "Web")
-- The script automatically appends the new problem link to the relevant `tools/skill_guides/{skill}.md` file.
+1.  **Извор:** Сликај ја задачата или копирај го текстот (од Нумерус, Сигма, Натпревари).
+2.  **AI Обработка (Google AI Studio):**
+    *   Користи го **System Prompt** од `ai/system_prompt.md`.
+    *   Постави ја **JSON Schema** од `ai/output_schema.json`.
+    *   Внеси ја задачата и добиј JSON излез.
+3.  **Подготовка за Build:**
+    *   Отвори го фајлот `tools/input.json`.
+    *   Залепи го JSON кодот внатре (може и листа од повеќе задачи).
+
+---
+
+## 2. ⚙️ Процесирање (Build Phase)
+
+1.  Отвори терминал во папката `tools`.
+2.  Стартувај ја скриптата:
+    ```bash
+    python build_problem.py
+    ```
+3.  **Резултат:** Скриптата автоматски:
+    *   Креира `.md` фајл во соодветната папка (`grade_X` или `pre_olympiad`).
+    *   Проверува дали има слика во `assets/images`.
+    *   Го форматира текстот.
+
+---
+
+## 3. 🎨 Визуелизација (Geometry Only)
+
+1.  Во генерираниот `.md` фајл, најди го коментарот `<!-- VISUAL PROMPT: ... -->`.
+2.  Копирај го текстот (на англиски).
+3.  Користи AI алатка (Geo-Mentor, Midjourney, ChatGPT) за да генерираш слика.
+4.  Зачувај ја сликата во `assets/images/` со име исто како ID-то на задачата (пр. `sigma_01.png`).
+5.  Повторно пушти `python build_problem.py` (или рачно одкоментирај го линкот во фајлот).
+
+---
+
+## 4. 📤 Публикување (Export Phase)
+
+### Една задача (Word/PDF)
+За да испечатиш конкретна задача за ученик:
+```bash
+# За Word (препорачано)
+python export.py grade_9/geometry/task_01.md
+
+# За PDF
+python export.py grade_9/geometry/task_01.md --pdf
