@@ -7,7 +7,6 @@ import sys
 
 # Обид за увоз на export скриптата
 try:
-    # Додаваме патека до тековниот директориум за да може да импортира
     sys.path.append(os.path.dirname(os.path.abspath(__file__)))
     from export import export_file
 except ImportError:
@@ -19,12 +18,10 @@ SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 ARCHIVE_ROOT = os.path.abspath(os.path.join(SCRIPT_DIR, "../"))
 
 def parse_problem(file_path):
-    """Го чита фајлот и ги вади мета-податоците и содржината."""
     with open(file_path, 'r', encoding='utf-8') as f:
         content = f.read()
 
     meta = {}
-    # Вадење на YAML заглавието
     match = re.search(r'^---(.*?)---', content, re.DOTALL)
     if match:
         yaml_text = match.group(1)
@@ -33,17 +30,13 @@ def parse_problem(file_path):
                 key, val = line.split(':', 1)
                 meta[key.strip()] = val.strip().replace('"', '').replace("'", "")
     
-    # Вадење на телото на задачата (без YAML)
     body = re.sub(r'^---[\s\S]*?---', '', content).strip()
-    
     return meta, body
 
 def find_problems(grade, field, difficulty_range):
-    """Ги наоѓа сите задачи што одговараат на критериумите."""
     candidates = []
     min_diff, max_diff = difficulty_range
     
-    # Ако grade е 0, барај насекаде, инаку само во соодветната папка
     if grade and grade <= 5:
         search_dir = os.path.join(ARCHIVE_ROOT, "pre_olympiad", f"grade_{grade}")
     elif grade:
@@ -61,27 +54,17 @@ def find_problems(grade, field, difficulty_range):
                 path = os.path.join(root, file)
                 meta, body = parse_problem(path)
                 
-                # Филтрирање
-                if field and meta.get('field') != field:
-                    continue
+                if field and meta.get('field') != field: continue
                 
                 diff = int(meta.get('difficulty', 0))
-                if not (min_diff <= diff <= max_diff):
-                    continue
+                if not (min_diff <= diff <= max_diff): continue
                 
-                candidates.append({
-                    'path': path,
-                    'meta': meta,
-                    'body': body
-                })
+                candidates.append({'path': path, 'meta': meta, 'body': body})
     return candidates
 
 def format_problem_for_test(problem, index):
-    """Го форматира текстот на задачата за ученикот."""
     parts = problem['body'].split('## Решение')
     question_text = parts[0].strip()
-    
-    # Ги тргаме насловите
     question_text = re.sub(r'^# .*?\n', '', question_text)
     
     # Корекција на патеки за слики
@@ -91,14 +74,13 @@ def format_problem_for_test(problem, index):
     return f"**{index}.** {question_text}\n\n\\vspace{{4cm}}\n"
 
 def format_solution_for_key(problem, index):
-    """Го форматира решението за наставникот."""
     meta = problem['meta']
     body = problem['body'].replace("../../assets", "../assets")
     body = body.replace("../../../assets", "../assets")
 
     text = f"### Задача {index} (Извор: {meta.get('source', 'N/A')})\n"
     text += f"**Тежина:** {meta.get('difficulty')}/10 | **Skill:** {meta.get('primary_skill')}\n\n"
-    text += body + "\n\n---\n"
+    text += body + "\n\n***\n" # Користиме *** за сепаратор
     return text
 
 def generate_test(grade, field, count, difficulty, output_format):
@@ -119,11 +101,10 @@ def generate_test(grade, field, count, difficulty, output_format):
     else:
         selected = random.sample(problems, count)
 
-    # --- КРЕИРАЊЕ НА ДОКУМЕНТОТ ---
     date_str = datetime.datetime.now().strftime("%d.%m.%Y")
     field_name = field.capitalize() if field else "Општ тест"
     
-    # --- ПОПРАВКА: Правилен YAML Header за Pandoc ---
+    # --- YAML HEADER ---
     md_content = f"""---
 title: "ТЕСТ ПО МАТЕМАТИКА"
 subtitle: "Одделение: {grade} | Област: {field_name}"
@@ -136,18 +117,19 @@ mainfont: "Times New Roman"
 
 **Бодови:** _______ / 100  |  **Оценка:** _______
 
----
+***
 
 """
-    # 2. Задачи
+    # --- ЗАДАЧИ ---
     for i, prob in enumerate(selected, 1):
         md_content += format_problem_for_test(prob, i)
-        md_content += "\n---\n"
+        # ВАЖНО: Користиме *** наместо --- за да не го збуниме Pandoc
+        md_content += "\n***\n" 
 
-    # 3. Прелом
+    # --- ПРЕЛОМ ---
     md_content += "\n\\newpage\n"
     
-    # 4. Клуч
+    # --- КЛУЧ ---
     md_content += "# КЛУЧ СО РЕШЕНИЈА\n\n"
     for i, prob in enumerate(selected, 1):
         md_content += format_solution_for_key(prob, i)
@@ -161,7 +143,6 @@ mainfont: "Times New Roman"
     
     print(f"📄 Markdown фајлот е креиран: {filename}")
 
-    # --- АВТОМАТСКИ ЕКСПОРТ ---
     if export_file:
         print("⚙️ Стартувам конверзија...")
         export_file(output_path, output_format)
@@ -181,7 +162,6 @@ if __name__ == "__main__":
     fmt = 'pdf' if args.pdf else 'docx'
     
     if not args.grade:
-        # Интерактивен мод
         try:
             g = int(input("Одделение (1-9): "))
             f = input("Област (algebra/geometry/all): ")
