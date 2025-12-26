@@ -1373,3 +1373,118 @@ class Task_cnt92_v2_12(Scene):
 
 ```
 ---
+
+### 🆔 Задача: cnt92_v2_13 - Множества (Математика и Економија)
+**📅 Додадено:** 2025-12-26 23:41
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_cnt92_v2_13(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+class Task_cnt92_v2_13(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        
+        # Sets
+        c1 = Circle(radius=1.5, color=BLUE, fill_opacity=0.1).shift(LEFT*0.8)
+        c2 = Circle(radius=1.5, color=RED, fill_opacity=0.1).shift(RIGHT*0.8)
+        
+        # Labels
+        t1 = MathTex("M (55)", color=BLUE).next_to(c1, UL)
+        t2 = MathTex("E (40)", color=RED).next_to(c2, UR)
+        t_inter = MathTex("30", color=BLACK).move_to(ORIGIN)
+        
+        # Universe box
+        rect = Rectangle(width=7, height=5, color=BLACK)
+        t_u = MathTex("U = 75", color=BLACK).to_corner(UL)
+        t_none = MathTex("None = 10", color=GRAY).to_corner(DR)
+        
+        self.add(rect, c1, c2, t1, t2, t_inter, t_u, t_none)
+        # --- AI GENERATED CODE END ---
+
+```
+---
+
+### 🆔 Задача: cnt92_v2_14 - Позиција на точки во однос на права
+**📅 Додадено:** 2025-12-26 23:41
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_cnt92_v2_14(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+class Task_cnt92_v2_14(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        axes = Axes(x_range=[-1, 3, 1], y_range=[-2, 5, 1], axis_config={"color": BLACK})
+        
+        # Line y = 2.82x - 2.23
+        line = axes.plot(lambda x: 2.828*x - 2.236, color=BLUE)
+        
+        # Points
+        pt_A = Dot(axes.c2p(1, 0), color=RED)
+        lbl_A = MathTex("A", color=RED).next_to(pt_A, DOWN)
+        
+        pt_B = Dot(axes.c2p(2, 3.5), color=GREEN)
+        lbl_B = MathTex("B", color=GREEN).next_to(pt_B, UP)
+        
+        # Dashed lines
+        val_A = 2.828*1 - 2.236
+        dash_A = DashedLine(pt_A.get_center(), axes.c2p(1, val_A), color=GRAY)
+        
+        val_B = 2.828*2 - 2.236
+        dash_B = DashedLine(pt_B.get_center(), axes.c2p(2, val_B), color=GRAY)
+        
+        self.add(axes, line, pt_A, lbl_A, pt_B, lbl_B, dash_A, dash_B)
+        # --- AI GENERATED CODE END ---
+
+```
+---
+
+### 🆔 Задача: cnt92_v2_16 - Збир на координати на пресек (Виетови формули)
+**📅 Додадено:** 2025-12-26 23:41
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_cnt92_v2_16(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+class Task_cnt92_v2_16(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        axes = Axes(x_range=[-6, 2, 1], y_range=[-2, 4, 1], axis_config={"color": BLACK})
+        
+        # Coefficients
+        a = 2.646 - 2.236 # approx 0.41
+        b = 2
+        c = -a
+        
+        # Graph
+        graph = axes.plot(lambda x: a*x**2 + b*x + c, color=BLUE)
+        
+        # Roots (approx -5.something and something)
+        # Sum is approx -4.88
+        
+        lbl = MathTex("x_1 + x_2 = -\\sqrt{7} - \\sqrt{5}", color=BLACK).to_corner(UR)
+        
+        self.add(axes, graph, lbl)
+        # --- AI GENERATED CODE END ---
+
+```
+---
