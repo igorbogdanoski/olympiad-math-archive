@@ -52,3 +52,33 @@ null
 **📋 Промпт за Geo-Mentor / AI:**
 ```text
 Draw isosceles triangle ABC. Draw altitude CC1 to base AB. Draw angle bisector AA1. Mark D as midpoint of BA1 and connect C1D.
+
+### 🆔 Задача: geom_9_sum_altitudes - Идентитет на нормали во произволен триаголник
+**📅 Додадено:** 2025-12-26 10:22
+**📋 Промпт за Geo-Mentor / AI:**
+```text
+Draw triangle ABC with an internal point M. Draw perpendicular segments from M to sides BC (labeled x), AC (labeled y), and AB (labeled z). Draw segments MA, MB, and MC to show the triangle division.
+
+### 🆔 Задача: geom_8_2018_para_line - Збир на нормали од темиња на паралелограм
+**📅 Додадено:** 2025-12-26 10:22
+**📋 Промпт за Geo-Mentor / AI:**
+```text
+Draw parallelogram ABCD touching line p only at point D. Draw line p at an angle. Drop perpendiculars from A to p (point M), B to p (point N), and C to p (point O). Mark the center of the parallelogram as S and drop perpendicular SS'.
+
+### 🆔 Задача: geom_8_2018_centroid_diag - Конкурентност на тежишни линии во паралелограм
+**📅 Додадено:** 2025-12-26 10:22
+**📋 Промпт за Geo-Mentor / AI:**
+```text
+Draw parallelogram ABCD. Mark M as midpoint of BC and N as midpoint of CD. Draw DM and BN. Draw diagonal AC and show they intersect on it. Draw auxiliary diagonal BD.
+
+### 🆔 Задача: geom_8_viviani_proof - Теорема на Вивиани
+**📅 Додадено:** 2025-12-26 10:22
+**📋 Промпт за Geo-Mentor / AI:**
+```text
+Draw an equilateral triangle ABC. Place a point S inside. Draw three perpendicular lines from S to the three sides. Label them SM, SN, SP. Draw a vertical altitude h for comparison.
+
+### 🆔 Задача: geom_9_rect_proj_diff - Проекции на хипотенуза и агли
+**📅 Додадено:** 2025-12-26 10:22
+**📋 Промпт за Geo-Mentor / AI:**
+```text
+Draw a right triangle ABC with right angle at C. Draw altitude CD to hypotenuse AB. Mark segments AD=p and BD=q. Mark point E on AD such that DE=q. Highlight triangles CBE and AEC.
