@@ -82,3 +82,33 @@ Draw an equilateral triangle ABC. Place a point S inside. Draw three perpendicul
 **📋 Промпт за Geo-Mentor / AI:**
 ```text
 Draw a right triangle ABC with right angle at C. Draw altitude CD to hypotenuse AB. Mark segments AD=p and BD=q. Mark point E on AD such that DE=q. Highlight triangles CBE and AEC.
+
+### 🆔 Задача: geom_angle_incenter_01 - Агол кај центарот на впишана кружница
+**📅 Додадено:** 2025-12-26 10:35
+**📋 Промпт за Geo-Mentor / AI:**
+```text
+Draw a general triangle ABC. Construct the internal angle bisectors of angle A and angle B. Mark their intersection as I. Label the angle at C as gamma.
+
+### 🆔 Задача: geom_angle_orthocenter_02 - Агол кај ортоцентарот
+**📅 Додадено:** 2025-12-26 10:35
+**📋 Промпт за Geo-Mentor / AI:**
+```text
+Draw an acute triangle ABC. Draw altitude AD to BC and altitude BE to AC. Mark their intersection as H. Highlight the quadrilateral CDHE.
+
+### 🆔 Задача: geom_angle_alt_bisector_03 - Агол меѓу висина и симетрала
+**📅 Додадено:** 2025-12-26 10:35
+**📋 Промпт за Geo-Mentor / AI:**
+```text
+Draw triangle ABC with AC significantly longer than AB. Draw altitude AD from A to BC. Draw internal angle bisector AS from A to BC. Label angle B as beta and angle C as gamma.
+
+### 🆔 Задача: geom_angle_hybrid_04 - Агол меѓу внатрешна и надворешна симетрала
+**📅 Додадено:** 2025-12-26 10:35
+**📋 Промпт за Geo-Mentor / AI:**
+```text
+Draw triangle ABC. Extend side CB beyond B to create an external angle at B. Draw internal bisector of angle A and external bisector of angle B. Mark their intersection as Y.
+
+### 🆔 Задача: geom_angle_overlap_05 - Агол на преклопување на хипотенуза
+**📅 Додадено:** 2025-12-26 10:35
+**📋 Промпт за Geo-Mentor / AI:**
+```text
+Draw a right triangle ABC with right angle at A. On hypotenuse BC, mark point E such that BE=AB and point D such that CD=AC. Connect AD and AE.
