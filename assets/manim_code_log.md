@@ -350,3 +350,111 @@ class Task_16(Scene):
 
 ```
 ---
+
+### 🆔 Задача: 13 - Економисти и Математичари
+**📅 Додадено:** 2025-12-26 21:36
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_13(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+class Task_cnt92_13(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        
+        # Sets
+        c1 = Circle(radius=1.5, color=BLUE, fill_opacity=0.1).shift(LEFT)
+        c2 = Circle(radius=1.5, color=RED, fill_opacity=0.1).shift(RIGHT)
+        
+        # Labels
+        t1 = MathTex("M (50)", color=BLUE).next_to(c1, UL)
+        t2 = MathTex("E (40)", color=RED).next_to(c2, UR)
+        t_inter = MathTex("?", color=BLACK).move_to(ORIGIN)
+        
+        # Universe box
+        rect = Rectangle(width=7, height=5, color=BLACK)
+        t_u = MathTex("U = 70", color=BLACK).to_corner(UL)
+        t_none = MathTex("None = 10", color=GRAY).to_corner(DR)
+        
+        self.add(rect, c1, c2, t1, t2, t_inter, t_u, t_none)
+        # --- AI GENERATED CODE END ---
+
+```
+---
+
+### 🆔 Задача: 14 - Позиција на точки во однос на права
+**📅 Додадено:** 2025-12-26 21:36
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_14(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+class Task_cnt92_14(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        axes = Axes(x_range=[-1, 4, 1], y_range=[-1, 6, 1], axis_config={"color": BLACK})
+        
+        # Line
+        line = axes.plot(lambda x: 1.414 * x + 1.732, color=BLUE)
+        lbl_line = MathTex("y=\\sqrt{2}x+\\sqrt{3}", color=BLUE).next_to(line, UP)
+        
+        # Points
+        pt_A = Dot(axes.c2p(1, 3), color=RED)
+        lbl_A = MathTex("A", color=RED).next_to(pt_A, DOWN)
+        
+        pt_B = Dot(axes.c2p(2, 5), color=GREEN)
+        lbl_B = MathTex("B", color=GREEN).next_to(pt_B, UP)
+        
+        self.add(axes, line, lbl_line, pt_A, lbl_A, pt_B, lbl_B)
+        # --- AI GENERATED CODE END ---
+
+```
+---
+
+### 🆔 Задача: 16 - Збир на координати на пресек
+**📅 Додадено:** 2025-12-26 21:36
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_16(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+class Task_cnt92_16(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        axes = Axes(x_range=[-2, 6, 1], y_range=[-3, 3, 1], axis_config={"color": BLACK})
+        
+        # Parabola (approximate coeffs for visual)
+        a = 0.5
+        b = -2
+        c = -0.5
+        graph = axes.plot(lambda x: a*x**2 + b*x + c, color=BLUE)
+        
+        # Roots
+        r1 = Dot(axes.c2p(-0.24, 0), color=RED)
+        r2 = Dot(axes.c2p(4.2, 0), color=RED)
+        
+        lbl = MathTex("x_1 + x_2 = -b/a", color=BLACK).to_corner(UR)
+        
+        self.add(axes, graph, r1, r2, lbl)
+        # --- AI GENERATED CODE END ---
+
+```
+---
