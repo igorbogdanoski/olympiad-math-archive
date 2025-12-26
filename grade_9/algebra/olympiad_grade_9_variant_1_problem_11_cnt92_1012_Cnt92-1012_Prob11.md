@@ -1,22 +1,26 @@
 ---
 grade: 9
-field: algebra
+field: <algebra | number_theory | combinatorics | logic>
 difficulty: 2
+problem_type: calculation
 source: "Olympiad Grade 9, Variant 1, Problem 11 (Cnt92-1012)"
 problem_id: Cnt92-1012_Prob11
 language_original: ru
 translated: false
 
-# --- SKILL MAPPING (New Standard) ---
-primary_skill: functions # e.g., symmetry, invariants, telescoping
+# --- SKILL MAPPING ---
+primary_skill: functions
 related_skills:
   - domain
   - radicals
+prerequisites:
+  - basic_math
 
 # --- TOPICS ---
 tags:
-  - <topic_1> # e.g., percentages
-  - <topic_2> # e.g., linear_equations
+  - domain
+  - square_root
+  - cube_root
   - olympiad
 ---
 
@@ -55,11 +59,8 @@ $$2 \le x \le 4$$
 Точниот одговор е опцијата **2) [2; 4]**.
 <Користи LaTeX за формули: $x^2$ или $$ x^2 $$>
 
-## 💡 Алтернативен пристап (опционално)
-<Ако постои решение со друг Skill (на пр. геометриски наместо алгебарски).>
-
 ## 🏁 Заклучок
-<Краен резултат, јасно истакнат во \boxed{}.>
+<Краен резултат.>
 
 ## 👩‍🏫 За наставници
 **Стапица:** Многу ученици механички поставуваат услов $x-4 \ge 0$ и за третиот корен, добивајќи $x \ge 4$, што би довело до погрешен одговор $x=4$ (пресек на сите три). Клучно е да се знае својството на непарните корени.

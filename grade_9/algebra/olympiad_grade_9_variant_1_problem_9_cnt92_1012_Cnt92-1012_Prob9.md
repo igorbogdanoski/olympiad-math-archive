@@ -1,22 +1,26 @@
 ---
 grade: 9
-field: algebra
+field: <algebra | number_theory | combinatorics | logic>
 difficulty: 3
+problem_type: calculation
 source: "Olympiad Grade 9, Variant 1, Problem 9 (Cnt92-1012)"
 problem_id: Cnt92-1012_Prob9
 language_original: ru
 translated: false
 
-# --- SKILL MAPPING (New Standard) ---
-primary_skill: quadratic_equations # e.g., symmetry, invariants, telescoping
+# --- SKILL MAPPING ---
+primary_skill: quadratic_equations
 related_skills:
   - inequalities
   - discriminant
+prerequisites:
+  - basic_math
 
 # --- TOPICS ---
 tags:
-  - <topic_1> # e.g., percentages
-  - <topic_2> # e.g., linear_equations
+  - quadratic
+  - parameter
+  - no_solution
   - olympiad
 ---
 
@@ -63,11 +67,8 @@ $$-0,5 < a < 0,5$$
 Точниот одговор е опцијата **5)**.
 <Користи LaTeX за формули: $x^2$ или $$ x^2 $$>
 
-## 💡 Алтернативен пристап (опционално)
-<Ако постои решение со друг Skill (на пр. геометриски наместо алгебарски).>
-
 ## 🏁 Заклучок
-<Краен резултат, јасно истакнат во \boxed{}.>
+<Краен резултат.>
 
 ## 👩‍🏫 За наставници
 **Олимписки совет:** Секогаш избегнувајте работа со децимални броеви ако можете. Множењето со $-4$ на почетокот драстично ја намалува шансата за аритметичка грешка.

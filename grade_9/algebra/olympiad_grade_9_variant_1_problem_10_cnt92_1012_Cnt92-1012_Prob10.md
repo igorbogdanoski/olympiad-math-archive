@@ -1,22 +1,26 @@
 ---
 grade: 9
-field: algebra
+field: <algebra | number_theory | combinatorics | logic>
 difficulty: 2
+problem_type: calculation
 source: "Olympiad Grade 9, Variant 1, Problem 10 (Cnt92-1012)"
 problem_id: Cnt92-1012_Prob10
 language_original: ru
 translated: false
 
-# --- SKILL MAPPING (New Standard) ---
-primary_skill: inequalities # e.g., symmetry, invariants, telescoping
+# --- SKILL MAPPING ---
+primary_skill: inequalities
 related_skills:
   - interval_arithmetic
   - fractions
+prerequisites:
+  - basic_math
 
 # --- TOPICS ---
 tags:
-  - <topic_1> # e.g., percentages
-  - <topic_2> # e.g., linear_equations
+  - intervals
+  - estimation
+  - bounds
   - olympiad
 ---
 
@@ -51,11 +55,8 @@ $$3 < \frac{x}{y} < 6$$
 Точниот одговор е опцијата **2) (3; 6)**.
 <Користи LaTeX за формули: $x^2$ или $$ x^2 $$>
 
-## 💡 Алтернативен пристап (опционално)
-<Ако постои решение со друг Skill (на пр. геометриски наместо алгебарски).>
-
 ## 🏁 Заклучок
-<Краен резултат, јасно истакнат во \boxed{}.>
+<Краен резултат.>
 
 ## 👩‍🏫 За наставници
 **Ригорозен пристап:**

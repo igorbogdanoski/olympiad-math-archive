@@ -16,9 +16,9 @@ MANIM_LOG_FILE = os.path.join(BASE_DIR, "assets", "manim_code_log.md")
 
 # Проверка дали Manim е достапен
 try:
-    import manim
+    import manim # type: ignore
     MANIM_AVAILABLE = True
-except ImportError:
+except (ImportError, Exception):
     MANIM_AVAILABLE = False
 
 if not os.path.exists(IMAGES_DIR): os.makedirs(IMAGES_DIR)

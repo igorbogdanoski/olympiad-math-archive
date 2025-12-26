@@ -2,26 +2,24 @@
 grade: 9
 field: geometry
 difficulty: 3
+problem_type: calculation
 source: "<натпревар / списание / година>"
 problem_id: Cnt92-1012_Prob12
 language_original: <mk | en | sr | hr | ...>
 translated: false
 
 # --- GEOMETRY SKILLS ---
-geometry_style: analytic # synthetic | analytic | mixed
-primary_skill: <main_tool> # e.g., angle_chasing, similarity, cyclic_quads
+geometry_style: analytic
+primary_skill: <main_tool>
 related_skills:
   - quadratic_functions
   - optimization
+prerequisites:
+  - basic_math
 
-allowed_tools:
-  - classical_euclidean
-  - similarity
-  - symmetry
-forbidden_tools:
-  - coordinate_geometry
-  - vectors
-  - complex_numbers
+# --- VISUALIZATION ---
+visual_prompt: "Graph of the parabola y = -x^2 + 2x + 5. The parabola opens downwards. The vertex is at (1, 6). The interval [-2, 2] on the x-axis is highlighted. The points on the graph corresponding to x=-2 and x=2 are marked."
+
 tags:
   - geometry
   - olympiad
@@ -38,53 +36,15 @@ tags:
 5) -14
 
 ## 📐 Скица / Конструкција
-<Опис на цртежот. Кои се клучните точки? Дали има помошни линии?>
+<!-- VISUAL PROMPT: Graph of the parabola y = -x^2 + 2x + 5. The parabola opens downwards. The vertex is at (1, 6). The interval [-2, 2] on the x-axis is highlighted. The points on the graph corresponding to x=-2 and x=2 are marked. -->
 
 
 > **👨‍💻 Manim Code (за Geo-Mentor):**
 > ```python
-> def construct(self):
-    self.camera.background_color = WHITE
-    
-    # Axes
-    axes = Axes(
-        x_range=[-3, 4, 1],
-        y_range=[-4, 8, 2],
-        axis_config={"color": BLACK, "include_numbers": True},
-        tips=True
-    ).scale(0.8)
-    
-    # Function y = -x^2 + 2x + 5
-    parabola = axes.plot(lambda x: -x**2 + 2*x + 5, color=BLUE)
-    
-    # Interval [-2, 2]
-    interval_line = Line(
-        start=axes.c2p(-2, 0),
-        end=axes.c2p(2, 0),
-        color=GREEN,
-        stroke_width=6
-    )
-    
-    # Points of interest
-    # x = -2, y = -3 (Minimum on interval)
-    pt_min = axes.c2p(-2, -3)
-    dot_min = Dot(pt_min, color=RED, radius=0.12)
-    label_min = MathTex("min(-2, -3)", color=RED).next_to(dot_min, DOWN+LEFT)
-    
-    # x = 1, y = 6 (Vertex - Max)
-    pt_vertex = axes.c2p(1, 6)
-    dot_vertex = Dot(pt_vertex, color=BLACK, radius=0.08)
-    label_vertex = MathTex("V(1, 6)", color=BLACK).next_to(dot_vertex, UP)
-    
-    # x = 2, y = 5 (Other endpoint)
-    pt_end = axes.c2p(2, 5)
-    dot_end = Dot(pt_end, color=BLACK, radius=0.08)
-    
-    # Dashed lines for min
-    dash_h = DashedLine(start=axes.c2p(0, -3), end=pt_min, color=GRAY)
-    dash_v = DashedLine(start=axes.c2p(-2, 0), end=pt_min, color=GRAY)
-    
-    self.add(axes, parabola, interval_line, dot_min, label_min, dot_vertex, label_vertex, dot_end, dash_h, dash_v)
+> class Task_Cnt92_1012_Prob12(Scene):
+>     def construct(self):
+>         self.camera.background_color = WHITE
+>         # ... (копирај од логот) ...
 > ```
 
 ## 🧠 Анализа
@@ -112,8 +72,9 @@ tags:
 
 Точниот одговор е опцијата **3) -3**.
 
-## ⚠️ Аналитички пристап (само ако е неизбежен)
-<Ако мора да се користат координати, објасни зошто синтетичкиот пат е претежок.>
-
 ## 🏁 Заклучок
 <Краен резултат.>
+
+## 👩‍🏫 За наставници
+**Визуелна интуиција:** Замислете рид. Врвот е на $x=1$. Ние се движиме од $x=-2$ до $x=2$. Точката $x=-2$ е „подалеку“ од врвот отколку $x=2$, па затоа таму сме „пониско“ на падината.
+**Важно:** Ако параболата беше свртена нагоре ($a>0$), тогаш темето ќе беше минимум и ќе требаше прво да провериме дали темето е во интервалот.
