@@ -262,3 +262,33 @@ Draw triangle ABC. On side BC, mark point D such that the length DC is twice the
 **📋 Промпт за Geo-Mentor / AI:**
 ```text
 Draw triangle ABC with angle A = 70 and angle B = 80. Inside the triangle, place point M such that angle ACM = 10 and angle CBM = 20. Connect M to vertices A, B, and C.
+
+### 🆔 Задача: geom_9_trap_perp_diag - Плоштина на рамнокрак трапез со нормални дијагонали
+**📅 Додадено:** 2025-12-26 10:57
+**📋 Промпт за Geo-Mentor / AI:**
+```text
+Draw an isosceles trapezoid ABCD with midsegment 6. Draw diagonals AC and BD intersecting at 90 degrees. Extend base AB to E such that BE = CD and connect CE to show a right triangle ACE.
+
+### 🆔 Задача: geom_9_para_diag_id - Втора дијагонала на паралелограм
+**📅 Додадено:** 2025-12-26 10:57
+**📋 Промпт за Geo-Mentor / AI:**
+```text
+Draw a parallelogram ABCD with sides labeled 13 and 14. Draw one diagonal labeled 15 and the other diagonal as d2.
+
+### 🆔 Задача: geom_9_quad_parallel_proof - Паралелност преку средна линија на спротивни страни
+**📅 Додадено:** 2025-12-26 10:57
+**📋 Промпт за Geo-Mentor / AI:**
+```text
+Draw a convex quadrilateral ABCD. Mark midpoints M of AB and N of CD. Draw segment MN. Mark K as midpoint of diagonal AC and show segments MK and KN.
+
+### 🆔 Задача: geom_9_para_area_ratio - Однос на плоштини во поделен паралелограм
+**📅 Додадено:** 2025-12-26 10:57
+**📋 Промпт за Geo-Mentor / AI:**
+```text
+Draw parallelogram ABCD. Draw diagonal BD and mark point M such that MD is 3 times longer than BM. Extend AM to meet BC at N. Shade triangle MND.
+
+### 🆔 Задача: geom_9_symm_point_circumcircle - Симетрична точка на опишана кружница
+**📅 Додадено:** 2025-12-26 10:57
+**📋 Промпт за Geo-Mentor / AI:**
+```text
+Draw an acute triangle ABC. Pick a point D inside such that angle ADB = angle ADC = 180 - angle A. Reflect A over D to get A'. Show that A, B, A', and C all lie on the same circle.
