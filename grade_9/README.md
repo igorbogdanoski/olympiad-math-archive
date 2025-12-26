@@ -2,11 +2,11 @@
 
 [🏠 Назад кон почеток](../../README.md)
 
-Оваа папка содржи **199** олимписки задачи поделени по области.
+Оваа папка содржи **200** олимписки задачи поделени по области.
 
 | Област | Број на задачи |
 |:---|:---:|
-| [📁 Algebra](algebra/README.md) | 74 |
+| [📁 Algebra](algebra/README.md) | 75 |
 | [📁 Analytic_geometry](analytic_geometry/README.md) | 6 |
 | [📁 Combinatorics](combinatorics/README.md) | 4 |
 | [📁 Geometry](geometry/README.md) | 78 |
