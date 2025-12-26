@@ -69,6 +69,10 @@
       "type": ["string", "null"],
       "description": "REQUIRED FOR GEOMETRY. Step-by-step construction instructions in ENGLISH for an AI visualizer. Example: 'Draw acute triangle ABC. Mark incenter I.' Set to null for non-geometry."
     },
+    "manim_code": {
+      "type": ["string", "null"],
+      "description": "Python code for Manim Community to generate a static image. Use 'self.camera.background_color = WHITE'. Use BLACK for lines/text. Only the body of the construct method. Null for non-geometry."
+    },
     "primary_skill": {
       "type": "string",
       "description": "The main cognitive skill/method from the Skill Map (e.g., 'invariants', 'angle_chasing', 'telescoping'). NOT the topic."
@@ -76,6 +80,13 @@
     "related_skills": {
       "type": "array",
       "description": "List of secondary skills used.",
+      "items": {
+        "type": "string"
+      }
+    },
+    "prerequisites": {
+      "type": "array",
+      "description": "List of specific mathematical concepts/theorems the student must know BEFORE attempting this problem (e.g., 'Pythagorean Theorem', 'Modular Arithmetic', 'Similar Triangles').",
       "items": {
         "type": "string"
       }
@@ -105,7 +116,7 @@
     },
     "pedagogical_notes": {
       "type": "string",
-      "description": "Notes for teachers: common pitfalls, Socratic questions, and prerequisites."
+      "description": "Notes for teachers: common pitfalls and Socratic questions."
     }
   },
   "required": [
@@ -116,6 +127,7 @@
     "source",
     "problem_id",
     "primary_skill",
+    "prerequisites",
     "tags",
     "problem_title",
     "problem_text_mk",

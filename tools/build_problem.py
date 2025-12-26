@@ -12,19 +12,16 @@ TEMPLATES_DIR = os.path.join(BASE_DIR, "templates")
 INPUT_FILE = os.path.join(SCRIPT_DIR, "input.json")
 IMAGES_DIR = os.path.join(BASE_DIR, "assets", "images")
 PROMPTS_LOG_FILE = os.path.join(BASE_DIR, "assets", "visual_prompts_log.md")
+MANIM_LOG_FILE = os.path.join(BASE_DIR, "assets", "manim_code_log.md")
 
-# Проверка дали Manim е достапен (за да не крашира скри# filepath: c:\Users\pc4all\Documents\matholimpiad\olympiad-math-archive\tools\build_problem.py
-# ...existing code...
-# Проверка дали Manim е достапен (за да не крашира скриптата)
+# Проверка дали Manim е достапен
 try:
-    import manim  # type: ignore
+    import manim
     MANIM_AVAILABLE = True
 except ImportError:
     MANIM_AVAILABLE = False
 
-# Креирај папка за слики ако не постои
-if not os.path.exists(IMAGES_DIR):
-    os.makedirs(IMAGES_DIR)
+if not os.path.exists(IMAGES_DIR): os.makedirs(IMAGES_DIR)
 
 def slugify(text):
     if not text: return "unknown"
@@ -41,47 +38,51 @@ def load_template(is_geometry):
     with open(path, 'r', encoding='utf-8') as f:
         return f.read()
 
-def log_visual_prompt(prob_id, title, prompt):
-    """Го запишува промптот во централен лог фајл за лесно копирање."""
-    timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M")
+def ensure_skill_exists(skill_name, is_theorem=False):
+    if not skill_name: return
+    folder = os.path.join(BASE_DIR, "tools", "theorems" if is_theorem else "skill_guides")
+    if not os.path.exists(folder): os.makedirs(folder)
     
-    entry = f"""
-### 🆔 Задача: {prob_id} - {title}
-**📅 Додадено:** {timestamp}
-**📋 Промпт за Geo-Mentor / AI:**
-```text
-{prompt}
-"""
+    filename = f"{skill_name}.md"
+    path = os.path.join(folder, filename)
+
+    if not os.path.exists(path):
+        print(f"🆕 Креирам нов фајл за вештина: {filename}")
+        content = f"# {skill_name.replace('_', ' ').title()}\n\n*(Автоматски генерирано. Потребно пополнување.)*\n"
+        with open(path, 'w', encoding='utf-8') as f:
+            f.write(content)
+
+def log_visual_prompt(prob_id, title, prompt):
+    timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M")
+    entry = f"\n### 🆔 Задача: {prob_id} - {title}\n**📅 Додадено:** {timestamp}\n**📋 Текстуален Промпт:**\n```text\n{prompt}\n```\n---\n"
     try:
         with open(PROMPTS_LOG_FILE, "a", encoding="utf-8") as f:
             f.write(entry)
-        print(f"📝 Промптот е додаден во: assets/visual_prompts_log.md")
-    except Exception as e:
-        print(f"⚠️ Не успеав да запишам во логот: {e}")
+    except Exception: pass
+
+def log_manim_code(prob_id, title, code):
+    timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M")
+    safe_id = re.sub(r'[^a-zA-Z0-9_]', '_', prob_id)
+    class_name = f"Task_{safe_id}"
+    full_code = f"from manim import *\n\nclass {class_name}(Scene):\n    def construct(self):\n        self.camera.background_color = WHITE\n        Text.set_default(color=BLACK)\n        MathTex.set_default(color=BLACK)\n        Mobject.set_default(color=BLACK)\n        # --- AI GENERATED CODE START ---\n{code}\n        # --- AI GENERATED CODE END ---\n"
+    entry = f"\n### 🆔 Задача: {prob_id} - {title}\n**📅 Додадено:** {timestamp}\n**🐍 Python/Manim Код:**\n```python\n{full_code}\n```\n---\n"
+    try:
+        with open(MANIM_LOG_FILE, "a", encoding="utf-8") as f:
+            f.write(entry)
+    except Exception: pass
 
 def generate_manim_image(prob_id, code_body):
-    """Го извршува Manim кодот САМО АКО е инсталиран."""
-    if not MANIM_AVAILABLE:
-        return False
-    if not code_body: return False
-
+    if not MANIM_AVAILABLE or not code_body: return False
+    safe_id = re.sub(r'[^a-zA-Z0-9_]', '_', prob_id)
+    class_name = f"Task_{safe_id}"
     print(f"🎨 Генерирам слика за {prob_id}...")
-
-    manim_script = f"""
-from manim import *
-class ProblemScene(Scene):
-    def construct(self):
-        self.camera.background_color = WHITE
-        Text.set_default(color=BLACK)
-        MathTex.set_default(color=BLACK)
-        Mobject.set_default(color=BLACK)
-        {code_body}
-"""
+    
+    manim_script = f"from manim import *\nclass {class_name}(Scene):\n    def construct(self):\n        self.camera.background_color = WHITE\n        Text.set_default(color=BLACK)\n        MathTex.set_default(color=BLACK)\n        Mobject.set_default(color=BLACK)\n        {code_body}\n"
     temp_script_path = os.path.join(SCRIPT_DIR, "temp_manim.py")
     with open(temp_script_path, "w", encoding="utf-8") as f:
         f.write(manim_script)
-    cmd = ["manim", "-s", "-pql", "--disable_caching", "-v", "WARNING", temp_script_path, "ProblemScene"]
 
+    cmd = ["manim", "-s", "-pql", "--disable_caching", "-v", "WARNING", temp_script_path, class_name]
     try:
         subprocess.run(cmd, check=True, cwd=SCRIPT_DIR)
         media_dir = os.path.join(SCRIPT_DIR, "media", "images", "temp_manim")
@@ -92,11 +93,9 @@ class ProblemScene(Scene):
                 dst = os.path.join(IMAGES_DIR, f"{prob_id}.png")
                 if os.path.exists(dst): os.remove(dst)
                 os.rename(src, dst)
-                print(f"🖼️  Сликата е зачувана: assets/images/{prob_id}.png")
                 return True
-    except Exception as e:
-        print(f"⚠️ Грешка при генерирање слика: {e}")
-
+    except Exception:
+        return False
     return False
 
 def create_problem_file(data):
@@ -125,22 +124,37 @@ def create_problem_file(data):
     content = load_template(is_geo)
     if not content: return
 
-    # --- MANIM GENERATION (Safe Mode) ---
-    if is_geo and data.get('manim_code') and MANIM_AVAILABLE:
-        generate_manim_image(prob_id, data['manim_code'])
+    # --- AUTO-CREATE SKILLS ---
+    p_skill = data.get('primary_skill')
+    if p_skill: ensure_skill_exists(p_skill, 'theorem' in p_skill or 'lemma' in p_skill)
+    for r_skill in data.get('related_skills', []):
+        ensure_skill_exists(r_skill, 'theorem' in r_skill or 'lemma' in r_skill)
 
-    # --- MAPPING ---
+    # --- LOGGING & GENERATION ---
+    if is_geo and data.get('manim_code'):
+        log_manim_code(prob_id, data.get('problem_title', ''), data['manim_code'])
+        if MANIM_AVAILABLE: generate_manim_image(prob_id, data['manim_code'])
+    elif is_geo and data.get('visual_prompt'):
+        log_visual_prompt(prob_id, data.get('problem_title', ''), data['visual_prompt'])
+
+    # --- MAPPING METADATA (DIRECT REPLACEMENT) ---
     content = content.replace("<6-12>", str(grade))
     content = content.replace("<algebra | geometry | number_theory | combinatorics>", field_dir)
     content = content.replace("<1-10>", str(data.get('difficulty', 1)))
+    content = content.replace("<problem_type>", data.get('problem_type', 'calculation'))
     content = content.replace("<списание / натпревар / година>", data.get('source', ''))
     content = content.replace("<број_или_шифра>", prob_id)
     content = content.replace("<mk | en | sr | hr | ru | ...>", data.get('language_original', 'mk'))
-    content = content.replace("<main_cognitive_tool>", data.get('primary_skill', 'logic'))
+    content = content.replace("<main_cognitive_tool>", p_skill if p_skill else 'logic')
 
+    # Lists formatting
     related = data.get('related_skills', [])
     related_str = "\n".join([f"  - {s}" for s in related]) if related else "  - logic"
     content = content.replace("  - <skill_1>\n  - <skill_2>", related_str)
+
+    prereqs = data.get('prerequisites', [])
+    prereq_str = "\n".join([f"  - {p}" for p in prereqs]) if prereqs else "  - basic_math"
+    content = content.replace("  - <prerequisite_1>", prereq_str)
 
     tags = data.get('tags', [])
     tags_str = "\n".join([f"  - {t}" for t in tags]) if tags else "  - math"
@@ -148,23 +162,26 @@ def create_problem_file(data):
 
     if is_geo:
         geo_style = data.get('geometry_style', 'synthetic') or 'synthetic'
-        content = content.replace("geometry_style: synthetic", f"geometry_style: {geo_style}")
+        content = content.replace("<geometry_style>", geo_style)
+        
+        # Visual Prompt Replacement
+        v_prompt = data.get('visual_prompt', 'No visual prompt provided.')
+        content = content.replace("<visual_prompt>", v_prompt if v_prompt else "None")
 
-    # --- VISUALS LOGIC ---
+    # --- VISUALS IN MARKDOWN ---
     image_filename = f"{prob_id}.png"
     image_abs_path = os.path.join(IMAGES_DIR, image_filename)
     
     visual_block = ""
-    
     if os.path.exists(image_abs_path):
         visual_block = f"\n![Скица]({img_rel_path_prefix}/{image_filename})\n"
-    elif data.get('visual_prompt'):
-        visual_block = f"\n<!-- VISUAL PROMPT: {data['visual_prompt']} -->\n"
-        log_visual_prompt(prob_id, data.get('problem_title', ''), data['visual_prompt'])
+    elif data.get('manim_code'):
+        safe_id = re.sub(r'[^a-zA-Z0-9_]', '_', prob_id)
+        visual_block = f"\n> **👨‍💻 Manim Code (за Geo-Mentor):**\n> ```python\n> class Task_{safe_id}(Scene):\n>     def construct(self):\n>         self.camera.background_color = WHITE\n>         # ... (копирај од логот) ...\n> ```\n"
 
     content = content.replace("## 🧠 Анализа", f"{visual_block}\n## 🧠 Анализа")
 
-    # --- TEXT ---
+    # --- TEXT CONTENT ---
     content = content.replace("<Наслов на задачата>", data.get('problem_title', 'Наслов'))
     text_mk = data.get('problem_text_mk', '')
     content = content.replace("<Оригинален текст на задачата. Ако е превод, внимавај на терминологијата.>", text_mk)
@@ -180,6 +197,7 @@ def create_problem_file(data):
 
     notes = data.get('pedagogical_notes', '')
     content = content.replace("<Педагошки забелешки: каде грешат учениците, кои предуслови им требаат.>", notes)
+    content = content.replace("<Педагошки забелешки.>", notes)
 
     with open(output_path, 'w', encoding='utf-8') as f:
         f.write(content)

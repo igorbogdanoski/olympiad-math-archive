@@ -2,26 +2,24 @@
 grade: <6-12>
 field: geometry
 difficulty: <1-10>
+problem_type: <problem_type>
 source: "<натпревар / списание / година>"
 problem_id: <број_или_шифра>
 language_original: <mk | en | sr | hr | ...>
 translated: false
 
 # --- GEOMETRY SKILLS ---
-geometry_style: synthetic # synthetic | analytic | mixed
-primary_skill: <main_tool> # e.g., angle_chasing, similarity, cyclic_quads
+geometry_style: <geometry_style>
+primary_skill: <main_tool>
 related_skills:
   - <skill_1>
   - <skill_2>
+prerequisites:
+  - <prerequisite_1>
 
-allowed_tools:
-  - classical_euclidean
-  - similarity
-  - symmetry
-forbidden_tools:
-  - coordinate_geometry
-  - vectors
-  - complex_numbers
+# --- VISUALIZATION ---
+visual_prompt: "<visual_prompt>"
+
 tags:
   - geometry
   - olympiad
@@ -33,7 +31,7 @@ tags:
 <Текст.>
 
 ## 📐 Скица / Конструкција
-<Опис на цртежот. Кои се клучните точки? Дали има помошни линии?>
+<!-- VISUAL PROMPT: <visual_prompt> -->
 
 ## 🧠 Анализа
 <Зошто повлековме баш таква помошна линија? Каде е "клучот" на задачата?>
@@ -41,8 +39,8 @@ tags:
 ## 📝 Решение (СИНТЕТИЧКО)
 <Чекор по чекор. Секој чекор мора да има геометриско оправдување (на пр. "агли над ист лак").>
 
-## ⚠️ Аналитички пристап (само ако е неизбежен)
-<Ако мора да се користат координати, објасни зошто синтетичкиот пат е претежок.>
-
 ## 🏁 Заклучок
 <Краен резултат.>
+
+## 👩‍🏫 За наставници
+<Педагошки забелешки.>
