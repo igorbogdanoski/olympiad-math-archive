@@ -112,3 +112,33 @@ Draw triangle ABC. Extend side CB beyond B to create an external angle at B. Dra
 **📋 Промпт за Geo-Mentor / AI:**
 ```text
 Draw a right triangle ABC with right angle at A. On hypotenuse BC, mark point E such that BE=AB and point D such that CD=AC. Connect AD and AE.
+
+### 🆔 Задача: para_normals_sum_06 - Збир на нормали во паралелограм
+**📅 Додадено:** 2025-12-26 10:37
+**📋 Промпт за Geo-Mentor / AI:**
+```text
+Draw a parallelogram ABCD with only point D touching a line p. From A, B, and C, draw perpendicular segments AM, BN, and CO to the line p. Mark the intersection of diagonals AC and BD as S, and draw a perpendicular SS' to line p.
+
+### 🆔 Задача: para_diag_centroid_07 - Пресек на линии во паралелограм
+**📅 Додадено:** 2025-12-26 10:37
+**📋 Промпт за Geo-Mentor / AI:**
+```text
+Draw a parallelogram ABCD. Mark M as the midpoint of BC and N as the midpoint of CD. Draw segments DM and BN and show their intersection T. Draw diagonal AC and diagonal BD, showing they intersect at O and that T lies on AC.
+
+### 🆔 Задача: viviani_theorem_08 - Теорема на Вивиани
+**📅 Додадено:** 2025-12-26 10:37
+**📋 Промпт за Geo-Mentor / AI:**
+```text
+Draw an equilateral triangle ABC with altitude h. Place a point S inside and draw perpendiculars SM, SN, and SP to the sides BC, CA, and AB respectively. Connect S to vertices A, B, and C to show three internal triangles.
+
+### 🆔 Задача: tri_altitudes_perimeter_09 - Периметар преку однос на висини
+**📅 Додадено:** 2025-12-26 10:37
+**📋 Промпт за Geo-Mentor / AI:**
+```text
+null
+
+### 🆔 Задача: right_tri_angles_10 - Агли во правоаголен триаголник
+**📅 Додадено:** 2025-12-26 10:37
+**📋 Промпт за Geo-Mentor / AI:**
+```text
+Draw a right triangle ABC with right angle at C. Draw altitude CD to hypotenuse AB. Mark segments AD=p and BD=q. Mark point E on AD such that DE=q. Highlight triangles CBE and AEC to show they are isosceles.
