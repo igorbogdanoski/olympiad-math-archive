@@ -232,3 +232,33 @@ Draw a general quadrilateral ABCD. Mark E as midpoint of AB, K as midpoint of CD
 **📋 Промпт за Geo-Mentor / AI:**
 ```text
 Draw triangle ABC in space and a horizontal plane below it. Show perpendicular segments AA', BB', CC' connecting vertices to the plane. Show centroid T and its perpendicular projection T'.
+
+### 🆔 Задача: geom_9_incenter_intersect - Центар на впишана кружница во специфична конфигурација
+**📅 Додадено:** 2025-12-26 10:55
+**📋 Промпт за Geo-Mentor / AI:**
+```text
+Draw two intersecting circles k1 and k2. Let the center O of k2 lie on the boundary of k1. Mark intersection points A and B. Pick a point C on k1 and draw line OC, marking its intersection with k2 as D. Draw triangle ABC and segments AD and BD.
+
+### 🆔 Задача: geom_9_right_tri_perimeter - Хипотенуза преку периметар и впишан радиус
+**📅 Додадено:** 2025-12-26 10:55
+**📋 Промпт за Geo-Mentor / AI:**
+```text
+Draw a right-angled triangle ABC with incenter I. Draw the incircle tangent to all three sides. Label perimeter as 30 and inradius as 2.
+
+### 🆔 Задача: geom_9_leg_ratio_circles - Однос на катети преку радиуси
+**📅 Додадено:** 2025-12-26 10:55
+**📋 Промпт за Geo-Mentor / AI:**
+```text
+Draw a right-angled triangle with legs a and b and hypotenuse c. Draw the circumcircle (passing through vertices) and the incircle (tangent to sides). Label radii r and R.
+
+### 🆔 Задача: geom_9_tri_angle_45_60 - Пресметка на агли преку поделба на страна
+**📅 Додадено:** 2025-12-26 10:55
+**📋 Промпт за Geo-Mentor / AI:**
+```text
+Draw triangle ABC. On side BC, mark point D such that the length DC is twice the length of BD. Label angle B as 45 degrees and angle ADC as 60 degrees. Drop altitude AH.
+
+### 🆔 Задача: geom_9_tri_ab_mc_proof - Еднаквост на отсечки преку центар на кружница
+**📅 Додадено:** 2025-12-26 10:55
+**📋 Промпт за Geo-Mentor / AI:**
+```text
+Draw triangle ABC with angle A = 70 and angle B = 80. Inside the triangle, place point M such that angle ACM = 10 and angle CBM = 20. Connect M to vertices A, B, and C.
