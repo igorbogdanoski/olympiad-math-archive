@@ -142,3 +142,33 @@ null
 **📋 Промпт за Geo-Mentor / AI:**
 ```text
 Draw a right triangle ABC with right angle at C. Draw altitude CD to hypotenuse AB. Mark segments AD=p and BD=q. Mark point E on AD such that DE=q. Highlight triangles CBE and AEC to show they are isosceles.
+
+### 🆔 Задача: geom_quad_symmetry_05 - Симетрија во конвексен четириаголник
+**📅 Додадено:** 2025-12-26 10:44
+**📋 Промпт за Geo-Mentor / AI:**
+```text
+Draw a convex quadrilateral ABCD with a right angle at C. Mark a point P on side CD. Reflect point B across line CD to get B'. Connect A, P, and B' as a straight line. Mark equal angles APD and BPC.
+
+### 🆔 Задача: geom_tri_bisector_diff_11 - Триаголник со разлика на агли од 90 степени
+**📅 Додадено:** 2025-12-26 10:44
+**📋 Промпт за Geo-Mentor / AI:**
+```text
+Draw triangle ABC with angle A significantly larger than angle B. Construct the internal bisector CD and the external bisector CE at vertex C. Extend side AB to meet the external bisector at point E.
+
+### 🆔 Задача: geom_right_tri_bisect_09 - Симетрала на агол меѓу висина и медијана
+**📅 Додадено:** 2025-12-26 10:44
+**📋 Промпт за Geo-Mentor / AI:**
+```text
+Draw a right triangle ABC with right angle at C. Draw altitude CD, median CM, and angle bisector CL from vertex C to the hypotenuse AB. Label angle A as 40 degrees.
+
+### 🆔 Задача: geom_iso_bisector_intersect_10 - Агли во рамнокрак триаголник преку пресек на симетрали
+**📅 Додадено:** 2025-12-26 10:44
+**📋 Промпт за Geo-Mentor / AI:**
+```text
+Draw an isosceles triangle ABC with AB as base. Draw altitude CD from vertex C. Draw angle bisector AE from vertex A. Mark their intersection as I and label the obtuse angle at I as 130 degrees.
+
+### 🆔 Задача: geom_iso_side_bisector_08 - Пресек на симетрала на страна и симетрала на агол
+**📅 Додадено:** 2025-12-26 10:44
+**📋 Промпт за Geo-Mentor / AI:**
+```text
+Draw an isosceles triangle ABC with side AC = BC. Construct the perpendicular bisector of side AC and the angle bisector of angle A. Mark their intersection point D on the side BC. Label angle C as gamma.
