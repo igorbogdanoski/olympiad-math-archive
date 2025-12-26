@@ -1530,3 +1530,123 @@ class Task_cnt92_v2_20(Scene):
 
 ```
 ---
+
+### 🆔 Задача: cnt92_v2_20 - Пресек на прави со децимални коефициенти
+**📅 Додадено:** 2025-12-26 23:51
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_cnt92_v2_20(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+class Task_cnt92_v2_20(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        
+        axes = Axes(
+            x_range=[-5, 2, 1],
+            y_range=[-1, 7, 1],
+            axis_config={"color": BLACK, "include_numbers": True}
+        )
+        
+        # Lines
+        # y = -12/13 x + 29/13 approx -0.92x + 2.23
+        line1 = axes.plot(lambda x: -0.923*x + 2.23, color=BLUE)
+        
+        # y = -13/12 x + 1.75 approx -1.08x + 1.75
+        line2 = axes.plot(lambda x: -1.083*x + 1.75, color=GREEN)
+        
+        # Intersection Point (-3, 5)
+        dot = Dot(axes.c2p(-3, 5), color=RED)
+        
+        label = MathTex("P(-3, 5)", color=RED).next_to(dot, UR)
+        sum_label = MathTex("x+y=2", color=BLACK).to_corner(UR)
+
+        self.add(axes, line1, line2, dot, label, sum_label)
+        # --- AI GENERATED CODE END ---
+
+```
+---
+
+### 🆔 Задача: cnt92_v2_05 - Равенка на права низ две точки
+**📅 Додадено:** 2025-12-26 23:51
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_cnt92_v2_05(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+class Task_cnt92_v2_05(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        axes = Axes(x_range=[-1, 4, 1], y_range=[-4, 2, 1], axis_config={"color": BLACK})
+        
+        # Points
+        p1 = Dot(axes.c2p(2, 0), color=RED)
+        lbl1 = MathTex("(2, 0)", color=RED).next_to(p1, UP)
+        
+        p2 = Dot(axes.c2p(0, -3), color=RED)
+        lbl2 = MathTex("(0, -3)", color=RED).next_to(p2, RIGHT)
+        
+        # Line
+        line = axes.plot(lambda x: 1.5*x - 3, color=BLUE)
+        eq = MathTex("y = 1.5x - 3", color=BLUE).to_corner(UL)
+        
+        self.add(axes, p1, lbl1, p2, lbl2, line, eq)
+        # --- AI GENERATED CODE END ---
+
+```
+---
+
+### 🆔 Задача: cnt92_v2_08 - Тежишна линија кон хипотенузата
+**📅 Додадено:** 2025-12-26 23:51
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_cnt92_v2_08(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+class Task_cnt92_v2_08(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        
+        # Triangle vertices (6, 8, 10 scaled down by 2 for view)
+        A = ORIGIN
+        B = RIGHT * 4  # represents 8
+        C = UP * 3     # represents 6
+        
+        triangle = Polygon(A, B, C, color=BLACK, stroke_width=4)
+        
+        # Midpoint of hypotenuse BC
+        M = (B + C) / 2
+        median = Line(A, M, color=RED, stroke_width=4)
+        
+        # Labels
+        lbl_a = MathTex("6", color=BLACK).next_to(Line(A, C), LEFT)
+        lbl_b = MathTex("8", color=BLACK).next_to(Line(A, B), DOWN)
+        lbl_c = MathTex("c=10", color=BLACK).next_to(Line(B, C), UR)
+        lbl_m = MathTex("m_c = ?", color=RED).next_to(median, RIGHT, buff=0.1)
+        
+        # Right angle symbol
+        ra = RightAngle(Line(A, B), Line(A, C), length=0.4, color=BLACK)
+        
+        self.add(triangle, median, lbl_a, lbl_b, lbl_c, lbl_m, ra)
+        # --- AI GENERATED CODE END ---
+
+```
+---
