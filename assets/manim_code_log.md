@@ -1488,3 +1488,45 @@ class Task_cnt92_v2_16(Scene):
 
 ```
 ---
+
+### 🆔 Задача: cnt92_v2_20 - Пресек на прави со децимални коефициенти
+**📅 Додадено:** 2025-12-26 23:47
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_cnt92_v2_20(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+class Task_cnt92_v2_20(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        
+        axes = Axes(
+            x_range=[-5, 2, 1],
+            y_range=[-1, 7, 1],
+            axis_config={"color": BLACK, "include_numbers": True}
+        )
+        
+        # Lines
+        # y = -12/13 x + 29/13 approx -0.92x + 2.23
+        line1 = axes.plot(lambda x: -0.923*x + 2.23, color=BLUE)
+        
+        # y = -13/12 x + 1.75 approx -1.08x + 1.75
+        line2 = axes.plot(lambda x: -1.083*x + 1.75, color=GREEN)
+        
+        # Intersection Point (-3, 5)
+        dot = Dot(axes.c2p(-3, 5), color=RED)
+        
+        label = MathTex("P(-3, 5)", color=RED).next_to(dot, UR)
+        sum_label = MathTex("x+y=2", color=BLACK).to_corner(UR)
+
+        self.add(axes, line1, line2, dot, label, sum_label)
+        # --- AI GENERATED CODE END ---
+
+```
+---
