@@ -202,3 +202,33 @@ Draw an isosceles triangle ABC with AB as base. Draw altitude CD from vertex C. 
 **📋 Промпт за Geo-Mentor / AI:**
 ```text
 Draw an isosceles triangle ABC with side AC = BC. Construct the perpendicular bisector of side AC and the angle bisector of angle A. Mark their intersection point D on the side BC. Label angle C as gamma.
+
+### 🆔 Задача: geom_9_midpoint_tangent - Средина на тангентна отсечка
+**📅 Додадено:** 2025-12-26 10:52
+**📋 Промпт за Geo-Mentor / AI:**
+```text
+Draw circle k tangent to arms of angle O at A and B. Draw line BC parallel to OA. Draw segment OC intersecting circle at D. Draw line BD intersecting OA at S.
+
+### 🆔 Задача: geom_9_pentagon_incenter - Постоење на впишана кружница во петтоаголник
+**📅 Додадено:** 2025-12-26 10:52
+**📋 Промпт за Geo-Mentor / AI:**
+```text
+Draw a convex pentagon ABCDE. Mark potential tangent points K, L, M, N, P on the sides. Label tangent segments x, y, z, u, v from each vertex.
+
+### 🆔 Задача: geom_9_touching_circles_tangent - Радиус на трета кружница при допир
+**📅 Додадено:** 2025-12-26 10:52
+**📋 Промпт за Geo-Mentor / AI:**
+```text
+Draw two circles k1 and k2 touching externally at M. Draw a vertical tangent line t touching k2 at N. Draw k3 touching k1, k2, and t. Mark the centers and radii.
+
+### 🆔 Задача: geom_9_midpoints_parallelogram - Паралелограм од средини на отсечки
+**📅 Додадено:** 2025-12-26 10:52
+**📋 Промпт за Geo-Mentor / AI:**
+```text
+Draw a general quadrilateral ABCD. Mark E as midpoint of AB, K as midpoint of CD. Connect AK, CE, BK, DE and mark their midpoints M1, M2, M3, M4. Draw diagonal EK.
+
+### 🆔 Задача: geom_9_centroid_plane_dist - Растојание од тежиште до рамнина
+**📅 Додадено:** 2025-12-26 10:52
+**📋 Промпт за Geo-Mentor / AI:**
+```text
+Draw triangle ABC in space and a horizontal plane below it. Show perpendicular segments AA', BB', CC' connecting vertices to the plane. Show centroid T and its perpendicular projection T'.
