@@ -1261,3 +1261,115 @@ class Task_cnt92_v2_08(Scene):
 
 ```
 ---
+
+### 🆔 Задача: cnt92_v2_09 - Квадратна равенка без решенија
+**📅 Додадено:** 2025-12-26 23:39
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_cnt92_v2_09(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+class Task_cnt92_v2_09(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        axes = Axes(x_range=[-4, 4, 1], y_range=[-4, 2, 1], axis_config={"color": BLACK})
+        
+        # Parabola for a=0 (y = -0.5x^2 - 0.5)
+        graph = axes.plot(lambda x: -0.5*x**2 - 0.5, color=RED)
+        label = MathTex("D < 0", color=RED).next_to(graph, DOWN)
+        
+        # X-axis highlight
+        xaxis = Line(axes.c2p(-4, 0), axes.c2p(4, 0), color=BLUE, stroke_width=4)
+        
+        title = MathTex("-0.5x^2 + ax - 0.5 = 0", color=BLACK).to_corner(UL)
+        
+        self.add(axes, graph, label, xaxis, title)
+        # --- AI GENERATED CODE END ---
+
+```
+---
+
+### 🆔 Задача: cnt92_v2_11 - Дефинициона област на функција
+**📅 Додадено:** 2025-12-26 23:39
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_cnt92_v2_11(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+class Task_cnt92_v2_11(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        
+        number_line = NumberLine(
+            x_range=[0, 10, 1],
+            length=10,
+            color=BLACK,
+            include_numbers=True
+        )
+        
+        # Condition x >= 6
+        line1 = Line(number_line.n2p(6), number_line.n2p(10), color=BLUE, stroke_width=6).shift(UP*0.2)
+        lbl1 = MathTex("x \\ge 6", color=BLUE).next_to(number_line.n2p(6), UP*2)
+        
+        # Condition x <= 8
+        line2 = Line(number_line.n2p(0), number_line.n2p(8), color=RED, stroke_width=6).shift(DOWN*0.2)
+        lbl2 = MathTex("x \\le 8", color=RED).next_to(number_line.n2p(8), DOWN*2)
+        
+        # Intersection
+        inter = Line(number_line.n2p(6), number_line.n2p(8), color=GREEN, stroke_width=10)
+        
+        self.add(number_line, line1, lbl1, line2, lbl2, inter)
+        # --- AI GENERATED CODE END ---
+
+```
+---
+
+### 🆔 Задача: cnt92_v2_12 - Најмала вредност на функција
+**📅 Додадено:** 2025-12-26 23:39
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_cnt92_v2_12(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+class Task_cnt92_v2_12(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        axes = Axes(x_range=[-2, 4, 1], y_range=[-12, 2, 2], axis_config={"color": BLACK})
+        
+        # Function y = -x^2 + 4x - 5
+        graph = axes.plot(lambda x: -x**2 + 4*x - 5, color=BLUE)
+        
+        # Interval [-1, 3]
+        p1 = Dot(axes.c2p(-1, -10), color=RED)
+        lbl1 = MathTex("(-1, -10)", color=RED).next_to(p1, LEFT)
+        
+        p2 = Dot(axes.c2p(3, -2), color=RED)
+        lbl2 = MathTex("(3, -2)", color=RED).next_to(p2, RIGHT)
+        
+        # Vertex
+        v = Dot(axes.c2p(2, -1), color=GREEN)
+        lbl_v = MathTex("Max", color=GREEN).next_to(v, UP)
+        
+        self.add(axes, graph, p1, lbl1, p2, lbl2, v, lbl_v)
+        # --- AI GENERATED CODE END ---
+
+```
+---
