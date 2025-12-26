@@ -292,3 +292,33 @@ Draw parallelogram ABCD. Draw diagonal BD and mark point M such that MD is 3 tim
 **📋 Промпт за Geo-Mentor / AI:**
 ```text
 Draw an acute triangle ABC. Pick a point D inside such that angle ADB = angle ADC = 180 - angle A. Reflect A over D to get A'. Show that A, B, A', and C all lie on the same circle.
+
+### 🆔 Задача: geom_9_construct_perp_axcy - Конструкција на нормални прави во кружница
+**📅 Додадено:** 2025-12-26 11:03
+**📋 Промпт за Geo-Mentor / AI:**
+```text
+Draw a circle with diameter AB. Place a point C on AB. Mark N as the midpoint of CB. Draw a vertical line through N to find points X and Y on the circle. Connect AX and CY to show they are perpendicular.
+
+### 🆔 Задача: geom_9_quad_diag_equal_angles - Еднаквост на агли во четириаголник со еднакви дијагонали
+**📅 Додадено:** 2025-12-26 11:03
+**📋 Промпт за Geo-Mentor / AI:**
+```text
+Draw quadrilateral ABCD where AC = BD. Construct perpendicular bisectors of AD and BC. Mark their intersection P on segment AB. Highlight congruent triangles APC and DPB.
+
+### 🆔 Задача: geom_9_k1_k2_incenter_proof - Пресечни кружници и центар на впишана кружница
+**📅 Додадено:** 2025-12-26 11:03
+**📋 Промпт за Geo-Mentor / AI:**
+```text
+Draw circle k2 with center O and circle k1 passing through O. Let A and B be intersection points. Pick point C on k1 and connect OC, marking D on k2. Show AD and CD are angle bisectors of triangle ABC.
+
+### 🆔 Задача: geom_9_contact_tri_sides - Страни на контактниот триаголник
+**📅 Додадено:** 2025-12-26 11:03
+**📋 Промпт за Geo-Mentor / AI:**
+```text
+Draw triangle ABC with an incircle. Mark contact points M, N, P. Connect them to form triangle MNP. Draw the incenter I and connect it to vertices and contact points to show right triangles.
+
+### 🆔 Задача: geom_9_hypot_ratio_mid_circle - Поделба на хипотенуза со кружница над средна линија
+**📅 Додадено:** 2025-12-26 11:03
+**📋 Промпт за Geo-Mentor / AI:**
+```text
+Draw a right triangle with legs 5 and 12. Mark midpoints M and N of the legs. Draw a circle with diameter MN. Mark points P and Q where the circle hits the hypotenuse. Show that one point is the midpoint and the other is the altitude foot.
