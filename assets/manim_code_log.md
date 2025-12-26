@@ -1996,3 +1996,98 @@ class Task_2025_mun_y2_4a(Scene):
 
 ```
 ---
+
+### 🆔 Задача: 2025_mun_y3_3a - Екстреми на функција со ограничен домен
+**📅 Додадено:** 2025-12-27 00:42
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_2025_mun_y3_3a(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+class Task_2025_mun_y3_3a(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        axes = Axes(x_range=[-4, 4, 1], y_range=[-2, 15, 2], axis_config={"color": BLACK})
+        
+        # Function
+        func = axes.plot(lambda x: x**2 - 2*x - 1, color=GRAY, stroke_opacity=0.5)
+        
+        # Domain segments
+        seg1 = axes.plot(lambda x: x**2 - 2*x - 1, x_range=[-3, -2], color=BLUE, stroke_width=4)
+        seg2 = axes.plot(lambda x: x**2 - 2*x - 1, x_range=[2, 3], color=BLUE, stroke_width=4)
+        
+        # Points
+        p_min = Dot(axes.c2p(2, -1), color=RED)
+        lbl_min = MathTex("min(-1)", color=RED).next_to(p_min, DOWN)
+        
+        p_max = Dot(axes.c2p(-3, 14), color=RED)
+        lbl_max = MathTex("MAX(14)", color=RED).next_to(p_max, UP)
+        
+        # Vertex (not in domain)
+        v = Dot(axes.c2p(1, -2), color=BLACK)
+        lbl_v = MathTex("V(1, -2)", color=BLACK).next_to(v, DOWN)
+        
+        self.add(axes, func, seg1, seg2, p_min, lbl_min, p_max, lbl_max, v, lbl_v)
+        # --- AI GENERATED CODE END ---
+
+```
+---
+
+### 🆔 Задача: 2025_mun_y3_4a - Конус и впишана топка
+**📅 Додадено:** 2025-12-27 00:42
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_2025_mun_y3_4a(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+class Task_2025_mun_y3_4a(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        
+        # Cross section: Isosceles triangle with inscribed circle
+        # s = 3r. Let r=2, then s=6. h = sqrt(36-4) = sqrt(32) approx 5.65
+        r = 2
+        h = np.sqrt(32)
+        
+        A = LEFT * r + DOWN * 2
+        B = RIGHT * r + DOWN * 2
+        C = UP * (h - 2)
+        
+        triangle = Polygon(A, B, C, color=BLACK, stroke_width=4)
+        
+        # Incenter calculation
+        # For isosceles, incenter is on y-axis.
+        # R = rh / (s+r) = 2*5.65 / 8 = 1.41
+        R = r * h / (6 + r)
+        incenter = DOWN * (2 - R)
+        circle = Circle(radius=R, color=BLUE).move_to(incenter)
+        
+        # Labels
+        lbl_r = MathTex("r", color=BLACK).next_to(Line(incenter + DOWN*R, B), DOWN)
+        lbl_s = MathTex("s", color=BLACK).next_to(Line(B, C), RIGHT)
+        lbl_h = MathTex("h", color=BLACK).next_to(Line(incenter, C), LEFT)
+        
+        # Formula
+        txt = MathTex("\\frac{M}{B} = \\frac{s}{r} = 3", color=RED).to_corner(UL)
+        
+        self.add(triangle, circle, lbl_r, lbl_s, lbl_h, txt)
+        
+        # Height line
+        hline = DashedLine(C, DOWN*2, color=GRAY)
+        self.add(hline)
+        # --- AI GENERATED CODE END ---
+
+```
+---
