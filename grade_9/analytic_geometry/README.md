@@ -2,7 +2,7 @@
 
 [⬅️ Назад кон прегледот](../README.md)
 
-**Вкупно задачи:** 5
+**Вкупно задачи:** 6
 
 | ID | Наслов | Тежина | Тип | Клучна Вештина |
 |:---|:---|:---:|:---|:---|
@@ -11,3 +11,4 @@
 | [cnt92_v2_05](cnt92_olympiad_var2_cnt92_v2_05.md) | --- GEOMETRY SKILLS --- | 2/10 | calculation | logic |
 | [cnt92_v2_14](cnt92_olympiad_var2_cnt92_v2_14.md) | --- GEOMETRY SKILLS --- | 4/10 | calculation | logic |
 | [cnt92_v2_20](cnt92_olympiad_var2_cnt92_v2_20.md) | --- GEOMETRY SKILLS --- | 4/10 | calculation | logic |
+| [cnt92_v2_26](cnt92_olympiad_var2_cnt92_v2_26.md) | --- GEOMETRY SKILLS --- | 5/10 | calculation | logic |

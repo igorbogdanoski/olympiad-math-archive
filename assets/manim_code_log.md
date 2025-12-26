@@ -1770,3 +1770,51 @@ class Task_cnt92_v2_27(Scene):
 
 ```
 ---
+
+### 🆔 Задача: cnt92_v2_29 - Параметар и Signum функција
+**📅 Додадено:** 2025-12-27 00:04
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_cnt92_v2_29(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+class Task_cnt92_v2_29(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        
+        number_line = NumberLine(
+            x_range=[-2, 4, 1],
+            length=10,
+            color=BLACK,
+            include_numbers=True
+        )
+        
+        # Active zone (-1, 3)
+        zone = Line(
+            number_line.n2p(-1),
+            number_line.n2p(3),
+            color=GREEN,
+            stroke_width=8
+        )
+        lbl_zone = MathTex("u(x) < 0", color=GREEN).next_to(zone, UP)
+        
+        # Parameter range (0, 2)
+        param_range = Line(
+            number_line.n2p(0),
+            number_line.n2p(2),
+            color=BLUE,
+            stroke_width=8
+        ).shift(DOWN * 0.5)
+        lbl_param = MathTex("a \\in (0, 2)", color=BLUE).next_to(param_range, DOWN)
+        
+        self.add(number_line, zone, lbl_zone, param_range, lbl_param)
+        # --- AI GENERATED CODE END ---
+
+```
+---

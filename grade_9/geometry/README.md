@@ -2,7 +2,7 @@
 
 [⬅️ Назад кон прегледот](../README.md)
 
-**Вкупно задачи:** 76
+**Вкупно задачи:** 77
 
 | ID | Наслов | Тежина | Тип | Клучна Вештина |
 |:---|:---|:---:|:---|:---|
@@ -33,6 +33,7 @@
 | [14](cnt92_olympiad_14.md) | --- GEOMETRY SKILLS --- | 4/10 | calculation | <main_tool> |
 | [24](cnt92_olympiad_24.md) | --- GEOMETRY SKILLS --- | 3/10 | calculation | logic |
 | [cnt92_v2_08](cnt92_olympiad_var2_cnt92_v2_08.md) | --- GEOMETRY SKILLS --- | 2/10 | calculation | logic |
+| [cnt92_v2_24](cnt92_olympiad_var2_cnt92_v2_24.md) | --- GEOMETRY SKILLS --- | 3/10 | calculation | logic |
 | [geom_9_rect_proj_diff](d4_geom_9_rect_proj_diff.md) | --- GEOMETRY SKILLS --- | 8/10 | General | <main_tool> # e.g., angle_chasing, similarity, cyclic_quads |
 | [right_tri_angles_10](euclidean_theorems_analysis_right_tri_angles_10.md) | --- GEOMETRY SKILLS --- | 8/10 | General | <main_tool> # e.g., angle_chasing, similarity, cyclic_quads |
 | [geom_angle_hybrid_04](excenter_theorems_geom_angle_hybrid_04.md) | --- GEOMETRY SKILLS --- | 6/10 | General | <main_tool> # e.g., angle_chasing, similarity, cyclic_quads |
