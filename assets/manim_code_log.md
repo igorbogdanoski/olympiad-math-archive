@@ -1183,3 +1183,81 @@ class Task_cnt92_v2_03(Scene):
 
 ```
 ---
+
+### 🆔 Задача: cnt92_v2_05 - Равенка на права низ две точки
+**📅 Додадено:** 2025-12-26 23:33
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_cnt92_v2_05(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+class Task_cnt92_v2_05(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        axes = Axes(x_range=[-1, 4, 1], y_range=[-4, 2, 1], axis_config={"color": BLACK})
+        
+        # Points
+        p1 = Dot(axes.c2p(2, 0), color=RED)
+        lbl1 = MathTex("(2, 0)", color=RED).next_to(p1, UP)
+        
+        p2 = Dot(axes.c2p(0, -3), color=RED)
+        lbl2 = MathTex("(0, -3)", color=RED).next_to(p2, RIGHT)
+        
+        # Line
+        line = axes.plot(lambda x: 1.5*x - 3, color=BLUE)
+        eq = MathTex("y = 1.5x - 3", color=BLUE).to_corner(UL)
+        
+        self.add(axes, p1, lbl1, p2, lbl2, line, eq)
+        # --- AI GENERATED CODE END ---
+
+```
+---
+
+### 🆔 Задача: cnt92_v2_08 - Тежишна линија кон хипотенузата
+**📅 Додадено:** 2025-12-26 23:33
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_cnt92_v2_08(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+class Task_cnt92_v2_08(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        
+        # Triangle vertices (6, 8, 10 scaled down by 2 for view)
+        A = ORIGIN
+        B = RIGHT * 4  # represents 8
+        C = UP * 3     # represents 6
+        
+        triangle = Polygon(A, B, C, color=BLACK, stroke_width=4)
+        
+        # Midpoint of hypotenuse BC
+        M = (B + C) / 2
+        median = Line(A, M, color=RED, stroke_width=4)
+        
+        # Labels
+        lbl_a = MathTex("6", color=BLACK).next_to(Line(A, C), LEFT)
+        lbl_b = MathTex("8", color=BLACK).next_to(Line(A, B), DOWN)
+        lbl_c = MathTex("c=10", color=BLACK).next_to(Line(B, C), UR)
+        lbl_m = MathTex("m_c = ?", color=RED).next_to(median, RIGHT, buff=0.1)
+        
+        # Right angle symbol
+        ra = RightAngle(Line(A, B), Line(A, C), length=0.4, color=BLACK)
+        
+        self.add(triangle, median, lbl_a, lbl_b, lbl_c, lbl_m, ra)
+        # --- AI GENERATED CODE END ---
+
+```
+---
