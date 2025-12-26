@@ -346,3 +346,9 @@ A right triangle ABC with hypotenuse AB. The triangle is completed into a rectan
 **📋 Промпт за Geo-Mentor / AI:**
 ```text
 Graph of the parabola y = -x^2 + 2x + 5. The parabola opens downwards. The vertex is at (1, 6). The interval [-2, 2] on the x-axis is highlighted. The points on the graph corresponding to x=-2 and x=2 are marked.
+
+### 🆔 Задача: Cnt92-1012_Prob12 - Најмала вредност на функција на интервал
+**📅 Додадено:** 2025-12-26 18:27
+**📋 Промпт за Geo-Mentor / AI:**
+```text
+Graph of the parabola y = -x^2 + 2x + 5. The parabola opens downwards. The vertex is at (1, 6). The interval [-2, 2] on the x-axis is highlighted. The points on the graph corresponding to x=-2 and x=2 are marked.
