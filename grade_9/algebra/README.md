@@ -2,7 +2,7 @@
 
 [⬅️ Назад кон прегледот](../README.md)
 
-**Вкупно задачи:** 71
+**Вкупно задачи:** 74
 
 | ID | Наслов | Тежина | Тип | Клучна Вештина |
 |:---|:---|:---:|:---|:---|
@@ -41,6 +41,9 @@
 | [cnt92_v2_28](cnt92_olympiad_var2_cnt92_v2_28.md) | --- SKILL MAPPING --- | 3/10 | calculation | logic |
 | [cnt92_v2_29](cnt92_olympiad_var2_cnt92_v2_29.md) | --- GEOMETRY SKILLS --- | 5/10 | calculation | logic |
 | [cnt92_v2_30](cnt92_olympiad_var2_cnt92_v2_30.md) | --- SKILL MAPPING --- | 5/10 | calculation | logic |
+| [2025_mun_y1_1a](municipal_competition_2025_2025_mun_y1_1a.md) | --- SKILL MAPPING --- | 3/10 | calculation | logic |
+| [2025_mun_y1_1b](municipal_competition_2025_2025_mun_y1_1b.md) | --- SKILL MAPPING --- | 2/10 | calculation | logic |
+| [2025_mun_y1_4a](municipal_competition_2025_2025_mun_y1_4a.md) | --- SKILL MAPPING --- | 4/10 | calculation | logic |
 | [4333](numerus_4333_4333.md) | --- SKILL MAPPING (New Standard) --- | 4/10 | General | inequalities # e.g., symmetry, invariants, telescoping |
 | [4334](numerus_4334_4334.md) | --- SKILL MAPPING (New Standard) --- | 5/10 | General | factorization # e.g., symmetry, invariants, telescoping |
 | [4377](numerus_4377_4377.md) | --- SKILL MAPPING (New Standard) --- | 3/10 | General | extremal_principle # e.g., symmetry, invariants, telescoping |

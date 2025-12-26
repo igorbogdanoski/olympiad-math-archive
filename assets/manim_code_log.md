@@ -1818,3 +1818,69 @@ class Task_cnt92_v2_29(Scene):
 
 ```
 ---
+
+### 🆔 Задача: 2025_mun_y1_3ab - Однос на плоштини во кружница
+**📅 Додадено:** 2025-12-27 00:21
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_2025_mun_y1_3ab(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+class Task_2025_mun_y1_3ab(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        
+        # Setup
+        R = 3
+        O = ORIGIN
+        circle = Circle(radius=R, color=BLACK)
+        
+        # Points A, B (Diameter)
+        A = LEFT * R
+        B = RIGHT * R
+        
+        # Point C (2AC = CB => AC = 2/3 R)
+        # A is at -3. C should be at -3 + 2 = -1.
+        C = LEFT * 1
+        
+        # Point D (DC perp AB)
+        # x = -1. y = sqrt(9 - 1) = sqrt(8) approx 2.82
+        D = np.array([-1, np.sqrt(8), 0])
+        
+        # Point E (DE is diameter => E is symmetric to D wrt O)
+        E = -D
+        
+        # Drawing
+        line_AB = Line(A, B, color=BLACK)
+        line_DE = Line(D, E, color=BLACK)
+        line_DC = Line(D, C, color=BLACK)
+        
+        # Triangles
+        tri_ABD = Polygon(A, B, D, color=BLUE, fill_opacity=0.1)
+        tri_CDE = Polygon(C, D, E, color=RED, fill_opacity=0.1)
+        
+        # Labels
+        lbl_A = MathTex("A", color=BLACK).next_to(A, LEFT)
+        lbl_B = MathTex("B", color=BLACK).next_to(B, RIGHT)
+        lbl_C = MathTex("C", color=BLACK).next_to(C, DOWN)
+        lbl_D = MathTex("D", color=BLACK).next_to(D, UP)
+        lbl_E = MathTex("E", color=BLACK).next_to(E, DOWN)
+        lbl_O = MathTex("O", color=BLACK).next_to(O, DOWN)
+        
+        self.add(circle, line_AB, line_DE, line_DC)
+        self.add(tri_ABD, tri_CDE)
+        self.add(lbl_A, lbl_B, lbl_C, lbl_D, lbl_E, lbl_O)
+        
+        # Right angle
+        ra = RightAngle(Line(C, B), Line(C, D), length=0.3, color=BLACK)
+        self.add(ra)
+        # --- AI GENERATED CODE END ---
+
+```
+---
