@@ -328,3 +328,21 @@ Draw a right triangle with legs 5 and 12. Mark midpoints M and N of the legs. Dr
 **📋 Промпт за Geo-Mentor / AI:**
 ```text
 Draw rectangle ABCD. Place E on AB (1/3 from A), F on BC (2/3 from B), G midpoint of AD. Shade triangle EFG.
+
+### 🆔 Задача: Cnt92-1012_Prob5_Olympic - Равенка на права (Олимписки метод)
+**📅 Додадено:** 2025-12-26 18:21
+**📋 Промпт за Geo-Mentor / AI:**
+```text
+Coordinate system showing a line passing through (2,0) and (0,3). The area formed by the axes and the line is a right triangle.
+
+### 🆔 Задача: Cnt92-1012_Prob8_Synthetic - Медијана кон хипотенуза (Синтетички пристап)
+**📅 Додадено:** 2025-12-26 18:21
+**📋 Промпт за Geo-Mentor / AI:**
+```text
+A right triangle ABC with hypotenuse AB. The triangle is completed into a rectangle ACBD with dashed lines. The diagonals AB and CD intersect at M.
+
+### 🆔 Задача: Cnt92-1012_Prob12 - Најмала вредност на функција на интервал
+**📅 Додадено:** 2025-12-26 18:25
+**📋 Промпт за Geo-Mentor / AI:**
+```text
+Graph of the parabola y = -x^2 + 2x + 5. The parabola opens downwards. The vertex is at (1, 6). The interval [-2, 2] on the x-axis is highlighted. The points on the graph corresponding to x=-2 and x=2 are marked.
