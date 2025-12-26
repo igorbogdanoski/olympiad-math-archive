@@ -322,3 +322,9 @@ Draw triangle ABC with an incircle. Mark contact points M, N, P. Connect them to
 **📋 Промпт за Geo-Mentor / AI:**
 ```text
 Draw a right triangle with legs 5 and 12. Mark midpoints M and N of the legs. Draw a circle with diameter MN. Mark points P and Q where the circle hits the hypotenuse. Show that one point is the midpoint and the other is the altitude foot.
+
+### 🆔 Задача: geo_rect_shade_01 - Плоштина на триаголник во правоаголник
+**📅 Додадено:** 2025-12-26 11:27
+**📋 Промпт за Geo-Mentor / AI:**
+```text
+Draw rectangle ABCD. Place E on AB (1/3 from A), F on BC (2/3 from B), G midpoint of AD. Shade triangle EFG.
