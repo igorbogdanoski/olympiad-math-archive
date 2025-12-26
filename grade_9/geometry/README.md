@@ -2,7 +2,7 @@
 
 [⬅️ Назад кон прегледот](../README.md)
 
-**Вкупно задачи:** 74
+**Вкупно задачи:** 75
 
 | ID | Наслов | Тежина | Тип | Клучна Вештина |
 |:---|:---|:---:|:---|:---|
@@ -31,6 +31,7 @@
 | [geom_9_quad_diag_equal_angles](abcd_geom_9_quad_diag_equal_angles.md) | --- GEOMETRY SKILLS --- | 7/10 | General | <main_tool> # e.g., angle_chasing, similarity, cyclic_quads |
 | [geom_9_sum_altitudes](blue_book_428_3_1599_geom_9_sum_altitudes.md) | --- GEOMETRY SKILLS --- | 7/10 | General | <main_tool> # e.g., angle_chasing, similarity, cyclic_quads |
 | [14](cnt92_olympiad_14.md) | --- GEOMETRY SKILLS --- | 4/10 | calculation | <main_tool> |
+| [24](cnt92_olympiad_24.md) | --- GEOMETRY SKILLS --- | 3/10 | calculation | logic |
 | [geom_9_rect_proj_diff](d4_geom_9_rect_proj_diff.md) | --- GEOMETRY SKILLS --- | 8/10 | General | <main_tool> # e.g., angle_chasing, similarity, cyclic_quads |
 | [right_tri_angles_10](euclidean_theorems_analysis_right_tri_angles_10.md) | --- GEOMETRY SKILLS --- | 8/10 | General | <main_tool> # e.g., angle_chasing, similarity, cyclic_quads |
 | [geom_angle_hybrid_04](excenter_theorems_geom_angle_hybrid_04.md) | --- GEOMETRY SKILLS --- | 6/10 | General | <main_tool> # e.g., angle_chasing, similarity, cyclic_quads |

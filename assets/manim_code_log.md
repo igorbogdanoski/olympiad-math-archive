@@ -609,3 +609,507 @@ class Task_cnt92_20(Scene):
 
 ```
 ---
+
+### 🆔 Задача: 20 - Пресек на две прави
+**📅 Додадено:** 2025-12-26 22:08
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_20(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+class Task_cnt92_20(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        
+        axes = Axes(
+            x_range=[-3, 3, 1],
+            y_range=[-1, 5, 1],
+            axis_config={"color": BLACK, "include_numbers": True}
+        )
+        
+        # Lines
+        # y = -7/3 x + 5/6
+        line1 = axes.plot(lambda x: -2.33*x + 0.833, color=BLUE)
+        # y = -3/7 x + 2.5
+        line2 = axes.plot(lambda x: -0.428*x + 2.5, color=GREEN)
+        
+        # Intersection Point (-0.875, 2.875)
+        x_int = -0.875
+        y_int = 2.875
+        dot = Dot(axes.c2p(x_int, y_int), color=RED)
+        
+        label = MathTex("P(-\\frac{7}{8}, \\frac{23}{8})", color=RED).next_to(dot, UR)
+        sum_label = MathTex("x+y=2", color=BLACK).to_corner(UR)
+
+        self.add(axes, line1, line2, dot, label, sum_label)
+        # --- AI GENERATED CODE END ---
+
+```
+---
+
+### 🆔 Задача: 20 - Пресек на две прави
+**📅 Додадено:** 2025-12-26 22:18
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_20(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+class Task_cnt92_20(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        
+        axes = Axes(
+            x_range=[-3, 3, 1],
+            y_range=[-1, 5, 1],
+            axis_config={"color": BLACK, "include_numbers": True}
+        )
+        
+        # Lines
+        # y = -7/3 x + 5/6
+        line1 = axes.plot(lambda x: -2.33*x + 0.833, color=BLUE)
+        # y = -3/7 x + 2.5
+        line2 = axes.plot(lambda x: -0.428*x + 2.5, color=GREEN)
+        
+        # Intersection Point (-0.875, 2.875)
+        x_int = -0.875
+        y_int = 2.875
+        dot = Dot(axes.c2p(x_int, y_int), color=RED)
+        
+        label = MathTex("P(-\\frac{7}{8}, \\frac{23}{8})", color=RED).next_to(dot, UR)
+        sum_label = MathTex("x+y=2", color=BLACK).to_corner(UR)
+
+        self.add(axes, line1, line2, dot, label, sum_label)
+        # --- AI GENERATED CODE END ---
+
+```
+---
+
+### 🆔 Задача: 24 - Максимална плоштина на паралелограм
+**📅 Додадено:** 2025-12-26 22:22
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_24(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+class Task_cnt92_24(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        
+        # Define points for a rhombus (since max area is when a=b)
+        # Side length approx 3 units for visualization
+        a = 3
+        angle = 30 * DEGREES
+        
+        p1 = ORIGIN
+        p2 = RIGHT * a
+        p3 = p2 + np.array([a * np.cos(angle), a * np.sin(angle), 0])
+        p4 = p1 + np.array([a * np.cos(angle), a * np.sin(angle), 0])
+        
+        parallelogram = Polygon(p1, p2, p3, p4, color=BLUE, stroke_width=4)
+        
+        # Labels
+        lbl_a = MathTex("a", color=BLACK).next_to(Line(p1, p2), DOWN)
+        lbl_b = MathTex("b", color=BLACK).next_to(Line(p2, p3), RIGHT)
+        
+        # Angle arc
+        arc = Angle(Line(p1, p2), Line(p1, p4), radius=0.5, color=RED)
+        lbl_angle = MathTex("30^\circ", color=RED).next_to(arc, RIGHT, buff=0.1).shift(UP*0.1)
+        
+        # Area formula
+        formula = MathTex("S = a \\cdot b \\cdot \\sin(30^\circ)", color=BLACK).to_edge(UP)
+        cond = MathTex("a+b=24", color=BLACK).next_to(formula, DOWN)
+        
+        self.add(parallelogram, lbl_a, lbl_b, arc, lbl_angle, formula, cond)
+        # --- AI GENERATED CODE END ---
+
+```
+---
+
+### 🆔 Задача: 25 - Неравенка со апсолутни вредности
+**📅 Додадено:** 2025-12-26 22:22
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_25(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+class Task_cnt92_25(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        
+        # Number line
+        number_line = NumberLine(
+            x_range=[-15, 0, 1],
+            length=10,
+            color=BLACK,
+            include_numbers=True,
+            label_direction=DOWN
+        )
+        
+        # Interval (-inf, -3)
+        interval_line = Line(
+            start=number_line.n2p(-15), 
+            end=number_line.n2p(-3), 
+            color=BLUE, 
+            stroke_width=6
+        )
+        label_int = MathTex("x < -3", color=BLUE).next_to(number_line.n2p(-3), UP)
+        
+        # Solution x <= -12
+        sol_line = Line(
+            start=number_line.n2p(-15), 
+            end=number_line.n2p(-12), 
+            color=RED, 
+            stroke_width=6
+        ).shift(UP*0.1) # Shift slightly to show overlap
+        
+        label_sol = MathTex("x \\le -12", color=RED).next_to(number_line.n2p(-12), UP).shift(LEFT)
+        
+        self.add(number_line, interval_line, label_int, sol_line, label_sol)
+        # --- AI GENERATED CODE END ---
+
+```
+---
+
+### 🆔 Задача: 26 - Број на решенија на систем равенки
+**📅 Додадено:** 2025-12-26 22:22
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_26(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+class Task_cnt92_26(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        axes = Axes(x_range=[-4, 4, 1], y_range=[-1, 4, 1], axis_config={"color": BLACK})
+        
+        # Piecewise function segments
+        # x < 0, y = 0
+        seg1 = Line(axes.c2p(-4, 0), axes.c2p(0, 0), color=BLUE, stroke_width=4)
+        # 0 < x < 2, y = 2
+        seg2 = Line(axes.c2p(0, 2), axes.c2p(2, 2), color=BLUE, stroke_width=4)
+        # x > 2, y = 0
+        seg3 = Line(axes.c2p(2, 0), axes.c2p(4, 0), color=BLUE, stroke_width=4)
+        
+        # Holes
+        h1 = Circle(radius=0.08, color=BLUE, fill_color=WHITE, fill_opacity=1).move_to(axes.c2p(0, 0))
+        h2 = Circle(radius=0.08, color=BLUE, fill_color=WHITE, fill_opacity=1).move_to(axes.c2p(0, 2))
+        h3 = Circle(radius=0.08, color=BLUE, fill_color=WHITE, fill_opacity=1).move_to(axes.c2p(2, 2))
+        h4 = Circle(radius=0.08, color=BLUE, fill_color=WHITE, fill_opacity=1).move_to(axes.c2p(2, 0))
+        
+        # The Line y = kx + 1 (example k=1)
+        line = axes.plot(lambda x: 1*x + 1, color=RED)
+        lbl_line = MathTex("y=kx+1", color=RED).next_to(line, UP)
+        
+        self.add(axes, seg1, seg2, seg3, h1, h2, h3, h4, line, lbl_line)
+        # --- AI GENERATED CODE END ---
+
+```
+---
+
+### 🆔 Задача: 27 - Бесконечно многу решенија на ирационална равенка
+**📅 Додадено:** 2025-12-26 22:22
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_27(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+class Task_cnt92_27(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        
+        number_line = NumberLine(
+            x_range=[0, 4, 1],
+            length=8,
+            color=BLACK,
+            include_numbers=True
+        )
+        
+        # Points A and B
+        pt_A = Dot(number_line.n2p(1.414), color=BLUE)
+        lbl_A = MathTex("\\sqrt{2}", color=BLUE).next_to(pt_A, DOWN)
+        
+        pt_B = Dot(number_line.n2p(2.236), color=BLUE)
+        lbl_B = MathTex("\\sqrt{5}", color=BLUE).next_to(pt_B, DOWN)
+        
+        # Segment between them
+        segment = Line(pt_A.get_center(), pt_B.get_center(), color=RED, stroke_width=6)
+        lbl_seg = MathTex("a = \\sqrt{5}-\\sqrt{2}", color=RED).next_to(segment, UP)
+        
+        # Point x
+        pt_x = Dot(number_line.n2p(1.8), color=GREEN)
+        lbl_x = MathTex("x", color=GREEN).next_to(pt_x, UP)
+        
+        self.add(number_line, pt_A, lbl_A, pt_B, lbl_B, segment, lbl_seg, pt_x, lbl_x)
+        # --- AI GENERATED CODE END ---
+
+```
+---
+
+### 🆔 Задача: 24 - Максимална плоштина на паралелограм
+**📅 Додадено:** 2025-12-26 23:17
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_24(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+class Task_cnt92_24(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        
+        # Define points for a rhombus (since max area is when a=b)
+        # Side length approx 3 units for visualization
+        a = 3
+        angle = 30 * DEGREES
+        
+        p1 = ORIGIN
+        p2 = RIGHT * a
+        p3 = p2 + np.array([a * np.cos(angle), a * np.sin(angle), 0])
+        p4 = p1 + np.array([a * np.cos(angle), a * np.sin(angle), 0])
+        
+        parallelogram = Polygon(p1, p2, p3, p4, color=BLUE, stroke_width=4)
+        
+        # Labels
+        lbl_a = MathTex("a", color=BLACK).next_to(Line(p1, p2), DOWN)
+        lbl_b = MathTex("b", color=BLACK).next_to(Line(p2, p3), RIGHT)
+        
+        # Angle arc
+        arc = Angle(Line(p1, p2), Line(p1, p4), radius=0.5, color=RED)
+        lbl_angle = MathTex("30^\circ", color=RED).next_to(arc, RIGHT, buff=0.1).shift(UP*0.1)
+        
+        # Area formula
+        formula = MathTex("S = a \\cdot b \\cdot \\sin(30^\circ)", color=BLACK).to_edge(UP)
+        cond = MathTex("a+b=24", color=BLACK).next_to(formula, DOWN)
+        
+        self.add(parallelogram, lbl_a, lbl_b, arc, lbl_angle, formula, cond)
+        # --- AI GENERATED CODE END ---
+
+```
+---
+
+### 🆔 Задача: 25 - Неравенка со апсолутни вредности
+**📅 Додадено:** 2025-12-26 23:17
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_25(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+class Task_cnt92_25(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        
+        # Number line
+        number_line = NumberLine(
+            x_range=[-15, 0, 1],
+            length=10,
+            color=BLACK,
+            include_numbers=True,
+            label_direction=DOWN
+        )
+        
+        # Interval (-inf, -3)
+        interval_line = Line(
+            start=number_line.n2p(-15), 
+            end=number_line.n2p(-3), 
+            color=BLUE, 
+            stroke_width=6
+        )
+        label_int = MathTex("x < -3", color=BLUE).next_to(number_line.n2p(-3), UP)
+        
+        # Solution x <= -12
+        sol_line = Line(
+            start=number_line.n2p(-15), 
+            end=number_line.n2p(-12), 
+            color=RED, 
+            stroke_width=6
+        ).shift(UP*0.1) # Shift slightly to show overlap
+        
+        label_sol = MathTex("x \\le -12", color=RED).next_to(number_line.n2p(-12), UP).shift(LEFT)
+        
+        self.add(number_line, interval_line, label_int, sol_line, label_sol)
+        # --- AI GENERATED CODE END ---
+
+```
+---
+
+### 🆔 Задача: 26 - Број на решенија на систем равенки
+**📅 Додадено:** 2025-12-26 23:17
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_26(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+class Task_cnt92_26(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        axes = Axes(x_range=[-4, 4, 1], y_range=[-1, 4, 1], axis_config={"color": BLACK})
+        
+        # Piecewise function segments
+        # x < 0, y = 0
+        seg1 = Line(axes.c2p(-4, 0), axes.c2p(0, 0), color=BLUE, stroke_width=4)
+        # 0 < x < 2, y = 2
+        seg2 = Line(axes.c2p(0, 2), axes.c2p(2, 2), color=BLUE, stroke_width=4)
+        # x > 2, y = 0
+        seg3 = Line(axes.c2p(2, 0), axes.c2p(4, 0), color=BLUE, stroke_width=4)
+        
+        # Holes
+        h1 = Circle(radius=0.08, color=BLUE, fill_color=WHITE, fill_opacity=1).move_to(axes.c2p(0, 0))
+        h2 = Circle(radius=0.08, color=BLUE, fill_color=WHITE, fill_opacity=1).move_to(axes.c2p(0, 2))
+        h3 = Circle(radius=0.08, color=BLUE, fill_color=WHITE, fill_opacity=1).move_to(axes.c2p(2, 2))
+        h4 = Circle(radius=0.08, color=BLUE, fill_color=WHITE, fill_opacity=1).move_to(axes.c2p(2, 0))
+        
+        # The Line y = kx + 1 (example k=1)
+        line = axes.plot(lambda x: 1*x + 1, color=RED)
+        lbl_line = MathTex("y=kx+1", color=RED).next_to(line, UP)
+        
+        self.add(axes, seg1, seg2, seg3, h1, h2, h3, h4, line, lbl_line)
+        # --- AI GENERATED CODE END ---
+
+```
+---
+
+### 🆔 Задача: 27 - Бесконечно многу решенија на ирационална равенка
+**📅 Додадено:** 2025-12-26 23:17
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_27(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+class Task_cnt92_27(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        
+        number_line = NumberLine(
+            x_range=[0, 4, 1],
+            length=8,
+            color=BLACK,
+            include_numbers=True
+        )
+        
+        # Points A and B
+        pt_A = Dot(number_line.n2p(1.414), color=BLUE)
+        lbl_A = MathTex("\\sqrt{2}", color=BLUE).next_to(pt_A, DOWN)
+        
+        pt_B = Dot(number_line.n2p(2.236), color=BLUE)
+        lbl_B = MathTex("\\sqrt{5}", color=BLUE).next_to(pt_B, DOWN)
+        
+        # Segment between them
+        segment = Line(pt_A.get_center(), pt_B.get_center(), color=RED, stroke_width=6)
+        lbl_seg = MathTex("a = \\sqrt{5}-\\sqrt{2}", color=RED).next_to(segment, UP)
+        
+        # Point x
+        pt_x = Dot(number_line.n2p(1.8), color=GREEN)
+        lbl_x = MathTex("x", color=GREEN).next_to(pt_x, UP)
+        
+        self.add(number_line, pt_A, lbl_A, pt_B, lbl_B, segment, lbl_seg, pt_x, lbl_x)
+        # --- AI GENERATED CODE END ---
+
+```
+---
+
+### 🆔 Задача: 29 - Параметар во равенка со signum функција
+**📅 Додадено:** 2025-12-26 23:18
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_29(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+class Task_cnt92_29(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        
+        number_line = NumberLine(
+            x_range=[-3, 4, 1],
+            length=10,
+            color=BLACK,
+            include_numbers=True
+        )
+        
+        # Forbidden zone [-1, 2]
+        forbidden = Line(
+            number_line.n2p(-1),
+            number_line.n2p(2),
+            color=RED,
+            stroke_width=8
+        )
+        lbl_forbid = MathTex("u(x) \\le 0", color=RED).next_to(forbidden, UP)
+        
+        # Parameter range [0, 1]
+        param_range = Line(
+            number_line.n2p(0),
+            number_line.n2p(1),
+            color=GREEN,
+            stroke_width=8
+        ).shift(DOWN * 0.5)
+        lbl_param = MathTex("a \\in [0, 1]", color=GREEN).next_to(param_range, DOWN)
+        
+        self.add(number_line, forbidden, lbl_forbid, param_range, lbl_param)
+        # --- AI GENERATED CODE END ---
+
+```
+---

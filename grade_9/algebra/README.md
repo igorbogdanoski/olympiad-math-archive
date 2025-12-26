@@ -2,12 +2,24 @@
 
 [⬅️ Назад кон прегледот](../README.md)
 
-**Вкупно задачи:** 38
+**Вкупно задачи:** 50
 
 | ID | Наслов | Тежина | Тип | Клучна Вештина |
 |:---|:---|:---:|:---|:---|
 | [15](cnt92_olympiad_15.md) | --- SKILL MAPPING --- | 3/10 | calculation | percentages |
 | [16](cnt92_olympiad_16.md) | --- GEOMETRY SKILLS --- | 5/10 | calculation | <main_tool> |
+| [17](cnt92_olympiad_17.md) | --- SKILL MAPPING --- | 3/10 | calculation | logic |
+| [18](cnt92_olympiad_18.md) | --- SKILL MAPPING --- | 4/10 | calculation | logic |
+| [19](cnt92_olympiad_19.md) | --- SKILL MAPPING --- | 4/10 | calculation | logic |
+| [21](cnt92_olympiad_21.md) | --- SKILL MAPPING --- | 4/10 | calculation | logic |
+| [22](cnt92_olympiad_22.md) | --- SKILL MAPPING --- | 5/10 | calculation | logic |
+| [23](cnt92_olympiad_23.md) | --- SKILL MAPPING --- | 5/10 | calculation | logic |
+| [25](cnt92_olympiad_25.md) | --- SKILL MAPPING --- | 4/10 | calculation | logic |
+| [26](cnt92_olympiad_26.md) | --- GEOMETRY SKILLS --- | 5/10 | calculation | logic |
+| [27](cnt92_olympiad_27.md) | --- GEOMETRY SKILLS --- | 5/10 | calculation | logic |
+| [28](cnt92_olympiad_28.md) | --- SKILL MAPPING --- | 3/10 | calculation | logic |
+| [29](cnt92_olympiad_29.md) | --- GEOMETRY SKILLS --- | 5/10 | calculation | logic |
+| [30](cnt92_olympiad_30.md) | --- SKILL MAPPING --- | 5/10 | calculation | logic |
 | [4333](numerus_4333_4333.md) | --- SKILL MAPPING (New Standard) --- | 4/10 | General | inequalities # e.g., symmetry, invariants, telescoping |
 | [4334](numerus_4334_4334.md) | --- SKILL MAPPING (New Standard) --- | 5/10 | General | factorization # e.g., symmetry, invariants, telescoping |
 | [4377](numerus_4377_4377.md) | --- SKILL MAPPING (New Standard) --- | 3/10 | General | extremal_principle # e.g., symmetry, invariants, telescoping |

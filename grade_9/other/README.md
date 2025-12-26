@@ -2,7 +2,7 @@
 
 [⬅️ Назад кон прегледот](../README.md)
 
-**Вкупно задачи:** 8
+**Вкупно задачи:** 11
 
 | ID | Наслов | Тежина | Тип | Клучна Вештина |
 |:---|:---|:---:|:---|:---|
@@ -14,3 +14,6 @@
 | [18](cnt92_olympiad_18.md) | --- SKILL MAPPING --- | 4/10 | calculation | logic |
 | [19](cnt92_olympiad_19.md) | --- SKILL MAPPING --- | 4/10 | calculation | logic |
 | [20](cnt92_olympiad_20.md) | --- GEOMETRY SKILLS --- | 4/10 | calculation | logic |
+| [21](cnt92_olympiad_21.md) | --- SKILL MAPPING --- | 4/10 | calculation | logic |
+| [22](cnt92_olympiad_22.md) | --- SKILL MAPPING --- | 5/10 | calculation | logic |
+| [23](cnt92_olympiad_23.md) | --- SKILL MAPPING --- | 5/10 | calculation | logic |
