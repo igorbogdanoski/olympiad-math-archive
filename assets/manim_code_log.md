@@ -1650,3 +1650,123 @@ class Task_cnt92_v2_08(Scene):
 
 ```
 ---
+
+### 🆔 Задача: cnt92_v2_24 - Минимален периметар на паралелограм
+**📅 Додадено:** 2025-12-26 23:59
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_cnt92_v2_24(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+class Task_cnt92_v2_24(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        
+        # Rhombus a=b=5. Scaled down for view.
+        # Area = 25. Side = 5.
+        side = 3 # visual scale
+        angle = 30 * DEGREES
+        
+        p1 = ORIGIN
+        p2 = RIGHT * side
+        p3 = p2 + np.array([side * np.cos(angle), side * np.sin(angle), 0])
+        p4 = p1 + np.array([side * np.cos(angle), side * np.sin(angle), 0])
+        
+        shape = Polygon(p1, p2, p3, p4, color=BLUE, stroke_width=4)
+        
+        lbl_a = MathTex("a", color=BLACK).next_to(Line(p1, p2), DOWN)
+        lbl_b = MathTex("b", color=BLACK).next_to(Line(p2, p3), RIGHT)
+        lbl_ang = MathTex("30^\circ", color=RED).next_to(p1, UR, buff=0.1)
+        
+        txt_area = MathTex("S = ab \\sin 30^\circ = 12.5", color=BLACK).to_corner(UL)
+        txt_res = MathTex("ab = 25 \\implies P_{min} = 20", color=RED).next_to(txt_area, DOWN)
+        
+        self.add(shape, lbl_a, lbl_b, lbl_ang, txt_area, txt_res)
+        # --- AI GENERATED CODE END ---
+
+```
+---
+
+### 🆔 Задача: cnt92_v2_26 - Систем равенки со параметар
+**📅 Додадено:** 2025-12-26 23:59
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_cnt92_v2_26(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+class Task_cnt92_v2_26(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        axes = Axes(x_range=[-4, 4, 1], y_range=[-1, 4, 1], axis_config={"color": BLACK})
+        
+        # Piecewise function
+        # x < -2, y = 0
+        seg1 = Line(axes.c2p(-4, 0), axes.c2p(-2, 0), color=BLUE, stroke_width=4)
+        # -2 < x < 0, y = 2
+        seg2 = Line(axes.c2p(-2, 2), axes.c2p(0, 2), color=BLUE, stroke_width=4)
+        # x > 0, y = 0
+        seg3 = Line(axes.c2p(0, 0), axes.c2p(4, 0), color=BLUE, stroke_width=4)
+        
+        # Holes
+        holes = VGroup(
+            Circle(radius=0.08, color=BLUE, fill_color=WHITE, fill_opacity=1).move_to(axes.c2p(-2, 0)),
+            Circle(radius=0.08, color=BLUE, fill_color=WHITE, fill_opacity=1).move_to(axes.c2p(-2, 2)),
+            Circle(radius=0.08, color=BLUE, fill_color=WHITE, fill_opacity=1).move_to(axes.c2p(0, 2)),
+            Circle(radius=0.08, color=BLUE, fill_color=WHITE, fill_opacity=1).move_to(axes.c2p(0, 0))
+        )
+        
+        # Line y = -1x + 1 (example for k < -0.5)
+        line = axes.plot(lambda x: -1*x + 1, color=RED)
+        lbl = MathTex("k < -0.5", color=RED).to_corner(UR)
+        
+        self.add(axes, seg1, seg2, seg3, holes, line, lbl)
+        # --- AI GENERATED CODE END ---
+
+```
+---
+
+### 🆔 Задача: cnt92_v2_27 - Бесконечно многу решенија (Модули)
+**📅 Додадено:** 2025-12-26 23:59
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_cnt92_v2_27(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+class Task_cnt92_v2_27(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        
+        nl = NumberLine(x_range=[-3, 3, 1], length=8, color=BLACK, include_numbers=True)
+        
+        p1 = Dot(nl.n2p(-1.732), color=BLUE)
+        l1 = MathTex("-\\sqrt{3}", color=BLUE).next_to(p1, DOWN)
+        
+        p2 = Dot(nl.n2p(1.414), color=BLUE)
+        l2 = MathTex("\\sqrt{2}", color=BLUE).next_to(p2, DOWN)
+        
+        seg = Line(p1.get_center(), p2.get_center(), color=RED, stroke_width=6)
+        lbl = MathTex("a = \\sqrt{2}+\\sqrt{3}", color=RED).next_to(seg, UP)
+        
+        self.add(nl, p1, l1, p2, l2, seg, lbl)
+        # --- AI GENERATED CODE END ---
+
+```
+---
