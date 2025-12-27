@@ -1,6 +1,9 @@
 import streamlit as st
 import os
 import re
+import random
+import subprocess
+import tempfile
 
 # --- КОНФИГУРАЦИЈА ---
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -23,6 +26,15 @@ def parse_problem(file_path):
             if ':' in line:
                 key, val = line.split(':', 1)
                 meta[key.strip()] = val.strip().replace('"', '').replace("'", "")
+        
+        # Екстракција на тагови (подобрено)
+        tags = []
+        # Бараме tags: проследено со листа со цртички
+        tags_match = re.search(r'tags:\s*\n((?:\s*-\s*.*\n?)+)', yaml_text)
+        if tags_match:
+            tags_block = tags_match.group(1)
+            tags = [t.strip().replace('- ', '').strip() for t in tags_block.split('\n') if t.strip()]
+        meta['tags'] = tags
     
     # Екстракција на телото на задачата
     # 1. Тргни го YAML frontmatter (првиот блок помеѓу ---)
@@ -46,6 +58,41 @@ def parse_problem(file_path):
     # Засега само ги оставаме релативни, можеби нема да се прикажат сликите перфектно без дополнителен setup
     
     return meta, body, file_path
+
+def generate_pdf(problems_list):
+    """Генерира PDF од листа на задачи."""
+    if not problems_list:
+        return None
+        
+    # Креирање на привремен Markdown фајл
+    md_content = ""
+    for p in problems_list:
+        md_content += f"# {p['filename'].replace('.md', '').replace('_', ' ').title()}\n\n"
+        md_content += p['body'] + "\n\n---\n\n"
+    
+    try:
+        with tempfile.NamedTemporaryFile(delete=False, suffix=".md", mode='w', encoding='utf-8') as tmp:
+            tmp.write(md_content)
+            tmp_path = tmp.name
+            
+        pdf_path = tmp_path.replace(".md", ".pdf")
+        
+        # Команда за Pandoc (иста како во export_to_pdf.py)
+        command = [
+            "pandoc", tmp_path, "-o", pdf_path,
+            "--pdf-engine=xelatex", 
+            "--from=markdown+tex_math_dollars",
+            "-V", "geometry:margin=1in",
+            "-V", "mainfont=Times New Roman", 
+            "-V", "lang=mk",
+            "-V", "fontsize=12pt"
+        ]
+        
+        subprocess.run(command, check=True, capture_output=True)
+        return pdf_path
+    except Exception as e:
+        print(f"PDF Generation Error: {e}")
+        return None
 
 @st.cache_data
 def load_all_problems():
@@ -148,8 +195,20 @@ selected_categories = st.sidebar.multiselect("Категорија", categories,
 # 3. Филтер за Тежина
 min_diff, max_diff = st.sidebar.slider("Тежина", 1, 10, (1, 10))
 
-# 4. Пребарување текст
+# 4. Филтер за Тагови
+all_tags = sorted(list(set(tag for p in all_problems for tag in p['meta'].get('tags', []))))
+selected_tags = st.sidebar.multiselect("Тагови", all_tags)
+
+# 5. Пребарување текст
 search_query = st.sidebar.text_input("Пребарај текст (пр. триаголник)")
+
+# --- КОПЧЕ ЗА СЛУЧАЈНА ЗАДАЧА ---
+if st.sidebar.button("🎲 Случајна Задача"):
+    candidates = [p for p in all_problems if p['grade'] in selected_grades and p['category'] in selected_categories]
+    if candidates:
+        st.session_state['random_prob'] = random.choice(candidates)
+    else:
+        st.sidebar.warning("Нема задачи за избор!")
 
 # --- ПРИМЕНА НА ФИЛТРИ ---
 filtered_problems = [
@@ -157,8 +216,15 @@ filtered_problems = [
     if p['grade'] in selected_grades
     and p['category'] in selected_categories
     and min_diff <= p['difficulty'] <= max_diff
+    and (not selected_tags or any(tag in p['meta'].get('tags', []) for tag in selected_tags))
     and (search_query.lower() in p['body'].lower() if search_query else True)
 ]
+
+# Ако е кликнато "Случајна", прикажи ја само неа
+if 'random_prob' in st.session_state:
+    filtered_problems = [st.session_state['random_prob']]
+    del st.session_state['random_prob']
+    st.info("🎲 Избрана е случајна задача!")
 
 st.metric("Пронајдени задачи", len(filtered_problems))
 
@@ -175,6 +241,21 @@ end_idx = start_idx + items_per_page
 current_batch = filtered_problems[start_idx:end_idx]
 
 st.caption(f"Прикажувам {start_idx + 1}-{min(end_idx, len(filtered_problems))} од {len(filtered_problems)} задачи")
+
+# --- PDF ГЕНЕРАТОР ---
+if st.button("📄 Генерирај PDF од овие задачи"):
+    with st.spinner("Генерирам PDF..."):
+        pdf_file = generate_pdf(current_batch)
+        if pdf_file and os.path.exists(pdf_file):
+            with open(pdf_file, "rb") as f:
+                st.download_button(
+                    label="⬇️ Преземи PDF Тест",
+                    data=f,
+                    file_name="math_test.pdf",
+                    mime="application/pdf"
+                )
+        else:
+            st.error("Грешка при генерирање. Проверете дали Pandoc и LaTeX се инсталирани.")
 
 # --- ПРИКАЗ НА ЗАДАЧИ ---
 if not current_batch:
