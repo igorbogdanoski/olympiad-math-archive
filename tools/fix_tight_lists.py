@@ -66,6 +66,12 @@ def fix_tight_lists(root_dir):
 
 if __name__ == "__main__":
     base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    for item in os.listdir(base_dir):
-        if item.startswith('grade_'):
-            fix_tight_lists(os.path.join(base_dir, item))
+    
+    # List of directories to scan
+    dirs_to_scan = [d for d in os.listdir(base_dir) if d.startswith('grade_')]
+    dirs_to_scan.append('pre_olympiad')
+    
+    for item in dirs_to_scan:
+        full_path = os.path.join(base_dir, item)
+        if os.path.isdir(full_path):
+            fix_tight_lists(full_path)
