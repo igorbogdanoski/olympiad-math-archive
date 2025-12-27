@@ -2,10 +2,12 @@
 
 [⬅️ Назад кон прегледот](../README.md)
 
-**Вкупно задачи:** 7
+**Вкупно задачи:** 9
 
 | ID | Наслов | Тежина | Тип | Клучна Вештина |
 |:---|:---|:---:|:---|:---|
+| [2022_mun_g7_6](municipal_competition_2022_2022_mun_g7_6.md) | --- SKILL MAPPING --- | 3/10 | calculation | modular_arithmetic |
+| [2022_mun_g7_8](municipal_competition_2022_2022_mun_g7_8.md) | --- SKILL MAPPING --- | 3/10 | calculation | divisibility_rules |
 | [2023_mun_g7_1](municipal_competition_2023_2023_mun_g7_1.md) | --- SKILL MAPPING --- | 3/10 | calculation | algebraic_manipulation |
 | [2024_mun_g7_2](municipal_competition_2024_2024_mun_g7_2.md) | --- SKILL MAPPING --- | 3/10 | calculation | divisibility_rules |
 | [2025_mun_g7_3](municipal_competition_2025_2025_mun_g7_3.md) |  | 3/10 | logic_puzzle | logic |
