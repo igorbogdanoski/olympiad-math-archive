@@ -101,10 +101,17 @@ def update_markdown_with_image(file_path, image_name):
 def main():
     print("🎨 Starting Batch Manim Renderer...")
     
+    BATCH_SIZE = 5
+    processed_count = 0
+    
     for root, dirs, files in os.walk(ARCHIVE_ROOT):
         if "tools" in root or "assets" in root: continue
         
         for file in files:
+            if processed_count >= BATCH_SIZE:
+                print(f"\n🛑 Batch limit of {BATCH_SIZE} reached. Run the script again to process the next batch.")
+                return
+
             if file.endswith(".md"):
                 path = os.path.join(root, file)
                 
@@ -125,7 +132,9 @@ def main():
                     image_name = run_manim(code, filename_base)
                     
                     if image_name:
-                        update_markdown_with_image(path, image_name)
+                        if update_markdown_with_image(path, image_name):
+                            processed_count += 1
+                            print(f"   📊 Progress: {processed_count}/{BATCH_SIZE}")
 
 if __name__ == "__main__":
     main()
