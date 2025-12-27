@@ -41,7 +41,7 @@ tags:
 5) -14
 
 ## 📐 Скица / Конструкција
-<!-- VISUAL PROMPT: Graph of the parabola y = -x^2 + 2x + 5. The parabola opens downwards. The vertex is at (1, 6). The interval [-2, 2] on the x-axis is highlighted. The points on the graph corresponding to x=-2 and x=2 are marked. -->
+![Визуелизација](../../assets/images/Cnt92-1012_Prob12.png)
 
 
 > **👨‍💻 Manim Code (за Geo-Mentor):**

@@ -118,23 +118,68 @@ def update_markdown_with_image(file_path, image_name):
     with open(file_path, 'r', encoding='utf-8') as f:
         content = f.read()
         
-    placeholder = "<!-- Ова место е резервирано за автоматската слика од Manim -->"
-    
+    # Ако веќе има слика, не прави ништо (освен ако не сакаме да ја замениме, но засега не)
+    if f"assets/images/{image_name}" in content:
+        print(f"   ⏭️  Link already exists in Markdown")
+        return True
+
     file_dir = os.path.dirname(file_path)
     rel_path = os.path.relpath(os.path.join(ASSETS_DIR, image_name), file_dir)
     rel_path = rel_path.replace("\\", "/")
     
     new_image_tag = f"![Визуелизација]({rel_path})"
     
+    # 1. Пробај со стандардниот placeholder
+    placeholder = "<!-- Ова место е резервирано за автоматската слика од Manim -->"
     if placeholder in content:
         new_content = content.replace(placeholder, new_image_tag)
         with open(file_path, 'w', encoding='utf-8') as f:
             f.write(new_content)
-        print(f"   ✅ Link updated in Markdown")
+        print(f"   ✅ Link updated (replaced placeholder)")
         return True
-    else:
-        print(f"   ⚠️ Placeholder NOT found in {os.path.basename(file_path)}")
-        return False
+
+    # 2. Пробај со VISUAL PROMPT placeholder
+    visual_prompt_regex = r"<!-- VISUAL PROMPT:.*?-->"
+    if re.search(visual_prompt_regex, content):
+        new_content = re.sub(visual_prompt_regex, new_image_tag, content)
+        with open(file_path, 'w', encoding='utf-8') as f:
+            f.write(new_content)
+        print(f"   ✅ Link updated (replaced VISUAL PROMPT)")
+        return True
+
+    # 3. Пробај да вметнеш после "## 📐 Скица"
+    if "## 📐 Скица" in content:
+        new_content = content.replace("## 📐 Скица", f"## 📐 Скица\n{new_image_tag}")
+        with open(file_path, 'w', encoding='utf-8') as f:
+            f.write(new_content)
+        print(f"   ✅ Link updated (inserted after Header)")
+        return True
+
+    # 4. Пробај да вметнеш пред "Geo-Mentor Code"
+    if "> **👨‍💻 Geo-Mentor Code:**" in content:
+        new_content = content.replace("> **👨‍💻 Geo-Mentor Code:**", f"{new_image_tag}\n\n> **👨‍💻 Geo-Mentor Code:**")
+        with open(file_path, 'w', encoding='utf-8') as f:
+            f.write(new_content)
+        print(f"   ✅ Link updated (inserted before Geo-Mentor)")
+        return True
+
+    # 5. Fallback: Вметни пред "## 🧠 Анализа" или "## 📝 Решение"
+    if "## 🧠 Анализа" in content:
+        new_content = content.replace("## 🧠 Анализа", f"## 📐 Скица\n{new_image_tag}\n\n## 🧠 Анализа")
+        with open(file_path, 'w', encoding='utf-8') as f:
+            f.write(new_content)
+        print(f"   ✅ Link updated (inserted before Analysis)")
+        return True
+        
+    if "## 📝 Решение" in content:
+        new_content = content.replace("## 📝 Решение", f"## 📐 Скица\n{new_image_tag}\n\n## 📝 Решение")
+        with open(file_path, 'w', encoding='utf-8') as f:
+            f.write(new_content)
+        print(f"   ✅ Link updated (inserted before Solution)")
+        return True
+
+    print(f"   ⚠️ Could not find a place to insert image in {os.path.basename(file_path)}")
+    return False
 
 def main():
     print("🎨 Starting Batch Manim Renderer...")
@@ -142,7 +187,7 @@ def main():
     # Вчитај ги кодовите од логот
     manim_code_map = load_manim_code_map()
     
-    BATCH_SIZE = 100  # Зголемено од 5 на 100 за да ги помине сите одеднаш
+    BATCH_SIZE = 100
     processed_count = 0
     scanned_files = 0
     candidates_found = 0
@@ -165,29 +210,28 @@ def main():
                 except Exception as e:
                     print(f"❌ Error reading {file}: {e}")
                     continue
-                    
-                if "<!-- Ова место е резервирано за автоматската слика од Manim -->" not in content:
-                    continue 
                 
-                candidates_found += 1
-                
-                # 1. Пробај да најдеш код преку problem_id во логот
+                # Провери дали веќе има слика (било каква)
+                if "![Визуелизација]" in content:
+                    continue
+
+                # Ако нема слика, провери дали имаме код за неа
                 problem_id = extract_problem_id(content)
                 code = None
                 
                 if problem_id and problem_id in manim_code_map:
+                    candidates_found += 1
                     print(f"🔍 Found code in LOG for ID: {problem_id} ({file})")
                     code = manim_code_map[problem_id]
                 else:
-                    # 2. Fallback: Пробај да најдеш код во самиот фајл
+                    # Fallback: embedded code
                     code = extract_manim_code(content)
                     if code:
+                        candidates_found += 1
                         print(f"🔍 Found embedded code in: {file}")
                 
                 if code:
-                    # Prefer problem_id for filename if available, else file basename
                     filename_base = problem_id if problem_id else file.replace(".md", "")
-                    
                     image_name = run_manim(code, filename_base)
                     
                     if image_name:
@@ -196,8 +240,8 @@ def main():
                             print(f"   📊 Progress: {processed_count}/{BATCH_SIZE}")
                         else:
                             print(f"   ❌ Failed to update markdown for {file}")
-                else:
-                    print(f"⚠️  No code found for: {file} (ID: {problem_id})")
+                # else:
+                    # print(f"⚠️  No code found for: {file} (ID: {problem_id})")
 
     print(f"\n🏁 Finished scan.")
     print(f"   📂 Scanned files: {scanned_files}")
