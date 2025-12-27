@@ -5,6 +5,13 @@ import sys
 import subprocess
 import datetime
 
+# Import the new renderer
+try:
+    from render_manim import render_scene
+    RENDERER_AVAILABLE = True
+except ImportError:
+    RENDERER_AVAILABLE = False
+
 # --- КОНФИГУРАЦИЈА ---
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 BASE_DIR = os.path.abspath(os.path.join(SCRIPT_DIR, "../"))
@@ -75,33 +82,23 @@ class {class_name}(Scene):
     except Exception: pass
 
 def generate_manim_image(prob_id, code_body):
-    if not MANIM_AVAILABLE or not code_body: return False
-    safe_id = re.sub(r'[^a-zA-Z0-9_]', '_', prob_id)
-    class_name = f"Task_{safe_id}"
-    print(f"🎨 Генерирам слика за {prob_id}...")
-    
-    manim_script = f"from manim import *\nclass {class_name}(Scene):\n    def construct(self):\n        self.camera.background_color = WHITE\n        Text.set_default(color=BLACK)\n        MathTex.set_default(color=BLACK)\n        Mobject.set_default(color=BLACK)\n        {code_body}\n"
-    temp_script_path = os.path.join(SCRIPT_DIR, "temp_manim.py")
-    
-    try:
-        with open(temp_script_path, "w", encoding="utf-8") as f:
-            f.write(manim_script)
-        
-        cmd = ["manim", "-s", "-pql", "--disable_caching", "-v", "ERROR", temp_script_path, class_name]
-        subprocess.run(cmd, check=True, cwd=SCRIPT_DIR, stdout=subprocess.DEVNULL)
-        
-        media_dir = os.path.join(SCRIPT_DIR, "media", "images", "temp_manim")
-        if os.path.exists(media_dir):
-            files = [f for f in os.listdir(media_dir) if f.endswith(".png")]
-            if files:
-                src = os.path.join(media_dir, files[0])
-                dst = os.path.join(IMAGES_DIR, f"{prob_id}.png")
-                if os.path.exists(dst): os.remove(dst)
-                os.rename(src, dst)
-                if os.path.exists(temp_script_path): os.remove(temp_script_path)
-                return True
-    except Exception:
+    if not RENDERER_AVAILABLE or not code_body: 
+        print("⚠️ Renderer not available or no code provided.")
         return False
+    
+    print(f"🎨 Генерирам слика за {prob_id} користејќи render_manim...")
+    try:
+        # render_scene handles cleaning, temp files, and moving the image to assets/images
+        render_scene(prob_id, code_body)
+        
+        # Check if successful
+        expected_path = os.path.join(IMAGES_DIR, f"{prob_id}.png")
+        if os.path.exists(expected_path):
+            return True
+    except Exception as e:
+        print(f"❌ Error rendering manim: {e}")
+        return False
+    
     return False
 
 def create_problem_file(data):
@@ -154,17 +151,17 @@ def create_problem_file(data):
     if manim_code and len(manim_code.strip()) > 0:
         log_manim_code(prob_id, data.get('problem_title', ''), manim_code)
         
-        # Пробај да генерираш слика само ако Manim е инсталиран локално
-        if MANIM_AVAILABLE and not os.path.exists(image_abs_path):
+        # Пробај да генерираш слика (сега користиме render_manim)
+        if not os.path.exists(image_abs_path):
             generate_manim_image(prob_id, manim_code)
 
     # Одлучи дали да прикажеш placeholder во Markdown
     visual_block = ""
     if os.path.exists(image_abs_path):
-        # Сликата веќе постои (си ја направил со Geo-Mentor и си ја ставил во assets)
+        # Сликата веќе постои (автоматски генерирана или рачно додадена)
         visual_block = f"\n![Скица]({img_rel_path_prefix}/{image_filename})\n"
     elif manim_code:
-        # Сликата ја нема, но има код -> Дај инструкција за Geo-Mentor
+        # Сликата ја нема, но има код -> Дај инструкција за Geo-Mentor (Fallback)
         safe_id = re.sub(r'[^a-zA-Z0-9_]', '_', prob_id)
         visual_block = f"\n> **👨‍💻 Geo-Mentor Code:**\n> Одете во `assets/manim_code_log.md`, копирајте го кодот за `Task_{safe_id}` и генерирајте ја сликата.\n"
     
