@@ -4,78 +4,18 @@ import re
 import random
 import subprocess
 import tempfile
+import indexer
+import user_data
 
 # --- КОНФИГУРАЦИЈА ---
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 ARCHIVE_ROOT = os.path.abspath(os.path.join(SCRIPT_DIR, "../"))
+INDEX_FILE = os.path.join(SCRIPT_DIR, "problems.json")
 
 st.set_page_config(page_title="МатАрхива Експлорер", page_icon="🧮", layout="wide")
 
 # --- ФУНКЦИИ ЗА ЧИТАЊЕ ---
-def parse_problem(file_path):
-    """Чита фајл и враќа метаподатоци и содржина."""
-    with open(file_path, 'r', encoding='utf-8') as f:
-        content = f.read()
-
-    meta = {}
-    # Екстракција на YAML frontmatter
-    match = re.search(r'^---(.*?)---', content, re.DOTALL)
-    if match:
-        yaml_text = match.group(1)
-        for line in yaml_text.split('\n'):
-            if ':' in line:
-                key, val = line.split(':', 1)
-                meta[key.strip()] = val.strip().replace('"', '').replace("'", "")
-        
-        # Екстракција на тагови (подобрено)
-        tags = []
-        # Бараме tags: проследено со листа со цртички
-        tags_match = re.search(r'tags:\s*\n((?:\s*-\s*.*\n?)+)', yaml_text)
-        if tags_match:
-            tags_block = tags_match.group(1)
-            tags = [t.strip().replace('- ', '').strip() for t in tags_block.split('\n') if t.strip()]
-        meta['tags'] = tags
-
-        # Екстракција на related_skills
-        related_skills = []
-        skills_match = re.search(r'related_skills:\s*\n((?:\s*-\s*.*\n?)+)', content) # Бараме во целиот content за секој случај
-        if skills_match:
-            skills_block = skills_match.group(1)
-            related_skills = [s.strip().replace('- ', '').strip() for s in skills_block.split('\n') if s.strip()]
-        meta['related_skills'] = related_skills
-    
-    # Екстракција на телото на задачата
-    # 1. Тргни го YAML frontmatter (првиот блок помеѓу ---)
-    body = re.sub(r'^---\s*\n[\s\S]*?\n---\s*', '', content).strip()
-    
-    # 2. Агресивно чистење на SKILL MAPPING и TOPICS блоковите
-    # Ги бараме линиите што почнуваат со "# --- SKILL" или "# --- TOPICS" и бришеме сè до следниот наслов (# )
-    body = re.sub(r'# --- SKILL MAPPING[\s\S]*?(?=\n# |\Z)', '', body)
-    body = re.sub(r'# --- TOPICS[\s\S]*?(?=\n# |\Z)', '', body)
-    
-    # 3. Чистење на заостанати tags ако не се фатени погоре
-    body = re.sub(r'tags:\s*\n(\s*- .*\n)*', '', body)
-    
-    # 4. Тргни повеќекратни празни редови
-    body = re.sub(r'\n{3,}', '\n\n', body).strip()
-    
-    # 5. Конверзија на LaTeX delimiters за Streamlit
-    # \[ ... \] -> $$ ... $$
-    body = re.sub(r'\\\[(.*?)\\\]', r'$$\1$$', body, flags=re.DOTALL)
-    # \( ... \) -> $ ... $
-    body = re.sub(r'\\\((.*?)\\\)', r'$\1$', body, flags=re.DOTALL)
-    
-    # Проверка за Manim placeholder
-    has_manim_placeholder = "<!-- Ова место е резервирано за автоматската слика од Manim -->" in content
-    meta['has_manim_placeholder'] = has_manim_placeholder
-
-    return meta, body, file_path
-    
-    # Поправање на патеки за слики за да работат во Streamlit
-    # (Ова е малку трики бидејќи Streamlit работи од tools папката, но ќе пробаме)
-    # Засега само ги оставаме релативни, можеби нема да се прикажат сликите перфектно без дополнителен setup
-    
-    return meta, body, file_path
+# (parse_problem е преместена во indexer.py)
 
 def generate_pdf(problems_list):
     """Генерира PDF од листа на задачи."""
@@ -114,46 +54,26 @@ def generate_pdf(problems_list):
 
 @st.cache_data
 def load_all_problems():
-    """Ги наоѓа сите задачи во архивата."""
-    problems = []
+    """Ги вчитува задачите од JSON индексот или ги генерира ако нема индекс."""
+    # 1. Пробај да вчиташ од JSON
+    problems = indexer.load_index(INDEX_FILE)
     
-    # Шетаме низ сите папки
-    for root, dirs, files in os.walk(ARCHIVE_ROOT):
-        # Игнорирај ги tools, ai, assets, public папките
-        if "tools" in root or "ai" in root or "assets" in root or "public" in root or ".git" in root:
-            continue
-            
-        for file in files:
-            if file.endswith(".md") and file not in ["README.md", "problem_template.md", "geometry_problem_template.md"]:
-                path = os.path.join(root, file)
-                try:
-                    meta, body, full_path = parse_problem(path)
-                    
-                    # Додај дополнителни полиња за полесно филтрирање
-                    # Претпоставуваме патека од тип: .../grade_9/algebra/...
-                    parts = os.path.normpath(path).split(os.sep)
-                    
-                    grade = "N/A"
-                    category = "N/A"
-                    
-                    for part in parts:
-                        if part.startswith("grade_"):
-                            grade = part.replace("grade_", "")
-                        elif part in ["algebra", "geometry", "number_theory", "combinatorics", "logic", "arithmetic"]:
-                            category = part
-                            
-                    problems.append({
-                        "meta": meta,
-                        "body": body,
-                        "path": full_path,
-                        "filename": file,
-                        "grade": grade,
-                        "category": category,
-                        "difficulty": int(meta.get('difficulty', 0))
-                    })
-                except Exception as e:
-                    print(f"Error parsing {file}: {e}")
-                    
+    if problems:
+        return problems
+    
+    # 2. Ако нема JSON, изгради го индексот
+    with st.spinner("Градиме индекс за прв пат (ова може да потрае)..."):
+        problems = indexer.build_index(ARCHIVE_ROOT)
+        indexer.save_index(problems, INDEX_FILE)
+        
+    return problems
+
+def rebuild_index_action():
+    """Форсирано преизградба на индексот."""
+    st.cache_data.clear() # Исчисти го кешот на Streamlit
+    problems = indexer.build_index(ARCHIVE_ROOT)
+    indexer.save_index(problems, INDEX_FILE)
+    st.success(f"Индексот е успешно ажуриран! ({len(problems)} задачи)")
     return problems
 
 # --- ГЛАВЕН ИНТЕРФЕЈС ---
@@ -223,6 +143,14 @@ search_query = st.sidebar.text_input("Пребарај текст (пр. три�
 # 6. Филтер за Визуелизација
 show_missing_images = st.sidebar.checkbox("⚠️ Само задачи без слика")
 
+# 7. Филтер за Решени
+hide_solved = st.sidebar.checkbox("✅ Криј решени задачи")
+
+# --- АЖУРИРАЊЕ НА ИНДЕКС ---
+if st.sidebar.button("🔄 Ажурирај Индекс"):
+    all_problems = rebuild_index_action()
+    st.rerun()
+
 # --- КОПЧЕ ЗА СЛУЧАЈНА ЗАДАЧА ---
 if st.sidebar.button("🎲 Случајна Задача"):
     candidates = [p for p in all_problems if p['grade'] in selected_grades and p['category'] in selected_categories]
@@ -232,6 +160,8 @@ if st.sidebar.button("🎲 Случајна Задача"):
         st.sidebar.warning("Нема задачи за избор!")
 
 # --- ПРИМЕНА НА ФИЛТРИ ---
+solved_problems = user_data.load_progress()
+
 filtered_problems = [
     p for p in all_problems
     if p['grade'] in selected_grades
@@ -240,6 +170,7 @@ filtered_problems = [
     and (not selected_tags or any(tag in p['meta'].get('tags', []) for tag in selected_tags))
     and (search_query.lower() in p['body'].lower() if search_query else True)
     and (p['meta'].get('has_manim_placeholder', False) if show_missing_images else True)
+    and (p['filename'] not in solved_problems if hide_solved else True)
 ]
 
 # Ако е кликнато "Случајна", прикажи ја само неа
@@ -339,7 +270,18 @@ else:
                         with cols[i]:
                             st.info(f"**{rp['filename'].replace('.md', '').replace('_', ' ').title()}**\n\n(Skill: {', '.join(set(current_skills) & set(rp['meta'].get('related_skills', [])))})")
 
-            st.caption(f"Извор: {prob['meta'].get('source', 'Непознат')} | Патека: {prob['path']}")
+            # --- ФУТЕР НА КАРТИЧКА ---
+            f_col1, f_col2 = st.columns([4, 1])
+            with f_col1:
+                st.caption(f"Извор: {prob['meta'].get('source', 'Непознат')} | Патека: {prob['path']}")
+            with f_col2:
+                is_solved = prob['filename'] in solved_problems
+                btn_label = "❌ Нерешена" if is_solved else "✅ Решена"
+                # Користиме unique key за секое копче
+                if st.button(btn_label, key=f"btn_{prob['filename']}"):
+                    user_data.toggle_solved(prob['filename'])
+                    st.rerun()
+            
             st.markdown("---")
 
 # --- ФУТЕР ---
