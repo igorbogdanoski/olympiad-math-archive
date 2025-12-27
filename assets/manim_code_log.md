@@ -11458,3 +11458,77 @@ class Task_2022_mun_y1_19a(Scene):
 
 ```
 ---
+
+### 🆔 Задача: 2022_mun_y1_3b - Агол во паралелограм
+**📅 Додадено:** 2025-12-27 21:47
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_2022_mun_y1_3b(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+        # Coordinates for Parallelogram BADC
+        # B at origin. Angle B = 40 deg.
+        B = ORIGIN
+        # Side BA length approx 3, angle 90? No, angle B is 40.
+        # Let's place B at (0,0), C at (4,0).
+        # Then A is at (length*cos140, length*sin140)? No.
+        # BADC parallelogram means BA || CD and BC || AD.
+        # Let's assume standard orientation.
+        
+        # Coordinates
+        B = [-2, -1, 0]
+        A = [-3, 2, 0] # Vector BA = (-1, 3)
+        # Vector BC must be horizontal for simplicity? Let's rotate.
+        # Let's stick to the angles.
+        # Angle B = 40. Angle A = 140.
+        
+        # Let's construct it properly
+        B = np.array([0, 0, 0])
+        C = np.array([4, 0, 0]) # BC is horizontal
+        # A is such that angle CBA = 40.
+        # Let BA length = 3.
+        A = np.array([3 * np.cos(40*DEGREES), 3 * np.sin(40*DEGREES), 0])
+        # D completes the parallelogram BADC? No, BADC means B->A->D->C.
+        # So BA and CD are sides? No, BA and AD.
+        # Order B, A, D, C.
+        # Vector BC = Vector AD.
+        # D = A + (C - B) = A + C.
+        D = A + C
+        
+        # Shift to center
+        center = (A + B + C + D) / 4
+        A -= center; B -= center; C -= center; D -= center
+
+        # Objects
+        para = Polygon(B, A, D, C, color=BLACK)
+        diag = Line(A, C, color=BLUE)
+        
+        # Angles
+        a_B = Angle(Line(B,A), Line(B,C), radius=0.5, other_angle=False)
+        l_B = MathTex('40^\circ').next_to(a_B, UR, buff=0.1)
+        
+        a_CAD = Angle(Line(A,C), Line(A,D), radius=0.6)
+        l_CAD = MathTex('57^\circ').next_to(a_CAD, RIGHT, buff=0.1)
+        
+        a_ACD = Angle(Line(C,A), Line(C,D), radius=0.6, color=RED)
+        l_ACD = MathTex('?', color=RED).next_to(a_ACD, UL, buff=0.1)
+        
+        # Labels
+        labels = VGroup(
+            MathTex('B').next_to(B, DL),
+            MathTex('A').next_to(A, UL),
+            MathTex('D').next_to(D, UR),
+            MathTex('C').next_to(C, DR)
+        ).set_color(BLACK)
+
+        self.add(para, diag, labels, a_B, l_B, a_CAD, l_CAD, a_ACD, l_ACD)
+        # --- AI GENERATED CODE END ---
+
+```
+---

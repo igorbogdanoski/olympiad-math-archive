@@ -2,7 +2,7 @@
 
 [⬅️ Назад кон прегледот](../README.md)
 
-**Вкупно задачи:** 95
+**Вкупно задачи:** 97
 
 | ID | Наслов | Тежина | Тип | Клучна Вештина |
 |:---|:---|:---:|:---|:---|
@@ -49,8 +49,10 @@
 | [2022_mun_y1_13a](municipal_competition_2022_2022_mun_y1_13a.md) | --- SKILL MAPPING --- | 3/10 | calculation | algebraic_modeling |
 | [2022_mun_y1_16a](municipal_competition_2022_2022_mun_y1_16a.md) | --- SKILL MAPPING --- | 3/10 | calculation | polynomials |
 | [2022_mun_y1_1a](municipal_competition_2022_2022_mun_y1_1a.md) | --- SKILL MAPPING --- | 2/10 | calculation | algebraic_manipulation |
+| [2022_mun_y1_1b](municipal_competition_2022_2022_mun_y1_1b.md) | --- SKILL MAPPING --- | 2/10 | calculation | algebraic_manipulation |
 | [2022_mun_y1_20a](municipal_competition_2022_2022_mun_y1_20a.md) | --- SKILL MAPPING --- | 4/10 | calculation | algebraic_identities |
 | [2022_mun_y1_4a](municipal_competition_2022_2022_mun_y1_4a.md) | --- SKILL MAPPING --- | 3/10 | calculation | pattern_recognition |
+| [2022_mun_y1_4b](municipal_competition_2022_2022_mun_y1_4b.md) | --- SKILL MAPPING --- | 3/10 | calculation | pattern_recognition |
 | [2022_mun_y1_7a](municipal_competition_2022_2022_mun_y1_7a.md) | --- SKILL MAPPING --- | 3/10 | logic_puzzle | functions |
 | [2023_mun_g9_1](municipal_competition_2023_2023_mun_g9_1.md) | --- SKILL MAPPING --- | 3/10 | proof | algebraic_manipulation |
 | [2023_mun_y1_1a](municipal_competition_2023_2023_mun_y1_1a.md) | --- SKILL MAPPING --- | 3/10 | word_problem | working_backwards |

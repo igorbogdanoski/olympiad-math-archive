@@ -2,7 +2,7 @@
 
 [⬅️ Назад кон прегледот](../README.md)
 
-**Вкупно задачи:** 100
+**Вкупно задачи:** 101
 
 | ID | Наслов | Тежина | Тип | Клучна Вештина |
 |:---|:---|:---:|:---|:---|
@@ -52,6 +52,7 @@
 | [2022_mun_y1_17a](municipal_competition_2022_2022_mun_y1_17a.md) | --- GEOMETRY SKILLS --- | 4/10 | calculation | similarity |
 | [2022_mun_y1_19a](municipal_competition_2022_2022_mun_y1_19a.md) | --- GEOMETRY SKILLS --- | 5/10 | calculation | area_method |
 | [2022_mun_y1_3a](municipal_competition_2022_2022_mun_y1_3a.md) | --- GEOMETRY SKILLS --- | 2/10 | calculation | angle_chasing |
+| [2022_mun_y1_3b](municipal_competition_2022_2022_mun_y1_3b.md) | --- GEOMETRY SKILLS --- | 3/10 | calculation | angle_chasing |
 | [2022_mun_y1_6a](municipal_competition_2022_2022_mun_y1_6a.md) | --- GEOMETRY SKILLS --- | 3/10 | calculation | similarity |
 | [2023_mun_g9_2](municipal_competition_2023_2023_mun_g9_2.md) | --- GEOMETRY SKILLS --- | 4/10 | calculation | visual_reasoning |
 | [2023_mun_g9_4](municipal_competition_2023_2023_mun_g9_4.md) | --- GEOMETRY SKILLS --- | 4/10 | calculation | algebraic_manipulation |
