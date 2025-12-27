@@ -2209,3 +2209,93 @@ class Task_2025_mun_g4_1(Scene):
 
 ```
 ---
+
+### 🆔 Задача: 2025_mun_g5_2 - Коцка и проценти
+**📅 Додадено:** 2025-12-27 01:25
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_2025_mun_g5_2(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+class Task_2025_mun_g5_2(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        
+        # Draw a 5x5 grid representing the front face
+        grid = VGroup()
+        for i in range(5):
+            for j in range(5):
+                sq = Square(side_length=1, color=BLACK, fill_opacity=0)
+                sq.move_to(RIGHT*(i-2) + UP*(j-2))
+                grid.add(sq)
+        
+        # Highlight the removed cubes (assuming full layer for visual simplicity as per count 25)
+        # Or just show the calculation
+        
+        cube_text = Text("Вкупно: 5 x 5 x 5 = 125", color=BLACK).to_edge(UP)
+        removed_text = Text("Отстранети: 25", color=RED).next_to(cube_text, DOWN)
+        percent_text = MathTex("\\frac{25}{125} = \\frac{1}{5} = 20\\%", color=BLUE).next_to(removed_text, DOWN)
+        
+        self.add(grid, cube_text)
+        self.play(grid.animate.set_fill(RED, opacity=0.5), Write(removed_text))
+        self.wait(1)
+        self.play(Write(percent_text))
+        # --- AI GENERATED CODE END ---
+
+```
+---
+
+### 🆔 Задача: 2025_mun_g5_4 - Лука и Јован на скали
+**📅 Додадено:** 2025-12-27 01:25
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_2025_mun_g5_4(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+class Task_2025_mun_g5_4(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        
+        # Stairs
+        step_height = 0.5
+        step_width = 0.5
+        stairs = VGroup()
+        for i in range(10):
+            stairs.add(Line(start=RIGHT*i*step_width + UP*i*step_height, end=RIGHT*(i+1)*step_width + UP*i*step_height, color=BLACK))
+            stairs.add(Line(start=RIGHT*(i+1)*step_width + UP*i*step_height, end=RIGHT*(i+1)*step_width + UP*(i+1)*step_height, color=BLACK))
+        
+        # Luka at step 3
+        luka_x = 3.5 * step_width
+        luka_base_y = 3 * step_height
+        luka = Rectangle(height=3, width=0.5, color=BLUE).move_to(RIGHT*luka_x + UP*(luka_base_y + 1.5))
+        lbl_luka = Text("Лука", color=BLUE, font_size=20).next_to(luka, UP)
+        
+        # Jovan at step 9
+        jovan_x = 9.5 * step_width
+        jovan_base_y = 9 * step_height
+        jovan = Rectangle(height=2.5, width=0.5, color=GREEN).move_to(RIGHT*jovan_x + UP*(jovan_base_y + 1.25))
+        lbl_jovan = Text("Јован", color=GREEN, font_size=20).next_to(jovan, UP)
+        
+        self.add(stairs, luka, lbl_luka, jovan, lbl_jovan)
+        
+        # Height lines
+        line1 = DashedLine(start=LEFT, end=RIGHT*10, color=GRAY).shift(UP*(luka_base_y + 3))
+        lbl1 = MathTex("200", color=BLACK).next_to(line1, LEFT)
+        
+        self.add(line1, lbl1)
+        # --- AI GENERATED CODE END ---
+
+```
+---
