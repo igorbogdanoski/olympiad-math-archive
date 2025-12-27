@@ -10118,3 +10118,59 @@ class Task_2022_mun_g6_10(Scene):
 
 ```
 ---
+
+### 🆔 Задача: 2022_mun_g6_11 - Низа со дропки (Фибоначи)
+**📅 Додадено:** 2025-12-27 20:31
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_2022_mun_g6_11(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+class Task_2022_mun_g6_11(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        
+        # Sequence
+        nums = [1, 2, 3, 5, 8, 13]
+        text_group = VGroup()
+        
+        for i, n in enumerate(nums):
+            frac = MathTex(f"\\frac{{1}}{{{n}}}", color=BLACK).move_to(RIGHT * (i-2.5) * 1.5)
+            text_group.add(frac)
+            
+        self.play(Write(text_group[:5]))
+        self.wait(0.5)
+        
+        # Show addition
+        # 1+2=3
+        brace1 = Brace(text_group[0:2], DOWN)
+        sum1 = MathTex("1+2=3", color=BLUE).next_to(brace1, DOWN)
+        
+        self.play(Write(brace1), Write(sum1))
+        self.wait(0.5)
+        self.play(FadeOut(brace1), FadeOut(sum1))
+        
+        # 2+3=5
+        brace2 = Brace(text_group[1:3], DOWN)
+        sum2 = MathTex("2+3=5", color=BLUE).next_to(brace2, DOWN)
+        
+        self.play(Write(brace2), Write(sum2))
+        self.wait(0.5)
+        self.play(FadeOut(brace2), FadeOut(sum2))
+        
+        # 5+8=13
+        brace3 = Brace(text_group[3:5], DOWN)
+        sum3 = MathTex("5+8=13", color=RED).next_to(brace3, DOWN)
+        
+        self.play(Write(brace3), Write(sum3))
+        self.play(Write(text_group[5]))
+        # --- AI GENERATED CODE END ---
+
+```
+---
