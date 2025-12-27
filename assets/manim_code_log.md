@@ -7841,3 +7841,43 @@ class Task_2024_mun_y3_3ab(Scene):
 
 ```
 ---
+
+### 🆔 Задача: 2024_mun_y4_2a - Пресек на крива и права
+**📅 Додадено:** 2025-12-27 17:06
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_2024_mun_y4_2a(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+        self.camera.background_color = WHITE
+        axes = Axes(x_range=[-2.5, 2.5, 1], y_range=[-3, 3, 1], axis_config={"color": BLACK})
+        
+        # Curve y = x^4 - 2x^2
+        curve = axes.plot(lambda x: x**4 - 2*x**2, color=BLUE)
+        
+        # Line y = 0.5x - 0.5 (intersects at 4 points)
+        # Roots approx: -1.3, -0.6, 0.4, 1.5
+        line = axes.plot(lambda x: 0.5*x - 0.5, color=RED)
+        
+        # Intersection points (visual approximation)
+        pts = [
+            Dot(axes.c2p(-1.36, -1.18), color=BLACK),
+            Dot(axes.c2p(-0.54, -0.77), color=BLACK),
+            Dot(axes.c2p(0.45, -0.27), color=BLACK),
+            Dot(axes.c2p(1.45, 0.22), color=BLACK)
+        ]
+        
+        lbl = MathTex("x_1+x_2+x_3+x_4 = 0", color=RED).to_edge(UP)
+        
+        self.add(axes, curve, line, lbl)
+        for p in pts: self.add(p)
+        # --- AI GENERATED CODE END ---
+
+```
+---
