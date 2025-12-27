@@ -2,7 +2,7 @@
 
 [⬅️ Назад кон прегледот](../README.md)
 
-**Вкупно задачи:** 32
+**Вкупно задачи:** 34
 
 | ID | Наслов | Тежина | Тип | Клучна Вештина |
 |:---|:---|:---:|:---|:---|
@@ -10,6 +10,8 @@
 | [2022_mun_g9_13](municipal_competition_2022_2022_mun_g9_13.md) | --- SKILL MAPPING --- | 3/10 | calculation | factorization |
 | [2022_mun_g9_15](municipal_competition_2022_2022_mun_g9_15.md) | --- SKILL MAPPING --- | 4/10 | calculation | pattern_recognition |
 | [2022_mun_g9_2](municipal_competition_2022_2022_mun_g9_2.md) | --- SKILL MAPPING --- | 3/10 | calculation | algebraic_manipulation |
+| [2022_mun_y1_11a](municipal_competition_2022_2022_mun_y1_11a.md) | --- SKILL MAPPING --- | 3/10 | calculation | divisors |
+| [2022_mun_y1_14a](municipal_competition_2022_2022_mun_y1_14a.md) | --- SKILL MAPPING --- | 4/10 | calculation | modular_arithmetic |
 | [2022_mun_y1_2a](municipal_competition_2022_2022_mun_y1_2a.md) | --- SKILL MAPPING --- | 3/10 | logic_puzzle | divisibility_rules |
 | [2022_mun_y1_5a](municipal_competition_2022_2022_mun_y1_5a.md) | --- SKILL MAPPING --- | 3/10 | logic_puzzle | logical_deduction |
 | [2023_mun_y1_2a](municipal_competition_2023_2023_mun_y1_2a.md) | --- SKILL MAPPING --- | 4/10 | proof | modular_arithmetic |

@@ -11314,3 +11314,72 @@ class Task_2022_mun_y1_6a(Scene):
 
 ```
 ---
+
+### 🆔 Задача: 2022_mun_y1_12a - Рамностран цилиндар
+**📅 Додадено:** 2025-12-27 21:34
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_2022_mun_y1_12a(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+        # Cylinder parameters
+        r = 2
+        h = 4 # H = 2r
+        
+        # Create Cylinder
+        cylinder = Cylinder(radius=r, height=h, direction=UP, show_ends=True, resolution=(24, 24))
+        cylinder.set_opacity(0.5).set_color(BLUE)
+        
+        # Labels
+        brace_h = Brace(cylinder, RIGHT)
+        label_h = brace_h.get_text("H = 2r")
+        
+        brace_d = Brace(cylinder, DOWN)
+        label_d = brace_d.get_text("2r")
+        
+        self.add(cylinder, brace_h, label_h, brace_d, label_d)
+        self.camera.set_euler_angles(phi=75 * DEGREES, theta=30 * DEGREES)
+        # --- AI GENERATED CODE END ---
+
+```
+---
+
+### 🆔 Задача: 2022_mun_y1_15a - Топење на железни блокови
+**📅 Додадено:** 2025-12-27 21:34
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_2022_mun_y1_15a(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+        # Big Block
+        big_block = Cube(side_length=3).set_color(BLUE).set_opacity(0.5)
+        label_big = Text("V = 960,000 cm^3").next_to(big_block, UP)
+        
+        # Small Block
+        small_block = Cube(side_length=1).set_color(RED).set_opacity(0.5).next_to(big_block, RIGHT, buff=2)
+        label_small = Text("V = 960 cm^3").next_to(small_block, UP)
+        
+        # Dimensions text
+        dims = MathTex("15 \\cdot x \\cdot x = 960").next_to(small_block, DOWN)
+        res = MathTex("x = 8").next_to(dims, DOWN)
+        
+        arrow = Arrow(big_block.get_right(), small_block.get_left(), buff=0.5)
+        text_1000 = Text("/ 1000").next_to(arrow, UP, buff=0.1).scale(0.7)
+        
+        self.add(big_block, label_big, small_block, label_small, arrow, text_1000, dims, res)
+        # --- AI GENERATED CODE END ---
+
+```
+---

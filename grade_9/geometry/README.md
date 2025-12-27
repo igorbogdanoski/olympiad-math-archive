@@ -2,7 +2,7 @@
 
 [⬅️ Назад кон прегледот](../README.md)
 
-**Вкупно задачи:** 96
+**Вкупно задачи:** 98
 
 | ID | Наслов | Тежина | Тип | Клучна Вештина |
 |:---|:---|:---:|:---|:---|
@@ -47,6 +47,8 @@
 | [2022_mun_g9_5](municipal_competition_2022_2022_mun_g9_5.md) | --- GEOMETRY SKILLS --- | 4/10 | calculation | visual_reasoning |
 | [2022_mun_g9_6](municipal_competition_2022_2022_mun_g9_6.md) | --- GEOMETRY SKILLS --- | 3/10 | calculation | visual_reasoning |
 | [2022_mun_g9_8](municipal_competition_2022_2022_mun_g9_8.md) | --- GEOMETRY SKILLS --- | 4/10 | calculation | angle_chasing |
+| [2022_mun_y1_12a](municipal_competition_2022_2022_mun_y1_12a.md) | --- GEOMETRY SKILLS --- | 4/10 | calculation | solid_geometry |
+| [2022_mun_y1_15a](municipal_competition_2022_2022_mun_y1_15a.md) | --- GEOMETRY SKILLS --- | 3/10 | calculation | solid_geometry |
 | [2022_mun_y1_3a](municipal_competition_2022_2022_mun_y1_3a.md) | --- GEOMETRY SKILLS --- | 2/10 | calculation | angle_chasing |
 | [2022_mun_y1_6a](municipal_competition_2022_2022_mun_y1_6a.md) | --- GEOMETRY SKILLS --- | 3/10 | calculation | similarity |
 | [2023_mun_g9_2](municipal_competition_2023_2023_mun_g9_2.md) | --- GEOMETRY SKILLS --- | 4/10 | calculation | visual_reasoning |
