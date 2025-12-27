@@ -2145,3 +2145,67 @@ class Task_2025_mun_y4_4a(Scene):
 
 ```
 ---
+
+### 🆔 Задача: 2025_mun_g4_1 - Броење правоаголници
+**📅 Додадено:** 2025-12-27 01:21
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_2025_mun_g4_1(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+class Task_2025_mun_g4_1(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        
+        # Define vertices for the grid
+        # Main square 2x2
+        A, B, C, D = UL*2, UR*2, DR*2, DL*2
+        M_AB, M_BC, M_CD, M_DA = UP*2, RIGHT*2, DOWN*2, LEFT*2
+        Center = ORIGIN
+        
+        # Draw the base figure
+        lines = VGroup(
+            Line(A, B), Line(B, C), Line(C, D), Line(D, A), # Outer
+            Line(M_AB, M_CD), Line(M_DA, M_BC), # Cross
+            Line(A, C), Line(B, D), # Diagonals
+            Line(M_AB, M_BC), Line(M_BC, M_CD), Line(M_CD, M_DA), Line(M_DA, M_AB) # Inner Diamond
+        ).set_color(BLACK).set_stroke(width=2)
+        
+        self.add(lines)
+        
+        # Highlight examples
+        # 1. Large Vertical Rectangle
+        rect1 = Polygon(M_AB+LEFT, M_AB+RIGHT, M_CD+RIGHT, M_CD+LEFT, color=BLUE, fill_opacity=0.3)
+        lbl1 = Text("Големи (2)", color=BLUE, font_size=24).next_to(rect1, UP)
+        
+        self.play(FadeIn(rect1), Write(lbl1))
+        self.wait(1)
+        self.play(FadeOut(rect1), FadeOut(lbl1))
+        
+        # 2. Small Rectangle (corner)
+        rect2 = Polygon(A, M_AB, Center, M_DA, color=GREEN, fill_opacity=0.3)
+        lbl2 = Text("Помали (4)", color=GREEN, font_size=24).next_to(rect2, UL)
+        
+        self.play(FadeIn(rect2), Write(lbl2))
+        self.wait(1)
+        self.play(FadeOut(rect2), FadeOut(lbl2))
+        
+        # 3. Slanted Rectangle
+        rect3 = Polygon(M_AB, B, M_BC, Center, color=RED, fill_opacity=0.3)
+        lbl3 = Text("Коси (4)", color=RED, font_size=24).next_to(rect3, UR)
+        
+        self.play(FadeIn(rect3), Write(lbl3))
+        self.wait(1)
+        self.play(FadeOut(rect3), FadeOut(lbl3))
+        
+        self.add(lines)
+        # --- AI GENERATED CODE END ---
+
+```
+---
