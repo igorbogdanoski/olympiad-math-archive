@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=latex 2025.12.27)  27 DEC 2025 22:49
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=latex 2025.12.27)  27 DEC 2025 22:55
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -192,7 +192,8 @@ File: l3backend-dvips.def 2025-10-09 L3 backend support: dvips
 \g__pdfannot_backend_link_int=\count302
 \g__pdfannot_backend_link_sf_int=\count303
 )
-No file b1156fad99df66fa.aux.
+(C:\Users\pc4all\Documents\matholimpiad\olympiad-math-archive\tools\media\Tex\b
+1156fad99df66fa.aux)
 \openout1 = `b1156fad99df66fa.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 5.
@@ -233,10 +234,10 @@ You may provide a definition with
 
  
 Here is how much of TeX's memory you used:
- 3532 strings out of 467872
- 59229 string characters out of 5417917
+ 3535 strings out of 467872
+ 59456 string characters out of 5417917
  467485 words of memory out of 5000000
- 32400 multiletter control sequences out of 15000+600000
+ 32401 multiletter control sequences out of 15000+600000
  629420 words of font info for 48 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  57i,8n,71p,244b,169s stack positions out of 10000i,1000n,20000p,200000b,200000s

@@ -2,11 +2,12 @@
 
 [⬅️ Назад кон прегледот](../README.md)
 
-**Вкупно задачи:** 11
+**Вкупно задачи:** 12
 
 | ID | Наслов | Тежина | Тип | Клучна Вештина |
 |:---|:---|:---:|:---|:---|
 | [2022_mun_y2_10a](municipal_competition_2022_2022_mun_y2_10a.md) | --- GEOMETRY SKILLS --- | 3/10 | calculation | area_method |
+| [2022_mun_y2_10b](municipal_competition_2022_2022_mun_y2_10b.md) | --- GEOMETRY SKILLS --- | 3/10 | calculation | area_method |
 | [2022_mun_y2_11a](municipal_competition_2022_2022_mun_y2_11a.md) | --- GEOMETRY SKILLS --- | 2/10 | calculation | trigonometry |
 | [2022_mun_y2_19a](municipal_competition_2022_2022_mun_y2_19a.md) | --- GEOMETRY SKILLS --- | 5/10 | calculation | area_method |
 | [2022_mun_y2_1a](municipal_competition_2022_2022_mun_y2_1a.md) | --- GEOMETRY SKILLS --- | 3/10 | calculation | area_method |
