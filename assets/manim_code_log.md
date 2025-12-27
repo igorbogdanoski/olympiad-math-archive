@@ -9772,3 +9772,204 @@ class Task_2022_mun_g7_10(Scene):
 
 ```
 ---
+
+### 🆔 Задача: 2022_mun_g7_12 - Периметар на паралелограм и дијагонала
+**📅 Додадено:** 2025-12-27 20:20
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_2022_mun_g7_12(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+class Task_2022_mun_g7_12(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        
+        # Parallelogram
+        A = DL * 1.5 + LEFT
+        B = DR * 1.5 + LEFT
+        D = UL * 1.5 + RIGHT
+        C = UR * 1.5 + RIGHT
+        
+        parallelogram = Polygon(A, B, C, D, color=BLACK, stroke_width=4)
+        diagonal = Line(B, D, color=RED, stroke_width=4)
+        
+        # Labels
+        lbl_a = MathTex("a", color=BLUE).next_to(Line(A, B), DOWN)
+        lbl_b = MathTex("b", color=BLUE).next_to(Line(A, D), LEFT)
+        lbl_d = MathTex("d", color=RED).move_to(diagonal.get_center() + UP*0.3)
+        
+        # Equations
+        eq1 = MathTex("L_{par} = 2a + 2b = 5.2", color=BLACK).to_edge(UP)
+        eq2 = MathTex("L_{tri} = a + b + d", color=BLACK).next_to(eq1, DOWN)
+        eq3 = MathTex("d = 1.4m = 14dm", color=RED).to_edge(DOWN)
+        
+        self.add(parallelogram, diagonal, lbl_a, lbl_b, lbl_d)
+        self.play(Write(eq1))
+        self.play(Write(eq2))
+        self.play(Write(eq3))
+        # --- AI GENERATED CODE END ---
+
+```
+---
+
+### 🆔 Задача: 2022_mun_g7_14 - Агли меѓу паралелни прави
+**📅 Додадено:** 2025-12-27 20:20
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_2022_mun_g7_14(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+class Task_2022_mun_g7_14(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        
+        # Parallel lines
+        line_a = Line(LEFT*3 + UP*2, RIGHT*3 + UP*2, color=BLACK)
+        line_b = Line(LEFT*3 + DOWN*2, RIGHT*3 + DOWN*2, color=BLACK)
+        
+        # Zigzag lines
+        # Top angle 132 (obtuse). Inner acute is 48.
+        # Bottom angle 108 (obtuse). Inner acute is 72.
+        # Vertex V is between lines.
+        
+        # Start point on top line
+        P1 = UP*2 + LEFT*1
+        # Start point on bottom line
+        P2 = DOWN*2 + LEFT*2
+        
+        # Vertex V. Let's calculate position.
+        # Line from P1 goes down-right at angle -48 deg.
+        # Line from P2 goes up-right at angle 72 deg.
+        # Intersection V.
+        
+        # Visual approximation for simplicity
+        V = RIGHT * 1 # y=0 approx
+        
+        seg1 = Line(P1, V, color=BLUE)
+        seg2 = Line(P2, V, color=BLUE)
+        
+        # Auxiliary line through V
+        aux = DashedLine(LEFT*3, RIGHT*3, color=GRAY).move_to(V)
+        
+        # Angles
+        # Beta (132)
+        a_beta = MathTex("\\beta=132^\\circ", color=BLACK).next_to(P1, UP)
+        # Gamma (108)
+        a_gamma = MathTex("\\gamma=108^\\circ", color=BLACK).next_to(P2, DOWN)
+        
+        # Alpha parts
+        lbl_48 = MathTex("48^\\circ", color=RED, font_size=24).next_to(V, UL, buff=0.1)
+        lbl_72 = MathTex("72^\\circ", color=RED, font_size=24).next_to(V, DL, buff=0.1)
+        
+        self.add(line_a, line_b, seg1, seg2, aux, a_beta, a_gamma)
+        self.play(Write(lbl_48), Write(lbl_72))
+        
+        res = MathTex("\\alpha = 48+72=120^\\circ", color=RED).to_edge(RIGHT)
+        self.play(Write(res))
+        # --- AI GENERATED CODE END ---
+
+```
+---
+
+### 🆔 Задача: 2022_mun_g6_1 - Координати и симетрија
+**📅 Додадено:** 2025-12-27 20:24
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_2022_mun_g6_1(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+class Task_2022_mun_g6_1(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        axes = Axes(x_range=[-1, 6, 1], y_range=[-5, 5, 1], axis_config={"color": BLACK})
+        
+        A = Dot(axes.c2p(5, -4), color=BLUE)
+        lbl_A = MathTex("A(5, -4)", color=BLUE).next_to(A, RIGHT)
+        
+        B = Dot(axes.c2p(5, 4), color=RED)
+        lbl_B = MathTex("B(5, 4)", color=RED).next_to(B, RIGHT)
+        
+        line = DashedLine(A, B, color=GRAY)
+        
+        self.add(axes, A, lbl_A)
+        self.wait(0.5)
+        self.play(TransformFromCopy(A, B), Create(line))
+        self.add(lbl_B)
+        # --- AI GENERATED CODE END ---
+
+```
+---
+
+### 🆔 Задача: 2022_mun_g6_5 - Агли во триаголник (равенка)
+**📅 Додадено:** 2025-12-27 20:24
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_2022_mun_g6_5(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+class Task_2022_mun_g6_5(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        
+        # Triangle with angles 55, 45, 80
+        # Side c (AB) length 5.
+        # C = (x, y). 
+        # x = (b cos A). y = b sin A.
+        # c / sin C = b / sin B => b = c sin B / sin C
+        # b = 5 * sin(45) / sin(80) = 5 * 0.707 / 0.98 = 3.6
+        
+        c_len = 5
+        b_len = c_len * np.sin(45*DEGREES) / np.sin(80*DEGREES)
+        
+        A = LEFT * 2.5
+        B = RIGHT * 2.5
+        C = A + np.array([b_len * np.cos(55*DEGREES), b_len * np.sin(55*DEGREES), 0])
+        
+        tri = Polygon(A, B, C, color=BLACK, stroke_width=4)
+        
+        # Angles
+        a_A = Angle(Line(A, B), Line(A, C), radius=0.5, color=RED)
+        lbl_A = MathTex("x", color=RED).next_to(a_A, UR)
+        
+        a_B = Angle(Line(B, C), Line(B, A), radius=0.5, color=BLUE)
+        lbl_B = MathTex("x-10", color=BLUE).next_to(a_B, UL)
+        
+        a_C = Angle(Line(C, A), Line(C, B), radius=0.5, color=GREEN)
+        lbl_C = MathTex("x+25", color=GREEN).next_to(a_C, DOWN)
+        
+        self.add(tri, a_A, lbl_A, a_B, lbl_B, a_C, lbl_C)
+        
+        # Equation
+        eq = MathTex("x + (x-10) + (x+25) = 180", color=BLACK).to_edge(UP)
+        res = MathTex("3x = 165 \\implies x = 55^\\circ", color=RED).next_to(eq, DOWN)
+        
+        self.play(Write(eq))
+        self.play(Write(res))
+        # --- AI GENERATED CODE END ---
+
+```
+---

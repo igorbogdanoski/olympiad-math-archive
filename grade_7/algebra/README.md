@@ -2,11 +2,14 @@
 
 [⬅️ Назад кон прегледот](../README.md)
 
-**Вкупно задачи:** 11
+**Вкупно задачи:** 14
 
 | ID | Наслов | Тежина | Тип | Клучна Вештина |
 |:---|:---|:---:|:---|:---|
 | [2022_mun_g7_1](municipal_competition_2022_2022_mun_g7_1.md) | --- SKILL MAPPING --- | 4/10 | calculation | telescoping |
+| [2022_mun_g7_11](municipal_competition_2022_2022_mun_g7_11.md) | --- SKILL MAPPING --- | 2/10 | calculation | calculation |
+| [2022_mun_g7_13](municipal_competition_2022_2022_mun_g7_13.md) | --- SKILL MAPPING --- | 3/10 | word_problem | algebraic_manipulation |
+| [2022_mun_g7_15](municipal_competition_2022_2022_mun_g7_15.md) | --- SKILL MAPPING --- | 3/10 | word_problem | algebraic_manipulation |
 | [2022_mun_g7_2](municipal_competition_2022_2022_mun_g7_2.md) | --- SKILL MAPPING --- | 3/10 | calculation | algebraic_manipulation |
 | [2022_mun_g7_3](municipal_competition_2022_2022_mun_g7_3.md) | --- SKILL MAPPING --- | 3/10 | calculation | percentages |
 | [2022_mun_g7_5](municipal_competition_2022_2022_mun_g7_5.md) | --- SKILL MAPPING --- | 3/10 | calculation | working_backwards |
