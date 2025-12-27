@@ -9319,3 +9319,40 @@ class Task_2022_mun_g4_10(Scene):
 
 ```
 ---
+
+### 🆔 Задача: 2022_mun_g6_4 - Коцки во коцка
+**📅 Додадено:** 2025-12-27 19:47
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_2022_mun_g6_4(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+        self.camera.background_color = WHITE
+        
+        # Large cube wireframe
+        cube = Cube(side_length=4, fill_opacity=0, stroke_color=BLACK)
+        lbl_A = MathTex("A=40mm", color=BLACK).next_to(cube, UP)
+        
+        # Small cube (scaled)
+        # Scale: 4 units = 40mm. 2mm = 0.2 units.
+        small_cube = Cube(side_length=0.2, fill_color=RED, fill_opacity=1, stroke_width=0)
+        small_cube.move_to(cube.get_corner(DL+IN) + np.array([0.1, 0.1, -0.1]))
+        
+        lbl_a = MathTex("a=2mm", color=RED).next_to(small_cube, RIGHT)
+        
+        self.add(cube, lbl_A)
+        self.play(FadeIn(small_cube), Write(lbl_a))
+        
+        # Calculation
+        calc = MathTex("N = \\frac{40}{2} \\times \\frac{40}{2} \\times \\frac{40}{2} = 8000", color=BLUE).to_edge(DOWN)
+        self.play(Write(calc))
+        # --- AI GENERATED CODE END ---
+
+```
+---
