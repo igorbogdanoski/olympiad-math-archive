@@ -7172,3 +7172,118 @@ class Task_2024_mun_g6_4(Scene):
 
 ```
 ---
+
+### 🆔 Задача: 2024_mun_g7_3 - Искршена линија во триаголник
+**📅 Додадено:** 2025-12-27 12:51
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_2024_mun_g7_3(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+        self.camera.background_color = WHITE
+        
+        # Triangle 30-60-90
+        # BC = 8 (vertical). AC = 8sqrt(3) (horizontal). AB = 16.
+        # Scale down: 1 unit = 2 cm.
+        # BC = 4. AC = 4sqrt(3) approx 6.92.
+        
+        C = ORIGIN
+        B = UP * 4
+        A = RIGHT * (4 * np.sqrt(3))
+        
+        # Midpoints
+        M = (A + B) / 2
+        N = (A + C) / 2
+        P = (A + M) / 2
+        
+        # Draw Triangle
+        tri = Polygon(A, B, C, color=BLACK, stroke_width=2)
+        
+        # Draw Path B-C-M-N-P-A
+        path = VGroup(
+            Line(B, C, color=RED, stroke_width=4),
+            Line(C, M, color=BLUE, stroke_width=4),
+            Line(M, N, color=GREEN, stroke_width=4),
+            Line(N, P, color=ORANGE, stroke_width=4),
+            Line(P, A, color=PURPLE, stroke_width=4)
+        )
+        
+        # Labels
+        labels = VGroup(
+            MathTex("C", color=BLACK).next_to(C, DL),
+            MathTex("B", color=BLACK).next_to(B, UL),
+            MathTex("A", color=BLACK).next_to(A, DR),
+            MathTex("M", color=BLACK).next_to(M, UP),
+            MathTex("N", color=BLACK).next_to(N, DOWN),
+            MathTex("P", color=BLACK).next_to(P, UP)
+        )
+        
+        # Length labels
+        l1 = MathTex("8", color=RED).next_to(Line(B, C), LEFT)
+        l2 = MathTex("8", color=BLUE).move_to(Line(C, M).get_center() + LEFT*0.3)
+        l3 = MathTex("4", color=GREEN).next_to(Line(M, N), LEFT)
+        l4 = MathTex("4", color=ORANGE).next_to(Line(N, P), DOWN)
+        l5 = MathTex("4", color=PURPLE).next_to(Line(P, A), UP)
+        
+        self.add(tri, labels)
+        self.play(Create(path[0]), Write(l1))
+        self.play(Create(path[1]), Write(l2))
+        self.play(Create(path[2]), Write(l3))
+        self.play(Create(path[3]), Write(l4))
+        self.play(Create(path[4]), Write(l5))
+        
+        total = MathTex("L = 8+8+4+4+4 = 28", color=BLACK).to_edge(UP)
+        self.play(Write(total))
+        # --- AI GENERATED CODE END ---
+
+```
+---
+
+### 🆔 Задача: 2024_mun_g7_4 - Рамнокраки триаголници со целобројни страни
+**📅 Додадено:** 2025-12-27 12:51
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_2024_mun_g7_4(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+        self.camera.background_color = WHITE
+        
+        # Visualizing the constraints on b
+        # Number line for b
+        nl = NumberLine(x_range=[500, 1020, 100], length=10, color=BLACK, include_numbers=True)
+        
+        # Constraint 1: b > 505.25
+        c1 = Line(nl.n2p(505.25), nl.n2p(1020), color=BLUE, stroke_width=6).shift(UP*0.5)
+        t1 = MathTex("b > 505.25", color=BLUE).next_to(c1, UP)
+        
+        # Constraint 2: b <= 1010
+        c2 = Line(nl.n2p(500), nl.n2p(1010), color=RED, stroke_width=6).shift(DOWN*0.5)
+        t2 = MathTex("b \\le 1010", color=RED).next_to(c2, DOWN)
+        
+        # Intersection
+        inter = Line(nl.n2p(506), nl.n2p(1010), color=GREEN, stroke_width=10)
+        t_res = MathTex("b \\in [506, 1010]", color=GREEN).next_to(inter, UP)
+        
+        self.add(nl, c1, t1, c2, t2)
+        self.wait(1)
+        self.play(FadeIn(inter), Write(t_res))
+        
+        # Calculation
+        calc = MathTex("N = 1010 - 506 + 1 = 505", color=BLACK).to_edge(DOWN)
+        self.play(Write(calc))
+        # --- AI GENERATED CODE END ---
+
+```
+---
