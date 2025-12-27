@@ -2,7 +2,7 @@
 
 [⬅️ Назад кон прегледот](../README.md)
 
-**Вкупно задачи:** 28
+**Вкупно задачи:** 29
 
 | ID | Наслов | Тежина | Тип | Клучна Вештина |
 |:---|:---|:---:|:---|:---|
@@ -15,6 +15,7 @@
 | [2022_mun_y2_15b](municipal_competition_2022_2022_mun_y2_15b.md) | --- SKILL MAPPING --- | 4/10 | calculation | pattern_recognition |
 | [2022_mun_y2_16a](municipal_competition_2022_2022_mun_y2_16a.md) | --- SKILL MAPPING --- | 4/10 | calculation | case_analysis |
 | [2022_mun_y2_17a](municipal_competition_2022_2022_mun_y2_17a.md) | --- SKILL MAPPING --- | 5/10 | calculation | trigonometric_equations |
+| [2022_mun_y2_17b](municipal_competition_2022_2022_mun_y2_17b.md) | --- SKILL MAPPING --- | 5/10 | calculation | completing_the_square |
 | [2022_mun_y2_18a](municipal_competition_2022_2022_mun_y2_18a.md) | --- SKILL MAPPING --- | 4/10 | calculation | inequalities_am_gm |
 | [2022_mun_y2_5a](municipal_competition_2022_2022_mun_y2_5a.md) | --- SKILL MAPPING --- | 3/10 | calculation | factorization |
 | [2022_mun_y2_5b](municipal_competition_2022_2022_mun_y2_5b.md) | --- SKILL MAPPING --- | 3/10 | calculation | factorization |

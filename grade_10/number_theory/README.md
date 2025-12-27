@@ -2,11 +2,12 @@
 
 [⬅️ Назад кон прегледот](../README.md)
 
-**Вкупно задачи:** 7
+**Вкупно задачи:** 8
 
 | ID | Наслов | Тежина | Тип | Клучна Вештина |
 |:---|:---|:---:|:---|:---|
 | [2022_mun_y2_13b](municipal_competition_2022_2022_mun_y2_13b.md) | --- SKILL MAPPING --- | 3/10 | calculation | counting |
+| [2022_mun_y2_16b](municipal_competition_2022_2022_mun_y2_16b.md) | --- SKILL MAPPING --- | 5/10 | calculation | vieta_formulas |
 | [2022_mun_y2_8a](municipal_competition_2022_2022_mun_y2_8a.md) | --- SKILL MAPPING --- | 5/10 | calculation | parity |
 | [2022_mun_y2_8b](municipal_competition_2022_2022_mun_y2_8b.md) | --- SKILL MAPPING --- | 5/10 | calculation | parity |
 | [2023_mun_y2_4a](municipal_competition_2023_2023_mun_y2_4a.md) | --- SKILL MAPPING --- | 5/10 | calculation | algebraic_manipulation |
