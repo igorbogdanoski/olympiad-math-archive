@@ -8901,3 +8901,148 @@ class Task_2022_mun_g4_1(Scene):
 
 ```
 ---
+
+### 🆔 Задача: 2022_mun_g5_1 - Споредување на обоени делови
+**📅 Додадено:** 2025-12-27 19:32
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_2022_mun_g5_1(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+        self.camera.background_color = WHITE
+        
+        # Figure 1: Circle
+        circle = Circle(radius=1.5, color=BLACK)
+        # Sector 1/4
+        sector = Sector(outer_radius=1.5, angle=90*DEGREES, start_angle=0, color=BLUE, fill_opacity=0.5)
+        lines = VGroup(
+            Line(LEFT*1.5, RIGHT*1.5),
+            Line(UP*1.5, DOWN*1.5)
+        ).set_color(BLACK)
+        
+        fig1 = VGroup(circle, sector, lines).shift(LEFT*3)
+        lbl1 = MathTex("\\frac{1}{4} = 25\\%", color=BLUE).next_to(fig1, DOWN)
+        
+        # Figure 2: Cross (5 squares)
+        # Center, Up, Down, Left, Right
+        s_center = Square(side_length=1, color=BLACK)
+        s_up = Square(side_length=1, color=BLACK).next_to(s_center, UP, buff=0)
+        s_down = Square(side_length=1, color=BLACK).next_to(s_center, DOWN, buff=0)
+        s_left = Square(side_length=1, color=BLACK).next_to(s_center, LEFT, buff=0)
+        s_right = Square(side_length=1, color=BLACK).next_to(s_center, RIGHT, buff=0)
+        
+        # Shade one (e.g., left)
+        s_left.set_fill(RED, opacity=0.5)
+        
+        fig2 = VGroup(s_center, s_up, s_down, s_left, s_right).shift(RIGHT*3)
+        lbl2 = MathTex("\\frac{1}{5} = 20\\%", color=RED).next_to(fig2, DOWN)
+        
+        self.add(fig1, fig2)
+        self.play(Write(lbl1), Write(lbl2))
+        
+        # Comparison
+        comp = MathTex("25\\% > 20\\%", color=BLACK).to_edge(UP)
+        self.play(Write(comp))
+        # --- AI GENERATED CODE END ---
+
+```
+---
+
+### 🆔 Задача: 2022_mun_g5_3 - Трчање околу игралиште
+**📅 Додадено:** 2025-12-27 19:32
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_2022_mun_g5_3(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+        self.camera.background_color = WHITE
+        
+        # Rectangle 17x12. Scale down.
+        w = 3.4
+        h = 2.4
+        
+        rect = Rectangle(width=w, height=h, color=GREEN)
+        
+        lbl_b = MathTex("12", color=BLACK).next_to(rect, LEFT)
+        lbl_a = MathTex("12+5=17", color=BLACK).next_to(rect, DOWN)
+        
+        perim_txt = MathTex("L = 2(17+12) = 58", color=BLUE).to_edge(UP)
+        total_txt = MathTex("3 \\times 58 = 174", color=RED).next_to(perim_txt, DOWN)
+        
+        self.add(rect, lbl_a, lbl_b)
+        self.play(Create(rect))
+        self.play(Write(perim_txt))
+        self.play(Write(total_txt))
+        # --- AI GENERATED CODE END ---
+
+```
+---
+
+### 🆔 Задача: 2022_mun_g5_4 - Периметар на сложена фигура
+**📅 Додадено:** 2025-12-27 19:32
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_2022_mun_g5_4(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+        self.camera.background_color = WHITE
+        
+        # Shape coordinates
+        # HG = 12. Height AH = 4. 
+        # AB=4, CD=4, EF=4. BC=2 (up), DE=2 (down).
+        # Start at A(0,0)
+        
+        scale = 0.5
+        A = ORIGIN
+        B = RIGHT * 4 * scale
+        C = B + UP * 2 * scale
+        D = C + RIGHT * 4 * scale
+        E = D + DOWN * 2 * scale
+        F = E + RIGHT * 4 * scale
+        G = F + UP * 4 * scale
+        H = A + UP * 4 * scale
+        
+        # Center the shape
+        center = (A + G) / 2
+        shift_vec = -center
+        
+        points = [A, B, C, D, E, F, G, H]
+        points = [p + shift_vec for p in points]
+        
+        poly = Polygon(*points, color=BLACK, stroke_width=4)
+        
+        # Labels
+        lbl_HG = MathTex("12", color=BLUE).next_to(Line(points[7], points[6]), UP)
+        lbl_AH = MathTex("4", color=BLACK).next_to(Line(points[0], points[7]), LEFT)
+        lbl_AB = MathTex("4", color=BLACK).next_to(Line(points[0], points[1]), DOWN)
+        lbl_CD = MathTex("4", color=BLACK).next_to(Line(points[2], points[3]), UP)
+        lbl_EF = MathTex("4", color=BLACK).next_to(Line(points[4], points[5]), DOWN)
+        lbl_BC = MathTex("2", color=RED).next_to(Line(points[1], points[2]), LEFT)
+        
+        self.add(poly, lbl_HG, lbl_AH, lbl_AB, lbl_CD, lbl_EF, lbl_BC)
+        
+        # Calculation
+        calc = MathTex("L = 12+4+4+2+4+2+4+4 = 36", color=BLACK).to_edge(DOWN)
+        self.play(Write(calc))
+        # --- AI GENERATED CODE END ---
+
+```
+---
