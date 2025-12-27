@@ -2,10 +2,11 @@
 
 [⬅️ Назад кон прегледот](../README.md)
 
-**Вкупно задачи:** 7
+**Вкупно задачи:** 8
 
 | ID | Наслов | Тежина | Тип | Клучна Вештина |
 |:---|:---|:---:|:---|:---|
+| [2025_mun_g7_4](municipal_competition_2025_2025_mun_g7_4.md) | --- GEOMETRY SKILLS --- | 4/10 | calculation | logic |
 | [4370](numerus_4370_4370.md) | --- GEOMETRY SKILLS --- | 4/10 | General | <main_tool> # e.g., angle_chasing, similarity, cyclic_quads |
 | [4376](numerus_4376_4376.md) | --- GEOMETRY SKILLS --- | 3/10 | General | <main_tool> # e.g., angle_chasing, similarity, cyclic_quads |
 | [4411](numerus_4411_4411.md) | --- GEOMETRY SKILLS --- | 4/10 | General | <main_tool> # e.g., angle_chasing, similarity, cyclic_quads |
