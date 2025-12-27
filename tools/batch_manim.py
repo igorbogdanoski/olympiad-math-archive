@@ -103,6 +103,8 @@ def main():
     
     BATCH_SIZE = 5
     processed_count = 0
+    scanned_files = 0
+    candidates_found = 0
     
     for root, dirs, files in os.walk(ARCHIVE_ROOT):
         if "tools" in root or "assets" in root: continue
@@ -113,14 +115,21 @@ def main():
                 return
 
             if file.endswith(".md"):
+                scanned_files += 1
                 path = os.path.join(root, file)
                 
                 # Провери дали веќе има слика (за да не рендерираме пак)
-                with open(path, 'r', encoding='utf-8') as f:
-                    content = f.read()
+                try:
+                    with open(path, 'r', encoding='utf-8') as f:
+                        content = f.read()
+                except Exception as e:
+                    print(f"❌ Error reading {file}: {e}")
+                    continue
                     
                 if "<!-- Ова место е резервирано за автоматската слика од Manim -->" not in content:
                     continue # Или нема placeholder или веќе е средено
+                
+                candidates_found += 1
                 
                 # Провери дали има код
                 code = extract_manim_code(content)
@@ -135,6 +144,15 @@ def main():
                         if update_markdown_with_image(path, image_name):
                             processed_count += 1
                             print(f"   📊 Progress: {processed_count}/{BATCH_SIZE}")
+                else:
+                    print(f"⚠️  Found placeholder but NO valid Manim code in: {file}")
+
+    print(f"\n🏁 Finished scan.")
+    print(f"   📂 Scanned files: {scanned_files}")
+    print(f"   🎯 Candidates (with placeholder): {candidates_found}")
+    print(f"   ✅ Processed in this batch: {processed_count}")
+    if candidates_found == 0:
+        print("   (Ова значи дека сите задачи или веќе имаат слика, или немаат placeholder за слика.)")
 
 if __name__ == "__main__":
     main()
