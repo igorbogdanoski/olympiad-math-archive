@@ -25,16 +25,21 @@ def parse_problem(file_path):
                 meta[key.strip()] = val.strip().replace('"', '').replace("'", "")
     
     # Екстракција на телото на задачата
-    # Подобрен regex за да ги фати само вистинските YAML блокови (помеѓу --- и --- на нови редови)
-    # Ова спречува грешки кога имаме # --- SKILL MAPPING --- во коментари
+    # 1. Тргни го YAML frontmatter (првиот блок помеѓу ---)
     body = re.sub(r'^---\s*\n[\s\S]*?\n---\s*', '', content).strip()
     
-    # Дополнително чистење на "SKILL MAPPING" и "TOPICS" ако останале во телото
-    # Ги бришеме блоковите што личат на метаподатоци но се во телото
-    body = re.sub(r'# --- SKILL MAPPING.*?---', '', body, flags=re.DOTALL)
-    body = re.sub(r'# --- TOPICS.*?---', '', body, flags=re.DOTALL)
-    # Бришење на заостанати tags линии
+    # 2. Агресивно чистење на SKILL MAPPING и TOPICS блоковите
+    # Ги бараме линиите што почнуваат со "# --- SKILL" или "# --- TOPICS" и бришеме сè до следниот наслов (# )
+    body = re.sub(r'# --- SKILL MAPPING[\s\S]*?(?=\n# |\Z)', '', body)
+    body = re.sub(r'# --- TOPICS[\s\S]*?(?=\n# |\Z)', '', body)
+    
+    # 3. Чистење на заостанати tags ако не се фатени погоре
     body = re.sub(r'tags:\s*\n(\s*- .*\n)*', '', body)
+    
+    # 4. Тргни повеќекратни празни редови
+    body = re.sub(r'\n{3,}', '\n\n', body).strip()
+    
+    return meta, body, file_path
     
     # Поправање на патеки за слики за да работат во Streamlit
     # (Ова е малку трики бидејќи Streamlit работи од tools папката, но ќе пробаме)
@@ -122,21 +127,35 @@ filtered_problems = [
 
 st.metric("Пронајдени задачи", len(filtered_problems))
 
+# --- ПАГИНАЦИЈА ---
+items_per_page = 5
+total_pages = max(1, (len(filtered_problems) + items_per_page - 1) // items_per_page)
+
+col1, col2 = st.columns([3, 1])
+with col2:
+    page = st.number_input("Страна", min_value=1, max_value=total_pages, value=1)
+
+start_idx = (page - 1) * items_per_page
+end_idx = start_idx + items_per_page
+current_batch = filtered_problems[start_idx:end_idx]
+
+st.caption(f"Прикажувам {start_idx + 1}-{min(end_idx, len(filtered_problems))} од {len(filtered_problems)} задачи")
+
 # --- ПРИКАЗ НА ЗАДАЧИ ---
-if not filtered_problems:
+if not current_batch:
     st.warning("Нема задачи што одговараат на филтрите.")
 else:
-    for prob in filtered_problems:
+    for prob in current_batch:
         # Креирање на "Картичка" со HTML/CSS
         with st.container():
             st.markdown(f"""
-            <div style="border: 1px solid #ddd; border-radius: 10px; padding: 20px; margin-bottom: 20px; background-color: #f9f9f9;">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-                    <h3 style="margin: 0; color: #2c3e50;">{prob['filename'].replace('.md', '').replace('_', ' ').title()}</h3>
-                    <div>
-                        <span style="background-color: #3498db; color: white; padding: 4px 8px; border-radius: 12px; font-size: 0.8em;">Одд: {prob['grade']}</span>
-                        <span style="background-color: #2ecc71; color: white; padding: 4px 8px; border-radius: 12px; font-size: 0.8em;">{prob['category'].capitalize()}</span>
-                        <span style="background-color: #e67e22; color: white; padding: 4px 8px; border-radius: 12px; font-size: 0.8em;">Тежина: {prob['difficulty']}</span>
+            <div style="border: 1px solid #ddd; border-radius: 10px; padding: 20px; margin-bottom: 20px; background-color: #f9f9f9; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; border-bottom: 1px solid #eee; padding-bottom: 10px;">
+                    <h3 style="margin: 0; color: #2c3e50; font-size: 1.2rem;">{prob['filename'].replace('.md', '').replace('_', ' ').title()}</h3>
+                    <div style="display:flex; gap:5px;">
+                        <span style="background-color: #3498db; color: white; padding: 2px 8px; border-radius: 10px; font-size: 0.7em;">Одд: {prob['grade']}</span>
+                        <span style="background-color: #2ecc71; color: white; padding: 2px 8px; border-radius: 10px; font-size: 0.7em;">{prob['category'].capitalize()}</span>
+                        <span style="background-color: #e67e22; color: white; padding: 2px 8px; border-radius: 10px; font-size: 0.7em;">Тежина: {prob['difficulty']}</span>
                     </div>
                 </div>
             </div>
@@ -147,7 +166,7 @@ else:
             question = parts[0]
             solution = parts[1] if len(parts) > 1 else "Нема решение."
             
-            # Приказ на текстот на задачата
+            # Приказ на текстот на задачата (во 2 колони за подобра искористеност на просторот ако е широк екран)
             st.markdown(question)
             
             # Експандер за решение
