@@ -25,7 +25,16 @@ def parse_problem(file_path):
                 meta[key.strip()] = val.strip().replace('"', '').replace("'", "")
     
     # Екстракција на телото на задачата
-    body = re.sub(r'^---[\s\S]*?---', '', content).strip()
+    # Подобрен regex за да ги фати само вистинските YAML блокови (помеѓу --- и --- на нови редови)
+    # Ова спречува грешки кога имаме # --- SKILL MAPPING --- во коментари
+    body = re.sub(r'^---\s*\n[\s\S]*?\n---\s*', '', content).strip()
+    
+    # Дополнително чистење на "SKILL MAPPING" и "TOPICS" ако останале во телото
+    # Ги бришеме блоковите што личат на метаподатоци но се во телото
+    body = re.sub(r'# --- SKILL MAPPING.*?---', '', body, flags=re.DOTALL)
+    body = re.sub(r'# --- TOPICS.*?---', '', body, flags=re.DOTALL)
+    # Бришење на заостанати tags линии
+    body = re.sub(r'tags:\s*\n(\s*- .*\n)*', '', body)
     
     # Поправање на патеки за слики за да работат во Streamlit
     # (Ова е малку трики бидејќи Streamlit работи од tools папката, но ќе пробаме)
@@ -118,16 +127,36 @@ if not filtered_problems:
     st.warning("Нема задачи што одговараат на филтрите.")
 else:
     for prob in filtered_problems:
-        with st.expander(f"[{prob['grade']} одд] {prob['category'].capitalize()} - Тежина: {prob['difficulty']} - {prob['filename']}"):
+        # Креирање на "Картичка" со HTML/CSS
+        with st.container():
+            st.markdown(f"""
+            <div style="border: 1px solid #ddd; border-radius: 10px; padding: 20px; margin-bottom: 20px; background-color: #f9f9f9;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                    <h3 style="margin: 0; color: #2c3e50;">{prob['filename'].replace('.md', '').replace('_', ' ').title()}</h3>
+                    <div>
+                        <span style="background-color: #3498db; color: white; padding: 4px 8px; border-radius: 12px; font-size: 0.8em;">Одд: {prob['grade']}</span>
+                        <span style="background-color: #2ecc71; color: white; padding: 4px 8px; border-radius: 12px; font-size: 0.8em;">{prob['category'].capitalize()}</span>
+                        <span style="background-color: #e67e22; color: white; padding: 4px 8px; border-radius: 12px; font-size: 0.8em;">Тежина: {prob['difficulty']}</span>
+                    </div>
+                </div>
+            </div>
+            """, unsafe_allow_html=True)
+            
             # Поделба на Текст и Решение
             parts = prob['body'].split('## Решение')
             question = parts[0]
             solution = parts[1] if len(parts) > 1 else "Нема решение."
             
-            st.markdown("### 📝 Текст на задачата")
+            # Приказ на текстот на задачата
             st.markdown(question)
             
-            if st.checkbox("👀 Прикажи решение", key=prob['path']):
+            # Експандер за решение
+            with st.expander("👀 Прикажи решение"):
+                st.markdown("### 💡 Решение")
+                st.markdown(solution)
+                
+            st.caption(f"Извор: {prob['meta'].get('source', 'Непознат')} | Патека: {prob['path']}")
+            st.markdown("---")
                 st.markdown("### 💡 Решение")
                 st.info(solution)
             
