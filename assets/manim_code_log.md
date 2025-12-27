@@ -12006,3 +12006,48 @@ class Task_2022_mun_y2_4a(Scene):
 
 ```
 ---
+
+### 🆔 Задача: 2022_mun_y2_10a - Плоштина на кружен исечок и триаголник
+**📅 Додадено:** 2025-12-27 22:27
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_2022_mun_y2_10a(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+        # Coordinates
+        B = ORIGIN
+        R = 4
+        # Angle 45 degrees
+        A = [R * np.cos(45*DEGREES), R * np.sin(45*DEGREES), 0]
+        D = [R, 0, 0]
+        # C is projection of A on BD (x-axis)
+        C = [A[0], 0, 0]
+
+        # Sector
+        sector = Sector(outer_radius=R, angle=45*DEGREES, start_angle=0, color=BLUE, fill_opacity=0.2)
+        
+        # Triangle
+        triangle = Polygon(B, C, A, color=RED, stroke_width=4)
+        right_angle = RightAngle(Line(A,C), Line(C,B), length=0.4, color=RED)
+
+        # Labels
+        labels = VGroup(
+            MathTex('B').next_to(B, DL),
+            MathTex('A').next_to(A, UR),
+            MathTex('D').next_to(D, RIGHT),
+            MathTex('C').next_to(C, DOWN),
+            MathTex('R=4').next_to(Line(B,A), UL),
+            MathTex('45^\circ').next_to(B, RIGHT, buff=0.5).shift(UP*0.2)
+        ).set_color(BLACK)
+
+        self.add(sector, triangle, right_angle, labels)
+        # --- AI GENERATED CODE END ---
+
+```
+---
