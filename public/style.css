@@ -294,3 +294,81 @@ blockquote {
     }
 }
 
+
+/* --- Problem Page Enhancements --- */
+.problem-page .card {
+    padding: 40px;
+    max-width: 900px;
+    margin: 0 auto;
+    border-top: 5px solid var(--secondary-color);
+}
+
+.problem-page h1 {
+    font-size: 2.2rem;
+    color: #2c3e50;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 15px;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.problem-page h2 {
+    font-size: 1.5rem;
+    color: #34495e;
+    margin-top: 40px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.problem-page h2::before {
+    content: '';
+    display: inline-block;
+    width: 8px;
+    height: 24px;
+    background-color: var(--accent-color);
+    border-radius: 4px;
+}
+
+.problem-page p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #444;
+    margin-bottom: 20px;
+}
+
+.problem-page ul, .problem-page ol {
+    margin-left: 20px;
+    margin-bottom: 20px;
+}
+
+.problem-page li {
+    margin-bottom: 10px;
+    font-size: 1.05rem;
+}
+
+/* Highlight Analysis and Solution sections if they exist */
+/* Note: This relies on the markdown structure. We can't target text content with CSS, 
+   but we can style all H2s nicely as above. */
+
+/* Print Button Enhancement */
+.btn-print {
+    background-color: #f8f9fa;
+    border: 1px solid #ddd;
+    color: #555;
+    font-weight: 600;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.btn-print:hover {
+    background-color: #e9ecef;
+    color: #333;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.btn-print i {
+    color: var(--secondary-color);
+}
+

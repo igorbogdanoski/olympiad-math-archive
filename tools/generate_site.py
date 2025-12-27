@@ -237,7 +237,7 @@ def process_grades():
                     # Output path: public/grade_10/algebra/prob1.html
                     out_file_dir = os.path.join(output_grade_path, rel_dir)
                     
-                    root_p = "../../../" if rel_dir != "." else "../../"
+                    root_p = "../../" if rel_dir != "." else "../"
                     
                     bc = [("Почетна", root_p + "index.html"), (f"Grade {grade_num}", "../index.html" if rel_dir != "." else "index.html")]
                     if rel_dir != ".":
@@ -247,7 +247,7 @@ def process_grades():
                     generate_page(
                         os.path.join(out_file_dir, f"{prob_slug}.html"),
                         prob_title,
-                        f"<div class='card'>{html_body}</div>",
+                        f"<div class='problem-page'><div class='card'>{html_body}</div></div>",
                         root_path=root_p,
                         breadcrumbs=bc
                     )
