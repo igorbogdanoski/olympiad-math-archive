@@ -8765,3 +8765,53 @@ class Task_2023_mun_y3_3ab(Scene):
 
 ```
 ---
+
+### 🆔 Задача: 2023_mun_y3_3a - Агол во триаголник (Синусна теорема)
+**📅 Додадено:** 2025-12-27 18:47
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_2023_mun_y3_3a(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+class Task_2023_mun_y3_3a(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        
+        # Triangle with alpha = 30 deg
+        # b^2 + c^2 - a^2 = sqrt(3)bc
+        # Let b=2, c=3.
+        # a^2 = 4 + 9 - 2*2*3*cos(30) = 13 - 12*(sqrt(3)/2) = 13 - 6sqrt(3) approx 2.6
+        # a = sqrt(2.6) approx 1.61
+        
+        A = ORIGIN
+        b_len = 3
+        c_len = 4 # visual scale
+        
+        B = RIGHT * c_len
+        C = np.array([b_len * np.cos(30*DEGREES), b_len * np.sin(30*DEGREES), 0])
+        
+        tri = Polygon(A, B, C, color=BLACK, stroke_width=4)
+        
+        # Angle alpha
+        arc = Angle(Line(A, B), Line(A, C), radius=0.5, color=RED)
+        lbl_alpha = MathTex("\\alpha = 30^\\circ", color=RED).next_to(arc, RIGHT)
+        
+        # Labels
+        lbl_A = MathTex("A", color=BLACK).next_to(A, DL)
+        lbl_B = MathTex("B", color=BLACK).next_to(B, DR)
+        lbl_C = MathTex("C", color=BLACK).next_to(C, UP)
+        
+        # Formula
+        txt = MathTex("\\cos \\alpha = \\frac{\\sqrt{3}}{2}", color=BLUE).to_corner(UL)
+        
+        self.add(tri, arc, lbl_alpha, lbl_A, lbl_B, lbl_C, txt)
+        # --- AI GENERATED CODE END ---
+
+```
+---
