@@ -9265,3 +9265,57 @@ class Task_2022_mun_g4_6(Scene):
 
 ```
 ---
+
+### 🆔 Задача: 2022_mun_g4_10 - Агли во триаголник
+**📅 Додадено:** 2025-12-27 19:39
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_2022_mun_g4_10(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+        self.camera.background_color = WHITE
+        
+        # Construct the lines
+        # Vertical line
+        L1 = Line(UP*3, DOWN*3, color=BLACK)
+        
+        # Transversal 1 (angle 60 with vertical)
+        # Direction: (-sin(60), cos(60))? No, angle with vertical is 60.
+        # So angle with horizontal is 30.
+        L2 = Line(DL*3, UR*3, color=BLACK).rotate(30*DEGREES)
+        
+        # Transversal 2 (angle 25 with vertical?)
+        # Forms triangle with L1 and L2.
+        # Let intersection be origin.
+        # Actually, let's just draw a generic triangle with angles 60, 25, 95.
+        
+        A = UP * 2
+        B = DL * 2
+        C = DR * 2
+        
+        # Let's assume the triangle is formed by 3 lines.
+        # Angle at A = 60 (beta). Angle at B = 25. Angle at C = 95 (gamma).
+        
+        tri = Polygon(A, B, C, color=BLACK)
+        
+        # Extend lines to show supplementary angles
+        line_A = Line(A, A + UP, color=BLACK)
+        
+        lbl_beta = MathTex("\\beta=60^\\circ", color=BLUE).next_to(A, DOWN)
+        lbl_25 = MathTex("25^\\circ", color=BLACK).next_to(B, UR)
+        lbl_gamma = MathTex("\\gamma=95^\\circ", color=RED).next_to(C, UL)
+        
+        self.add(tri, lbl_beta, lbl_25, lbl_gamma)
+        
+        calc = MathTex("\\beta+\\gamma = 60+95=155", color=BLACK).to_edge(UP)
+        self.play(Write(calc))
+        # --- AI GENERATED CODE END ---
+
+```
+---
