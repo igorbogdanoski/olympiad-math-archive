@@ -51,7 +51,7 @@ tags:
 <Опис на цртежот. Кои се клучните точки? Дали има помошни линии?>
 
 
-<!-- VISUAL PROMPT: Draw a square ABCD. Inside the square, draw an equilateral triangle ABE sharing the side AB. Draw segments DE and CE connecting the inner vertex E to the top corners D and C. Mark the angle DEC as the target angle. Highlight that AE=AD and BE=BC to show isosceles triangles. -->
+![Визуелизација](../../assets/images/copernicus_cat2_01.png)
 
 ## 🧠 Анализа
 Ова е класична задача. Клучот е да ги искористиш еднаквостите на страните. Бидејќи $ABCD$ е квадрат, $AB=BC=CD=DA$. Бидејќи $\triangle ABE$ е рамностран, $AB=AE=BE$. Заклучокот е дека $AE=AD$ и $BE=BC$. Ова формира два скриени рамнокраки триаголници: $\triangle ADE$ и $\triangle BCE$.

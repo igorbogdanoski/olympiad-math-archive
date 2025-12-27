@@ -1,68 +1,62 @@
 from manim import *
 
-class Task_4411(Scene):
+class Task_geom_9_sum_altitudes(Scene):
     def construct(self):
         self.camera.background_color = WHITE
         Text.set_default(color=BLACK)
         MathTex.set_default(color=BLACK)
         Mobject.set_default(color=BLACK)
         
-        # A = 40, B = 60, C = 80
-        # Coordinates
-        # A at origin
-        A = ORIGIN
-        # B on x-axis. c = 6 (arbitrary)
-        c_len = 6
-        B = RIGHT * c_len
+        # Equilateral triangle for symmetry looks nice, but prompt says "triangle ABC".
+        # Let's use equilateral for clarity of "Viviani-like" setup, or generic.
+        # Prompt says "triangle ABC".
+        A = np.array([-2, -1.5, 0])
+        B = np.array([3, -1.5, 0])
+        C = np.array([0.5, 2.5, 0])
         
-        # C coordinates
-        # b = c * sin(60) / sin(80)
-        b_len = c_len * np.sin(60*DEGREES) / np.sin(80*DEGREES)
-        C_pt = np.array([b_len * np.cos(40*DEGREES), b_len * np.sin(40*DEGREES), 0])
+        tri = Polygon(A, B, C, color=BLUE)
         
-        # Shift to center
-        center = (A + B + C_pt) / 3
-        A = A - center
-        B = B - center
-        C_pt = C_pt - center
+        # Point M inside
+        M = np.array([0.5, -0.5, 0])
+        dot_M = Dot(M, color=BLACK)
+        lbl_M = MathTex("M").next_to(M, UP, buff=0.1)
         
-        tri = Polygon(A, B, C_pt, color=BLUE)
+        # Perpendiculars to sides
+        # To BC (x)
+        vec_BC = C - B
+        unit_BC = vec_BC / np.linalg.norm(vec_BC)
+        # Normal vector to BC
+        normal_BC = np.array([-unit_BC[1], unit_BC[0], 0])
+        # Project M-B onto normal? No, just project M onto line BC.
+        proj_x = B + np.dot(M - B, unit_BC) * unit_BC
+        line_x = Line(M, proj_x, color=RED)
+        lbl_x = MathTex("x", color=RED).next_to(line_x, RIGHT, buff=0.1)
+        
+        # To AC (y)
+        vec_AC = C - A
+        unit_AC = vec_AC / np.linalg.norm(vec_AC)
+        proj_y = A + np.dot(M - A, unit_AC) * unit_AC
+        line_y = Line(M, proj_y, color=RED)
+        lbl_y = MathTex("y", color=RED).next_to(line_y, LEFT, buff=0.1)
+        
+        # To AB (z)
+        proj_z = np.array([M[0], A[1], 0])
+        line_z = Line(M, proj_z, color=RED)
+        lbl_z = MathTex("z", color=RED).next_to(line_z, LEFT, buff=0.1)
+        
+        # Segments MA, MB, MC
+        seg_MA = DashedLine(M, A, color=GRAY)
+        seg_MB = DashedLine(M, B, color=GRAY)
+        seg_MC = DashedLine(M, C, color=GRAY)
+        
         lbl_A = MathTex("A").next_to(A, DOWN+LEFT)
         lbl_B = MathTex("B").next_to(B, DOWN+RIGHT)
-        lbl_C = MathTex("C").next_to(C_pt, UP)
+        lbl_C = MathTex("C").next_to(C, UP)
         
-        # Bisector of AC
-        # Midpoint E
-        E = (A + C_pt) / 2
-        # Direction AC
-        vec_AC = C_pt - A
-        # Perpendicular direction
-        perp_vec = np.array([-vec_AC[1], vec_AC[0], 0])
-        perp_vec = perp_vec / np.linalg.norm(perp_vec)
-        
-        # Draw bisector line s
-        s_start = E + perp_vec * 4
-        s_end = E - perp_vec * 4
-        bisector = Line(s_start, s_end, color=GREEN)
-        lbl_s = MathTex("s", color=GREEN).next_to(s_start, UP)
-        
-        # Intersection D with AB
-        # D is intersection of bisector and AB
-        # We can calculate it or use line_intersection
-        D = line_intersection(
-            [s_start, s_end],
-            [A, B]
-        )
-        dot_D = Dot(D, color=RED)
-        lbl_D = MathTex("D").next_to(D, DOWN)
-        
-        self.add(tri, lbl_A, lbl_B, lbl_C)
-        self.add(bisector, lbl_s)
-        self.add(dot_D, lbl_D)
-        
-        # Mark right angle at E
-        ra = RightAngle(Line(E, C_pt), Line(E, s_start), length=0.3, quadrant=(-1,1))
-        self.add(ra)
+        self.add(tri, dot_M, lbl_M)
+        self.add(line_x, lbl_x, line_y, lbl_y, line_z, lbl_z)
+        self.add(seg_MA, seg_MB, seg_MC)
+        self.add(lbl_A, lbl_B, lbl_C)
 
 
 config.media_width = '100%'

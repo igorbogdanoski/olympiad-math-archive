@@ -50,7 +50,7 @@ tags:
 <Опис на цртежот. Кои се клучните точки? Дали има помошни линии?>
 
 
-<!-- VISUAL PROMPT: Draw an equilateral triangle ABC. Place a point S inside. Draw three perpendicular lines from S to the three sides. Label them SM, SN, SP. Draw a vertical altitude h for comparison. -->
+![Визуелизација](../../assets/images/geom_8_viviani_proof.png)
 
 ## 🧠 Анализа
 Ова е специјален случај на идентитетот на нормали. Бидејќи сите страни се еднакви, плоштината се поедноставува драматично.

@@ -50,7 +50,7 @@ tags:
 <Опис на цртежот. Кои се клучните точки? Дали има помошни линии?>
 
 
-<!-- VISUAL PROMPT: Draw parallelogram ABCD touching line p only at point D. Draw line p at an angle. Drop perpendiculars from A to p (point M), B to p (point N), and C to p (point O). Mark the center of the parallelogram as S and drop perpendicular SS'. -->
+![Визуелизација](../../assets/images/geom_8_2018_para_line.png)
 
 ## 🧠 Анализа
 Користи ја централната симетрија на паралелограмот. Пресекот на дијагоналите е клучната точка која ја поврзува левата и десната страна на равенството преку средни линии.

@@ -1,0 +1,257 @@
+[
+  {
+    "id": "geo_test_01",
+    "title": "Висина кон хипотенузата",
+    "prompt": "Draw a right-angled triangle ABC with the right angle at the top vertex C. Draw the altitude CD perpendicular to the hypotenuse AB. Label the segments AD as 4 and BD as 9. Label the altitude CD as h."
+  },
+  {
+    "id": "copernicus_cat2_01",
+    "title": "Рамностран триаголник во квадрат",
+    "prompt": "Draw a square ABCD. Inside the square, draw an equilateral triangle ABE sharing the side AB. Draw segments DE and CE connecting the inner vertex E to the top corners D and C. Mark the angle DEC as the target angle. Highlight that AE=AD and BE=BC to show isosceles triangles."
+  },
+  {
+    "id": "geom_8_2018_rect",
+    "title": "Плоштина на впишан триаголник во правоаголник",
+    "prompt": "Draw rectangle ABCD with A at bottom-left. Place E on AB such that AE=1/3 AB, F on BC such that BF=2/3 BC, and G as midpoint of AD. Shade triangle EFG."
+  },
+  {
+    "id": "geom_8_2015_square",
+    "title": "Поделба на дијагонала во квадрат",
+    "prompt": "Draw square ABCD. Draw diagonal AC and diagonal BD intersecting at O. Mark M as midpoint of CD and N as midpoint of BC. Connect AM and AN."
+  },
+  {
+    "id": "geom_9_2018_cm",
+    "title": "Должина на симетрала преку разлика на страни",
+    "prompt": "Draw triangle ABC with angle A=40 and B=20. Draw bisector CM. Mark point D on AB such that BD=BC."
+  },
+  {
+    "id": "geom_8_2018_trap",
+    "title": "Агли на основа во специфичен трапез",
+    "prompt": "Draw trapezoid ABCD. Mark midpoints M on AB and N on CD. Draw segment MN. Draw auxiliary lines from N parallel to AD and BC."
+  },
+  {
+    "id": "geom_9_area_height",
+    "title": "Периметар преку релација на висини",
+    "prompt": "null"
+  },
+  {
+    "id": "geom_9_2015_iso_angle",
+    "title": "Агли кај специфичен рамнокрак триаголник",
+    "prompt": "Draw isosceles triangle ABC. Draw altitude CC1 to base AB. Draw angle bisector AA1. Mark D as midpoint of BA1 and connect C1D."
+  },
+  {
+    "id": "geom_9_sum_altitudes",
+    "title": "Идентитет на нормали во произволен триаголник",
+    "prompt": "Draw triangle ABC with an internal point M. Draw perpendicular segments from M to sides BC (labeled x), AC (labeled y), and AB (labeled z). Draw segments MA, MB, and MC to show the triangle division."
+  },
+  {
+    "id": "geom_8_2018_para_line",
+    "title": "Збир на нормали од темиња на паралелограм",
+    "prompt": "Draw parallelogram ABCD touching line p only at point D. Draw line p at an angle. Drop perpendiculars from A to p (point M), B to p (point N), and C to p (point O). Mark the center of the parallelogram as S and drop perpendicular SS'."
+  },
+  {
+    "id": "geom_8_2018_centroid_diag",
+    "title": "Конкурентност на тежишни линии во паралелограм",
+    "prompt": "Draw parallelogram ABCD. Mark M as midpoint of BC and N as midpoint of CD. Draw DM and BN. Draw diagonal AC and show they intersect on it. Draw auxiliary diagonal BD."
+  },
+  {
+    "id": "geom_8_viviani_proof",
+    "title": "Теорема на Вивиани",
+    "prompt": "Draw an equilateral triangle ABC. Place a point S inside. Draw three perpendicular lines from S to the three sides. Label them SM, SN, SP. Draw a vertical altitude h for comparison."
+  },
+  {
+    "id": "geom_9_rect_proj_diff",
+    "title": "Проекции на хипотенуза и агли",
+    "prompt": "Draw a right triangle ABC with right angle at C. Draw altitude CD to hypotenuse AB. Mark segments AD=p and BD=q. Mark point E on AD such that DE=q. Highlight triangles CBE and AEC."
+  },
+  {
+    "id": "geom_angle_incenter_01",
+    "title": "Агол кај центарот на впишана кружница",
+    "prompt": "Draw a general triangle ABC. Construct the internal angle bisectors of angle A and angle B. Mark their intersection as I. Label the angle at C as gamma."
+  },
+  {
+    "id": "geom_angle_orthocenter_02",
+    "title": "Агол кај ортоцентарот",
+    "prompt": "Draw an acute triangle ABC. Draw altitude AD to BC and altitude BE to AC. Mark their intersection as H. Highlight the quadrilateral CDHE."
+  },
+  {
+    "id": "geom_angle_alt_bisector_03",
+    "title": "Агол меѓу висина и симетрала",
+    "prompt": "Draw triangle ABC with AC significantly longer than AB. Draw altitude AD from A to BC. Draw internal angle bisector AS from A to BC. Label angle B as beta and angle C as gamma."
+  },
+  {
+    "id": "geom_angle_hybrid_04",
+    "title": "Агол меѓу внатрешна и надворешна симетрала",
+    "prompt": "Draw triangle ABC. Extend side CB beyond B to create an external angle at B. Draw internal bisector of angle A and external bisector of angle B. Mark their intersection as Y."
+  },
+  {
+    "id": "geom_angle_overlap_05",
+    "title": "Агол на преклопување на хипотенуза",
+    "prompt": "Draw a right triangle ABC with right angle at A. On hypotenuse BC, mark point E such that BE=AB and point D such that CD=AC. Connect AD and AE."
+  },
+  {
+    "id": "para_normals_sum_06",
+    "title": "Збир на нормали во паралелограм",
+    "prompt": "Draw a parallelogram ABCD with only point D touching a line p. From A, B, and C, draw perpendicular segments AM, BN, and CO to the line p. Mark the intersection of diagonals AC and BD as S, and draw a perpendicular SS' to line p."
+  },
+  {
+    "id": "para_diag_centroid_07",
+    "title": "Пресек на линии во паралелограм",
+    "prompt": "Draw a parallelogram ABCD. Mark M as the midpoint of BC and N as the midpoint of CD. Draw segments DM and BN and show their intersection T. Draw diagonal AC and diagonal BD, showing they intersect at O and that T lies on AC."
+  },
+  {
+    "id": "viviani_theorem_08",
+    "title": "Теорема на Вивиани",
+    "prompt": "Draw an equilateral triangle ABC with altitude h. Place a point S inside and draw perpendiculars SM, SN, and SP to the sides BC, CA, and AB respectively. Connect S to vertices A, B, and C to show three internal triangles."
+  },
+  {
+    "id": "tri_altitudes_perimeter_09",
+    "title": "Периметар преку однос на висини",
+    "prompt": "null"
+  },
+  {
+    "id": "right_tri_angles_10",
+    "title": "Агли во правоаголен триаголник",
+    "prompt": "Draw a right triangle ABC with right angle at C. Draw altitude CD to hypotenuse AB. Mark segments AD=p and BD=q. Mark point E on AD such that DE=q. Highlight triangles CBE and AEC to show they are isosceles."
+  },
+  {
+    "id": "geom_quad_symmetry_05",
+    "title": "Симетрија во конвексен четириаголник",
+    "prompt": "Draw a convex quadrilateral ABCD with a right angle at C. Mark a point P on side CD. Reflect point B across line CD to get B'. Connect A, P, and B' as a straight line. Mark equal angles APD and BPC."
+  },
+  {
+    "id": "geom_tri_bisector_diff_11",
+    "title": "Триаголник со разлика на агли од 90 степени",
+    "prompt": "Draw triangle ABC with angle A significantly larger than angle B. Construct the internal bisector CD and the external bisector CE at vertex C. Extend side AB to meet the external bisector at point E."
+  },
+  {
+    "id": "geom_right_tri_bisect_09",
+    "title": "Симетрала на агол меѓу висина и медијана",
+    "prompt": "Draw a right triangle ABC with right angle at C. Draw altitude CD, median CM, and angle bisector CL from vertex C to the hypotenuse AB. Label angle A as 40 degrees."
+  },
+  {
+    "id": "geom_iso_bisector_intersect_10",
+    "title": "Агли во рамнокрак триаголник преку пресек на симетрали",
+    "prompt": "Draw an isosceles triangle ABC with AB as base. Draw altitude CD from vertex C. Draw angle bisector AE from vertex A. Mark their intersection as I and label the obtuse angle at I as 130 degrees."
+  },
+  {
+    "id": "geom_iso_side_bisector_08",
+    "title": "Пресек на симетрала на страна и симетрала на агол",
+    "prompt": "Draw an isosceles triangle ABC with side AC = BC. Construct the perpendicular bisector of side AC and the angle bisector of angle A. Mark their intersection point D on the side BC. Label angle C as gamma."
+  },
+  {
+    "id": "geom_9_midpoint_tangent",
+    "title": "Средина на тангентна отсечка",
+    "prompt": "Draw circle k tangent to arms of angle O at A and B. Draw line BC parallel to OA. Draw segment OC intersecting circle at D. Draw line BD intersecting OA at S."
+  },
+  {
+    "id": "geom_9_pentagon_incenter",
+    "title": "Постоење на впишана кружница во петтоаголник",
+    "prompt": "Draw a convex pentagon ABCDE. Mark potential tangent points K, L, M, N, P on the sides. Label tangent segments x, y, z, u, v from each vertex."
+  },
+  {
+    "id": "geom_9_touching_circles_tangent",
+    "title": "Радиус на трета кружница при допир",
+    "prompt": "Draw two circles k1 and k2 touching externally at M. Draw a vertical tangent line t touching k2 at N. Draw k3 touching k1, k2, and t. Mark the centers and radii."
+  },
+  {
+    "id": "geom_9_midpoints_parallelogram",
+    "title": "Паралелограм од средини на отсечки",
+    "prompt": "Draw a general quadrilateral ABCD. Mark E as midpoint of AB, K as midpoint of CD. Connect AK, CE, BK, DE and mark their midpoints M1, M2, M3, M4. Draw diagonal EK."
+  },
+  {
+    "id": "geom_9_centroid_plane_dist",
+    "title": "Растојание од тежиште до рамнина",
+    "prompt": "Draw triangle ABC in space and a horizontal plane below it. Show perpendicular segments AA', BB', CC' connecting vertices to the plane. Show centroid T and its perpendicular projection T'."
+  },
+  {
+    "id": "geom_9_incenter_intersect",
+    "title": "Центар на впишана кружница во специфична конфигурација",
+    "prompt": "Draw two intersecting circles k1 and k2. Let the center O of k2 lie on the boundary of k1. Mark intersection points A and B. Pick a point C on k1 and draw line OC, marking its intersection with k2 as D. Draw triangle ABC and segments AD and BD."
+  },
+  {
+    "id": "geom_9_right_tri_perimeter",
+    "title": "Хипотенуза преку периметар и впишан радиус",
+    "prompt": "Draw a right-angled triangle ABC with incenter I. Draw the incircle tangent to all three sides. Label perimeter as 30 and inradius as 2."
+  },
+  {
+    "id": "geom_9_leg_ratio_circles",
+    "title": "Однос на катети преку радиуси",
+    "prompt": "Draw a right-angled triangle with legs a and b and hypotenuse c. Draw the circumcircle (passing through vertices) and the incircle (tangent to sides). Label radii r and R."
+  },
+  {
+    "id": "geom_9_tri_angle_45_60",
+    "title": "Пресметка на агли преку поделба на страна",
+    "prompt": "Draw triangle ABC. On side BC, mark point D such that the length DC is twice the length of BD. Label angle B as 45 degrees and angle ADC as 60 degrees. Drop altitude AH."
+  },
+  {
+    "id": "geom_9_tri_ab_mc_proof",
+    "title": "Еднаквост на отсечки преку центар на кружница",
+    "prompt": "Draw triangle ABC with angle A = 70 and angle B = 80. Inside the triangle, place point M such that angle ACM = 10 and angle CBM = 20. Connect M to vertices A, B, and C."
+  },
+  {
+    "id": "geom_9_trap_perp_diag",
+    "title": "Плоштина на рамнокрак трапез со нормални дијагонали",
+    "prompt": "Draw an isosceles trapezoid ABCD with midsegment 6. Draw diagonals AC and BD intersecting at 90 degrees. Extend base AB to E such that BE = CD and connect CE to show a right triangle ACE."
+  },
+  {
+    "id": "geom_9_para_diag_id",
+    "title": "Втора дијагонала на паралелограм",
+    "prompt": "Draw a parallelogram ABCD with sides labeled 13 and 14. Draw one diagonal labeled 15 and the other diagonal as d2."
+  },
+  {
+    "id": "geom_9_quad_parallel_proof",
+    "title": "Паралелност преку средна линија на спротивни страни",
+    "prompt": "Draw a convex quadrilateral ABCD. Mark midpoints M of AB and N of CD. Draw segment MN. Mark K as midpoint of diagonal AC and show segments MK and KN."
+  },
+  {
+    "id": "geom_9_para_area_ratio",
+    "title": "Однос на плоштини во поделен паралелограм",
+    "prompt": "Draw parallelogram ABCD. Draw diagonal BD and mark point M such that MD is 3 times longer than BM. Extend AM to meet BC at N. Shade triangle MND."
+  },
+  {
+    "id": "geom_9_symm_point_circumcircle",
+    "title": "Симетрична точка на опишана кружница",
+    "prompt": "Draw an acute triangle ABC. Pick a point D inside such that angle ADB = angle ADC = 180 - angle A. Reflect A over D to get A'. Show that A, B, A', and C all lie on the same circle."
+  },
+  {
+    "id": "geom_9_construct_perp_axcy",
+    "title": "Конструкција на нормални прави во кружница",
+    "prompt": "Draw a circle with diameter AB. Place a point C on AB. Mark N as the midpoint of CB. Draw a vertical line through N to find points X and Y on the circle. Connect AX and CY to show they are perpendicular."
+  },
+  {
+    "id": "geom_9_quad_diag_equal_angles",
+    "title": "Еднаквост на агли во четириаголник со еднакви дијагонали",
+    "prompt": "Draw quadrilateral ABCD where AC = BD. Construct perpendicular bisectors of AD and BC. Mark their intersection P on segment AB. Highlight congruent triangles APC and DPB."
+  },
+  {
+    "id": "geom_9_k1_k2_incenter_proof",
+    "title": "Пресечни кружници и центар на впишана кружница",
+    "prompt": "Draw circle k2 with center O and circle k1 passing through O. Let A and B be intersection points. Pick point C on k1 and connect OC, marking D on k2. Show AD and CD are angle bisectors of triangle ABC."
+  },
+  {
+    "id": "geom_9_contact_tri_sides",
+    "title": "Страни на контактниот триаголник",
+    "prompt": "Draw triangle ABC with an incircle. Mark contact points M, N, P. Connect them to form triangle MNP. Draw the incenter I and connect it to vertices and contact points to show right triangles."
+  },
+  {
+    "id": "geom_9_hypot_ratio_mid_circle",
+    "title": "Поделба на хипотенуза со кружница над средна линија",
+    "prompt": "Draw a right triangle with legs 5 and 12. Mark midpoints M and N of the legs. Draw a circle with diameter MN. Mark points P and Q where the circle hits the hypotenuse. Show that one point is the midpoint and the other is the altitude foot."
+  },
+  {
+    "id": "geo_rect_shade_01",
+    "title": "Плоштина на триаголник во правоаголник",
+    "prompt": "Draw rectangle ABCD. Place E on AB (1/3 from A), F on BC (2/3 from B), G midpoint of AD. Shade triangle EFG."
+  },
+  {
+    "id": "Cnt92-1012_Prob5_Olympic",
+    "title": "1012_Prob5_Olympic - Равенка на права (Олимписки метод)",
+    "prompt": "Coordinate system showing a line passing through (2,0) and (0,3). The area formed by the axes and the line is a right triangle."
+  },
+  {
+    "id": "Cnt92-1012_Prob8_Synthetic",
+    "title": "1012_Prob8_Synthetic - Медијана кон хипотенуза (Синтетички пристап)",
+    "prompt": "A right triangle ABC with hypotenuse AB. The triangle is completed into a rectangle ACBD with dashed lines. The diagonals AB and CD intersect at M."
+  }
+]

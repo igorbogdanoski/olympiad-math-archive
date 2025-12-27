@@ -3241,3 +3241,820 @@ class Task_4411(Scene):
         ra = RightAngle(Line(E, C_pt), Line(E, s_start), length=0.3, quadrant=(-1,1))
         self.add(ra)
 ```
+
+### 🆔 Задача: geo_test_01 - Висина кон хипотенузата
+**📅 Додадено:** 2025-12-27 01:30
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_geo_test_01(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        
+        # Right triangle ABC, C=90. Altitude CD.
+        # AD = 4, BD = 9.
+        # By geometric mean theorem, h^2 = p*q = 4*9 = 36 => h=6.
+        # Let D be origin (0,0).
+        # A = (-4, 0), B = (9, 0).
+        # C = (0, 6).
+        
+        D = ORIGIN
+        A = LEFT * 4
+        B = RIGHT * 9
+        C = UP * 6
+        
+        # Scale down to fit screen
+        scale = 0.5
+        A *= scale
+        B *= scale
+        C *= scale
+        D *= scale
+        
+        # Shift to center
+        center = (A + B + C) / 3
+        A -= center
+        B -= center
+        C -= center
+        D -= center
+        
+        tri = Polygon(A, B, C, color=BLUE, stroke_width=4)
+        alt = Line(C, D, color=RED)
+        
+        lbl_A = MathTex("A").next_to(A, DOWN)
+        lbl_B = MathTex("B").next_to(B, DOWN)
+        lbl_C = MathTex("C").next_to(C, UP)
+        lbl_D = MathTex("D").next_to(D, DOWN)
+        
+        lbl_h = MathTex("h", color=RED).next_to(alt, RIGHT, buff=0.1)
+        
+        brace_AD = Brace(Line(A, D), DOWN)
+        lbl_4 = brace_AD.get_text("4")
+        
+        brace_BD = Brace(Line(D, B), DOWN)
+        lbl_9 = brace_BD.get_text("9")
+        
+        self.add(tri, alt)
+        self.add(lbl_A, lbl_B, lbl_C, lbl_D, lbl_h)
+        self.add(brace_AD, lbl_4, brace_BD, lbl_9)
+        
+        # Right angle markers
+        ra_C = RightAngle(Line(C, A), Line(C, B), quadrant=(-1,-1))
+        ra_D = RightAngle(Line(D, C), Line(D, B), quadrant=(1,1))
+        self.add(ra_C, ra_D)
+```
+
+### 🆔 Задача: copernicus_cat2_01 - Рамностран триаголник во квадрат
+**📅 Додадено:** 2025-12-27 01:30
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_copernicus_cat2_01(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        
+        # Square ABCD
+        side = 4
+        A = np.array([-side/2, -side/2, 0])
+        B = np.array([side/2, -side/2, 0])
+        C = np.array([side/2, side/2, 0])
+        D = np.array([-side/2, side/2, 0])
+        
+        square = Polygon(A, B, C, D, color=BLUE)
+        
+        # Equilateral triangle ABE inside
+        # Height of equilateral triangle = side * sqrt(3)/2
+        h = side * np.sqrt(3) / 2
+        E = (A + B) / 2 + UP * h
+        
+        tri_ABE = Polygon(A, B, E, color=GREEN, fill_opacity=0.1, fill_color=GREEN)
+        
+        # Segments DE and CE
+        seg_DE = Line(D, E, color=RED)
+        seg_CE = Line(C, E, color=RED)
+        
+        lbl_A = MathTex("A").next_to(A, DOWN+LEFT)
+        lbl_B = MathTex("B").next_to(B, DOWN+RIGHT)
+        lbl_C = MathTex("C").next_to(C, UP+RIGHT)
+        lbl_D = MathTex("D").next_to(D, UP+LEFT)
+        lbl_E = MathTex("E").next_to(E, UP)
+        
+        # Target angle DEC
+        arc = Angle(Line(E, D), Line(E, C), radius=0.5)
+        lbl_ang = MathTex("?").next_to(arc, UP)
+        
+        self.add(square, tri_ABE)
+        self.add(seg_DE, seg_CE)
+        self.add(lbl_A, lbl_B, lbl_C, lbl_D, lbl_E)
+        self.add(arc, lbl_ang)
+```
+
+### 🆔 Задача: geom_8_2018_rect - Плоштина на впишан триаголник во правоаголник
+**📅 Додадено:** 2025-12-27 01:30
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_geom_8_2018_rect(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        
+        # Rectangle ABCD
+        width = 6
+        height = 4
+        A = np.array([-width/2, -height/2, 0])
+        B = np.array([width/2, -height/2, 0])
+        C = np.array([width/2, height/2, 0])
+        D = np.array([-width/2, height/2, 0])
+        
+        rect = Polygon(A, B, C, D, color=BLUE)
+        
+        # E on AB, AE = 1/3 AB
+        E = A + (B - A) * (1/3)
+        
+        # F on BC, BF = 2/3 BC
+        F = B + (C - B) * (2/3)
+        
+        # G midpoint of AD
+        G = (A + D) / 2
+        
+        tri_EFG = Polygon(E, F, G, color=RED, fill_opacity=0.3, fill_color=RED)
+        
+        lbl_A = MathTex("A").next_to(A, DOWN+LEFT)
+        lbl_B = MathTex("B").next_to(B, DOWN+RIGHT)
+        lbl_C = MathTex("C").next_to(C, UP+RIGHT)
+        lbl_D = MathTex("D").next_to(D, UP+LEFT)
+        lbl_E = MathTex("E").next_to(E, DOWN)
+        lbl_F = MathTex("F").next_to(F, RIGHT)
+        lbl_G = MathTex("G").next_to(G, LEFT)
+        
+        self.add(rect, tri_EFG)
+        self.add(lbl_A, lbl_B, lbl_C, lbl_D, lbl_E, lbl_F, lbl_G)
+```
+
+### 🆔 Задача: geom_8_2015_square - Поделба на дијагонала во квадрат
+**📅 Додадено:** 2025-12-27 01:30
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_geom_8_2015_square(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        
+        side = 4
+        A = np.array([-side/2, -side/2, 0])
+        B = np.array([side/2, -side/2, 0])
+        C = np.array([side/2, side/2, 0])
+        D = np.array([-side/2, side/2, 0])
+        
+        square = Polygon(A, B, C, D, color=BLUE)
+        
+        diag_AC = Line(A, C, color=GRAY)
+        diag_BD = Line(B, D, color=GRAY)
+        
+        O = (A + C) / 2
+        lbl_O = MathTex("O").next_to(O, UP)
+        
+        M = (C + D) / 2
+        N = (B + C) / 2
+        
+        seg_AM = Line(A, M, color=RED)
+        seg_AN = Line(A, N, color=RED)
+        
+        lbl_A = MathTex("A").next_to(A, DOWN+LEFT)
+        lbl_B = MathTex("B").next_to(B, DOWN+RIGHT)
+        lbl_C = MathTex("C").next_to(C, UP+RIGHT)
+        lbl_D = MathTex("D").next_to(D, UP+LEFT)
+        lbl_M = MathTex("M").next_to(M, UP)
+        lbl_N = MathTex("N").next_to(N, RIGHT)
+        
+        self.add(square, diag_AC, diag_BD)
+        self.add(seg_AM, seg_AN)
+        self.add(lbl_A, lbl_B, lbl_C, lbl_D, lbl_M, lbl_N, lbl_O)
+```
+
+### 🆔 Задача: geom_9_2018_cm - Должина на симетрала преку разлика на страни
+**📅 Додадено:** 2025-12-27 01:30
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_geom_9_2018_cm(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        
+        # Triangle ABC, A=40, B=20 => C=120
+        # Let C be at origin for easier construction? No, let's put AB horizontal.
+        # c = 6
+        c_len = 6
+        A = np.array([-c_len/2, 0, 0])
+        B = np.array([c_len/2, 0, 0])
+        
+        # C coordinates
+        # b = c * sin(20) / sin(120)
+        b_len = c_len * np.sin(20*DEGREES) / np.sin(120*DEGREES)
+        C = A + np.array([b_len * np.cos(40*DEGREES), b_len * np.sin(40*DEGREES), 0])
+        
+        tri = Polygon(A, B, C, color=BLUE)
+        
+        # Bisector CM
+        # Angle C is 120. Bisector splits it into 60/60.
+        # Direction of AC is 40 deg. Direction of BC is 180-20 = 160 deg.
+        # Bisector direction is (40+160)/2 = 100 deg? No.
+        # Angle C is 120.
+        # Vector CA angle is 40-180 = -140 = 220.
+        # Vector CB angle is 160-180 = -20 = 340.
+        # Bisector angle is (220+340)/2 = 280 = -80.
+        # Wait, let's use incenter logic.
+        # M is on AB.
+        # AM/MB = b/a.
+        a_len = c_len * np.sin(40*DEGREES) / np.sin(120*DEGREES)
+        ratio = b_len / (b_len + a_len)
+        M = A + (B - A) * ratio
+        
+        bisector = Line(C, M, color=RED)
+        
+        # D on AB such that BD = BC = a
+        # Vector BA is (-1, 0).
+        # D = B + (A-B)/len * a
+        vec_BA = A - B
+        unit_BA = vec_BA / np.linalg.norm(vec_BA)
+        D = B + unit_BA * a_len
+        
+        dot_D = Dot(D, color=GREEN)
+        
+        lbl_A = MathTex("A").next_to(A, DOWN+LEFT)
+        lbl_B = MathTex("B").next_to(B, DOWN+RIGHT)
+        lbl_C = MathTex("C").next_to(C, UP)
+        lbl_M = MathTex("M").next_to(M, DOWN)
+        lbl_D = MathTex("D").next_to(D, DOWN)
+        
+        self.add(tri, bisector, dot_D)
+        self.add(lbl_A, lbl_B, lbl_C, lbl_M, lbl_D)
+        
+        # Mark BD = BC
+        line_BD = Line(B, D, color=GREEN, stroke_width=6)
+        line_BC = Line(B, C, color=GREEN, stroke_width=6)
+        self.add(line_BD, line_BC)
+```
+
+### 🆔 Задача: geom_8_2018_trap - Агли на основа во специфичен трапез
+**📅 Додадено:** 2025-12-27 01:35
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_geom_8_2018_trap(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        
+        # Trapezoid ABCD
+        # Let's make it generic but nice.
+        # A=(-3, -2), B=(3, -2), C=(1, 2), D=(-1, 2)
+        A = np.array([-3, -2, 0])
+        B = np.array([3, -2, 0])
+        C = np.array([1, 2, 0])
+        D = np.array([-1, 2, 0])
+        
+        trap = Polygon(A, B, C, D, color=BLUE)
+        
+        M = (A + B) / 2
+        N = (C + D) / 2
+        
+        seg_MN = Line(M, N, color=RED)
+        
+        # Aux lines from N parallel to AD and BC
+        # Vector AD
+        vec_AD = D - A
+        # Line through N parallel to AD: N + t * vec_AD
+        # Intersect with AB?
+        # Usually these lines form a triangle with AB.
+        
+        # Line 1: N + t * (A-D) -> intersects AB at some point P
+        # P = N + (A-D)
+        P = N + (A - D)
+        line_NP = DashedLine(N, P, color=GREEN)
+        
+        # Line 2: N + t * (B-C) -> intersects AB at some point Q
+        Q = N + (B - C)
+        line_NQ = DashedLine(N, Q, color=GREEN)
+        
+        lbl_A = MathTex("A").next_to(A, DOWN+LEFT)
+        lbl_B = MathTex("B").next_to(B, DOWN+RIGHT)
+        lbl_C = MathTex("C").next_to(C, UP+RIGHT)
+        lbl_D = MathTex("D").next_to(D, UP+LEFT)
+        lbl_M = MathTex("M").next_to(M, DOWN)
+        lbl_N = MathTex("N").next_to(N, UP)
+        
+        self.add(trap, seg_MN)
+        self.add(line_NP, line_NQ)
+        self.add(lbl_A, lbl_B, lbl_C, lbl_D, lbl_M, lbl_N)
+```
+
+### 🆔 Задача: geom_9_area_height - Периметар преку релација на висини
+**📅 Додадено:** 2025-12-27 01:35
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_geom_9_area_height(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        
+        # Generic triangle with heights
+        A = np.array([-2, -1.5, 0])
+        B = np.array([3, -1.5, 0])
+        C = np.array([0, 2.5, 0])
+        
+        tri = Polygon(A, B, C, color=BLUE)
+        
+        # Heights
+        # h_a from A to BC
+        # Project A onto BC
+        # Vector BC
+        vec_BC = C - B
+        unit_BC = vec_BC / np.linalg.norm(vec_BC)
+        proj_A = B + np.dot(A - B, unit_BC) * unit_BC
+        h_a = DashedLine(A, proj_A, color=RED)
+        
+        # h_b from B to AC
+        vec_AC = C - A
+        unit_AC = vec_AC / np.linalg.norm(vec_AC)
+        proj_B = A + np.dot(B - A, unit_AC) * unit_AC
+        h_b = DashedLine(B, proj_B, color=RED)
+        
+        # h_c from C to AB
+        # AB is horizontal
+        proj_C = np.array([C[0], A[1], 0])
+        h_c = DashedLine(C, proj_C, color=RED)
+        
+        lbl_A = MathTex("A").next_to(A, DOWN+LEFT)
+        lbl_B = MathTex("B").next_to(B, DOWN+RIGHT)
+        lbl_C = MathTex("C").next_to(C, UP)
+        
+        lbl_ha = MathTex("h_a", color=RED).next_to(h_a, LEFT, buff=0)
+        lbl_hb = MathTex("h_b", color=RED).next_to(h_b, RIGHT, buff=0)
+        lbl_hc = MathTex("h_c", color=RED).next_to(h_c, RIGHT, buff=0)
+        
+        self.add(tri, h_a, h_b, h_c)
+        self.add(lbl_A, lbl_B, lbl_C, lbl_ha, lbl_hb, lbl_hc)
+```
+
+### 🆔 Задача: geom_9_2015_iso_angle - Агли кај специфичен рамнокрак триаголник
+**📅 Додадено:** 2025-12-27 01:35
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_geom_9_2015_iso_angle(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        
+        # Isosceles ABC (AC=BC)
+        # Let's pick some angle C, say 40.
+        # A = (-2, 0), B = (2, 0).
+        # C on y-axis.
+        A = np.array([-2.5, -2, 0])
+        B = np.array([2.5, -2, 0])
+        # Height h = 2.5 * tan(70) approx 6.8 -> too tall.
+        # Let's pick C = (0, 3)
+        C = np.array([0, 3, 0])
+        
+        tri = Polygon(A, B, C, color=BLUE)
+        
+        # Altitude CC1
+        C1 = (A + B) / 2
+        alt_CC1 = Line(C, C1, color=RED)
+        
+        # Angle bisector AA1
+        # Incenter I lies on CC1.
+        # A1 is on BC.
+        # Use geometry to find A1.
+        # Vector AC
+        vec_AC = C - A
+        vec_AB = B - A
+        angle_A = np.arccos(np.dot(vec_AC, vec_AB) / (np.linalg.norm(vec_AC) * np.linalg.norm(vec_AB)))
+        # Rotate AB by angle_A/2
+        # Or just find intersection
+        # Bisector theorem: CA1 / A1B = AC / AB
+        len_AC = np.linalg.norm(C - A)
+        len_AB = np.linalg.norm(B - A)
+        ratio = len_AC / (len_AC + len_AB)
+        # A1 divides CB in ratio AC:AB? No, A1 divides BC in ratio BA1/A1C = AB/AC.
+        # So A1 = B + (C-B) * (AB / (AB+AC))
+        ratio = len_AB / (len_AB + len_AC)
+        A1 = B + (C - B) * ratio
+        
+        bisector_AA1 = Line(A, A1, color=GREEN)
+        
+        # D midpoint of BA1
+        D = (B + A1) / 2
+        dot_D = Dot(D, color=BLACK)
+        
+        # Connect C1D
+        seg_C1D = Line(C1, D, color=ORANGE)
+        
+        lbl_A = MathTex("A").next_to(A, DOWN+LEFT)
+        lbl_B = MathTex("B").next_to(B, DOWN+RIGHT)
+        lbl_C = MathTex("C").next_to(C, UP)
+        lbl_C1 = MathTex("C_1").next_to(C1, DOWN)
+        lbl_A1 = MathTex("A_1").next_to(A1, RIGHT)
+        lbl_D = MathTex("D").next_to(D, RIGHT)
+        
+        self.add(tri, alt_CC1, bisector_AA1, dot_D, seg_C1D)
+        self.add(lbl_A, lbl_B, lbl_C, lbl_C1, lbl_A1, lbl_D)
+```
+
+### 🆔 Задача: geom_9_sum_altitudes - Идентитет на нормали во произволен триаголник
+**📅 Додадено:** 2025-12-27 01:35
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_geom_9_sum_altitudes(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        
+        # Equilateral triangle for symmetry looks nice, but prompt says "triangle ABC".
+        # Let's use equilateral for clarity of "Viviani-like" setup, or generic.
+        # Prompt says "triangle ABC".
+        A = np.array([-2, -1.5, 0])
+        B = np.array([3, -1.5, 0])
+        C = np.array([0.5, 2.5, 0])
+        
+        tri = Polygon(A, B, C, color=BLUE)
+        
+        # Point M inside
+        M = np.array([0.5, -0.5, 0])
+        dot_M = Dot(M, color=BLACK)
+        lbl_M = MathTex("M").next_to(M, UP, buff=0.1)
+        
+        # Perpendiculars to sides
+        # To BC (x)
+        vec_BC = C - B
+        unit_BC = vec_BC / np.linalg.norm(vec_BC)
+        # Normal vector to BC
+        normal_BC = np.array([-unit_BC[1], unit_BC[0], 0])
+        # Project M-B onto normal? No, just project M onto line BC.
+        proj_x = B + np.dot(M - B, unit_BC) * unit_BC
+        line_x = Line(M, proj_x, color=RED)
+        lbl_x = MathTex("x", color=RED).next_to(line_x, RIGHT, buff=0.1)
+        
+        # To AC (y)
+        vec_AC = C - A
+        unit_AC = vec_AC / np.linalg.norm(vec_AC)
+        proj_y = A + np.dot(M - A, unit_AC) * unit_AC
+        line_y = Line(M, proj_y, color=RED)
+        lbl_y = MathTex("y", color=RED).next_to(line_y, LEFT, buff=0.1)
+        
+        # To AB (z)
+        proj_z = np.array([M[0], A[1], 0])
+        line_z = Line(M, proj_z, color=RED)
+        lbl_z = MathTex("z", color=RED).next_to(line_z, LEFT, buff=0.1)
+        
+        # Segments MA, MB, MC
+        seg_MA = DashedLine(M, A, color=GRAY)
+        seg_MB = DashedLine(M, B, color=GRAY)
+        seg_MC = DashedLine(M, C, color=GRAY)
+        
+        lbl_A = MathTex("A").next_to(A, DOWN+LEFT)
+        lbl_B = MathTex("B").next_to(B, DOWN+RIGHT)
+        lbl_C = MathTex("C").next_to(C, UP)
+        
+        self.add(tri, dot_M, lbl_M)
+        self.add(line_x, lbl_x, line_y, lbl_y, line_z, lbl_z)
+        self.add(seg_MA, seg_MB, seg_MC)
+        self.add(lbl_A, lbl_B, lbl_C)
+```
+
+### 🆔 Задача: geom_8_2018_para_line - Збир на нормали од темиња на паралелограм
+**📅 Додадено:** 2025-12-27 01:35
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_geom_8_2018_para_line(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        
+        # Line p at an angle
+        p_start = np.array([-4, -2, 0])
+        p_end = np.array([4, 0, 0])
+        line_p = Line(p_start, p_end, color=BLACK)
+        lbl_p = MathTex("p").next_to(p_end, RIGHT)
+        
+        # Parallelogram ABCD touching p at D
+        # Let D be on the line.
+        D = np.array([0, -1, 0]) # Roughly on line
+        # Actually let's define line p as y = 0.25x - 1
+        # D = (0, -1) satisfies it.
+        
+        # A, B, C above the line
+        A = D + np.array([-2, 2, 0])
+        C = D + np.array([3, 1, 0])
+        B = A + (C - D) # Parallelogram rule
+        
+        para = Polygon(A, B, C, D, color=BLUE)
+        
+        # Perpendiculars to p
+        # Normal vector to p
+        vec_p = p_end - p_start
+        unit_p = vec_p / np.linalg.norm(vec_p)
+        
+        def get_proj(Pt):
+            return p_start + np.dot(Pt - p_start, unit_p) * unit_p
+            
+        M = get_proj(A)
+        N = get_proj(B)
+        O = get_proj(C)
+        
+        perp_A = DashedLine(A, M, color=RED)
+        perp_B = DashedLine(B, N, color=RED)
+        perp_C = DashedLine(C, O, color=RED)
+        
+        # Center S
+        S = (A + C) / 2
+        S_proj = get_proj(S)
+        perp_S = Line(S, S_proj, color=GREEN)
+        
+        lbl_A = MathTex("A").next_to(A, UP)
+        lbl_B = MathTex("B").next_to(B, UP)
+        lbl_C = MathTex("C").next_to(C, UP)
+        lbl_D = MathTex("D").next_to(D, DOWN)
+        lbl_S = MathTex("S").next_to(S, UP)
+        
+        self.add(line_p, lbl_p)
+        self.add(para)
+        self.add(perp_A, perp_B, perp_C, perp_S)
+        self.add(lbl_A, lbl_B, lbl_C, lbl_D, lbl_S)
+```
+
+### 🆔 Задача: geom_8_2018_centroid_diag - Конкурентност на тежишни линии во паралелограм
+**📅 Додадено:** 2025-12-27 01:40
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_geom_8_2018_centroid_diag(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        
+        # Parallelogram ABCD
+        A = np.array([-3, -1.5, 0])
+        B = np.array([2, -1.5, 0])
+        D = np.array([-1, 1.5, 0])
+        C = B + (D - A)
+        
+        para = Polygon(A, B, C, D, color=BLUE)
+        
+        M = (B + C) / 2
+        N = (C + D) / 2
+        
+        seg_DM = Line(D, M, color=RED)
+        seg_BN = Line(B, N, color=RED)
+        
+        diag_AC = Line(A, C, color=GREEN)
+        diag_BD = DashedLine(B, D, color=GRAY)
+        
+        lbl_A = MathTex("A").next_to(A, DOWN+LEFT)
+        lbl_B = MathTex("B").next_to(B, DOWN+RIGHT)
+        lbl_C = MathTex("C").next_to(C, UP+RIGHT)
+        lbl_D = MathTex("D").next_to(D, UP+LEFT)
+        lbl_M = MathTex("M").next_to(M, RIGHT)
+        lbl_N = MathTex("N").next_to(N, UP)
+        
+        self.add(para, seg_DM, seg_BN, diag_AC, diag_BD)
+        self.add(lbl_A, lbl_B, lbl_C, lbl_D, lbl_M, lbl_N)
+```
+
+### 🆔 Задача: geom_8_viviani_proof - Теорема на Вивиани
+**📅 Додадено:** 2025-12-27 01:40
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_geom_8_viviani_proof(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        
+        # Equilateral Triangle ABC
+        side = 6
+        h_tri = side * np.sqrt(3) / 2
+        A = np.array([-side/2, -h_tri/3, 0])
+        B = np.array([side/2, -h_tri/3, 0])
+        C = np.array([0, 2*h_tri/3, 0])
+        
+        tri = Polygon(A, B, C, color=BLUE)
+        
+        # Point S inside
+        S = np.array([0.5, 0.5, 0])
+        dot_S = Dot(S, color=BLACK)
+        lbl_S = MathTex("S").next_to(S, UP)
+        
+        # Perpendiculars
+        # To BC (side a)
+        # Line BC eq: y - (-h/3) = (2h/3 - (-h/3)) / (0 - side/2) * (x - side/2)
+        # Slope m = h / (-side/2) = -2h/side = -sqrt(3)
+        # Normal slope = 1/sqrt(3)
+        # Or use projection
+        def get_perp(P, P1, P2):
+            vec = P2 - P1
+            unit = vec / np.linalg.norm(vec)
+            proj = P1 + np.dot(P - P1, unit) * unit
+            return Line(P, proj, color=RED)
+            
+        perp_a = get_perp(S, B, C)
+        perp_b = get_perp(S, C, A)
+        perp_c = get_perp(S, A, B)
+        
+        # Altitude h for comparison
+        alt_h = DashedLine(C, np.array([0, -h_tri/3, 0]), color=GREEN)
+        lbl_h = MathTex("h", color=GREEN).next_to(alt_h, LEFT)
+        
+        self.add(tri, dot_S, lbl_S)
+        self.add(perp_a, perp_b, perp_c)
+        self.add(alt_h, lbl_h)
+```
+
+### 🆔 Задача: geom_9_rect_proj_diff - Проекции на хипотенуза и агли
+**📅 Додадено:** 2025-12-27 01:40
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_geom_9_rect_proj_diff(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        
+        # Right triangle ABC, C=90
+        # Let C = (0,0)
+        # A = (0, 4), B = (6, 0)
+        C = ORIGIN
+        A = UP * 4
+        B = RIGHT * 6
+        
+        # Shift to center
+        center = (A + B + C) / 3
+        A -= center
+        B -= center
+        C -= center
+        
+        tri = Polygon(A, B, C, color=BLUE)
+        
+        # Altitude CD to AB
+        # Project C onto AB
+        vec_AB = B - A
+        unit_AB = vec_AB / np.linalg.norm(vec_AB)
+        D = A + np.dot(C - A, unit_AB) * unit_AB
+        alt_CD = Line(C, D, color=RED)
+        
+        # E on AD such that DE = BD = q
+        len_BD = np.linalg.norm(B - D)
+        vec_DA = A - D
+        unit_DA = vec_DA / np.linalg.norm(vec_DA)
+        E = D + unit_DA * len_BD
+        
+        dot_E = Dot(E, color=GREEN)
+        lbl_E = MathTex("E").next_to(E, UP)
+        
+        # Highlight triangles CBE and AEC
+        tri_CBE = Polygon(C, B, E, color=GREEN, fill_opacity=0.1, fill_color=GREEN)
+        tri_AEC = Polygon(A, E, C, color=ORANGE, fill_opacity=0.1, fill_color=ORANGE)
+        
+        lbl_A = MathTex("A").next_to(A, UP)
+        lbl_B = MathTex("B").next_to(B, RIGHT)
+        lbl_C = MathTex("C").next_to(C, DOWN)
+        lbl_D = MathTex("D").next_to(D, DOWN)
+        
+        self.add(tri, alt_CD, dot_E, lbl_E)
+        self.add(tri_CBE, tri_AEC)
+        self.add(lbl_A, lbl_B, lbl_C, lbl_D)
+```
+
+### 🆔 Задача: geom_angle_incenter_01 - Агол кај центарот на впишана кружница
+**📅 Додадено:** 2025-12-27 01:40
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_geom_angle_incenter_01(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        
+        A = np.array([-3, -2, 0])
+        B = np.array([3, -2, 0])
+        C = np.array([0, 3, 0])
+        
+        tri = Polygon(A, B, C, color=BLUE)
+        
+        # Incenter I
+        # a, b, c lengths
+        a = np.linalg.norm(B - C)
+        b = np.linalg.norm(A - C)
+        c = np.linalg.norm(A - B)
+        I = (a*A + b*B + c*C) / (a + b + c)
+        
+        bisector_A = Line(A, I, color=RED)
+        bisector_B = Line(B, I, color=RED)
+        # Extend them a bit
+        
+        lbl_A = MathTex("A").next_to(A, DOWN+LEFT)
+        lbl_B = MathTex("B").next_to(B, DOWN+RIGHT)
+        lbl_C = MathTex("C").next_to(C, UP)
+        lbl_I = MathTex("I").next_to(I, UP)
+        lbl_gamma = MathTex("\gamma").next_to(C, DOWN, buff=0.5)
+        
+        self.add(tri, bisector_A, bisector_B)
+        self.add(lbl_A, lbl_B, lbl_C, lbl_I, lbl_gamma)
+```
+
+### 🆔 Задача: geom_angle_orthocenter_02 - Агол кај ортоцентарот
+**📅 Додадено:** 2025-12-27 01:40
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_geom_angle_orthocenter_02(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        
+        A = np.array([-2, -2, 0])
+        B = np.array([3, -2, 0])
+        C = np.array([1, 3, 0])
+        
+        tri = Polygon(A, B, C, color=BLUE)
+        
+        # Altitude AD to BC
+        def get_alt(P, P1, P2):
+            vec = P2 - P1
+            unit = vec / np.linalg.norm(vec)
+            proj = P1 + np.dot(P - P1, unit) * unit
+            return Line(P, proj, color=RED), proj
+            
+        alt_AD, D = get_alt(A, B, C)
+        alt_BE, E = get_alt(B, A, C)
+        
+        # Orthocenter H
+        # Intersection of AD and BE
+        H = line_intersection([A, D], [B, E])
+        
+        quad_CDHE = Polygon(C, D, H, E, color=GREEN, fill_opacity=0.1, fill_color=GREEN)
+        
+        lbl_A = MathTex("A").next_to(A, DOWN+LEFT)
+        lbl_B = MathTex("B").next_to(B, DOWN+RIGHT)
+        lbl_C = MathTex("C").next_to(C, UP)
+        lbl_D = MathTex("D").next_to(D, RIGHT)
+        lbl_E = MathTex("E").next_to(E, LEFT)
+        lbl_H = MathTex("H").next_to(H, DOWN)
+        
+        self.add(tri, alt_AD, alt_BE)
+        self.add(quad_CDHE)
+        self.add(lbl_A, lbl_B, lbl_C, lbl_D, lbl_E, lbl_H)
+```

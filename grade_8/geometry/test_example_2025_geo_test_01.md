@@ -50,7 +50,7 @@ tags:
 <Опис на цртежот. Кои се клучните точки? Дали има помошни линии?>
 
 
-<!-- VISUAL PROMPT: Draw a right-angled triangle ABC with the right angle at the top vertex C. Draw the altitude CD perpendicular to the hypotenuse AB. Label the segments AD as 4 and BD as 9. Label the altitude CD as h. -->
+![Визуелизација](../../assets/images/geo_test_01.png)
 
 ## 🧠 Анализа
 Користи ја Евклидовата теорема за висината во правоаголен триаголник: Висината на квадрат е еднаква на производот на проекциите на катетите ($h^2 = p \cdot q$).

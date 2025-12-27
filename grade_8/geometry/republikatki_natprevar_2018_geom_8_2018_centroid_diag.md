@@ -50,7 +50,7 @@ tags:
 <Опис на цртежот. Кои се клучните точки? Дали има помошни линии?>
 
 
-<!-- VISUAL PROMPT: Draw parallelogram ABCD. Mark M as midpoint of BC and N as midpoint of CD. Draw DM and BN. Draw diagonal AC and show they intersect on it. Draw auxiliary diagonal BD. -->
+![Визуелизација](../../assets/images/geom_8_2018_centroid_diag.png)
 
 ## 🧠 Анализа
 Префрли го фокусот од целиот паралелограм на триаголникот $BCD$. Што се всушност правите $DM$ и $BN$ за тој триаголник?

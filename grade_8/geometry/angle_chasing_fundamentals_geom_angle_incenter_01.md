@@ -50,7 +50,7 @@ tags:
 <Опис на цртежот. Кои се клучните точки? Дали има помошни линии?>
 
 
-<!-- VISUAL PROMPT: Draw a general triangle ABC. Construct the internal angle bisectors of angle A and angle B. Mark their intersection as I. Label the angle at C as gamma. -->
+![Визуелизација](../../assets/images/geom_angle_incenter_01.png)
 
 ## 🧠 Анализа
 Клучот не е во наоѓање на поединечните агли $\alpha$ и $\beta$, туку во изразување на нивниот збир преку третиот агол $\gamma$.
