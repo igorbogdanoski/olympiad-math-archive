@@ -9198,3 +9198,70 @@ class Task_2022_mun_g5_12(Scene):
 
 ```
 ---
+
+### 🆔 Задача: 2022_mun_g4_6 - Осна симетрија
+**📅 Додадено:** 2025-12-27 19:37
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_2022_mun_g4_6(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+        self.camera.background_color = WHITE
+        
+        # Grid 4x4 roughly
+        grid = VGroup()
+        for i in range(4):
+            for j in range(4):
+                sq = Square(side_length=1, color=GRAY, stroke_width=1)
+                sq.move_to(RIGHT*i + UP*j)
+                grid.add(sq)
+        
+        # Axis d (between row 1 and 2, i.e., y=1.5)
+        axis = Line(LEFT, RIGHT*4, color=RED, stroke_width=4).shift(UP*1.5)
+        lbl_d = MathTex("d", color=RED).next_to(axis, RIGHT)
+        
+        # Initial squares (Asymmetric)
+        # Row 3 (Top): [X][ ][ ][ ]
+        # Row 2 (Top): [ ][X][ ][ ]
+        # Row 1 (Bot): [ ][ ][X][ ]
+        # Row 0 (Bot): [ ][ ][ ][X]
+        
+        s1 = Square(side_length=1, color=BLACK, fill_color=BLUE, fill_opacity=0.8).move_to(grid[12].get_center()) # Top Left
+        s2 = Square(side_length=1, color=BLACK, fill_color=BLUE, fill_opacity=0.8).move_to(grid[9].get_center())  # Top Mid-Left
+        
+        s3 = Square(side_length=1, color=BLACK, fill_color=BLUE, fill_opacity=0.8).move_to(grid[6].get_center())  # Bot Mid-Right
+        s4 = Square(side_length=1, color=BLACK, fill_color=BLUE, fill_opacity=0.8).move_to(grid[3].get_center())  # Bot Right
+        
+        squares = VGroup(s1, s2, s3, s4)
+        
+        self.add(grid, axis, lbl_d, squares)
+        self.wait(1)
+        
+        # Move s3 to match s2 (needs to be at grid[5])
+        # Move s4 to match s1 (needs to be at grid[0])
+        # Or move s1 to match s4? 
+        # Question says "move squares".
+        # Let's move s1 to match s4's mirror (grid[0])? No, s4 is at 3 (far right).
+        # Let's make it symmetric.
+        
+        # Target: Symmetric shape.
+        # Move s3 (from 6) to 5 (under 9/s2). 
+        # Move s4 (from 3) to 0 (under 12/s1).
+        
+        target_s3 = grid[5].get_center()
+        target_s4 = grid[0].get_center()
+        
+        self.play(s3.animate.move_to(target_s3), s4.animate.move_to(target_s4))
+        
+        lbl = Text("2 преместувања", color=RED).to_edge(DOWN)
+        self.play(Write(lbl))
+        # --- AI GENERATED CODE END ---
+
+```
+---
