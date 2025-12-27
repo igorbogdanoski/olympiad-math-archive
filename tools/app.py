@@ -157,10 +157,6 @@ else:
                 
             st.caption(f"Извор: {prob['meta'].get('source', 'Непознат')} | Патека: {prob['path']}")
             st.markdown("---")
-                st.markdown("### 💡 Решение")
-                st.info(solution)
-            
-            st.caption(f"Извор: {prob['meta'].get('source', 'Непознат')} | Патека: {prob['path']}")
 
 # --- ФУТЕР ---
 st.sidebar.markdown("---")
