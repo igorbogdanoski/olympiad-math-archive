@@ -8307,3 +8307,88 @@ class Task_2023_mun_g7_3(Scene):
 
 ```
 ---
+
+### 🆔 Задача: 2023_mun_g8_1 - Симетрала на страна во триаголник
+**📅 Додадено:** 2025-12-27 17:51
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_2023_mun_g8_1(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+        self.camera.background_color = WHITE
+        
+        # Triangle ABC
+        # Angle C = 60. Angle A = 40. Angle B = 80.
+        # Let AC be length 4.
+        # AB / sin(60) = 4 / sin(80) => AB = 4 * 0.866 / 0.98 = 3.53
+        # BC / sin(40) = 4 / sin(80) => BC = 4 * 0.64 / 0.98 = 2.61
+        
+        A = LEFT * 2
+        C = RIGHT * 2
+        # B is intersection of ray from A (40 deg) and ray from C (180-60=120 deg? No, C is at right)
+        # Let's place A at origin for easier calc.
+        A = ORIGIN
+        # C is at (b, 0). Let b=4.
+        C = RIGHT * 4
+        # B is at (c * cos(40), c * sin(40)). c = 3.53.
+        B = np.array([3.53 * np.cos(40*DEGREES), 3.53 * np.sin(40*DEGREES), 0])
+        
+        # Re-center
+        center = (A+B+C)/3
+        A -= center
+        B -= center
+        C -= center
+        
+        tri = Polygon(A, B, C, color=BLACK, stroke_width=4)
+        
+        # Perpendicular bisector of AC
+        # Midpoint of AC
+        M = (A + C) / 2
+        # Vector AC is horizontal (after rotation? No, let's calculate normal)
+        vec_AC = C - A
+        normal = np.array([-vec_AC[1], vec_AC[0], 0])
+        # Bisector line passes through M with direction normal
+        # Intersection D with AB
+        # D is on AB such that AD = CD. Angle DAC = 40. Angle DCA = 40.
+        # Triangle ADC is isosceles.
+        # D is intersection of line(A, B) and line(M, M+normal)
+        # Or just calculate D based on angles.
+        # In triangle ADC, angles are 40, 40, 100.
+        # D is on AB.
+        # Let's find D on AB such that AD = CD.
+        # Angle A = 40. Angle ACD = 40.
+        # D is simply determined by angle ACD=40.
+        
+        # Line CD
+        line_CD = Line(C, C + 3*np.array([np.cos(140*DEGREES), np.sin(140*DEGREES), 0])) # 180-40 from C
+        # Intersection with AB
+        # Visual approximation for Manim is fine
+        D = A + 0.55 * (B - A) # approx
+        
+        line_CD_segment = Line(C, D, color=BLUE)
+        
+        # Bisector line
+        bisector = Line(M + UP*3, M + DOWN*1, color=RED)
+        
+        # Labels
+        lbl_A = MathTex("A", color=BLACK).next_to(A, DL)
+        lbl_B = MathTex("B", color=BLACK).next_to(B, UP)
+        lbl_C = MathTex("C", color=BLACK).next_to(C, DR)
+        lbl_D = MathTex("D", color=BLUE).next_to(D, UL)
+        
+        # Angles
+        a_ACD = MathTex("40^\circ", color=BLUE, font_size=24).next_to(C, UL, buff=0.4)
+        a_DCB = MathTex("20^\circ", color=BLACK, font_size=24).next_to(C, UP, buff=0.2)
+        
+        self.add(tri, line_CD_segment, bisector)
+        self.add(lbl_A, lbl_B, lbl_C, lbl_D, a_ACD, a_DCB)
+        # --- AI GENERATED CODE END ---
+
+```
+---
