@@ -2,6 +2,7 @@ import os
 import re
 import subprocess
 import shutil
+import sys
 
 # --- КОНФИГУРАЦИЈА ---
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -9,6 +10,20 @@ ARCHIVE_ROOT = os.path.abspath(os.path.join(SCRIPT_DIR, "../"))
 ASSETS_DIR = os.path.join(ARCHIVE_ROOT, "assets", "images")
 LOG_FILE = os.path.join(ARCHIVE_ROOT, "assets", "manim_code_log.md")
 TEMP_MANIM_FILE = os.path.join(SCRIPT_DIR, "temp_scene.py")
+
+def check_manim_installed():
+    """Checks if manim is installed and runnable via python -m manim."""
+    try:
+        subprocess.run(
+            [sys.executable, "-m", "manim", "--version"], 
+            check=True, 
+            capture_output=True
+        )
+        return True
+    except subprocess.CalledProcessError:
+        return False
+    except Exception:
+        return False
 
 def load_manim_code_map():
     """Parses the log file and returns a dict of {problem_id: code}."""
@@ -59,7 +74,7 @@ def run_manim(code, filename_base):
     
     # 0. Провери дали сликата веќе постои
     if os.path.exists(target_path):
-        print(f"   ⏭️  Image already exists: {target_name}")
+        # print(f"   ⏭️  Image already exists: {target_name}")
         return target_name
 
     # 1. Запиши го кодот во привремен фајл
@@ -69,25 +84,35 @@ def run_manim(code, filename_base):
             f.write("from manim import *\n")
         f.write(code)
         # Додај config за да зачува само последен фрејм како слика
+        # Користиме config.pixel_height / width за подобар квалитет ако треба
         f.write(f"\n\nconfig.media_width = '100%'\nconfig.verbosity = 'ERROR'\n")
 
     # 2. Најди го името на сцената (класата)
     scene_match = re.search(r'class\s+(\w+)\(Scene\):', code)
     if not scene_match:
-        # Ако нема класа, можеби е само функција construct?
-        # Засега претпоставуваме дека има класа.
+        print(f"   ⚠️ No Scene class found in code for {filename_base}")
         return None
     scene_name = scene_match.group(1)
     
     # 3. Изврши Manim команда
-    # Користиме -o за да го фиксираме името на излезот (без верзија)
-    cmd = ["manim", "-qm", "-s", "--disable_caching", "-o", f"{scene_name}.png", TEMP_MANIM_FILE, scene_name]
+    # Користиме sys.executable за да сме сигурни дека е истиот Python
+    cmd = [
+        sys.executable, "-m", "manim", 
+        "-qm",              # Medium quality
+        "-s",               # Save last frame only (image)
+        "--disable_caching", 
+        "-o", f"{scene_name}.png", 
+        TEMP_MANIM_FILE, 
+        scene_name
+    ]
     
-    print(f"   🎬 Rendering {scene_name}...")
+    print(f"   🎬 Rendering {scene_name} for {filename_base}...")
     try:
-        subprocess.run(cmd, check=True, capture_output=True)
+        # Capture output to avoid spamming terminal, but print on error
+        result = subprocess.run(cmd, check=True, capture_output=True, encoding='utf-8')
         
         # 4. Најди ја генерираната слика
+        # Manim output structure: media/images/temp_scene/{scene_name}.png
         expected_output = os.path.join("media", "images", "temp_scene", f"{scene_name}.png")
         
         if os.path.exists(expected_output):
@@ -95,6 +120,7 @@ def run_manim(code, filename_base):
             os.makedirs(ASSETS_DIR, exist_ok=True)
             shutil.move(expected_output, target_path)
             
+            # Cleanup media folder to save space
             if os.path.exists("media"):
                 shutil.rmtree("media", ignore_errors=True)
                 
@@ -107,10 +133,12 @@ def run_manim(code, filename_base):
                 print(f"   📂 Dir content: {os.listdir(debug_dir)}")
             
     except subprocess.CalledProcessError as e:
-        print(f"   ❌ Manim Error: {e}")
-        print(f"   ❌ Stderr: {e.stderr.decode('utf-8') if e.stderr else 'None'}")
+        print(f"   ❌ Manim Error for {filename_base}:")
+        print(f"   Command: {' '.join(cmd)}")
+        print(f"   Stderr: {e.stderr}")
+        print(f"   Stdout: {e.stdout}")
     except Exception as e:
-        print(f"   ❌ Error: {e}")
+        print(f"   ❌ Unexpected Error: {e}")
         
     return None
 
@@ -118,18 +146,27 @@ def update_markdown_with_image(file_path, image_name):
     with open(file_path, 'r', encoding='utf-8') as f:
         content = f.read()
         
-    # Ако веќе има слика, не прави ништо (освен ако не сакаме да ја замениме, но засега не)
+    # Ако веќе има слика, не прави ништо
     if f"assets/images/{image_name}" in content:
-        print(f"   ⏭️  Link already exists in Markdown")
+        # print(f"   ⏭️  Link already exists in Markdown")
         return True
 
     file_dir = os.path.dirname(file_path)
-    rel_path = os.path.relpath(os.path.join(ASSETS_DIR, image_name), file_dir)
+    # Calculate relative path from markdown file to image
+    try:
+        rel_path = os.path.relpath(os.path.join(ASSETS_DIR, image_name), file_dir)
+    except ValueError:
+        # On Windows, if drives are different, relpath fails. Fallback to absolute or root-relative?
+        # Assuming same drive for now.
+        rel_path = f"/assets/images/{image_name}"
+        
     rel_path = rel_path.replace("\\", "/")
     
-    new_image_tag = f"![Визуелизација]({rel_path})"
+    new_image_tag = f"\n![Визуелизација]({rel_path})\n"
     
-    # 1. Пробај со стандардниот placeholder
+    # Strategies for insertion
+    
+    # 1. Replace placeholder
     placeholder = "<!-- Ова место е резервирано за автоматската слика од Manim -->"
     if placeholder in content:
         new_content = content.replace(placeholder, new_image_tag)
@@ -138,16 +175,17 @@ def update_markdown_with_image(file_path, image_name):
         print(f"   ✅ Link updated (replaced placeholder)")
         return True
 
-    # 2. Пробај со VISUAL PROMPT placeholder
+    # 2. Replace VISUAL PROMPT block
+    # Matches <!-- VISUAL PROMPT: ... --> including multiline
     visual_prompt_regex = r"<!-- VISUAL PROMPT:.*?-->"
-    if re.search(visual_prompt_regex, content):
-        new_content = re.sub(visual_prompt_regex, new_image_tag, content)
+    if re.search(visual_prompt_regex, content, re.DOTALL):
+        new_content = re.sub(visual_prompt_regex, new_image_tag, content, flags=re.DOTALL)
         with open(file_path, 'w', encoding='utf-8') as f:
             f.write(new_content)
         print(f"   ✅ Link updated (replaced VISUAL PROMPT)")
         return True
 
-    # 3. Пробај да вметнеш после "## 📐 Скица..." (целиот ред)
+    # 3. Insert after "## 📐 Скица"
     header_regex = r"(## 📐 Скица.*)"
     if re.search(header_regex, content):
         new_content = re.sub(header_regex, r"\1\n" + new_image_tag, content)
@@ -156,7 +194,7 @@ def update_markdown_with_image(file_path, image_name):
         print(f"   ✅ Link updated (inserted after Header)")
         return True
 
-    # 4. Пробај да вметнеш пред "Geo-Mentor Code"
+    # 4. Insert before "Geo-Mentor Code"
     if "> **👨‍💻 Geo-Mentor Code:**" in content:
         new_content = content.replace("> **👨‍💻 Geo-Mentor Code:**", f"{new_image_tag}\n\n> **👨‍💻 Geo-Mentor Code:**")
         with open(file_path, 'w', encoding='utf-8') as f:
@@ -164,7 +202,7 @@ def update_markdown_with_image(file_path, image_name):
         print(f"   ✅ Link updated (inserted before Geo-Mentor)")
         return True
 
-    # 5. Fallback: Вметни пред "## 🧠 Анализа" или "## 📝 Решение"
+    # 5. Fallback: Insert before Analysis or Solution
     if "## 🧠 Анализа" in content:
         new_content = content.replace("## 🧠 Анализа", f"## 📐 Скица\n{new_image_tag}\n\n## 🧠 Анализа")
         with open(file_path, 'w', encoding='utf-8') as f:
@@ -183,8 +221,13 @@ def update_markdown_with_image(file_path, image_name):
     return False
 
 def main():
-    print("🎨 Starting Batch Manim Renderer...")
+    print("🎨 Starting Batch Manim Renderer (v2 - Robust)...")
     
+    if not check_manim_installed():
+        print("❌ Error: 'manim' is not installed or not found in the current Python environment.")
+        print("   Please run: pip install manim")
+        return
+
     # Вчитај ги кодовите од логот
     manim_code_map = load_manim_code_map()
     
@@ -194,11 +237,12 @@ def main():
     candidates_found = 0
     
     for root, dirs, files in os.walk(ARCHIVE_ROOT):
-        if "tools" in root or "assets" in root: continue
+        if "tools" in root or "assets" in root or "node_modules" in root or ".git" in root: 
+            continue
         
         for file in files:
             if processed_count >= BATCH_SIZE:
-                print(f"\n🛑 Batch limit of {BATCH_SIZE} reached. Run the script again to process the next batch.")
+                print(f"\n🛑 Batch limit of {BATCH_SIZE} reached.")
                 return
 
             if file.endswith(".md"):
@@ -222,7 +266,7 @@ def main():
                 
                 if problem_id and problem_id in manim_code_map:
                     candidates_found += 1
-                    print(f"🔍 Found code in LOG for ID: {problem_id} ({file})")
+                    # print(f"🔍 Found code in LOG for ID: {problem_id} ({file})")
                     code = manim_code_map[problem_id]
                 else:
                     # Fallback: embedded code
@@ -238,7 +282,7 @@ def main():
                     if image_name:
                         if update_markdown_with_image(path, image_name):
                             processed_count += 1
-                            print(f"   📊 Progress: {processed_count}/{BATCH_SIZE}")
+                            print(f"   ✅ Processed: {file}")
                         else:
                             print(f"   ❌ Failed to update markdown for {file}")
                 # else:
@@ -246,8 +290,12 @@ def main():
 
     print(f"\n🏁 Finished scan.")
     print(f"   📂 Scanned files: {scanned_files}")
-    print(f"   🎯 Candidates (with placeholder): {candidates_found}")
-    print(f"   ✅ Processed in this batch: {processed_count}")
+    print(f"   🎯 Candidates found: {candidates_found}")
+    print(f"   ✅ Successfully processed: {processed_count}")
+    
+    # Cleanup temp file
+    if os.path.exists(TEMP_MANIM_FILE):
+        os.remove(TEMP_MANIM_FILE)
 
 
 if __name__ == "__main__":

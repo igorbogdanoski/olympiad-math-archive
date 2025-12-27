@@ -151,9 +151,9 @@ def create_problem_file(data):
     if manim_code and len(manim_code.strip()) > 0:
         log_manim_code(prob_id, data.get('problem_title', ''), manim_code)
         
-        # Пробај да генерираш слика (сега користиме render_manim)
-        if not os.path.exists(image_abs_path):
-            generate_manim_image(prob_id, manim_code)
+        # Стариот renderer е исклучен бидејќи користиме batch_manim на крајот
+        # if not os.path.exists(image_abs_path):
+        #     generate_manim_image(prob_id, manim_code)
 
     # Одлучи дали да прикажеш placeholder во Markdown
     visual_block = ""
@@ -251,3 +251,14 @@ if __name__ == "__main__":
                     create_problem_file(json_data)
         except Exception as e:
             print(f"❌ ГРЕШКА: {e}")
+
+    # --- AUTOMATED VISUALIZATION GENERATION ---
+    print("\n🎨 Стартувам автоматско генерирање на слики (batch_manim)...")
+    batch_script = os.path.join(SCRIPT_DIR, "batch_manim.py")
+    if os.path.exists(batch_script):
+        try:
+            subprocess.run([sys.executable, batch_script], check=False)
+        except Exception as e:
+            print(f"⚠️ Не успеав да го стартувам batch_manim: {e}")
+    else:
+        print(f"⚠️ Скриптата {batch_script} не постои.")

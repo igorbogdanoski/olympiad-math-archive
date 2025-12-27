@@ -51,7 +51,9 @@ tags:
 <Опис на цртежот. Кои се клучните точки? Дали има помошни линии?>
 
 
-<!-- VISUAL PROMPT: Draw a right triangle ABC with right angle at C. Draw altitude CD to hypotenuse AB. Mark segments AD=p and BD=q. Mark point E on AD such that DE=q. Highlight triangles CBE and AEC to show they are isosceles. -->
+
+![Визуелизација](../../assets/images/right_tri_angles_10.png)
+
 
 ## 🧠 Анализа
 Синтетичка стратегија: 'Доцртување на симетрична точка'. Пренесете ја помалата проекција на другата страна од висината за да формирате рамнокраки триаголници.
