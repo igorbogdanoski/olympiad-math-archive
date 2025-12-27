@@ -50,7 +50,7 @@ tags:
 <Опис на цртежот. Кои се клучните точки? Дали има помошни линии?>
 
 
-<!-- VISUAL PROMPT: Draw an equilateral triangle ABC with altitude h. Place a point S inside and draw perpendiculars SM, SN, and SP to the sides BC, CA, and AB respectively. Connect S to vertices A, B, and C to show three internal triangles. -->
+![Визуелизација](../../assets/images/viviani_theorem_08.png)
 
 ## 🧠 Анализа
 Стратегија: Искористете го фактот дека целината е збир од нејзините делови. Поделете го големиот триаголник на три помали со заедничко теме во $S$.

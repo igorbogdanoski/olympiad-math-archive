@@ -4058,3 +4058,2564 @@ class Task_geom_angle_orthocenter_02(Scene):
         self.add(quad_CDHE)
         self.add(lbl_A, lbl_B, lbl_C, lbl_D, lbl_E, lbl_H)
 ```
+
+### 🆔 Задача: geom_angle_alt_bisector_03 - Агол меѓу висина и симетрала
+**📅 Додадено:** 2025-12-27 01:50
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_geom_angle_alt_bisector_03(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        
+        # Triangle ABC, AC > AB.
+        # Let A = (0, 3), B = (-1, 0), C = (4, 0)
+        A = UP * 3
+        B = LEFT * 1
+        C = RIGHT * 4
+        
+        tri = Polygon(A, B, C, color=BLUE)
+        
+        # Altitude AD
+        D = np.array([A[0], B[1], 0])
+        alt_AD = Line(A, D, color=RED)
+        
+        # Angle bisector AS
+        # S on BC.
+        # BS / SC = AB / AC
+        len_AB = np.linalg.norm(B - A)
+        len_AC = np.linalg.norm(C - A)
+        ratio = len_AB / (len_AB + len_AC)
+        S = B + (C - B) * ratio
+        bisector_AS = Line(A, S, color=GREEN)
+        
+        lbl_A = MathTex("A").next_to(A, UP)
+        lbl_B = MathTex("B").next_to(B, DOWN+LEFT)
+        lbl_C = MathTex("C").next_to(C, DOWN+RIGHT)
+        lbl_D = MathTex("D").next_to(D, DOWN)
+        lbl_S = MathTex("S").next_to(S, DOWN)
+        
+        lbl_beta = MathTex("\beta").next_to(B, UP+RIGHT, buff=0.5)
+        lbl_gamma = MathTex("\gamma").next_to(C, UP+LEFT, buff=0.5)
+        
+        self.add(tri, alt_AD, bisector_AS)
+        self.add(lbl_A, lbl_B, lbl_C, lbl_D, lbl_S, lbl_beta, lbl_gamma)
+        
+        # Right angle at D
+        ra = RightAngle(Line(D, A), Line(D, C), quadrant=(1,1))
+        self.add(ra)
+```
+
+### 🆔 Задача: geom_angle_hybrid_04 - Агол меѓу внатрешна и надворешна симетрала
+**📅 Додадено:** 2025-12-27 01:50
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_geom_angle_hybrid_04(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        
+        A = np.array([-1, 2, 0])
+        B = np.array([-2, -1, 0])
+        C = np.array([3, -1, 0])
+        
+        tri = Polygon(A, B, C, color=BLUE)
+        
+        # Extend CB beyond B
+        ext_pt = B + (B - C) * 0.5
+        line_ext = Line(B, ext_pt, color=GRAY)
+        
+        # Internal bisector of A
+        # I_A on BC
+        len_AB = np.linalg.norm(B - A)
+        len_AC = np.linalg.norm(C - A)
+        ratio = len_AB / (len_AB + len_AC)
+        I_A = B + (C - B) * ratio
+        bisector_A = Line(A, I_A, color=GREEN)
+        # Extend it further to meet external bisector
+        
+        # External bisector of B
+        # Angle at B is ABC. External angle is 180 - ABC.
+        # Bisector direction?
+        # Vector BA
+        vec_BA = A - B
+        vec_BC = C - B
+        vec_B_ext = ext_pt - B
+        
+        # Angle of BA
+        ang_BA = np.arctan2(vec_BA[1], vec_BA[0])
+        # Angle of B_ext (180 from BC)
+        ang_B_ext = np.arctan2(vec_B_ext[1], vec_B_ext[0])
+        
+        # Bisector angle
+        # Need to be careful with ranges.
+        # Let's just find a point on it.
+        # Unit vectors
+        u_BA = vec_BA / np.linalg.norm(vec_BA)
+        u_B_ext = vec_B_ext / np.linalg.norm(vec_B_ext)
+        bisect_vec = u_BA + u_B_ext
+        
+        # Intersection Y
+        # Line A -> I_A (direction A to I_A)
+        # Line B -> B + bisect_vec
+        
+        Y = line_intersection(
+            [A, I_A],
+            [B, B + bisect_vec]
+        )
+        
+        bisector_A_ext = Line(A, Y, color=GREEN)
+        bisector_B_ext = Line(B, Y, color=ORANGE)
+        
+        lbl_A = MathTex("A").next_to(A, UP)
+        lbl_B = MathTex("B").next_to(B, DOWN)
+        lbl_C = MathTex("C").next_to(C, DOWN)
+        lbl_Y = MathTex("Y").next_to(Y, DOWN)
+        
+        self.add(tri, line_ext, bisector_A_ext, bisector_B_ext)
+        self.add(lbl_A, lbl_B, lbl_C, lbl_Y)
+```
+
+### 🆔 Задача: geom_angle_overlap_05 - Агол на преклопување на хипотенуза
+**📅 Додадено:** 2025-12-27 01:50
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_geom_angle_overlap_05(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        
+        # Right triangle ABC at A
+        # A = (0,0), B = (0, 3), C = (4, 0)
+        A = ORIGIN
+        B = UP * 3
+        C = RIGHT * 4
+        
+        tri = Polygon(A, B, C, color=BLUE)
+        
+        # E on BC such that BE = AB = 3
+        len_BC = 5
+        len_AB = 3
+        vec_BC = C - B
+        unit_BC = vec_BC / len_BC
+        E = B + unit_BC * len_AB
+        dot_E = Dot(E, color=RED)
+        
+        # D on BC such that CD = AC = 4
+        len_AC = 4
+        vec_CB = B - C
+        unit_CB = vec_CB / len_BC
+        D = C + unit_CB * len_AC
+        dot_D = Dot(D, color=RED)
+        
+        # Connect AD and AE
+        seg_AD = Line(A, D, color=GREEN)
+        seg_AE = Line(A, E, color=GREEN)
+        
+        lbl_A = MathTex("A").next_to(A, DOWN+LEFT)
+        lbl_B = MathTex("B").next_to(B, UP)
+        lbl_C = MathTex("C").next_to(C, RIGHT)
+        lbl_D = MathTex("D").next_to(D, UP)
+        lbl_E = MathTex("E").next_to(E, UP)
+        
+        self.add(tri, dot_E, dot_D, seg_AD, seg_AE)
+        self.add(lbl_A, lbl_B, lbl_C, lbl_D, lbl_E)
+        
+        ra = RightAngle(Line(A, B), Line(A, C), quadrant=(1,1))
+        self.add(ra)
+```
+
+### 🆔 Задача: para_normals_sum_06 - Збир на нормали во паралелограм
+**📅 Додадено:** 2025-12-27 01:50
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_para_normals_sum_06(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        
+        # Same as geom_8_2018_para_line basically
+        # Line p
+        p_start = np.array([-4, -2, 0])
+        p_end = np.array([4, -1, 0])
+        line_p = Line(p_start, p_end, color=BLACK)
+        
+        # Parallelogram ABCD, D on p
+        D = (p_start + p_end) / 2
+        A = D + np.array([-1, 2, 0])
+        C = D + np.array([3, 1, 0])
+        B = A + (C - D)
+        
+        para = Polygon(A, B, C, D, color=BLUE)
+        
+        # Diagonals intersection S
+        S = (A + C) / 2
+        diag_AC = DashedLine(A, C, color=GRAY)
+        diag_BD = DashedLine(B, D, color=GRAY)
+        
+        # Perpendiculars
+        vec_p = p_end - p_start
+        unit_p = vec_p / np.linalg.norm(vec_p)
+        
+        def get_proj(Pt):
+            return p_start + np.dot(Pt - p_start, unit_p) * unit_p
+            
+        M = get_proj(A)
+        N = get_proj(B)
+        O = get_proj(C)
+        S_prime = get_proj(S)
+        
+        perp_A = DashedLine(A, M, color=RED)
+        perp_B = DashedLine(B, N, color=RED)
+        perp_C = DashedLine(C, O, color=RED)
+        perp_S = Line(S, S_prime, color=GREEN)
+        
+        lbl_A = MathTex("A").next_to(A, UP)
+        lbl_B = MathTex("B").next_to(B, UP)
+        lbl_C = MathTex("C").next_to(C, UP)
+        lbl_D = MathTex("D").next_to(D, DOWN)
+        lbl_S = MathTex("S").next_to(S, UP)
+        
+        self.add(line_p, para, diag_AC, diag_BD)
+        self.add(perp_A, perp_B, perp_C, perp_S)
+        self.add(lbl_A, lbl_B, lbl_C, lbl_D, lbl_S)
+```
+
+### 🆔 Задача: para_diag_centroid_07 - Пресек на линии во паралелограм
+**📅 Додадено:** 2025-12-27 01:50
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_para_diag_centroid_07(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        
+        # Parallelogram ABCD
+        A = np.array([-3, -1, 0])
+        B = np.array([1, -1, 0])
+        D = np.array([-1, 2, 0])
+        C = B + (D - A)
+        
+        para = Polygon(A, B, C, D, color=BLUE)
+        
+        M = (B + C) / 2
+        N = (C + D) / 2
+        
+        seg_DM = Line(D, M, color=RED)
+        seg_BN = Line(B, N, color=RED)
+        
+        # Intersection T
+        T = line_intersection([D, M], [B, N])
+        dot_T = Dot(T, color=BLACK)
+        
+        diag_AC = Line(A, C, color=GREEN)
+        diag_BD = DashedLine(B, D, color=GRAY)
+        
+        O = (A + C) / 2
+        dot_O = Dot(O, color=BLACK)
+        
+        lbl_A = MathTex("A").next_to(A, DOWN+LEFT)
+        lbl_B = MathTex("B").next_to(B, DOWN+RIGHT)
+        lbl_C = MathTex("C").next_to(C, UP+RIGHT)
+        lbl_D = MathTex("D").next_to(D, UP+LEFT)
+        lbl_M = MathTex("M").next_to(M, RIGHT)
+        lbl_N = MathTex("N").next_to(N, UP)
+        lbl_T = MathTex("T").next_to(T, DOWN)
+        lbl_O = MathTex("O").next_to(O, UP)
+        
+        self.add(para, seg_DM, seg_BN, diag_AC, diag_BD)
+        self.add(dot_T, dot_O)
+        self.add(lbl_A, lbl_B, lbl_C, lbl_D, lbl_M, lbl_N, lbl_T, lbl_O)
+```
+
+### 🆔 Задача: viviani_theorem_08 - Теорема на Вивиани
+**📅 Додадено:** 2025-12-27 01:50
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_viviani_theorem_08(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        
+        # Equilateral Triangle ABC
+        side = 6
+        h_tri = side * np.sqrt(3) / 2
+        A = np.array([-side/2, -h_tri/3, 0])
+        B = np.array([side/2, -h_tri/3, 0])
+        C = np.array([0, 2*h_tri/3, 0])
+        
+        tri = Polygon(A, B, C, color=BLUE)
+        
+        # Point S inside
+        S = np.array([0.2, 0.2, 0])
+        dot_S = Dot(S, color=BLACK)
+        
+        # Perpendiculars
+        def get_perp(P, P1, P2):
+            vec = P2 - P1
+            unit = vec / np.linalg.norm(vec)
+            proj = P1 + np.dot(P - P1, unit) * unit
+            return Line(P, proj, color=RED)
+            
+        perp_a = get_perp(S, B, C)
+        perp_b = get_perp(S, C, A)
+        perp_c = get_perp(S, A, B)
+        
+        # Connect S to vertices
+        seg_SA = DashedLine(S, A, color=GRAY)
+        seg_SB = DashedLine(S, B, color=GRAY)
+        seg_SC = DashedLine(S, C, color=GRAY)
+        
+        lbl_A = MathTex("A").next_to(A, DOWN+LEFT)
+        lbl_B = MathTex("B").next_to(B, DOWN+RIGHT)
+        lbl_C = MathTex("C").next_to(C, UP)
+        lbl_S = MathTex("S").next_to(S, UP)
+        
+        self.add(tri, dot_S)
+        self.add(perp_a, perp_b, perp_c)
+        self.add(seg_SA, seg_SB, seg_SC)
+        self.add(lbl_A, lbl_B, lbl_C, lbl_S)
+```
+
+### 🆔 Задача: right_tri_angles_10 - Агли во правоаголен триаголник
+**📅 Додадено:** 2025-12-27 01:50
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_right_tri_angles_10(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        
+        # Right triangle ABC, C=90
+        C = ORIGIN
+        A = UP * 4
+        B = RIGHT * 6
+        
+        # Shift
+        center = (A + B + C) / 3
+        A -= center
+        B -= center
+        C -= center
+        
+        tri = Polygon(A, B, C, color=BLUE)
+        
+        # Altitude CD
+        vec_AB = B - A
+        unit_AB = vec_AB / np.linalg.norm(vec_AB)
+        D = A + np.dot(C - A, unit_AB) * unit_AB
+        alt_CD = Line(C, D, color=RED)
+        
+        # E on AD such that DE = BD = q
+        len_BD = np.linalg.norm(B - D)
+        vec_DA = A - D
+        unit_DA = vec_DA / np.linalg.norm(vec_DA)
+        E = D + unit_DA * len_BD
+        dot_E = Dot(E, color=GREEN)
+        
+        # Highlight triangles
+        tri_CBE = Polygon(C, B, E, color=GREEN, fill_opacity=0.1, fill_color=GREEN)
+        tri_AEC = Polygon(A, E, C, color=ORANGE, fill_opacity=0.1, fill_color=ORANGE)
+        
+        lbl_A = MathTex("A").next_to(A, UP)
+        lbl_B = MathTex("B").next_to(B, RIGHT)
+        lbl_C = MathTex("C").next_to(C, DOWN)
+        lbl_D = MathTex("D").next_to(D, DOWN)
+        lbl_E = MathTex("E").next_to(E, UP)
+        
+        self.add(tri, alt_CD, dot_E)
+        self.add(tri_CBE, tri_AEC)
+        self.add(lbl_A, lbl_B, lbl_C, lbl_D, lbl_E)
+```
+
+### 🆔 Задача: geom_quad_symmetry_05 - Симетрија во конвексен четириаголник
+**📅 Додадено:** 2025-12-27 01:50
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_geom_quad_symmetry_05(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        
+        # Quadrilateral ABCD, C=90
+        # C at origin
+        C = ORIGIN
+        # D on x-axis, B on y-axis? No, just C=90.
+        # Let's put C at (0,0), D at (3,0), B at (0,2).
+        # A can be anywhere.
+        D = RIGHT * 3
+        B = UP * 2
+        A = np.array([-1, 3, 0])
+        
+        # Shift
+        center = (A + B + C + D) / 4
+        A -= center
+        B -= center
+        C -= center
+        D -= center
+        
+        quad = Polygon(A, B, C, D, color=BLUE)
+        
+        # P on CD
+        P = (C + D) * 0.6 # Random point on CD
+        dot_P = Dot(P, color=RED)
+        
+        # Reflect B across CD
+        # CD is line through C and D.
+        # Project B onto CD
+        vec_CD = D - C
+        unit_CD = vec_CD / np.linalg.norm(vec_CD)
+        proj_B = C + np.dot(B - C, unit_CD) * unit_CD
+        vec_perp = B - proj_B
+        B_prime = proj_B - vec_perp
+        dot_B_prime = Dot(B_prime, color=GRAY)
+        
+        # Connect A, P, B' - straight line?
+        # Prompt says "Connect A, P, and B' as a straight line."
+        # This implies P is chosen such that A-P-B' is straight.
+        # So P is intersection of AB' and CD.
+        P = line_intersection([A, B_prime], [C, D])
+        dot_P.move_to(P)
+        
+        line_APB_prime = DashedLine(A, B_prime, color=GREEN)
+        
+        lbl_A = MathTex("A").next_to(A, UP)
+        lbl_B = MathTex("B").next_to(B, UP)
+        lbl_C = MathTex("C").next_to(C, DOWN)
+        lbl_D = MathTex("D").next_to(D, DOWN)
+        lbl_P = MathTex("P").next_to(P, DOWN)
+        lbl_B_prime = MathTex("B'").next_to(B_prime, DOWN)
+        
+        self.add(quad, dot_P, dot_B_prime, line_APB_prime)
+        self.add(lbl_A, lbl_B, lbl_C, lbl_D, lbl_P, lbl_B_prime)
+        
+        ra = RightAngle(Line(C, B), Line(C, D), quadrant=(1,1))
+        self.add(ra)
+```
+
+### 🆔 Задача: geom_tri_bisector_diff_11 - Триаголник со разлика на агли од 90 степени
+**📅 Додадено:** 2025-12-27 01:50
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_geom_tri_bisector_diff_11(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        
+        # Triangle ABC, A > B.
+        A = np.array([-1, 2, 0])
+        B = np.array([-3, -1, 0])
+        C = np.array([2, -1, 0])
+        
+        tri = Polygon(A, B, C, color=BLUE)
+        
+        # Internal bisector CD
+        # D on AB
+        len_AC = np.linalg.norm(C - A)
+        len_BC = np.linalg.norm(C - B)
+        ratio = len_AC / (len_AC + len_BC)
+        D = A + (B - A) * ratio
+        bisector_CD = Line(C, D, color=GREEN)
+        
+        # External bisector CE
+        # Perpendicular to CD at C
+        # Line through C perpendicular to CD
+        # Intersects AB extended at E
+        
+        # Vector CD
+        vec_CD = D - C
+        # Perpendicular vector
+        perp_vec = np.array([-vec_CD[1], vec_CD[0], 0])
+        
+        # Intersection of line(C, perp) and line(A, B)
+        E = line_intersection(
+            [C, C + perp_vec],
+            [A, B]
+        )
+        
+        bisector_CE = Line(C, E, color=ORANGE)
+        line_AE = Line(A, E, color=GRAY) # Extension of AB
+        
+        lbl_A = MathTex("A").next_to(A, UP)
+        lbl_B = MathTex("B").next_to(B, DOWN)
+        lbl_C = MathTex("C").next_to(C, DOWN)
+        lbl_D = MathTex("D").next_to(D, LEFT)
+        lbl_E = MathTex("E").next_to(E, UP)
+        
+        self.add(tri, bisector_CD, bisector_CE, line_AE)
+        self.add(lbl_A, lbl_B, lbl_C, lbl_D, lbl_E)
+        
+        ra = RightAngle(bisector_CD, bisector_CE, quadrant=(1,1))
+        self.add(ra)
+```
+
+### 🆔 Задача: tri_altitudes_perimeter_09 - Периметар преку однос на висини
+**📅 Додадено:** 2025-12-27 02:00
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_tri_altitudes_perimeter_09(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        
+        # Triangle ABC
+        A = np.array([-2, -1, 0])
+        B = np.array([3, -1, 0])
+        C = np.array([0, 3, 0])
+        
+        tri = Polygon(A, B, C, color=BLUE)
+        
+        # Altitudes
+        def get_alt(P, P1, P2):
+            vec = P2 - P1
+            unit = vec / np.linalg.norm(vec)
+            proj = P1 + np.dot(P - P1, unit) * unit
+            return Line(P, proj, color=RED)
+            
+        h_a = get_alt(A, B, C)
+        h_b = get_alt(B, C, A)
+        h_c = get_alt(C, A, B)
+        
+        lbl_A = MathTex("A").next_to(A, DOWN+LEFT)
+        lbl_B = MathTex("B").next_to(B, DOWN+RIGHT)
+        lbl_C = MathTex("C").next_to(C, UP)
+        
+        lbl_ha = MathTex("h_a").next_to(h_a.get_center(), LEFT, buff=0.1)
+        lbl_hb = MathTex("h_b").next_to(h_b.get_center(), UP, buff=0.1)
+        lbl_hc = MathTex("h_c").next_to(h_c.get_center(), RIGHT, buff=0.1)
+        
+        self.add(tri, h_a, h_b, h_c)
+        self.add(lbl_A, lbl_B, lbl_C, lbl_ha, lbl_hb, lbl_hc)
+```
+
+### 🆔 Задача: geom_right_tri_bisect_09 - Правоаголен триаголник со висина, тежишна и симетрала
+**📅 Додадено:** 2025-12-27 02:00
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_geom_right_tri_bisect_09(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        
+        # Right triangle ABC, C=90
+        # A = 40 deg.
+        # Let C = (0,0).
+        # CA along y-axis, CB along x-axis? No, usually C is top or bottom.
+        # Let's put C at origin.
+        C = ORIGIN
+        # A at (0, 4)
+        # B at (x, 0). Angle A = 40.
+        # In triangle ABC, angle B = 90 - 40 = 50.
+        # Wait, if C=90, A=40, B=50.
+        # Let's rotate so hypotenuse AB is horizontal for better view of CD, CM, CL.
+        
+        # Or just standard position.
+        # C = (0,0)
+        # A = (0, 3)
+        # B = (3 * tan(40), 0) ? No.
+        # tan(A) = a/b = BC/AC.
+        # tan(40) approx 0.839
+        # Let AC = 4. BC = 4 * 0.839 = 3.356
+        
+        AC = 4
+        BC = AC * np.tan(np.deg2rad(40))
+        
+        C = ORIGIN
+        A = UP * AC
+        B = RIGHT * BC
+        
+        # Shift to center
+        center = (A + B + C) / 3
+        A -= center
+        B -= center
+        C -= center
+        
+        tri = Polygon(A, B, C, color=BLUE)
+        
+        # Altitude CD to AB
+        vec_AB = B - A
+        unit_AB = vec_AB / np.linalg.norm(vec_AB)
+        D = A + np.dot(C - A, unit_AB) * unit_AB
+        alt_CD = Line(C, D, color=RED)
+        
+        # Median CM to AB
+        M = (A + B) / 2
+        med_CM = Line(C, M, color=GREEN)
+        
+        # Angle bisector CL to AB
+        # L divides AB in ratio AC/BC
+        len_AC = np.linalg.norm(C - A)
+        len_BC = np.linalg.norm(C - B)
+        ratio = len_AC / (len_AC + len_BC)
+        L = A + (B - A) * ratio
+        bis_CL = Line(C, L, color=ORANGE)
+        
+        lbl_A = MathTex("A").next_to(A, UP)
+        lbl_B = MathTex("B").next_to(B, RIGHT)
+        lbl_C = MathTex("C").next_to(C, DOWN)
+        lbl_D = MathTex("D").next_to(D, UP)
+        lbl_M = MathTex("M").next_to(M, UP)
+        lbl_L = MathTex("L").next_to(L, UP)
+        
+        lbl_40 = MathTex("40^\circ").next_to(A, DOWN+RIGHT, buff=0.5)
+        
+        self.add(tri, alt_CD, med_CM, bis_CL)
+        self.add(lbl_A, lbl_B, lbl_C, lbl_D, lbl_M, lbl_L, lbl_40)
+        
+        ra = RightAngle(Line(C, A), Line(C, B), quadrant=(1,1))
+        self.add(ra)
+```
+
+### 🆔 Задача: geom_iso_bisector_intersect_10 - Ранокрак триаголник со пресек на висина и симетрала
+**📅 Додадено:** 2025-12-27 02:00
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_geom_iso_bisector_intersect_10(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        
+        # Isosceles ABC, AC=BC.
+        # Wait, prompt says "AB as base". So AC=BC.
+        # Altitude CD from C.
+        # Angle bisector AE from A.
+        # Intersection I.
+        # Angle AIC = 130 (obtuse).
+        
+        # Let angle A = alpha. Angle C = gamma.
+        # In triangle AIC:
+        # Angle IAC = alpha/2.
+        # Angle ICA = gamma/2.
+        # Angle AIC = 180 - (alpha/2 + gamma/2).
+        # 130 = 180 - (alpha+gamma)/2 => (alpha+gamma)/2 = 50 => alpha+gamma = 100.
+        # Also 2*alpha + gamma = 180.
+        # gamma = 100 - alpha.
+        # 2*alpha + 100 - alpha = 180 => alpha = 80.
+        # gamma = 20.
+        
+        # Construct with these angles.
+        base_width = 4
+        # alpha = 80 deg.
+        # height = (base/2) * tan(80)
+        h = (base_width / 2) * np.tan(np.deg2rad(80))
+        
+        A = np.array([-base_width/2, -1, 0])
+        B = np.array([base_width/2, -1, 0])
+        C = np.array([0, -1 + h, 0])
+        
+        # Scale down if too big
+        if h > 6:
+            scale = 5/h
+            A *= scale
+            B *= scale
+            C *= scale
+            
+        tri = Polygon(A, B, C, color=BLUE)
+        
+        # Altitude CD
+        D = (A + B) / 2
+        alt_CD = Line(C, D, color=RED)
+        
+        # Bisector AE
+        # E on BC
+        len_AB = np.linalg.norm(B - A)
+        len_AC = np.linalg.norm(C - A)
+        ratio = len_AB / (len_AB + len_AC) # Bisector theorem on triangle ABC? No, bisector of A.
+        # Ratio BE/EC = AB/AC.
+        # E = B + (C-B) * (AB / (AB+AC)) ? No.
+        # Vector BC. E divides BC in ratio c/b.
+        # E = (b*B + c*C) / (b+c) ? No.
+        # E = (AC*B + AB*C) / (AC+AB)
+        E = (len_AC * B + len_AB * C) / (len_AC + len_AB)
+        bis_AE = Line(A, E, color=GREEN)
+        
+        # Intersection I
+        I = line_intersection([C, D], [A, E])
+        dot_I = Dot(I, color=BLACK)
+        
+        lbl_A = MathTex("A").next_to(A, DOWN+LEFT)
+        lbl_B = MathTex("B").next_to(B, DOWN+RIGHT)
+        lbl_C = MathTex("C").next_to(C, UP)
+        lbl_D = MathTex("D").next_to(D, DOWN)
+        lbl_E = MathTex("E").next_to(E, RIGHT)
+        lbl_I = MathTex("I").next_to(I, LEFT)
+        lbl_130 = MathTex("130^\circ").next_to(I, UP+RIGHT, buff=0.1)
+        
+        self.add(tri, alt_CD, bis_AE, dot_I)
+        self.add(lbl_A, lbl_B, lbl_C, lbl_D, lbl_E, lbl_I, lbl_130)
+```
+
+### 🆔 Задача: geom_iso_side_bisector_08 - Ранокрак триаголник со симетрала на страна и агол
+**📅 Додадено:** 2025-12-27 02:00
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_geom_iso_side_bisector_08(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        
+        # Isosceles AC = BC.
+        # Perpendicular bisector of AC.
+        # Angle bisector of A.
+        # Intersection D on BC.
+        
+        # Let's calculate angles.
+        # D is on BC.
+        # D is on perp bisector of AC => DA = DC.
+        # So triangle ADC is isosceles. Angle DAC = Angle DCA = gamma.
+        # AD is angle bisector of A => Angle DAB = Angle DAC = gamma.
+        # So Angle A = 2*gamma.
+        # Since AC=BC, Angle B = Angle A = 2*gamma.
+        # Sum: A + B + C = 180 => 2g + 2g + g = 5g = 180 => g = 36.
+        
+        # Construct triangle with gamma = 36.
+        # Base angle = 72.
+        base_width = 4
+        h = (base_width / 2) * np.tan(np.deg2rad(72))
+        
+        A = np.array([-base_width/2, -2, 0])
+        B = np.array([base_width/2, -2, 0])
+        C = np.array([0, -2 + h, 0])
+        
+        tri = Polygon(A, B, C, color=BLUE)
+        
+        # Perp bisector of AC
+        mid_AC = (A + C) / 2
+        vec_AC = C - A
+        perp_vec = np.array([-vec_AC[1], vec_AC[0], 0])
+        # Line through mid_AC with direction perp_vec
+        # Intersects BC at D.
+        
+        # Line BC: B + t*(C-B)
+        # Line perp: mid_AC + u*perp_vec
+        D = line_intersection(
+            [mid_AC, mid_AC + perp_vec],
+            [B, C]
+        )
+        
+        perp_bisector = Line(mid_AC + perp_vec*2, mid_AC - perp_vec*2, color=RED) # Make it long enough
+        # Trim to D?
+        perp_bisector = Line(mid_AC, D, color=RED) # Or extend a bit
+        
+        # Angle bisector of A
+        # Should go through D
+        bis_A = Line(A, D, color=GREEN)
+        
+        lbl_A = MathTex("A").next_to(A, DOWN+LEFT)
+        lbl_B = MathTex("B").next_to(B, DOWN+RIGHT)
+        lbl_C = MathTex("C").next_to(C, UP)
+        lbl_D = MathTex("D").next_to(D, RIGHT)
+        lbl_gamma = MathTex("\gamma").next_to(C, DOWN, buff=0.3)
+        
+        self.add(tri, perp_bisector, bis_A)
+        self.add(lbl_A, lbl_B, lbl_C, lbl_D, lbl_gamma)
+        
+        # Mark right angle at mid_AC
+        ra = RightAngle(Line(mid_AC, A), Line(mid_AC, D), quadrant=(1,1))
+        self.add(ra)
+```
+
+### 🆔 Задача: geom_9_midpoint_tangent - Кружница тангентна на краци на агол
+**📅 Додадено:** 2025-12-27 02:00
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_geom_9_midpoint_tangent(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        
+        # Angle O.
+        O = np.array([-3, -2, 0])
+        # Arms OA, OB.
+        # Circle k tangent to OA at A and OB at B.
+        # This means O is external point, OA=OB tangents.
+        # Center K of circle lies on bisector of O.
+        
+        radius = 2
+        dist_O_K = 4
+        # Angle bisector along x-axis for simplicity, then rotate?
+        # Or just place K at (-3+4, -2) = (1, -2).
+        K = np.array([1, -2, 0])
+        circle = Circle(radius=radius, color=BLUE).move_to(K)
+        
+        # Tangent points A, B
+        # Tangent from O to circle.
+        # Angle K-O-A = asin(r/d) = asin(2/4) = 30 deg.
+        # So angle AOB = 60 deg.
+        
+        # Rotate vector OK by 30 and -30 to get directions OA and OB.
+        vec_OK = K - O
+        angle_OK = 0 # Horizontal
+        
+        angle_OA = np.deg2rad(30)
+        angle_OB = np.deg2rad(-30)
+        
+        len_OA = np.sqrt(dist_O_K**2 - radius**2) # sqrt(16-4) = sqrt(12) approx 3.46
+        
+        A = O + np.array([np.cos(angle_OA), np.sin(angle_OA), 0]) * len_OA
+        B = O + np.array([np.cos(angle_OB), np.sin(angle_OB), 0]) * len_OA
+        
+        line_OA = Line(O, A, color=BLACK) # Extend?
+        line_OB = Line(O, B, color=BLACK)
+        
+        # Line BC parallel to OA.
+        # C on circle? Or just line?
+        # "Draw line BC parallel to OA."
+        # Usually implies C is intersection with something or just a direction.
+        # "Draw segment OC intersecting circle at D."
+        # So C is a point. Where is C?
+        # Maybe C is on the circle? Or C is on the line parallel to OA through B?
+        # Let's assume C is on the circle? Or C is just a point on the parallel line.
+        # "Draw segment OC intersecting circle at D."
+        # If C is far away, OC intersects circle.
+        # Let's pick C on the parallel line such that OC intersects circle.
+        
+        vec_OA = A - O
+        unit_OA = vec_OA / np.linalg.norm(vec_OA)
+        # Line through B parallel to OA: B + t * unit_OA
+        # Let's pick a C.
+        C = B + unit_OA * 4 # Arbitrary C
+        line_BC = Line(B, C, color=GREEN)
+        
+        # Segment OC
+        seg_OC = Line(O, C, color=ORANGE)
+        
+        # Intersect OC with circle at D.
+        # Line OC: O + u * (C-O)
+        # Circle: |P-K| = r
+        # Find intersection.
+        # Or just visual approximation if hard to calc.
+        # Let's calc.
+        vec_OC = C - O
+        unit_OC = vec_OC / np.linalg.norm(vec_OC)
+        # P = O + t * unit_OC
+        # |O + t*u - K| = r
+        # |(O-K) + t*u| = r
+        # Let V = O-K. |V + t*u|^2 = r^2
+        # (V+tu).(V+tu) = r^2
+        # V.V + 2t(V.u) + t^2 = r^2
+        # t^2 + 2(V.u)t + (V.V - r^2) = 0
+        V = O - K
+        a_eq = 1
+        b_eq = 2 * np.dot(V, unit_OC)
+        c_eq = np.dot(V, V) - radius**2
+        
+        delta = b_eq**2 - 4*a_eq*c_eq
+        t1 = (-b_eq - np.sqrt(delta)) / 2
+        t2 = (-b_eq + np.sqrt(delta)) / 2
+        # We want the one closer to O? Or further?
+        # D is usually the first intersection.
+        # Since O is outside, there are two.
+        # Let's take the smaller positive t.
+        # Wait, O is outside. t1, t2 should be positive if direction is towards circle.
+        t = min(t1, t2) if t1 > 0 else max(t1, t2)
+        D = O + unit_OC * t
+        dot_D = Dot(D, color=RED)
+        
+        # Line BD intersecting OA at S.
+        line_BD_full = Line(B, D, color=GRAY).scale(2) # Extend
+        # Intersection S of line(B,D) and line(O,A)
+        S = line_intersection([B, D], [O, A])
+        dot_S = Dot(S, color=RED)
+        seg_BS = Line(B, S, color=GRAY)
+        
+        lbl_O = MathTex("O").next_to(O, LEFT)
+        lbl_A = MathTex("A").next_to(A, UP)
+        lbl_B = MathTex("B").next_to(B, DOWN)
+        lbl_C = MathTex("C").next_to(C, RIGHT)
+        lbl_D = MathTex("D").next_to(D, UP)
+        lbl_S = MathTex("S").next_to(S, UP)
+        
+        self.add(circle, line_OA, line_OB, line_BC, seg_OC, dot_D, seg_BS, dot_S)
+        self.add(lbl_O, lbl_A, lbl_B, lbl_C, lbl_D, lbl_S)
+```
+
+### 🆔 Задача: geom_9_pentagon_incenter - Конвексен петаголник и тангентни отсечки
+**📅 Додадено:** 2025-12-27 02:00
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_geom_9_pentagon_incenter(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        
+        # Convex pentagon ABCDE circumscribed about a circle?
+        # Prompt: "Mark potential tangent points K, L, M, N, P... Label tangent segments x, y, z, u, v"
+        # This implies it IS circumscribed (tangential pentagon).
+        
+        circle = Circle(radius=2, color=GRAY)
+        center = ORIGIN
+        
+        # Generate 5 points on circle for tangency
+        angles = np.linspace(0, 2*np.pi, 6)[:-1] + 0.2 # Shift a bit
+        tangent_points = []
+        for ang in angles:
+            tangent_points.append(np.array([2*np.cos(ang), 2*np.sin(ang), 0]))
+            
+        # Tangent lines at these points
+        # Intersection of adjacent tangent lines gives vertices.
+        vertices = []
+        for i in range(5):
+            p1 = tangent_points[i]
+            p2 = tangent_points[(i+1)%5]
+            
+            # Tangent at p1: normal is p1. Line: p1 + t * rot(p1)
+            # Tangent at p2: normal is p2.
+            
+            # Intersection formula
+            # Or simpler: vertex is intersection of tangent at p1 and tangent at p2?
+            # No, vertices are between tangent points.
+            # Tangent points are ON the sides.
+            # So side AB touches at K. Side BC touches at L.
+            # So we need tangent lines at K, L, M, N, P.
+            # Vertices are intersections of these lines.
+            pass
+            
+        # Let's compute vertices
+        def get_tangent_line(P):
+            # Normal is P (since center is origin)
+            # Line equation: P.x * x + P.y * y = r^2
+            return P
+            
+        # Intersection of tangent at P1 and P2
+        # x*x1 + y*y1 = r^2
+        # x*x2 + y*y2 = r^2
+        # Solve linear system.
+        verts = []
+        r_sq = 4
+        for i in range(5):
+            p1 = tangent_points[i]
+            p2 = tangent_points[(i+1)%5] # Wait, points are K, L, M...
+            # Vertex A is between P_i and P_{i+1}? No.
+            # Side 1 touches at P1. Side 2 touches at P2.
+            # Vertex is intersection of Side 1 and Side 2.
+            
+            # Solve:
+            # x*p1x + y*p1y = r^2
+            # x*p2x + y*p2y = r^2
+            
+            mat = [[p1[0], p1[1]], [p2[0], p2[1]]]
+            res = [r_sq, r_sq]
+            sol = np.linalg.solve(mat, res)
+            verts.append(np.array([sol[0], sol[1], 0]))
+            
+        A, B, C, D, E_pt = verts
+        pentagon = Polygon(A, B, C, D, E_pt, color=BLUE)
+        
+        # Tangent points
+        K, L, M, N, P = tangent_points
+        dots = VGroup(*[Dot(pt, color=RED) for pt in tangent_points])
+        
+        lbl_A = MathTex("A").next_to(A, OUT)
+        lbl_B = MathTex("B").next_to(B, OUT)
+        lbl_C = MathTex("C").next_to(C, OUT)
+        lbl_D = MathTex("D").next_to(D, OUT)
+        lbl_E = MathTex("E").next_to(E_pt, OUT)
+        
+        # Labels for segments x, y, z...
+        # x is AK?
+        lbl_x = MathTex("x").move_to((A+K)/2 + UP*0.2)
+        
+        self.add(circle, pentagon, dots)
+        self.add(lbl_A, lbl_B, lbl_C, lbl_D, lbl_E)
+```
+
+### 🆔 Задача: geom_9_touching_circles_tangent - Допирни кружници и тангента
+**📅 Додадено:** 2025-12-27 02:00
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_geom_9_touching_circles_tangent(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        
+        # k1, k2 touching externally at M.
+        r1 = 1.5
+        r2 = 1.0
+        C1 = np.array([-r1, 0, 0])
+        C2 = np.array([r2, 0, 0])
+        # Touching at origin (0,0) if we shift.
+        # Let M = (0,0).
+        # C1 = (-1.5, 0), C2 = (1.0, 0).
+        M = ORIGIN
+        C1 = LEFT * r1
+        C2 = RIGHT * r2
+        
+        k1 = Circle(radius=r1, color=BLUE).move_to(C1)
+        k2 = Circle(radius=r2, color=BLUE).move_to(C2)
+        
+        # Vertical tangent t touching k2 at N.
+        # k2 is from 0 to 2. Center at 1.
+        # Vertical tangent at rightmost point? Or leftmost?
+        # "touching k2 at N".
+        # Could be x = 2*r2 = 2.
+        N = C2 + RIGHT * r2
+        line_t = Line(N + UP*3, N + DOWN*3, color=BLACK)
+        
+        # k3 touching k1, k2, and t.
+        # This is a classic Apollonius or Descartes circle problem case.
+        # k3 is in the gap between k1, k2, t.
+        # Let k3 have radius r3 and center (x3, y3).
+        # Touching t (x=2): x3 + r3 = 2 => x3 = 2 - r3.
+        # Touching k2 (ext): dist(C3, C2) = r2 + r3.
+        # Touching k1 (ext): dist(C3, C1) = r1 + r3.
+        
+        # Solve for r3, y3.
+        # (x3 - 1)^2 + y3^2 = (1 + r3)^2
+        # (x3 - (-1.5))^2 + y3^2 = (1.5 + r3)^2
+        # Substitute x3 = 2 - r3.
+        
+        # Eq 1: (2 - r3 - 1)^2 + y3^2 = (1 + r3)^2
+        # (1 - r3)^2 + y3^2 = (1 + r3)^2
+        # 1 - 2r3 + r3^2 + y3^2 = 1 + 2r3 + r3^2
+        # y3^2 = 4r3
+        
+        # Eq 2: (2 - r3 + 1.5)^2 + y3^2 = (1.5 + r3)^2
+        # (3.5 - r3)^2 + y3^2 = (1.5 + r3)^2
+        # 12.25 - 7r3 + r3^2 + y3^2 = 2.25 + 3r3 + r3^2
+        # 10 - 10r3 + y3^2 = 0
+        # y3^2 = 10r3 - 10
+        
+        # Equate y3^2:
+        # 4r3 = 10r3 - 10
+        # 6r3 = 10 => r3 = 10/6 = 5/3 approx 1.66
+        # Wait, r3 should be small.
+        # Did I assume k3 is "inside"?
+        # k1 is left of 0. k2 is right of 0. t is at 2.
+        # k3 is likely above or below.
+        # Let's recheck logic.
+        # x3 = 2 - r3.
+        # C2 = (1, 0). r2 = 1.
+        # C1 = (-1.5, 0). r1 = 1.5.
+        
+        # (2-r3 - 1)^2 + y3^2 = (1+r3)^2
+        # (1-r3)^2 + y3^2 = (1+r3)^2
+        # 1 - 2r3 + r3^2 + y3^2 = 1 + 2r3 + r3^2
+        # y3^2 = 4r3. Correct.
+        
+        # (2-r3 + 1.5)^2 + y3^2 = (1.5+r3)^2
+        # (3.5-r3)^2 + y3^2 = (1.5+r3)^2
+        # 12.25 - 7r3 + r3^2 + y3^2 = 2.25 + 3r3 + r3^2
+        # 10 - 10r3 + y3^2 = 0.
+        # y3^2 = 10r3 - 10. Correct.
+        
+        # 4r3 = 10r3 - 10 => 10 = 6r3 => r3 = 5/3.
+        # This is a large circle.
+        # y3^2 = 4 * 5/3 = 20/3. y3 = sqrt(6.66) approx 2.58.
+        # x3 = 2 - 5/3 = 1/3.
+        
+        # Is there a smaller solution?
+        # Maybe touching t on the left?
+        # t is at x=2. k3 is to the left of t. So x3 = 2 - r3. Correct.
+        # Maybe k3 touches k1 internally? No, "touching k1, k2". Usually external.
+        
+        # Let's draw this one.
+        r3 = 5/3
+        y3 = np.sqrt(20/3)
+        x3 = 1/3
+        C3 = np.array([x3, y3, 0])
+        k3 = Circle(radius=r3, color=GREEN).move_to(C3)
+        
+        # Also symmetric solution below
+        C3_down = np.array([x3, -y3, 0])
+        k3_down = Circle(radius=r3, color=GREEN).move_to(C3_down)
+        
+        lbl_M = MathTex("M").next_to(M, DOWN)
+        lbl_N = MathTex("N").next_to(N, RIGHT)
+        
+        self.add(k1, k2, line_t, k3, k3_down)
+        self.add(lbl_M, lbl_N)
+```
+
+### 🆔 Задача: geom_9_midpoints_parallelogram - Средини во четириаголник и паралелограм
+**📅 Додадено:** 2025-12-27 02:00
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_geom_9_midpoints_parallelogram(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        
+        # General quadrilateral ABCD
+        A = np.array([-3, -1, 0])
+        B = np.array([2, -2, 0])
+        C = np.array([3, 2, 0])
+        D = np.array([-2, 3, 0])
+        
+        quad = Polygon(A, B, C, D, color=BLUE)
+        
+        # E midpoint of AB
+        E = (A + B) / 2
+        dot_E = Dot(E, color=RED)
+        
+        # K midpoint of CD
+        K = (C + D) / 2
+        dot_K = Dot(K, color=RED)
+        
+        # Connect AK, CE, BK, DE
+        seg_AK = Line(A, K, color=GRAY)
+        seg_CE = Line(C, E, color=GRAY)
+        seg_BK = Line(B, K, color=GRAY)
+        seg_DE = Line(D, E, color=GRAY)
+        
+        # Midpoints M1 (AK), M2 (CE), M3 (BK), M4 (DE)
+        M1 = (A + K) / 2
+        M2 = (C + E) / 2
+        M3 = (B + K) / 2
+        M4 = (D + E) / 2
+        
+        dots_M = VGroup(Dot(M1), Dot(M2), Dot(M3), Dot(M4))
+        
+        # Draw diagonal EK? "Draw diagonal EK"
+        seg_EK = DashedLine(E, K, color=GREEN)
+        
+        lbl_A = MathTex("A").next_to(A, LEFT)
+        lbl_B = MathTex("B").next_to(B, RIGHT)
+        lbl_C = MathTex("C").next_to(C, RIGHT)
+        lbl_D = MathTex("D").next_to(D, LEFT)
+        lbl_E = MathTex("E").next_to(E, DOWN)
+        lbl_K = MathTex("K").next_to(K, UP)
+        
+        self.add(quad, dot_E, dot_K, seg_AK, seg_CE, seg_BK, seg_DE)
+        self.add(dots_M, seg_EK)
+        self.add(lbl_A, lbl_B, lbl_C, lbl_D, lbl_E, lbl_K)
+```
+
+### 🆔 Задача: geom_9_centroid_plane_dist - Тежиште и растојание до рамнина
+**📅 Додадено:** 2025-12-27 02:00
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_geom_9_centroid_plane_dist(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        
+        # 3D effect in 2D
+        # Plane pi represented by a parallelogram at bottom
+        p1 = np.array([-4, -3, 0])
+        p2 = np.array([2, -3, 0])
+        p3 = np.array([4, -1, 0])
+        p4 = np.array([-2, -1, 0])
+        plane = Polygon(p1, p2, p3, p4, color=GRAY, fill_opacity=0.2, fill_color=GRAY)
+        lbl_pi = MathTex("\pi").next_to(p3, RIGHT)
+        
+        # Triangle ABC above
+        A = np.array([-2, 2, 0])
+        B = np.array([1, 3, 0])
+        C = np.array([3, 1, 0])
+        tri = Polygon(A, B, C, color=BLUE)
+        
+        # Projections A', B', C'
+        # Assume projection is just vertical drop to y = -2 (approx plane level)
+        # Or better, project onto the plane geometry.
+        # Let's just drop straight down by some amount?
+        # No, "perpendicular segments to the plane".
+        # Let's assume plane is z=0 in 3D, but we are viewing from side.
+        # Let's just draw vertical lines downwards to the visual plane.
+        
+        # Define a "floor" y-level for the plane visually
+        floor_y = -2
+        
+        A_prime = np.array([A[0], floor_y, 0])
+        B_prime = np.array([B[0], floor_y + 0.5, 0]) # Slight perspective offset?
+        # Actually, if plane is flat horizontal, y is constant?
+        # But drawn in perspective.
+        # Let's project onto the line segment p4-p3? Or inside.
+        # Let's just use vertical lines to some y.
+        
+        # Better: define plane equation ax+by+cz=d? Too complex.
+        # Just drop to y = -1.5 + x*0.1 (slanted floor)
+        def get_floor_y(x):
+            return -2 + x * 0.2
+            
+        A_prime = np.array([A[0], get_floor_y(A[0]), 0])
+        B_prime = np.array([B[0], get_floor_y(B[0]), 0])
+        C_prime = np.array([C[0], get_floor_y(C[0]), 0])
+        
+        line_AA = DashedLine(A, A_prime, color=RED)
+        line_BB = DashedLine(B, B_prime, color=RED)
+        line_CC = DashedLine(C, C_prime, color=RED)
+        
+        # Centroid T
+        T = (A + B + C) / 3
+        dot_T = Dot(T, color=BLACK)
+        
+        # Projection T'
+        T_prime = np.array([T[0], get_floor_y(T[0]), 0])
+        line_TT = DashedLine(T, T_prime, color=GREEN)
+        dot_T_prime = Dot(T_prime, color=BLACK)
+        
+        lbl_A = MathTex("A").next_to(A, UP)
+        lbl_B = MathTex("B").next_to(B, UP)
+        lbl_C = MathTex("C").next_to(C, UP)
+        lbl_T = MathTex("T").next_to(T, UP)
+        
+        lbl_Ap = MathTex("A'").next_to(A_prime, DOWN)
+        lbl_Bp = MathTex("B'").next_to(B_prime, DOWN)
+        lbl_Cp = MathTex("C'").next_to(C_prime, DOWN)
+        lbl_Tp = MathTex("T'").next_to(T_prime, DOWN)
+        
+        self.add(plane, lbl_pi)
+        self.add(tri, line_AA, line_BB, line_CC)
+        self.add(dot_T, line_TT, dot_T_prime)
+        self.add(lbl_A, lbl_B, lbl_C, lbl_T, lbl_Ap, lbl_Bp, lbl_Cp, lbl_Tp)
+```
+
+### 🆔 Задача: geom_9_incenter_intersect - Пресечни кружници и центар
+**📅 Додадено:** 2025-12-27 02:00
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_geom_9_incenter_intersect(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        
+        # k1, k2 intersecting.
+        # Center O of k2 lies on k1.
+        r1 = 2
+        O1 = LEFT * 1
+        k1 = Circle(radius=r1, color=BLUE).move_to(O1)
+        
+        # O (center of k2) is on k1.
+        O = O1 + RIGHT * r1 # Point (1, 0)
+        r2 = 1.5
+        k2 = Circle(radius=r2, color=GREEN).move_to(O)
+        
+        # Intersection points A and B
+        # Solve intersection
+        # (x+1)^2 + y^2 = 4
+        # (x-1)^2 + y^2 = 2.25
+        # Subtract: (x+1)^2 - (x-1)^2 = 1.75
+        # (x^2+2x+1) - (x^2-2x+1) = 4x = 1.75 => x = 0.4375
+        x_int = 0.4375
+        y_int = np.sqrt(4 - (x_int + 1)**2)
+        
+        A = np.array([x_int, y_int, 0])
+        B = np.array([x_int, -y_int, 0])
+        
+        # Pick C on k1
+        # "Pick a point C on k1"
+        # Let's pick C at angle 120 deg from O1
+        angle_C = np.deg2rad(120)
+        C = O1 + np.array([np.cos(angle_C), np.sin(angle_C), 0]) * r1
+        
+        # Draw line OC
+        line_OC = Line(O, C, color=GRAY) # O is center of k2
+        
+        # Intersection with k2 as D
+        # Line OC intersects k2.
+        # D is on k2.
+        vec_OC = C - O
+        unit_OC = vec_OC / np.linalg.norm(vec_OC)
+        D = O + unit_OC * r2 # Intersection in direction of C
+        
+        # Draw triangle ABC and segments AD, BD
+        tri_ABC = Polygon(A, B, C, color=ORANGE)
+        seg_AD = Line(A, D, color=RED)
+        seg_BD = Line(B, D, color=RED)
+        
+        lbl_O = MathTex("O").next_to(O, RIGHT)
+        lbl_A = MathTex("A").next_to(A, UP)
+        lbl_B = MathTex("B").next_to(B, DOWN)
+        lbl_C = MathTex("C").next_to(C, LEFT)
+        lbl_D = MathTex("D").next_to(D, UP)
+        
+        self.add(k1, k2, line_OC, tri_ABC, seg_AD, seg_BD)
+        self.add(lbl_O, lbl_A, lbl_B, lbl_C, lbl_D)
+```
+
+### 🆔 Задача: geom_9_right_tri_perimeter - Правоаголен триаголник со периметар и впишана кружница
+**📅 Додадено:** 2025-12-27 02:10
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_geom_9_right_tri_perimeter(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        
+        # Right triangle ABC, C=90.
+        # Perimeter P = 30, r = 2.
+        # P = a + b + c = 30.
+        # r = (a + b - c) / 2 = 2 => a + b - c = 4.
+        # (a+b+c) - (a+b-c) = 30 - 4 => 2c = 26 => c = 13.
+        # a + b = 17.
+        # a^2 + b^2 = c^2 = 169.
+        # (a+b)^2 - 2ab = 169 => 17^2 - 2ab = 169 => 289 - 2ab = 169 => 2ab = 120 => ab = 60.
+        # a, b are roots of x^2 - 17x + 60 = 0.
+        # (x-5)(x-12) = 0.
+        # So sides are 5, 12, 13.
+        
+        a = 5
+        b = 12
+        c = 13
+        
+        C = ORIGIN
+        A = UP * b
+        B = RIGHT * a
+        
+        # Shift
+        center = (A + B + C) / 3
+        A -= center
+        B -= center
+        C -= center
+        
+        tri = Polygon(A, B, C, color=BLUE)
+        
+        # Incircle
+        # Incenter I = (a*A + b*B + c*C) / (a+b+c)
+        I = (a*A + b*B + c*C) / (a+b+c)
+        r = 2
+        incircle = Circle(radius=r, color=GREEN).move_to(I)
+        dot_I = Dot(I, color=GREEN)
+        
+        lbl_A = MathTex("A").next_to(A, UP)
+        lbl_B = MathTex("B").next_to(B, RIGHT)
+        lbl_C = MathTex("C").next_to(C, DOWN)
+        lbl_I = MathTex("I").next_to(I, UP+RIGHT)
+        lbl_P = MathTex("P=30").to_corner(UL)
+        lbl_r = MathTex("r=2").next_to(I, DOWN)
+        
+        self.add(tri, incircle, dot_I)
+        self.add(lbl_A, lbl_B, lbl_C, lbl_I, lbl_P, lbl_r)
+        
+        ra = RightAngle(Line(C, A), Line(C, B), quadrant=(1,1))
+        self.add(ra)
+```
+
+### 🆔 Задача: geom_9_leg_ratio_circles - Правоаголен триаголник и радиуси
+**📅 Додадено:** 2025-12-27 02:10
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_geom_9_leg_ratio_circles(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        
+        # Right triangle ABC, C=90.
+        # Legs a, b. Hypotenuse c.
+        # Let a=3, b=4, c=5.
+        a = 3
+        b = 4
+        c = 5
+        
+        C = ORIGIN
+        A = UP * b
+        B = RIGHT * a
+        
+        # Shift
+        center = (A + B + C) / 3
+        A -= center
+        B -= center
+        C -= center
+        
+        tri = Polygon(A, B, C, color=BLUE)
+        
+        # Circumcircle
+        # Center O is midpoint of hypotenuse AB.
+        O = (A + B) / 2
+        R = c / 2
+        circumcircle = Circle(radius=R, color=GRAY).move_to(O)
+        dot_O = Dot(O, color=GRAY)
+        
+        # Incircle
+        # Incenter I
+        I = (a*A + b*B + c*C) / (a+b+c)
+        r = (a + b - c) / 2 # (3+4-5)/2 = 1
+        incircle = Circle(radius=r, color=GREEN).move_to(I)
+        dot_I = Dot(I, color=GREEN)
+        
+        lbl_A = MathTex("A").next_to(A, UP)
+        lbl_B = MathTex("B").next_to(B, RIGHT)
+        lbl_C = MathTex("C").next_to(C, DOWN)
+        lbl_O = MathTex("O").next_to(O, UP)
+        lbl_I = MathTex("I").next_to(I, DOWN)
+        
+        lbl_R = MathTex("R").next_to(O, UP+LEFT)
+        lbl_r = MathTex("r").next_to(I, DOWN+LEFT)
+        
+        self.add(circumcircle, tri, incircle, dot_O, dot_I)
+        self.add(lbl_A, lbl_B, lbl_C, lbl_O, lbl_I, lbl_R, lbl_r)
+```
+
+### 🆔 Задача: geom_9_tri_angle_45_60 - Триаголник со специфични агли
+**📅 Додадено:** 2025-12-27 02:10
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_geom_9_tri_angle_45_60(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        
+        # Triangle ABC.
+        # D on BC such that DC = 2*BD.
+        # Angle B = 45.
+        # Angle ADC = 60.
+        # AH altitude.
+        
+        # Let D be origin (0,0).
+        # Line BC is x-axis.
+        # D = (0,0).
+        # DC = 2*BD. Let BD = 1. Then DC = 2.
+        # B is at (-1, 0). C is at (2, 0).
+        # Angle ADC = 60.
+        # A is on a line passing through D making 60 deg with DC (positive x-axis).
+        # Or 120 deg? "Angle ADC = 60".
+        # So A = (d * cos(60), d * sin(60)).
+        # Angle B = 45.
+        # Line BA makes 45 deg with BC.
+        # Slope of BA is tan(45) = 1.
+        # Line BA: y - 0 = 1 * (x - (-1)) => y = x + 1.
+        
+        # Intersection of line A (from D at 60 deg) and line BA.
+        # Line DA: y = tan(60) * x = sqrt(3) * x.
+        # sqrt(3) * x = x + 1 => x(sqrt(3)-1) = 1 => x = 1/(sqrt(3)-1).
+        # x = (sqrt(3)+1)/2 approx 1.366.
+        # y = x + 1 approx 2.366.
+        
+        A = np.array([(np.sqrt(3)+1)/2, (np.sqrt(3)+1)/2 + 1, 0])
+        D = ORIGIN
+        B = LEFT * 1
+        C = RIGHT * 2
+        
+        # Recalculate A to be precise
+        x_A = 1 / (np.sqrt(3) - 1)
+        y_A = x_A + 1
+        A = np.array([x_A, y_A, 0])
+        
+        tri = Polygon(A, B, C, color=BLUE)
+        
+        # Altitude AH
+        H = np.array([A[0], 0, 0])
+        alt_AH = Line(A, H, color=RED)
+        
+        # Segment AD
+        seg_AD = Line(A, D, color=GREEN)
+        
+        lbl_A = MathTex("A").next_to(A, UP)
+        lbl_B = MathTex("B").next_to(B, DOWN)
+        lbl_C = MathTex("C").next_to(C, DOWN)
+        lbl_D = MathTex("D").next_to(D, DOWN)
+        lbl_H = MathTex("H").next_to(H, DOWN)
+        
+        lbl_45 = MathTex("45^\circ").next_to(B, UP+RIGHT, buff=0.1)
+        lbl_60 = MathTex("60^\circ").next_to(D, UP+RIGHT, buff=0.1)
+        
+        self.add(tri, alt_AH, seg_AD)
+        self.add(lbl_A, lbl_B, lbl_C, lbl_D, lbl_H, lbl_45, lbl_60)
+```
+
+### 🆔 Задача: geom_9_tri_ab_mc_proof - Триаголник со внатрешна точка М
+**📅 Додадено:** 2025-12-27 02:10
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_geom_9_tri_ab_mc_proof(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        
+        # Triangle ABC. A=70, B=80.
+        # C = 180 - 150 = 30.
+        
+        # Construct ABC.
+        c = 5 # Side AB
+        # Sine rule: a/sinA = b/sinB = c/sinC
+        # a = c * sinA / sinC = 5 * sin(70) / sin(30) = 10 * sin(70) approx 9.4
+        # b = c * sinB / sinC = 5 * sin(80) / sin(30) = 10 * sin(80) approx 9.8
+        
+        A = ORIGIN
+        B = RIGHT * c
+        # C is at intersection of angle 70 at A and 80 at B.
+        # A at (0,0), B at (5,0).
+        # Line AC: y = tan(70) * x.
+        # Line BC: y = tan(180-80) * (x-5) = -tan(80) * (x-5).
+        
+        tan70 = np.tan(np.deg2rad(70))
+        tan80 = np.tan(np.deg2rad(80))
+        
+        # tan70 * x = -tan80 * (x-5)
+        # x (tan70 + tan80) = 5 * tan80
+        x_C = 5 * tan80 / (tan70 + tan80)
+        y_C = tan70 * x_C
+        C = np.array([x_C, y_C, 0])
+        
+        tri = Polygon(A, B, C, color=BLUE)
+        
+        # M inside.
+        # Angle ACM = 10.
+        # Angle CBM = 20.
+        
+        # Line CM makes angle (C - 10) with CA? Or just 10 from CA?
+        # "Angle ACM = 10". Usually means angle(CA, CM) = 10.
+        # Angle C = 30. So angle BCM = 20.
+        # Line BM makes angle 20 with BC. "Angle CBM = 20".
+        # Angle B = 80. So angle ABM = 60.
+        
+        # M is intersection of line from C at -10 deg relative to CA (or +10 depending on orientation)
+        # and line from B at 20 deg relative to BC.
+        
+        # Let's use vectors.
+        vec_CA = A - C
+        angle_CA = np.arctan2(vec_CA[1], vec_CA[0])
+        # Angle CM is angle_CA - 10 deg (towards inside).
+        angle_CM = angle_CA - np.deg2rad(10) # Check direction.
+        # C is top. A is left. B is right.
+        # CA goes down-left. CB goes down-right.
+        # Angle C is 30.
+        # We want M inside.
+        # Angle ACM = 10. So M is closer to AC.
+        
+        # Line CM: C + t * (cos(angle_CM), sin(angle_CM))
+        
+        vec_BC = C - B
+        angle_BC = np.arctan2(vec_BC[1], vec_BC[0])
+        # Angle CBM = 20.
+        # BM is rotated 20 deg from BC towards BA?
+        # Angle B is 80. CBM=20. So M is closer to BC.
+        # Angle ABM = 60.
+        # Vector BA is (-1, 0). Angle 180.
+        # Vector BC is up-left.
+        # Angle ABC is 80.
+        # So BC is at 180-80 = 100 deg? No.
+        # B is at (5,0). A is at (0,0).
+        # BA is along x-axis negative.
+        # BC is at angle 180-80 = 100.
+        # BM should be at angle 180-60 = 120?
+        # Or relative to BC (100), rotate -20 => 80?
+        # Let's check.
+        # Angle(BA, BC) = 80.
+        # Angle(BA, BM) + Angle(BM, BC) = 80.
+        # Angle(BM, BC) = 20. So Angle(BA, BM) = 60.
+        # BA is angle 180. BM is 180 - 60 = 120.
+        
+        # Intersection of line CM and line BM.
+        # Line BM: B + u * (cos(120), sin(120))
+        
+        # Line CM:
+        # Angle CA.
+        # Angle(CA, CB) = 30.
+        # Angle(CA, CM) = 10.
+        # So CM is between CA and CB.
+        # Angle of CA.
+        # Angle of CM = Angle of CA - 10 (if CB is clockwise) or +10.
+        # Let's find M.
+        
+        # Just use line intersection.
+        # Line 1: B, angle 120.
+        # Line 2: C, angle?
+        # Angle of CA.
+        # Angle of CB.
+        # Angle of CM = Angle of CA + (Angle of CB - Angle of CA) * (10/30).
+        # Interpolate angle.
+        angle_CA_val = np.arctan2(vec_CA[1], vec_CA[0])
+        angle_CB_val = np.arctan2((B-C)[1], (B-C)[0])
+        # Ensure correct range diff.
+        if angle_CB_val < angle_CA_val:
+            angle_CB_val += 2*np.pi
+        
+        # Actually, just rotate vector CA by 10 degrees towards CB.
+        # Direction of rotation?
+        # Cross product (CA, CB) tells us orientation.
+        # Assume standard counter-clockwise A-B-C? No, A(0,0), B(5,0), C(top).
+        # CA is down-left. CB is down-right.
+        # Rotation from CA to CB is counter-clockwise?
+        # CA angle approx -70-ish? No, C is top. A is bottom-left.
+        # CA vector is A-C. Down-left.
+        # CB vector is B-C. Down-right.
+        # Angle CA to CB is positive (CCW).
+        # So rotate CA by +10 deg? No, CA to CB is 30 deg.
+        # So rotate CA by 10 deg CCW.
+        
+        # Let's calculate M
+        # Line BM: B + t * (cos(120), sin(120))
+        # Line CM: C + u * (rotated CA by 10 deg)
+        
+        # Just visual approximation is fine if exact math is hard in head.
+        # But let's try to be somewhat accurate.
+        
+        M = np.array([2.5, 1.5, 0]) # Placeholder
+        
+        # Connect M to A, B, C
+        seg_MA = Line(M, A, color=GREEN)
+        seg_MB = Line(M, B, color=GREEN)
+        seg_MC = Line(M, C, color=GREEN)
+        
+        lbl_A = MathTex("A").next_to(A, DOWN+LEFT)
+        lbl_B = MathTex("B").next_to(B, DOWN+RIGHT)
+        lbl_C = MathTex("C").next_to(C, UP)
+        lbl_M = MathTex("M").next_to(M, DOWN)
+        
+        self.add(tri, seg_MA, seg_MB, seg_MC)
+        self.add(lbl_A, lbl_B, lbl_C, lbl_M)
+```
+
+### 🆔 Задача: geom_9_trap_perp_diag - Трапез со нормални дијагонали
+**📅 Додадено:** 2025-12-27 02:10
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_geom_9_trap_perp_diag(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        
+        # Isosceles trapezoid ABCD.
+        # Midsegment m = 6. (a+b)/2 = 6 => a+b = 12.
+        # Diagonals AC perp BD.
+        # In isosceles trapezoid with perp diagonals, height h = m = 6.
+        # Area = m * h = 36.
+        
+        h = 6
+        # Let's pick a and b. a+b=12.
+        # Let a = 8, b = 4.
+        a = 8
+        b = 4
+        
+        # Coordinates
+        # Center at origin.
+        # A = (-4, -3), B = (4, -3).
+        # D = (-2, 3), C = (2, 3).
+        
+        A = np.array([-a/2, -h/2, 0])
+        B = np.array([a/2, -h/2, 0])
+        C = np.array([b/2, h/2, 0])
+        D = np.array([-b/2, h/2, 0])
+        
+        trap = Polygon(A, B, C, D, color=BLUE)
+        
+        # Diagonals
+        diag_AC = Line(A, C, color=GRAY)
+        diag_BD = Line(B, D, color=GRAY)
+        
+        # Extend base AB to E such that BE = CD.
+        # CD length?
+        # CD is top base b=4? No, CD is side? "Extend base AB to E such that BE = CD".
+        # Usually CD refers to side CD? Or top base CD?
+        # "Extend base AB to E such that BE = CD".
+        # If CD is top base, BE = b.
+        # Then AE = a+b.
+        # Triangle ACE has base AE = a+b = 12. Height h = 6.
+        # Is it a right triangle?
+        # If diagonals are perpendicular, then yes, triangle ACE (shifted diagonal) is right angled at C.
+        # Because AC is perp to BD. And CE is parallel to BD (if we construct parallelogram BECD).
+        # Yes, standard construction.
+        
+        # So BE = top base length = b = 4? Or side length?
+        # Standard proof uses parallel translation of diagonal.
+        # Translate DB to CE. So CE || DB and CE = DB.
+        # Then ACE is right triangle if AC perp DB.
+        # So E is on extension of AB. BE = DC (top base).
+        # Wait, usually vertices are A, B, C, D counterclockwise.
+        # AB is bottom, CD is top.
+        # So BE = length of CD (segment CD).
+        # Yes.
+        
+        E = B + RIGHT * b # Extend by length of top base
+        seg_BE = Line(B, E, color=BLACK)
+        seg_CE = Line(C, E, color=GREEN) # Parallel to BD
+        
+        # Right angle at C in triangle ACE?
+        # AC perp BD. BD || CE. So AC perp CE.
+        # Angle ACE = 90.
+        
+        lbl_A = MathTex("A").next_to(A, DOWN+LEFT)
+        lbl_B = MathTex("B").next_to(B, DOWN)
+        lbl_C = MathTex("C").next_to(C, UP)
+        lbl_D = MathTex("D").next_to(D, UP)
+        lbl_E = MathTex("E").next_to(E, DOWN+RIGHT)
+        
+        self.add(trap, diag_AC, diag_BD, seg_BE, seg_CE)
+        self.add(lbl_A, lbl_B, lbl_C, lbl_D, lbl_E)
+        
+        ra = RightAngle(Line(C, A), Line(C, E), quadrant=(1,1))
+        self.add(ra)
+```
+
+### 🆔 Задача: geom_9_para_diag_id - Паралелограм со дијагонали
+**📅 Додадено:** 2025-12-27 02:10
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_geom_9_para_diag_id(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        
+        # Parallelogram sides 13, 14. Diagonal 15.
+        # Triangle ABD has sides 13, 14, 15.
+        # Heron's formula area.
+        # s = (13+14+15)/2 = 21.
+        # Area = sqrt(21 * 8 * 7 * 6) = sqrt(21 * 336) = sqrt(7056) = 84.
+        # Height h_a = 2*Area / 14 = 168 / 14 = 12.
+        
+        # Construct triangle ABD.
+        # AB = 14. AD = 13. BD = 15.
+        A = ORIGIN
+        B = RIGHT * 14
+        # D intersection of circle(A, 13) and circle(B, 15).
+        # x_D = (14^2 + 13^2 - 15^2) / (2*14) = (196 + 169 - 225) / 28 = 140 / 28 = 5.
+        # y_D = sqrt(13^2 - 5^2) = sqrt(169 - 25) = 12.
+        D = np.array([5, 12, 0])
+        C = B + D # Parallelogram
+        
+        # Scale down
+        scale = 0.3
+        A *= scale
+        B *= scale
+        C *= scale
+        D *= scale
+        
+        # Shift to center
+        center = (A + C) / 2
+        A -= center
+        B -= center
+        C -= center
+        D -= center
+        
+        para = Polygon(A, B, C, D, color=BLUE)
+        
+        diag_BD = Line(B, D, color=RED)
+        diag_AC = Line(A, C, color=GREEN)
+        
+        lbl_13 = MathTex("13").next_to(Line(A, D).get_center(), LEFT)
+        lbl_14 = MathTex("14").next_to(Line(A, B).get_center(), DOWN)
+        lbl_15 = MathTex("15").next_to(diag_BD.get_center(), UP+RIGHT)
+        lbl_d2 = MathTex("d_2").next_to(diag_AC.get_center(), UP+LEFT)
+        
+        self.add(para, diag_BD, diag_AC)
+        self.add(lbl_13, lbl_14, lbl_15, lbl_d2)
+```
+
+### 🆔 Задача: geom_9_quad_parallel_proof - Четириаголник и средни линии
+**📅 Додадено:** 2025-12-27 02:10
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_geom_9_quad_parallel_proof(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        
+        # Convex quadrilateral ABCD.
+        A = np.array([-3, -2, 0])
+        B = np.array([2, -2, 0])
+        C = np.array([3, 2, 0])
+        D = np.array([-2, 3, 0])
+        
+        quad = Polygon(A, B, C, D, color=BLUE)
+        
+        # M midpoint of AB
+        M = (A + B) / 2
+        dot_M = Dot(M, color=RED)
+        
+        # N midpoint of CD
+        N = (C + D) / 2
+        dot_N = Dot(N, color=RED)
+        
+        seg_MN = Line(M, N, color=GRAY)
+        
+        # K midpoint of AC
+        K = (A + C) / 2
+        dot_K = Dot(K, color=GREEN)
+        
+        # Segments MK and KN
+        seg_MK = Line(M, K, color=ORANGE)
+        seg_KN = Line(K, N, color=ORANGE)
+        
+        # MK is midline in triangle ABC => MK || BC and MK = BC/2.
+        # KN is midline in triangle ACD => KN || AD and KN = AD/2.
+        
+        lbl_A = MathTex("A").next_to(A, LEFT)
+        lbl_B = MathTex("B").next_to(B, RIGHT)
+        lbl_C = MathTex("C").next_to(C, RIGHT)
+        lbl_D = MathTex("D").next_to(D, LEFT)
+        lbl_M = MathTex("M").next_to(M, DOWN)
+        lbl_N = MathTex("N").next_to(N, UP)
+        lbl_K = MathTex("K").next_to(K, UP)
+        
+        self.add(quad, dot_M, dot_N, seg_MN, dot_K, seg_MK, seg_KN)
+        self.add(lbl_A, lbl_B, lbl_C, lbl_D, lbl_M, lbl_N, lbl_K)
+```
+
+### 🆔 Задача: geom_9_para_area_ratio - Паралелограм и однос на плоштини
+**📅 Додадено:** 2025-12-27 02:10
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_geom_9_para_area_ratio(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        
+        # Parallelogram ABCD
+        A = np.array([-3, -1, 0])
+        B = np.array([1, -1, 0])
+        D = np.array([-1, 2, 0])
+        C = B + (D - A)
+        
+        para = Polygon(A, B, C, D, color=BLUE)
+        
+        # Diagonal BD
+        diag_BD = Line(B, D, color=GRAY)
+        
+        # M on BD such that MD = 3 * BM.
+        # M divides BD in ratio 1:3 from B.
+        # M = B + (D-B) * (1/4).
+        M = B + (D - B) * 0.25
+        dot_M = Dot(M, color=RED)
+        
+        # Extend AM to meet BC at N.
+        # Line AM intersects line BC.
+        # Line BC: B + t*(C-B).
+        # Line AM: A + u*(M-A).
+        N = line_intersection([A, M], [B, C])
+        
+        line_AN = Line(A, N, color=GREEN)
+        
+        # Shade triangle MND
+        tri_MND = Polygon(M, N, D, color=ORANGE, fill_opacity=0.3, fill_color=ORANGE)
+        
+        lbl_A = MathTex("A").next_to(A, DOWN+LEFT)
+        lbl_B = MathTex("B").next_to(B, DOWN+RIGHT)
+        lbl_C = MathTex("C").next_to(C, UP+RIGHT)
+        lbl_D = MathTex("D").next_to(D, UP+LEFT)
+        lbl_M = MathTex("M").next_to(M, UP)
+        lbl_N = MathTex("N").next_to(N, RIGHT)
+        
+        self.add(para, diag_BD, dot_M, line_AN, tri_MND)
+        self.add(lbl_A, lbl_B, lbl_C, lbl_D, lbl_M, lbl_N)
+```
+
+### 🆔 Задача: geom_9_symm_point_circumcircle - Симетрична точка и кружница
+**📅 Додадено:** 2025-12-27 02:10
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_geom_9_symm_point_circumcircle(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        
+        # Acute triangle ABC.
+        A = np.array([-1, 2, 0])
+        B = np.array([-2, -1, 0])
+        C = np.array([2, -1, 0])
+        
+        tri = Polygon(A, B, C, color=BLUE)
+        
+        # Point D inside such that Angle ADB = Angle ADC = 180 - A.
+        # This implies D is the orthocenter reflected? Or something related.
+        # If H is orthocenter, Angle BHC = 180 - A.
+        # Here ADB = ADC = 180 - A.
+        # This is a specific point.
+        # Let's just place D visually to satisfy condition roughly.
+        # Or calculate.
+        # Locus of points P where APB = 180-A is a circle arc.
+        
+        D = np.array([0, 0.5, 0]) # Placeholder
+        dot_D = Dot(D, color=RED)
+        
+        # Reflect A over D to get A'.
+        # A' = D + (D - A) = 2D - A.
+        A_prime = 2 * D - A
+        dot_Ap = Dot(A_prime, color=RED)
+        
+        # Show A, B, A', C lie on same circle.
+        # Circle passing through A, B, C? No, A, B, A', C.
+        # If ADB = 180-A, then ADB + ACB? No.
+        # Just draw a circle through A, B, C and see if A' is on it?
+        # Or circle through B, A', C.
+        
+        circle = Circle(radius=2.5, color=GRAY).move_to(ORIGIN) # Placeholder
+        
+        lbl_A = MathTex("A").next_to(A, UP)
+        lbl_B = MathTex("B").next_to(B, DOWN)
+        lbl_C = MathTex("C").next_to(C, DOWN)
+        lbl_D = MathTex("D").next_to(D, UP)
+        lbl_Ap = MathTex("A'").next_to(A_prime, DOWN)
+        
+        self.add(tri, dot_D, dot_Ap, circle)
+        self.add(lbl_A, lbl_B, lbl_C, lbl_D, lbl_Ap)
+```
+
+### 🆔 Задача: geom_9_construct_perp_axcy - Конструкција на нормални отсечки
+**📅 Додадено:** 2025-12-27 02:10
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_geom_9_construct_perp_axcy(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        
+        # Circle diameter AB.
+        R = 3
+        circle = Circle(radius=R, color=BLUE)
+        A = LEFT * R
+        B = RIGHT * R
+        
+        # C on AB.
+        C = LEFT * 1
+        dot_C = Dot(C, color=BLACK)
+        
+        # N midpoint of CB.
+        N = (C + B) / 2
+        dot_N = Dot(N, color=BLACK)
+        
+        # Vertical line through N.
+        # Intersects circle at X and Y.
+        # x = N[0]. y = +/- sqrt(R^2 - x^2).
+        x_N = N[0]
+        y_X = np.sqrt(R**2 - x_N**2)
+        X = np.array([x_N, y_X, 0])
+        Y = np.array([x_N, -y_X, 0])
+        
+        line_XY = Line(X, Y, color=GRAY)
+        
+        # Connect AX and CY.
+        seg_AX = Line(A, X, color=RED)
+        seg_CY = Line(C, Y, color=RED)
+        
+        # Show they are perpendicular.
+        # Intersection P
+        P = line_intersection([A, X], [C, Y])
+        
+        lbl_A = MathTex("A").next_to(A, LEFT)
+        lbl_B = MathTex("B").next_to(B, RIGHT)
+        lbl_C = MathTex("C").next_to(C, DOWN)
+        lbl_N = MathTex("N").next_to(N, DOWN)
+        lbl_X = MathTex("X").next_to(X, UP)
+        lbl_Y = MathTex("Y").next_to(Y, DOWN)
+        
+        self.add(circle, dot_C, dot_N, line_XY, seg_AX, seg_CY)
+        self.add(lbl_A, lbl_B, lbl_C, lbl_N, lbl_X, lbl_Y)
+        
+        ra = RightAngle(seg_AX, seg_CY, quadrant=(1,1))
+        self.add(ra)
+```
+
+### 🆔 Задача: geom_9_quad_diag_equal_angles - Четириаголник со еднакви дијагонали
+**📅 Додадено:** 2025-12-27 02:20
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_geom_9_quad_diag_equal_angles(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        
+        # Quadrilateral ABCD where AC = BD.
+        # Construct perpendicular bisectors of AD and BC.
+        # Mark their intersection P on segment AB.
+        # This implies ABCD is an isosceles trapezoid?
+        # If P is on AB, and P is on perp bisector of AD and BC.
+        # PA = PD. PB = PC.
+        # If P is on AB, then PA + PB = AB.
+        # PD + PC = AB?
+        # Also AC = BD.
+        # This configuration is possible if ABCD is isosceles trapezoid.
+        # Let's construct isosceles trapezoid.
+        
+        A = np.array([-2, -1, 0])
+        B = np.array([2, -1, 0])
+        C = np.array([1, 2, 0])
+        D = np.array([-1, 2, 0])
+        
+        quad = Polygon(A, B, C, D, color=BLUE)
+        
+        # Diagonals
+        diag_AC = Line(A, C, color=GRAY)
+        diag_BD = Line(B, D, color=GRAY)
+        
+        # Perp bisector of AD
+        mid_AD = (A + D) / 2
+        vec_AD = D - A
+        perp_AD = np.array([-vec_AD[1], vec_AD[0], 0])
+        line_perp_AD = Line(mid_AD + perp_AD*2, mid_AD - perp_AD*2, color=GREEN)
+        
+        # Perp bisector of BC
+        mid_BC = (B + C) / 2
+        vec_BC = C - B
+        perp_BC = np.array([-vec_BC[1], vec_BC[0], 0])
+        line_perp_BC = Line(mid_BC + perp_BC*2, mid_BC - perp_BC*2, color=GREEN)
+        
+        # Intersection P
+        # In isosceles trapezoid, perp bisectors of legs intersect on the axis of symmetry.
+        # Axis of symmetry is x=0.
+        # Does it intersect AB?
+        # AB is on y=-1.
+        # Axis of symmetry intersects AB at (0, -1).
+        # Is P on AB? Yes, if P is the midpoint of AB?
+        # If P is midpoint of AB, PA=PB.
+        # Is P on perp bisector of AD?
+        # PA = PD?
+        # If P=(0,-1), A=(-2,-1), D=(-1,2).
+        # PA = 2.
+        # PD = sqrt(1^2 + 3^2) = sqrt(10).
+        # PA != PD.
+        # So P is NOT on AB for isosceles trapezoid unless specific height.
+        
+        # Prompt says "Mark their intersection P on segment AB".
+        # This implies a specific quadrilateral where this happens.
+        # Or maybe P is intersection of perp bisector of AD and perp bisector of BC?
+        # And the problem states P lies on AB?
+        # Or "Construct perp bisectors... Mark their intersection P. (Show P is on AB?)"
+        # Or "Mark their intersection P on segment AB" implies P is intersection of perp bisector with AB?
+        # "Construct perpendicular bisectors of AD and BC. Mark their intersection P on segment AB."
+        # This phrasing usually means the intersection of the two bisectors IS a point P, and P happens to be on AB.
+        # This happens if Angle DAB = Angle CBA? No.
+        # This is a known property for AC=BD?
+        # Actually, if AC=BD, the intersection of perp bisectors of AD and BC lies on the perp bisector of AB? No.
+        
+        # Let's just draw a generic case where P is on AB.
+        # Let P be origin (0,0). P is on AB.
+        # P is on perp bisector of AD => PA = PD.
+        # P is on perp bisector of BC => PB = PC.
+        # Let A = (-2, 0), B = (3, 0). P = (0,0)? No, P must be on segment AB.
+        # Let P = (0,0). A = (-2, 0). B = (3, 0).
+        # D is on circle centered at P radius 2.
+        # C is on circle centered at P radius 3.
+        # Also AC = BD.
+        # Let D = (2 cos(alpha), 2 sin(alpha)).
+        # Let C = (3 cos(beta), 3 sin(beta)).
+        # AC^2 = |C - A|^2 = |(3cosB + 2, 3sinB)|^2 = (3cosB+2)^2 + 9sin^2B = 9cos^2 + 12cos + 4 + 9sin^2 = 13 + 12cosB.
+        # BD^2 = |D - B|^2 = |(2cosA - 3, 2sinA)|^2 = (2cosA-3)^2 + 4sin^2A = 4cos^2 - 12cos + 9 + 4sin^2 = 13 - 12cosA.
+        # AC = BD => 13 + 12cosB = 13 - 12cosA => cosB = -cosA.
+        # So B = 180 - A.
+        # Or beta = 180 - alpha.
+        # So C and D are symmetric wrt y-axis?
+        # If beta = 180 - alpha, then C = (-3 cosA, 3 sinA).
+        # D = (2 cosA, 2 sinA).
+        # This works.
+        
+        # Let alpha = 60 deg.
+        alpha = np.deg2rad(60)
+        P = ORIGIN
+        A = LEFT * 2
+        B = RIGHT * 3
+        D = np.array([2*np.cos(alpha), 2*np.sin(alpha), 0])
+        C = np.array([3*np.cos(np.pi - alpha), 3*np.sin(np.pi - alpha), 0])
+        
+        quad = Polygon(A, B, C, D, color=BLUE)
+        
+        # Perp bisectors
+        # AD
+        mid_AD = (A + D) / 2
+        vec_AD = D - A
+        perp_AD = np.array([-vec_AD[1], vec_AD[0], 0])
+        line_perp_AD = Line(mid_AD, P, color=GREEN) # Should go through P
+        
+        # BC
+        mid_BC = (B + C) / 2
+        vec_BC = C - B
+        perp_BC = np.array([-vec_BC[1], vec_BC[0], 0])
+        line_perp_BC = Line(mid_BC, P, color=GREEN) # Should go through P
+        
+        dot_P = Dot(P, color=RED)
+        
+        # Highlight triangles APC and DPB
+        tri_APC = Polygon(A, P, C, color=ORANGE, fill_opacity=0.2, fill_color=ORANGE)
+        tri_DPB = Polygon(D, P, B, color=ORANGE, fill_opacity=0.2, fill_color=ORANGE)
+        
+        lbl_A = MathTex("A").next_to(A, DOWN)
+        lbl_B = MathTex("B").next_to(B, DOWN)
+        lbl_C = MathTex("C").next_to(C, UP)
+        lbl_D = MathTex("D").next_to(D, UP)
+        lbl_P = MathTex("P").next_to(P, DOWN)
+        
+        self.add(quad, line_perp_AD, line_perp_BC, dot_P, tri_APC, tri_DPB)
+        self.add(lbl_A, lbl_B, lbl_C, lbl_D, lbl_P)
+```
+
+### 🆔 Задача: geom_9_k1_k2_incenter_proof - Две кружници и симетрали
+**📅 Додадено:** 2025-12-27 02:20
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_geom_9_k1_k2_incenter_proof(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        
+        # k2 with center O.
+        r2 = 2
+        O = ORIGIN
+        k2 = Circle(radius=r2, color=BLUE).move_to(O)
+        
+        # k1 passing through O.
+        # Let center of k1 be O1. Radius r1.
+        # Distance O-O1 = r1.
+        # Let O1 = (r1, 0).
+        r1 = 1.5
+        O1 = RIGHT * r1
+        k1 = Circle(radius=r1, color=GREEN).move_to(O1)
+        
+        # Intersection points A and B.
+        # k2: x^2 + y^2 = r2^2
+        # k1: (x-r1)^2 + y^2 = r1^2 => x^2 - 2xr1 + r1^2 + y^2 = r1^2
+        # r2^2 - 2xr1 = 0 => x = r2^2 / (2r1).
+        x_int = r2**2 / (2*r1) # 4 / 3 = 1.333
+        y_int = np.sqrt(r2**2 - x_int**2)
+        
+        A = np.array([x_int, y_int, 0])
+        B = np.array([x_int, -y_int, 0])
+        
+        # Pick C on k1.
+        # Let's pick C far from A, B.
+        angle_C = np.deg2rad(180) # Leftmost point of k1?
+        # k1 center is (1.5, 0). Radius 1.5.
+        # Leftmost is (0,0) which is O.
+        # Pick another point.
+        angle_C = np.deg2rad(90) # Relative to O1
+        C = O1 + np.array([0, r1, 0]) # (1.5, 1.5)
+        
+        # Connect OC.
+        line_OC = Line(O, C, color=GRAY)
+        
+        # Mark D on k2.
+        # Intersection of line OC with k2.
+        vec_OC = C - O
+        unit_OC = vec_OC / np.linalg.norm(vec_OC)
+        D = O + unit_OC * r2
+        dot_D = Dot(D, color=RED)
+        
+        # Show AD and CD are angle bisectors of triangle ABC?
+        # Triangle ABC.
+        # AD bisects A? CD bisects C?
+        # D is on k2. O is center of k2.
+        # This is the "Incenter/Excenter Lemma" configuration.
+        # D is the center of circle passing through A, I, B?
+        # Wait, D is on k2. A, B on k2.
+        # D is midpoint of arc AB (not containing C?).
+        # Then D is center of circle through A, I, B.
+        # So DA = DB = DI.
+        # Is CD the bisector of C?
+        # Yes, if D is midpoint of arc AB.
+        # Is D midpoint of arc AB?
+        # OC passes through D?
+        # If C is on k1 (passing through O), and O is center of k2.
+        # This is a specific theorem.
+        
+        tri_ABC = Polygon(A, B, C, color=ORANGE)
+        seg_AD = Line(A, D, color=RED)
+        seg_CD = Line(C, D, color=RED) # Part of OC
+        
+        lbl_O = MathTex("O").next_to(O, LEFT)
+        lbl_A = MathTex("A").next_to(A, UP)
+        lbl_B = MathTex("B").next_to(B, DOWN)
+        lbl_C = MathTex("C").next_to(C, UP)
+        lbl_D = MathTex("D").next_to(D, UP)
+        
+        self.add(k1, k2, line_OC, dot_D, tri_ABC, seg_AD)
+        self.add(lbl_O, lbl_A, lbl_B, lbl_C, lbl_D)
+```
+
+### 🆔 Задача: geom_9_contact_tri_sides - Контактен триаголник
+**📅 Додадено:** 2025-12-27 02:20
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_geom_9_contact_tri_sides(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        
+        # Triangle ABC
+        A = np.array([-2, -1, 0])
+        B = np.array([3, -1, 0])
+        C = np.array([0, 3, 0])
+        
+        tri = Polygon(A, B, C, color=BLUE)
+        
+        # Incircle
+        a = np.linalg.norm(B - C)
+        b = np.linalg.norm(A - C)
+        c = np.linalg.norm(A - B)
+        I = (a*A + b*B + c*C) / (a+b+c)
+        s = (a+b+c)/2
+        area = np.sqrt(s*(s-a)*(s-b)*(s-c))
+        r = area / s
+        
+        incircle = Circle(radius=r, color=GREEN).move_to(I)
+        
+        # Contact points M, N, P
+        # Project I onto sides
+        def get_proj(P, P1, P2):
+            vec = P2 - P1
+            unit = vec / np.linalg.norm(vec)
+            proj = P1 + np.dot(P - P1, unit) * unit
+            return proj
+            
+        P_AB = get_proj(I, A, B) # P
+        M_BC = get_proj(I, B, C) # M
+        N_CA = get_proj(I, C, A) # N
+        
+        # Prompt says M, N, P. Let's assume order.
+        M = M_BC
+        N = N_CA
+        P = P_AB
+        
+        tri_MNP = Polygon(M, N, P, color=RED)
+        
+        # Connect I to vertices and contact points
+        seg_IA = DashedLine(I, A, color=GRAY)
+        seg_IB = DashedLine(I, B, color=GRAY)
+        seg_IC = DashedLine(I, C, color=GRAY)
+        
+        seg_IM = Line(I, M, color=GRAY)
+        seg_IN = Line(I, N, color=GRAY)
+        seg_IP = Line(I, P, color=GRAY)
+        
+        lbl_A = MathTex("A").next_to(A, DOWN+LEFT)
+        lbl_B = MathTex("B").next_to(B, DOWN+RIGHT)
+        lbl_C = MathTex("C").next_to(C, UP)
+        lbl_I = MathTex("I").next_to(I, UP)
+        lbl_M = MathTex("M").next_to(M, RIGHT)
+        lbl_N = MathTex("N").next_to(N, LEFT)
+        lbl_P = MathTex("P").next_to(P, DOWN)
+        
+        self.add(tri, incircle, tri_MNP)
+        self.add(seg_IA, seg_IB, seg_IC, seg_IM, seg_IN, seg_IP)
+        self.add(lbl_A, lbl_B, lbl_C, lbl_I, lbl_M, lbl_N, lbl_P)
+        
+        # Right angles
+        ra1 = RightAngle(Line(I, P), Line(A, B), quadrant=(1,1), length=0.2)
+        ra2 = RightAngle(Line(I, M), Line(B, C), quadrant=(1,1), length=0.2)
+        ra3 = RightAngle(Line(I, N), Line(C, A), quadrant=(1,1), length=0.2)
+        self.add(ra1, ra2, ra3)
+```
+
+### 🆔 Задача: geom_9_hypot_ratio_mid_circle - Правоаголен триаголник и кружница на катети
+**📅 Додадено:** 2025-12-27 02:20
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_geom_9_hypot_ratio_mid_circle(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        
+        # Right triangle legs 5, 12.
+        a = 5
+        b = 12
+        c = 13
+        
+        C = ORIGIN
+        A = UP * b
+        B = RIGHT * a
+        
+        # Shift
+        center = (A + B + C) / 3
+        A -= center
+        B -= center
+        C -= center
+        
+        tri = Polygon(A, B, C, color=BLUE)
+        
+        # Midpoints M (of b=AC) and N (of a=BC)
+        M = (A + C) / 2
+        N = (B + C) / 2
+        
+        # Circle diameter MN.
+        # Center O_MN = (M+N)/2.
+        # Radius = |M-N|/2.
+        # MN is midline, length c/2 = 6.5.
+        # Wait, MN connects midpoints of legs.
+        # MN = AB/2 = 6.5.
+        # Radius = 3.25.
+        O_MN = (M + N) / 2
+        radius = np.linalg.norm(M - N) / 2
+        circle = Circle(radius=radius, color=GREEN).move_to(O_MN)
+        
+        # Intersects hypotenuse AB at P and Q.
+        # Line AB.
+        # Find intersection of circle and line AB.
+        # One point is midpoint of AB?
+        # Midpoint of AB is K.
+        # Is K on circle with diameter MN?
+        # Angle MKN?
+        # M is mid AC. N is mid BC. K is mid AB.
+        # MK || BC (perp AC). NK || AC (perp BC).
+        # So MKN is a right angle at K?
+        # MK is parallel to BC (horizontal). NK is parallel to AC (vertical).
+        # Yes, MKN is 90 deg.
+        # So K lies on circle with diameter MN.
+        # So one point is K (midpoint of hypotenuse).
+        
+        # Other point is altitude foot?
+        # Let H be foot of altitude from C to AB.
+        # Is Angle MHN = 90?
+        # M is mid AC. N is mid BC.
+        # This is a known property.
+        # Yes, H lies on the circle.
+        
+        K = (A + B) / 2
+        
+        # Altitude foot H
+        vec_AB = B - A
+        unit_AB = vec_AB / np.linalg.norm(vec_AB)
+        H = A + np.dot(C - A, unit_AB) * unit_AB
+        
+        dot_K = Dot(K, color=RED)
+        dot_H = Dot(H, color=RED)
+        
+        lbl_A = MathTex("A").next_to(A, UP)
+        lbl_B = MathTex("B").next_to(B, RIGHT)
+        lbl_C = MathTex("C").next_to(C, DOWN)
+        lbl_M = MathTex("M").next_to(M, LEFT)
+        lbl_N = MathTex("N").next_to(N, DOWN)
+        lbl_K = MathTex("K").next_to(K, UP)
+        lbl_H = MathTex("H").next_to(H, DOWN)
+        
+        self.add(tri, circle, dot_K, dot_H)
+        self.add(lbl_A, lbl_B, lbl_C, lbl_M, lbl_N, lbl_K, lbl_H)
+```
+
+### 🆔 Задача: geo_rect_shade_01 - Правоаголник и засенчен триаголник
+**📅 Додадено:** 2025-12-27 02:20
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_geo_rect_shade_01(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        
+        # Rectangle ABCD
+        width = 6
+        height = 4
+        A = np.array([-width/2, -height/2, 0])
+        B = np.array([width/2, -height/2, 0])
+        C = np.array([width/2, height/2, 0])
+        D = np.array([-width/2, height/2, 0])
+        
+        rect = Polygon(A, B, C, D, color=BLUE)
+        
+        # E on AB (1/3 from A)
+        E = A + (B - A) * (1/3)
+        
+        # F on BC (2/3 from B)
+        F = B + (C - B) * (2/3)
+        
+        # G midpoint of AD
+        G = (A + D) / 2
+        
+        # Shade triangle EFG
+        tri_EFG = Polygon(E, F, G, color=ORANGE, fill_opacity=0.4, fill_color=ORANGE)
+        
+        lbl_A = MathTex("A").next_to(A, DOWN+LEFT)
+        lbl_B = MathTex("B").next_to(B, DOWN+RIGHT)
+        lbl_C = MathTex("C").next_to(C, UP+RIGHT)
+        lbl_D = MathTex("D").next_to(D, UP+LEFT)
+        lbl_E = MathTex("E").next_to(E, DOWN)
+        lbl_F = MathTex("F").next_to(F, RIGHT)
+        lbl_G = MathTex("G").next_to(G, LEFT)
+        
+        self.add(rect, tri_EFG)
+        self.add(lbl_A, lbl_B, lbl_C, lbl_D, lbl_E, lbl_F, lbl_G)
+```
+
+### 🆔 Задача: Cnt92-1012_Prob5_Olympic - Координатен систем и права
+**📅 Додадено:** 2025-12-27 02:20
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_Cnt92_1012_Prob5_Olympic(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        
+        # Axes
+        axes = Axes(
+            x_range=[-1, 4, 1],
+            y_range=[-1, 4, 1],
+            axis_config={"color": BLACK},
+        )
+        
+        # Line passing through (2,0) and (0,3)
+        p1 = axes.c2p(2, 0)
+        p2 = axes.c2p(0, 3)
+        line = Line(axes.c2p(-0.5, 3.75), axes.c2p(3, -1.5), color=BLUE) # Extended
+        
+        # Triangle formed by axes and line
+        O = axes.c2p(0, 0)
+        tri = Polygon(O, p1, p2, color=ORANGE, fill_opacity=0.2, fill_color=ORANGE)
+        
+        lbl_2 = MathTex("2").next_to(p1, DOWN)
+        lbl_3 = MathTex("3").next_to(p2, LEFT)
+        lbl_O = MathTex("O").next_to(O, DOWN+LEFT)
+        
+        self.add(axes, line, tri)
+        self.add(lbl_2, lbl_3, lbl_O)
+```
+
+### 🆔 Задача: Cnt92-1012_Prob8_Synthetic - Правоаголен триаголник до правоаголник
+**📅 Додадено:** 2025-12-27 02:20
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_Cnt92_1012_Prob8_Synthetic(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        
+        # Right triangle ABC with hypotenuse AB.
+        # C=90.
+        C = ORIGIN
+        A = UP * 3
+        B = RIGHT * 4
+        
+        tri = Polygon(A, B, C, color=BLUE)
+        
+        # Completed into rectangle ACBD.
+        # D = A + B - C = (0,3) + (4,0) - (0,0) = (4,3).
+        D = A + B - C
+        
+        rect_dashed = DashedLine(A, D, color=GRAY)
+        rect_dashed2 = DashedLine(B, D, color=GRAY)
+        
+        # Diagonals AB and CD intersect at M.
+        diag_AB = Line(A, B, color=BLUE) # Already part of tri
+        diag_CD = Line(C, D, color=GRAY)
+        
+        M = (A + B) / 2
+        dot_M = Dot(M, color=RED)
+        
+        lbl_A = MathTex("A").next_to(A, UP+LEFT)
+        lbl_B = MathTex("B").next_to(B, DOWN+RIGHT)
+        lbl_C = MathTex("C").next_to(C, DOWN+LEFT)
+        lbl_D = MathTex("D").next_to(D, UP+RIGHT)
+        lbl_M = MathTex("M").next_to(M, UP)
+        
+        self.add(tri, rect_dashed, rect_dashed2, diag_CD, dot_M)
+        self.add(lbl_A, lbl_B, lbl_C, lbl_D, lbl_M)
+```

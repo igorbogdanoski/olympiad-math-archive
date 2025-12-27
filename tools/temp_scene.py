@@ -1,62 +1,56 @@
 from manim import *
 
-class Task_geom_9_sum_altitudes(Scene):
+class Task_geom_9_leg_ratio_circles(Scene):
     def construct(self):
         self.camera.background_color = WHITE
         Text.set_default(color=BLACK)
         MathTex.set_default(color=BLACK)
         Mobject.set_default(color=BLACK)
         
-        # Equilateral triangle for symmetry looks nice, but prompt says "triangle ABC".
-        # Let's use equilateral for clarity of "Viviani-like" setup, or generic.
-        # Prompt says "triangle ABC".
-        A = np.array([-2, -1.5, 0])
-        B = np.array([3, -1.5, 0])
-        C = np.array([0.5, 2.5, 0])
+        # Right triangle ABC, C=90.
+        # Legs a, b. Hypotenuse c.
+        # Let a=3, b=4, c=5.
+        a = 3
+        b = 4
+        c = 5
+        
+        C = ORIGIN
+        A = UP * b
+        B = RIGHT * a
+        
+        # Shift
+        center = (A + B + C) / 3
+        A -= center
+        B -= center
+        C -= center
         
         tri = Polygon(A, B, C, color=BLUE)
         
-        # Point M inside
-        M = np.array([0.5, -0.5, 0])
-        dot_M = Dot(M, color=BLACK)
-        lbl_M = MathTex("M").next_to(M, UP, buff=0.1)
+        # Circumcircle
+        # Center O is midpoint of hypotenuse AB.
+        O = (A + B) / 2
+        R = c / 2
+        circumcircle = Circle(radius=R, color=GRAY).move_to(O)
+        dot_O = Dot(O, color=GRAY)
         
-        # Perpendiculars to sides
-        # To BC (x)
-        vec_BC = C - B
-        unit_BC = vec_BC / np.linalg.norm(vec_BC)
-        # Normal vector to BC
-        normal_BC = np.array([-unit_BC[1], unit_BC[0], 0])
-        # Project M-B onto normal? No, just project M onto line BC.
-        proj_x = B + np.dot(M - B, unit_BC) * unit_BC
-        line_x = Line(M, proj_x, color=RED)
-        lbl_x = MathTex("x", color=RED).next_to(line_x, RIGHT, buff=0.1)
+        # Incircle
+        # Incenter I
+        I = (a*A + b*B + c*C) / (a+b+c)
+        r = (a + b - c) / 2 # (3+4-5)/2 = 1
+        incircle = Circle(radius=r, color=GREEN).move_to(I)
+        dot_I = Dot(I, color=GREEN)
         
-        # To AC (y)
-        vec_AC = C - A
-        unit_AC = vec_AC / np.linalg.norm(vec_AC)
-        proj_y = A + np.dot(M - A, unit_AC) * unit_AC
-        line_y = Line(M, proj_y, color=RED)
-        lbl_y = MathTex("y", color=RED).next_to(line_y, LEFT, buff=0.1)
+        lbl_A = MathTex("A").next_to(A, UP)
+        lbl_B = MathTex("B").next_to(B, RIGHT)
+        lbl_C = MathTex("C").next_to(C, DOWN)
+        lbl_O = MathTex("O").next_to(O, UP)
+        lbl_I = MathTex("I").next_to(I, DOWN)
         
-        # To AB (z)
-        proj_z = np.array([M[0], A[1], 0])
-        line_z = Line(M, proj_z, color=RED)
-        lbl_z = MathTex("z", color=RED).next_to(line_z, LEFT, buff=0.1)
+        lbl_R = MathTex("R").next_to(O, UP+LEFT)
+        lbl_r = MathTex("r").next_to(I, DOWN+LEFT)
         
-        # Segments MA, MB, MC
-        seg_MA = DashedLine(M, A, color=GRAY)
-        seg_MB = DashedLine(M, B, color=GRAY)
-        seg_MC = DashedLine(M, C, color=GRAY)
-        
-        lbl_A = MathTex("A").next_to(A, DOWN+LEFT)
-        lbl_B = MathTex("B").next_to(B, DOWN+RIGHT)
-        lbl_C = MathTex("C").next_to(C, UP)
-        
-        self.add(tri, dot_M, lbl_M)
-        self.add(line_x, lbl_x, line_y, lbl_y, line_z, lbl_z)
-        self.add(seg_MA, seg_MB, seg_MC)
-        self.add(lbl_A, lbl_B, lbl_C)
+        self.add(circumcircle, tri, incircle, dot_O, dot_I)
+        self.add(lbl_A, lbl_B, lbl_C, lbl_O, lbl_I, lbl_R, lbl_r)
 
 
 config.media_width = '100%'

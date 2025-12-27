@@ -50,7 +50,7 @@ tags:
 <Опис на цртежот. Кои се клучните точки? Дали има помошни линии?>
 
 
-<!-- VISUAL PROMPT: Draw an isosceles triangle ABC with side AC = BC. Construct the perpendicular bisector of side AC and the angle bisector of angle A. Mark their intersection point D on the side BC. Label angle C as gamma. -->
+![Визуелизација](../../assets/images/geom_iso_side_bisector_08.png)
 
 ## 🧠 Анализа
 Секоја точка на симетрала на отсечка е еднакво оддалечена од нејзините краишта. Користи го ова за да формираш нов рамнокрак триаголник $ADC$.

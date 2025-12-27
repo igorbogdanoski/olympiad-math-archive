@@ -50,7 +50,7 @@ tags:
 <Опис на цртежот. Кои се клучните точки? Дали има помошни линии?>
 
 
-<!-- VISUAL PROMPT: Draw triangle ABC in space and a horizontal plane below it. Show perpendicular segments AA', BB', CC' connecting vertices to the plane. Show centroid T and its perpendicular projection T'. -->
+![Визуелизација](../../assets/images/geom_9_centroid_plane_dist.png)
 
 ## 🧠 Анализа
 Растојанието од тежиштето до рамнината е всушност аритметичка средина од растојанијата на неговите темиња до истата рамнина.

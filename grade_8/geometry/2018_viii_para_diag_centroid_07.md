@@ -50,7 +50,7 @@ tags:
 <Опис на цртежот. Кои се клучните точки? Дали има помошни линии?>
 
 
-<!-- VISUAL PROMPT: Draw a parallelogram ABCD. Mark M as the midpoint of BC and N as the midpoint of CD. Draw segments DM and BN and show their intersection T. Draw diagonal AC and diagonal BD, showing they intersect at O and that T lies on AC. -->
+![Визуелизација](../../assets/images/para_diag_centroid_07.png)
 
 ## 🧠 Анализа
 Што се всушност отсечките $DM$ и $BN$ ако го набљудуваме само триаголникот $BCD$? Тие се негови медијани.

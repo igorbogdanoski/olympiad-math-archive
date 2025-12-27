@@ -52,7 +52,7 @@ tags:
 <Опис на цртежот. Кои се клучните точки? Дали има помошни линии?>
 
 
-<!-- VISUAL PROMPT: Draw two intersecting circles k1 and k2. Let the center O of k2 lie on the boundary of k1. Mark intersection points A and B. Pick a point C on k1 and draw line OC, marking its intersection with k2 as D. Draw triangle ABC and segments AD and BD. -->
+![Визуелизација](../../assets/images/geom_9_incenter_intersect.png)
 
 ## 🧠 Анализа
 За да докажеш дека $D$ е инцентар, треба да покажеш дека $AD$ и $CD$ се симетрали на аглите. Искористи го фактот дека $OACB$ е тетивен четириаголник и $OA=OB=OD$ како радиуси.

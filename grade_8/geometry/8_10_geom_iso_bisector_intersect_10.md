@@ -50,7 +50,7 @@ tags:
 <Опис на цртежот. Кои се клучните точки? Дали има помошни линии?>
 
 
-<!-- VISUAL PROMPT: Draw an isosceles triangle ABC with AB as base. Draw altitude CD from vertex C. Draw angle bisector AE from vertex A. Mark their intersection as I and label the obtuse angle at I as 130 degrees. -->
+![Визуелизација](../../assets/images/geom_iso_bisector_intersect_10.png)
 
 ## 🧠 Анализа
 Запомни дека симетралата на аголот при врвот кај рамнокрак триаголник е истовремено и висина. Разгледај го правоаголниот триаголник формиран од пресекот.
