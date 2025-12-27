@@ -1,0 +1,234 @@
+
+    <!DOCTYPE html>
+    <html lang="mk">
+    <head>
+        <meta charset="UTF-8">
+        <title>Општински Натпревар - 8 Одделение</title>
+        
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+    
+    body {
+        font-family: 'Inter', sans-serif;
+        line-height: 1.6;
+        color: #333;
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 40px;
+        background-color: #f9fafb;
+    }
+    .sheet-container {
+        background: white;
+        padding: 50px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        border-radius: 12px;
+    }
+    header {
+        text-align: center;
+        border-bottom: 3px solid #2563eb;
+        padding-bottom: 20px;
+        margin-bottom: 40px;
+    }
+    h1 { color: #1e293b; margin: 0; font-size: 24px; text-transform: uppercase; letter-spacing: 1px; }
+    .subtitle { color: #64748b; font-size: 14px; margin-top: 5px; }
+    
+    .section-title {
+        background: #eff6ff;
+        color: #1d4ed8;
+        padding: 10px 20px;
+        border-radius: 6px;
+        font-weight: 700;
+        margin-top: 40px;
+        margin-bottom: 20px;
+        border-left: 5px solid #2563eb;
+    }
+    
+    .problem-box {
+        margin-bottom: 30px;
+        padding: 20px;
+        border: 1px solid #e2e8f0;
+        border-radius: 8px;
+        background: #fff;
+        transition: transform 0.2s;
+    }
+    .problem-header {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+        font-size: 0.9em;
+        color: #94a3b8;
+        font-weight: 600;
+    }
+    .problem-text { font-size: 1.1em; font-weight: 500; }
+    
+    .solution-box {
+        margin-top: 15px;
+        padding: 15px;
+        background-color: #f0fdf4;
+        border: 1px solid #bbf7d0;
+        border-radius: 6px;
+        color: #166534;
+    }
+    .solution-title { font-weight: bold; color: #15803d; margin-bottom: 5px; display: block; }
+    
+    .workspace {
+        height: 150px;
+        border: 2px dashed #e2e8f0;
+        border-radius: 8px;
+        margin-top: 15px;
+        background: #f8fafc;
+    }
+    
+    .footer {
+        margin-top: 50px;
+        text-align: center;
+        font-size: 0.8em;
+        color: #cbd5e1;
+    }
+    
+    @media print {
+        body { background: white; padding: 0; }
+        .sheet-container { box-shadow: none; padding: 20px; }
+        .problem-box { break-inside: avoid; }
+        .workspace { border: 1px solid #ccc; }
+    }
+</style>
+
+        
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']]
+  }
+};
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    </head>
+    <body>
+        <div class="sheet-container">
+            <header>
+                <h1>Подготовка за Општински Натпревар</h1>
+                <div class="subtitle">Математика - 8 Одделение | 27.12.2025</div>
+                <div class="subtitle" style="color: #2563eb; font-weight: bold; margin-top: 10px;">РЕШЕНИЈА ЗА НАСТАВНИК</div>
+            </header>
+    <div class="section-title">📝 ГЛАВНИ ЗАДАЧИ (40 мин)</div>
+        <div class="problem-box">
+            <div class="problem-header">
+                <span>Задача 1</span>
+                <span>tags:</span>
+            </div>
+            <div class="problem-text">
+                Во рамнокракиот триаголник $ABC$ повлечени се симетралите на аголот при врвот и на едниот од аглите при основата. Тие се сечат под агол од $130^\circ$. Одреди ги аглите во триаголникот.
+            </div>
+        
+            <div class="solution-box">
+                <span class="solution-title">💡 Решение:</span>
+                1. <b>Поставка:<b> Нека $CD$ е симетрала на врвот (и висина, $CD \perp AB$) и $AE$ е симетрала на аголот $\alpha$.<br>2. <b>Пресечен агол:<b> Дадениот агол од $130^\circ$ е надворешен за триаголникот на пресекот, па внатрешниот агол $\angle AID = 180^\circ - 130^\circ = 50^\circ$.<br>3. <b>Пресметка:<b> Во правоаголниот $\triangle ADI$: $\frac{\alpha}{2} = 90^\circ - 50^\circ = 40^\circ$.<br>4. <b>Резултат:<b> $\alpha = 80^\circ$. Аглите се $80^\circ, 80^\circ$ и $180^\circ - 160^\circ = 20^\circ$.
+            </div>
+            </div>
+        <div class="problem-box">
+            <div class="problem-header">
+                <span>Задача 2</span>
+                <span>tags:</span>
+            </div>
+            <div class="problem-text">
+                Определи ја најголемата дропка со која треба да се поделат дропките $\frac{8}{15}, \frac{12}{35}$ и $\frac{20}{21}$ така што во сите три случаи количникот да биде природен број.
+            </div>
+        
+            <div class="solution-box">
+                <span class="solution-title">💡 Решение:</span>
+                Нека бараната дропка е $\frac{x}{y}$.<br>Условот е количниците да се природни броеви:<br>1. $\frac{8}{15} : \frac{x}{y} = \frac{8y}{15x} \in \mathbb{N} \implies x \mid 8, \ 15 \mid y$<br>2. $\frac{12}{35} : \frac{x}{y} = \frac{12y}{35x} \in \mathbb{N} \implies x \mid 12, \ 35 \mid y$<br>3. $\frac{20}{21} : \frac{x}{y} = \frac{20y}{21x} \in \mathbb{N} \implies x \mid 20, \ 21 \mid y$<br><br>За дропката $\frac{x}{y}$ да биде <b>максимална<b>, треба:<br>- $x$ да биде најголемиот можен делител на броителите: $x = \text{НЗД}(8, 12, 20) = 4$.<br>- $y$ да биде најмалиот можен содржател на именителите: $y = \text{НЗС}(15, 35, 21)$.<br><br>Пресметка на НЗС:<br>$15 = 3 \cdot 5$<br>$35 = 5 \cdot 7$<br>$21 = 3 \cdot 7$<br>$y = 3 \cdot 5 \cdot 7 = 105$.<br><br><b>Резултат:<b> Бараната дропка е $\boxed{\frac{4}{105}}$.<br><Користи LaTeX за формули: $x^2$ или $$ x^2 $$>
+            </div>
+            </div>
+        <div class="problem-box">
+            <div class="problem-header">
+                <span>Задача 3</span>
+                <span>Телескопска сума</span>
+            </div>
+            <div class="problem-text">
+                Да се пресмета сумата<br>\[<br>S = \frac{1}{1\cdot 2} + \frac{1}{2\cdot 3} + \frac{1}{3\cdot 4} + \cdots + \frac{1}{99\cdot 100}.<br>\]<br><br>---
+            </div>
+        
+            <div class="solution-box">
+                <span class="solution-title">💡 Решение:</span>
+                Ќе решаваме чекор по чекор.
+            </div>
+            </div>
+        <div class="problem-box">
+            <div class="problem-header">
+                <span>Задача 4</span>
+                <span>--- SKILL MAPPING (New Standard) ---</span>
+            </div>
+            <div class="problem-text">
+                Двајца кројачи треба да сошијат 62 униформи. Едниот шие 3 униформи за 8 дена, а другиот 4 униформи за 10 дена. За колку денови заедно ќе ги сошијат и колку метри платно ќе потрошат ако за една униформа треба 250 cm платно?
+            </div>
+        
+            <div class="solution-box">
+                <span class="solution-title">💡 Решение:</span>
+                ### Чекор 1: Брзини на работа<br>- Прв кројач: $v_1 = \frac{3}{8}$ униформи/ден.<br>- Втор кројач: $v_2 = \frac{4}{10} = \frac{2}{5}$ униформи/ден.
+            </div>
+            </div><div class="section-title" style="border-color: #7c3aed; color: #7c3aed; background: #f5f3ff;">🚀 ДОПОЛНИТЕЛНИ ЗАДАЧИ (За вежбање)</div>
+        <div class="problem-box">
+            <div class="problem-header">
+                <span>Задача 5</span>
+                <span>tags:</span>
+            </div>
+            <div class="problem-text">
+                Неколкумина другари купуваат топка. Ако секој даде по 230 денари, ќе останат 110 денари. Ако секој даде по 200 денари, ќе недостасуваат 100 денари за да може да ја купат топката. Колкумина биле другарите и колку денари чини топката?
+            </div>
+        
+            <div class="solution-box" style="border-color: #ddd6fe; background: #f5f3ff; color: #5b21b6;">
+                <span class="solution-title">💡 Решение:</span>
+                Нека $x$ е бројот на другари, а $y$ цената на топката.<br><br>1. <b>Прв услов:<b> Ако дадат по 230, собираат $230x$. Ова е повеќе од цената за 110 денари.<br>   $$ 230x = y + 110 \implies y = 230x - 110 $$<br>2. <b>Втор услов:<b> Ако дадат по 200, собираат $200x$. Ова е помалку од цената за 100 денари.<br>   $$ 200x = y - 100 \implies y = 200x + 100 $$<br><br>Изедначуваме:<br>$$ 230x - 110 = 200x + 100 $$<br>$$ 30x = 210 $$<br>$$ x = 7 $$<br>Има 7 другари.<br><br>Цената е:<br>$$ y = 200 \cdot 7 + 100 = 1400 + 100 = 1500 \text{ денари} $$<br><br><b>Одговор:<b> 7 другари, топка 1500 денари.<br><Користи LaTeX за формули: $x^2$ или $$ x^2 $$>
+            </div>
+            </div>
+        <div class="problem-box">
+            <div class="problem-header">
+                <span>Задача 6</span>
+                <span>tags:</span>
+            </div>
+            <div class="problem-text">
+                Во правоаголник е впишан триаголник со основа на едната страна и врв на спротивната. Ако деловите од правоаголникот имаат плоштини 3, 5 и 8 (надвор од триаголникот), колкава е плоштината на триаголникот?
+            </div>
+        
+            <div class="solution-box" style="border-color: #ddd6fe; background: #f5f3ff; color: #5b21b6;">
+                <span class="solution-title">💡 Решение:</span>
+                Нека плоштината на триаголникот е $P_T$, а на правоаголникот $P_{rect}$.<br>Познато својство: Ако триаголник и правоаголник имаат иста основа и иста висина, плоштината на триаголникот е половина од правоаголникот.<br>$$ P_T = \frac{1}{2} P_{rect} $$<br>Ова значи дека збирот на плоштините НАДВОР од триаголникот е исто така половина од правоаголникот.<br>$$ P_{out} = P_T $$<br><br>Дадени се деловите надвор: 3, 5, 8.<br>$$ P_{out} = 3 + 5 + 8 = 16 $$<br>Значи $P_T = 16$.<br><br>(Забелешка: Вториот дел од задачата за магичен квадрат е неповрзан и го испуштивме за јасност).<br><br><b>Резултат:<b> Плоштината е <b>16<b>.
+            </div>
+            </div>
+        <div class="problem-box">
+            <div class="problem-header">
+                <span>Задача 7</span>
+                <span>--- SKILL MAPPING ---</span>
+            </div>
+            <div class="problem-text">
+                Збирот на броителот и именителот на една дропка е 296. По скратувањето на таа дропка се добива дропката $\frac{12}{25}$. Одреди ја таа дропка.
+            </div>
+        
+            <div class="solution-box" style="border-color: #ddd6fe; background: #f5f3ff; color: #5b21b6;">
+                <span class="solution-title">💡 Решение:</span>
+                <b>Метод: Користење на коефициент на пропорционалност<b><br>Бидејќи дропката по скратувањето е $\frac{12}{25}$, оригиналната дропка има облик:<br><br>$$ \frac{a}{b} = \frac{12k}{25k} $$<br><br>Дадено е дека збирот на броителот и именителот е 296:<br><br>$$ 12k + 25k = 296 $$<br><br>$$ 37k = 296 $$<br><br>$$ k = \frac{296}{37} = 8 $$<br><br>Сега ја наоѓаме дропката:<br><br>*   Броител: $a = 12 \cdot 8 = 96$<br>*   Именител: $b = 25 \cdot 8 = 200$<br><br>Бараната дропка е $\frac{96}{200}$.
+            </div>
+            </div>
+        <div class="problem-box">
+            <div class="problem-header">
+                <span>Задача 8</span>
+                <span>Паралелограм и кружница со дијаметар</span>
+            </div>
+            <div class="problem-text">
+                Во паралелограмот \(ABCD\), дијагоналата \(AC\) се сече со кружница<br>со дијаметар \(AC\) во точка \(E\).<br>Докажете дека<br>\[<br>\angle AEB = 90^\circ.<br>\]<br><br>---
+            </div>
+        
+            <div class="solution-box" style="border-color: #ddd6fe; background: #f5f3ff; color: #5b21b6;">
+                <span class="solution-title">💡 Решение:</span>
+                Ќе докажеме дека аголот \(\angle AEB\) е прав.<br><br>---
+            </div>
+            </div>
+            <div class="footer">
+                Генерирано од Olympiad Math Archive AI • © 2025
+            </div>
+        </div>
+    </body>
+    </html>
+    
