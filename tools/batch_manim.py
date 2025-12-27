@@ -54,6 +54,14 @@ def extract_manim_code(content):
 def run_manim(code, filename_base):
     """Го извршува Manim кодот и ја враќа патеката до сликата."""
     
+    target_name = f"{filename_base}.png"
+    target_path = os.path.join(ASSETS_DIR, target_name)
+    
+    # 0. Провери дали сликата веќе постои
+    if os.path.exists(target_path):
+        print(f"   ⏭️  Image already exists: {target_name}")
+        return target_name
+
     # 1. Запиши го кодот во привремен фајл
     with open(TEMP_MANIM_FILE, 'w', encoding='utf-8') as f:
         # Осигурај се дека има imports ако фалат
@@ -72,7 +80,8 @@ def run_manim(code, filename_base):
     scene_name = scene_match.group(1)
     
     # 3. Изврши Manim команда
-    cmd = ["manim", "-qm", "-s", "--disable_caching", TEMP_MANIM_FILE, scene_name]
+    # Користиме -o за да го фиксираме името на излезот (без верзија)
+    cmd = ["manim", "-qm", "-s", "--disable_caching", "-o", f"{scene_name}.png", TEMP_MANIM_FILE, scene_name]
     
     print(f"   🎬 Rendering {scene_name}...")
     try:
@@ -83,9 +92,6 @@ def run_manim(code, filename_base):
         
         if os.path.exists(expected_output):
             # 5. Премести ја во assets/images
-            target_name = f"{filename_base}.png"
-            target_path = os.path.join(ASSETS_DIR, target_name)
-            
             os.makedirs(ASSETS_DIR, exist_ok=True)
             shutil.move(expected_output, target_path)
             
@@ -93,9 +99,16 @@ def run_manim(code, filename_base):
                 shutil.rmtree("media", ignore_errors=True)
                 
             return target_name
+        else:
+            print(f"   ❌ Expected output not found: {expected_output}")
+            # Debug: list dir
+            debug_dir = os.path.dirname(expected_output)
+            if os.path.exists(debug_dir):
+                print(f"   📂 Dir content: {os.listdir(debug_dir)}")
             
     except subprocess.CalledProcessError as e:
         print(f"   ❌ Manim Error: {e}")
+        print(f"   ❌ Stderr: {e.stderr.decode('utf-8') if e.stderr else 'None'}")
     except Exception as e:
         print(f"   ❌ Error: {e}")
         
@@ -119,7 +132,9 @@ def update_markdown_with_image(file_path, image_name):
             f.write(new_content)
         print(f"   ✅ Link updated in Markdown")
         return True
-    return False
+    else:
+        print(f"   ⚠️ Placeholder NOT found in {os.path.basename(file_path)}")
+        return False
 
 def main():
     print("🎨 Starting Batch Manim Renderer...")
@@ -127,7 +142,7 @@ def main():
     # Вчитај ги кодовите од логот
     manim_code_map = load_manim_code_map()
     
-    BATCH_SIZE = 5
+    BATCH_SIZE = 100  # Зголемено од 5 на 100 за да ги помине сите одеднаш
     processed_count = 0
     scanned_files = 0
     candidates_found = 0
@@ -170,13 +185,17 @@ def main():
                         print(f"🔍 Found embedded code in: {file}")
                 
                 if code:
-                    filename_base = file.replace(".md", "")
+                    # Prefer problem_id for filename if available, else file basename
+                    filename_base = problem_id if problem_id else file.replace(".md", "")
+                    
                     image_name = run_manim(code, filename_base)
                     
                     if image_name:
                         if update_markdown_with_image(path, image_name):
                             processed_count += 1
                             print(f"   📊 Progress: {processed_count}/{BATCH_SIZE}")
+                        else:
+                            print(f"   ❌ Failed to update markdown for {file}")
                 else:
                     print(f"⚠️  No code found for: {file} (ID: {problem_id})")
 
