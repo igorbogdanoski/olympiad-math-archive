@@ -8221,3 +8221,89 @@ class Task_2023_mun_g6_2(Scene):
 
 ```
 ---
+
+### 🆔 Задача: 2023_mun_g7_2 - Ширина на автопат
+**📅 Додадено:** 2025-12-27 17:39
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_2023_mun_g7_2(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+        self.camera.background_color = WHITE
+        
+        # Visualizing the road cross-section
+        # Widths: 0.5 | 2.75 | 0.75 | 2.75 | 0.75 | 2.75 | 0.5
+        # Total visual width = 10.75. Scale down by 2.
+        
+        widths = [0.5, 2.75, 0.75, 2.75, 0.75, 2.75, 0.5]
+        colors = [GRAY, BLUE, WHITE, BLUE, WHITE, BLUE, GRAY]
+        labels = ["0.5", "2.75", "0.75", "2.75", "0.75", "2.75", "0.5"]
+        
+        start_x = -5
+        rects = VGroup()
+        
+        for w, c, l in zip(widths, colors, labels):
+            rect = Rectangle(width=w, height=1, color=BLACK, fill_color=c, fill_opacity=0.5)
+            rect.move_to(RIGHT * (start_x + w/2))
+            lbl = MathTex(l, font_size=20, color=BLACK).move_to(rect.get_center())
+            rects.add(VGroup(rect, lbl))
+            start_x += w
+            
+        # Total brace
+        brace = Brace(rects, UP)
+        total_lbl = brace.get_text("L = 10.75 m")
+        
+        self.add(rects)
+        self.play(Write(brace), Write(total_lbl))
+        # --- AI GENERATED CODE END ---
+
+```
+---
+
+### 🆔 Задача: 2023_mun_g7_3 - Агли при пресек на прави
+**📅 Додадено:** 2025-12-27 17:39
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_2023_mun_g7_3(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+        self.camera.background_color = WHITE
+        
+        # Two intersecting lines
+        # Angle 28 degrees. 
+        # Line 1: Horizontal. Line 2: Rotated by 28 deg.
+        
+        L1 = Line(LEFT*3, RIGHT*3, color=BLACK)
+        L2 = Line(LEFT*3, RIGHT*3, color=BLACK).rotate(28*DEGREES)
+        
+        # Angles
+        a1 = Angle(L1, L2, radius=0.5, quadrant=(1,1), other_angle=False, color=RED)
+        lbl1 = MathTex("28^\\circ", color=RED, font_size=24).next_to(a1, RIGHT)
+        
+        a2 = Angle(L1, L2, radius=0.5, quadrant=(-1,-1), other_angle=False, color=RED)
+        lbl2 = MathTex("28^\\circ", color=RED, font_size=24).next_to(a2, LEFT)
+        
+        a3 = Angle(L1, L2, radius=0.6, quadrant=(-1,1), other_angle=True, color=BLUE)
+        lbl3 = MathTex("152^\\circ", color=BLUE, font_size=24).next_to(a3, UP)
+        
+        self.add(L1, L2, a1, lbl1, a2, lbl2, a3, lbl3)
+        
+        # Text calculation
+        calc = MathTex("360^\\circ - 332^\\circ = 28^\\circ", color=BLACK).to_edge(UP)
+        self.play(Write(calc))
+        # --- AI GENERATED CODE END ---
+
+```
+---
