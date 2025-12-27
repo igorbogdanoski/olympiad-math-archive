@@ -9046,3 +9046,155 @@ class Task_2022_mun_g5_4(Scene):
 
 ```
 ---
+
+### 🆔 Задача: 2022_mun_g5_6 - Координати на средина
+**📅 Додадено:** 2025-12-27 19:35
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_2022_mun_g5_6(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+        self.camera.background_color = WHITE
+        axes = Axes(x_range=[0, 6, 1], y_range=[0, 4, 1], axis_config={"color": BLACK, "include_numbers": True})
+        
+        A = Dot(axes.c2p(2, 3), color=BLUE)
+        C = Dot(axes.c2p(5, 1), color=BLUE)
+        B = Dot(axes.c2p(5, 3), color=BLUE)
+        D = Dot(axes.c2p(2, 1), color=BLUE)
+        
+        rect = Polygon(axes.c2p(2,1), axes.c2p(5,1), axes.c2p(5,3), axes.c2p(2,3), color=BLACK)
+        
+        lbl_A = MathTex("A(2,3)", color=BLACK, font_size=24).next_to(A, UL, buff=0.1)
+        lbl_C = MathTex("C(5,1)", color=BLACK, font_size=24).next_to(C, DR, buff=0.1)
+        lbl_D = MathTex("D(2,1)", color=RED, font_size=24).next_to(D, DL, buff=0.1)
+        
+        # Midpoint K
+        K = Dot(axes.c2p(2, 2), color=GREEN)
+        lbl_K = MathTex("K(2,2)", color=GREEN, font_size=24).next_to(K, LEFT, buff=0.1)
+        
+        self.add(axes, rect, A, C, B, D, lbl_A, lbl_C)
+        self.wait(1)
+        self.play(Write(lbl_D))
+        self.play(FadeIn(K), Write(lbl_K))
+        # --- AI GENERATED CODE END ---
+
+```
+---
+
+### 🆔 Задача: 2022_mun_g5_7 - Трка (График растојание-време)
+**📅 Додадено:** 2025-12-27 19:35
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_2022_mun_g5_7(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+        self.camera.background_color = WHITE
+        axes = Axes(x_range=[0, 8, 1], y_range=[0, 1600, 300], axis_config={"color": BLACK, "include_numbers": True})
+        
+        # Marija: (0,0) to (5, 1500)
+        g1 = axes.plot_line_graph(x_values=[0, 2, 5], y_values=[0, 600, 1500], line_color=BLUE)
+        lbl1 = Text("Марија", color=BLUE, font_size=20).next_to(axes.c2p(5, 1500), UP)
+        
+        # Kate: (0,0) to (6.5, 1500)
+        g2 = axes.plot_line_graph(x_values=[0, 3, 6.5], y_values=[0, 500, 1500], line_color=RED)
+        lbl2 = Text("Кате", color=RED, font_size=20).next_to(axes.c2p(6.5, 1500), RIGHT)
+        
+        # Dashed lines to x-axis
+        l1 = DashedLine(axes.c2p(5, 1500), axes.c2p(5, 0), color=BLUE)
+        l2 = DashedLine(axes.c2p(6.5, 1500), axes.c2p(6.5, 0), color=RED)
+        
+        # Brace
+        brace = Brace(Line(axes.c2p(5,0), axes.c2p(6.5,0)), DOWN)
+        txt = brace.get_text("1.5 min")
+        
+        self.add(axes, g1, g2, lbl1, lbl2)
+        self.play(Create(l1), Create(l2))
+        self.play(Write(brace), Write(txt))
+        # --- AI GENERATED CODE END ---
+
+```
+---
+
+### 🆔 Задача: 2022_mun_g5_8 - Броење триаголници
+**📅 Додадено:** 2025-12-27 19:35
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_2022_mun_g5_8(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+        self.camera.background_color = WHITE
+        # Generic visualization of counting
+        sq = Square(side_length=3, color=BLACK)
+        d1 = Line(sq.get_corner(UL), sq.get_corner(DR), color=BLACK)
+        d2 = Line(sq.get_corner(UR), sq.get_corner(DL), color=BLACK)
+        l3 = Line(sq.get_center(), sq.get_edge_center(UP), color=BLACK)
+        
+        self.add(sq, d1, d2, l3)
+        
+        # Highlight one triangle
+        t = Polygon(sq.get_center(), sq.get_corner(UR), sq.get_edge_center(UP), color=RED, fill_opacity=0.5)
+        self.play(FadeIn(t))
+        self.wait(0.5)
+        self.play(FadeOut(t))
+        # --- AI GENERATED CODE END ---
+
+```
+---
+
+### 🆔 Задача: 2022_mun_g5_12 - Трансформација на правоаголници
+**📅 Додадено:** 2025-12-27 19:35
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_2022_mun_g5_12(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+        self.camera.background_color = WHITE
+        
+        # Initial n=10. Rect 10x10 (Square).
+        # Ana: 20x5. Maja: 5x20.
+        
+        # Ana's rect
+        r1 = Rectangle(width=4, height=1, color=BLUE)
+        l1 = MathTex("2n", color=BLACK).next_to(r1, UP)
+        h1 = MathTex("5", color=BLACK).next_to(r1, LEFT)
+        
+        # Maja's rect
+        r2 = Rectangle(width=1, height=4, color=RED).next_to(r1, RIGHT, buff=2)
+        l2 = MathTex("n/2", color=BLACK).next_to(r2, UP)
+        h2 = MathTex("20", color=BLACK).next_to(r2, RIGHT)
+        
+        # Equation
+        eq = MathTex("2(2n+5) = 2(n/2+20)", color=BLACK).to_edge(DOWN)
+        res = MathTex("n=10", color=GREEN).next_to(eq, DOWN)
+        
+        self.add(r1, l1, h1, r2, l2, h2)
+        self.play(Write(eq))
+        self.play(Write(res))
+        # --- AI GENERATED CODE END ---
+
+```
+---
