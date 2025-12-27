@@ -8672,3 +8672,96 @@ class Task_2023_mun_y2_3ab(Scene):
 
 ```
 ---
+
+### 🆔 Задача: 2023_mun_y3_1ab - Плоштина на правилна пирамида
+**📅 Додадено:** 2025-12-27 18:45
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_2023_mun_y3_1ab(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+class Task_2023_mun_y3_1ab(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        
+        # Pyramid coordinates
+        A = np.array([-2, -1, 0])
+        B = np.array([2, -1, 0])
+        C = np.array([3, 1, 0])
+        D = np.array([-1, 1, 0])
+        Apex = np.array([0.5, 3, 0])
+        Center = np.array([0.5, 0, 0])
+        
+        # Base
+        base = Polygon(A, B, C, D, color=BLACK)
+        
+        # Edges
+        edges = VGroup(
+            Line(A, Apex, color=BLACK),
+            Line(B, Apex, color=BLACK),
+            Line(C, Apex, color=BLACK),
+            Line(D, Apex, color=BLACK, stroke_opacity=0.5) # Hidden
+        )
+        
+        # Height H
+        height_line = DashedLine(Apex, Center, color=RED)
+        lbl_H = MathTex("H=12", color=RED).next_to(height_line, LEFT, buff=0.1)
+        
+        # Slant height h
+        M_BC = (B + C) / 2
+        slant_line = Line(Apex, M_BC, color=BLUE)
+        lbl_h = MathTex("h=13", color=BLUE).next_to(slant_line, RIGHT, buff=0.1)
+        
+        # Base apothem
+        apothem = DashedLine(Center, M_BC, color=GREEN)
+        lbl_a2 = MathTex("5", color=GREEN, font_size=24).next_to(apothem, DOWN, buff=0.1)
+        
+        self.add(base, edges, height_line, slant_line, apothem)
+        self.add(lbl_H, lbl_h, lbl_a2)
+        # --- AI GENERATED CODE END ---
+
+```
+---
+
+### 🆔 Задача: 2023_mun_y3_3ab - Квадратна функција и цели броеви
+**📅 Додадено:** 2025-12-27 18:45
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_2023_mun_y3_3ab(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+class Task_2023_mun_y3_3ab(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        axes = Axes(x_range=[-1, 6, 1], y_range=[-3, 6, 1], axis_config={"color": BLACK})
+        
+        # Case k=5 (roots 1, 4)
+        f1 = axes.plot(lambda x: x**2 - 5*x + 4, color=BLUE)
+        lbl1 = MathTex("k=5", color=BLUE).next_to(f1, UP).shift(RIGHT)
+        
+        # Case k=4 (roots 2, 2)
+        f2 = axes.plot(lambda x: x**2 - 4*x + 4, color=RED)
+        lbl2 = MathTex("k=4", color=RED).next_to(f2, UP).shift(LEFT)
+        
+        # Roots
+        d1 = Dot(axes.c2p(1, 0), color=BLUE)
+        d2 = Dot(axes.c2p(4, 0), color=BLUE)
+        d3 = Dot(axes.c2p(2, 0), color=RED)
+        
+        self.add(axes, f1, lbl1, f2, lbl2, d1, d2, d3)
+        # --- AI GENERATED CODE END ---
+
+```
+---
