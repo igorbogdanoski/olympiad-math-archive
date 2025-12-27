@@ -86,10 +86,30 @@ def ensure_dir(path):
     if not os.path.exists(path):
         os.makedirs(path)
 
-def generate_page(output_path, title, content, root_path="./"):
+def generate_page(output_path, title, content, root_path="./", breadcrumbs=None):
     """Writes a full HTML page."""
     ensure_dir(os.path.dirname(output_path))
-    full_html = HTML_HEAD.format(title=title, root_path=root_path) + content + HTML_FOOTER
+    
+    # Breadcrumbs HTML
+    bc_html = ""
+    if breadcrumbs:
+        bc_html = '<div class="breadcrumbs">'
+        for i, (name, url) in enumerate(breadcrumbs):
+            if i > 0: bc_html += ' <i class="fas fa-chevron-right separator"></i> '
+            if url:
+                bc_html += f'<a href="{url}">{name}</a>'
+            else:
+                bc_html += f'<span class="current">{name}</span>'
+        bc_html += '</div>'
+
+    # Print Button
+    print_btn = """
+    <div class="action-bar">
+        <button onclick="window.print()" class="btn-print"><i class="fas fa-print"></i> Печати</button>
+    </div>
+    """
+
+    full_html = HTML_HEAD.format(title=title, root_path=root_path) + bc_html + print_btn + content + HTML_FOOTER
     with open(output_path, 'w', encoding='utf-8') as f:
         f.write(full_html)
     print(f"Generated: {output_path}")
@@ -128,7 +148,8 @@ def process_collection(input_dir, output_subdir, title_prefix):
                 os.path.join(output_base, f"{item_slug}.html"), 
                 item_title, 
                 page_content, 
-                root_path="../"
+                root_path="../",
+                breadcrumbs=[("Почетна", "../index.html"), (title_prefix, "index.html"), (item_title, "")]
             )
             
             items.append({
@@ -156,7 +177,8 @@ def process_collection(input_dir, output_subdir, title_prefix):
         os.path.join(output_base, "index.html"), 
         title_prefix, 
         index_content, 
-        root_path="../"
+        root_path="../",
+        breadcrumbs=[("Почетна", "../index.html"), (title_prefix, "")]
     )
     return items
 
@@ -214,11 +236,20 @@ def process_grades():
                     
                     # Output path: public/grade_10/algebra/prob1.html
                     out_file_dir = os.path.join(output_grade_path, rel_dir)
+                    
+                    root_p = "../../../" if rel_dir != "." else "../../"
+                    
+                    bc = [("Почетна", root_p + "index.html"), (f"Grade {grade_num}", "../index.html" if rel_dir != "." else "index.html")]
+                    if rel_dir != ".":
+                        bc.append((rel_dir.title(), ""))
+                    bc.append((prob_title, ""))
+
                     generate_page(
                         os.path.join(out_file_dir, f"{prob_slug}.html"),
                         prob_title,
                         f"<div class='card'>{html_body}</div>",
-                        root_path="../../../" if rel_dir != "." else "../../"
+                        root_path=root_p,
+                        breadcrumbs=bc
                     )
                     
                     problems.append({
@@ -247,7 +278,8 @@ def process_grades():
             os.path.join(output_grade_path, "index.html"),
             f"Grade {grade_num}",
             grade_index_content,
-            root_path="../"
+            root_path="../",
+            breadcrumbs=[("Почетна", "../index.html"), (f"Grade {grade_num}", "")]
         )
 
     return grades
