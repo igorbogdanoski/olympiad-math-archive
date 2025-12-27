@@ -2,7 +2,7 @@
 
 [⬅️ Назад кон прегледот](../README.md)
 
-**Вкупно задачи:** 26
+**Вкупно задачи:** 29
 
 | ID | Наслов | Тежина | Тип | Клучна Вештина |
 |:---|:---|:---:|:---|:---|
@@ -11,8 +11,11 @@
 | [2022_mun_y3_14a](municipal_competition_2022_2022_mun_y3_14a.md) | --- SKILL MAPPING --- | 3/10 | calculation | functions |
 | [2022_mun_y3_15a](municipal_competition_2022_2022_mun_y3_15a.md) | --- SKILL MAPPING --- | 5/10 | calculation | logarithms |
 | [2022_mun_y3_16a](municipal_competition_2022_2022_mun_y3_16a.md) | --- SKILL MAPPING --- | 4/10 | calculation | case_analysis |
+| [2022_mun_y3_16b](municipal_competition_2022_2022_mun_y3_16b.md) | --- SKILL MAPPING --- | 3/10 | calculation | functions |
 | [2022_mun_y3_17a](municipal_competition_2022_2022_mun_y3_17a.md) | --- SKILL MAPPING --- | 5/10 | calculation | trigonometric_equations |
 | [2022_mun_y3_18a](municipal_competition_2022_2022_mun_y3_18a.md) | --- SKILL MAPPING --- | 4/10 | calculation | inequalities_am_gm |
+| [2022_mun_y3_18b](municipal_competition_2022_2022_mun_y3_18b.md) | --- SKILL MAPPING --- | 5/10 | calculation | completing_the_square |
+| [2022_mun_y3_19b](municipal_competition_2022_2022_mun_y3_19b.md) | --- SKILL MAPPING --- | 5/10 | calculation | trigonometric_equations |
 | [2022_mun_y3_1a](municipal_competition_2022_2022_mun_y3_1a.md) | --- GEOMETRY SKILLS --- | 3/10 | calculation | functions |
 | [2022_mun_y3_1b](municipal_competition_2022_2022_mun_y3_1b.md) | --- GEOMETRY SKILLS --- | 3/10 | calculation | functions |
 | [2022_mun_y3_4a](municipal_competition_2022_2022_mun_y3_4a.md) | --- GEOMETRY SKILLS --- | 4/10 | calculation | vieta_formulas |
