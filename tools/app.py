@@ -35,6 +35,14 @@ def parse_problem(file_path):
             tags_block = tags_match.group(1)
             tags = [t.strip().replace('- ', '').strip() for t in tags_block.split('\n') if t.strip()]
         meta['tags'] = tags
+
+        # Екстракција на related_skills
+        related_skills = []
+        skills_match = re.search(r'related_skills:\s*\n((?:\s*-\s*.*\n?)+)', content) # Бараме во целиот content за секој случај
+        if skills_match:
+            skills_block = skills_match.group(1)
+            related_skills = [s.strip().replace('- ', '').strip() for s in skills_block.split('\n') if s.strip()]
+        meta['related_skills'] = related_skills
     
     # Екстракција на телото на задачата
     # 1. Тргни го YAML frontmatter (првиот блок помеѓу ---)
@@ -57,6 +65,10 @@ def parse_problem(file_path):
     # \( ... \) -> $ ... $
     body = re.sub(r'\\\((.*?)\\\)', r'$\1$', body, flags=re.DOTALL)
     
+    # Проверка за Manim placeholder
+    has_manim_placeholder = "<!-- Ова место е резервирано за автоматската слика од Manim -->" in content
+    meta['has_manim_placeholder'] = has_manim_placeholder
+
     return meta, body, file_path
     
     # Поправање на патеки за слики за да работат во Streamlit
@@ -208,6 +220,9 @@ selected_tags = st.sidebar.multiselect("Тагови", all_tags)
 # 5. Пребарување текст
 search_query = st.sidebar.text_input("Пребарај текст (пр. триаголник)")
 
+# 6. Филтер за Визуелизација
+show_missing_images = st.sidebar.checkbox("⚠️ Само задачи без слика")
+
 # --- КОПЧЕ ЗА СЛУЧАЈНА ЗАДАЧА ---
 if st.sidebar.button("🎲 Случајна Задача"):
     candidates = [p for p in all_problems if p['grade'] in selected_grades and p['category'] in selected_categories]
@@ -224,6 +239,7 @@ filtered_problems = [
     and min_diff <= p['difficulty'] <= max_diff
     and (not selected_tags or any(tag in p['meta'].get('tags', []) for tag in selected_tags))
     and (search_query.lower() in p['body'].lower() if search_query else True)
+    and (p['meta'].get('has_manim_placeholder', False) if show_missing_images else True)
 ]
 
 # Ако е кликнато "Случајна", прикажи ја само неа
@@ -302,7 +318,27 @@ else:
             with st.expander("👀 Прикажи решение"):
                 st.markdown("### 💡 Решение")
                 st.markdown(solution)
+            
+            # --- ПОВРЗАНИ ЗАДАЧИ ---
+            current_skills = prob['meta'].get('related_skills', [])
+            if current_skills:
+                related_probs = []
+                for p in all_problems:
+                    if p['path'] == prob['path']: continue # Не ја вклучувај истата задача
+                    
+                    other_skills = p['meta'].get('related_skills', [])
+                    # Проверка дали има пресек на skills
+                    if set(current_skills) & set(other_skills):
+                        related_probs.append(p)
+                        if len(related_probs) >= 3: break # Доволно се 3 препораки
                 
+                if related_probs:
+                    st.markdown("#### 🔗 Поврзани задачи:")
+                    cols = st.columns(len(related_probs))
+                    for i, rp in enumerate(related_probs):
+                        with cols[i]:
+                            st.info(f"**{rp['filename'].replace('.md', '').replace('_', ' ').title()}**\n\n(Skill: {', '.join(set(current_skills) & set(rp['meta'].get('related_skills', [])))})")
+
             st.caption(f"Извор: {prob['meta'].get('source', 'Непознат')} | Патека: {prob['path']}")
             st.markdown("---")
 
