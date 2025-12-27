@@ -6774,3 +6774,61 @@ class Task_2025_mun_g9_5(Scene):
 
 ```
 ---
+
+### 🆔 Задача: 4427 - Опишан рамнокрак трапез
+**📅 Додадено:** 2025-12-27 12:00
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_4427(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        
+        # Parameters
+        # a=8, b=2 => h=4, c=5.
+        # Scale down by 2 for view.
+        scale = 0.8
+        
+        # Coordinates (centered at origin)
+        # Circle radius = 2 * scale
+        R = 2 * scale
+        
+        # Top base (y = R)
+        # Width b = 2 * scale. Half-width = 1 * scale.
+        C = np.array([1 * scale, R, 0])
+        D = np.array([-1 * scale, R, 0])
+        
+        # Bottom base (y = -R)
+        # Width a = 8 * scale. Half-width = 4 * scale.
+        B = np.array([4 * scale, -R, 0])
+        A = np.array([-4 * scale, -R, 0])
+        
+        # Projection E
+        E = np.array([C[0], B[1], 0])
+        
+        # Shapes
+        trapezoid = Polygon(A, B, C, D, color=BLUE, stroke_width=4)
+        circle = Circle(radius=R, color=RED, fill_opacity=0.1)
+        altitude = DashedLine(C, E, color=BLACK)
+        
+        # Right angle mark
+        right_angle = RightAngle(Line(E, C), Line(E, B), length=0.3, color=BLACK)
+        
+        # Labels
+        lbl_A = MathTex('A').next_to(A, DL)
+        lbl_B = MathTex('B').next_to(B, DR)
+        lbl_C = MathTex('C').next_to(C, UP)
+        lbl_D = MathTex('D').next_to(D, UP)
+        lbl_E = MathTex('E').next_to(E, DOWN)
+        
+        lbl_h = MathTex('h').next_to(altitude, LEFT)
+        
+        # Add to scene
+        self.add(trapezoid, circle, altitude, right_angle)
+        self.add(lbl_A, lbl_B, lbl_C, lbl_D, lbl_E, lbl_h)
+```
+
