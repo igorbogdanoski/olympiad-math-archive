@@ -9973,3 +9973,148 @@ class Task_2022_mun_g6_5(Scene):
 
 ```
 ---
+
+### 🆔 Задача: 2022_mun_g6_7 - Искршена линија
+**📅 Додадено:** 2025-12-27 20:27
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_2022_mun_g6_7(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+class Task_2022_mun_g6_7(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        
+        # Visualize the segments as bars
+        # Lengths: 1, 4, 7, ... 34
+        # Scale down for view
+        
+        bars = VGroup()
+        for i in range(12):
+            length = 1 + i*3
+            bar = Rectangle(width=0.4, height=length/10, color=BLUE, fill_opacity=0.5)
+            # Position them side by side
+            bar.move_to(RIGHT * (i - 5.5) * 0.5 + UP * (length/20 - 2))
+            bars.add(bar)
+            
+        # Labels for first and last
+        lbl_1 = MathTex("1", color=BLACK, font_size=24).next_to(bars[0], DOWN)
+        lbl_12 = MathTex("34", color=BLACK, font_size=24).next_to(bars[11], DOWN)
+        
+        # Formula
+        formula = MathTex("S = \\frac{12}{2}(1 + 34) = 210 \\text{ cm}", color=RED).to_edge(UP)
+        res = MathTex("= 21 \\text{ dm}", color=RED).next_to(formula, DOWN)
+        
+        self.add(bars, lbl_1, lbl_12)
+        self.play(Write(formula))
+        self.play(Write(res))
+        # --- AI GENERATED CODE END ---
+
+```
+---
+
+### 🆔 Задача: 2022_mun_g6_9 - Промена на плоштина на правоаголник
+**📅 Додадено:** 2025-12-27 20:27
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_2022_mun_g6_9(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+class Task_2022_mun_g6_9(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        
+        # Original Rect 25x12. Scale: 1 unit = 5 cm.
+        w = 5
+        h = 2.4
+        
+        rect = Rectangle(width=w, height=h, color=BLACK)
+        lbl = Text("25 x 12", color=BLACK).next_to(rect, UP)
+        
+        # Vedran: Increase width by 10% -> 1.1w
+        rect_v = Rectangle(width=w*1.1, height=h, color=BLUE, fill_opacity=0.3)
+        rect_v.shift(LEFT * 2)
+        lbl_v = MathTex("P_V = (1.1 \\cdot 25) \\cdot 12", color=BLUE).next_to(rect_v, DOWN)
+        
+        # Darijan: Increase height by 10% -> 1.1h
+        rect_d = Rectangle(width=w, height=h*1.1, color=RED, fill_opacity=0.3)
+        rect_d.shift(RIGHT * 2)
+        lbl_d = MathTex("P_D = 25 \\cdot (1.1 \\cdot 12)", color=RED).next_to(rect_d, DOWN)
+        
+        self.add(rect_v, lbl_v, rect_d, lbl_d)
+        
+        # Conclusion
+        concl = MathTex("1.1 \\cdot (25 \\cdot 12) = (25 \\cdot 12) \\cdot 1.1", color=BLACK).to_edge(UP)
+        res = MathTex("\\Delta P = 0", color=GREEN).next_to(concl, DOWN)
+        
+        self.play(Write(concl))
+        self.play(Write(res))
+        # --- AI GENERATED CODE END ---
+
+```
+---
+
+### 🆔 Задача: 2022_mun_g6_10 - Размер на агли
+**📅 Додадено:** 2025-12-27 20:27
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_2022_mun_g6_10(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+class Task_2022_mun_g6_10(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        
+        # Visual representation of parts
+        # Circle divided into 10 parts
+        circle = Circle(radius=2, color=BLACK)
+        
+        # Angles: 36, 72, 108, 144
+        # Cumulative: 0, 36, 108, 216, 360
+        angles = [0, 36, 108, 216, 360]
+        colors = [BLUE, GREEN, YELLOW, RED]
+        labels = ["x", "2x", "3x", "4x"]
+        
+        sectors = VGroup()
+        for i in range(4):
+            start = angles[i] * DEGREES
+            end = angles[i+1] * DEGREES
+            sector = Sector(outer_radius=2, start_angle=start, angle=end-start, color=colors[i], fill_opacity=0.5)
+            sectors.add(sector)
+            
+            # Label position
+            mid_angle = (start + end) / 2
+            pos = np.array([1.2*np.cos(mid_angle), 1.2*np.sin(mid_angle), 0])
+            lbl = MathTex(labels[i], color=BLACK).move_to(pos)
+            self.add(lbl)
+            
+        self.add(sectors)
+        
+        # Calculation
+        calc = MathTex("10x = 360^\\circ \\implies x = 36^\\circ", color=BLACK).to_edge(UP)
+        diff = MathTex("4x - x = 3x = 108^\\circ", color=RED).next_to(calc, DOWN)
+        
+        self.play(Write(calc))
+        self.play(Write(diff))
+        # --- AI GENERATED CODE END ---
+
+```
+---
