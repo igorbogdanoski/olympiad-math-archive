@@ -8128,3 +8128,96 @@ class Task_2023_mun_g5_4(Scene):
 
 ```
 ---
+
+### 🆔 Задача: 2023_mun_g6_1 - Периметар на рамнокрак триаголник
+**📅 Додадено:** 2025-12-27 17:33
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_2023_mun_g6_1(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+        self.camera.background_color = WHITE
+        
+        # Isosceles triangle with base x and legs 3x
+        # Scale: let x=1. Height = sqrt((3)^2 - (0.5)^2) = sqrt(8.75) approx 2.95
+        
+        base_len = 1.5
+        leg_len = 3 * base_len
+        height = np.sqrt(leg_len**2 - (base_len/2)**2)
+        
+        A = LEFT * (base_len / 2) + DOWN * 1.5
+        B = RIGHT * (base_len / 2) + DOWN * 1.5
+        C = UP * (height - 1.5)
+        
+        tri = Polygon(A, B, C, color=BLACK, stroke_width=4)
+        
+        # Labels
+        lbl_a = MathTex("a = x", color=BLUE).next_to(Line(A, B), DOWN)
+        lbl_b1 = MathTex("b = 3x", color=RED).next_to(Line(B, C), RIGHT)
+        lbl_b2 = MathTex("b = 3x", color=RED).next_to(Line(A, C), LEFT)
+        
+        # Equation
+        eq = MathTex("x + 3x + 3x = 168", color=BLACK).to_edge(UP)
+        res = MathTex("7x = 168 \\implies x = 24", color=BLACK).next_to(eq, DOWN)
+        
+        self.add(tri, lbl_a, lbl_b1, lbl_b2)
+        self.play(Write(eq))
+        self.play(Write(res))
+        # --- AI GENERATED CODE END ---
+
+```
+---
+
+### 🆔 Задача: 2023_mun_g6_2 - Агол на часовник (13:30)
+**📅 Додадено:** 2025-12-27 17:33
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_2023_mun_g6_2(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+        self.camera.background_color = WHITE
+        
+        circle = Circle(radius=3, color=BLACK)
+        
+        # Ticks
+        ticks = VGroup()
+        for i in range(12):
+            angle = i * 30 * DEGREES
+            start = np.array([3*np.sin(angle), 3*np.cos(angle), 0])
+            end = np.array([2.7*np.sin(angle), 2.7*np.cos(angle), 0])
+            ticks.add(Line(start, end, color=BLACK))
+        
+        # Hands for 1:30
+        # Minute hand at 6 (180 deg from vertical)
+        min_angle = 180 * DEGREES
+        # In Manim (from x-axis): 6 is -90 deg.
+        min_vec = DOWN * 2.5
+        min_hand = Arrow(ORIGIN, min_vec, color=BLUE, buff=0)
+        
+        # Hour hand at 1.5 (45 deg from vertical)
+        # In Manim: 12 is 90. 1.5 is 90 - 45 = 45 deg.
+        hour_angle = 45 * DEGREES
+        hour_vec = np.array([1.5*np.cos(hour_angle), 1.5*np.sin(hour_angle), 0])
+        hour_hand = Arrow(ORIGIN, hour_vec, color=RED, buff=0)
+        
+        # Arc
+        arc = Angle(min_hand, hour_hand, radius=1, color=GREEN)
+        lbl = MathTex("135^\\circ", color=GREEN).next_to(arc, RIGHT)
+        
+        self.add(circle, ticks, min_hand, hour_hand, arc, lbl)
+        # --- AI GENERATED CODE END ---
+
+```
+---

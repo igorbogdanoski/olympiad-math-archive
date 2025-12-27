@@ -2,10 +2,12 @@
 
 [⬅️ Назад кон прегледот](../README.md)
 
-**Вкупно задачи:** 5
+**Вкупно задачи:** 7
 
 | ID | Наслов | Тежина | Тип | Клучна Вештина |
 |:---|:---|:---:|:---|:---|
+| [2023_mun_g6_3](municipal_competition_2023_2023_mun_g6_3.md) | --- SKILL MAPPING --- | 3/10 | word_problem | algebraic_manipulation |
+| [2023_mun_g6_4](municipal_competition_2023_2023_mun_g6_4.md) | --- SKILL MAPPING --- | 3/10 | word_problem | proportions |
 | [2024_mun_g6_2](municipal_competition_2024_2024_mun_g6_2.md) | --- SKILL MAPPING --- | 3/10 | calculation | algebraic_manipulation |
 | [2025_mun_g6_2](municipal_competition_2025_2025_mun_g6_2.md) | --- SKILL MAPPING --- | 3/10 | calculation | logic |
 | [4365](numerus_4365.md) | --- SKILL MAPPING (New Standard) --- | 2/10 | General | distributive_property # e.g., symmetry, invariants, telescoping |
