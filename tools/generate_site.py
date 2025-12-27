@@ -161,72 +161,94 @@ def process_collection(input_dir, output_subdir, title_prefix):
     return items
 
 def process_grades():
-    """Processes grade folders and problems."""
+    """Processes grade folders and problems from multiple sources."""
     grades = []
-    for item in os.listdir(BASE_DIR):
-        if item.startswith("grade_") and os.path.isdir(os.path.join(BASE_DIR, item)):
-            grade_num = item.split('_')[1]
-            grades.append(item)
-            
-            # Process problems within grade
-            grade_path = os.path.join(BASE_DIR, item)
-            output_grade_path = os.path.join(OUTPUT_DIR, item)
-            
-            problems = []
-            
-            # Walk through subfolders (algebra, geometry, etc.)
-            for root, dirs, files in os.walk(grade_path):
-                for file in files:
-                    if file.endswith(".md") and file != "README.md":
-                        filepath = os.path.join(root, file)
-                        rel_dir = os.path.relpath(root, grade_path) # e.g. "algebra"
-                        
-                        with open(filepath, 'r', encoding='utf-8') as f:
-                            raw_content = f.read()
-                        
-                        meta, body = parse_frontmatter(raw_content)
-                        html_body = md_to_html(body)
-                        
-                        prob_title = meta.get('title', file)
-                        prob_slug = file.replace('.md', '')
-                        
-                        # Output path: public/grade_10/algebra/prob1.html
-                        out_file_dir = os.path.join(output_grade_path, rel_dir)
-                        generate_page(
-                            os.path.join(out_file_dir, f"{prob_slug}.html"),
-                            prob_title,
-                            f"<div class='card'>{html_body}</div>",
-                            root_path="../../../" if rel_dir != "." else "../../"
-                        )
-                        
-                        problems.append({
-                            'title': prob_title,
-                            'path': f"{rel_dir}/{prob_slug}.html" if rel_dir != "." else f"{prob_slug}.html",
-                            'category': rel_dir.title()
-                        })
+    
+    # Define sources: (Path to scan, is_pre_olympiad)
+    sources = [
+        (BASE_DIR, False),
+        (os.path.join(BASE_DIR, "pre_olympiad"), True)
+    ]
+    
+    grade_dirs = []
+    
+    for source_path, is_pre in sources:
+        if os.path.exists(source_path):
+            for item in os.listdir(source_path):
+                if item.startswith("grade_") and os.path.isdir(os.path.join(source_path, item)):
+                    grade_dirs.append({
+                        'name': item,
+                        'path': os.path.join(source_path, item),
+                        'num': int(item.split('_')[1]) if item.split('_')[1].isdigit() else 999
+                    })
+    
+    # Sort by grade number
+    grade_dirs.sort(key=lambda x: x['num'])
+    
+    for grade_info in grade_dirs:
+        item = grade_info['name']
+        grade_num = str(grade_info['num'])
+        grades.append(item)
+        
+        # Process problems within grade
+        grade_path = grade_info['path']
+        output_grade_path = os.path.join(OUTPUT_DIR, item)
+        
+        problems = []
+        
+        # Walk through subfolders (algebra, geometry, etc.)
+        for root, dirs, files in os.walk(grade_path):
+            for file in files:
+                if file.endswith(".md") and file != "README.md":
+                    filepath = os.path.join(root, file)
+                    rel_dir = os.path.relpath(root, grade_path) # e.g. "algebra"
+                    
+                    with open(filepath, 'r', encoding='utf-8') as f:
+                        raw_content = f.read()
+                    
+                    meta, body = parse_frontmatter(raw_content)
+                    html_body = md_to_html(body)
+                    
+                    prob_title = meta.get('title', file)
+                    prob_slug = file.replace('.md', '')
+                    
+                    # Output path: public/grade_10/algebra/prob1.html
+                    out_file_dir = os.path.join(output_grade_path, rel_dir)
+                    generate_page(
+                        os.path.join(out_file_dir, f"{prob_slug}.html"),
+                        prob_title,
+                        f"<div class='card'>{html_body}</div>",
+                        root_path="../../../" if rel_dir != "." else "../../"
+                    )
+                    
+                    problems.append({
+                        'title': prob_title,
+                        'path': f"{rel_dir}/{prob_slug}.html" if rel_dir != "." else f"{prob_slug}.html",
+                        'category': rel_dir.title()
+                    })
 
-            # Generate Grade Index
-            grade_index_content = f"<h1>Grade {grade_num} Problems</h1>"
+        # Generate Grade Index
+        grade_index_content = f"<h1>Grade {grade_num} Problems</h1>"
+        
+        # Group by category
+        cats = {}
+        for p in problems:
+            c = p['category']
+            if c not in cats: cats[c] = []
+            cats[c].append(p)
+        
+        for cat, probs in cats.items():
+            grade_index_content += f"<h2>{cat}</h2><ul>"
+            for p in probs:
+                grade_index_content += f"<li><a href='{p['path']}'>{p['title']}</a></li>"
+            grade_index_content += "</ul>"
             
-            # Group by category
-            cats = {}
-            for p in problems:
-                c = p['category']
-                if c not in cats: cats[c] = []
-                cats[c].append(p)
-            
-            for cat, probs in cats.items():
-                grade_index_content += f"<h2>{cat}</h2><ul>"
-                for p in probs:
-                    grade_index_content += f"<li><a href='{p['path']}'>{p['title']}</a></li>"
-                grade_index_content += "</ul>"
-                
-            generate_page(
-                os.path.join(output_grade_path, "index.html"),
-                f"Grade {grade_num}",
-                grade_index_content,
-                root_path="../"
-            )
+        generate_page(
+            os.path.join(output_grade_path, "index.html"),
+            f"Grade {grade_num}",
+            grade_index_content,
+            root_path="../"
+        )
 
     return grades
 
@@ -255,7 +277,14 @@ def generate_main_index(skills, theorems, grades):
     <div class="grid">
     """.format(skill_count=len(skills), theorem_count=len(theorems))
     
-    for grade in sorted(grades):
+    # Sort grades numerically for display
+    def grade_sort_key(g):
+        try:
+            return int(g.split('_')[1])
+        except:
+            return 999
+            
+    for grade in sorted(grades, key=grade_sort_key):
         grade_num = grade.split('_')[1]
         content += f"""
         <div class="card">
