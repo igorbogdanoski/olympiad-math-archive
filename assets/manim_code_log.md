@@ -8843,3 +8843,61 @@ class Task_2023_mun_y4_3a(Scene):
 
 ```
 ---
+
+### 🆔 Задача: 2022_mun_g4_1 - Броење отсечки
+**📅 Додадено:** 2025-12-27 19:28
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_2022_mun_g4_1(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+        self.camera.background_color = WHITE
+        
+        # Vertices
+        A = UL * 2
+        B = UR * 2
+        C = DR * 2
+        D = DL * 2
+        Center = ORIGIN
+        TopMid = UP * 2
+        BotMid = DOWN * 2
+        
+        # Lines
+        # Top horizontal
+        l1 = Line(A, B, color=BLACK)
+        # Bottom horizontal
+        l2 = Line(D, C, color=BLACK)
+        # Vertical
+        l3 = Line(TopMid, BotMid, color=BLACK)
+        # Diagonals
+        l4 = Line(A, C, color=BLACK)
+        l5 = Line(D, B, color=BLACK)
+        
+        self.add(l1, l2, l3, l4, l5)
+        
+        # Highlight counting for one line (e.g., Top)
+        # Segment 1
+        s1 = Line(A, TopMid, color=RED, stroke_width=6)
+        self.play(FadeIn(s1))
+        self.wait(0.5)
+        # Segment 2
+        s2 = Line(TopMid, B, color=BLUE, stroke_width=6)
+        self.play(FadeIn(s2))
+        self.wait(0.5)
+        # Segment 3 (Whole)
+        s3 = Line(A, B, color=GREEN, stroke_width=8, stroke_opacity=0.5)
+        self.play(FadeIn(s3))
+        self.wait(0.5)
+        
+        lbl = MathTex("3 \\times 5 = 15", color=BLACK).to_edge(DOWN)
+        self.play(Write(lbl))
+        # --- AI GENERATED CODE END ---
+
+```
+---
