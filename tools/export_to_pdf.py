@@ -16,6 +16,11 @@ def export_to_pdf(file_path):
 
     pdf_file_path = file_path.replace(".md", ".pdf")
 
+    # Determine directories
+    file_dir = os.path.dirname(file_path)
+    file_name = os.path.basename(file_path)
+    pdf_name = os.path.basename(pdf_file_path).replace(".pdf", "_v2.pdf")
+
     # --- КЛУЧНИОТ ДЕЛ ЗА КИРИЛИЦА ---
     # Користиме 'xelatex' и му задаваме фонт што има кирилица (Times New Roman).
     # Ако си на Linux, смени го фонтот во 'DejaVu Serif' или 'Liberation Serif'.
@@ -23,8 +28,8 @@ def export_to_pdf(file_path):
     
     command = [
         "pandoc",
-        file_path,
-        "-o", pdf_file_path,
+        file_name,               # Use filename only
+        "-o", pdf_name,          # Output filename only
         "--pdf-engine=xelatex", 
         "--from=markdown+tex_math_dollars",
         "--standalone",
@@ -35,8 +40,14 @@ def export_to_pdf(file_path):
     ]
 
     try:
-        print(f"🚀 Конвертирам: {os.path.basename(file_path)}...")
-        subprocess.run(command, check=True, capture_output=True, text=True, encoding='utf-8')
+        print(f"🚀 Конвертирам: {file_name}...")
+        # Run in the directory of the file so relative paths work
+        result = subprocess.run(command, cwd=file_dir, check=True, capture_output=True, text=True, encoding='utf-8')
+        
+        # Print stderr (warnings) if any
+        if result.stderr:
+            print("⚠️  Pandoc Warnings/Output:")
+            print(result.stderr)
         
         print(f"✅ УСПЕХ! PDF фајлот е креиран:")
         print(f"   📄 {pdf_file_path}")
