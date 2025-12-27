@@ -7,11 +7,43 @@ import shutil
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 ARCHIVE_ROOT = os.path.abspath(os.path.join(SCRIPT_DIR, "../"))
 ASSETS_DIR = os.path.join(ARCHIVE_ROOT, "assets", "images")
+LOG_FILE = os.path.join(ARCHIVE_ROOT, "assets", "manim_code_log.md")
 TEMP_MANIM_FILE = os.path.join(SCRIPT_DIR, "temp_scene.py")
 
+def load_manim_code_map():
+    """Parses the log file and returns a dict of {problem_id: code}."""
+    if not os.path.exists(LOG_FILE):
+        print(f"⚠️ Log file not found: {LOG_FILE}")
+        return {}
+
+    with open(LOG_FILE, 'r', encoding='utf-8') as f:
+        content = f.read()
+    
+    # Regex to find problem entries
+    # Matches: ### 🆔 Задача: <ID> ... ```python <code> ```
+    pattern = re.compile(
+        r"### 🆔 Задача:\s*([a-zA-Z0-9_\-]+).*?```python\s+(.*?)```",
+        re.DOTALL
+    )
+    
+    code_map = {}
+    for match in pattern.finditer(content):
+        problem_id = match.group(1).strip()
+        code = match.group(2)
+        code_map[problem_id] = code
+    
+    print(f"📚 Loaded {len(code_map)} code snippets from log.")
+    return code_map
+
+def extract_problem_id(content):
+    """Extracts problem_id from YAML frontmatter."""
+    match = re.search(r'^problem_id:\s*(.+)$', content, re.MULTILINE)
+    if match:
+        return match.group(1).strip().replace('"', '').replace("'", "")
+    return None
+
 def extract_manim_code(content):
-    """Бара Python код блок што личи на Manim сцена."""
-    # Бараме ```python ... class ... (Scene): ... ```
+    """Бара Python код блок што личи на Manim сцена (fallback)."""
     match = re.search(r'```python\s+(.*?)```', content, re.DOTALL)
     if match:
         code = match.group(1)
@@ -25,7 +57,7 @@ def run_manim(code, filename_base):
     # 1. Запиши го кодот во привремен фајл
     with open(TEMP_MANIM_FILE, 'w', encoding='utf-8') as f:
         # Осигурај се дека има imports ако фалат
-        if "from manim import *" not in code:
+        if "from manim import" not in code:
             f.write("from manim import *\n")
         f.write(code)
         # Додај config за да зачува само последен фрејм како слика
@@ -34,11 +66,12 @@ def run_manim(code, filename_base):
     # 2. Најди го името на сцената (класата)
     scene_match = re.search(r'class\s+(\w+)\(Scene\):', code)
     if not scene_match:
+        # Ако нема класа, можеби е само функција construct?
+        # Засега претпоставуваме дека има класа.
         return None
     scene_name = scene_match.group(1)
     
-    # 3. Изврши Manim команда: manim -qm -s temp_scene.py SceneName
-    # -qm: quality medium, -s: save last frame only (image)
+    # 3. Изврши Manim команда
     cmd = ["manim", "-qm", "-s", "--disable_caching", TEMP_MANIM_FILE, scene_name]
     
     print(f"   🎬 Rendering {scene_name}...")
@@ -46,20 +79,16 @@ def run_manim(code, filename_base):
         subprocess.run(cmd, check=True, capture_output=True)
         
         # 4. Најди ја генерираната слика
-        # Manim по дифолт ја става во media/images/temp_scene/SceneName.png
         expected_output = os.path.join("media", "images", "temp_scene", f"{scene_name}.png")
         
         if os.path.exists(expected_output):
-            # 5. Премести ја во assets/images со правилно име
+            # 5. Премести ја во assets/images
             target_name = f"{filename_base}.png"
             target_path = os.path.join(ASSETS_DIR, target_name)
             
-            # Креирај папка ако не постои
             os.makedirs(ASSETS_DIR, exist_ok=True)
-            
             shutil.move(expected_output, target_path)
             
-            # Исчисти media папка
             if os.path.exists("media"):
                 shutil.rmtree("media", ignore_errors=True)
                 
@@ -78,14 +107,8 @@ def update_markdown_with_image(file_path, image_name):
         
     placeholder = "<!-- Ова место е резервирано за автоматската слика од Manim -->"
     
-    # Пресметај релативна патека
-    # file_path: .../grade_10/geometry/file.md
-    # image_path: .../assets/images/file.png
-    # Треба да одиме нагоре до root, па во assets
-    
     file_dir = os.path.dirname(file_path)
     rel_path = os.path.relpath(os.path.join(ASSETS_DIR, image_name), file_dir)
-    # Замени backslash со forward slash за Markdown
     rel_path = rel_path.replace("\\", "/")
     
     new_image_tag = f"![Визуелизација]({rel_path})"
@@ -100,6 +123,9 @@ def update_markdown_with_image(file_path, image_name):
 
 def main():
     print("🎨 Starting Batch Manim Renderer...")
+    
+    # Вчитај ги кодовите од логот
+    manim_code_map = load_manim_code_map()
     
     BATCH_SIZE = 5
     processed_count = 0
@@ -118,7 +144,6 @@ def main():
                 scanned_files += 1
                 path = os.path.join(root, file)
                 
-                # Провери дали веќе има слика (за да не рендерираме пак)
                 try:
                     with open(path, 'r', encoding='utf-8') as f:
                         content = f.read()
@@ -127,17 +152,25 @@ def main():
                     continue
                     
                 if "<!-- Ова место е резервирано за автоматската слика од Manim -->" not in content:
-                    continue # Или нема placeholder или веќе е средено
+                    continue 
                 
                 candidates_found += 1
                 
-                # Провери дали има код
-                code = extract_manim_code(content)
+                # 1. Пробај да најдеш код преку problem_id во логот
+                problem_id = extract_problem_id(content)
+                code = None
+                
+                if problem_id and problem_id in manim_code_map:
+                    print(f"🔍 Found code in LOG for ID: {problem_id} ({file})")
+                    code = manim_code_map[problem_id]
+                else:
+                    # 2. Fallback: Пробај да најдеш код во самиот фајл
+                    code = extract_manim_code(content)
+                    if code:
+                        print(f"🔍 Found embedded code in: {file}")
+                
                 if code:
-                    print(f"🔍 Found Manim code in: {file}")
                     filename_base = file.replace(".md", "")
-                    
-                    # Рендерирај
                     image_name = run_manim(code, filename_base)
                     
                     if image_name:
@@ -145,14 +178,13 @@ def main():
                             processed_count += 1
                             print(f"   📊 Progress: {processed_count}/{BATCH_SIZE}")
                 else:
-                    print(f"⚠️  Found placeholder but NO valid Manim code in: {file}")
+                    print(f"⚠️  No code found for: {file} (ID: {problem_id})")
 
     print(f"\n🏁 Finished scan.")
     print(f"   📂 Scanned files: {scanned_files}")
     print(f"   🎯 Candidates (with placeholder): {candidates_found}")
     print(f"   ✅ Processed in this batch: {processed_count}")
-    if candidates_found == 0:
-        print("   (Ова значи дека сите задачи или веќе имаат слика, или немаат placeholder за слика.)")
+
 
 if __name__ == "__main__":
     main()
