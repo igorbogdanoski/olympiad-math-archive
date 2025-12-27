@@ -10996,3 +10996,217 @@ class Task_2022_mun_g9_14(Scene):
 
 ```
 ---
+
+### 🆔 Задача: 2022_mun_g9_12 - Поделба на отсечка
+**📅 Додадено:** 2025-12-27 21:02
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_2022_mun_g9_12(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+class Task_2022_mun_g9_12(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        
+        # Segment AB length 16. Scale: 1 unit = 1 cm (visual scale 0.5)
+        scale = 0.5
+        A = LEFT * 4
+        B = RIGHT * 4
+        
+        line = Line(A, B, color=BLACK)
+        
+        # M at 3/8. Total length 8 units. 3/8 * 8 = 3 units from left.
+        M = A + RIGHT * 3
+        # N at 1/2. 4 units from left.
+        N = A + RIGHT * 4
+        
+        # Dots
+        dA = Dot(A, color=BLACK)
+        dB = Dot(B, color=BLACK)
+        dM = Dot(M, color=BLUE)
+        dN = Dot(N, color=RED)
+        
+        # Labels
+        lbl_A = MathTex("A", color=BLACK).next_to(A, DOWN)
+        lbl_B = MathTex("B", color=BLACK).next_to(B, DOWN)
+        lbl_M = MathTex("M", color=BLUE).next_to(M, UP)
+        lbl_N = MathTex("N", color=RED).next_to(N, UP)
+        
+        # Braces
+        b_AM = Brace(Line(A, M), DOWN)
+        t_AM = b_AM.get_text("6")
+        
+        b_AN = Brace(Line(A, N), DOWN, buff=0.5)
+        t_AN = b_AN.get_text("8")
+        
+        b_MN = Brace(Line(M, N), UP)
+        t_MN = b_MN.get_text("?")
+        
+        self.add(line, dA, dB, dM, dN, lbl_A, lbl_B, lbl_M, lbl_N)
+        self.play(Write(b_AM), Write(t_AM))
+        self.play(Write(b_AN), Write(t_AN))
+        self.play(Write(b_MN), Write(t_MN))
+        
+        res = MathTex("MN = 8 - 6 = 2", color=RED).to_edge(UP)
+        self.play(Write(res))
+        # --- AI GENERATED CODE END ---
+
+```
+---
+
+### 🆔 Задача: 2022_mun_g9_14 - Тангентен четириаголник
+**📅 Додадено:** 2025-12-27 21:02
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_2022_mun_g9_14(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+class Task_2022_mun_g9_14(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        
+        # Tangential Quadrilateral
+        # Sides proportional to 2020, 2021, 2022, 2021.
+        # Almost a square/rhombus.
+        
+        # Let's draw a circle and 4 tangents.
+        circle = Circle(radius=2, color=BLUE)
+        
+        # Tangent points angles (approximate to get side ratios)
+        # Equal sides would be 90, 180, 270, 360.
+        # Here sides are very close. Let's just draw a square-ish shape.
+        
+        square = Square(side_length=4, color=BLACK)
+        
+        lbl_AB = MathTex("2020k", color=BLACK).next_to(square, DOWN)
+        lbl_BC = MathTex("2021k", color=BLACK).next_to(square, RIGHT)
+        lbl_CD = MathTex("2022k", color=BLACK).next_to(square, UP)
+        lbl_AD = MathTex("AD=?", color=RED).next_to(square, LEFT)
+        
+        prop = MathTex("AB+CD = BC+AD", color=BLUE).to_corner(UL)
+        
+        self.add(circle, square, lbl_AB, lbl_BC, lbl_CD, lbl_AD)
+        self.play(Write(prop))
+        # --- AI GENERATED CODE END ---
+
+```
+---
+
+### 🆔 Задача: 2022_mun_g9_12 - Поделба на отсечка
+**📅 Додадено:** 2025-12-27 21:04
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_2022_mun_g9_12(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+class Task_2022_mun_g9_12(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        
+        # Segment AB length 16. Scale: 1 unit = 1 cm (visual scale 0.5)
+        scale = 0.5
+        A = LEFT * 4
+        B = RIGHT * 4
+        
+        line = Line(A, B, color=BLACK)
+        
+        # M at 3/8. Total length 8 units. 3/8 * 8 = 3 units from left.
+        M = A + RIGHT * 3
+        # N at 1/2. 4 units from left.
+        N = A + RIGHT * 4
+        
+        # Dots
+        dA = Dot(A, color=BLACK)
+        dB = Dot(B, color=BLACK)
+        dM = Dot(M, color=BLUE)
+        dN = Dot(N, color=RED)
+        
+        # Labels
+        lbl_A = MathTex("A", color=BLACK).next_to(A, DOWN)
+        lbl_B = MathTex("B", color=BLACK).next_to(B, DOWN)
+        lbl_M = MathTex("M", color=BLUE).next_to(M, UP)
+        lbl_N = MathTex("N", color=RED).next_to(N, UP)
+        
+        # Braces
+        b_AM = Brace(Line(A, M), DOWN)
+        t_AM = b_AM.get_text("6")
+        
+        b_AN = Brace(Line(A, N), DOWN, buff=0.5)
+        t_AN = b_AN.get_text("8")
+        
+        b_MN = Brace(Line(M, N), UP)
+        t_MN = b_MN.get_text("?")
+        
+        self.add(line, dA, dB, dM, dN, lbl_A, lbl_B, lbl_M, lbl_N)
+        self.play(Write(b_AM), Write(t_AM))
+        self.play(Write(b_AN), Write(t_AN))
+        self.play(Write(b_MN), Write(t_MN))
+        
+        res = MathTex("MN = 8 - 6 = 2", color=RED).to_edge(UP)
+        self.play(Write(res))
+        # --- AI GENERATED CODE END ---
+
+```
+---
+
+### 🆔 Задача: 2022_mun_g9_14 - Тангентен четириаголник
+**📅 Додадено:** 2025-12-27 21:04
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_2022_mun_g9_14(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+class Task_2022_mun_g9_14(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        
+        # Tangential Quadrilateral
+        # Sides proportional to 2020, 2021, 2022, 2021.
+        # Almost a square/rhombus.
+        
+        # Let's draw a circle and 4 tangents.
+        circle = Circle(radius=2, color=BLUE)
+        
+        # Tangent points angles (approximate to get side ratios)
+        # Equal sides would be 90, 180, 270, 360.
+        # Here sides are very close. Let's just draw a square-ish shape.
+        
+        square = Square(side_length=4, color=BLACK)
+        
+        lbl_AB = MathTex("2020k", color=BLACK).next_to(square, DOWN)
+        lbl_BC = MathTex("2021k", color=BLACK).next_to(square, RIGHT)
+        lbl_CD = MathTex("2022k", color=BLACK).next_to(square, UP)
+        lbl_AD = MathTex("AD=?", color=RED).next_to(square, LEFT)
+        
+        prop = MathTex("AB+CD = BC+AD", color=BLUE).to_corner(UL)
+        
+        self.add(circle, square, lbl_AB, lbl_BC, lbl_CD, lbl_AD)
+        self.play(Write(prop))
+        # --- AI GENERATED CODE END ---
+
+```
+---
