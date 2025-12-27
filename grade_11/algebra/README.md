@@ -2,10 +2,12 @@
 
 [⬅️ Назад кон прегледот](../README.md)
 
-**Вкупно задачи:** 9
+**Вкупно задачи:** 11
 
 | ID | Наслов | Тежина | Тип | Клучна Вештина |
 |:---|:---|:---:|:---|:---|
+| [2022_mun_y3_1a](municipal_competition_2022_2022_mun_y3_1a.md) | --- GEOMETRY SKILLS --- | 3/10 | calculation | functions |
+| [2022_mun_y3_4a](municipal_competition_2022_2022_mun_y3_4a.md) | --- GEOMETRY SKILLS --- | 4/10 | calculation | vieta_formulas |
 | [2023_mun_y3_2a](municipal_competition_2023_2023_mun_y3_2a.md) | --- SKILL MAPPING --- | 4/10 | calculation | algebraic_manipulation |
 | [2023_mun_y3_2b](municipal_competition_2023_2023_mun_y3_2b.md) | --- SKILL MAPPING --- | 3/10 | proof | algebraic_manipulation |
 | [2023_mun_y3_3ab](municipal_competition_2023_2023_mun_y3_3ab.md) | --- GEOMETRY SKILLS --- | 4/10 | calculation | vieta_formulas |
