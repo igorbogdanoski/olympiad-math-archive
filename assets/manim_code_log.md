@@ -12165,3 +12165,131 @@ class Task_2022_mun_y2_20a(Scene):
 
 ```
 ---
+
+### 🆔 Задача: 2022_mun_y2_1b - Плоштина на шрафиран дел во квадрат
+**📅 Додадено:** 2025-12-27 22:48
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_2022_mun_y2_1b(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+        # Coordinates
+        A = [-2, 2, 0]
+        B = [2, 2, 0]
+        C = [2, -2, 0]
+        D = [-2, -2, 0]
+        
+        # Points Y and X
+        # Side length 4 (scaled from 10). 8 is 0.8 of 10.
+        # Y on AD (Left side). A is top-left. D is bottom-left.
+        # AY = 0.8 * side. Y is 0.8 down from A.
+        Y = [-2, 2 - 0.8*4, 0]
+        
+        # X on BC (Right side). C is bottom-right. B is top-right.
+        # CX = 0.8 * side. X is 0.8 up from C.
+        X = [2, -2 + 0.8*4, 0]
+
+        # Shapes
+        square = Polygon(A, B, C, D, color=BLACK)
+        # Shaded region XBYD
+        shaded = Polygon(B, Y, D, X, color=BLACK, fill_opacity=0.4, fill_color=GREY)
+        
+        # Labels
+        labels = VGroup(
+            MathTex('A').next_to(A, UL),
+            MathTex('B').next_to(B, UR),
+            MathTex('C').next_to(C, DR),
+            MathTex('D').next_to(D, DL),
+            MathTex('Y').next_to(Y, LEFT),
+            MathTex('X').next_to(X, RIGHT),
+            MathTex('10').next_to(Line(A,B), UP),
+            MathTex('8').next_to(Line(A,Y), LEFT)
+        ).set_color(BLACK)
+
+        self.add(square, shaded, labels)
+        # --- AI GENERATED CODE END ---
+
+```
+---
+
+### 🆔 Задача: 2022_mun_y2_3b - Дијаграм за активности
+**📅 Додадено:** 2025-12-27 22:48
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_2022_mun_y2_3b(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+        # Angles
+        a1 = 130
+        a2 = 110
+        a3 = 360 - a1 - a2 # 120
+        
+        # Sectors
+        s1 = Sector(outer_radius=2, angle=a1*DEGREES, start_angle=0, color=BLUE, fill_opacity=0.7)
+        s2 = Sector(outer_radius=2, angle=a2*DEGREES, start_angle=a1*DEGREES, color=RED, fill_opacity=0.7)
+        s3 = Sector(outer_radius=2, angle=a3*DEGREES, start_angle=(a1+a2)*DEGREES, color=GREEN, fill_opacity=0.7)
+        
+        # Labels
+        l1 = MathTex('130^\circ').move_to(s1.get_center() * 1.5)
+        l2 = MathTex('110^\circ').move_to(s2.get_center() * 1.5)
+        l3 = MathTex('?').move_to(s3.get_center() * 1.5)
+        
+        self.add(s1, s2, s3, l1, l2, l3)
+        # --- AI GENERATED CODE END ---
+
+```
+---
+
+### 🆔 Задача: 2022_mun_y2_4b - Агли со симетрали
+**📅 Додадено:** 2025-12-27 22:48
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_2022_mun_y2_4b(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+        # Coordinates
+        Q = ORIGIN
+        # P and R such that angle PQR = 120
+        P = [-3, 0, 0]
+        R = [2 * np.cos(120*DEGREES), 2 * np.sin(120*DEGREES), 0]
+        
+        # Incenter S calculation (approximate for visual)
+        S = [-1, 0.8, 0] # Visual approximation
+
+        tri = Polygon(P, Q, R, color=BLACK)
+        bis1 = Line(P, S, color=BLUE)
+        bis2 = Line(R, S, color=BLUE)
+        
+        labels = VGroup(
+            MathTex('Q').next_to(Q, DR),
+            MathTex('P').next_to(P, DL),
+            MathTex('R').next_to(R, UP),
+            MathTex('S').next_to(S, UP),
+            MathTex('120^\circ').next_to(Q, UL, buff=0.1)
+        ).set_color(BLACK)
+        
+        angle_S = Angle(Line(S,R), Line(S,P), radius=0.3, color=RED)
+
+        self.add(tri, bis1, bis2, labels, angle_S)
+        # --- AI GENERATED CODE END ---
+
+```
+---
