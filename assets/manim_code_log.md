@@ -2420,3 +2420,245 @@ class Task_2025_mun_g6_4(Scene):
 
 ```
 ---
+
+### 🆔 Задача: 2025_mun_g6_3 - Периметар со симетрала
+**📅 Додадено:** 2025-12-27 01:37
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_2025_mun_g6_3(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+class Task_2025_mun_g6_3(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        
+        # Coordinates
+        A = LEFT * 3 + DOWN * 1
+        B = RIGHT * 2 + UP * 2
+        C = RIGHT * 3 + DOWN * 1
+        
+        # Perpendicular bisector of AC
+        # Midpoint of AC
+        M = (A + C) / 2
+        # Bisector is vertical line x=0 (since A and C have same y)
+        bisector = Line(M + UP*4, M + DOWN*1, color=GRAY, stroke_width=2)
+        
+        # Intersection Q with AB
+        # Line AB equation... let's just calculate intersection visually or geometrically
+        # For visualization, let's place Q on AB such that QA=QC
+        # Since bisector is x=0, Q must be at x=0 on line AB.
+        # A=(-3, -1), B=(2, 2). Line: y - (-1) = (3/5)(x - (-3)) => y = 0.6x + 1.8 - 1 = 0.6x + 0.8
+        # If x=0, y=0.8. So Q=(0, 0.8)
+        Q = UP * 0.8
+        
+        # Draw Triangle ABC
+        tri = Polygon(A, B, C, color=BLACK, stroke_width=4)
+        
+        # Draw segments
+        line_QC = Line(Q, C, color=RED, stroke_width=4)
+        line_QA = Line(Q, A, color=RED, stroke_width=4)
+        
+        # Labels
+        lbl_A = MathTex("A", color=BLACK).next_to(A, DL)
+        lbl_B = MathTex("B", color=BLACK).next_to(B, UP)
+        lbl_C = MathTex("C", color=BLACK).next_to(C, DR)
+        lbl_Q = MathTex("Q", color=BLACK).next_to(Q, UL)
+        
+        # Equality marks
+        mark1 = DashedLine(Q, A, color=RED)
+        mark2 = DashedLine(Q, C, color=RED)
+        
+        txt = MathTex("QA = QC", color=RED).to_corner(UL)
+        
+        self.add(tri, bisector, line_QC, lbl_A, lbl_B, lbl_C, lbl_Q, txt)
+        self.play(Indicate(line_QA), Indicate(line_QC))
+        # --- AI GENERATED CODE END ---
+
+```
+---
+
+### 🆔 Задача: 2025_mun_g6_4 - Агли во четириаголник
+**📅 Додадено:** 2025-12-27 01:37
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_2025_mun_g6_4(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+class Task_2025_mun_g6_4(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        
+        # Arbitrary angles satisfying 2a+2b=80. Let 2a=40, 2b=40 => a=20, b=20.
+        # Small triangle angles: 40, 40, 100.
+        # Large quad angles: 80, 80, 150, x=50.
+        
+        # Vertices approximation
+        A = DL * 2
+        B = DR * 2
+        # Inner point P such that PAB is 40, PBA is 40.
+        # Intersection of rays.
+        P = UP * 0.5 # approx
+        
+        # Outer points D, C
+        # Angle at A is 80. Angle at B is 80.
+        D = A + UP * 3 + LEFT * 0.5
+        C = B + UP * 3 + RIGHT * 0.5
+        
+        # Draw shapes
+        quad = Polygon(A, B, C, D, color=BLACK, stroke_width=4)
+        tri_lines = VGroup(Line(A, P), Line(B, P)).set_color(BLUE)
+        
+        # Labels
+        lbl_100 = MathTex("100^\circ", color=BLUE, font_size=24).next_to(P, UP, buff=0.1)
+        lbl_150 = MathTex("150^\circ", color=BLACK, font_size=24).next_to(D, UP)
+        lbl_x = MathTex("x", color=RED).next_to(C, UP)
+        
+        lbl_2a = MathTex("2\\alpha", color=BLUE, font_size=20).move_to(A + UR*0.5)
+        lbl_2b = MathTex("2\\beta", color=BLUE, font_size=20).move_to(B + UL*0.5)
+        
+        lbl_4a = MathTex("4\\alpha", color=BLACK, font_size=24).next_to(A, LEFT)
+        lbl_4b = MathTex("4\\beta", color=BLACK, font_size=24).next_to(B, RIGHT)
+        
+        self.add(quad, tri_lines)
+        self.add(lbl_100, lbl_150, lbl_x, lbl_2a, lbl_2b, lbl_4a, lbl_4b)
+        
+        # Equation
+        eq = MathTex("2\\alpha + 2\\beta = 80^\circ \\implies 4\\alpha + 4\\beta = 160^\circ", color=RED).to_edge(UP)
+        self.add(eq)
+        # --- AI GENERATED CODE END ---
+
+```
+---
+
+### 🆔 Задача: 2025_mun_g6_3 - Периметар со симетрала
+**📅 Додадено:** 2025-12-27 01:37
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_2025_mun_g6_3(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+class Task_2025_mun_g6_3(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        
+        # Coordinates
+        A = LEFT * 3 + DOWN * 1
+        B = RIGHT * 2 + UP * 2
+        C = RIGHT * 3 + DOWN * 1
+        
+        # Perpendicular bisector of AC
+        # Midpoint of AC
+        M = (A + C) / 2
+        # Bisector is vertical line x=0 (since A and C have same y)
+        bisector = Line(M + UP*4, M + DOWN*1, color=GRAY, stroke_width=2)
+        
+        # Intersection Q with AB
+        # Line AB equation... let's just calculate intersection visually or geometrically
+        # For visualization, let's place Q on AB such that QA=QC
+        # Since bisector is x=0, Q must be at x=0 on line AB.
+        # A=(-3, -1), B=(2, 2). Line: y - (-1) = (3/5)(x - (-3)) => y = 0.6x + 1.8 - 1 = 0.6x + 0.8
+        # If x=0, y=0.8. So Q=(0, 0.8)
+        Q = UP * 0.8
+        
+        # Draw Triangle ABC
+        tri = Polygon(A, B, C, color=BLACK, stroke_width=4)
+        
+        # Draw segments
+        line_QC = Line(Q, C, color=RED, stroke_width=4)
+        line_QA = Line(Q, A, color=RED, stroke_width=4)
+        
+        # Labels
+        lbl_A = MathTex("A", color=BLACK).next_to(A, DL)
+        lbl_B = MathTex("B", color=BLACK).next_to(B, UP)
+        lbl_C = MathTex("C", color=BLACK).next_to(C, DR)
+        lbl_Q = MathTex("Q", color=BLACK).next_to(Q, UL)
+        
+        # Equality marks
+        mark1 = DashedLine(Q, A, color=RED)
+        mark2 = DashedLine(Q, C, color=RED)
+        
+        txt = MathTex("QA = QC", color=RED).to_corner(UL)
+        
+        self.add(tri, bisector, line_QC, lbl_A, lbl_B, lbl_C, lbl_Q, txt)
+        self.play(Indicate(line_QA), Indicate(line_QC))
+        # --- AI GENERATED CODE END ---
+
+```
+---
+
+### 🆔 Задача: 2025_mun_g6_4 - Агли во четириаголник
+**📅 Додадено:** 2025-12-27 01:37
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_2025_mun_g6_4(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+class Task_2025_mun_g6_4(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        
+        # Arbitrary angles satisfying 2a+2b=80. Let 2a=40, 2b=40 => a=20, b=20.
+        # Small triangle angles: 40, 40, 100.
+        # Large quad angles: 80, 80, 150, x=50.
+        
+        # Vertices approximation
+        A = DL * 2
+        B = DR * 2
+        # Inner point P such that PAB is 40, PBA is 40.
+        # Intersection of rays.
+        P = UP * 0.5 # approx
+        
+        # Outer points D, C
+        # Angle at A is 80. Angle at B is 80.
+        D = A + UP * 3 + LEFT * 0.5
+        C = B + UP * 3 + RIGHT * 0.5
+        
+        # Draw shapes
+        quad = Polygon(A, B, C, D, color=BLACK, stroke_width=4)
+        tri_lines = VGroup(Line(A, P), Line(B, P)).set_color(BLUE)
+        
+        # Labels
+        lbl_100 = MathTex("100^\circ", color=BLUE, font_size=24).next_to(P, UP, buff=0.1)
+        lbl_150 = MathTex("150^\circ", color=BLACK, font_size=24).next_to(D, UP)
+        lbl_x = MathTex("x", color=RED).next_to(C, UP)
+        
+        lbl_2a = MathTex("2\\alpha", color=BLUE, font_size=20).move_to(A + UR*0.5)
+        lbl_2b = MathTex("2\\beta", color=BLUE, font_size=20).move_to(B + UL*0.5)
+        
+        lbl_4a = MathTex("4\\alpha", color=BLACK, font_size=24).next_to(A, LEFT)
+        lbl_4b = MathTex("4\\beta", color=BLACK, font_size=24).next_to(B, RIGHT)
+        
+        self.add(quad, tri_lines)
+        self.add(lbl_100, lbl_150, lbl_x, lbl_2a, lbl_2b, lbl_4a, lbl_4b)
+        
+        # Equation
+        eq = MathTex("2\\alpha + 2\\beta = 80^\circ \\implies 4\\alpha + 4\\beta = 160^\circ", color=RED).to_edge(UP)
+        self.add(eq)
+        # --- AI GENERATED CODE END ---
+
+```
+---
