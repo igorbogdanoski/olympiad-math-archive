@@ -9,7 +9,9 @@ tags:
   - lcm
   - time
   - modular_arithmetic
----
+
+related_skills:
+  - gcd_lcm---
 
 # Задача 4407 — Кога се вклопуваат двата звона?
 

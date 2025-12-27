@@ -8,7 +8,15 @@ problem_id: 26
 language_original: <mk | en | sr | hr | ...>
 translated: false
 
-# --- GEOMETRY SKILLS ---
+# 
+tags:
+  - combinatorics
+  - algebra
+  - system_of_equations
+  - graph_theory
+related_skills:
+  - system_of_equations
+  - graph_theory--- GEOMETRY SKILLS ---
 geometry_style: analytic
 primary_skill: logic
 related_skills:

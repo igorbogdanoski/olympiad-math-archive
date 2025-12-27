@@ -8,7 +8,12 @@ problem_id: 2025_mun_y3_3a
 language_original: <mk | en | sr | hr | ...>
 translated: false
 
-# --- GEOMETRY SKILLS ---
+# 
+tags:
+  - functions
+  - analysis
+related_skills:
+  - functions--- GEOMETRY SKILLS ---
 geometry_style: analytic
 primary_skill: logic
 related_skills:

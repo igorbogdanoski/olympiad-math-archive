@@ -8,7 +8,12 @@ problem_id: cnt92_v2_17
 language_original: mk
 translated: false
 
-# --- SKILL MAPPING ---
+# 
+tags:
+  - geometry
+  - trigonometry
+related_skills:
+  - trigonometry--- SKILL MAPPING ---
 primary_skill: logic
 related_skills:
   - logic

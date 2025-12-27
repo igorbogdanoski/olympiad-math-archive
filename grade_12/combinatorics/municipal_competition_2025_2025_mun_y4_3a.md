@@ -8,7 +8,12 @@ problem_id: 2025_mun_y4_3a
 language_original: mk
 translated: false
 
-# --- SKILL MAPPING ---
+# 
+tags:
+  - combinatorics
+  - pigeonhole_principle
+related_skills:
+  - pigeonhole_principle--- SKILL MAPPING ---
 primary_skill: logic
 related_skills:
   - logic

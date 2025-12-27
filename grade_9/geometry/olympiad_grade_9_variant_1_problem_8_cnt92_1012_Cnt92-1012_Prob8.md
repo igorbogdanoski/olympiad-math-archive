@@ -7,7 +7,21 @@ problem_id: Cnt92-1012_Prob8
 language_original: <mk | en | sr | hr | ...>
 translated: false
 
-# --- GEOMETRY SKILLS ---
+# 
+tags:
+  - circle_geometry
+  - vectors
+  - angle_chasing
+  - geometry
+  - complex_numbers
+  - algebra
+  - similarity
+related_skills:
+  - circle_geometry
+  - vectors
+  - angle_chasing
+  - complex_numbers
+  - similarity--- GEOMETRY SKILLS ---
 geometry_style: synthetic # synthetic | analytic | mixed
 primary_skill: <main_tool> # e.g., angle_chasing, similarity, cyclic_quads
 related_skills:

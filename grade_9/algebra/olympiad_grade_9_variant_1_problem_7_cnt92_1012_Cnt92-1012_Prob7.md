@@ -7,7 +7,12 @@ problem_id: Cnt92-1012_Prob7
 language_original: ru
 translated: false
 
-# --- SKILL MAPPING (New Standard) ---
+# 
+tags:
+  - functions
+  - analysis
+related_skills:
+  - functions--- SKILL MAPPING (New Standard) ---
 primary_skill: radicals # e.g., symmetry, invariants, telescoping
 related_skills:
   - functions

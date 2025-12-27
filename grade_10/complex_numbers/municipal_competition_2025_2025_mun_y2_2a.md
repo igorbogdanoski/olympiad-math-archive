@@ -8,7 +8,12 @@ problem_id: 2025_mun_y2_2a
 language_original: mk
 translated: false
 
-# --- SKILL MAPPING ---
+# 
+tags:
+  - algebra
+  - complex_numbers
+related_skills:
+  - complex_numbers--- SKILL MAPPING ---
 primary_skill: logic
 related_skills:
   - logic

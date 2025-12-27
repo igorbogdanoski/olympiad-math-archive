@@ -8,7 +8,12 @@ problem_id: Cnt92-1012_Prob11
 language_original: ru
 translated: false
 
-# --- SKILL MAPPING ---
+# 
+tags:
+  - functions
+  - analysis
+related_skills:
+  - functions--- SKILL MAPPING ---
 primary_skill: functions
 related_skills:
   - domain

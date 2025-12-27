@@ -7,7 +7,12 @@ problem_id: sigma_adv_32
 language_original: mk
 translated: false
 
-# --- SKILL MAPPING (New Standard) ---
+# 
+tags:
+  - geometry
+  - trigonometry
+related_skills:
+  - trigonometry--- SKILL MAPPING (New Standard) ---
 primary_skill: trigonometry # e.g., symmetry, invariants, telescoping
 related_skills:
   - algebraic_substitution

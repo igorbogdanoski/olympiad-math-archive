@@ -8,7 +8,12 @@ problem_id: 16
 language_original: <mk | en | sr | hr | ...>
 translated: false
 
-# --- GEOMETRY SKILLS ---
+# 
+tags:
+  - vieta_formulas
+  - polynomials
+related_skills:
+  - vieta_formulas--- GEOMETRY SKILLS ---
 geometry_style: analytic
 primary_skill: logic
 related_skills:

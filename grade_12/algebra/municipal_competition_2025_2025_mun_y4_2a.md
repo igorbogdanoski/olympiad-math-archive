@@ -8,7 +8,15 @@ problem_id: 2025_mun_y4_2a
 language_original: mk
 translated: false
 
-# --- SKILL MAPPING ---
+# 
+tags:
+  - algebra
+  - geometry
+  - sequences
+  - trigonometry
+related_skills:
+  - sequences
+  - trigonometry--- SKILL MAPPING ---
 primary_skill: logic
 related_skills:
   - logic

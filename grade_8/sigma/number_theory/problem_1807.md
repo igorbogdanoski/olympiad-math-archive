@@ -10,7 +10,9 @@ tags:
   - divisibility
   - parity
   - modular_thinking
----
+
+related_skills:
+  - gcd_lcm---
 
 # Прости броеви и деливост
 

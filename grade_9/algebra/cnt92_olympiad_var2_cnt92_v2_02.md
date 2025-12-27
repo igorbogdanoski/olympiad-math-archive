@@ -8,7 +8,15 @@ problem_id: cnt92_v2_02
 language_original: mk
 translated: false
 
-# --- SKILL MAPPING ---
+# 
+tags:
+  - number_theory
+  - algebra
+  - integers
+  - system_of_equations
+related_skills:
+  - integers
+  - system_of_equations--- SKILL MAPPING ---
 primary_skill: logic
 related_skills:
   - logic

@@ -7,7 +7,12 @@ problem_id: 4354
 language_original: mk
 translated: false
 
-# --- SKILL MAPPING (New Standard) ---
+# 
+tags:
+  - algebra
+  - system_of_equations
+related_skills:
+  - system_of_equations--- SKILL MAPPING (New Standard) ---
 primary_skill: systematic_listing # e.g., symmetry, invariants, telescoping
 related_skills:
   - parity

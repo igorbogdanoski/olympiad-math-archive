@@ -7,7 +7,21 @@ problem_id: geom_9_touching_circles_tangent
 language_original: <mk | en | sr | hr | ...>
 translated: false
 
-# --- GEOMETRY SKILLS ---
+# 
+tags:
+  - circle_geometry
+  - vectors
+  - angle_chasing
+  - geometry
+  - complex_numbers
+  - algebra
+  - similarity
+related_skills:
+  - circle_geometry
+  - vectors
+  - angle_chasing
+  - complex_numbers
+  - similarity--- GEOMETRY SKILLS ---
 geometry_style: analytic # synthetic | analytic | mixed
 primary_skill: <main_tool> # e.g., angle_chasing, similarity, cyclic_quads
 related_skills:

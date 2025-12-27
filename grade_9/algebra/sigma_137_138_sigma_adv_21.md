@@ -7,7 +7,12 @@ problem_id: sigma_adv_21
 language_original: mk
 translated: false
 
-# --- SKILL MAPPING (New Standard) ---
+# 
+tags:
+  - algebra
+  - logarithms
+related_skills:
+  - logarithms--- SKILL MAPPING (New Standard) ---
 primary_skill: logarithms # e.g., symmetry, invariants, telescoping
 related_skills:
   - exponential_equations

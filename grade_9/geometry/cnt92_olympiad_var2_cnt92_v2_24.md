@@ -8,7 +8,12 @@ problem_id: cnt92_v2_24
 language_original: <mk | en | sr | hr | ...>
 translated: false
 
-# --- GEOMETRY SKILLS ---
+# 
+tags:
+  - geometry
+  - area
+related_skills:
+  - area--- GEOMETRY SKILLS ---
 geometry_style: synthetic
 primary_skill: logic
 related_skills:

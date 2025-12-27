@@ -10,7 +10,9 @@ tags:
   - invariants
   - transformations
   - structural_thinking
----
+
+related_skills:
+  - gcd_lcm---
 
 # Замена на броеви и инваријанта
 

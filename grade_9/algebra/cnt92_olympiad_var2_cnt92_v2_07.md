@@ -8,7 +8,12 @@ problem_id: cnt92_v2_07
 language_original: mk
 translated: false
 
-# --- SKILL MAPPING ---
+# 
+tags:
+  - functions
+  - analysis
+related_skills:
+  - functions--- SKILL MAPPING ---
 primary_skill: logic
 related_skills:
   - logic

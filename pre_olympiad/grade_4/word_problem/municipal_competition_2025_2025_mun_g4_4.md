@@ -8,7 +8,12 @@ problem_id: 2025_mun_g4_4
 language_original: mk
 translated: false
 
-# --- SKILL MAPPING ---
+# 
+tags:
+  - algebra
+  - sequences
+related_skills:
+  - sequences--- SKILL MAPPING ---
 primary_skill: logic
 related_skills:
   - logic

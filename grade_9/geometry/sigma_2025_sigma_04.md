@@ -7,7 +7,23 @@ problem_id: sigma_04
 language_original: <mk | en | sr | hr | ...>
 translated: false
 
-# --- GEOMETRY SKILLS ---
+# 
+tags:
+  - vectors
+  - angle_chasing
+  - congruence
+  - geometry
+  - complex_numbers
+  - algebra
+  - triangle_geometry
+  - similarity
+related_skills:
+  - vectors
+  - angle_chasing
+  - congruence
+  - complex_numbers
+  - triangle_geometry
+  - similarity--- GEOMETRY SKILLS ---
 geometry_style: synthetic # synthetic | analytic | mixed
 primary_skill: <main_tool> # e.g., angle_chasing, similarity, cyclic_quads
 related_skills:

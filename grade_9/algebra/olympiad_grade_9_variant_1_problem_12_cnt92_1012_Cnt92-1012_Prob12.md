@@ -8,7 +8,12 @@ problem_id: Cnt92-1012_Prob12
 language_original: <mk | en | sr | hr | ...>
 translated: false
 
-# --- GEOMETRY SKILLS ---
+# 
+tags:
+  - combinatorics
+  - graph_theory
+related_skills:
+  - graph_theory--- GEOMETRY SKILLS ---
 geometry_style: analytic
 primary_skill: <main_tool>
 related_skills:

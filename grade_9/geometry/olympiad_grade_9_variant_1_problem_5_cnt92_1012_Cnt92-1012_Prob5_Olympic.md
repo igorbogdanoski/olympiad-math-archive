@@ -7,7 +7,25 @@ problem_id: Cnt92-1012_Prob5_Olympic
 language_original: <mk | en | sr | hr | ...>
 translated: false
 
-# --- GEOMETRY SKILLS ---
+# 
+tags:
+  - vectors
+  - angle_chasing
+  - geometry
+  - system_of_equations
+  - complex_numbers
+  - area
+  - algebra
+  - triangle_geometry
+  - similarity
+related_skills:
+  - vectors
+  - angle_chasing
+  - area
+  - system_of_equations
+  - complex_numbers
+  - triangle_geometry
+  - similarity--- GEOMETRY SKILLS ---
 geometry_style: analytic # synthetic | analytic | mixed
 primary_skill: <main_tool> # e.g., angle_chasing, similarity, cyclic_quads
 related_skills:

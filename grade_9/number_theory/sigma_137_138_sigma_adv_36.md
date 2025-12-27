@@ -7,7 +7,12 @@ problem_id: sigma_adv_36
 language_original: mk
 translated: false
 
-# --- SKILL MAPPING (New Standard) ---
+# 
+tags:
+  - vieta_formulas
+  - polynomials
+related_skills:
+  - vieta_formulas--- SKILL MAPPING (New Standard) ---
 primary_skill: diophantine_equations # e.g., symmetry, invariants, telescoping
 related_skills:
   - quadratic_equation

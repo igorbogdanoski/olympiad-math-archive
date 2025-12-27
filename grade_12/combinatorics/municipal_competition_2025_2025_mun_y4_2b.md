@@ -8,7 +8,12 @@ problem_id: 2025_mun_y4_2b
 language_original: mk
 translated: false
 
-# --- SKILL MAPPING ---
+# 
+tags:
+  - permutations
+  - combinatorics
+related_skills:
+  - permutations--- SKILL MAPPING ---
 primary_skill: logic
 related_skills:
   - logic

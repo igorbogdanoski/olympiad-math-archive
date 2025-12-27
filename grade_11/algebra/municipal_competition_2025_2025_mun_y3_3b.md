@@ -8,7 +8,15 @@ problem_id: 2025_mun_y3_3b
 language_original: mk
 translated: false
 
-# --- SKILL MAPPING ---
+# 
+tags:
+  - algebra
+  - vieta_formulas
+  - system_of_equations
+  - polynomials
+related_skills:
+  - vieta_formulas
+  - system_of_equations--- SKILL MAPPING ---
 primary_skill: logic
 related_skills:
   - logic

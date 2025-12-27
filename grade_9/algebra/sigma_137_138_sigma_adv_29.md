@@ -7,7 +7,15 @@ problem_id: sigma_adv_29
 language_original: mk
 translated: false
 
-# --- SKILL MAPPING (New Standard) ---
+# 
+tags:
+  - algebra
+  - vieta_formulas
+  - system_of_equations
+  - polynomials
+related_skills:
+  - vieta_formulas
+  - system_of_equations--- SKILL MAPPING (New Standard) ---
 primary_skill: vieta_formulas # e.g., symmetry, invariants, telescoping
 related_skills:
   - quadratic_equation

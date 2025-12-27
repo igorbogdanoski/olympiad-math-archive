@@ -7,7 +7,22 @@ problem_id: geo_right_triangle_radii
 language_original: <mk | en | sr | hr | ...>
 translated: false
 
-# --- GEOMETRY SKILLS ---
+# 
+tags:
+  - vieta_formulas
+  - vectors
+  - angle_chasing
+  - geometry
+  - complex_numbers
+  - algebra
+  - similarity
+  - polynomials
+related_skills:
+  - vieta_formulas
+  - vectors
+  - angle_chasing
+  - complex_numbers
+  - similarity--- GEOMETRY SKILLS ---
 geometry_style: synthetic # synthetic | analytic | mixed
 primary_skill: <main_tool> # e.g., angle_chasing, similarity, cyclic_quads
 related_skills:

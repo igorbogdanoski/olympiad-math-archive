@@ -7,7 +7,12 @@ problem_id: Cnt92-1012_Prob1
 language_original: ru
 translated: false
 
-# --- SKILL MAPPING (New Standard) ---
+# 
+tags:
+  - number_theory
+  - divisibility
+related_skills:
+  - divisibility--- SKILL MAPPING (New Standard) ---
 primary_skill: modular_arithmetic # e.g., symmetry, invariants, telescoping
 related_skills:
   - divisibility_rules

@@ -7,7 +7,12 @@ problem_id: 4355
 language_original: mk
 translated: false
 
-# --- SKILL MAPPING (New Standard) ---
+# 
+tags:
+  - number_theory
+  - integers
+related_skills:
+  - integers--- SKILL MAPPING (New Standard) ---
 primary_skill: arithmetic_progressions # e.g., symmetry, invariants, telescoping
 related_skills:
   - time_calculations

@@ -7,7 +7,12 @@ problem_id: sigma_10
 language_original: mk
 translated: false
 
-# --- SKILL MAPPING (New Standard) ---
+# 
+tags:
+  - number_theory
+  - prime_numbers
+related_skills:
+  - prime_numbers--- SKILL MAPPING (New Standard) ---
 primary_skill: factorization # e.g., symmetry, invariants, telescoping
 related_skills:
   - primes

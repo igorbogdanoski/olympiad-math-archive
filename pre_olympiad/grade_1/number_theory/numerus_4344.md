@@ -7,7 +7,12 @@ problem_id: 4344
 language_original: mk
 translated: false
 
-# --- SKILL MAPPING (New Standard) ---
+# 
+tags:
+  - algebra
+  - sequences
+related_skills:
+  - sequences--- SKILL MAPPING (New Standard) ---
 primary_skill: pattern_recognition # e.g., symmetry, invariants, telescoping
 related_skills:
   - sequences

@@ -7,7 +7,12 @@ problem_id: 4366
 language_original: mk
 translated: false
 
-# --- SKILL MAPPING (New Standard) ---
+# 
+tags:
+  - combinatorics
+  - pigeonhole_principle
+related_skills:
+  - pigeonhole_principle--- SKILL MAPPING (New Standard) ---
 primary_skill: pigeonhole_principle # e.g., symmetry, invariants, telescoping
 related_skills:
   - proof_by_contradiction

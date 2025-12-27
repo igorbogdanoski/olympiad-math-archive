@@ -8,7 +8,16 @@ problem_id: 2025_mun_g9_2
 language_original: <mk | en | sr | hr | ...>
 translated: false
 
-# --- GEOMETRY SKILLS ---
+# 
+tags:
+  - congruence
+  - triangle_geometry
+  - geometry
+  - angle_chasing
+related_skills:
+  - congruence
+  - triangle_geometry
+  - angle_chasing--- GEOMETRY SKILLS ---
 geometry_style: synthetic
 primary_skill: logic
 related_skills:

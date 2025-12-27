@@ -8,7 +8,12 @@ problem_id: cnt92_v2_27
 language_original: <mk | en | sr | hr | ...>
 translated: false
 
-# --- GEOMETRY SKILLS ---
+# 
+tags:
+  - triangle_geometry
+  - geometry
+related_skills:
+  - triangle_geometry--- GEOMETRY SKILLS ---
 geometry_style: analytic
 primary_skill: logic
 related_skills:

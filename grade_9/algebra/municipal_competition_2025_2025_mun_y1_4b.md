@@ -8,7 +8,12 @@ problem_id: 2025_mun_y1_4b
 language_original: mk
 translated: false
 
-# --- SKILL MAPPING ---
+# 
+tags:
+  - algebra
+  - polynomials
+related_skills:
+  - polynomials--- SKILL MAPPING ---
 primary_skill: logic
 related_skills:
   - logic

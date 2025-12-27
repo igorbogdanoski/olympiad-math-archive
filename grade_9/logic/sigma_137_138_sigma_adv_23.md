@@ -7,7 +7,12 @@ problem_id: sigma_adv_23
 language_original: mk
 translated: false
 
-# --- SKILL MAPPING (New Standard) ---
+# 
+tags:
+  - number_theory
+  - divisibility
+related_skills:
+  - divisibility--- SKILL MAPPING (New Standard) ---
 primary_skill: invariants # e.g., symmetry, invariants, telescoping
 related_skills:
   - transformations

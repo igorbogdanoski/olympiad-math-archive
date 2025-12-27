@@ -8,7 +8,12 @@ problem_id: cnt92_v2_01
 language_original: mk
 translated: false
 
-# --- SKILL MAPPING ---
+# 
+tags:
+  - number_theory
+  - divisibility
+related_skills:
+  - divisibility--- SKILL MAPPING ---
 primary_skill: logic
 related_skills:
   - logic

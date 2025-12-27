@@ -8,7 +8,12 @@ problem_id: 2025_mun_y4_1a
 language_original: mk
 translated: false
 
-# --- SKILL MAPPING ---
+# 
+tags:
+  - algebra
+  - system_of_equations
+related_skills:
+  - system_of_equations--- SKILL MAPPING ---
 primary_skill: logic
 related_skills:
   - logic

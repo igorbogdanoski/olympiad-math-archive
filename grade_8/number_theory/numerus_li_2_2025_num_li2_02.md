@@ -7,7 +7,12 @@ problem_id: num_li2_02
 language_original: mk
 translated: false
 
-# --- SKILL MAPPING (New Standard) ---
+# 
+tags:
+  - number_theory
+  - divisibility
+related_skills:
+  - divisibility--- SKILL MAPPING (New Standard) ---
 primary_skill: lcm # e.g., symmetry, invariants, telescoping
 related_skills:
   - divisibility_rules

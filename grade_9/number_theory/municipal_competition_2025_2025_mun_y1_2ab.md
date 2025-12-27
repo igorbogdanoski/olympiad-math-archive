@@ -8,7 +8,12 @@ problem_id: 2025_mun_y1_2ab
 language_original: mk
 translated: false
 
-# --- SKILL MAPPING ---
+# 
+tags:
+  - number_theory
+  - divisibility
+related_skills:
+  - divisibility--- SKILL MAPPING ---
 primary_skill: logic
 related_skills:
   - logic

@@ -8,7 +8,12 @@ problem_id: 2025_mun_g5_2
 language_original: <mk | en | sr | hr | ...>
 translated: false
 
-# --- GEOMETRY SKILLS ---
+# 
+tags:
+  - stereometry
+  - volume
+related_skills:
+  - volume--- GEOMETRY SKILLS ---
 geometry_style: synthetic
 primary_skill: logic
 related_skills:

@@ -8,7 +8,14 @@ problem_id: 2025_mun_y2_3ab
 language_original: <mk | en | sr | hr | ...>
 translated: false
 
-# --- GEOMETRY SKILLS ---
+# 
+tags:
+  - triangle_geometry
+  - geometry
+  - area
+related_skills:
+  - triangle_geometry
+  - area--- GEOMETRY SKILLS ---
 geometry_style: synthetic
 primary_skill: logic
 related_skills:

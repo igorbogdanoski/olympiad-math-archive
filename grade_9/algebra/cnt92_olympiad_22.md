@@ -8,7 +8,12 @@ problem_id: 22
 language_original: mk
 translated: false
 
-# --- SKILL MAPPING ---
+# 
+tags:
+  - vieta_formulas
+  - polynomials
+related_skills:
+  - vieta_formulas--- SKILL MAPPING ---
 primary_skill: logic
 related_skills:
   - logic

@@ -7,7 +7,12 @@ problem_id: sigma_adv_17
 language_original: mk
 translated: false
 
-# --- SKILL MAPPING (New Standard) ---
+# 
+tags:
+  - functions
+  - analysis
+related_skills:
+  - functions--- SKILL MAPPING (New Standard) ---
 primary_skill: functional_equation # e.g., symmetry, invariants, telescoping
 related_skills:
   - summation

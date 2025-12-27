@@ -20,7 +20,9 @@ tags:
   - angle_chasing
   - circle_geometry
   - structural_thinking
----
+
+related_skills:
+  - angle_chasing---
 
 # Паралелограм и кружница со дијаметар
 

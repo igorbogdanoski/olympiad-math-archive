@@ -20,7 +20,10 @@ tags:
   - triangle_geometry
   - centroid
   - structural_thinking
----
+
+related_skills:
+  - triangle_geometry
+  - angle_chasing---
 
 # Висина и тежиште во правоаголен триаголник
 

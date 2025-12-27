@@ -1,5 +1,10 @@
 ---
-# --- OLD STANDARD (Компатибилност) ---
+# 
+tags:
+  - algebra
+  - system_of_equations
+related_skills:
+  - system_of_equations--- OLD STANDARD (Компатибилност) ---
 grade: transition
 field: algebra
 difficulty: 4
