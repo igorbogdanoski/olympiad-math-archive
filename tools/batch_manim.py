@@ -147,9 +147,10 @@ def update_markdown_with_image(file_path, image_name):
         print(f"   ✅ Link updated (replaced VISUAL PROMPT)")
         return True
 
-    # 3. Пробај да вметнеш после "## 📐 Скица"
-    if "## 📐 Скица" in content:
-        new_content = content.replace("## 📐 Скица", f"## 📐 Скица\n{new_image_tag}")
+    # 3. Пробај да вметнеш после "## 📐 Скица..." (целиот ред)
+    header_regex = r"(## 📐 Скица.*)"
+    if re.search(header_regex, content):
+        new_content = re.sub(header_regex, r"\1\n" + new_image_tag, content)
         with open(file_path, 'w', encoding='utf-8') as f:
             f.write(new_content)
         print(f"   ✅ Link updated (inserted after Header)")
