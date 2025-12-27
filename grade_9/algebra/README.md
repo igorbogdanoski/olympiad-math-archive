@@ -2,7 +2,7 @@
 
 [⬅️ Назад кон прегледот](../README.md)
 
-**Вкупно задачи:** 103
+**Вкупно задачи:** 104
 
 | ID | Наслов | Тежина | Тип | Клучна Вештина |
 |:---|:---|:---:|:---|:---|
@@ -51,6 +51,7 @@
 | [2022_mun_y1_14b](municipal_competition_2022_2022_mun_y1_14b.md) | --- SKILL MAPPING --- | 3/10 | calculation | modeling |
 | [2022_mun_y1_15b](municipal_competition_2022_2022_mun_y1_15b.md) | --- SKILL MAPPING --- | 4/10 | calculation | pattern_recognition |
 | [2022_mun_y1_16a](municipal_competition_2022_2022_mun_y1_16a.md) | --- SKILL MAPPING --- | 3/10 | calculation | polynomials |
+| [2022_mun_y1_17b](municipal_competition_2022_2022_mun_y1_17b.md) | --- SKILL MAPPING --- | 5/10 | calculation | completing_the_square |
 | [2022_mun_y1_1a](municipal_competition_2022_2022_mun_y1_1a.md) | --- SKILL MAPPING --- | 2/10 | calculation | algebraic_manipulation |
 | [2022_mun_y1_1b](municipal_competition_2022_2022_mun_y1_1b.md) | --- SKILL MAPPING --- | 2/10 | calculation | algebraic_manipulation |
 | [2022_mun_y1_20a](municipal_competition_2022_2022_mun_y1_20a.md) | --- SKILL MAPPING --- | 4/10 | calculation | algebraic_identities |

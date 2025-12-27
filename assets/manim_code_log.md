@@ -11631,3 +11631,102 @@ class Task_2022_mun_y1_11b(Scene):
 
 ```
 ---
+
+### 🆔 Задача: 2022_mun_y1_18b - Пресек на квадрат и ромб
+**📅 Додадено:** 2025-12-27 22:07
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_2022_mun_y1_18b(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+        # Coordinates
+        A = ORIGIN
+        B = [3, 0, 0] # Scaled 17 -> 3
+        s = 3
+        C = [3, 3, 0]
+        D = [0, 3, 0]
+        
+        # Rhombus parameters
+        # h = 15/17 * s
+        h = (15/17) * s
+        # projection x = 8/17 * s
+        x = (8/17) * s
+        M = [x, h, 0]
+        N = [3+x, h, 0]
+
+        # Shapes
+        square = Polygon(A, B, C, D, color=BLUE)
+        rhombus = Polygon(A, B, N, M, color=RED)
+        
+        # Intersection points
+        # Line BN intersects x=3 (BC) at B.
+        # Line MN intersects x=3 at P.
+        P = [3, h, 0]
+        intersection = Polygon(A, B, P, M, color=PURPLE, fill_opacity=0.5)
+        
+        # Gray part (Square minus Intersection)
+        # Polygon MBCD + Triangle ADP? No.
+        # It is Polygon M P C D.
+        gray_part = Polygon(M, P, C, D, color=GREY, fill_opacity=0.5)
+
+        self.add(square, rhombus, gray_part)
+        # --- AI GENERATED CODE END ---
+
+```
+---
+
+### 🆔 Задача: 2022_mun_y1_20b - Квадрат во правоаголен триаголник
+**📅 Додадено:** 2025-12-27 22:07
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_2022_mun_y1_20b(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+        # Coordinates
+        C = ORIGIN
+        # We need a, b such that a^2+b^2=24^2 and 7/a + 7/b = 1
+        # From solution P=112 => ab=224.
+        # t^2 - (a+b)t + ab = 0. a+b = 224/7 = 32.
+        # t^2 - 32t + 224 = 0. D = 1024 - 896 = 128.
+        # a = (32 + sqrt(128))/2 approx 21.6
+        # b = (32 - sqrt(128))/2 approx 10.3
+        a = (32 + np.sqrt(128))/2
+        b = (32 - np.sqrt(128))/2
+        
+        A = [0, b, 0]
+        B = [a, 0, 0]
+        
+        # Square
+        s = 7
+        D = [0, s, 0]
+        F = [s, 0, 0]
+        E = [s, s, 0]
+        
+        triangle = Polygon(C, A, B, color=BLUE)
+        square = Polygon(C, D, E, F, color=RED, fill_opacity=0.2)
+        
+        labels = VGroup(
+            MathTex('C').next_to(C, DL),
+            MathTex('A').next_to(A, UP),
+            MathTex('B').next_to(B, RIGHT),
+            MathTex('7').next_to(Line(C,D), LEFT),
+            MathTex('c=24').next_to(Line(A,B), UR)
+        ).set_color(BLACK)
+
+        self.add(triangle, square, labels)
+        # --- AI GENERATED CODE END ---
+
+```
+---
