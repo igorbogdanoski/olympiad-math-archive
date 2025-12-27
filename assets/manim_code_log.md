@@ -12338,3 +12338,57 @@ class Task_2022_mun_y2_10b(Scene):
 
 ```
 ---
+
+### 🆔 Задача: 2022_mun_y2_11b - Паралелни прави и агли
+**📅 Додадено:** 2025-12-27 23:04
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_2022_mun_y2_11b(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+        # Lines
+        line_bottom = Line(LEFT*4, RIGHT*4, color=BLACK)
+        line_top = Line(LEFT*2 + UP*2, RIGHT*2 + UP*2, color=BLACK)
+        
+        # Points
+        Q = LEFT*1
+        R = RIGHT*2
+        T = LEFT*0.5 + UP*2
+        U = RIGHT*1.5 + UP*2
+        
+        # Transversals
+        t1 = Line(T, Q, color=BLUE)
+        t2 = Line(U, R, color=BLUE)
+        
+        # Angles
+        a1 = Angle(Line(Q, LEFT*4), t1, radius=0.5)
+        l1 = MathTex('x').next_to(a1, UL, buff=0.1)
+        
+        a2 = Angle(t1, Line(Q, RIGHT*4), radius=0.5)
+        l2 = MathTex('x-50^\circ').next_to(a2, UR, buff=0.1)
+        
+        a3 = Angle(Line(U, R), Line(U, T), radius=0.5, quadrant=(-1,1))
+        l3 = MathTex('x+25^\circ').next_to(a3, DL, buff=0.1)
+        
+        a4 = Angle(Line(R, U), Line(R, S), radius=0.5, color=RED)
+        l4 = MathTex('?', color=RED).next_to(a4, UR, buff=0.1)
+        
+        # Labels
+        labels = VGroup(
+            MathTex('Q').next_to(Q, DOWN),
+            MathTex('R').next_to(R, DOWN),
+            MathTex('T').next_to(T, UP),
+            MathTex('U').next_to(U, UP)
+        ).set_color(BLACK)
+
+        self.add(line_bottom, line_top, t1, t2, a1, l1, a2, l2, a3, l3, a4, l4, labels)
+        # --- AI GENERATED CODE END ---
+
+```
+---
