@@ -5,17 +5,38 @@ import argparse
 import datetime
 import sys
 
-# Обид за увоз на export скриптата
-try:
-    sys.path.append(os.path.dirname(os.path.abspath(__file__)))
-    from export import export_file
-except ImportError:
-    print("⚠️ Предупредување: export.py не е пронајден. Ќе генерирам само Markdown.")
-    export_file = None
-
 # --- КОНФИГУРАЦИЈА ---
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 ARCHIVE_ROOT = os.path.abspath(os.path.join(SCRIPT_DIR, "../"))
+OUTPUT_DIR = os.path.join(SCRIPT_DIR, "output_documents")
+
+if not os.path.exists(OUTPUT_DIR):
+    os.makedirs(OUTPUT_DIR)
+
+# --- HTML TEMPLATE ---
+HTML_HEAD = """
+<!DOCTYPE html>
+<html lang="mk">
+<head>
+    <meta charset="UTF-8">
+    <title>Тест по Математика</title>
+    <link rel="stylesheet" href="../../public/style.css">
+    <!-- MathJax -->
+    <script>
+    window.MathJax = {
+      tex: { inlineMath: [['$', '$'], ['\\\\(', '\\\\)']], displayMath: [['$$', '$$']] },
+      chtml: { scale: 1 }
+    };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+</head>
+<body>
+    <div class="no-print" style="background:#d1ecf1; color:#0c5460; padding:15px; margin-bottom:20px; border-radius:5px; text-align:center;">
+        <strong>🖨️ СПРЕМНО ЗА ПЕЧАТЕЊЕ!</strong><br>
+        Притисни <code>Ctrl + P</code> и избери <strong>"Save as PDF"</strong>.<br>
+        Во опциите (More settings), исклучи "Headers and footers".
+    </div>
+"""
 
 def parse_problem(file_path):
     with open(file_path, 'r', encoding='utf-8') as f:
@@ -62,28 +83,47 @@ def find_problems(grade, field, difficulty_range):
                 candidates.append({'path': path, 'meta': meta, 'body': body})
     return candidates
 
-def format_problem_for_student(problem, index):
-    parts = problem['body'].split('## Решение')
+def format_problem_html(problem, index, is_teacher=False):
+    meta = problem['meta']
+    body = problem['body']
+    
+    # Extract question (before solution)
+    parts = body.split('## Решение')
     question_text = parts[0].strip()
+    # Remove title if it exists in markdown (# Title)
     question_text = re.sub(r'^# .*?\n', '', question_text)
     
-    # Корекција на патеки за слики
-    question_text = question_text.replace("../../assets", "../assets")
-    question_text = question_text.replace("../../../assets", "../assets")
+    # Fix image paths
+    question_text = question_text.replace("../../assets", "../../assets") # Adjust if needed
+    
+    html = f"""
+    <div class="problem-container">
+        <div class="problem-header" style="{ 'border-left-color:#c0392b;' if is_teacher else '' }">
+            <span>Задача {index}</span>
+            <span style="font-weight:normal; font-size:0.9em;">
+                {meta.get('source', 'N/A')} | Тежина: {meta.get('difficulty')}/10
+            </span>
+        </div>
+        <div class="problem-text">
+            {question_text}
+        </div>
+    """
+    
+    if is_teacher:
+        solution_text = parts[1] if len(parts) > 1 else "Нема решение."
+        html += f"""
+        <div style="background:#fff5f5; padding:10px; border:1px solid #ffcccc; margin-top:10px;">
+            <strong>📝 Решение:</strong><br>
+            {solution_text}
+        </div>
+        """
+    else:
+        html += '<div class="workspace"></div>'
+        
+    html += "</div>"
+    return html
 
-    return f"**{index}.** {question_text}\n\n\\vspace{{5cm}}\n"
-
-def format_problem_for_teacher(problem, index):
-    meta = problem['meta']
-    body = problem['body'].replace("../../assets", "../assets")
-    body = body.replace("../../../assets", "../assets")
-
-    text = f"### Задача {index} (Извор: {meta.get('source', 'N/A')})\n"
-    text += f"**Тежина:** {meta.get('difficulty')}/10 | **Skill:** {meta.get('primary_skill')}\n\n"
-    text += body + "\n\n***\n"
-    return text
-
-def generate_test(grade, field, count, difficulty, output_format):
+def generate_test(grade, field, count, difficulty):
     print(f"🔍 Генерирам тест: Одд: {grade} | Област: {field} | Тежина: {difficulty}...")
     
     diff_map = {'easy': (1, 3), 'medium': (4, 6), 'hard': (7, 10), 'all': (1, 10)}
@@ -104,76 +144,61 @@ def generate_test(grade, field, count, difficulty, output_format):
     date_str = datetime.datetime.now().strftime("%d.%m.%Y")
     field_name = field.capitalize() if field else "Општ тест"
     
-    # --- 1. ГЕНЕРИРАЊЕ НА СТУДЕНТСКИ ТЕСТ ---
-    student_md = f"""---
-title: "ТЕСТ ПО МАТЕМАТИКА"
-subtitle: "Одделение: {grade} | Област: {field_name}"
-date: "{date_str}"
-geometry: margin=1in
-mainfont: "Times New Roman"
----
+    # --- HEADER ---
+    header_html = f"""
+    <div class="header-box">
+        <h1>ТЕСТ ПО МАТЕМАТИКА</h1>
+        <div style="text-align:center; color:#666; margin-bottom:15px;">Одделение: {grade} | Област: {field_name}</div>
+        <div class="header-row">
+            <div>Име и Презиме: <span class="header-line"></span></div>
+            <div>Дата: {date_str}</div>
+        </div>
+        <div class="header-row">
+            <div>Бодови: <span class="header-line" style="width:50px"></span> / 100</div>
+            <div>Оценка: <span class="header-line" style="width:50px"></span></div>
+        </div>
+    </div>
+    """
 
-**Име и Презиме:** _________________________________________________
-
-**Бодови:** _______ / 100  |  **Оценка:** _______
-
-***
-
-"""
+    # --- STUDENT HTML ---
+    student_html = HTML_HEAD + header_html
     for i, prob in enumerate(selected, 1):
-        student_md += format_problem_for_student(prob, i)
-        student_md += "\n***\n"
+        student_html += format_problem_html(prob, i, is_teacher=False)
+        if i % 3 == 0 and i != len(selected):
+            student_html += '<div class="page-break"></div>'
+    student_html += "</body></html>"
 
-    # --- 2. ГЕНЕРИРАЊЕ НА НАСТАВНИЧКИ КЛУЧ ---
-    teacher_md = f"""---
-title: "КЛУЧ СО РЕШЕНИЈА"
-subtitle: "За наставникот | Одделение: {grade}"
-date: "{date_str}"
-geometry: margin=1in
-mainfont: "Times New Roman"
----
-
-"""
+    # --- TEACHER HTML ---
+    teacher_html = HTML_HEAD + f"<h1 style='color:#c0392b; text-align:center;'>КЛУЧ СО РЕШЕНИЈА</h1><h3 style='text-align:center;'>{date_str}</h3><hr>"
     for i, prob in enumerate(selected, 1):
-        teacher_md += format_problem_for_teacher(prob, i)
+        teacher_html += format_problem_html(prob, i, is_teacher=True)
+    teacher_html += "</body></html>"
 
-    # --- ЗАЧУВУВАЊЕ И ЕКСПОРТ ---
+    # --- SAVE ---
     base_name = f"Test_Grade{grade}_{field if field else 'All'}_{difficulty}_{date_str.replace('.','')}"
     
-    # Student File
-    file_student = f"{base_name}_STUDENT.md"
-    path_student = os.path.join(SCRIPT_DIR, file_student)
+    path_student = os.path.join(OUTPUT_DIR, f"{base_name}_STUDENT.html")
     with open(path_student, 'w', encoding='utf-8') as f:
-        f.write(student_md)
+        f.write(student_html)
     
-    # Teacher File
-    file_teacher = f"{base_name}_TEACHER.md"
-    path_teacher = os.path.join(SCRIPT_DIR, file_teacher)
+    path_teacher = os.path.join(OUTPUT_DIR, f"{base_name}_TEACHER.html")
     with open(path_teacher, 'w', encoding='utf-8') as f:
-        f.write(teacher_md)
+        f.write(teacher_html)
     
-    print(f"✅ Генерирани се 2 фајла:")
-    print(f"   1. {file_student}")
-    print(f"   2. {file_teacher}")
-
-    if export_file:
-        print("⚙️ Стартувам конверзија во Word/PDF...")
-        export_file(path_student, output_format)
-        export_file(path_teacher, output_format)
-    else:
-        print("⚠️ export.py не е достапен.")
+    print(f"✅ УСПЕХ! Генерирани се 2 фајла во {OUTPUT_DIR}:")
+    print(f"   📄 {os.path.basename(path_student)}")
+    print(f"   📄 {os.path.basename(path_teacher)}")
+    print("👉 Отвори ги во прелистувач за печатење.")
 
 # --- MAIN ---
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Генератор на Тестови")
+    parser = argparse.ArgumentParser(description="Генератор на Тестови (HTML)")
     parser.add_argument("-g", "--grade", type=int, help="Одделение")
     parser.add_argument("-f", "--field", type=str, help="Област")
     parser.add_argument("-c", "--count", type=int, default=5, help="Број на задачи")
     parser.add_argument("-d", "--difficulty", type=str, default="all", choices=['easy', 'medium', 'hard', 'all'])
-    parser.add_argument("--pdf", action="store_true", help="PDF формат")
     
     args = parser.parse_args()
-    fmt = 'pdf' if args.pdf else 'docx'
     
     if not args.grade:
         try:
@@ -182,8 +207,8 @@ if __name__ == "__main__":
             if f == 'all' or f == '': f = None
             c = int(input("Број на задачи: "))
             d = input("Тежина (easy/medium/hard/all): ")
-            generate_test(g, f, c, d, fmt)
+            generate_test(g, f, c, d)
         except ValueError:
             print("❌ Грешен внес.")
     else:
-        generate_test(args.grade, args.field, args.count, args.difficulty, fmt)
+        generate_test(args.grade, args.field, args.count, args.difficulty)

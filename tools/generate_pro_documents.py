@@ -19,6 +19,7 @@ HTML_HEAD = """
 <head>
     <meta charset="UTF-8">
     <title>Математички Материјали</title>
+    <link rel="stylesheet" href="../../public/style.css">
     <!-- MathJax Конфигурација за перфектни формули -->
     <script>
     window.MathJax = {
@@ -31,99 +32,6 @@ HTML_HEAD = """
     };
     </script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
-    
-    <style>
-        /* --- ОСНОВЕН ДИЗАЈН (A4 ФОРМАТ) --- */
-        body { 
-            font-family: 'Calibri', 'Segoe UI', sans-serif; 
-            line-height: 1.6;
-            color: #333;
-            max-width: 210mm; 
-            margin: 0 auto; 
-            padding: 20px;
-            background: white;
-        }
-
-        /* Хедер за документи */
-        .header-box {
-            border: 2px solid #333;
-            padding: 15px;
-            margin-bottom: 30px;
-            border-radius: 8px;
-            background-color: #f9f9f9;
-        }
-        .header-row { display: flex; justify-content: space-between; margin-bottom: 10px; }
-        .header-line { border-bottom: 1px solid #999; width: 200px; display: inline-block; }
-
-        h1 { text-align: center; text-transform: uppercase; letter-spacing: 2px; color: #2c3e50; font-size: 24px; margin-bottom: 5px; }
-        h2 { font-size: 18px; color: #7f8c8d; margin-top: 0; border-bottom: 2px solid #27ae60; padding-bottom: 5px; }
-
-        /* --- СТИЛ ЗА ЗАДАЧИ --- */
-        .problem-container {
-            margin-bottom: 25px;
-            page-break-inside: avoid; /* Не ја сечи задачата на пола лист */
-        }
-        .problem-header {
-            font-weight: bold;
-            background-color: #eee;
-            padding: 5px 10px;
-            border-left: 5px solid #2980b9;
-            display: flex;
-            justify-content: space-between;
-        }
-        .problem-text {
-            padding: 10px;
-            border: 1px solid #eee;
-            border-left: 5px solid #eee;
-            font-size: 16px;
-        }
-        .workspace {
-            height: 150px; /* Простор за пишување */
-            border: 1px dashed #ccc;
-            margin-top: 10px;
-            position: relative;
-        }
-        .workspace::after {
-            content: "Простор за работа";
-            position: absolute;
-            bottom: 5px;
-            right: 10px;
-            color: #ccc;
-            font-size: 12px;
-        }
-
-        /* --- СТИЛ ЗА КАРТИЧКИ --- */
-        .cards-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            grid-template-rows: 1fr 1fr;
-            gap: 0; 
-            border-top: 1px dashed #999;
-            border-left: 1px dashed #999;
-            height: 260mm; /* Приближно A4 висина за 2 реда */
-        }
-        .card {
-            border-right: 1px dashed #999;
-            border-bottom: 1px dashed #999;
-            height: 130mm; /* Пола страна */
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            page-break-inside: avoid;
-            position: relative;
-        }
-        .card-back { background-color: #f0fdf4; }
-        
-        /* --- ПЕЧАТЕЊЕ --- */
-        @media print {
-            .no-print { display: none !important; }
-            body { padding: 0; margin: 0; }
-            .page-break { page-break-after: always; }
-        }
-    </style>
 </head>
 <body>
     <div class="no-print" style="background:#d1ecf1; color:#0c5460; padding:15px; margin-bottom:20px; border-radius:5px; text-align:center;">
@@ -221,14 +129,14 @@ def generate_flashcards(data):
         for p in chunk:
             if p:
                 html += f"""
-                <div class="card">
+                <div class="flashcard">
                     <div style="color:#999; font-size:0.8em;">{p.get('source')}</div>
                     <h3>Задача {p.get('problem_id')}</h3>
                     <div style="overflow:hidden; max-height:180px;">{p.get('problem_text_mk')}</div>
                 </div>
                 """
             else:
-                html += '<div class="card" style="border:0;"></div>'
+                html += '<div class="flashcard" style="border:0;"></div>'
         html += '</div><div class="page-break"></div>'
         
         # --- ЗАДНА СТРАНА (РЕШЕНИЈА) ---
@@ -241,7 +149,7 @@ def generate_flashcards(data):
         for p in chunk:
             if p:
                 html += f"""
-                <div class="card card-back">
+                <div class="flashcard card-back">
                     <h3 style="color:#27ae60;">Решение {p.get('problem_id')}</h3>
                     <div style="font-size:0.85em; overflow-y:auto; max-height:300px; width:100%; text-align:left;">
                         {p.get('solution_content')}
@@ -249,7 +157,7 @@ def generate_flashcards(data):
                 </div>
                 """
             else:
-                html += '<div class="card" style="border:0;"></div>'
+                html += '<div class="flashcard" style="border:0;"></div>'
         html += '</div><div class="page-break"></div>'
 
     html += "</body></html>"
