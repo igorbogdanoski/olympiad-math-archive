@@ -100,6 +100,41 @@ st.markdown("Пребарувајте, филтрирајте и преглед�
 with st.spinner('Ја вчитувам архивата...'):
     all_problems = load_all_problems()
 
+# --- СТАТИСТИЧКИ ДАШБОРД ---
+with st.expander("📊 Статистика на Архивата", expanded=True):
+    col1, col2, col3 = st.columns(3)
+    col1.metric("Вкупно Задачи", len(all_problems))
+    
+    # Пресметка за графикони
+    grade_counts = {}
+    cat_counts = {}
+    
+    for p in all_problems:
+        g = p['grade']
+        c = p['category']
+        grade_counts[g] = grade_counts.get(g, 0) + 1
+        cat_counts[c] = cat_counts.get(c, 0) + 1
+        
+    # Најпопуларна категорија
+    if cat_counts:
+        top_cat = max(cat_counts, key=cat_counts.get)
+        col2.metric("Најчеста Област", f"{top_cat.capitalize()} ({cat_counts[top_cat]})")
+    
+    # Просечна тежина
+    avg_diff = sum(p['difficulty'] for p in all_problems) / len(all_problems) if all_problems else 0
+    col3.metric("Просечна Тежина", f"{avg_diff:.1f} / 5")
+
+    st.markdown("---")
+    
+    # Графикони
+    c1, c2 = st.columns(2)
+    with c1:
+        st.caption("Задачи по Одделение")
+        st.bar_chart(grade_counts)
+    with c2:
+        st.caption("Задачи по Област")
+        st.bar_chart(cat_counts)
+
 st.sidebar.header("🔍 Филтри")
 
 # 1. Филтер за Одделение
