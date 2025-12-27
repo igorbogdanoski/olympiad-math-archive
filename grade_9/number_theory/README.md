@@ -2,7 +2,7 @@
 
 [⬅️ Назад кон прегледот](../README.md)
 
-**Вкупно задачи:** 38
+**Вкупно задачи:** 39
 
 | ID | Наслов | Тежина | Тип | Клучна Вештина |
 |:---|:---|:---:|:---|:---|
@@ -11,6 +11,7 @@
 | [2022_mun_g9_15](municipal_competition_2022_2022_mun_g9_15.md) | --- SKILL MAPPING --- | 4/10 | calculation | pattern_recognition |
 | [2022_mun_g9_2](municipal_competition_2022_2022_mun_g9_2.md) | --- SKILL MAPPING --- | 3/10 | calculation | algebraic_manipulation |
 | [2022_mun_y1_11a](municipal_competition_2022_2022_mun_y1_11a.md) | --- SKILL MAPPING --- | 3/10 | calculation | divisors |
+| [2022_mun_y1_13b](municipal_competition_2022_2022_mun_y1_13b.md) | --- SKILL MAPPING --- | 3/10 | calculation | counting |
 | [2022_mun_y1_14a](municipal_competition_2022_2022_mun_y1_14a.md) | --- SKILL MAPPING --- | 4/10 | calculation | modular_arithmetic |
 | [2022_mun_y1_18a](municipal_competition_2022_2022_mun_y1_18a.md) | --- SKILL MAPPING --- | 4/10 | logic_puzzle | factorization |
 | [2022_mun_y1_2a](municipal_competition_2022_2022_mun_y1_2a.md) | --- SKILL MAPPING --- | 3/10 | logic_puzzle | divisibility_rules |
