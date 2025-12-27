@@ -7493,3 +7493,198 @@ class Task_2024_mun_g9_4(Scene):
 
 ```
 ---
+
+### 🆔 Задача: 2024_mun_y1_4a - Тежишни линии во триаголник
+**📅 Додадено:** 2025-12-27 16:44
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_2024_mun_y1_4a(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+        self.camera.background_color = WHITE
+        
+        # Construct triangle with perpendicular medians
+        # AB = sqrt(20) approx 4.47
+        # T at origin.
+        # A on negative y, B on positive x? No, T is 90 deg.
+        # Let T = (0,0). A = (0, 2/3 ta). B = (2/3 tb, 0).
+        # From system: x+y=5. 4x+y=16 => 3x=11 => x=11/3. y=4/3.
+        # ta^2 = 9x = 33. tb^2 = 9y = 12.
+        # ta = sqrt(33) approx 5.74. tb = sqrt(12) approx 3.46.
+        # AT = 2/3 sqrt(33). BT = 2/3 sqrt(12).
+        
+        T = ORIGIN
+        AT_len = 2/3 * np.sqrt(33)
+        BT_len = 2/3 * np.sqrt(12)
+        
+        A = UP * AT_len
+        B = RIGHT * BT_len
+        
+        # D is on line AT extended. TD = 1/2 AT.
+        D = DOWN * (AT_len / 2)
+        # E is on line BT extended (left). TE = 1/2 BT.
+        E = LEFT * (BT_len / 2)
+        
+        # C is such that D is mid of BC => C = 2D - B
+        C = 2*D - B
+        # Check if E is mid of AC. 2E - A = (-BT, 0) - (0, AT) = (-BT, -AT).
+        # C = (0, -AT) - (BT, 0) = (-BT, -AT). Yes!
+        
+        tri = Polygon(A, B, C, color=BLACK, stroke_width=4)
+        
+        # Medians
+        med_a = Line(A, D, color=BLUE)
+        med_b = Line(B, E, color=RED)
+        
+        # Right angle at T
+        ra = RightAngle(med_a, med_b, length=0.3, color=BLACK)
+        
+        # Labels
+        lbl_A = MathTex("A", color=BLACK).next_to(A, UP)
+        lbl_B = MathTex("B", color=BLACK).next_to(B, RIGHT)
+        lbl_C = MathTex("C", color=BLACK).next_to(C, DL)
+        lbl_D = MathTex("D", color=BLUE).next_to(D, DOWN)
+        lbl_E = MathTex("E", color=RED).next_to(E, LEFT)
+        
+        self.add(tri, med_a, med_b, ra)
+        self.add(lbl_A, lbl_B, lbl_C, lbl_D, lbl_E)
+        # --- AI GENERATED CODE END ---
+
+```
+---
+
+### 🆔 Задача: 2024_mun_y1_4a - Тежишни линии во триаголник
+**📅 Додадено:** 2025-12-27 16:49
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_2024_mun_y1_4a(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+        self.camera.background_color = WHITE
+        
+        # Construct triangle with perpendicular medians
+        # AB = sqrt(20) approx 4.47
+        # T at origin.
+        # A on negative y, B on positive x? No, T is 90 deg.
+        # Let T = (0,0). A = (0, 2/3 ta). B = (2/3 tb, 0).
+        # From system: x+y=5. 4x+y=16 => 3x=11 => x=11/3. y=4/3.
+        # ta^2 = 9x = 33. tb^2 = 9y = 12.
+        # ta = sqrt(33) approx 5.74. tb = sqrt(12) approx 3.46.
+        # AT = 2/3 sqrt(33). BT = 2/3 sqrt(12).
+        
+        T = ORIGIN
+        AT_len = 2/3 * np.sqrt(33)
+        BT_len = 2/3 * np.sqrt(12)
+        
+        A = UP * AT_len
+        B = RIGHT * BT_len
+        
+        # D is on line AT extended. TD = 1/2 AT.
+        D = DOWN * (AT_len / 2)
+        # E is on line BT extended (left). TE = 1/2 BT.
+        E = LEFT * (BT_len / 2)
+        
+        # C is such that D is mid of BC => C = 2D - B
+        C = 2*D - B
+        # Check if E is mid of AC. 2E - A = (-BT, 0) - (0, AT) = (-BT, -AT).
+        # C = (0, -AT) - (BT, 0) = (-BT, -AT). Yes!
+        
+        tri = Polygon(A, B, C, color=BLACK, stroke_width=4)
+        
+        # Medians
+        med_a = Line(A, D, color=BLUE)
+        med_b = Line(B, E, color=RED)
+        
+        # Right angle at T
+        ra = RightAngle(med_a, med_b, length=0.3, color=BLACK)
+        
+        # Labels
+        lbl_A = MathTex("A", color=BLACK).next_to(A, UP)
+        lbl_B = MathTex("B", color=BLACK).next_to(B, RIGHT)
+        lbl_C = MathTex("C", color=BLACK).next_to(C, DL)
+        lbl_D = MathTex("D", color=BLUE).next_to(D, DOWN)
+        lbl_E = MathTex("E", color=RED).next_to(E, LEFT)
+        
+        self.add(tri, med_a, med_b, ra)
+        self.add(lbl_A, lbl_B, lbl_C, lbl_D, lbl_E)
+        # --- AI GENERATED CODE END ---
+
+```
+---
+
+### 🆔 Задача: 2024_mun_y1_4a - Тежишни линии во триаголник
+**📅 Додадено:** 2025-12-27 16:51
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_2024_mun_y1_4a(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+        self.camera.background_color = WHITE
+        
+        # Construct triangle with perpendicular medians
+        # AB = sqrt(20) approx 4.47
+        # T at origin.
+        # A on negative y, B on positive x? No, T is 90 deg.
+        # Let T = (0,0). A = (0, 2/3 ta). B = (2/3 tb, 0).
+        # From system: x+y=5. 4x+y=16 => 3x=11 => x=11/3. y=4/3.
+        # ta^2 = 9x = 33. tb^2 = 9y = 12.
+        # ta = sqrt(33) approx 5.74. tb = sqrt(12) approx 3.46.
+        # AT = 2/3 sqrt(33). BT = 2/3 sqrt(12).
+        
+        T = ORIGIN
+        AT_len = 2/3 * np.sqrt(33)
+        BT_len = 2/3 * np.sqrt(12)
+        
+        A = UP * AT_len
+        B = RIGHT * BT_len
+        
+        # D is on line AT extended. TD = 1/2 AT.
+        D = DOWN * (AT_len / 2)
+        # E is on line BT extended (left). TE = 1/2 BT.
+        E = LEFT * (BT_len / 2)
+        
+        # C is such that D is mid of BC => C = 2D - B
+        C = 2*D - B
+        # Check if E is mid of AC. 2E - A = (-BT, 0) - (0, AT) = (-BT, -AT).
+        # C = (0, -AT) - (BT, 0) = (-BT, -AT). Yes!
+        
+        tri = Polygon(A, B, C, color=BLACK, stroke_width=4)
+        
+        # Medians
+        med_a = Line(A, D, color=BLUE)
+        med_b = Line(B, E, color=RED)
+        
+        # Right angle at T
+        ra = RightAngle(med_a, med_b, length=0.3, color=BLACK)
+        
+        # Labels
+        lbl_A = MathTex("A", color=BLACK).next_to(A, UP)
+        lbl_B = MathTex("B", color=BLACK).next_to(B, RIGHT)
+        lbl_C = MathTex("C", color=BLACK).next_to(C, DL)
+        lbl_D = MathTex("D", color=BLUE).next_to(D, DOWN)
+        lbl_E = MathTex("E", color=RED).next_to(E, LEFT)
+        
+        self.add(tri, med_a, med_b, ra)
+        self.add(lbl_A, lbl_B, lbl_C, lbl_D, lbl_E)
+        # --- AI GENERATED CODE END ---
+
+```
+---
