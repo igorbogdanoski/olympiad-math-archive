@@ -2,11 +2,12 @@
 
 [⬅️ Назад кон прегледот](../README.md)
 
-**Вкупно задачи:** 24
+**Вкупно задачи:** 25
 
 | ID | Наслов | Тежина | Тип | Клучна Вештина |
 |:---|:---|:---:|:---|:---|
 | [cnt92_v2_01](cnt92_olympiad_var2_cnt92_v2_01.md) | --- SKILL MAPPING --- | 2/10 | calculation | logic |
+| [2025_mun_g9_1](municipal_competition_2025_2025_mun_g9_1.md) | --- SKILL MAPPING --- | 2/10 | calculation | logic |
 | [2025_mun_y1_2ab](municipal_competition_2025_2025_mun_y1_2ab.md) | --- SKILL MAPPING --- | 4/10 | proof | logic |
 | [4290](numerus_4290_4290.md) | --- SKILL MAPPING (New Standard) --- | 5/10 | General | modular_arithmetic # e.g., symmetry, invariants, telescoping |
 | [4335](numerus_4335_4335.md) | --- SKILL MAPPING (New Standard) --- | 6/10 | General | gcd_properties # e.g., symmetry, invariants, telescoping |

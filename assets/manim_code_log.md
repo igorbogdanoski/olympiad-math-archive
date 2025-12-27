@@ -2882,3 +2882,159 @@ class Task_2025_mun_g8_4(Scene):
 
 ```
 ---
+
+### 🆔 Задача: 2025_mun_g9_2 - Периметри во рамнокрак триаголник
+**📅 Додадено:** 2025-12-27 01:54
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_2025_mun_g9_2(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+class Task_2025_mun_g9_2(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        
+        # Isosceles Triangle ABC
+        # Base AB. C on top.
+        # Inner triangle DEC is equilateral with side 10.
+        # Let's scale down by 5. Side = 2.
+        # AD = BE. Let AD = 1.5 (visual).
+        
+        side_de = 2
+        seg_ad = 1.5
+        
+        D = LEFT * (side_de / 2)
+        E = RIGHT * (side_de / 2)
+        # C forms equilateral with DE
+        C = UP * (side_de * np.sqrt(3) / 2)
+        
+        A = D + LEFT * seg_ad
+        B = E + RIGHT * seg_ad
+        
+        # Draw triangles
+        tri_abc = Polygon(A, B, C, color=BLACK, stroke_width=4)
+        tri_dec = Polygon(D, E, C, color=RED, fill_opacity=0.2)
+        
+        # Labels
+        lbl_A = MathTex("A", color=BLACK).next_to(A, DL)
+        lbl_B = MathTex("B", color=BLACK).next_to(B, DR)
+        lbl_C = MathTex("C", color=BLACK).next_to(C, UP)
+        lbl_D = MathTex("D", color=RED).next_to(D, DOWN)
+        lbl_E = MathTex("E", color=RED).next_to(E, DOWN)
+        
+        # Angle 60
+        arc = Angle(Line(C, E), Line(C, D), radius=0.4, color=RED)
+        lbl_60 = MathTex("60^\circ", color=RED, font_size=24).next_to(arc, UP)
+        
+        # Equality marks
+        mark_ad = DashedLine(A, D, color=BLUE).shift(DOWN*0.1)
+        mark_be = DashedLine(E, B, color=BLUE).shift(DOWN*0.1)
+        lbl_eq = MathTex("x", color=BLUE).next_to(mark_ad, DOWN)
+        lbl_eq2 = MathTex("x", color=BLUE).next_to(mark_be, DOWN)
+        
+        self.add(tri_abc, tri_dec, lbl_A, lbl_B, lbl_C, lbl_D, lbl_E, arc, lbl_60)
+        self.add(mark_ad, mark_be, lbl_eq, lbl_eq2)
+        # --- AI GENERATED CODE END ---
+
+```
+---
+
+### 🆔 Задача: 2025_mun_g9_4 - Квадрат впишан во триаголник
+**📅 Додадено:** 2025-12-27 01:54
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_2025_mun_g9_4(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+class Task_2025_mun_g9_4(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        
+        # Square side x=8. AD+EB=16. Let AD=6, EB=10.
+        # Base = 16+8 = 24.
+        # Height h: x(h-x)=32 => 8(h-8)=32 => h-8=4 => h=12.
+        
+        x_side = 2 # visual scale (8/4)
+        h_total = 3 # visual scale (12/4)
+        base_len = 6 # visual scale (24/4)
+        
+        # Coordinates
+        # A at origin
+        A = LEFT * 3
+        B = RIGHT * 3
+        # D is at A + AD. AD=6 -> 1.5 units
+        D = A + RIGHT * 1.5
+        E = D + RIGHT * x_side
+        
+        # Square DEFG
+        G = D + UP * x_side
+        F = E + UP * x_side
+        
+        # C is intersection of AG and BF? No, C is vertex.
+        # Similarity: Triangle GCF is on top.
+        # C is at height h_total. x-coord depends on slant.
+        # Let's just place C to make it look right.
+        C = UP * (h_total - 1.5) # Shifted down to center
+        # Re-calculate C based on G, F being on AC, BC
+        # Line AG slope? No.
+        # Just draw C above center of GF
+        C = UP * 2 + RIGHT * 0.5
+        
+        # Re-adjust A and B to fit lines CG and CF
+        # Slope CG: (Cy - Gy)/(Cx - Gx). A is at y=0.
+        # Let's stick to the calculated dimensions for accuracy
+        # x=8, h=12. Base=24.
+        # Scale: 1 unit = 4 cm.
+        # x=2, h=3. Base=6.
+        
+        sq_pts = [
+            np.array([-1, -1.5, 0]), # D
+            np.array([1, -1.5, 0]),  # E
+            np.array([1, 0.5, 0]),   # F
+            np.array([-1, 0.5, 0])   # G
+        ]
+        square = Polygon(*sq_pts, color=BLUE, fill_opacity=0.2)
+        
+        # C is at y=1.5 (since h=3, and base is at -1.5)
+        C = np.array([0, 1.5, 0])
+        
+        # A and B on line y=-1.5
+        # Similarity center C. Scale factor h/(h-x) = 3/(3-2) = 3.
+        # A is projection of G scaled by 3 relative to C.
+        # vec_CG = G - C = (-1, 0.5) - (0, 1.5) = (-1, -1)
+        # vec_CA = 3 * vec_CG = (-3, -3)
+        # A = C + vec_CA = (0, 1.5) + (-3, -3) = (-3, -1.5). Correct.
+        A = np.array([-3, -1.5, 0])
+        
+        # vec_CF = F - C = (1, 0.5) - (0, 1.5) = (1, -1)
+        # vec_CB = 3 * vec_CF = (3, -3)
+        # B = C + vec_CB = (0, 1.5) + (3, -3) = (3, -1.5). Correct.
+        B = np.array([3, -1.5, 0])
+        
+        tri = Polygon(A, B, C, color=BLACK, stroke_width=4)
+        
+        # Labels
+        lbl_sq = MathTex("P_{sq}=?", color=BLUE).move_to(square.get_center())
+        lbl_top = MathTex("P=16", color=BLACK).move_to((C+sq_pts[2]+sq_pts[3])/3)
+        
+        # Segments text
+        brace = Brace(Line(A, B), DOWN)
+        txt_brace = brace.get_text("AD + EB = 16")
+        
+        self.add(tri, square, lbl_sq, lbl_top, brace, txt_brace)
+        # --- AI GENERATED CODE END ---
+
+```
+---
