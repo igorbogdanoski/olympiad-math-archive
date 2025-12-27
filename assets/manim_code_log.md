@@ -12715,3 +12715,75 @@ class Task_2022_mun_y3_11a(Scene):
 
 ```
 ---
+
+### 🆔 Задача: 2022_mun_y3_19a - Впишани фигури (Квадрат-Круг-Триаголник)
+**📅 Додадено:** 2025-12-27 23:21
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_2022_mun_y3_19a(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+        # Shapes
+        square = Square(side_length=4, color=BLUE)
+        circle = Circle(radius=2, color=RED)
+        triangle = Triangle(color=GREEN).scale(2) # Radius 2 means side 2*sqrt(3)
+        # Manim triangle radius is 1 by default? No, fits in circle radius 1.
+        # Scale by 2 to fit in radius 2.
+        
+        # Group
+        g = VGroup(square, circle, triangle)
+        
+        # Labels
+        l1 = MathTex('P_1').next_to(square, UL)
+        l2 = MathTex('P_2').move_to(triangle.get_center())
+        
+        self.add(g, l1, l2)
+        # --- AI GENERATED CODE END ---
+
+```
+---
+
+### 🆔 Задача: 2022_mun_y3_20a - Квадрат во правоаголен триаголник
+**📅 Додадено:** 2025-12-27 23:21
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_2022_mun_y3_20a(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+        # Same code as 2022_mun_y1_20b
+        C = ORIGIN
+        a = (32 + np.sqrt(128))/2
+        b = (32 - np.sqrt(128))/2
+        A = [0, b, 0]
+        B = [a, 0, 0]
+        s = 7
+        D = [0, s, 0]
+        F = [s, 0, 0]
+        E = [s, s, 0]
+        
+        triangle = Polygon(C, A, B, color=BLUE)
+        square = Polygon(C, D, E, F, color=RED, fill_opacity=0.2)
+        
+        labels = VGroup(
+            MathTex('C').next_to(C, DL),
+            MathTex('7').next_to(Line(C,D), LEFT),
+            MathTex('c=24').next_to(Line(A,B), UR)
+        ).set_color(BLACK)
+
+        self.add(triangle, square, labels)
+        # --- AI GENERATED CODE END ---
+
+```
+---
