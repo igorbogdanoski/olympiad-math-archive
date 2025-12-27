@@ -8815,3 +8815,31 @@ class Task_2023_mun_y3_3a(Scene):
 
 ```
 ---
+
+### 🆔 Задача: 2023_mun_y4_3a - Агол во триаголник (Синусна теорема)
+**📅 Додадено:** 2025-12-27 19:00
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_2023_mun_y4_3a(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+class Task_2023_mun_y4_3a(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        A = ORIGIN
+        B = RIGHT * 4
+        C = np.array([3 * np.cos(30*DEGREES), 3 * np.sin(30*DEGREES), 0])
+        tri = Polygon(A, B, C, color=BLACK, stroke_width=4)
+        arc = Angle(Line(A, B), Line(A, C), radius=0.5, color=RED)
+        lbl = MathTex("30^\\circ", color=RED).next_to(arc, RIGHT)
+        self.add(tri, arc, lbl)
+        # --- AI GENERATED CODE END ---
+
+```
+---

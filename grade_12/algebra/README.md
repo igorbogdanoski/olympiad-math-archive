@@ -2,10 +2,13 @@
 
 [⬅️ Назад кон прегледот](../README.md)
 
-**Вкупно задачи:** 7
+**Вкупно задачи:** 10
 
 | ID | Наслов | Тежина | Тип | Клучна Вештина |
 |:---|:---|:---:|:---|:---|
+| [2023_mun_y4_2a](municipal_competition_2023_2023_mun_y4_2a.md) | --- SKILL MAPPING --- | 4/10 | proof | substitution |
+| [2023_mun_y4_2b](municipal_competition_2023_2023_mun_y4_2b.md) | --- SKILL MAPPING --- | 5/10 | proof | discriminant |
+| [2023_mun_y4_3b](municipal_competition_2023_2023_mun_y4_3b.md) | --- SKILL MAPPING --- | 4/10 | calculation | pattern_recognition |
 | [2024_mun_y4_1b](municipal_competition_2024_2024_mun_y4_1b.md) | --- SKILL MAPPING --- | 3/10 | proof | algebraic_manipulation |
 | [2024_mun_y4_2a](municipal_competition_2024_2024_mun_y4_2a.md) | --- GEOMETRY SKILLS --- | 4/10 | proof | vieta_formulas |
 | [2024_mun_y4_4b](municipal_competition_2024_2024_mun_y4_4b.md) | --- SKILL MAPPING --- | 3/10 | calculation | telescoping |
