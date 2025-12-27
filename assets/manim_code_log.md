@@ -7979,3 +7979,152 @@ class Task_2023_mun_g4_4(Scene):
 
 ```
 ---
+
+### 🆔 Задача: 2023_mun_g5_1 - Агол на часовник
+**📅 Додадено:** 2025-12-27 17:21
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_2023_mun_g5_1(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+        self.camera.background_color = WHITE
+        
+        # Clock face
+        circle = Circle(radius=3, color=BLACK)
+        ticks = VGroup()
+        for i in range(12):
+            angle = i * 30 * DEGREES
+            start = np.array([3*np.sin(angle), 3*np.cos(angle), 0])
+            end = np.array([2.7*np.sin(angle), 2.7*np.cos(angle), 0])
+            ticks.add(Line(start, end, color=BLACK))
+            
+            # Numbers
+            num = 12 - i
+            pos = np.array([2.4*np.sin(angle+np.pi), 2.4*np.cos(angle+np.pi), 0])
+            # Fix rotation logic for numbers if needed, but simple placement works
+        
+        # Hands for 1:20
+        # Minute hand at 4 (120 degrees from vertical)
+        # Angle in standard math (from x-axis): 0 is 3 o'clock. 
+        # 12 is 90 deg. 4 is 90 - 4*30 = -30 deg.
+        min_angle = -30 * DEGREES
+        min_hand = Arrow(ORIGIN, np.array([2.5*np.cos(min_angle), 2.5*np.sin(min_angle), 0]), color=BLUE, buff=0)
+        
+        # Hour hand at 1:20
+        # 1 is 60 deg. It moves 0.5 deg per min. 20 min = 10 deg.
+        # Position: 60 - 10 = 50 deg.
+        hour_angle = 50 * DEGREES
+        hour_hand = Arrow(ORIGIN, np.array([1.5*np.cos(hour_angle), 1.5*np.sin(hour_angle), 0]), color=RED, buff=0)
+        
+        # Arc
+        arc = Angle(min_hand, hour_hand, radius=1, color=GREEN)
+        lbl = MathTex("80^\\circ", color=GREEN).next_to(arc, RIGHT)
+        
+        self.add(circle, ticks, min_hand, hour_hand, arc, lbl)
+        # --- AI GENERATED CODE END ---
+
+```
+---
+
+### 🆔 Задача: 2023_mun_g5_3 - Периметар и плоштина на сложена фигура
+**📅 Додадено:** 2025-12-27 17:21
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_2023_mun_g5_3(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+        self.camera.background_color = WHITE
+        
+        # Bounding box 19x11. Scale down: 1 unit = 2 cm.
+        w = 19 / 3
+        h = 11 / 3
+        
+        rect = Rectangle(width=w, height=h, color=BLUE, fill_opacity=0.1)
+        
+        # Cutouts (visual approximation based on problem description)
+        # 1. Top left corner? Let's just show the subtraction principle.
+        c1 = Rectangle(width=2, height=1, color=RED, fill_opacity=0.5).align_to(rect, UL)
+        c2 = Rectangle(width=0.6, height=1, color=RED, fill_opacity=0.5).align_to(rect, UR)
+        c3 = Rectangle(width=1, height=1.3, color=RED, fill_opacity=0.5).align_to(rect, DR)
+        
+        # Labels
+        lbl_total = MathTex("P_{total} = 19 \\cdot 11 = 209", color=BLUE).to_edge(UP)
+        lbl_sub = MathTex("P_{cut} = 36", color=RED).next_to(lbl_total, DOWN)
+        lbl_res = MathTex("P = 209 - 36 = 173", color=BLACK).next_to(lbl_sub, DOWN)
+        
+        self.add(rect, lbl_total)
+        self.wait(1)
+        self.play(FadeIn(c1), FadeIn(c2), FadeIn(c3), Write(lbl_sub))
+        self.wait(1)
+        self.play(Write(lbl_res))
+        # --- AI GENERATED CODE END ---
+
+```
+---
+
+### 🆔 Задача: 2023_mun_g5_4 - Збир на два броја
+**📅 Додадено:** 2025-12-27 17:21
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_2023_mun_g5_4(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+        self.camera.background_color = WHITE
+        
+        # Bar Model
+        # First number: 1 block
+        # Second number: 4 blocks + small block (4)
+        
+        block_width = 1.5
+        block_height = 0.8
+        
+        # Row 1: First Number (x)
+        rect_x = Rectangle(width=block_width, height=block_height, color=BLUE)
+        lbl_x = MathTex("x", color=BLACK).move_to(rect_x.get_center())
+        group_x = VGroup(rect_x, lbl_x).move_to(UP*1 + LEFT*2)
+        
+        # Row 2: Second Number (y = 4x + 4)
+        rects_y = VGroup()
+        for i in range(4):
+            r = Rectangle(width=block_width, height=block_height, color=BLUE)
+            r.next_to(group_x, DOWN, buff=0.5 if i==0 else 0).shift(RIGHT * i * block_width if i>0 else 0)
+            rects_y.add(r)
+            
+        # Small block for +4
+        rect_4 = Rectangle(width=0.5, height=block_height, color=RED)
+        rect_4.next_to(rects_y, RIGHT, buff=0)
+        lbl_4 = MathTex("4", color=BLACK).move_to(rect_4.get_center())
+        
+        group_y = VGroup(rects_y, rect_4, lbl_4)
+        
+        # Brace for total
+        brace = Brace(VGroup(group_x, group_y), RIGHT)
+        lbl_total = brace.get_text("424")
+        
+        self.add(group_x, group_y, brace, lbl_total)
+        
+        # Equation text
+        eq = MathTex("x + (4x + 4) = 424", color=BLACK).to_edge(DOWN)
+        self.play(Write(eq))
+        # --- AI GENERATED CODE END ---
+
+```
+---
