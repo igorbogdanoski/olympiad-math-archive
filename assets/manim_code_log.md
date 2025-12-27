@@ -7688,3 +7688,64 @@ class Task_2024_mun_y1_4a(Scene):
 
 ```
 ---
+
+### 🆔 Задача: 2024_mun_y2_3ab - Плоштини и паралелни прави
+**📅 Додадено:** 2025-12-27 16:55
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_2024_mun_y2_3ab(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+        self.camera.background_color = WHITE
+        
+        # Triangle ABC
+        A = DL * 2
+        B = DR * 2
+        C = UP * 2
+        
+        # Point D on AB (let's say at 1/3 from A)
+        k = 0.35
+        D = A + k * (B - A)
+        
+        # E on AC (DE || BC)
+        E = A + k * (C - A)
+        
+        # F on BC (DF || AC)
+        # Vector DF is parallel to AC. F is on BC.
+        # F = B + (1-k) * (C - B)
+        F = B + (1-k) * (C - B)
+        
+        # Draw shapes
+        tri = Polygon(A, B, C, color=BLACK, stroke_width=4)
+        line_DE = Line(D, E, color=BLUE)
+        line_DF = Line(D, F, color=BLUE)
+        
+        # Fill areas
+        area_ADE = Polygon(A, D, E, color=RED, fill_opacity=0.3)
+        area_DBF = Polygon(D, B, F, color=GREEN, fill_opacity=0.3)
+        area_CEDF = Polygon(E, D, F, C, color=YELLOW, fill_opacity=0.3)
+        
+        # Labels
+        lbl_A = MathTex("A", color=BLACK).next_to(A, DL)
+        lbl_B = MathTex("B", color=BLACK).next_to(B, DR)
+        lbl_C = MathTex("C", color=BLACK).next_to(C, UP)
+        lbl_D = MathTex("D", color=BLACK).next_to(D, DOWN)
+        lbl_E = MathTex("E", color=BLACK).next_to(E, LEFT)
+        lbl_F = MathTex("F", color=BLACK).next_to(F, RIGHT)
+        
+        self.add(tri, area_ADE, area_DBF, area_CEDF)
+        self.add(lbl_A, lbl_B, lbl_C, lbl_D, lbl_E, lbl_F)
+        
+        # Formula
+        eq = MathTex("P_{CEDF}^2 = 4 \\cdot P_{ADE} \\cdot P_{DBF}", color=BLACK).to_edge(UP)
+        self.add(eq)
+        # --- AI GENERATED CODE END ---
+
+```
+---
