@@ -10421,3 +10421,151 @@ class Task_2022_mun_g8_8(Scene):
 
 ```
 ---
+
+### 🆔 Задача: 2022_mun_g8_13 - Трапез и средна линија
+**📅 Додадено:** 2025-12-27 20:44
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_2022_mun_g8_13(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+class Task_2022_mun_g8_13(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        
+        # Trapezoid a=2b. Let b=2, a=4. h=2.
+        # Centered.
+        b_len = 2
+        a_len = 4
+        h_len = 2
+        
+        A = DL * 1 + LEFT * 2
+        B = DR * 1 + RIGHT * 2
+        C = UR * 1 + RIGHT * 1
+        D = UL * 1 + LEFT * 1
+        
+        trap = Polygon(A, B, C, D, color=BLACK, stroke_width=4)
+        
+        # Diagonals
+        diag1 = Line(A, C, color=GRAY)
+        diag2 = Line(B, D, color=GRAY)
+        
+        # Median
+        M_AD = (A+D)/2
+        M_BC = (B+C)/2
+        median = Line(M_AD, M_BC, color=BLUE, stroke_width=4)
+        
+        # Intersection points
+        # P on AC, Q on BD
+        # P is midpoint of AC? No, median cuts diagonals at midpoints.
+        P = (A+C)/2
+        Q = (B+D)/2
+        
+        # Segments of median
+        seg1 = Line(M_AD, Q, color=RED, stroke_width=6)
+        seg2 = Line(Q, P, color=GREEN, stroke_width=6)
+        seg3 = Line(P, M_BC, color=RED, stroke_width=6)
+        
+        # Labels
+        lbl_b = MathTex("b=28", color=BLACK).next_to(Line(D, C), UP)
+        lbl_a = MathTex("a=2b=56", color=BLACK).next_to(Line(A, B), DOWN)
+        
+        lbl_parts = MathTex("x=y=z", color=BLUE).next_to(median, UP)
+        
+        self.add(trap, diag1, diag2, median)
+        self.add(seg1, seg2, seg3)
+        self.add(lbl_b, lbl_a, lbl_parts)
+        
+        # Calculation
+        calc = MathTex("P = \\frac{56+28}{2} \\cdot 20 = 840", color=RED).to_edge(DOWN)
+        self.play(Write(calc))
+        # --- AI GENERATED CODE END ---
+
+```
+---
+
+### 🆔 Задача: 2022_mun_g8_15 - Мрежа на квадар
+**📅 Додадено:** 2025-12-27 20:44
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_2022_mun_g8_15(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+class Task_2022_mun_g8_15(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        
+        # Net dimensions: a=4, b=6, c=3.
+        # Scale: 1 unit = 1 cm.
+        
+        # Horizontal strip: a, b, a, b -> 4, 6, 4, 6. Total 20.
+        # Vertical: c=3.
+        # Flaps: Top on 2nd rect (b=6) -> height a=4? No, height is other dim.
+        # If attached to b, height is a. If attached to a, height is b.
+        # From problem: c+b=9 => flap height is b=6? No, c=3.
+        # Wait, if c+b=9 and c=3, then flap is 6. 
+        # If flap is attached to side 'a', its height is 'b'.
+        # Let's assume order a, b, a, b.
+        # Flap 1 (top) on 2nd rect (width b=6). Height must be a=4.
+        # Then c+a = 3+4 = 7. This matches right arrow.
+        # Flap 2 (bottom) on 3rd rect (width a=4). Height must be b=6.
+        # Then c+b = 3+6 = 9. This matches left arrow.
+        
+        # Let's draw this configuration.
+        # Rects: [4x3], [6x3], [4x3], [6x3]
+        
+        start_x = -6
+        y_base = 0
+        
+        r1 = Rectangle(width=4/2, height=3/2, color=BLACK).move_to(np.array([start_x + 2/2, 0, 0]))
+        r2 = Rectangle(width=6/2, height=3/2, color=BLACK).next_to(r1, RIGHT, buff=0)
+        r3 = Rectangle(width=4/2, height=3/2, color=BLACK).next_to(r2, RIGHT, buff=0)
+        r4 = Rectangle(width=6/2, height=3/2, color=BLACK).next_to(r3, RIGHT, buff=0)
+        
+        # Flaps
+        # Top flap on r2 (width 6). Height a=4.
+        flap_top = Rectangle(width=6/2, height=4/2, color=BLACK).next_to(r2, UP, buff=0)
+        # Bottom flap on r3 (width 4). Height b=6.
+        flap_bot = Rectangle(width=4/2, height=6/2, color=BLACK).next_to(r3, DOWN, buff=0)
+        
+        # Arrows
+        # 20cm horizontal
+        brace_hor = Brace(VGroup(r1, r4), DOWN, buff=2)
+        lbl_20 = brace_hor.get_text("20")
+        
+        # 9cm left (on flap_bot + r3? No, image shows specific alignment)
+        # Let's assume the arrows measure total vertical extent at that x-position.
+        # At r3: c + b = 3 + 6 = 9. Correct.
+        # At r2: c + a = 3 + 4 = 7. Correct.
+        
+        # Draw arrows manually
+        # Left arrow (at r3 x-pos)
+        arr_9 = DoubleArrow(flap_bot.get_bottom() + LEFT*0.5, r3.get_top() + LEFT*0.5, color=RED)
+        lbl_9 = MathTex("9", color=RED).next_to(arr_9, LEFT)
+        
+        # Right arrow (at r2 x-pos)
+        arr_7 = DoubleArrow(r2.get_bottom() + RIGHT*0.5, flap_top.get_top() + RIGHT*0.5, color=BLUE)
+        lbl_7 = MathTex("7", color=BLUE).next_to(arr_7, RIGHT)
+        
+        self.add(r1, r2, r3, r4, flap_top, flap_bot)
+        self.add(brace_hor, lbl_20, arr_9, lbl_9, arr_7, lbl_7)
+        
+        # Solution text
+        sol = MathTex("V = 4 \\cdot 6 \\cdot 3 = 72", color=BLACK).to_edge(UP)
+        self.play(Write(sol))
+        # --- AI GENERATED CODE END ---
+
+```
+---
