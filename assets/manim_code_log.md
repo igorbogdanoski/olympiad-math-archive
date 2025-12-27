@@ -10569,3 +10569,102 @@ class Task_2022_mun_g8_15(Scene):
 
 ```
 ---
+
+### 🆔 Задача: 2022_mun_g9_3 - Периметар на рамнокрак триаголник
+**📅 Додадено:** 2025-12-27 20:46
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_2022_mun_g9_3(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+class Task_2022_mun_g9_3(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        
+        # Triangle where base = height
+        # Let h = 3. Then base = 3.
+        h_val = 3
+        a_val = 3
+        
+        A = LEFT * (a_val/2) + DOWN * 1.5
+        B = RIGHT * (a_val/2) + DOWN * 1.5
+        C = UP * (h_val - 1.5)
+        D = DOWN * 1.5 # Projection of C
+        
+        tri = Polygon(A, B, C, color=BLACK, stroke_width=4)
+        height = DashedLine(C, D, color=RED)
+        
+        # Labels
+        lbl_h = MathTex("h", color=RED).next_to(height, RIGHT, buff=0.1)
+        lbl_a = MathTex("a=h", color=BLUE).next_to(Line(A, B), DOWN)
+        lbl_b = MathTex("b", color=BLACK).next_to(Line(B, C), RIGHT)
+        
+        # Calculation
+        calc = MathTex("b = \\sqrt{h^2 + (h/2)^2} = \\frac{h\\sqrt{5}}{2}", color=BLACK).to_edge(UP)
+        res = MathTex("L = h + 2b = h(1+\\sqrt{5})", color=BLACK).next_to(calc, DOWN)
+        
+        self.add(tri, height, lbl_h, lbl_a, lbl_b)
+        self.play(Write(calc))
+        self.play(Write(res))
+        # --- AI GENERATED CODE END ---
+
+```
+---
+
+### 🆔 Задача: 2022_mun_g9_5 - Поплочување на шестаголник
+**📅 Додадено:** 2025-12-27 20:46
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_2022_mun_g9_5(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+class Task_2022_mun_g9_5(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        
+        # Hexagon composed of 6 triangles
+        hex = RegularPolygon(n=6, radius=3, color=BLACK)
+        
+        # Divide into 6 triangles
+        lines = VGroup()
+        for i in range(3):
+            lines.add(Line(hex.get_vertices()[i], hex.get_vertices()[i+3], color=BLACK))
+            
+        # Highlight one triangle
+        tri = Polygon(ORIGIN, hex.get_vertices()[0], hex.get_vertices()[1], color=BLUE, fill_opacity=0.2)
+        
+        # Small tiles inside the triangle
+        # Visualizing k=3 for simplicity (instead of 60)
+        # A triangle of side 3 contains 3^2 = 9 small triangles
+        
+        small_tris = VGroup()
+        # Recursive generation or manual placement for k=3
+        # Row 1: 1 tri. Row 2: 3 tris. Row 3: 5 tris. Total 1+3+5=9.
+        
+        # Just show text explanation
+        lbl_A = MathTex("A", color=BLACK).next_to(tri, RIGHT)
+        lbl_a = MathTex("a", color=RED).scale(0.5).move_to(tri.get_center())
+        
+        ratio = MathTex("k = A/a = 60", color=BLUE).to_corner(UL)
+        calc = MathTex("N = 6 \\cdot k^2 = 6 \\cdot 3600 = 21600", color=BLACK).next_to(ratio, DOWN)
+        
+        self.add(hex, lines)
+        self.play(FadeIn(tri))
+        self.play(Write(ratio))
+        self.play(Write(calc))
+        # --- AI GENERATED CODE END ---
+
+```
+---

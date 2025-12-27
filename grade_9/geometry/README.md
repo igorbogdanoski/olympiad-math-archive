@@ -2,7 +2,7 @@
 
 [⬅️ Назад кон прегледот](../README.md)
 
-**Вкупно задачи:** 87
+**Вкупно задачи:** 89
 
 | ID | Наслов | Тежина | Тип | Клучна Вештина |
 |:---|:---|:---:|:---|:---|
@@ -40,6 +40,8 @@
 | [geom_9_area_height](matematiskop_3_1600_geom_9_area_height.md) |  | 7/10 | General | <main_tool> # e.g., angle_chasing, similarity, cyclic_quads |
 | [geo_right_triangle_radii](math_problem_image_geo_right_triangle_radii.md) |  | 5/10 | General | <main_tool> # e.g., angle_chasing, similarity, cyclic_quads |
 | [geo_two_circles_incenter](math_problem_image_geo_two_circles_incenter.md) |  | 6/10 | General | <main_tool> # e.g., angle_chasing, similarity, cyclic_quads |
+| [2022_mun_g9_3](municipal_competition_2022_2022_mun_g9_3.md) | --- GEOMETRY SKILLS --- | 3/10 | calculation | pythagorean_theorem |
+| [2022_mun_g9_5](municipal_competition_2022_2022_mun_g9_5.md) | --- GEOMETRY SKILLS --- | 4/10 | calculation | visual_reasoning |
 | [2023_mun_g9_2](municipal_competition_2023_2023_mun_g9_2.md) | --- GEOMETRY SKILLS --- | 4/10 | calculation | visual_reasoning |
 | [2023_mun_g9_4](municipal_competition_2023_2023_mun_g9_4.md) | --- GEOMETRY SKILLS --- | 4/10 | calculation | algebraic_manipulation |
 | [2023_mun_y1_4ab](municipal_competition_2023_2023_mun_y1_4ab.md) | --- GEOMETRY SKILLS --- | 3/10 | calculation | similarity |
