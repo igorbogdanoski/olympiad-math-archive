@@ -77,6 +77,7 @@ $$ \angle ACD = \angle BAC = 50^\circ $$
 $$ \angle CAD = \angle ACD = 50^\circ $$
 
 **Чекор 4: Пресметка на аглите на трапезот**
+
 *   $\angle A = \angle BAC + \angle CAD = 50^\circ + 50^\circ = 100^\circ$
 *   $\angle B = 40^\circ$ (дадено)
 *   $\angle C = \angle ACB + \angle ACD = 90^\circ + 50^\circ = 140^\circ$

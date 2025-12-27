@@ -48,6 +48,7 @@ $$ c = \frac{2}{\sqrt{7} + \sqrt{5}} \cdot \frac{\sqrt{7} - \sqrt{5}}{\sqrt{7} -
 
 **Чекор 2: Споредба на $a$ и $b$**
 Да ги запишеме како дропки со рационализација 'наопаку':
+
 *   $a = \sqrt{8} - \sqrt{6} = \frac{(\sqrt{8}-\sqrt{6})(\sqrt{8}+\sqrt{6})}{\sqrt{8}+\sqrt{6}} = \frac{2}{\sqrt{8}+\sqrt{6}}$
 *   $b = \sqrt{7} - \sqrt{5} = \frac{2}{\sqrt{7}+\sqrt{5}}$
 

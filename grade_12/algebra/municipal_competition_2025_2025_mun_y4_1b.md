@@ -67,6 +67,7 @@ $$ (a^2+b^2+c^2)(x^2+y^2+z^2) - (ax+by+cz)^2 = (ay-bx)^2 + (az-cx)^2 + (bz-cy)^2
 $$ (ac-b^2)^2 + (ad-bc)^2 + (bd-c^2)^2 $$
 
 Бидејќи се во геометриска прогресија:
+
 *   $b^2 = ac \implies ac-b^2 = 0$
 *   $c^2 = bd \implies bd-c^2 = 0$
 *   $ad = a(aq^3) = a^2q^3$ и $bc = (aq)(aq^2) = a^2q^3 \implies ad-bc=0$

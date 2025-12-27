@@ -44,10 +44,12 @@ tags:
 $$ \sqrt{2+\sqrt{3}} = \frac{\sqrt{3}+1}{\sqrt{2}}, \quad \sqrt{2-\sqrt{3}} = \frac{\sqrt{3}-1}{\sqrt{2}} $$
 
 **Чекор 2: Средување на именителите**
+
 *   Именител 1: $\sqrt{2} + \frac{\sqrt{3}+1}{\sqrt{2}} = \frac{2+\sqrt{3}+1}{\sqrt{2}} = \frac{3+\sqrt{3}}{\sqrt{2}}$
 *   Именител 2: $\sqrt{2} - \frac{\sqrt{3}-1}{\sqrt{2}} = \frac{2-(\sqrt{3}-1)}{\sqrt{2}} = \frac{3-\sqrt{3}}{\sqrt{2}}$
 
 **Чекор 3: Средување на дропките**
+
 *   Дропка 1: $\frac{2+\sqrt{3}}{\frac{3+\sqrt{3}}{\sqrt{2}}} = \sqrt{2} \frac{2+\sqrt{3}}{3+\sqrt{3}}$. Рационализираме со $(3-\sqrt{3})$:
     $\sqrt{2} \frac{6-2\sqrt{3}+3\sqrt{3}-3}{9-3} = \sqrt{2} \frac{3+\sqrt{3}}{6}$
 

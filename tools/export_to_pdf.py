@@ -48,7 +48,7 @@ def export_to_pdf(file_path):
     file_dir = os.path.dirname(file_path)
     # Use the temp file name for input
     file_name = os.path.basename(temp_file_path) 
-    pdf_name = os.path.basename(pdf_file_path).replace(".pdf", "_v3.pdf") # Version 3
+    pdf_name = os.path.basename(pdf_file_path).replace(".pdf", "_v4.pdf") # Version 4
 
     # --- КЛУЧНИОТ ДЕЛ ЗА КИРИЛИЦА ---
     # Користиме 'xelatex' и му задаваме фонт што има кирилица (Times New Roman).
