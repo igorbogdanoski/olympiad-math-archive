@@ -6965,3 +6965,107 @@ class Task_2024_mun_g4_4(Scene):
 
 ```
 ---
+
+### 🆔 Задача: 2024_mun_g5_3 - Периметри на квадрат и правоаголник
+**📅 Додадено:** 2025-12-27 12:45
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_2024_mun_g5_3(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+        self.camera.background_color = WHITE
+        
+        # Square
+        square = Square(side_length=2, color=BLUE)
+        label_sq = MathTex("a=6", color=BLUE).move_to(square.get_center())
+        perim_sq = MathTex("L = 24", color=BLACK).next_to(square, UP)
+        
+        # Rectangle (area not same, but perimeter same)
+        # 4 and 8. Ratio 1:2.
+        rect = Rectangle(height=1.33, width=2.66, color=RED)
+        label_rect = MathTex("?", color=RED).move_to(rect.get_center())
+        side_label = MathTex("4", color=RED).next_to(rect, LEFT)
+        
+        # Grouping
+        g_sq = VGroup(square, label_sq, perim_sq).shift(LEFT*2)
+        g_rect = VGroup(rect, label_rect, side_label).shift(RIGHT*2)
+        
+        self.add(g_sq)
+        self.wait(1)
+        self.play(TransformFromCopy(perim_sq, MathTex("L = 24", color=BLACK).next_to(rect, UP)))
+        self.add(g_rect)
+        
+        # Calculation animation
+        calc = MathTex("2(4 + x) = 24", color=BLACK).to_edge(DOWN)
+        calc2 = MathTex("4 + x = 12", color=BLACK).to_edge(DOWN)
+        calc3 = MathTex("x = 8", color=RED).to_edge(DOWN)
+        
+        self.play(Write(calc))
+        self.wait(1)
+        self.play(Transform(calc, calc2))
+        self.wait(1)
+        self.play(Transform(calc, calc3))
+        self.play(Transform(label_rect, MathTex("8", color=RED).move_to(rect.get_center())))
+        # --- AI GENERATED CODE END ---
+
+```
+---
+
+### 🆔 Задача: 2024_mun_g5_4 - Броење квадрати во мрежа
+**📅 Додадено:** 2025-12-27 12:45
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_2024_mun_g5_4(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+        self.camera.background_color = WHITE
+        
+        # Create a 3x3 grid to demonstrate the concept
+        # (Since exact shape is unknown, we demonstrate the types)
+        
+        # 1x1 Squares
+        grid = VGroup()
+        for i in range(3):
+            for j in range(3):
+                grid.add(Square(side_length=1).move_to(RIGHT*i + UP*j))
+        grid.set_color(BLACK)
+        
+        self.add(grid)
+        
+        # Highlight 1x1
+        s1 = Square(side_length=1, color=BLUE, fill_opacity=0.5).move_to(ORIGIN)
+        t1 = Text("1x1", color=BLUE).next_to(grid, LEFT)
+        self.play(FadeIn(s1), Write(t1))
+        self.wait(0.5)
+        self.play(FadeOut(s1), FadeOut(t1))
+        
+        # Highlight 2x2
+        s2 = Square(side_length=2, color=RED, fill_opacity=0.3).move_to(RIGHT*0.5 + UP*0.5)
+        t2 = Text("2x2 (4x Area)", color=RED).next_to(grid, LEFT)
+        self.play(FadeIn(s2), Write(t2))
+        self.wait(0.5)
+        self.play(FadeOut(s2), FadeOut(t2))
+        
+        # Highlight Rotated (Area 2)
+        # Vertices at (1,0), (2,1), (1,2), (0,1)
+        s3 = Polygon(RIGHT, RIGHT*2+UP, RIGHT+UP*2, UP, color=GREEN, fill_opacity=0.3)
+        t3 = Text("Rotated (2x Area)", color=GREEN).next_to(grid, LEFT)
+        self.play(FadeIn(s3), Write(t3))
+        self.wait(0.5)
+        self.play(FadeOut(s3), FadeOut(t3))
+        # --- AI GENERATED CODE END ---
+
+```
+---
