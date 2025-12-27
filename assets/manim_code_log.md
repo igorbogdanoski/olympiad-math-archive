@@ -7287,3 +7287,86 @@ class Task_2024_mun_g7_4(Scene):
 
 ```
 ---
+
+### 🆔 Задача: 2024_mun_g8_4 - Агли во правоаголен триаголник
+**📅 Додадено:** 2025-12-27 12:54
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_2024_mun_g8_4(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+        self.camera.background_color = WHITE
+        
+        # Right Triangle ABC with C at origin
+        # Angle A = 55, B = 35.
+        # Let side b (AC) be along y-axis, a (BC) along x-axis for easier ray drawing?
+        # No, standard orientation: C at top (0,0) is hard. Let's put C at origin.
+        # AC along Y, BC along X.
+        # A = (0, b), B = (a, 0).
+        # tan(A) = a/b = tan(55). Let b=3. a = 3 * tan(55) approx 4.28.
+        
+        C = ORIGIN
+        b_len = 3
+        a_len = 3 * np.tan(55 * DEGREES)
+        
+        A = UP * b_len
+        B = RIGHT * a_len
+        
+        # Hypotenuse AB
+        hyp = Line(A, B)
+        
+        # Median CF (F is midpoint of AB)
+        F = (A + B) / 2
+        median = Line(C, F, color=BLUE)
+        
+        # Altitude CD (D is projection of C on AB)
+        # Vector AB = B - A = (a, -b). Normal = (b, a).
+        # Line AB: bx + ay - ab = 0.
+        # Dist = ab / sqrt(a^2+b^2).
+        # Let's use Manim's projection
+        # Project C onto line AB
+        # Or just calculate D geometrically.
+        # D = A + t * (B-A). t = dot(AC, AB) / |AB|^2 ? No.
+        # Let's use a helper point.
+        D = hyp.get_projection(C)
+        altitude = Line(C, D, color=RED)
+        
+        # Angle Bisector CL
+        # L is on AB. Angle ACL = 45.
+        # Line CL direction: (1, 1) if AC is Y and BC is X? No.
+        # AC is UP. BC is RIGHT. Angle is 90.
+        # Bisector is at -45 degrees from UP (or +45 from RIGHT).
+        # Direction (1, 1).
+        # Intersection of y=x with line AB (y-b = (0-b)/(a-0) * (x-0) -> y = -b/a x + b)
+        # x = -b/a x + b => x(1 + b/a) = b => x = b / (1+b/a) = ab/(a+b)
+        L_coords = np.array([a_len*b_len/(a_len+b_len), a_len*b_len/(a_len+b_len), 0])
+        bisector = Line(C, L_coords, color=GREEN)
+        
+        # Draw Triangle
+        tri = Polygon(A, B, C, color=BLACK, stroke_width=4)
+        
+        # Labels
+        lbl_C = MathTex("C", color=BLACK).next_to(C, DL)
+        lbl_A = MathTex("A", color=BLACK).next_to(A, UL)
+        lbl_B = MathTex("B", color=BLACK).next_to(B, DR)
+        lbl_F = MathTex("F", color=BLUE).next_to(F, UR)
+        lbl_D = MathTex("D", color=RED).next_to(D, UR)
+        lbl_L = MathTex("L", color=GREEN).next_to(L_coords, UR)
+        
+        # Angles text
+        txt = MathTex("\\angle DCF = 20^\\circ", color=BLACK).to_edge(UP)
+        res = MathTex("\\angle LCF = 10^\\circ", color=RED).next_to(txt, DOWN)
+        
+        self.add(tri, median, altitude, bisector)
+        self.add(lbl_C, lbl_A, lbl_B, lbl_F, lbl_D, lbl_L)
+        self.add(txt, res)
+        # --- AI GENERATED CODE END ---
+
+```
+---
