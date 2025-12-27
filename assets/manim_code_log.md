@@ -7370,3 +7370,126 @@ class Task_2024_mun_g8_4(Scene):
 
 ```
 ---
+
+### 🆔 Задача: 2024_mun_g9_2 - Плоштина во квадрат
+**📅 Додадено:** 2025-12-27 12:57
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_2024_mun_g9_2(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+        self.camera.background_color = WHITE
+        
+        # Square vertices
+        A = DL * 2
+        B = DR * 2
+        C = UR * 2
+        D = UL * 2
+        
+        # Midpoint M
+        M = (A + B) / 2
+        # Center O
+        O = ORIGIN
+        
+        # Lines
+        square = Polygon(A, B, C, D, color=BLACK, stroke_width=4)
+        diag_BD = Line(B, D, color=BLACK)
+        line_MC = Line(M, C, color=BLACK)
+        
+        # Intersection P
+        # M is at (0, -2). C is at (2, 2). Line MC: y = 2x - 2.
+        # B is at (2, -2). D is at (-2, 2). Line BD: y = -x.
+        # 2x - 2 = -x => 3x = 2 => x = 2/3. y = -2/3.
+        # Scale factor is 2 (since side is 4 in Manim coords, but 1 in problem).
+        # P should be at (2/3 * 2, -2/3 * 2) = (1.33, -1.33)?
+        # Let's re-calculate relative to center.
+        # M=(0,-2), C=(2,2). P is intersection.
+        P = np.array([2/3 * 2, -2/3 * 2, 0])
+        
+        # Triangle MOP
+        tri_mop = Polygon(M, O, P, color=RED, fill_opacity=0.4)
+        
+        # Labels
+        lbl_A = MathTex("A", color=BLACK).next_to(A, DL)
+        lbl_B = MathTex("B", color=BLACK).next_to(B, DR)
+        lbl_C = MathTex("C", color=BLACK).next_to(C, UR)
+        lbl_D = MathTex("D", color=BLACK).next_to(D, UL)
+        lbl_M = MathTex("M", color=BLACK).next_to(M, DOWN)
+        lbl_O = MathTex("O", color=BLACK).next_to(O, LEFT)
+        lbl_P = MathTex("P", color=RED).next_to(P, RIGHT)
+        
+        self.add(square, diag_BD, line_MC)
+        self.add(lbl_A, lbl_B, lbl_C, lbl_D, lbl_M, lbl_O)
+        self.play(FadeIn(tri_mop), Write(lbl_P))
+        
+        # Result
+        res = MathTex("P = 1/24", color=RED).to_edge(UP)
+        self.play(Write(res))
+        # --- AI GENERATED CODE END ---
+
+```
+---
+
+### 🆔 Задача: 2024_mun_g9_4 - Плоштина на четириаголник
+**📅 Додадено:** 2025-12-27 12:57
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_2024_mun_g9_4(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+        self.camera.background_color = WHITE
+        
+        # Construct quadrilateral
+        # a+b=10. Let a=6, b=4.
+        # c^2 = (36+16)/2 = 26. c = sqrt(26) approx 5.1.
+        
+        A = DL * 2
+        B = A + RIGHT * 3 # a=6 units (scaled /2)
+        D = A + UP * 2    # b=4 units (scaled /2)
+        
+        # C needs to be such that BC=CD and angle C=90.
+        # C is intersection of circle(B, c) and circle(D, c).
+        # Also C lies on circle with diameter BD (since angle C=90).
+        # Midpoint of BD
+        M_BD = (B + D) / 2
+        # C is M_BD + vector perpendicular to BD with length BD/2? No.
+        # Triangle BCD is isosceles right triangle.
+        # Height from C to BD is BD/2.
+        # Vector BD = D - B = (-3, 2).
+        # Normal = (2, 3). 
+        # C = M_BD + Normal/2 = (0, 1) + (1, 1.5) = (1, 2.5).
+        C = M_BD + np.array([1, 1.5, 0])
+        
+        quad = Polygon(A, B, C, D, color=BLACK, stroke_width=4)
+        diag = Line(B, D, color=BLUE)
+        
+        # Right angles
+        ra_A = RightAngle(Line(A, D), Line(A, B), length=0.3, color=RED)
+        ra_C = RightAngle(Line(C, D), Line(C, B), length=0.3, color=RED)
+        
+        # Labels
+        lbl_A = MathTex("A", color=BLACK).next_to(A, DL)
+        lbl_B = MathTex("B", color=BLACK).next_to(B, DR)
+        lbl_C = MathTex("C", color=BLACK).next_to(C, UR)
+        lbl_D = MathTex("D", color=BLACK).next_to(D, UL)
+        
+        txt = MathTex("P = \\frac{(a+b)^2}{4} = 25", color=BLUE).to_edge(UP)
+        
+        self.add(quad, diag, ra_A, ra_C)
+        self.add(lbl_A, lbl_B, lbl_C, lbl_D, txt)
+        # --- AI GENERATED CODE END ---
+
+```
+---
