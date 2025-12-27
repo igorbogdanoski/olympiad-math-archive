@@ -11210,3 +11210,64 @@ class Task_2022_mun_g9_14(Scene):
 
 ```
 ---
+
+### 🆔 Задача: 2022_mun_y1_6a - Колинеарни квадрати
+**📅 Додадено:** 2025-12-27 21:09
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_2022_mun_y1_6a(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+class Task_2022_mun_y1_6a(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        
+        # Squares side 9, 6, 4
+        # Scale: 1 unit = 1.5 cm
+        s1 = 9 / 1.5
+        s2 = 6 / 1.5
+        s3 = 4 / 1.5
+        
+        # Position them side by side on x-axis
+        sq1 = Square(side_length=s1, color=BLUE, fill_opacity=0.2).move_to(LEFT*3 + UP*s1/2)
+        sq2 = Square(side_length=s2, color=BLUE, fill_opacity=0.2).next_to(sq1, RIGHT, buff=0, aligned_edge=DOWN)
+        sq3 = Square(side_length=s3, color=BLUE, fill_opacity=0.2).next_to(sq2, RIGHT, buff=0, aligned_edge=DOWN)
+        
+        # Vertices X, Y, Z (Top Left corners)
+        X = sq1.get_corner(UL)
+        Y = sq2.get_corner(UL)
+        Z = sq3.get_corner(UL)
+        
+        line = Line(X + LEFT, Z + RIGHT, color=RED)
+        
+        # Labels
+        lbl_x = MathTex("x", color=BLACK).next_to(sq1, DOWN)
+        lbl_6 = MathTex("6", color=BLACK).next_to(sq2, DOWN)
+        lbl_4 = MathTex("4", color=BLACK).next_to(sq3, DOWN)
+        
+        # Triangles for slope
+        p1 = X + RIGHT * s1
+        p1_proj = np.array([p1[0], Y[1], 0])
+        tri1 = Polygon(X, p1_proj, Y, color=GREEN, fill_opacity=0)
+        
+        p2 = Y + RIGHT * s2
+        p2_proj = np.array([p2[0], Z[1], 0])
+        tri2 = Polygon(Y, p2_proj, Z, color=GREEN, fill_opacity=0)
+        
+        self.add(sq1, sq2, sq3, line, lbl_x, lbl_6, lbl_4)
+        self.play(Create(tri1), Create(tri2))
+        
+        # Equation
+        eq = MathTex("\\frac{x-6}{x} = \\frac{6-4}{6}", color=BLACK).to_edge(UP)
+        res = MathTex("x=9", color=RED).next_to(eq, RIGHT)
+        self.play(Write(eq), Write(res))
+        # --- AI GENERATED CODE END ---
+
+```
+---
