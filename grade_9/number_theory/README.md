@@ -2,11 +2,13 @@
 
 [⬅️ Назад кон прегледот](../README.md)
 
-**Вкупно задачи:** 28
+**Вкупно задачи:** 30
 
 | ID | Наслов | Тежина | Тип | Клучна Вештина |
 |:---|:---|:---:|:---|:---|
 | [cnt92_v2_01](cnt92_olympiad_var2_cnt92_v2_01.md) |  | 2/10 | calculation | logic |
+| [2022_mun_g9_13](municipal_competition_2022_2022_mun_g9_13.md) | --- SKILL MAPPING --- | 3/10 | calculation | factorization |
+| [2022_mun_g9_15](municipal_competition_2022_2022_mun_g9_15.md) | --- SKILL MAPPING --- | 4/10 | calculation | pattern_recognition |
 | [2022_mun_g9_2](municipal_competition_2022_2022_mun_g9_2.md) | --- SKILL MAPPING --- | 3/10 | calculation | algebraic_manipulation |
 | [2023_mun_y1_2a](municipal_competition_2023_2023_mun_y1_2a.md) | --- SKILL MAPPING --- | 4/10 | proof | modular_arithmetic |
 | [2024_mun_g9_1](municipal_competition_2024_2024_mun_g9_1.md) | --- SKILL MAPPING --- | 2/10 | calculation | pattern_recognition |

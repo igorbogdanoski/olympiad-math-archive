@@ -10668,3 +10668,331 @@ class Task_2022_mun_g9_5(Scene):
 
 ```
 ---
+
+### 🆔 Задача: 2022_mun_g9_6 - Концентрични кружници и тангента
+**📅 Додадено:** 2025-12-27 20:50
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_2022_mun_g9_6(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+class Task_2022_mun_g9_6(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        
+        # R=3, r=1. Scale up.
+        r = 1.5
+        R = 4.5
+        
+        c1 = Circle(radius=R, color=BLUE)
+        c2 = Circle(radius=r, color=RED)
+        O = ORIGIN
+        
+        # Diameter AC. Let C be at angle 0, A at 180.
+        C = RIGHT * R
+        A = LEFT * R
+        
+        # Chord BC tangent to c2.
+        # Tangent point M on c2. Let M be at angle -60 deg? No.
+        # In triangle ABC (right at B), OM is midline parallel to AB.
+        # OM = r = R/3. AB = 2r = 2R/3.
+        # Wait, problem says AB=12, R=18. AB = 2/3 R. 
+        # cos(A) = AB/AC = (2/3 R) / 2R = 1/3.
+        # Angle A = arccos(1/3).
+        
+        angle_A = np.arccos(1/3)
+        # B is on circle c1.
+        # Coordinates of B: R * (cos(theta), sin(theta))? No.
+        # Let's construct B geometrically.
+        # M is intersection of c2 and BC.
+        # OM perp BC.
+        
+        # Let's place M at (r, 0) rotated by some angle.
+        # Actually, let's fix M at (0, -r). Then BC is horizontal line y=-r.
+        # Intersection of y=-r with c1 gives B and C.
+        # But AC must be diameter. If C is on y=-r, A must be opposite.
+        
+        # Let's stick to the logic: OM || AB.
+        # Let A = (-R, 0), C = (R, 0).
+        # B is such that angle B is 90.
+        # M is midpoint of BC. OM = r.
+        # Distance O to BC is r.
+        # Let M = (r, 0) rotated? No.
+        # Let angle MOC = alpha. M = (r cos a, r sin a).
+        # C = (R, 0). Line MC must be perp to OM.
+        # Slope OM = tan a. Slope MC = -cot a.
+        # This is getting complex for Manim.
+        
+        # Simple visual:
+        # Right triangle ABC. AB vertical. BC horizontal.
+        # O on hypotenuse AC.
+        # OM perp BC (so OM vertical).
+        # This fits OM || AB.
+        
+        A = UP * 3 + LEFT * 4
+        B = DOWN * 1 + LEFT * 4
+        C = DOWN * 1 + RIGHT * 5
+        # Adjust to make O midpoint
+        # B=(-4, -1). C=(5, -1). BC length 9.
+        # A=(-4, 3). AB length 4.
+        # Midpoint AC = (0.5, 1). 
+        # O should be origin? No.
+        
+        # Let's just draw the schematic triangle
+        A = UP * 2 + LEFT * 2
+        B = DOWN * 2 + LEFT * 2
+        C = DOWN * 2 + RIGHT * 4
+        
+        tri = Polygon(A, B, C, color=BLACK)
+        
+        M = (B + C) / 2
+        O = (A + C) / 2
+        
+        c_small = Circle(radius=2, color=RED).move_to(O) # Visual r=2 (OM length)
+        c_big = Circle(radius=6, color=BLUE).move_to(O)  # Visual R=6 (OA length)
+        # Note: In this visual, R=sqrt(2^2+3^2) approx 3.6. r=2. Not 3:1 but shows concept.
+        
+        line_OM = Line(O, M, color=RED)
+        line_AB = Line(A, B, color=BLACK)
+        
+        lbl_O = MathTex("O", color=BLACK).next_to(O, UP)
+        lbl_M = MathTex("M", color=BLACK).next_to(M, DOWN)
+        lbl_r = MathTex("r", color=RED).next_to(line_OM, RIGHT)
+        lbl_AB = MathTex("AB=12", color=BLACK).next_to(line_AB, LEFT)
+        
+        ra = RightAngle(Line(A, B), Line(B, C), length=0.4)
+        ra2 = RightAngle(Line(O, M), Line(M, C), length=0.4, color=RED)
+        
+        self.add(tri, line_OM, lbl_O, lbl_M, lbl_r, lbl_AB, ra, ra2)
+        
+        txt = MathTex("OM = \\frac{1}{2}AB = 6", color=BLUE).to_edge(UP)
+        self.play(Write(txt))
+        # --- AI GENERATED CODE END ---
+
+```
+---
+
+### 🆔 Задача: 2022_mun_g9_8 - Тангенти и кружен лак
+**📅 Додадено:** 2025-12-27 20:50
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_2022_mun_g9_8(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+class Task_2022_mun_g9_8(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        
+        r = 2
+        circle = Circle(radius=r, color=BLACK)
+        O = ORIGIN
+        
+        # Tangents angle 45. Central angle 135.
+        # Points A and B at angles 90 +/- 135/2 = 90 +/- 67.5
+        # A = 157.5 deg. B = 22.5 deg.
+        
+        A = np.array([r*np.cos(157.5*DEGREES), r*np.sin(157.5*DEGREES), 0])
+        B = np.array([r*np.cos(22.5*DEGREES), r*np.sin(22.5*DEGREES), 0])
+        
+        # Tangent intersection T
+        # Distance OT = r / cos(67.5)
+        dist_T = r / np.cos(67.5*DEGREES)
+        T = np.array([0, dist_T, 0]) # Wait, angles are symmetric around y-axis
+        
+        # Draw radii
+        rad_A = Line(O, A, color=BLUE)
+        rad_B = Line(O, B, color=BLUE)
+        
+        # Draw tangents
+        tan_A = Line(A, T, color=RED)
+        tan_B = Line(B, T, color=RED)
+        
+        # Arc
+        arc = Arc(radius=r, start_angle=22.5*DEGREES, angle=135*DEGREES, color=GREEN, stroke_width=6)
+        
+        # Labels
+        lbl_45 = MathTex("45^\circ", color=RED).next_to(T, DOWN, buff=0.5)
+        lbl_135 = MathTex("135^\circ", color=BLUE).next_to(O, UP, buff=0.2)
+        lbl_l = MathTex("l", color=GREEN).next_to(arc, UP, buff=0.1)
+        
+        self.add(circle, rad_A, rad_B, tan_A, tan_B, arc)
+        self.add(lbl_45, lbl_135, lbl_l)
+        
+        # Calculation
+        calc = MathTex("l = \\frac{135}{360} 2\\pi(4) = 3\\pi", color=BLACK).to_edge(DOWN)
+        self.play(Write(calc))
+        # --- AI GENERATED CODE END ---
+
+```
+---
+
+### 🆔 Задача: 2022_mun_g9_10 - Растојание меѓу тетиви
+**📅 Додадено:** 2025-12-27 20:50
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_2022_mun_g9_10(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+class Task_2022_mun_g9_10(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        
+        # Circle r=13. Scale: 1 unit = 2 cm.
+        r = 6.5
+        circle = Circle(radius=r, color=BLACK)
+        O = ORIGIN
+        
+        # Chord 1: Length 24 (12 units). Dist d1=5 (2.5 units).
+        # Chord 2: Length 10 (5 units). Dist d2=12 (6 units).
+        # Both above center.
+        
+        y1 = 2.5
+        x1 = np.sqrt(r**2 - y1**2)
+        chord1 = Line(LEFT*x1 + UP*y1, RIGHT*x1 + UP*y1, color=BLUE)
+        
+        y2 = 6
+        x2 = np.sqrt(r**2 - y2**2)
+        chord2 = Line(LEFT*x2 + UP*y2, RIGHT*x2 + UP*y2, color=RED)
+        
+        # Distance line
+        dist_line = Line(UP*y1, UP*y2, color=GREEN, stroke_width=6)
+        lbl_dist = MathTex("d=7", color=GREEN).next_to(dist_line, RIGHT)
+        
+        # Center dot
+        dot = Dot(O, color=BLACK)
+        
+        self.add(circle, chord1, chord2, dist_line, lbl_dist, dot)
+        
+        # Labels
+        l1 = MathTex("24", color=BLUE).next_to(chord1, DOWN)
+        l2 = MathTex("10", color=RED).next_to(chord2, UP)
+        self.add(l1, l2)
+        # --- AI GENERATED CODE END ---
+
+```
+---
+
+### 🆔 Задача: 2022_mun_g9_12 - Поделба на отсечка
+**📅 Додадено:** 2025-12-27 20:57
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_2022_mun_g9_12(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+class Task_2022_mun_g9_12(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        
+        # Segment AB length 16. Scale: 1 unit = 1 cm (visual scale 0.5)
+        scale = 0.5
+        A = LEFT * 4
+        B = RIGHT * 4
+        
+        line = Line(A, B, color=BLACK)
+        
+        # M at 3/8. Total length 8 units. 3/8 * 8 = 3 units from left.
+        M = A + RIGHT * 3
+        # N at 1/2. 4 units from left.
+        N = A + RIGHT * 4
+        
+        # Dots
+        dA = Dot(A, color=BLACK)
+        dB = Dot(B, color=BLACK)
+        dM = Dot(M, color=BLUE)
+        dN = Dot(N, color=RED)
+        
+        # Labels
+        lbl_A = MathTex("A", color=BLACK).next_to(A, DOWN)
+        lbl_B = MathTex("B", color=BLACK).next_to(B, DOWN)
+        lbl_M = MathTex("M", color=BLUE).next_to(M, UP)
+        lbl_N = MathTex("N", color=RED).next_to(N, UP)
+        
+        # Braces
+        b_AM = Brace(Line(A, M), DOWN)
+        t_AM = b_AM.get_text("6")
+        
+        b_AN = Brace(Line(A, N), DOWN, buff=0.5)
+        t_AN = b_AN.get_text("8")
+        
+        b_MN = Brace(Line(M, N), UP)
+        t_MN = b_MN.get_text("?")
+        
+        self.add(line, dA, dB, dM, dN, lbl_A, lbl_B, lbl_M, lbl_N)
+        self.play(Write(b_AM), Write(t_AM))
+        self.play(Write(b_AN), Write(t_AN))
+        self.play(Write(b_MN), Write(t_MN))
+        
+        res = MathTex("MN = 8 - 6 = 2", color=RED).to_edge(UP)
+        self.play(Write(res))
+        # --- AI GENERATED CODE END ---
+
+```
+---
+
+### 🆔 Задача: 2022_mun_g9_14 - Тангентен четириаголник
+**📅 Додадено:** 2025-12-27 20:57
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_2022_mun_g9_14(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+class Task_2022_mun_g9_14(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        
+        # Tangential Quadrilateral
+        # Sides proportional to 2020, 2021, 2022, 2021.
+        # Almost a square/rhombus.
+        
+        # Let's draw a circle and 4 tangents.
+        circle = Circle(radius=2, color=BLUE)
+        
+        # Tangent points angles (approximate to get side ratios)
+        # Equal sides would be 90, 180, 270, 360.
+        # Here sides are very close. Let's just draw a square-ish shape.
+        
+        square = Square(side_length=4, color=BLACK)
+        
+        lbl_AB = MathTex("2020k", color=BLACK).next_to(square, DOWN)
+        lbl_BC = MathTex("2021k", color=BLACK).next_to(square, RIGHT)
+        lbl_CD = MathTex("2022k", color=BLACK).next_to(square, UP)
+        lbl_AD = MathTex("AD=?", color=RED).next_to(square, LEFT)
+        
+        prop = MathTex("AB+CD = BC+AD", color=BLUE).to_corner(UL)
+        
+        self.add(circle, square, lbl_AB, lbl_BC, lbl_CD, lbl_AD)
+        self.play(Write(prop))
+        # --- AI GENERATED CODE END ---
+
+```
+---
