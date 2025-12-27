@@ -2091,3 +2091,57 @@ class Task_2025_mun_y3_4a(Scene):
 
 ```
 ---
+
+### 🆔 Задача: 2025_mun_y4_4a - Агол во триаголник
+**📅 Додадено:** 2025-12-27 01:18
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_2025_mun_y4_4a(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+class Task_2025_mun_y4_4a(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        
+        # Triangle with beta = 30 deg
+        # Sides in AP. Let b=1. Then a+c=2.
+        # Cos rule: 1 = a^2 + c^2 - 2ac cos(30)
+        # 1 = (a+c)^2 - 2ac - ac sqrt(3)
+        # 1 = 4 - ac(2 + sqrt(3))
+        # ac = 3 / (2 + sqrt(3)) = 3(2-sqrt(3)) = 6 - 3sqrt(3) approx 0.8
+        # a, c are roots of x^2 - 2x + 0.8 = 0
+        # D = 4 - 3.2 = 0.8. x = (2 +/- 0.9)/2. a=0.55, c=1.45
+        
+        A = ORIGIN
+        c_len = 1.45
+        a_len = 0.55
+        b_len = 1
+        
+        B = RIGHT * c_len
+        # C is at distance b from A and a from B
+        # Using law of cosines to find coords
+        # b^2 = c^2 + a^2 - 2ac cos(beta) -> beta is at B?
+        # No, beta is opposite b (at B). Wait, standard notation beta is at B.
+        # So angle at B is 30.
+        
+        C = B + np.array([-a_len * np.cos(30*DEGREES), a_len * np.sin(30*DEGREES), 0])
+        
+        tri = Polygon(A, B, C, color=BLACK, stroke_width=4)
+        
+        lbl_B = MathTex("\\beta = 30^\circ", color=RED).next_to(B, DL, buff=0.1)
+        arc = Angle(Line(B, C), Line(B, A), radius=0.4, color=RED)
+        
+        txt = MathTex("a, b, c \\in A.P.", color=BLUE).to_corner(UL)
+        txt2 = MathTex("r = R(1 - \\cos \\beta)", color=BLACK).next_to(txt, DOWN)
+        
+        self.add(tri, lbl_B, arc, txt, txt2)
+        # --- AI GENERATED CODE END ---
+
+```
+---

@@ -1,0 +1,12 @@
+# 🎓 Grade 12
+
+[🏠 Назад кон почеток](../../README.md)
+
+Оваа папка содржи **8** олимписки задачи поделени по области.
+
+| Област | Број на задачи |
+|:---|:---:|
+| [📁 Algebra](algebra/README.md) | 4 |
+| [📁 Combinatorics](combinatorics/README.md) | 2 |
+| [📁 Geometry](geometry/README.md) | 1 |
+| [📁 Number_theory](number_theory/README.md) | 1 |
