@@ -123,28 +123,44 @@ def parse_markdown_problem(file_path):
     title_match = re.search(r'^#\s+(.+)$', content, re.MULTILINE)
     title = title_match.group(1).strip() if title_match else "Задача"
     
-    # Extract Text (Robust regex for headers with emojis/extra text)
-    # Matches ## followed by anything, then "Текст", then end of line
-    text_match = re.search(r'##\s*.*Текст.*?\n(.*?)(?=\n##|\Z)', content, re.DOTALL)
-    problem_text = text_match.group(1).strip() if text_match else "Текстот не е пронајден."
+    # Split content by level 2 headers
+    # We use a lookahead to keep the delimiter or just split and reconstruct
+    # Simpler: split by '\n##'
+    sections = re.split(r'\n##\s+', content)
     
-    # Extract Solution (Robust regex)
-    # Matches ## followed by anything, then "Решение", then end of line
-    sol_match = re.search(r'##\s*.*Решение.*?\n(.*?)(?=\n##|\Z)', content, re.DOTALL)
-    solution = sol_match.group(1).strip() if sol_match else "Решението не е достапно."
+    problem_text = "Текстот не е пронајден."
+    solution = "Решението не е достапно."
     
-    # Clean up <details> and <summary> tags often used in these markdown files
+    for section in sections:
+        # The first line of the section is the header title (e.g., "📝 Текст на задачата")
+        lines = section.split('\n', 1)
+        header = lines[0].lower()
+        body = lines[1].strip() if len(lines) > 1 else ""
+        
+        if "текст" in header:
+            problem_text = body
+        elif "решение" in header:
+            solution = body
+            
+    # Clean up <details> and <summary> tags
     solution = re.sub(r'<details>\s*<summary>.*?</summary>', '', solution, flags=re.DOTALL)
     solution = solution.replace('</details>', '')
     solution = solution.strip()
     
+    # Extract Image (Global search is usually fine for these files)
+    img_match = re.search(r'!\[.*?\]\((.*?)\)', content)
+    image_url = None
+    if img_match:
+        raw_path = img_match.group(1)
+        if "assets/images" in raw_path:
+            filename = os.path.basename(raw_path)
+            image_url = f"../assets/images/{filename}"
+
     # Convert Markdown bold/italic to HTML
     problem_text = problem_text.replace('**', '<b>').replace('**', '</b>')
     solution = solution.replace('**', '<b>').replace('**', '</b>')
     
-    # Convert newlines to <br> but preserve paragraph structure if possible
-    # Simple approach: double newline -> paragraph, single newline -> br
-    # For now, just replacing all newlines with <br> is safer for layout preservation
+    # Convert newlines to <br>
     solution = solution.replace('\n', '<br>')
     problem_text = problem_text.replace('\n', '<br>')
     
@@ -152,6 +168,7 @@ def parse_markdown_problem(file_path):
         "title": title,
         "text": problem_text,
         "solution": solution,
+        "image_url": image_url,
         "id": os.path.basename(file_path).replace('.md', '')
     }
 
@@ -203,6 +220,13 @@ def generate_html(problems_main, problems_extra, is_teacher_version):
             </div>
         """
         
+        if prob.get('image_url'):
+             html += f"""
+             <div style="text-align: center; margin: 20px 0;">
+                <img src="{prob['image_url']}" style="max-width: 100%; max-height: 300px; border-radius: 8px; border: 1px solid #e2e8f0;">
+             </div>
+             """
+        
         if is_teacher_version:
             html += f"""
             <div class="solution-box">
@@ -228,6 +252,13 @@ def generate_html(problems_main, problems_extra, is_teacher_version):
                 {prob['text']}
             </div>
         """
+        
+        if prob.get('image_url'):
+             html += f"""
+             <div style="text-align: center; margin: 20px 0;">
+                <img src="{prob['image_url']}" style="max-width: 100%; max-height: 300px; border-radius: 8px; border: 1px solid #e2e8f0;">
+             </div>
+             """
         
         if is_teacher_version:
             html += f"""
