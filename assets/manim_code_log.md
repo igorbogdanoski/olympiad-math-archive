@@ -8550,3 +8550,64 @@ class Task_2023_mun_y1_2b(Scene):
 
 ```
 ---
+
+### 🆔 Задача: 2023_mun_y1_4ab - Паралелни пресеци во трапез
+**📅 Додадено:** 2025-12-27 18:39
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_2023_mun_y1_4ab(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+        self.camera.background_color = WHITE
+        
+        # Trapezoid ABCD
+        # CD = 4 (top), AB = 13 (bottom). Height = 3.
+        # Centered horizontally.
+        
+        A = DL * 1.5 + LEFT * 2
+        B = DR * 1.5 + RIGHT * 2.5
+        D = UL * 1.5 + LEFT * 0.5
+        C = UR * 1.5 + RIGHT * 0.5
+        
+        trap = Polygon(A, B, C, D, color=BLACK, stroke_width=4)
+        
+        # Dividing points on AD and BC
+        # P1, P2 on AD. Q1, Q2 on BC.
+        P1 = D + (A-D)/3
+        P2 = D + 2*(A-D)/3
+        Q1 = C + (B-C)/3
+        Q2 = C + 2*(B-C)/3
+        
+        line_x = Line(P1, Q1, color=BLUE)
+        line_y = Line(P2, Q2, color=RED)
+        
+        # Labels
+        lbl_4 = MathTex("4", color=BLACK).next_to(Line(D, C), UP)
+        lbl_13 = MathTex("13", color=BLACK).next_to(Line(A, B), DOWN)
+        lbl_x = MathTex("x=7", color=BLUE).next_to(line_x, UP, buff=0.1)
+        lbl_y = MathTex("y=10", color=RED).next_to(line_y, UP, buff=0.1)
+        
+        # Helper lines for similarity method (parallelogram)
+        # Line through D parallel to BC
+        # Vector BC
+        vec_BC = C - B
+        # Point E on AB such that DE || BC
+        # E = A + ... no, E is on AB. DE vector is parallel to BC?
+        # No, draw line parallel to BC passing through D.
+        # Intersection with AB is E.
+        # Let's just draw it visually.
+        E = A + RIGHT * 4 # approx
+        line_DE = DashedLine(D, A + RIGHT*4.5, color=GRAY) # Visual fix
+        
+        self.add(trap, line_x, line_y)
+        self.add(lbl_4, lbl_13, lbl_x, lbl_y)
+        # --- AI GENERATED CODE END ---
+
+```
+---

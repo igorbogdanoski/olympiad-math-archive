@@ -2,7 +2,7 @@
 
 [⬅️ Назад кон прегледот](../README.md)
 
-**Вкупно задачи:** 81
+**Вкупно задачи:** 84
 
 | ID | Наслов | Тежина | Тип | Клучна Вештина |
 |:---|:---|:---:|:---|:---|
@@ -42,6 +42,9 @@
 | [cnt92_v2_29](cnt92_olympiad_var2_cnt92_v2_29.md) | --- GEOMETRY SKILLS --- | 5/10 | calculation | logic |
 | [cnt92_v2_30](cnt92_olympiad_var2_cnt92_v2_30.md) | --- SKILL MAPPING --- | 5/10 | calculation | logic |
 | [2023_mun_g9_1](municipal_competition_2023_2023_mun_g9_1.md) | --- SKILL MAPPING --- | 3/10 | proof | algebraic_manipulation |
+| [2023_mun_y1_1a](municipal_competition_2023_2023_mun_y1_1a.md) | --- SKILL MAPPING --- | 3/10 | word_problem | working_backwards |
+| [2023_mun_y1_1b](municipal_competition_2023_2023_mun_y1_1b.md) | --- SKILL MAPPING --- | 3/10 | word_problem | algebraic_manipulation |
+| [2023_mun_y1_3ab](municipal_competition_2023_2023_mun_y1_3ab.md) | --- SKILL MAPPING --- | 4/10 | calculation | algebraic_manipulation |
 | [2024_mun_g9_3](municipal_competition_2024_2024_mun_g9_3.md) | --- SKILL MAPPING --- | 4/10 | word_problem | algebraic_manipulation |
 | [2024_mun_y1_1a](municipal_competition_2024_2024_mun_y1_1a.md) | --- SKILL MAPPING --- | 3/10 | calculation | functions |
 | [2024_mun_y1_1b](municipal_competition_2024_2024_mun_y1_1b.md) | --- SKILL MAPPING --- | 3/10 | calculation | algebraic_manipulation |

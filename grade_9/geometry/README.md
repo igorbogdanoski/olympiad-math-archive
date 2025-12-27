@@ -2,7 +2,7 @@
 
 [⬅️ Назад кон прегледот](../README.md)
 
-**Вкупно задачи:** 86
+**Вкупно задачи:** 87
 
 | ID | Наслов | Тежина | Тип | Клучна Вештина |
 |:---|:---|:---:|:---|:---|
@@ -42,6 +42,7 @@
 | [geo_two_circles_incenter](math_problem_image_geo_two_circles_incenter.md) |  | 6/10 | General | <main_tool> # e.g., angle_chasing, similarity, cyclic_quads |
 | [2023_mun_g9_2](municipal_competition_2023_2023_mun_g9_2.md) | --- GEOMETRY SKILLS --- | 4/10 | calculation | visual_reasoning |
 | [2023_mun_g9_4](municipal_competition_2023_2023_mun_g9_4.md) | --- GEOMETRY SKILLS --- | 4/10 | calculation | algebraic_manipulation |
+| [2023_mun_y1_4ab](municipal_competition_2023_2023_mun_y1_4ab.md) | --- GEOMETRY SKILLS --- | 3/10 | calculation | similarity |
 | [2024_mun_g9_2](municipal_competition_2024_2024_mun_g9_2.md) | --- GEOMETRY SKILLS --- | 4/10 | calculation | coordinate_geometry |
 | [2024_mun_g9_4](municipal_competition_2024_2024_mun_g9_4.md) | --- GEOMETRY SKILLS --- | 4/10 | calculation | algebraic_manipulation |
 | [2024_mun_y1_4a](municipal_competition_2024_2024_mun_y1_4a.md) | --- GEOMETRY SKILLS --- | 4/10 | calculation | pythagorean_theorem |
