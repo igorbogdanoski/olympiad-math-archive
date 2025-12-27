@@ -1,0 +1,45 @@
+{
+    "algebra": {
+        "equation": ["equations", "algebra"],
+        "inequality": ["inequalities", "algebra"],
+        "polynomial": ["polynomials", "algebra"],
+        "system": ["system_of_equations", "algebra"],
+        "function": ["functions", "analysis"],
+        "logarithm": ["logarithms", "algebra"],
+        "sequence": ["sequences", "algebra"],
+        "series": ["series", "analysis"],
+        "complex": ["complex_numbers", "algebra"],
+        "vieta": ["vieta_formulas", "polynomials"]
+    },
+    "geometry": {
+        "triangle": ["triangle_geometry", "geometry"],
+        "circle": ["circle_geometry", "geometry"],
+        "angle": ["angle_chasing", "geometry"],
+        "area": ["area", "geometry"],
+        "volume": ["volume", "stereometry"],
+        "vector": ["vectors", "geometry"],
+        "congruence": ["congruence", "geometry"],
+        "similarity": ["similarity", "geometry"],
+        "trigonometry": ["trigonometry", "geometry"]
+    },
+    "number_theory": {
+        "prime": ["prime_numbers", "number_theory"],
+        "divisibility": ["divisibility", "number_theory"],
+        "modulo": ["modular_arithmetic", "number_theory"],
+        "gcd": ["gcd_lcm", "number_theory"],
+        "integer": ["integers", "number_theory"]
+    },
+    "combinatorics": {
+        "permutation": ["permutations", "combinatorics"],
+        "combination": ["combinations", "combinatorics"],
+        "probability": ["probability", "combinatorics"],
+        "graph": ["graph_theory", "combinatorics"],
+        "coloring": ["coloring", "combinatorics"],
+        "pigeonhole": ["pigeonhole_principle", "combinatorics"]
+    },
+    "logic": {
+        "prove": ["logic", "proof"],
+        "induction": ["induction", "logic"],
+        "contradiction": ["contradiction", "logic"]
+    }
+}
