@@ -51,6 +51,12 @@ def parse_problem(file_path):
     # 4. Тргни повеќекратни празни редови
     body = re.sub(r'\n{3,}', '\n\n', body).strip()
     
+    # 5. Конверзија на LaTeX delimiters за Streamlit
+    # \[ ... \] -> $$ ... $$
+    body = re.sub(r'\\\[(.*?)\\\]', r'$$\1$$', body, flags=re.DOTALL)
+    # \( ... \) -> $ ... $
+    body = re.sub(r'\\\((.*?)\\\)', r'$\1$', body, flags=re.DOTALL)
+    
     return meta, body, file_path
     
     # Поправање на патеки за слики за да работат во Streamlit
