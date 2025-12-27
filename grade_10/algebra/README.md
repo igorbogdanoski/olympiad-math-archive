@@ -2,17 +2,18 @@
 
 [⬅️ Назад кон прегледот](../README.md)
 
-**Вкупно задачи:** 29
+**Вкупно задачи:** 30
 
 | ID | Наслов | Тежина | Тип | Клучна Вештина |
 |:---|:---|:---:|:---|:---|
 | [2022_mun_y2_12a](municipal_competition_2022_2022_mun_y2_12a.md) | --- SKILL MAPPING --- | 4/10 | calculation | algebraic_identities |
-| [2022_mun_y2_12b](municipal_competition_2022_2022_mun_y2_12b.md) | --- SKILL MAPPING --- | 3/10 | calculation | functions |
+| [2022_mun_y2_12b](municipal_competition_2022_2022_mun_y2_12b.md) | --- SKILL MAPPING --- | 5/10 | calculation | algebraic_substitution |
 | [2022_mun_y2_13a](municipal_competition_2022_2022_mun_y2_13a.md) | --- SKILL MAPPING --- | 4/10 | calculation | algebraic_substitution |
+| [2022_mun_y2_13b](municipal_competition_2022_2022_mun_y2_13b.md) | --- SKILL MAPPING --- | 4/10 | calculation | algebraic_substitution |
 | [2022_mun_y2_14a](municipal_competition_2022_2022_mun_y2_14a.md) | --- SKILL MAPPING --- | 3/10 | calculation | functions |
 | [2022_mun_y2_14b](municipal_competition_2022_2022_mun_y2_14b.md) | --- SKILL MAPPING --- | 3/10 | calculation | modeling |
 | [2022_mun_y2_15a](municipal_competition_2022_2022_mun_y2_15a.md) | --- SKILL MAPPING --- | 5/10 | calculation | logarithms |
-| [2022_mun_y2_15b](municipal_competition_2022_2022_mun_y2_15b.md) | --- SKILL MAPPING --- | 4/10 | calculation | pattern_recognition |
+| [2022_mun_y2_15b](municipal_competition_2022_2022_mun_y2_15b.md) | --- SKILL MAPPING --- | 5/10 | calculation | algebraic_identities |
 | [2022_mun_y2_16a](municipal_competition_2022_2022_mun_y2_16a.md) | --- SKILL MAPPING --- | 4/10 | calculation | case_analysis |
 | [2022_mun_y2_17a](municipal_competition_2022_2022_mun_y2_17a.md) | --- SKILL MAPPING --- | 5/10 | calculation | trigonometric_equations |
 | [2022_mun_y2_17b](municipal_competition_2022_2022_mun_y2_17b.md) | --- SKILL MAPPING --- | 5/10 | calculation | completing_the_square |

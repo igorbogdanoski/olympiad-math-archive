@@ -12939,3 +12939,45 @@ class Task_2022_mun_y3_5b(Scene):
 
 ```
 ---
+
+### 🆔 Задача: 2022_mun_y2_11b - Периметар на правоаголен триаголник
+**📅 Додадено:** 2025-12-27 23:46
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_2022_mun_y2_11b(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+        # Coordinates
+        C = ORIGIN
+        A = [2, 0, 0]
+        B = [0, 1.5, 0]
+        
+        # Triangle
+        tri = Polygon(C, A, B, color=BLUE, stroke_width=4)
+        right_angle = RightAngle(Line(A,C), Line(C,B), length=0.3, color=BLUE)
+        
+        # Labels
+        labels = VGroup(
+            MathTex('C').next_to(C, DL),
+            MathTex('A').next_to(A, DR),
+            MathTex('B').next_to(B, UP),
+            MathTex('b=2').next_to(Line(C,A), DOWN),
+            MathTex('a=1.5').next_to(Line(C,B), LEFT),
+            MathTex('c=2.5').next_to(Line(A,B), UR)
+        ).set_color(BLACK)
+        
+        # Angle alpha
+        angle = Angle(Line(A,C), Line(A,B), radius=0.5, color=RED)
+        angle_label = MathTex('\\alpha').next_to(angle, LEFT, buff=0.1).set_color(RED)
+
+        self.add(tri, right_angle, labels, angle, angle_label)
+        # --- AI GENERATED CODE END ---
+
+```
+---
