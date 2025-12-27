@@ -11271,3 +11271,46 @@ class Task_2022_mun_y1_6a(Scene):
 
 ```
 ---
+
+### 🆔 Задача: 2022_mun_y1_6a - Колинеарни квадрати
+**📅 Додадено:** 2025-12-27 21:33
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_2022_mun_y1_6a(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+        # Scale factor
+        s = 0.5
+        x_val = 9 * s
+        y_val = 6 * s
+        z_val = 4 * s
+        
+        # Squares
+        sq1 = Square(side_length=x_val).move_to([0, x_val/2, 0])
+        sq2 = Square(side_length=y_val).next_to(sq1, RIGHT, buff=0, aligned_edge=DOWN)
+        sq3 = Square(side_length=z_val).next_to(sq2, RIGHT, buff=0, aligned_edge=DOWN)
+        
+        # Points
+        X = sq1.get_corner(UL)
+        Y = sq2.get_corner(UL)
+        Z = sq3.get_corner(UL)
+        
+        # Line
+        line = Line(start=X + LEFT*0.5, end=Z + RIGHT*0.5, color=RED)
+        
+        # Labels
+        lbl_x = MathTex('x').next_to(sq1, DOWN)
+        lbl_6 = MathTex('6').next_to(sq2, DOWN)
+        lbl_4 = MathTex('4').next_to(sq3, DOWN)
+        
+        self.add(sq1, sq2, sq3, line, lbl_x, lbl_6, lbl_4, Dot(X), Dot(Y), Dot(Z))
+        # --- AI GENERATED CODE END ---
+
+```
+---

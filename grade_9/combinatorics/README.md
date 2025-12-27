@@ -2,12 +2,13 @@
 
 [⬅️ Назад кон прегледот](../README.md)
 
-**Вкупно задачи:** 6
+**Вкупно задачи:** 7
 
 | ID | Наслов | Тежина | Тип | Клучна Вештина |
 |:---|:---|:---:|:---|:---|
 | [13](cnt92_olympiad_13.md) | --- SKILL MAPPING --- | 3/10 | logic_puzzle | inclusion_exclusion_principle |
 | [cnt92_v2_13](cnt92_olympiad_var2_cnt92_v2_13.md) | --- GEOMETRY SKILLS --- | 3/10 | logic_puzzle | logic |
+| [2022_mun_y1_8a](municipal_competition_2022_2022_mun_y1_8a.md) | --- SKILL MAPPING --- | 4/10 | calculation | counting |
 | [2023_mun_y1_2b](municipal_competition_2023_2023_mun_y1_2b.md) | --- GEOMETRY SKILLS --- | 4/10 | logic_puzzle | logic |
 | [2024_mun_y1_2ab](municipal_competition_2024_2024_mun_y1_2ab.md) | --- SKILL MAPPING --- | 3/10 | logic_puzzle | logic |
 | [L2_2025_04](numerus_l2_2024_2025_L2_2025_04.md) |  | 5/10 | General | counting # e.g., symmetry, invariants, telescoping |
