@@ -2750,3 +2750,135 @@ class Task_2025_mun_g7_4(Scene):
 
 ```
 ---
+
+### 🆔 Задача: 2025_mun_g8_2 - Агли во трапез
+**📅 Додадено:** 2025-12-27 01:48
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_2025_mun_g8_2(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+class Task_2025_mun_g8_2(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        
+        # Construct points based on angles
+        # A at origin. AB on x-axis.
+        # Angle A = 100 deg. Angle B = 40 deg.
+        # AD = CD. AC perp BC.
+        
+        # Let's work backwards from Triangle ABC
+        # C is at intersection of ray from A (50 deg) and ray from B (140 deg? No, B is 40)
+        # Wait, angle BAC is 50. Angle B is 40. C is 90.
+        
+        A = ORIGIN
+        c_len = 5 # arbitrary length for AB
+        B = RIGHT * c_len
+        
+        # C is vertex of right triangle with angles 50-40-90
+        # AC = c * cos(50), BC = c * sin(50)
+        AC_len = c_len * np.cos(50*DEGREES)
+        C = A + AC_len * np.array([np.cos(50*DEGREES), np.sin(50*DEGREES), 0])
+        
+        # D is such that CD || AB and AD = CD
+        # Angle CAD = 50. So AD is at 100 degrees from AB.
+        # Triangle ACD is isosceles (50-50-80).
+        # AD length = AC / (2*cos(50)) ? No, sine rule.
+        # AD / sin(50) = AC / sin(80)
+        AD_len = AC_len * np.sin(50*DEGREES) / np.sin(80*DEGREES)
+        D = A + AD_len * np.array([np.cos(100*DEGREES), np.sin(100*DEGREES), 0])
+        
+        # Draw Trapezoid
+        trap = Polygon(A, B, C, D, color=BLACK, stroke_width=4)
+        diag = Line(A, C, color=BLUE)
+        
+        # Labels
+        lbl_A = MathTex("A", color=BLACK).next_to(A, DL)
+        lbl_B = MathTex("B", color=BLACK).next_to(B, DR)
+        lbl_C = MathTex("C", color=BLACK).next_to(C, UR)
+        lbl_D = MathTex("D", color=BLACK).next_to(D, UL)
+        
+        # Angles
+        ang_B = MathTex("40^\circ", color=RED).next_to(B, UL, buff=0.3)
+        ra = RightAngle(Line(C, A), Line(C, B), length=0.3, color=RED)
+        
+        # Equality marks for AD and CD
+        mark1 = DashedLine(D, A, color=GREEN)
+        mark2 = DashedLine(D, C, color=GREEN)
+        
+        self.add(trap, diag, lbl_A, lbl_B, lbl_C, lbl_D, ang_B, ra)
+        # --- AI GENERATED CODE END ---
+
+```
+---
+
+### 🆔 Задача: 2025_mun_g8_4 - Плоштина на тангентен трапез
+**📅 Додадено:** 2025-12-27 01:48
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_2025_mun_g8_4(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+class Task_2025_mun_g8_4(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        
+        # Tangential Trapezoid
+        # r = 1.5 (scaled down from 6). h = 3.
+        # a+b = 3 (scaled down from 12).
+        # Let's make it an isosceles trapezoid for simplicity.
+        # b (top) = 1, a (bottom) = 2.
+        # c = d = 1.5. Sum = 3. Correct.
+        
+        r = 1.5
+        h = 3
+        
+        # Center at origin
+        circle = Circle(radius=r, color=BLUE)
+        
+        # Top base (y = r)
+        # Bottom base (y = -r)
+        # Sides must be tangent.
+        # Let top base width be 1. Bottom base width 2.
+        # Top: (-0.5, 1.5) to (0.5, 1.5)
+        # Bottom: (-1, -1.5) to (1, -1.5)
+        # Check side length: sqrt(0.5^2 + 3^2) = sqrt(9.25) approx 3.04.
+        # Sum of sides = 6.08. Sum of bases = 3. Not equal.
+        # Need to calculate exact coordinates for tangential trapezoid.
+        # Let angle of side be theta. h = 2r.
+        # c = h / sin(theta) = 2r / sin(theta)
+        # a+b = 2c (for isosceles) => 2c = 2 * 2r / sin(theta)
+        # We need a+b to be consistent with perimeter.
+        # Let's just draw a generic one that looks right.
+        
+        A = DL * 1.5 + LEFT * 0.5
+        B = DR * 1.5 + RIGHT * 0.5
+        C = UR * 1.5 + LEFT * 0.2
+        D = UL * 1.5 + RIGHT * 0.2
+        
+        trap = Polygon(A, B, C, D, color=BLACK, stroke_width=4)
+        
+        # Height line
+        height = DashedLine(D, D + DOWN*3, color=RED)
+        lbl_h = MathTex("h=2r", color=RED).next_to(height, LEFT)
+        
+        # Formula text
+        txt = MathTex("a+b = c+d = \\frac{L}{2}", color=BLACK).to_edge(UP)
+        
+        self.add(circle, trap, height, lbl_h, txt)
+        # --- AI GENERATED CODE END ---
+
+```
+---

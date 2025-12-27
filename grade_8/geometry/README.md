@@ -2,7 +2,7 @@
 
 [⬅️ Назад кон прегледот](../README.md)
 
-**Вкупно задачи:** 29
+**Вкупно задачи:** 31
 
 | ID | Наслов | Тежина | Тип | Клучна Вештина |
 |:---|:---|:---:|:---|:---|
@@ -20,6 +20,8 @@
 | [geo_rect_shade_01](geo_mentor_example_geo_rect_shade_01.md) | --- GEOMETRY SKILLS --- | 3/10 | General | <main_tool> # e.g., angle_chasing, similarity, cyclic_quads |
 | [geom_angle_overlap_05](matematiskop_3_762_geom_angle_overlap_05.md) | --- GEOMETRY SKILLS --- | 5/10 | General | <main_tool> # e.g., angle_chasing, similarity, cyclic_quads |
 | [geo_quad_bisectors](math_problem_image_geo_quad_bisectors.md) | --- GEOMETRY SKILLS --- | 5/10 | General | <main_tool> # e.g., angle_chasing, similarity, cyclic_quads |
+| [2025_mun_g8_2](municipal_competition_2025_2025_mun_g8_2.md) | --- GEOMETRY SKILLS --- | 3/10 | calculation | logic |
+| [2025_mun_g8_4](municipal_competition_2025_2025_mun_g8_4.md) | --- GEOMETRY SKILLS --- | 3/10 | calculation | logic |
 | [4287](numerus_4287_4287.md) | --- GEOMETRY SKILLS --- | 4/10 | General | <main_tool> # e.g., angle_chasing, similarity, cyclic_quads |
 | [4331](numerus_4331_4331.md) | --- GEOMETRY SKILLS --- | 6/10 | General | <main_tool> # e.g., angle_chasing, similarity, cyclic_quads |
 | [4332](numerus_4332_4332.md) | --- GEOMETRY SKILLS --- | 4/10 | General | <main_tool> # e.g., angle_chasing, similarity, cyclic_quads |
