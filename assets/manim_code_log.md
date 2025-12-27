@@ -6832,3 +6832,136 @@ class Task_4427(Scene):
         self.add(lbl_A, lbl_B, lbl_C, lbl_D, lbl_E, lbl_h)
 ```
 
+
+### 🆔 Задача: 2024_mun_g4_2 - Должини на отсечки
+**📅 Додадено:** 2025-12-27 12:39
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_2024_mun_g4_2(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+        self.camera.background_color = WHITE
+        
+        # Initial state
+        # CD is x (let x=2 units visually)
+        # AB is x + 2 (let 2cm = 0.6 units visually)
+        x_len = 2
+        diff = 0.6
+        
+        # Draw CD
+        CD_start = UP * 2 + LEFT * 3
+        CD_line = Line(CD_start, CD_start + RIGHT * x_len, color=BLUE, stroke_width=6)
+        CD_label = MathTex("CD", color=BLUE).next_to(CD_line, LEFT)
+        
+        # Draw AB
+        AB_start = UP * 1 + LEFT * 3
+        AB_line = Line(AB_start, AB_start + RIGHT * (x_len + diff), color=RED, stroke_width=6)
+        AB_label = MathTex("AB", color=RED).next_to(AB_line, LEFT)
+        
+        # Brace for difference
+        brace_diff = Brace(Line(AB_start + RIGHT*x_len, AB_start + RIGHT*(x_len+diff)), DOWN)
+        txt_diff = brace_diff.get_text("2")
+        
+        self.add(CD_line, CD_label, AB_line, AB_label, brace_diff, txt_diff)
+        self.wait(1)
+        
+        # Transformation
+        # CD becomes 3x
+        CD_new = Line(CD_start, CD_start + RIGHT * (3*x_len), color=BLUE, stroke_width=6).shift(DOWN*3)
+        CD_new_lbl = MathTex("3 \\cdot CD", color=BLUE).next_to(CD_new, LEFT)
+        
+        # AB becomes AB + 10. Visually 10cm = 3 units (since 2cm=0.6)
+        add_len = 3
+        AB_new = Line(AB_start, AB_start + RIGHT * (x_len + diff + add_len), color=RED, stroke_width=6).shift(DOWN*3)
+        AB_new_lbl = MathTex("AB + 10", color=RED).next_to(AB_new, LEFT)
+        
+        # Show equality
+        self.play(TransformFromCopy(CD_line, CD_new), Write(CD_new_lbl))
+        self.play(TransformFromCopy(AB_line, AB_new), Write(AB_new_lbl))
+        
+        # Braces for equation 3x = x + 12
+        # Visualizing 2x = 12
+        brace_eq = Brace(Line(CD_start + RIGHT*x_len, CD_start + RIGHT*(3*x_len)).shift(DOWN*3), UP)
+        txt_eq = brace_eq.get_text("2x = 12")
+        
+        self.play(Write(brace_eq), Write(txt_eq))
+        # --- AI GENERATED CODE END ---
+
+```
+---
+
+### 🆔 Задача: 2024_mun_g4_4 - Броење триаголници
+**📅 Додадено:** 2025-12-27 12:39
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_2024_mun_g4_4(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+        self.camera.background_color = WHITE
+        
+        # Vertices
+        A = DL * 2
+        B = DR * 2
+        C = UP * 2
+        
+        # Points on sides (approximate medians)
+        D = (A + B) / 2 + RIGHT * 0.5 # Not exactly mid to avoid symmetry confusion
+        E = (B + C) / 2
+        F = (A + C) / 2
+        
+        # Intersection G (Centroid-ish)
+        G = (A + B + C) / 3
+        
+        # Draw lines
+        lines = VGroup(
+            Line(A, B), Line(B, C), Line(C, A), # Triangle ABC
+            Line(C, D), Line(A, E), Line(B, F)  # Cevians
+        ).set_color(BLACK).set_stroke(width=2)
+        
+        # Labels
+        labels = VGroup(
+            MathTex("A", color=BLACK).next_to(A, DL),
+            MathTex("B", color=BLACK).next_to(B, DR),
+            MathTex("C", color=BLACK).next_to(C, UP),
+            MathTex("D", color=BLACK).next_to(D, DOWN),
+            MathTex("E", color=BLACK).next_to(E, RIGHT),
+            MathTex("F", color=BLACK).next_to(F, LEFT),
+            MathTex("G", color=BLACK).next_to(G, UP, buff=0.1)
+        )
+        
+        self.add(lines, labels)
+        
+        # Highlight examples
+        # 1. Small triangle
+        t1 = Polygon(A, G, F, color=RED, fill_opacity=0.3)
+        self.play(FadeIn(t1))
+        self.wait(0.5)
+        self.play(FadeOut(t1))
+        
+        # 2. Medium triangle
+        t2 = Polygon(A, B, E, color=BLUE, fill_opacity=0.3)
+        self.play(FadeIn(t2))
+        self.wait(0.5)
+        self.play(FadeOut(t2))
+        
+        # 3. Large triangle
+        t3 = Polygon(A, B, C, color=GREEN, fill_opacity=0.3)
+        self.play(FadeIn(t3))
+        self.wait(0.5)
+        self.play(FadeOut(t3))
+        # --- AI GENERATED CODE END ---
+
+```
+---
