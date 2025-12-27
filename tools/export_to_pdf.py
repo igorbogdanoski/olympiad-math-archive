@@ -1,10 +1,35 @@
 import subprocess
 import os
 import sys
+import re
 
 # --- КОНФИГУРАЦИЈА ---
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 ARCHIVE_ROOT = os.path.abspath(os.path.join(SCRIPT_DIR, "../"))
+
+def create_clean_temp_md(file_path):
+    """
+    Creates a temporary markdown file with the Manim Code block removed.
+    Returns the path to the temporary file.
+    """
+    with open(file_path, 'r', encoding='utf-8') as f:
+        content = f.read()
+    
+    # Regex to remove the Manim Code blockquote
+    # Matches lines starting with "> **👨‍💻 Manim Code" and subsequent lines starting with ">"
+    pattern = r'> \*\*👨‍💻 Manim Code.*(\n> .*)*'
+    clean_content = re.sub(pattern, '', content)
+    
+    # Create temp file in the same directory
+    dir_name = os.path.dirname(file_path)
+    base_name = os.path.basename(file_path)
+    temp_name = f"temp_{base_name}"
+    temp_path = os.path.join(dir_name, temp_name)
+    
+    with open(temp_path, 'w', encoding='utf-8') as f:
+        f.write(clean_content)
+        
+    return temp_path
 
 def export_to_pdf(file_path):
     """
@@ -14,12 +39,16 @@ def export_to_pdf(file_path):
         print(f"❌ ГРЕШКА: Фајлот не постои: {file_path}")
         return
 
+    # Create a clean temporary file
+    temp_file_path = create_clean_temp_md(file_path)
+    
     pdf_file_path = file_path.replace(".md", ".pdf")
 
     # Determine directories
     file_dir = os.path.dirname(file_path)
-    file_name = os.path.basename(file_path)
-    pdf_name = os.path.basename(pdf_file_path).replace(".pdf", "_v2.pdf")
+    # Use the temp file name for input
+    file_name = os.path.basename(temp_file_path) 
+    pdf_name = os.path.basename(pdf_file_path).replace(".pdf", "_v3.pdf") # Version 3
 
     # --- КЛУЧНИОТ ДЕЛ ЗА КИРИЛИЦА ---
     # Користиме 'xelatex' и му задаваме фонт што има кирилица (Times New Roman).
@@ -50,7 +79,7 @@ def export_to_pdf(file_path):
             print(result.stderr)
         
         print(f"✅ УСПЕХ! PDF фајлот е креиран:")
-        print(f"   📄 {pdf_file_path}")
+        print(f"   📄 {os.path.join(file_dir, pdf_name)}")
         
     except FileNotFoundError:
         print("❌ ГРЕШКА: Pandoc не е инсталиран.")
@@ -61,6 +90,10 @@ def export_to_pdf(file_path):
         print("\n💡 СОВЕТ: Ако грешката е за фонтови, пробај да генерираш Word (.docx) наместо PDF.")
     except Exception as e:
         print(f"❌ Неочекувана грешка: {e}")
+    finally:
+        # Cleanup temp file
+        if os.path.exists(temp_file_path):
+            os.remove(temp_file_path)
 
 # --- MAIN ---
 if __name__ == "__main__":
