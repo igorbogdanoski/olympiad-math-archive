@@ -10174,3 +10174,192 @@ class Task_2022_mun_g6_11(Scene):
 
 ```
 ---
+
+### 🆔 Задача: 2022_mun_g8_2 - Квадрат и триаголник
+**📅 Додадено:** 2025-12-27 20:36
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_2022_mun_g8_2(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+class Task_2022_mun_g8_2(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        
+        # Square area 16 -> side 4
+        # Triangle base 4, area 16 -> height 8
+        # Scale: 1 unit = 2 cm
+        
+        sq = Square(side_length=2, color=BLUE, fill_opacity=0.2)
+        lbl_sq = MathTex("P=16", color=BLUE).move_to(sq.get_center())
+        side_sq = MathTex("a=4", color=BLACK).next_to(sq, DOWN)
+        
+        tri = Polygon(LEFT, RIGHT, UP*4, color=RED, fill_opacity=0.2).shift(RIGHT*3 + DOWN*1)
+        lbl_tri = MathTex("P=16", color=RED).move_to(tri.get_center() + DOWN*0.5)
+        base_tri = MathTex("b=4", color=BLACK).next_to(tri, DOWN)
+        
+        # Height line
+        h_line = DashedLine(tri.get_vertices()[2], tri.get_bottom(), color=BLACK)
+        lbl_h = MathTex("h=?", color=BLACK).next_to(h_line, RIGHT)
+        
+        self.add(sq, lbl_sq, side_sq)
+        self.wait(1)
+        self.play(FadeIn(tri), Write(lbl_tri), Write(base_tri))
+        self.play(Create(h_line), Write(lbl_h))
+        
+        # Calculation
+        calc = MathTex("\\frac{4 \\cdot h}{2} = 16 \\implies h=8", color=BLACK).to_edge(UP)
+        self.play(Write(calc))
+        # --- AI GENERATED CODE END ---
+
+```
+---
+
+### 🆔 Задача: 2022_mun_g8_4 - Должина на отсечка
+**📅 Додадено:** 2025-12-27 20:36
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_2022_mun_g8_4(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+class Task_2022_mun_g8_4(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        
+        # Segment AB length 24. Scale: 1 unit = 3 cm.
+        # AB = 8 units.
+        A = LEFT * 4
+        B = RIGHT * 4
+        
+        line = Line(A, B, color=BLACK)
+        
+        # M at 1/4 (2 units from A)
+        M = A + RIGHT * 2
+        # N at 7/8 (7 units from A)
+        N = A + RIGHT * 7
+        
+        # Dots
+        dA = Dot(A, color=BLACK)
+        dB = Dot(B, color=BLACK)
+        dM = Dot(M, color=BLUE)
+        dN = Dot(N, color=RED)
+        
+        # Labels
+        lbl_A = MathTex("A", color=BLACK).next_to(A, DOWN)
+        lbl_B = MathTex("B", color=BLACK).next_to(B, DOWN)
+        lbl_M = MathTex("M", color=BLUE).next_to(M, UP)
+        lbl_N = MathTex("N", color=RED).next_to(N, UP)
+        
+        # Braces
+        b_AM = Brace(Line(A, M), DOWN)
+        t_AM = b_AM.get_text("6 cm")
+        
+        b_AN = Brace(Line(A, N), DOWN, buff=0.5)
+        t_AN = b_AN.get_text("21 cm")
+        
+        b_MN = Brace(Line(M, N), UP)
+        t_MN = b_MN.get_text("?")
+        
+        self.add(line, dA, dB, dM, dN, lbl_A, lbl_B, lbl_M, lbl_N)
+        self.play(Write(b_AM), Write(t_AM))
+        self.play(Write(b_AN), Write(t_AN))
+        self.play(Write(b_MN), Write(t_MN))
+        
+        res = MathTex("MN = 21 - 6 = 15cm = 150mm", color=RED).to_edge(UP)
+        self.play(Write(res))
+        # --- AI GENERATED CODE END ---
+
+```
+---
+
+### 🆔 Задача: 2022_mun_g8_5 - Агли со прави
+**📅 Додадено:** 2025-12-27 20:36
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_2022_mun_g8_5(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+class Task_2022_mun_g8_5(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        
+        # Construct lines AD and MN intersecting at B
+        # Angle ABM = 46 deg.
+        # Let B be origin.
+        B = ORIGIN
+        
+        # Line AD (horizontal)
+        A = LEFT * 3
+        D = RIGHT * 4
+        line_AD = Line(A, D, color=BLACK)
+        
+        # Line MN (rotated by 46 deg)
+        # M is in upper left (to make angle ABM acute? No, A is left)
+        # Angle MBA = 46? No, ABM = 46.
+        # M is at angle 180-46 = 134? Or just 46 from A?
+        # Let's place M such that AB=BM.
+        # A is at (-3, 0). B is (0,0). AB=3.
+        # M should be at distance 3 from B.
+        # Angle BAM = 67. Angle BMA = 67.
+        # Angle ABM = 180 - 134 = 46.
+        # So M is at angle 180-46 = 134 degrees from positive x-axis? No.
+        # A is on negative x-axis. So angle from BA is 46.
+        # M is at (3*cos(134), 3*sin(134)).
+        
+        M = np.array([3 * np.cos(134*DEGREES), 3 * np.sin(134*DEGREES), 0])
+        N = -M * 1.5 # Extend line to N
+        
+        line_MN = Line(M, N, color=BLACK)
+        
+        # Point C on BD. Angle DCN = 75.
+        # C is on positive x-axis.
+        # N is in 4th quadrant.
+        # Angle of line BN is -46 degrees.
+        # We need C such that angle with CN is 75 (exterior) or 105 (interior).
+        # Let's just draw C somewhere.
+        C = RIGHT * 2
+        
+        # Draw triangle BCN
+        tri_BCN = Polygon(B, C, N, color=BLUE, fill_opacity=0.1)
+        tri_ABM = Polygon(A, B, M, color=RED, fill_opacity=0.1)
+        
+        # Labels
+        lbl_A = MathTex("A", color=BLACK).next_to(A, DOWN)
+        lbl_B = MathTex("B", color=BLACK).next_to(B, UP)
+        lbl_C = MathTex("C", color=BLACK).next_to(C, UP)
+        lbl_D = MathTex("D", color=BLACK).next_to(D, UP)
+        lbl_M = MathTex("M", color=BLACK).next_to(M, UP)
+        lbl_N = MathTex("N", color=BLACK).next_to(N, DOWN)
+        
+        # Angles
+        a_67 = MathTex("67^\circ", color=RED, font_size=24).next_to(A, UR, buff=0.1)
+        a_75 = MathTex("75^\circ", color=BLUE, font_size=24).next_to(C, UR, buff=0.1)
+        
+        self.add(line_AD, line_MN, tri_ABM, tri_BCN)
+        self.add(lbl_A, lbl_B, lbl_C, lbl_D, lbl_M, lbl_N, a_67, a_75)
+        
+        # Result
+        res = MathTex("\\angle BNC = 29^\\circ", color=BLACK).to_edge(DOWN)
+        self.play(Write(res))
+        # --- AI GENERATED CODE END ---
+
+```
+---
