@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="mk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>10_11_geom_9_tri_ab_mc_proof.md | Математичка Архива</title>
+    <link rel="stylesheet" href="../../../style.css">
+    <!-- MathJax -->
+    <script>
+    window.MathJax = {
+      tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$']] },
+      chtml: { scale: 1 }
+    };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="../../../index.html" class="logo"><i class="fas fa-cube"></i> МатАрхива</a>
+            <div class="nav-links">
+                <a href="../../../index.html">Почетна</a>
+                <a href="../../../skills/index.html">Вештини</a>
+                <a href="../../../theorems/index.html">Теореми</a>
+            </div>
+        </div>
+    </nav>
+    <div class="container main-content">
+<div class='card'><h1>Еднаквост на отсечки преку центар на кружница</h1>
+<h2>Текст на задачата</h2>
+<p>Во внатрешноста на $\triangle ABC$ со агли $\angle BAC=70^\circ$ и $\angle ABC=80^\circ$ земена е точка $M$. Ако $\angle ACM=10^\circ$ и $\angle CBM=20^\circ$, докажи дека $AB=MC$.</p>
+<h2>📐 Скица / Конструкција</h2>
+<p>&lt;Опис на цртежот. Кои се клучните точки? Дали има помошни линии?&gt;</p>
+<!-- VISUAL PROMPT: Draw triangle ABC with angle A = 70 and angle B = 80. Inside the triangle, place point M such that angle ACM = 10 and angle CBM = 20. Connect M to vertices A, B, and C. -->
+
+<h2>🧠 Анализа</h2>
+<p>Пресметај го аголот $\angle MCB$ и воочи дека $\triangle MBC$ е рамнокрак. Потоа конструирај го центарот на опишаната кружница $O$ и покажи дека $O \equiv M$.</p>
+<h2>📝 Решение (СИНТЕТИЧКО)</h2>
+<ol>
+<li><strong>Агли:</strong> $\angle ACB = 180 - (70+80) = 30^\circ$. $\angle MCB = 30 - 10 = 20^\circ$. Бидејќи $\angle MBC = \angle MCB = 20^\circ$, триаголникот $\triangle MBC$ е рамнокрак и $MB=MC$.</li>
+<li><strong>Конструкција:</strong> Нека $O$ е центар на опишаната кружница околу $\triangle ABC$. Централниот агол $\angle AOB = 2\angle ACB = 60^\circ$. Бидејќи $OA=OB$ и $\angle AOB=60^\circ$, $\triangle AOB$ е рамностран, па $AB=OB$.</li>
+<li><strong>Позиција на O:</strong> Централниот агол $\angle BOC = 2\angle BAC = 140^\circ$. Аглите при основата на рамнокракиот $\triangle BOC$ се по $(180-140)/2 = 20^\circ$.</li>
+<li><strong>Идентификација:</strong> Бидејќи полуправите од $B$ и $C$ под агол од $20^\circ$ се сечат во единствена точка, $M \equiv O$. </li>
+<li><strong>Заклучок:</strong> $AB = OB$ и $MC = MB = OB$, па $AB = MC$.</li>
+</ol>
+<h2>⚠️ Аналитички пристап (само ако е неизбежен)</h2>
+<p>&lt;Ако мора да се користат координати, објасни зошто синтетичкиот пат е претежок.&gt;</p>
+<h2>🏁 Заклучок</h2>
+<p>&lt;Краен резултат.&gt;</p></div>
+    </div>
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Македонска Математичка Архива. Генерирано со Python.</p>
+        </div>
+    </footer>
+</body>
+</html>

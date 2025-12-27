@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="mk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>matematiskop_3_762_geom_angle_overlap_05.md | Математичка Архива</title>
+    <link rel="stylesheet" href="../../../style.css">
+    <!-- MathJax -->
+    <script>
+    window.MathJax = {
+      tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$']] },
+      chtml: { scale: 1 }
+    };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="../../../index.html" class="logo"><i class="fas fa-cube"></i> МатАрхива</a>
+            <div class="nav-links">
+                <a href="../../../index.html">Почетна</a>
+                <a href="../../../skills/index.html">Вештини</a>
+                <a href="../../../theorems/index.html">Теореми</a>
+            </div>
+        </div>
+    </nav>
+    <div class="container main-content">
+<div class='card'><h1>Агол на преклопување на хипотенуза</h1>
+<h2>Текст на задачата</h2>
+<p>На хипотенузата $BC$ во правоаголниот триаголник $ABC$ дадени се точките $D$ и $E$ такви што $BE = AB$ и $CD = AC$. Пресметај го аголот $\angle DAE$.</p>
+<h2>📐 Скица / Конструкција</h2>
+<p>&lt;Опис на цртежот. Кои се клучните точки? Дали има помошни линии?&gt;</p>
+<!-- VISUAL PROMPT: Draw a right triangle ABC with right angle at A. On hypotenuse BC, mark point E such that BE=AB and point D such that CD=AC. Connect AD and AE. -->
+
+<h2>🧠 Анализа</h2>
+<p>Аголот $\angle DAE$ е всушност 'вишокот' што се појавува кога ќе ги собереш аглите на двата рамнокраки триаголници внатре во правиот агол.</p>
+<h2>📝 Решение (СИНТЕТИЧКО)</h2>
+<ol>
+<li><strong>Рамнокраки триаголници:</strong> $\triangle ABE$ е рамнокрак со врв во $B$, па $\angle BAE = 90 - \frac{\beta}{2}$. </li>
+<li><strong>Втор триаголник:</strong> $\triangle ACD$ е рамнокрак со врв во $C$, па $\angle CAD = 90 - \frac{\gamma}{2}$. </li>
+<li><strong>Преклопување:</strong> $\angle DAE = \angle BAE + \angle CAD - \angle BAC$. </li>
+<li><strong>Замена:</strong> $\angle DAE = (90 - \frac{\beta}{2}) + (90 - \frac{\gamma}{2}) - 90 = 90 - \frac{\beta + \gamma}{2}$. </li>
+<li><strong>Финале:</strong> Бидејќи $\beta + \gamma = 90$ (остри агли), тогаш $\angle DAE = 90 - 45 = 45^\circ$.</li>
+</ol>
+<h2>⚠️ Аналитички пристап (само ако е неизбежен)</h2>
+<p>&lt;Ако мора да се користат координати, објасни зошто синтетичкиот пат е претежок.&gt;</p>
+<h2>🏁 Заклучок</h2>
+<p>&lt;Краен резултат.&gt;</p></div>
+    </div>
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Македонска Математичка Архива. Генерирано со Python.</p>
+        </div>
+    </footer>
+</body>
+</html>

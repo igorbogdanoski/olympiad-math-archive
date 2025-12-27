@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="mk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>cnt92_olympiad_var2_cnt92_v2_07.md | Математичка Архива</title>
+    <link rel="stylesheet" href="../../../style.css">
+    <!-- MathJax -->
+    <script>
+    window.MathJax = {
+      tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$']] },
+      chtml: { scale: 1 }
+    };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="../../../index.html" class="logo"><i class="fas fa-cube"></i> МатАрхива</a>
+            <div class="nav-links">
+                <a href="../../../index.html">Почетна</a>
+                <a href="../../../skills/index.html">Вештини</a>
+                <a href="../../../theorems/index.html">Теореми</a>
+            </div>
+        </div>
+    </nav>
+    <div class="container main-content">
+<div class='card'><p><a href="../../README.md">⬅️ Назад кон Индексот</a> | <a href="../../../tools/skill_guides/logic.md">🧰 Skill: logic</a></p>
+<h1>Вредност на функција во ирационална точка</h1>
+<h2>📝 Текст на задачата</h2>
+<p>Ако $f(x) = \frac{1}{2-x} - \frac{3.5}{3-x}$, тогаш $f(\sqrt{2})$ е еднакво на...</p>
+<h2>🧠 Анализа (Клучна идеја)</h2>
+<p>Можеме директно да замениме $x = \sqrt{2}$ и потоа да рационализираме. За полесна работа, запишете го $3.5$ како дропка $\frac{7}{2}$.</p>
+<h2>💡 Решение</h2>
+<details>
+<summary>👀 Прикажи го решението</summary>
+
+**Чекор 1: Замена на вредноста**
+Бараме $f(\sqrt{2})$:
+
+$$ f(\sqrt{2}) = \frac{1}{2-\sqrt{2}} - \frac{3.5}{3-\sqrt{2}} $$
+
+**Чекор 2: Рационализација на првиот член**
+
+$$ \frac{1}{2-\sqrt{2}} \cdot \frac{2+\sqrt{2}}{2+\sqrt{2}} = \frac{2+\sqrt{2}}{4-2} = \frac{2+\sqrt{2}}{2} = 1 + \frac{\sqrt{2}}{2} $$
+
+**Чекор 3: Рационализација на вториот член**
+Користиме $3.5 = \frac{7}{2}$:
+
+$$ \frac{7/2}{3-\sqrt{2}} \cdot \frac{3+\sqrt{2}}{3+\sqrt{2}} = \frac{3.5(3+\sqrt{2})}{9-2} = \frac{3.5(3+\sqrt{2})}{7} $$
+
+Кратиме $3.5$ и $7$ (бидејќи $7 = 2 \cdot 3.5$):
+
+$$ \frac{3+\sqrt{2}}{2} = 1.5 + \frac{\sqrt{2}}{2} $$
+
+**Чекор 4: Конечна разлика**
+
+$$ f(\sqrt{2}) = \left(1 + \frac{\sqrt{2}}{2}\right) - \left(1.5 + \frac{\sqrt{2}}{2}\right) = 1 - 1.5 = -0.5 $$
+
+</details>
+
+<h2>🏁 Заклучок</h2>
+<p>&lt;Краен резултат.&gt;</p>
+<h2>👩‍🏫 За наставници</h2>
+<p>Учениците често се плашат од децимални броеви во дропки. Претворањето во обични дропки ($3.5 \to 7/2$) често ги открива можностите за кратење.</p></div>
+    </div>
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Македонска Математичка Архива. Генерирано со Python.</p>
+        </div>
+    </footer>
+</body>
+</html>

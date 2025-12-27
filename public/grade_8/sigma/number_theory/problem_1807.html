@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="mk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>problem_1807.md | Математичка Архива</title>
+    <link rel="stylesheet" href="../../../style.css">
+    <!-- MathJax -->
+    <script>
+    window.MathJax = {
+      tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$']] },
+      chtml: { scale: 1 }
+    };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="../../../index.html" class="logo"><i class="fas fa-cube"></i> МатАрхива</a>
+            <div class="nav-links">
+                <a href="../../../index.html">Почетна</a>
+                <a href="../../../skills/index.html">Вештини</a>
+                <a href="../../../theorems/index.html">Теореми</a>
+            </div>
+        </div>
+    </nav>
+    <div class="container main-content">
+<div class='card'><h1>Прости броеви и деливост</h1>
+<h2>Текст на задачата</h2>
+<p>Да се докаже дека за секој прост број (p&gt;3),
+бројот
+[
+p^2-1
+]
+е делив со 24.</p>
+<hr />
+<h2>Анализа</h2>
+<p>Изразот (p^2-1) може да се запише како разлика на квадрати.
+Понатаму, за прост број поголем од 3 важат важни својства поврзани
+со паритет и деливост со 3.</p>
+<p>Клучната идеја е да се разгледаат <strong>деливоста со 8 и со 3 одделно</strong>.</p>
+<hr />
+<h2>Решение</h2>
+<p>Ќе докажеме дека бројот (p^2-1) е делив и со 8 и со 3.</p>
+<hr />
+<h3>Чекор 1: Разложување</h3>
+<p>Го запишуваме:
+[
+p^2 - 1 = (p-1)(p+1).
+]</p>
+<hr />
+<h3>Чекор 2: Деливост со 8</h3>
+<p>Бидејќи (p&gt;3) е прост број, тој е <strong>непарен</strong>.</p>
+<p>Тогаш броевите:
+[
+p-1,\quad p,\quad p+1
+]
+се три последователни цели броеви, од кои два се парни.</p>
+<p>Еден од парните броеви мора да биде делив со 4, па нивниот производ
+[
+(p-1)(p+1)
+]
+е делив со 8.</p>
+<hr />
+<h3>Чекор 3: Деливост со 3</h3>
+<p>Бидејќи (p&gt;3) е прост број, тој <strong>не е делив со 3</strong>.</p>
+<p>Затоа, при делење со 3, бројот (p) дава остаток 1 или 2.</p>
+<p>Во двата случаи:
+[
+p^2 \equiv 1 \pmod{3}.
+]</p>
+<p>Оттука:
+[
+p^2 - 1 \equiv 0 \pmod{3}.
+]</p>
+<hr />
+<h3>Чекор 4: Комбинирање на резултатите</h3>
+<p>Бројот (p^2-1) е делив и со 8 и со 3.</p>
+<p>Бидејќи (\gcd(8,3)=1), следи дека бројот е делив со:
+[
+8 \cdot 3 = 24.
+]</p>
+<hr />
+<h2>Алтернативен пристап (олимписки)</h2>
+<p>Се забележува дека за секој прост број (p&gt;3),
+важи:
+[
+p \equiv \pm1 \pmod{6}.
+]
+Оттука,
+[
+p^2 \equiv 1 \pmod{24},
+]
+па заклучокот следи директно.</p>
+<hr />
+<h2>Заклучок</h2>
+<p>За секој прост број (p&gt;3), бројот
+[
+p^2 - 1
+]
+е делив со 24.</p>
+<hr />
+<h2>За тутори (опционално)</h2>
+<ul>
+<li>Предуслови: прост број, деливост</li>
+<li>Клучна идеја: одделно разгледување на деливост</li>
+<li>Типична грешка: прескокнување на случајот (p=3)</li>
+</ul></div>
+    </div>
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Македонска Математичка Архива. Генерирано со Python.</p>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="mk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>regionalen_natprevar_geom_angle_alt_bisector_03.md | Математичка Архива</title>
+    <link rel="stylesheet" href="../../../style.css">
+    <!-- MathJax -->
+    <script>
+    window.MathJax = {
+      tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$']] },
+      chtml: { scale: 1 }
+    };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="../../../index.html" class="logo"><i class="fas fa-cube"></i> МатАрхива</a>
+            <div class="nav-links">
+                <a href="../../../index.html">Почетна</a>
+                <a href="../../../skills/index.html">Вештини</a>
+                <a href="../../../theorems/index.html">Теореми</a>
+            </div>
+        </div>
+    </nav>
+    <div class="container main-content">
+<div class='card'><h1>Агол меѓу висина и симетрала</h1>
+<h2>Текст на задачата</h2>
+<p>Во триаголник $ABC$ каде $AB &lt; AC$, нека $AD$ е висината, а $AS$ е симетралата на аголот повлечени од темето $A$. Докажи дека аголот меѓу нив е: $$\angle DAS = \frac{\beta - \gamma}{2}$$</p>
+<h2>📐 Скица / Конструкција</h2>
+<p>&lt;Опис на цртежот. Кои се клучните точки? Дали има помошни линии?&gt;</p>
+<!-- VISUAL PROMPT: Draw triangle ABC with AC significantly longer than AB. Draw altitude AD from A to BC. Draw internal angle bisector AS from A to BC. Label angle B as beta and angle C as gamma. -->
+
+<h2>🧠 Анализа</h2>
+<p>Пресметај ги аглите $\angle BAS$ и $\angle BAD$ одделно преку $\alpha, \beta, \gamma$ и најди ја нивната разлика.</p>
+<h2>📝 Решение (СИНТЕТИЧКО)</h2>
+<ol>
+<li><strong>Симетрала:</strong> $\angle BAS = \frac{\alpha}{2}$. Бидејќи $\alpha = 180 - (\beta + \gamma)$, тогаш $\angle BAS = 90 - \frac{\beta + \gamma}{2}$. </li>
+<li><strong>Висина:</strong> Во правоаголниот $\triangle ABD$, $\angle BAD = 90 - \beta$. </li>
+<li><strong>Одземање:</strong> $\angle DAS = \angle BAS - \angle BAD$. </li>
+<li><strong>Алгебра:</strong> $\angle DAS = (90 - \frac{\beta}{2} - \frac{\gamma}{2}) - (90 - \beta) = \beta - \frac{\beta}{2} - \frac{\gamma}{2}$. </li>
+<li><strong>Финале:</strong> $\angle DAS = \frac{\beta - \gamma}{2}$.</li>
+</ol>
+<h2>⚠️ Аналитички пристап (само ако е неизбежен)</h2>
+<p>&lt;Ако мора да се користат координати, објасни зошто синтетичкиот пат е претежок.&gt;</p>
+<h2>🏁 Заклучок</h2>
+<p>&lt;Краен резултат.&gt;</p></div>
+    </div>
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Македонска Математичка Архива. Генерирано со Python.</p>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="mk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>8_8_geom_iso_side_bisector_08.md | Математичка Архива</title>
+    <link rel="stylesheet" href="../../../style.css">
+    <!-- MathJax -->
+    <script>
+    window.MathJax = {
+      tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$']] },
+      chtml: { scale: 1 }
+    };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="../../../index.html" class="logo"><i class="fas fa-cube"></i> МатАрхива</a>
+            <div class="nav-links">
+                <a href="../../../index.html">Почетна</a>
+                <a href="../../../skills/index.html">Вештини</a>
+                <a href="../../../theorems/index.html">Теореми</a>
+            </div>
+        </div>
+    </nav>
+    <div class="container main-content">
+<div class='card'><h1>Пресек на симетрала на страна и симетрала на агол</h1>
+<h2>Текст на задачата</h2>
+<p>Во рамнокракиот триаголник $ABC$ симетралата на кракот $AC$ и симетралата на $\angle BAC$ се сечат во точка $D$ која припаѓа на кракот $BC$. Определи го $\angle CDA$.</p>
+<h2>📐 Скица / Конструкција</h2>
+<p>&lt;Опис на цртежот. Кои се клучните точки? Дали има помошни линии?&gt;</p>
+<!-- VISUAL PROMPT: Draw an isosceles triangle ABC with side AC = BC. Construct the perpendicular bisector of side AC and the angle bisector of angle A. Mark their intersection point D on the side BC. Label angle C as gamma. -->
+
+<h2>🧠 Анализа</h2>
+<p>Секоја точка на симетрала на отсечка е еднакво оддалечена од нејзините краишта. Користи го ова за да формираш нов рамнокрак триаголник $ADC$.</p>
+<h2>📝 Решение (СИНТЕТИЧКО)</h2>
+<ol>
+<li><strong>Својство на симетрала:</strong> Бидејќи $D$ е на симетралата на $AC$, следува $AD = CD$. Значи $\triangle ADC$ е рамнокрак и $\angle DAC = \angle DCA = \gamma$.</li>
+<li><strong>Симетрала на агол:</strong> Бидејќи $AD$ е симетрала на $\alpha$, следува $\alpha = 2\gamma$.</li>
+<li><strong>Рамнокрак триаголник:</strong> Триаголникот $ABC$ има краци $AC=BC$, па $\angle B = \angle A = \alpha = 2\gamma$.</li>
+<li><strong>Равенка:</strong> $\alpha + \alpha + \gamma = 180^\circ \implies 2\gamma + 2\gamma + \gamma = 180^\circ \implies 5\gamma = 180^\circ$, па $\gamma = 36^\circ$.</li>
+<li><strong>Агол:</strong> Во $\triangle ADC$, $\angle CDA = 180^\circ - 2\gamma = 180^\circ - 72^\circ = 108^\circ$.</li>
+</ol>
+<h2>⚠️ Аналитички пристап (само ако е неизбежен)</h2>
+<p>&lt;Ако мора да се користат координати, објасни зошто синтетичкиот пат е претежок.&gt;</p>
+<h2>🏁 Заклучок</h2>
+<p>&lt;Краен резултат.&gt;</p></div>
+    </div>
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Македонска Математичка Архива. Генерирано со Python.</p>
+        </div>
+    </footer>
+</body>
+</html>

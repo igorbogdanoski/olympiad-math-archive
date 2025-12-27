@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="mk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sigma_2025_sigma_11.md | Математичка Архива</title>
+    <link rel="stylesheet" href="../../../style.css">
+    <!-- MathJax -->
+    <script>
+    window.MathJax = {
+      tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$']] },
+      chtml: { scale: 1 }
+    };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="../../../index.html" class="logo"><i class="fas fa-cube"></i> МатАрхива</a>
+            <div class="nav-links">
+                <a href="../../../index.html">Почетна</a>
+                <a href="../../../skills/index.html">Вештини</a>
+                <a href="../../../theorems/index.html">Теореми</a>
+            </div>
+        </div>
+    </nav>
+    <div class="container main-content">
+<div class='card'><h1>Геометрија на хипотенуза (Ротација)</h1>
+<h2>Текст на задачата</h2>
+<p>Во рамнокрак правоаголен $\triangle ABC$ ($\angle C=90^\circ$), $M$ и $N$ се точки на хипотенузата такви што $\angle MCN=45^\circ$. Ако $AM=a, MN=b, NB=c$, докажи дека $a^2 + c^2 = b^2$.</p>
+<h2>📐 Скица / Конструкција</h2>
+<p>&lt;Опис на цртежот. Кои се клучните точки? Дали има помошни линии?&gt;</p>
+<h2>🧠 Анализа</h2>
+<p>Ротирај го $\triangle ACM$ околу темето $C$ за $90^\circ$. Точката $A$ ќе отиде во $B$, а $M$ во $M'$. Ќе добиеш правоаголен триаголник со катети $a$ и $c$.</p>
+<h2>📝 Решение (СИНТЕТИЧКО)</h2>
+<p>Ротираме $\triangle ACM$ околу $C$ за $90^\circ$ (така што $CA$ се поклопува со $CB$).
+Нека сликата на $M$ е $M'$.</p>
+<ol>
+<li><strong>Својства на ротацијата:</strong></li>
+<li>$CM = CM'$.</li>
+<li>$AM = BM' = a$.</li>
+<li>
+<p>$\angle MCM' = 90^\circ$.</p>
+</li>
+<li>
+<p><strong>Анализа на $\triangle M'CN$:</strong></p>
+</li>
+<li>$\angle M'CB = \angle MCA$ (од ротацијата).</li>
+<li>$\angle M'CN = \angle M'CB + \angle BCN = \angle MCA + \angle BCN$.</li>
+<li>Знаеме дека $\angle ACB = 90^\circ$ и $\angle MCN = 45^\circ$.</li>
+<li>Значи $\angle MCA + \angle BCN = 90 - 45 = 45^\circ$.</li>
+<li>
+<p>Заклучок: $\angle M'CN = 45^\circ$.</p>
+</li>
+<li>
+<p><strong>Складност:</strong>
+   Споредуваме $\triangle MCN$ и $\triangle M'CN$:</p>
+</li>
+<li>$CM = CM'$.</li>
+<li>$CN$ е заедничка.</li>
+<li>$\angle MCN = \angle M'CN = 45^\circ$.</li>
+<li>Следи $\triangle MCN \cong \triangle M'CN$ (САС).</li>
+<li>
+<p>Од складноста: $MN = M'N = b$.</p>
+</li>
+<li>
+<p><strong>Питагорова теорема:</strong>
+   Во $\triangle M'BN$:</p>
+</li>
+<li>$\angle M'BN = \angle M'BC + \angle CBN$. Од ротацијата $\angle M'BC = \angle MAC = 45^\circ$.</li>
+<li>$\angle CBN = 45^\circ$ (агол на основата).</li>
+<li>Значи $\angle M'BN = 45+45=90^\circ$.</li>
+<li>Триаголникот е правоаголен со катети $BM'=a$ и $BN=c$, и хипотенуза $M'N=b$.</li>
+<li>Важи: $a^2 + c^2 = b^2$.</li>
+</ol>
+<p><strong>Заклучок:</strong> Докажано.</p>
+<h2>⚠️ Аналитички пристап (само ако е неизбежен)</h2>
+<p>&lt;Ако мора да се користат координати, објасни зошто синтетичкиот пат е претежок.&gt;</p>
+<h2>🏁 Заклучок</h2>
+<p>&lt;Краен резултат.&gt;</p></div>
+    </div>
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Македонска Математичка Архива. Генерирано со Python.</p>
+        </div>
+    </footer>
+</body>
+</html>

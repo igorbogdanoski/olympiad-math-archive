@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="mk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>problem_1811.md | Математичка Архива</title>
+    <link rel="stylesheet" href="../../../style.css">
+    <!-- MathJax -->
+    <script>
+    window.MathJax = {
+      tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$']] },
+      chtml: { scale: 1 }
+    };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="../../../index.html" class="logo"><i class="fas fa-cube"></i> МатАрхива</a>
+            <div class="nav-links">
+                <a href="../../../index.html">Почетна</a>
+                <a href="../../../skills/index.html">Вештини</a>
+                <a href="../../../theorems/index.html">Теореми</a>
+            </div>
+        </div>
+    </nav>
+    <div class="container main-content">
+<div class='card'><h1>Експоненцијална неравенка</h1>
+<h2>Текст на задачата</h2>
+<p>Да се реши неравенката
+[
+2^x + 2^{-x} \ge 2.
+]</p>
+<hr />
+<h2>Анализа</h2>
+<p>Изразот содржи експоненцијални функции со иста основа.
+Поради тоа, корисно е:
+- да се разгледа симетријата во замената (x \leftrightarrow -x),
+- или да се примени позната нееднаквост за позитивни броеви.</p>
+<p>Клучната идеја е дека за секој позитивен број важи
+[
+a + \frac{1}{a} \ge 2.
+]</p>
+<hr />
+<h2>Решение (детално)</h2>
+<p>Ќе решаваме чекор по чекор.</p>
+<h3>Чекор 1: Воведување замена</h3>
+<p>Нека
+[
+a = 2^x.
+]
+Тогаш (a &gt; 0), а
+[
+2^{-x} = \frac{1}{a}.
+]</p>
+<p>Неравенката станува:
+[
+a + \frac{1}{a} \ge 2.
+]</p>
+<hr />
+<h3>Чекор 2: Примена на основна нееднаквост</h3>
+<p>За секој позитивен реален број (a) важи:
+[
+a + \frac{1}{a} \ge 2,
+]
+при што еднаквост важи тогаш и само тогаш кога (a = 1).</p>
+<p>Оттука неравенката е <strong>секогаш исполнета</strong>.</p>
+<hr />
+<h3>Чекор 3: Услов за еднаквост</h3>
+<p>Еднаквост важи кога:
+[
+a = 1 \quad \Rightarrow \quad 2^x = 1.
+]</p>
+<p>Оттука:
+[
+x = 0.
+]</p>
+<hr />
+<h2>Алтернативен пристап (олимписки)</h2>
+<p>Се забележува дека функцијата
+[
+f(x) = 2^x + 2^{-x}
+]
+е парна и има минимум во (x=0).
+Минималната вредност е:
+[
+f(0) = 2.
+]</p>
+<hr />
+<h2>Заклучок</h2>
+<p>Неравенката важи за сите реални броеви (x),
+а еднаквост се постигнува кога
+[
+x = 0.
+]</p>
+<hr />
+<h2>За тутори (опционално)</h2>
+<ul>
+<li>Предуслови: експоненти, основни нееднаквости</li>
+<li>Клучна идеја: симетрија и замена</li>
+<li>Типична грешка: комплицирани пресметки без потреба</li>
+</ul></div>
+    </div>
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Македонска Математичка Архива. Генерирано со Python.</p>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="mk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Euler's Theorem (Ојлерова Теорема) | Математичка Архива</title>
+    <link rel="stylesheet" href="../style.css">
+    <!-- MathJax -->
+    <script>
+    window.MathJax = {
+      tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$']] },
+      chtml: { scale: 1 }
+    };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="../index.html" class="logo"><i class="fas fa-cube"></i> МатАрхива</a>
+            <div class="nav-links">
+                <a href="../index.html">Почетна</a>
+                <a href="../skills/index.html">Вештини</a>
+                <a href="../theorems/index.html">Теореми</a>
+            </div>
+        </div>
+    </nav>
+    <div class="container main-content">
+
+            <div class="card">
+                <span class="badge badge-category">Number Theory</span>
+                <span class="badge badge-difficulty">Advanced</span>
+                <h1>📜 Euler's Theorem (Ојлерова Теорема)</h1>
+<h2>💡 Дефиниција</h2>
+<p>Нека $n$ е позитивен цел број и $a$ е цел број таков што $\gcd(a, n) = 1$ (заемно прости).
+Тогаш:</p>
+<p>$$ a^{\phi(n)} \equiv 1 \pmod n $$</p>
+<p>Каде $\phi(n)$ е <strong>Ојлеровата функција</strong> (бројот на цели броеви помали од $n$ кои се заемно прости со $n$).</p>
+<hr />
+<h2>🧠 Интуиција</h2>
+<p>Ова е генерализација на Малата теорема на Ферма.
+Во светот на модуларна аритметика (часовник со $n$ часови), ако множиме број сам со себе доволно пати, на крајот ќе се вратиме на 1 (ако немаме заеднички делители со $n$).
+Циклусот на повторување секогаш е делител на $\phi(n)$.</p>
+<hr />
+<h2>📝 Примери</h2>
+<ol>
+<li><strong>Прост модул ($n=7$):</strong>
+    $\phi(7) = 6$. Нека $a=2$.
+    $2^6 = 64 = 9 \cdot 7 + 1 \equiv 1 \pmod 7$.</li>
+<li><strong>Сложен модул ($n=10$):</strong>
+    Броеви заемно прости со 10 се ${1, 3, 7, 9}$. Значи $\phi(10) = 4$.
+    Нека $a=3$.
+    $3^4 = 81 \equiv 1 \pmod{10}$.</li>
+</ol>
+<hr />
+<h2>🛠 Каде се користи?</h2>
+<ol>
+<li><strong>RSA Енкрипција:</strong> Целиот интернет безбедносен систем се базира на оваа теорема.</li>
+<li><strong>Пресметка на големи степени:</strong> Колку е $7^{2025} \pmod{100}$?
+    $\phi(100) = 100(1-1/2)(1-1/5) = 40$.
+    $2025 = 50 \cdot 40 + 25 \equiv 25 \pmod{40}$.
+    Значи $7^{2025} \equiv 7^{25} \pmod{100}$.</li>
+<li><strong>Инверзни елементи:</strong> $a^{\phi(n)-1}$ е модуларен инверз на $a$.</li>
+</ol>
+            </div>
+            
+    </div>
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Македонска Математичка Архива. Генерирано со Python.</p>
+        </div>
+    </footer>
+</body>
+</html>

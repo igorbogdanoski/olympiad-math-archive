@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="mk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>cnt92_olympiad_var2_cnt92_v2_30.md | Математичка Архива</title>
+    <link rel="stylesheet" href="../../../style.css">
+    <!-- MathJax -->
+    <script>
+    window.MathJax = {
+      tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$']] },
+      chtml: { scale: 1 }
+    };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="../../../index.html" class="logo"><i class="fas fa-cube"></i> МатАрхива</a>
+            <div class="nav-links">
+                <a href="../../../index.html">Почетна</a>
+                <a href="../../../skills/index.html">Вештини</a>
+                <a href="../../../theorems/index.html">Теореми</a>
+            </div>
+        </div>
+    </nav>
+    <div class="container main-content">
+<div class='card'><p><a href="../../README.md">⬅️ Назад кон Индексот</a> | <a href="../../../tools/skill_guides/logic.md">🧰 Skill: logic</a></p>
+<h1>Вгнездени корени (Варијанта 2)</h1>
+<h2>📝 Текст на задачата</h2>
+<p>Вредноста на изразот $3 \cdot \left( \frac{2+\sqrt{3}}{\sqrt{2} + \sqrt{2+\sqrt{3}}} - \frac{2-\sqrt{3}}{\sqrt{2} - \sqrt{2-\sqrt{3}}} \right)$ е еднаква на...</p>
+<h2>🧠 Анализа (Клучна идеја)</h2>
+<p>Користете го идентитетот $\sqrt{2+\sqrt{3}} = \frac{\sqrt{3}+1}{\sqrt{2}}$. Ова ќе ги упрости именителите и ќе овозможи рационализација.</p>
+<h2>💡 Решение</h2>
+<details>
+<summary>👀 Прикажи го решението</summary>
+
+**Чекор 1: Упростување на вгнездените корени**
+
+$$ \sqrt{2+\sqrt{3}} = \frac{\sqrt{3}+1}{\sqrt{2}}, \quad \sqrt{2-\sqrt{3}} = \frac{\sqrt{3}-1}{\sqrt{2}} $$
+
+**Чекор 2: Средување на именителите**
+*   Именител 1: $\sqrt{2} + \frac{\sqrt{3}+1}{\sqrt{2}} = \frac{2+\sqrt{3}+1}{\sqrt{2}} = \frac{3+\sqrt{3}}{\sqrt{2}}$
+*   Именител 2: $\sqrt{2} - \frac{\sqrt{3}-1}{\sqrt{2}} = \frac{2-(\sqrt{3}-1)}{\sqrt{2}} = \frac{3-\sqrt{3}}{\sqrt{2}}$
+
+**Чекор 3: Средување на дропките**
+*   Дропка 1: $\frac{2+\sqrt{3}}{\frac{3+\sqrt{3}}{\sqrt{2}}} = \sqrt{2} \frac{2+\sqrt{3}}{3+\sqrt{3}}$. Рационализираме со $(3-\sqrt{3})$:
+    $\sqrt{2} \frac{6-2\sqrt{3}+3\sqrt{3}-3}{9-3} = \sqrt{2} \frac{3+\sqrt{3}}{6}$
+
+*   Дропка 2: $\frac{2-\sqrt{3}}{\frac{3-\sqrt{3}}{\sqrt{2}}} = \sqrt{2} \frac{2-\sqrt{3}}{3-\sqrt{3}}$. Рационализираме со $(3+\sqrt{3})$:
+    $\sqrt{2} \frac{6+2\sqrt{3}-3\sqrt{3}-3}{9-3} = \sqrt{2} \frac{3-\sqrt{3}}{6}$
+
+**Чекор 4: Разлика**
+
+$$ \frac{\sqrt{2}}{6} [ (3+\sqrt{3}) - (3-\sqrt{3}) ] = \frac{\sqrt{2}}{6} (2\sqrt{3}) = \frac{2\sqrt{6}}{6} = \frac{\sqrt{6}}{3} $$
+
+**Чекор 5: Конечен производ**
+
+$$ 3 \cdot \frac{\sqrt{6}}{3} = \sqrt{6} $$
+
+Одговор: Опција 1.
+
+</details>
+
+<h2>🏁 Заклучок</h2>
+<p>&lt;Краен резултат.&gt;</p>
+<h2>👩‍🏫 За наставници</h2>
+<p>Внимавајте на знакот минус помеѓу дропките. Во Варијанта 1 беше плус. Ова ја менува целата структура на кратењето.</p></div>
+    </div>
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Македонска Математичка Архива. Генерирано со Python.</p>
+        </div>
+    </footer>
+</body>
+</html>

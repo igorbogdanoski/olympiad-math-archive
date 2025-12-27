@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="mk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>10_11_geom_9_incenter_intersect.md | Математичка Архива</title>
+    <link rel="stylesheet" href="../../../style.css">
+    <!-- MathJax -->
+    <script>
+    window.MathJax = {
+      tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$']] },
+      chtml: { scale: 1 }
+    };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="../../../index.html" class="logo"><i class="fas fa-cube"></i> МатАрхива</a>
+            <div class="nav-links">
+                <a href="../../../index.html">Почетна</a>
+                <a href="../../../skills/index.html">Вештини</a>
+                <a href="../../../theorems/index.html">Теореми</a>
+            </div>
+        </div>
+    </nav>
+    <div class="container main-content">
+<div class='card'><h1>Центар на впишана кружница во специфична конфигурација</h1>
+<h2>Текст на задачата</h2>
+<p>Нека кружниците $k_1$ и $k_2$ се сечат во точките $A$ и $B$ така што центарот $O$ на кружницата $k_2$ лежи на $k_1$. Нека $C$ е произволна точка од лакот $AB$ од кружницата $k_1$ кој не ја содржи точката $O$. Отсечката $OC$ ја сече кружницата $k_2$ во точката $D$. Докажи дека точката $D$ е центар на впишаната кружница на $\triangle ABC$.</p>
+<h2>📐 Скица / Конструкција</h2>
+<p>&lt;Опис на цртежот. Кои се клучните точки? Дали има помошни линии?&gt;</p>
+<!-- VISUAL PROMPT: Draw two intersecting circles k1 and k2. Let the center O of k2 lie on the boundary of k1. Mark intersection points A and B. Pick a point C on k1 and draw line OC, marking its intersection with k2 as D. Draw triangle ABC and segments AD and BD. -->
+
+<h2>🧠 Анализа</h2>
+<p>За да докажеш дека $D$ е инцентар, треба да покажеш дека $AD$ и $CD$ се симетрали на аглите. Искористи го фактот дека $OACB$ е тетивен четириаголник и $OA=OB=OD$ како радиуси.</p>
+<h2>📝 Решение (СИНТЕТИЧКО)</h2>
+<ol>
+<li><strong>Симетрала на аголот C:</strong> Бидејќи $OA=OB$ (радиуси на $k_2$), лаците $OA$ и $OB$ во $k_1$ се еднакви. Перифериските агли над нив, $\angle ACO$ и $\angle BCO$, се еднакви. Бидејќи $D$ лежи на $OC$, $CD$ е симетрала на $\angle ACB$.</li>
+<li><strong>Рамнокраки триаголници:</strong> Бидејќи $O, A, C, B$ лежат на $k_1$, $\angle AOB = 180^\circ - \angle ACB = 180^\circ - \gamma$. Во рамнокракиот $\triangle OAB$, $\angle OAB = \gamma/2$.</li>
+<li><strong>Надворешен агол:</strong> $\triangle OAD$ е рамнокрак ($OA=OD$), па $\angle OAD = \angle ODA$. Аголот $\angle ODA$ е надворешен за $\triangle ADC$, па $\angle ODA = \angle DAC + \angle ACD = \angle DAC + \gamma/2$.</li>
+<li><strong>Изедначување:</strong> Од $\angle OAD = \angle OAB + \angle BAD$, имаме $\gamma/2 + \angle BAD = \angle DAC + \gamma/2$, од каде $\angle BAD = \angle DAC$. Значи $AD$ е симетрала на $\angle A$.</li>
+<li><strong>Заклучок:</strong> Бидејќи $D$ е пресек на две симетрали, тој е центар на впишаната кружница.</li>
+</ol>
+<h2>⚠️ Аналитички пристап (само ако е неизбежен)</h2>
+<p>&lt;Ако мора да се користат координати, објасни зошто синтетичкиот пат е претежок.&gt;</p>
+<h2>🏁 Заклучок</h2>
+<p>&lt;Краен резултат.&gt;</p></div>
+    </div>
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Македонска Математичка Архива. Генерирано со Python.</p>
+        </div>
+    </footer>
+</body>
+</html>

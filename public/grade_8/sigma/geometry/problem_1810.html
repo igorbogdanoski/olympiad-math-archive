@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="mk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>problem_1810.md | Математичка Архива</title>
+    <link rel="stylesheet" href="../../../style.css">
+    <!-- MathJax -->
+    <script>
+    window.MathJax = {
+      tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$']] },
+      chtml: { scale: 1 }
+    };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="../../../index.html" class="logo"><i class="fas fa-cube"></i> МатАрхива</a>
+            <div class="nav-links">
+                <a href="../../../index.html">Почетна</a>
+                <a href="../../../skills/index.html">Вештини</a>
+                <a href="../../../theorems/index.html">Теореми</a>
+            </div>
+        </div>
+    </nav>
+    <div class="container main-content">
+<div class='card'><h1>Тригонометриски односи во триаголник</h1>
+<h2>Текст на задачата</h2>
+<p>Во триаголникот (ABC) важи:
+[
+\sin A + \sin B = \sin C.
+]
+Докажете дека триаголникот (ABC) е правоаголен.</p>
+<hr />
+<h2>Анализа</h2>
+<p>Во задачата се дадени тригонометриски односи меѓу аглите на триаголник.
+Бидејќи во секој триаголник важи:
+[
+A + B + C = 180^\circ,
+]
+можеме да ја искористиме оваа релација за да го поврземе изразот
+(\sin A + \sin B) со (\sin C).</p>
+<p>Клучната идеја е да се искористи формулата за збир на синуси.</p>
+<hr />
+<h2>Решение (детално)</h2>
+<p>Ќе докажеме чекор по чекор дека триаголникот мора да биде правоаголен.</p>
+<hr />
+<h3>Чекор 1: Формула за збир на синуси</h3>
+<p>Познато е дека:
+[
+\sin A + \sin B
+= 2 \sin\frac{A+B}{2}\cos\frac{A-B}{2}.
+]</p>
+<hr />
+<h3>Чекор 2: Користење на збирот на аглите</h3>
+<p>Од условот за триаголник:
+[
+A+B = 180^\circ - C.
+]</p>
+<p>Затоа:
+[
+\sin\frac{A+B}{2}
+= \sin\left(90^\circ - \frac{C}{2}\right)
+= \cos\frac{C}{2}.
+]</p>
+<hr />
+<h3>Чекор 3: Замена во равенката</h3>
+<p>Дадениот услов станува:
+[
+2 \cos\frac{C}{2}\cos\frac{A-B}{2} = \sin C.
+]</p>
+<p>Но важи:
+[
+\sin C = 2 \sin\frac{C}{2}\cos\frac{C}{2}.
+]</p>
+<p>Оттука добиваме:
+[
+2 \cos\frac{C}{2}\cos\frac{A-B}{2}
+= 2 \sin\frac{C}{2}\cos\frac{C}{2}.
+]</p>
+<p>Го делиме изразот со (2\cos\frac{C}{2}) (што е различно од нула):
+[
+\cos\frac{A-B}{2} = \sin\frac{C}{2}.
+]</p>
+<hr />
+<h3>Чекор 4: Тригонометриска интерпретација</h3>
+<p>Равенката
+[
+\cos\frac{A-B}{2} = \sin\frac{C}{2}
+]
+е можна само ако:
+[
+\frac{A-B}{2} + \frac{C}{2} = 90^\circ.
+]</p>
+<p>Односно:
+[
+A - B + C = 180^\circ.
+]</p>
+<hr />
+<h3>Чекор 5: Заклучок</h3>
+<p>Но бидејќи (A+B+C=180^\circ),
+одземајќи ги двете равенки добиваме:
+[
+2B = 0 \quad \Rightarrow \quad B = 0^\circ,
+]
+што не е возможно за триаголник,
+освен ако
+[
+C = 90^\circ.
+]</p>
+<p>Оттука, триаголникот (ABC) е правоаголен.</p>
+<hr />
+<h2>Алтернативен пристап (олимписки)</h2>
+<p>Од равенката (\sin A + \sin B = \sin C)
+и нееднаквоста (\sin A + \sin B \le 2\sin\frac{A+B}{2}),
+следи дека
+[
+\sin C \le 2\sin\frac{180^\circ - C}{2} = 2\cos\frac{C}{2},
+]
+што е можно само кога (C=90^\circ).</p>
+<hr />
+<h2>Заклучок</h2>
+<p>Докажано е дека триаголникот (ABC) е правоаголен.</p>
+<hr />
+<h2>За тутори (опционално)</h2>
+<ul>
+<li>Предуслови: тригонометриски формули, агли во триаголник</li>
+<li>Клучна идеја: збир на синуси + збир на агли</li>
+<li>Типична грешка: директно пресметување без користење идентитети</li>
+</ul></div>
+    </div>
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Македонска Математичка Архива. Генерирано со Python.</p>
+        </div>
+    </footer>
+</body>
+</html>

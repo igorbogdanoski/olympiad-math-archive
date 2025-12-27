@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="mk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>telescoping_sum_squares.md | Математичка Архива</title>
+    <link rel="stylesheet" href="../../../style.css">
+    <!-- MathJax -->
+    <script>
+    window.MathJax = {
+      tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$']] },
+      chtml: { scale: 1 }
+    };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="../../../index.html" class="logo"><i class="fas fa-cube"></i> МатАрхива</a>
+            <div class="nav-links">
+                <a href="../../../index.html">Почетна</a>
+                <a href="../../../skills/index.html">Вештини</a>
+                <a href="../../../theorems/index.html">Теореми</a>
+            </div>
+        </div>
+    </nav>
+    <div class="container main-content">
+<div class='card'><h1>Телескопска сума со квадрати</h1>
+<h2>Текст на задачата</h2>
+<p>Пресметај ја вредноста на бројниот израз
+[
+\frac{1^2}{1 \cdot 3} + \frac{2^2}{3 \cdot 5} + \frac{3^2}{5 \cdot 7}
++ \cdots + \frac{50^2}{99 \cdot 101}.
+]</p>
+<hr />
+<h2>Анализа</h2>
+<p>Општиот член на сумата има облик
+[
+\frac{k^2}{(2k-1)(2k+1)},
+]
+што сугерира можност за <strong>алгебарско разложување</strong>
+и појава на <strong>телескопска сума</strong>.</p>
+<p>Клучната идеја е да се трансформира секој член во збир
+од константен дел и телескопски дел.</p>
+<hr />
+<h2>Решение (детално)</h2>
+<p>Го разгледуваме општиот член:
+[
+\frac{k^2}{(2k-1)(2k+1)} = \frac{k^2}{4k^2-1}.
+]</p>
+<h3>Чекор 1: Алгебарско разложување</h3>
+<p>Бараме разложување од облик:
+[
+\frac{k^2}{4k^2-1} = A + \frac{B}{4k^2-1}.
+]</p>
+<p>Со пресметка добиваме:
+[
+\frac{k^2}{4k^2-1}
+=
+\frac14 + \frac{1}{4(4k^2-1)}.
+]</p>
+<p>Оттука:
+[
+\frac{k^2}{(2k-1)(2k+1)}
+=
+\frac14 + \frac{1}{4(2k-1)(2k+1)}.
+]</p>
+<hr />
+<h3>Чекор 2: Телескопскиот дел</h3>
+<p>Забележуваме дека:
+[
+\frac{1}{(2k-1)(2k+1)}
+=
+\frac12\left(\frac{1}{2k-1}-\frac{1}{2k+1}\right).
+]</p>
+<hr />
+<h3>Чекор 3: Сумирање</h3>
+<p>Сумираме од (k=1) до (k=50):</p>
+<ul>
+<li>
+<p>Константниот дел:
+[
+\sum_{k=1}^{50} \frac14 = \frac{25}{2}.
+]</p>
+</li>
+<li>
+<p>Телескопскиот дел:
+[
+\sum_{k=1}^{50} \frac{1}{(2k-1)(2k+1)}
+=
+\frac12\left(1-\frac{1}{101}\right)
+=
+\frac{50}{101}.
+]</p>
+</li>
+</ul>
+<hr />
+<h3>Чекор 4: Крајна вредност</h3>
+<p>Собирајќи:
+[
+\frac{25}{2} + \frac{25}{202}
+=
+\frac{1275}{101}.
+]</p>
+<hr />
+<h2>Заклучок</h2>
+<p>Вредноста на дадениот бројниот израз е
+[
+\boxed{\frac{1275}{101}}.
+]</p>
+<hr />
+<h2>За тутори (опционално)</h2>
+<ul>
+<li>Предуслови: разложување на дропки</li>
+<li>Клучна идеја: телескопска структура</li>
+<li>Типична грешка: директно собирање на членови</li>
+</ul></div>
+    </div>
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Македонска Математичка Архива. Генерирано со Python.</p>
+        </div>
+    </footer>
+</body>
+</html>
