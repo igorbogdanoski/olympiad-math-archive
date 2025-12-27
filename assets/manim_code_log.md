@@ -7069,3 +7069,106 @@ class Task_2024_mun_g5_4(Scene):
 
 ```
 ---
+
+### 🆔 Задача: 2024_mun_g6_3 - Правоаголник и квадрат
+**📅 Додадено:** 2025-12-27 12:48
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_2024_mun_g6_3(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+        self.camera.background_color = WHITE
+        
+        # Rectangle 420x84. Ratio 5:1.
+        rect = Rectangle(width=5, height=1, color=BLUE)
+        lbl_rect = Text("Правоаголник", font_size=24, color=BLUE).next_to(rect, UP)
+        lbl_a = MathTex("a=420", color=BLACK, font_size=24).next_to(rect, DOWN)
+        lbl_b = MathTex("b=84", color=BLACK, font_size=24).next_to(rect, RIGHT)
+        
+        # Square. Side 84. Same height as rectangle.
+        square = Square(side_length=1, color=RED).next_to(rect, DOWN, buff=1)
+        lbl_sq = Text("Квадрат", font_size=24, color=RED).next_to(square, UP)
+        lbl_side = MathTex("a=84", color=BLACK, font_size=24).next_to(square, RIGHT)
+        
+        # Perimeter text
+        p_rect = MathTex("L_1 = 1008", color=BLUE).to_edge(UL)
+        p_sq = MathTex("L_2 = 1008 : 3 = 336", color=RED).next_to(p_rect, DOWN)
+        
+        self.add(rect, lbl_rect, lbl_a, lbl_b)
+        self.wait(1)
+        self.play(Write(p_rect))
+        self.play(Write(p_sq))
+        self.play(FadeIn(square), Write(lbl_sq), Write(lbl_side))
+        # --- AI GENERATED CODE END ---
+
+```
+---
+
+### 🆔 Задача: 2024_mun_g6_4 - Агли во четириаголник
+**📅 Додадено:** 2025-12-27 12:48
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_2024_mun_g6_4(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+        self.camera.background_color = WHITE
+        
+        # Construct a quadrilateral that fits the description
+        # Let alpha = 30, beta = 40 (sum 70). 
+        # Quad angles: 3a=90, 3b=120, 100, gamma=50. Sum=360. Correct.
+        
+        A = DL * 2
+        B = DR * 2
+        # Angle at A is 3alpha = 90. Angle at B is 3beta = 120.
+        D = A + UP * 3
+        # C needs to be positioned such that angle at C is 50 and angle at D is 100.
+        # Let's just draw it approximately correct visually.
+        C = B + UP * 2 + LEFT * 1
+        
+        quad = Polygon(A, B, C, D, color=BLACK, stroke_width=4)
+        
+        # Inner triangle lines (trisectors?)
+        # Ray from A at angle alpha (30)
+        # Ray from B at angle beta (40)
+        # Intersection P
+        # A is at (0,0) relative. B is at (4,0).
+        # Line AP: y = tan(30)x
+        # Line BP: y = tan(140)(x-4) -> 180-40=140 from positive x axis
+        # Intersection calculation omitted, visual approx:
+        P = (A + B) / 2 + UP * 1
+        
+        lines = VGroup(Line(A, P), Line(B, P)).set_color(BLUE)
+        
+        # Labels
+        lbl_110 = MathTex("110^\circ", color=BLUE, font_size=24).next_to(P, UP, buff=0.1)
+        lbl_100 = MathTex("100^\circ", color=BLACK, font_size=24).next_to(D, DR, buff=0.1)
+        lbl_gamma = MathTex("\\gamma", color=RED).next_to(C, DL, buff=0.1)
+        
+        lbl_a = MathTex("\\alpha", color=BLUE, font_size=20).move_to(A + UR*0.5 + RIGHT*0.2)
+        lbl_b = MathTex("\\beta", color=BLUE, font_size=20).move_to(B + UL*0.5 + LEFT*0.2)
+        
+        lbl_3a = MathTex("3\\alpha", color=BLACK, font_size=24).next_to(A, LEFT)
+        lbl_3b = MathTex("3\\beta", color=BLACK, font_size=24).next_to(B, RIGHT)
+        
+        self.add(quad, lines)
+        self.add(lbl_110, lbl_100, lbl_gamma, lbl_a, lbl_b, lbl_3a, lbl_3b)
+        
+        # Equation
+        eq = MathTex("3(\\alpha+\\beta) + 100 + \\gamma = 360", color=RED).to_edge(UP)
+        self.add(eq)
+        # --- AI GENERATED CODE END ---
+
+```
+---
