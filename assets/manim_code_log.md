@@ -8510,3 +8510,43 @@ class Task_2023_mun_g9_4(Scene):
 
 ```
 ---
+
+### 🆔 Задача: 2023_mun_y1_2b - Броеви на кружница
+**📅 Додадено:** 2025-12-27 18:10
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_2023_mun_y1_2b(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+        self.camera.background_color = WHITE
+        
+        # Circle with numbers
+        nums = [1, 7, 4, 9, 2, 6, 5, 8, 3]
+        n = len(nums)
+        R = 2.5
+        
+        circle = Circle(radius=R, color=GRAY)
+        self.add(circle)
+        
+        # Place numbers
+        for i in range(n):
+            angle = i * (360/n) * DEGREES + 90*DEGREES
+            pos = np.array([R*np.cos(angle), R*np.sin(angle), 0])
+            lbl = MathTex(str(nums[i]), color=BLACK, font_size=36).move_to(pos * 1.15)
+            dot = Dot(pos, color=BLUE)
+            self.add(lbl, dot)
+            
+        # Connect valid neighbors
+        # Just show the circle is formed
+        poly = Polygon(*[np.array([R*np.cos(i*(360/n)*DEGREES+90*DEGREES), R*np.sin(i*(360/n)*DEGREES+90*DEGREES), 0]) for i in range(n)], color=BLUE)
+        self.play(Create(poly))
+        # --- AI GENERATED CODE END ---
+
+```
+---
