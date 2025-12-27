@@ -11383,3 +11383,78 @@ class Task_2022_mun_y1_15a(Scene):
 
 ```
 ---
+
+### 🆔 Задача: 2022_mun_y1_17a - Паралелни прави (Талес)
+**📅 Додадено:** 2025-12-27 21:37
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_2022_mun_y1_17a(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+        # Parallel lines
+        r = Line(LEFT*3 + UP*2, RIGHT*3 + UP*2, color=BLUE)
+        s = Line(LEFT*3, RIGHT*3, color=BLUE)
+        t = Line(LEFT*3 + DOWN*2, RIGHT*3 + DOWN*2, color=BLUE)
+        
+        # Transversals
+        m = Line(LEFT*2 + UP*3, LEFT*1 + DOWN*3, color=RED)
+        n = Line(RIGHT*1 + UP*3, RIGHT*2 + DOWN*3, color=RED)
+        
+        # Labels
+        labels = VGroup(
+            MathTex('r').next_to(r, LEFT),
+            MathTex('s').next_to(s, LEFT),
+            MathTex('t').next_to(t, LEFT),
+            MathTex('A').move_to(LEFT*1.6 + UP*2 + UL*0.2),
+            MathTex('B').move_to(LEFT*1.3 + UL*0.2),
+            MathTex('C').move_to(LEFT*1 + DOWN*2 + UL*0.2),
+            MathTex('A_1').move_to(RIGHT*1.3 + UP*2 + UR*0.2),
+            MathTex('B_1').move_to(RIGHT*1.6 + UR*0.2),
+            MathTex('C_1').move_to(RIGHT*1.9 + DOWN*2 + UR*0.2)
+        ).set_color(BLACK)
+
+        self.add(r, s, t, m, n, labels)
+        # --- AI GENERATED CODE END ---
+
+```
+---
+
+### 🆔 Задача: 2022_mun_y1_19a - Плоштина во квадрат
+**📅 Додадено:** 2025-12-27 21:37
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_2022_mun_y1_19a(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+        # Square ABCD
+        s = 4 # Scaled size
+        square_outer = Square(side_length=s, color=BLUE)
+        
+        # Inscribed Circle
+        circle = Circle(radius=s/2, color=RED)
+        
+        # Inner Square (Midpoints)
+        # Rotated square inscribed in circle
+        square_inner = Square(side_length=s/np.sqrt(2), color=GREEN).rotate(PI/4)
+        
+        # Shading (Difference)
+        # Manim doesn't support boolean ops easily, so we just show objects
+        area = Intersection(circle, square_inner, color=GREY, fill_opacity=0.5) # This is conceptual
+        
+        self.add(square_outer, circle, square_inner)
+        # --- AI GENERATED CODE END ---
+
+```
+---
