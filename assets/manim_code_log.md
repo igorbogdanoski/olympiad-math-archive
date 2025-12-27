@@ -12787,3 +12787,155 @@ class Task_2022_mun_y3_20a(Scene):
 
 ```
 ---
+
+### 🆔 Задача: 2022_mun_y3_1b - Вредност на квадратна функција
+**📅 Додадено:** 2025-12-27 23:30
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_2022_mun_y3_1b(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+        axes = Axes(x_range=[-1, 11], y_range=[-1, 200], x_length=6, y_length=4)
+        graph = axes.plot(lambda x: 3*(x-2)**2, color=BLUE)
+        
+        dot_v = Dot(axes.c2p(2, 0), color=RED)
+        dot_y = Dot(axes.c2p(0, 12), color=RED)
+        dot_target = Dot(axes.c2p(10, 192), color=RED)
+        
+        labels = VGroup(
+            MathTex('2').next_to(dot_v, DOWN),
+            MathTex('12').next_to(dot_y, LEFT),
+            MathTex('f(10)=?').next_to(dot_target, LEFT)
+        ).set_color(BLACK)
+        
+        self.add(axes, graph, dot_v, dot_y, dot_target, labels)
+        # --- AI GENERATED CODE END ---
+
+```
+---
+
+### 🆔 Задача: 2022_mun_y3_3b - Агол во коцка
+**📅 Додадено:** 2025-12-27 23:30
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_2022_mun_y3_3b(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+        # Cube vertices
+        cube = Cube(side_length=3, fill_opacity=0.1, color=BLUE)
+        
+        # Points (approximate for standard view)
+        A = cube.get_corner(DL+IN)
+        B = cube.get_corner(DR+IN)
+        E = cube.get_corner(DL+OUT)
+        
+        # Triangle
+        tri = Polygon(A, B, E, color=RED, fill_opacity=0.3)
+        
+        # Labels
+        labels = VGroup(
+            MathTex('A').next_to(A, DL),
+            MathTex('B').next_to(B, DR),
+            MathTex('E').next_to(E, UL)
+        ).set_color(BLACK)
+        
+        self.add(cube, tri, labels)
+        # --- AI GENERATED CODE END ---
+
+```
+---
+
+### 🆔 Задача: 2022_mun_y3_4b - Параметар во парабола
+**📅 Додадено:** 2025-12-27 23:30
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_2022_mun_y3_4b(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+        axes = Axes(x_range=[-2, 8], y_range=[-5, 5], x_length=6, y_length=4)
+        graph = axes.plot(lambda x: -(x-1)*(x-5), color=BLUE)
+        
+        dot_A = Dot(axes.c2p(1, 0), color=RED)
+        dot_B = Dot(axes.c2p(5, 0), color=RED)
+        dot_O = Dot(axes.c2p(0, 0), color=BLACK)
+        
+        labels = VGroup(
+            MathTex('O').next_to(dot_O, DL),
+            MathTex('A').next_to(dot_A, UP),
+            MathTex('B').next_to(dot_B, UP),
+            MathTex('x_1=1').next_to(dot_A, DOWN),
+            MathTex('x_2=5').next_to(dot_B, DOWN)
+        ).set_color(BLACK)
+        
+        self.add(axes, graph, dot_A, dot_B, dot_O, labels)
+        # --- AI GENERATED CODE END ---
+
+```
+---
+
+### 🆔 Задача: 2022_mun_y3_5b - Котангенс во правоаголен триаголник
+**📅 Додадено:** 2025-12-27 23:30
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_2022_mun_y3_5b(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+        # Coordinates
+        # B at origin
+        B = ORIGIN
+        # C at angle beta. cos beta = 10/16 = 5/8.
+        # C = [16 * 5/8, 16 * sin(beta), 0] = [10, sqrt(156), 0]
+        C = [10, np.sqrt(156)/2, 0] # Scaled down by 2 for view
+        # H is projection of C on x-axis
+        H = [10, 0, 0]
+        # A is intersection of perpendicular to BC at C with x-axis
+        # Too complex to calc coords manually, let's just draw schematic
+        
+        # Schematic Right Triangle
+        C_pt = UP * 3
+        H_pt = ORIGIN
+        B_pt = RIGHT * 2
+        A_pt = LEFT * 4
+        
+        tri = Polygon(A_pt, B_pt, C_pt, color=BLACK)
+        alt = Line(C_pt, H_pt, color=RED)
+        
+        labels = VGroup(
+            MathTex('C').next_to(C_pt, UP),
+            MathTex('H').next_to(H_pt, DOWN),
+            MathTex('B').next_to(B_pt, DR),
+            MathTex('A').next_to(A_pt, DL),
+            MathTex('10').next_to(Line(H_pt, B_pt), DOWN),
+            MathTex('16').next_to(Line(C_pt, B_pt), UR),
+            MathTex('\\alpha').next_to(A_pt, RIGHT, buff=0.3)
+        ).set_color(BLACK)
+        
+        self.add(tri, alt, labels)
+        # --- AI GENERATED CODE END ---
+
+```
+---
