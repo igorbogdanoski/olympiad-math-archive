@@ -50,7 +50,7 @@ tags:
 <Опис на цртежот. Кои се клучните точки? Дали има помошни линии?>
 
 
-<!-- VISUAL PROMPT: Draw a right-angled triangle ABC with incenter I. Draw the incircle tangent to all three sides. Label perimeter as 30 and inradius as 2. -->
+![Визуелизација](../../assets/images/geom_9_right_tri_perimeter.png)
 
 ## 🧠 Анализа
 Користи ја специјалната формула за радиус на впишана кружница во правоаголен триаголник: $r = (a+b-c)/2$.

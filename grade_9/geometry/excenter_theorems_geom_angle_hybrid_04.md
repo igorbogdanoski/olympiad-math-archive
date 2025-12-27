@@ -50,7 +50,7 @@ tags:
 <Опис на цртежот. Кои се клучните точки? Дали има помошни линии?>
 
 
-<!-- VISUAL PROMPT: Draw triangle ABC. Extend side CB beyond B to create an external angle at B. Draw internal bisector of angle A and external bisector of angle B. Mark their intersection as Y. -->
+![Визуелизација](../../assets/images/geom_angle_hybrid_04.png)
 
 ## 🧠 Анализа
 Користи ја теоремата за надворешен агол во $\triangle ABY$.

@@ -50,7 +50,7 @@ tags:
 <Опис на цртежот. Кои се клучните точки? Дали има помошни линии?>
 
 
-<!-- VISUAL PROMPT: Draw triangle ABC with angle A = 70 and angle B = 80. Inside the triangle, place point M such that angle ACM = 10 and angle CBM = 20. Connect M to vertices A, B, and C. -->
+![Визуелизација](../../assets/images/geom_9_tri_ab_mc_proof.png)
 
 ## 🧠 Анализа
 Пресметај го аголот $\angle MCB$ и воочи дека $\triangle MBC$ е рамнокрак. Потоа конструирај го центарот на опишаната кружница $O$ и покажи дека $O \equiv M$.

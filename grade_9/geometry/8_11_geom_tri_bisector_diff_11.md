@@ -50,7 +50,7 @@ tags:
 <Опис на цртежот. Кои се клучните точки? Дали има помошни линии?>
 
 
-<!-- VISUAL PROMPT: Draw triangle ABC with angle A significantly larger than angle B. Construct the internal bisector CD and the external bisector CE at vertex C. Extend side AB to meet the external bisector at point E. -->
+![Визуелизација](../../assets/images/geom_tri_bisector_diff_11.png)
 
 ## 🧠 Анализа
 Покажи дека аголот меѓу внатрешната и надворешната симетрала е секогаш $90^\circ$, а потоа пресметај ги острите агли на добиениот триаголник $EDC$.

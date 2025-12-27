@@ -50,7 +50,7 @@ tags:
 <Опис на цртежот. Кои се клучните точки? Дали има помошни линии?>
 
 
-<!-- VISUAL PROMPT: Draw a right-angled triangle with legs a and b and hypotenuse c. Draw the circumcircle (passing through vertices) and the incircle (tangent to sides). Label radii r and R. -->
+![Визуелизација](../../assets/images/geom_9_leg_ratio_circles.png)
 
 ## 🧠 Анализа
 Изрази ги $r$ и $R$ преку страните ($R=c/2$) и постави хомогена равенка по $k=a/b$.

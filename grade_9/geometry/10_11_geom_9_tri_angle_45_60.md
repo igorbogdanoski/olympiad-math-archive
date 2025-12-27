@@ -50,7 +50,7 @@ tags:
 <Опис на цртежот. Кои се клучните точки? Дали има помошни линии?>
 
 
-<!-- VISUAL PROMPT: Draw triangle ABC. On side BC, mark point D such that the length DC is twice the length of BD. Label angle B as 45 degrees and angle ADC as 60 degrees. Drop altitude AH. -->
+![Визуелизација](../../assets/images/geom_9_tri_angle_45_60.png)
 
 ## 🧠 Анализа
 Спушти висина $AH$ и изрази ги сите делови на основата преку висината $h$. Побарај го аголот чиј тангенс е $2+\sqrt{3}$ или $2-\sqrt{3}$.

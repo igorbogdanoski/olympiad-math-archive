@@ -52,7 +52,7 @@ tags:
 <Опис на цртежот. Кои се клучните точки? Дали има помошни линии?>
 
 
-<!-- VISUAL PROMPT: Draw a right triangle with legs 5 and 12. Mark midpoints M and N of the legs. Draw a circle with diameter MN. Mark points P and Q where the circle hits the hypotenuse. Show that one point is the midpoint and the other is the altitude foot. -->
+![Визуелизација](../../assets/images/geom_9_hypot_ratio_mid_circle.png)
 
 ## 🧠 Анализа
 Идентификувај ги точките $P$ и $Q$. Едната е секогаш средина на хипотенузата, а другата е подножјето на висината. Користи ги Евклидовите теореми за да ги најдеш нивните позиции.

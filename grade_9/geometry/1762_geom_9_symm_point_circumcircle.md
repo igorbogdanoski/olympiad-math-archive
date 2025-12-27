@@ -52,7 +52,7 @@ tags:
 <Опис на цртежот. Кои се клучните точки? Дали има помошни линии?>
 
 
-<!-- VISUAL PROMPT: Draw an acute triangle ABC. Pick a point D inside such that angle ADB = angle ADC = 180 - angle A. Reflect A over D to get A'. Show that A, B, A', and C all lie on the same circle. -->
+![Визуелизација](../../assets/images/geom_9_symm_point_circumcircle.png)
 
 ## 🧠 Анализа
 Хеуристика: 'Докажи тетивност преку суплементни агли'. Треба да покажеме дека $\angle BA'C + \angle BAC = 180^\circ$. Прво докажете ја сличноста на триаголниците со точката $D$.

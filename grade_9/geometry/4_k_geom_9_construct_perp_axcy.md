@@ -52,7 +52,7 @@ tags:
 <Опис на цртежот. Кои се клучните точки? Дали има помошни линии?>
 
 
-<!-- VISUAL PROMPT: Draw a circle with diameter AB. Place a point C on AB. Mark N as the midpoint of CB. Draw a vertical line through N to find points X and Y on the circle. Connect AX and CY to show they are perpendicular. -->
+![Визуелизација](../../assets/images/geom_9_construct_perp_axcy.png)
 
 ## 🧠 Анализа
 Проекцијата на точката $X$ врз дијаметарот $AB$ го крие клучот. Користи сличност на правоаголни триаголници за да ја најдеш врската помеѓу $C$, $B$ и подножјето на нормалата.

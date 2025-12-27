@@ -52,7 +52,7 @@ tags:
 <Опис на цртежот. Кои се клучните точки? Дали има помошни линии?>
 
 
-<!-- VISUAL PROMPT: Draw circle k2 with center O and circle k1 passing through O. Let A and B be intersection points. Pick point C on k1 and connect OC, marking D on k2. Show AD and CD are angle bisectors of triangle ABC. -->
+![Визуелизација](../../assets/images/geom_9_k1_k2_incenter_proof.png)
 
 ## 🧠 Анализа
 Покажи дека $D$ е точката каде се сечат симетралите на аглите. Искористи го фактот дека $OA=OB=OD$ се радиуси на $k_2$.
