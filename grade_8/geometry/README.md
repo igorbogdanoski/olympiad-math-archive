@@ -2,7 +2,7 @@
 
 [⬅️ Назад кон прегледот](../README.md)
 
-**Вкупно задачи:** 32
+**Вкупно задачи:** 33
 
 | ID | Наслов | Тежина | Тип | Клучна Вештина |
 |:---|:---|:---:|:---|:---|
@@ -20,6 +20,7 @@
 | [geo_rect_shade_01](geo_mentor_example_geo_rect_shade_01.md) |  | 3/10 | General | <main_tool> # e.g., angle_chasing, similarity, cyclic_quads |
 | [geom_angle_overlap_05](matematiskop_3_762_geom_angle_overlap_05.md) |  | 5/10 | General | <main_tool> # e.g., angle_chasing, similarity, cyclic_quads |
 | [geo_quad_bisectors](math_problem_image_geo_quad_bisectors.md) |  | 5/10 | General | <main_tool> # e.g., angle_chasing, similarity, cyclic_quads |
+| [2023_mun_g8_1](municipal_competition_2023_2023_mun_g8_1.md) | --- GEOMETRY SKILLS --- | 3/10 | calculation | angle_chasing |
 | [2024_mun_g8_4](municipal_competition_2024_2024_mun_g8_4.md) | --- GEOMETRY SKILLS --- | 5/10 | calculation | angle_chasing |
 | [2025_mun_g8_2](municipal_competition_2025_2025_mun_g8_2.md) |  | 3/10 | calculation | logic |
 | [2025_mun_g8_4](municipal_competition_2025_2025_mun_g8_4.md) |  | 3/10 | calculation | logic |

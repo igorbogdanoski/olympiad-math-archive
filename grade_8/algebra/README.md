@@ -2,10 +2,12 @@
 
 [⬅️ Назад кон прегледот](../README.md)
 
-**Вкупно задачи:** 7
+**Вкупно задачи:** 9
 
 | ID | Наслов | Тежина | Тип | Клучна Вештина |
 |:---|:---|:---:|:---|:---|
+| [2023_mun_g8_2](municipal_competition_2023_2023_mun_g8_2.md) | --- SKILL MAPPING --- | 2/10 | word_problem | algebraic_manipulation |
+| [2023_mun_g8_4](municipal_competition_2023_2023_mun_g8_4.md) | --- SKILL MAPPING --- | 4/10 | word_problem | algebraic_manipulation |
 | [2024_mun_g8_1](municipal_competition_2024_2024_mun_g8_1.md) | --- SKILL MAPPING --- | 2/10 | calculation | algebraic_manipulation |
 | [2024_mun_g8_2](municipal_competition_2024_2024_mun_g8_2.md) | --- SKILL MAPPING --- | 3/10 | word_problem | algebraic_manipulation |
 | [2025_mun_g8_1](municipal_competition_2025_2025_mun_g8_1.md) |  | 2/10 | word_problem | logic |

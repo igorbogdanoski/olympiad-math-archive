@@ -8392,3 +8392,121 @@ class Task_2023_mun_g8_1(Scene):
 
 ```
 ---
+
+### 🆔 Задача: 2023_mun_g9_2 - Концентрични кружници и квадрати
+**📅 Додадено:** 2025-12-27 18:03
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_2023_mun_g9_2(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+class Task_2023_mun_g9_2(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        
+        # Radii
+        R = 3
+        r = R * np.sqrt(3) / 2 # approx 2.6
+        
+        # Circles
+        c1 = Circle(radius=R, color=BLUE)
+        c2 = Circle(radius=r, color=RED)
+        
+        # Squares
+        # Outer square side 2R
+        sq1 = Square(side_length=2*R, color=BLUE)
+        # Inner square side r*sqrt(2). Diagonal 2r.
+        sq2 = Square(side_length=r*np.sqrt(2), color=RED).rotate(45*DEGREES)
+        # Wait, inscribed square usually has vertices on circle. 
+        # If rotated by 45 deg, vertices are at (r,0), (0,r)... No, (r,0) distance is r.
+        # Yes, rotated square fits.
+        
+        # Hexagon for part b
+        hex = RegularPolygon(n=6, radius=R, color=GREEN)
+        
+        self.add(c1, c2)
+        self.wait(1)
+        self.play(Create(sq1), Create(sq2))
+        self.wait(1)
+        
+        # Show hexagon relation
+        self.play(FadeOut(sq1), FadeOut(sq2))
+        self.play(Create(hex))
+        
+        # Radius lines
+        line_R = Line(ORIGIN, hex.get_vertices()[0], color=BLACK)
+        # Apothem (r)
+        midpoint = (hex.get_vertices()[0] + hex.get_vertices()[1]) / 2
+        line_r = Line(ORIGIN, midpoint, color=BLACK)
+        
+        lbl_R = MathTex("R", color=BLACK).next_to(line_R, UP)
+        lbl_r = MathTex("r", color=BLACK).next_to(line_r, DOWN)
+        
+        self.add(line_R, line_r, lbl_R, lbl_r)
+        
+        txt = MathTex("r = \\frac{\\sqrt{3}}{2}R", color=BLACK).to_corner(UL)
+        self.play(Write(txt))
+        # --- AI GENERATED CODE END ---
+
+```
+---
+
+### 🆔 Задача: 2023_mun_g9_4 - Плоштина на четириаголник
+**📅 Додадено:** 2025-12-27 18:03
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_2023_mun_g9_4(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+        self.camera.background_color = WHITE
+        
+        # Construct quadrilateral
+        # a+b=10. Let a=6, b=4.
+        # c^2 = (36+16)/2 = 26. c = sqrt(26) approx 5.1.
+        
+        A = DL * 2
+        B = A + RIGHT * 3 # a=6 units (scaled /2)
+        D = A + UP * 2    # b=4 units (scaled /2)
+        
+        # C needs to be such that BC=CD and angle C=90.
+        # Midpoint of BD
+        M_BD = (B + D) / 2
+        # C is M_BD + vector perpendicular to BD with length BD/2
+        # Vector BD = D - B = (-3, 2).
+        # Normal = (2, 3). 
+        # C = M_BD + Normal/2 = (0, 1) + (1, 1.5) = (1, 2.5).
+        C = M_BD + np.array([1, 1.5, 0])
+        
+        quad = Polygon(A, B, C, D, color=BLACK, stroke_width=4)
+        diag = Line(B, D, color=BLUE)
+        
+        # Right angles
+        ra_A = RightAngle(Line(A, D), Line(A, B), length=0.3, color=RED)
+        ra_C = RightAngle(Line(C, D), Line(C, B), length=0.3, color=RED)
+        
+        # Labels
+        lbl_A = MathTex("A", color=BLACK).next_to(A, DL)
+        lbl_B = MathTex("B", color=BLACK).next_to(B, DR)
+        lbl_C = MathTex("C", color=BLACK).next_to(C, UR)
+        lbl_D = MathTex("D", color=BLACK).next_to(D, UL)
+        
+        txt = MathTex("P = \\frac{(a+b)^2}{4} = 25", color=BLUE).to_edge(UP)
+        
+        self.add(quad, diag, ra_A, ra_C)
+        self.add(lbl_A, lbl_B, lbl_C, lbl_D, txt)
+        # --- AI GENERATED CODE END ---
+
+```
+---

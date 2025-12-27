@@ -2,10 +2,11 @@
 
 [⬅️ Назад кон прегледот](../README.md)
 
-**Вкупно задачи:** 11
+**Вкупно задачи:** 12
 
 | ID | Наслов | Тежина | Тип | Клучна Вештина |
 |:---|:---|:---:|:---|:---|
+| [2023_mun_g8_3](municipal_competition_2023_2023_mun_g8_3.md) | --- GEOMETRY SKILLS --- | 4/10 | calculation | factorization |
 | [2024_mun_g8_3](municipal_competition_2024_2024_mun_g8_3.md) | --- SKILL MAPPING --- | 3/10 | proof | parity |
 | [4286](numerus_4286_4286.md) |  | 4/10 | General | divisibility_rules # e.g., symmetry, invariants, telescoping |
 | [4288](numerus_4288_4288.md) |  | 5/10 | General | divisibility_rules # e.g., symmetry, invariants, telescoping |
