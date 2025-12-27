@@ -10363,3 +10363,61 @@ class Task_2022_mun_g8_5(Scene):
 
 ```
 ---
+
+### 🆔 Задача: 2022_mun_g8_8 - Квадрат со впишани правоаголници
+**📅 Додадено:** 2025-12-27 20:41
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_2022_mun_g8_8(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+class Task_2022_mun_g8_8(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        
+        # Square 10x10. Scale: 1 unit = 2.
+        side = 5
+        square = Square(side_length=side, color=BLACK)
+        
+        # Labels for square side
+        lbl_right = MathTex("10", color=BLACK).next_to(square, RIGHT)
+        lbl_bottom = MathTex("7x+3", color=BLACK).next_to(square, DOWN)
+        
+        # Rectangles inside (x=1)
+        # R1: 2x3 -> 1x1.5 units
+        # R2: 2x3 -> 1x1.5 units
+        # R3: 8x2 -> 4x1 units
+        
+        r1 = Rectangle(width=1, height=1.5, color=BLUE, fill_opacity=0.3)
+        r1.align_to(square, UL).shift(RIGHT*0.5 + DOWN*0.5) # Arbitrary position inside
+        
+        r2 = Rectangle(width=1, height=1.5, color=BLUE, fill_opacity=0.3)
+        r2.align_to(square, UR).shift(LEFT*0.5 + DOWN*0.5)
+        
+        r3 = Rectangle(width=4, height=1, color=BLUE, fill_opacity=0.3)
+        r3.align_to(square, DL).shift(RIGHT*0.5 + UP*0.5)
+        
+        # Labels for rects
+        l1 = MathTex("2x", color=BLACK, font_size=24).next_to(r1, UP, buff=0.1)
+        l2 = MathTex("3", color=BLACK, font_size=24).next_to(r1, LEFT, buff=0.1)
+        l3 = MathTex("3x+5", color=BLACK, font_size=24).next_to(r3, DOWN, buff=0.1)
+        
+        self.add(square, lbl_right, lbl_bottom)
+        self.add(r1, r2, r3, l1, l2, l3)
+        
+        # Calculation animation
+        calc1 = MathTex("7x+3=10 \\implies x=1", color=RED).to_edge(UP)
+        calc2 = MathTex("P = 6+6+16 = 28", color=RED).next_to(calc1, DOWN)
+        
+        self.play(Write(calc1))
+        self.play(Write(calc2))
+        # --- AI GENERATED CODE END ---
+
+```
+---
