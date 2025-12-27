@@ -2,10 +2,15 @@
 
 [⬅️ Назад кон прегледот](../README.md)
 
-**Вкупно задачи:** 7
+**Вкупно задачи:** 12
 
 | ID | Наслов | Тежина | Тип | Клучна Вештина |
 |:---|:---|:---:|:---|:---|
+| [2022_mun_g6_1](municipal_competition_2022_2022_mun_g6_1.md) | --- SKILL MAPPING --- | 4/10 | calculation | telescoping |
+| [2022_mun_g6_2](municipal_competition_2022_2022_mun_g6_2.md) | --- SKILL MAPPING --- | 3/10 | calculation | algebraic_manipulation |
+| [2022_mun_g6_3](municipal_competition_2022_2022_mun_g6_3.md) | --- SKILL MAPPING --- | 3/10 | calculation | percentages |
+| [2022_mun_g6_5](municipal_competition_2022_2022_mun_g6_5.md) | --- SKILL MAPPING --- | 3/10 | calculation | working_backwards |
+| [2022_mun_g6_9](municipal_competition_2022_2022_mun_g6_9.md) | --- SKILL MAPPING --- | 3/10 | calculation | algebraic_manipulation |
 | [2023_mun_g6_3](municipal_competition_2023_2023_mun_g6_3.md) | --- SKILL MAPPING --- | 3/10 | word_problem | algebraic_manipulation |
 | [2023_mun_g6_4](municipal_competition_2023_2023_mun_g6_4.md) | --- SKILL MAPPING --- | 3/10 | word_problem | proportions |
 | [2024_mun_g6_2](municipal_competition_2024_2024_mun_g6_2.md) | --- SKILL MAPPING --- | 3/10 | calculation | algebraic_manipulation |

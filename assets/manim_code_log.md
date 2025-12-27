@@ -9356,3 +9356,98 @@ class Task_2022_mun_g6_4(Scene):
 
 ```
 ---
+
+### 🆔 Задача: 2022_mun_g6_7 - Зголемување на квадрат
+**📅 Додадено:** 2025-12-27 19:50
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_2022_mun_g6_7(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+        self.camera.background_color = WHITE
+        
+        # Square x by x. Let x=2.
+        # Increase by 4. Let 4 units = 1 visual unit.
+        # So x=2 (visual), increase=1 (visual).
+        
+        x_val = 2
+        inc = 1
+        
+        sq_old = Square(side_length=x_val, color=BLUE, fill_opacity=0.2).move_to(DL)
+        
+        # New parts
+        rect_right = Rectangle(width=inc, height=x_val, color=RED, fill_opacity=0.2).next_to(sq_old, RIGHT, buff=0)
+        rect_top = Rectangle(width=x_val, height=inc, color=RED, fill_opacity=0.2).next_to(sq_old, UP, buff=0)
+        sq_corner = Square(side_length=inc, color=RED, fill_opacity=0.2).next_to(rect_right, UP, buff=0)
+        
+        # Labels
+        lbl_x = MathTex("x", color=BLACK).next_to(sq_old, DOWN)
+        lbl_4 = MathTex("4", color=RED).next_to(rect_right, DOWN)
+        
+        area_lbl = MathTex("96", color=RED).move_to(sq_corner.get_center() + DL*0.5)
+        
+        self.add(sq_old, rect_right, rect_top, sq_corner)
+        self.add(lbl_x, lbl_4)
+        
+        # Equation
+        eq = MathTex("2 \\cdot (4x) + 4^2 = 96", color=BLACK).to_edge(UP)
+        res = MathTex("8x = 80 \\implies x = 10", color=BLUE).next_to(eq, DOWN)
+        
+        self.play(Write(eq))
+        self.play(Write(res))
+        # --- AI GENERATED CODE END ---
+
+```
+---
+
+### 🆔 Задача: 2022_mun_g6_10 - Надворешни агли во триаголник
+**📅 Додадено:** 2025-12-27 19:50
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_2022_mun_g6_10(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+        self.camera.background_color = WHITE
+        
+        # Right triangle
+        A = LEFT * 2 + DOWN * 1
+        B = RIGHT * 2 + DOWN * 1
+        C = LEFT * 2 + UP * 2
+        
+        tri = Polygon(A, B, C, color=BLACK, stroke_width=4)
+        
+        # Exterior angles lines
+        line_A = Line(A + RIGHT, A + LEFT*1.5, color=GRAY)
+        line_B = Line(B + LEFT, B + RIGHT*1.5, color=GRAY)
+        
+        # Angles
+        ext_A = Angle(Line(A, C), Line(A, A+LEFT), radius=0.5, color=RED)
+        lbl_extA = MathTex("\\alpha_1", color=RED).next_to(ext_A, UL, buff=0.1)
+        
+        ext_B = Angle(Line(B, B+RIGHT), Line(B, C), radius=0.5, color=BLUE)
+        lbl_extB = MathTex("\\beta_1", color=BLUE).next_to(ext_B, UR, buff=0.1)
+        
+        int_C = RightAngle(Line(C, A), Line(C, B), length=0.4, color=GREEN)
+        lbl_C = MathTex("\\gamma", color=GREEN).next_to(int_C, UR, buff=0.1)
+        
+        self.add(tri, line_A, line_B, ext_A, lbl_extA, ext_B, lbl_extB, int_C, lbl_C)
+        
+        # Calculation
+        calc = MathTex("\\alpha_1 + \\beta_1 = 270^\\circ \\implies \\gamma_1 = 90^\\circ", color=BLACK).to_edge(UP)
+        self.play(Write(calc))
+        # --- AI GENERATED CODE END ---
+
+```
+---
