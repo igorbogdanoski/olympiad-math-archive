@@ -2,10 +2,11 @@
 
 [⬅️ Назад кон прегледот](../README.md)
 
-**Вкупно задачи:** 4
+**Вкупно задачи:** 5
 
 | ID | Наслов | Тежина | Тип | Клучна Вештина |
 |:---|:---|:---:|:---|:---|
+| [2024_mun_g7_1](municipal_competition_2024_2024_mun_g7_1.md) | --- SKILL MAPPING --- | 3/10 | word_problem | algebraic_manipulation |
 | [2025_mun_g7_1](municipal_competition_2025_2025_mun_g7_1.md) | --- SKILL MAPPING --- | 3/10 | calculation | logic |
 | [2025_mun_g7_2](municipal_competition_2025_2025_mun_g7_2.md) | --- SKILL MAPPING --- | 2/10 | calculation | logic |
 | [4374](numerus_4374_4374.md) | --- SKILL MAPPING (New Standard) --- | 3/10 | General | modeling # e.g., symmetry, invariants, telescoping |

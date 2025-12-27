@@ -6,4 +6,4 @@
 
 | ID | Наслов | Тежина | Тип | Клучна Вештина |
 |:---|:---|:---:|:---|:---|
-| [2025_mun_y3_3a](municipal_competition_2025_2025_mun_y3_3a.md) | --- GEOMETRY SKILLS --- | 4/10 | calculation | logic |
+| [2025_mun_y3_3a](municipal_competition_2025_2025_mun_y3_3a.md) |  | 4/10 | calculation | logic |

@@ -6,4 +6,4 @@
 
 | ID | Наслов | Тежина | Тип | Клучна Вештина |
 |:---|:---|:---:|:---|:---|
-| [2025_mun_y2_2a](municipal_competition_2025_2025_mun_y2_2a.md) | --- SKILL MAPPING --- | 5/10 | proof | logic |
+| [2025_mun_y2_2a](municipal_competition_2025_2025_mun_y2_2a.md) |  | 5/10 | proof | logic |
