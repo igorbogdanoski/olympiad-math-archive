@@ -2,10 +2,11 @@
 
 [⬅️ Назад кон прегледот](../README.md)
 
-**Вкупно задачи:** 12
+**Вкупно задачи:** 13
 
 | ID | Наслов | Тежина | Тип | Клучна Вештина |
 |:---|:---|:---:|:---|:---|
+| [2022_mun_g7_4](municipal_competition_2022_2022_mun_g7_4.md) | --- GEOMETRY SKILLS --- | 3/10 | calculation | visual_reasoning |
 | [2023_mun_g7_2](municipal_competition_2023_2023_mun_g7_2.md) | --- GEOMETRY SKILLS --- | 2/10 | word_problem | visual_reasoning |
 | [2023_mun_g7_3](municipal_competition_2023_2023_mun_g7_3.md) | --- GEOMETRY SKILLS --- | 2/10 | calculation | angle_chasing |
 | [2024_mun_g7_3](municipal_competition_2024_2024_mun_g7_3.md) | --- GEOMETRY SKILLS --- | 4/10 | calculation | visual_reasoning |
