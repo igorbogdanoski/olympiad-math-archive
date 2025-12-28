@@ -81,26 +81,6 @@ class {class_name}(Scene):
             f.write(entry)
     except Exception: pass
 
-def generate_manim_image(prob_id, code_body):
-    if not RENDERER_AVAILABLE or not code_body: 
-        print("⚠️ Renderer not available or no code provided.")
-        return False
-    
-    print(f"🎨 Генерирам слика за {prob_id} користејќи render_manim...")
-    try:
-        # render_scene handles cleaning, temp files, and moving the image to assets/images
-        render_scene(prob_id, code_body)
-        
-        # Check if successful
-        expected_path = os.path.join(IMAGES_DIR, f"{prob_id}.png")
-        if os.path.exists(expected_path):
-            return True
-    except Exception as e:
-        print(f"❌ Error rendering manim: {e}")
-        return False
-    
-    return False
-
 def create_problem_file(data):
     if not data: return
 
@@ -195,7 +175,7 @@ def create_problem_file(data):
     content = content.replace("<Текст.>", text_mk)
     content = content.replace("<Оригинален текст на задачата. Ако е превод, внимавај на терминологијата.>", text_mk)
     
-    # --- 6. ПЕДАГОШКИ ДЕЛ (КЛУЧНИ ИЗМЕНИ) ---
+    # --- 6. ПЕДАГОШКИ ДЕЛ (КЛУЧНИ ИЗМЕНИ СО LAMBDA) ---
     
     # А. Анализа (Hint) - Скриена
     hint_text = data.get('analysis_hint', 'Нема анализа.')
@@ -213,19 +193,14 @@ def create_problem_file(data):
 </details>
 """
     # FIX: Користиме lambda x: interactive_hint за да избегнеме 'bad escape' грешки
-    # Ова му кажува на Python: "Не го гледај текстот како regex, само залепи го".
     content = re.sub(r'<Ова е најважниот дел.*?skill\?>', lambda x: interactive_hint, content, flags=re.DOTALL)
     content = re.sub(r'<Зошто повлековме.*?задачата\?>', lambda x: interactive_hint, content, flags=re.DOTALL)
     
-    # Fallback ако темплејтот е веќе чист
-    if "## 🧠 Анализа" in content and interactive_hint not in content:
-         pass 
-
     # Б. Решение - Скриено
     sol = data.get('solution_content', 'Решението е во изработка.')
     collapsible_sol = f"\n<details>\n<summary>📝 Прикажи го целото решение</summary>\n\n{sol}\n\n</details>\n"
     
-    # FIX: Истата поправка и тука (lambda x: ...)
+    # FIX: Користиме lambda x: collapsible_sol
     content = re.sub(r'<Детално решение.*?чекор\.>', lambda x: collapsible_sol, content, flags=re.DOTALL)
     content = re.sub(r'<Чекор по чекор.*?лак"\)\.>', lambda x: collapsible_sol, content, flags=re.DOTALL)
 
@@ -238,7 +213,9 @@ def create_problem_file(data):
 
     # Г. Педагошки белешки
     notes = data.get('pedagogical_notes', '')
-    content = re.sub(r'<Педагошки забелешки.*?>', notes, content, flags=re.DOTALL)
+    # FIX: Користиме lambda x: notes
+    content = re.sub(r'<Педагошки забелешки.*?>', lambda x: notes, content, flags=re.DOTALL)
+    content = re.sub(r'<Педагошки забелешки\.>', lambda x: notes, content, flags=re.DOTALL)
 
     # --- 7. ЗАПИШУВАЊЕ ---
     with open(output_path, 'w', encoding='utf-8') as f:

@@ -13169,3 +13169,46 @@ class Task_2022_mun_y4_19b(Scene):
 
 ```
 ---
+
+### 🆔 Задача: 2022_mun_y4_19b - Ротација и координати
+**📅 Додадено:** 2025-12-28 14:57
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_2022_mun_y4_19b(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+        axes = Axes(x_range=[0, 7], y_range=[0, 7], x_length=6, y_length=6)
+        
+        A = axes.c2p(1, 2)
+        A1 = axes.c2p(6, 5)
+        B = axes.c2p(1, 4)
+        B1 = axes.c2p(4, 5)
+        M = axes.c2p(2, 6)
+        
+        dots = VGroup(Dot(A), Dot(A1), Dot(B), Dot(B1), Dot(M, color=RED))
+        labels = VGroup(
+            MathTex('A').next_to(A, DL),
+            MathTex('A_1').next_to(A1, UR),
+            MathTex('B').next_to(B, UL),
+            MathTex('B_1').next_to(B1, UR),
+            MathTex('M').next_to(M, UP)
+        ).set_color(BLACK)
+        
+        lines = VGroup(
+            DashedLine(A, A1, color=GREY),
+            DashedLine(B, B1, color=GREY),
+            Line(M, A, color=BLUE, stroke_opacity=0.5),
+            Line(M, A1, color=BLUE, stroke_opacity=0.5)
+        )
+
+        self.add(axes, dots, labels, lines)
+        # --- AI GENERATED CODE END ---
+
+```
+---
