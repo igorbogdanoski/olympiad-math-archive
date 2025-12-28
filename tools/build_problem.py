@@ -199,7 +199,7 @@ def create_problem_file(data):
     
     # А. Анализа (Hint) - Скриена
     hint_text = data.get('analysis_hint', 'Нема анализа.')
-    strategy_text = data.get('solution_strategy', '') # Ново поле ако го додадеме во JSON
+    strategy_text = data.get('solution_strategy', '') 
     
     full_hint = hint_text
     if strategy_text:
@@ -212,20 +212,22 @@ def create_problem_file(data):
 {full_hint}
 </details>
 """
-    # Замена на сите можни placeholders за анализа
-    content = re.sub(r'<Ова е најважниот дел.*?skill\?>', interactive_hint, content, flags=re.DOTALL)
-    content = re.sub(r'<Зошто повлековме.*?задачата\?>', interactive_hint, content, flags=re.DOTALL)
+    # FIX: Користиме lambda x: interactive_hint за да избегнеме 'bad escape' грешки
+    # Ова му кажува на Python: "Не го гледај текстот како regex, само залепи го".
+    content = re.sub(r'<Ова е најважниот дел.*?skill\?>', lambda x: interactive_hint, content, flags=re.DOTALL)
+    content = re.sub(r'<Зошто повлековме.*?задачата\?>', lambda x: interactive_hint, content, flags=re.DOTALL)
+    
     # Fallback ако темплејтот е веќе чист
     if "## 🧠 Анализа" in content and interactive_hint not in content:
-         # Ова е малку ризично, подобро е да се потпреме на placeholders, но за секој случај:
          pass 
 
     # Б. Решение - Скриено
     sol = data.get('solution_content', 'Решението е во изработка.')
     collapsible_sol = f"\n<details>\n<summary>📝 Прикажи го целото решение</summary>\n\n{sol}\n\n</details>\n"
     
-    content = re.sub(r'<Детално решение.*?чекор\.>', collapsible_sol, content, flags=re.DOTALL)
-    content = re.sub(r'<Чекор по чекор.*?лак"\)\.>', collapsible_sol, content, flags=re.DOTALL)
+    # FIX: Истата поправка и тука (lambda x: ...)
+    content = re.sub(r'<Детално решение.*?чекор\.>', lambda x: collapsible_sol, content, flags=re.DOTALL)
+    content = re.sub(r'<Чекор по чекор.*?лак"\)\.>', lambda x: collapsible_sol, content, flags=re.DOTALL)
 
     # В. Краен резултат
     final_ans = data.get('final_answer', '')
