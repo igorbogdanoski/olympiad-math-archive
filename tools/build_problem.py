@@ -15,23 +15,25 @@ except ImportError:
 # --- КОНФИГУРАЦИЈА ---
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 BASE_DIR = os.path.abspath(os.path.join(SCRIPT_DIR, "../"))
-DOCS_DIR = os.path.join(BASE_DIR, "docs")  # <--- НОВО: Дефинираме каде е docs папката
+DOCS_DIR = os.path.join(BASE_DIR, "docs")  # <--- НОВО: Главна папка за MkDocs
 
 TEMPLATES_DIR = os.path.join(BASE_DIR, "templates")
 INPUT_FILE = os.path.join(SCRIPT_DIR, "input.json")
 
 # Сликите и логовите сега се во docs/assets
-IMAGES_DIR = os.path.join(DOCS_DIR, "assets", "images") 
+IMAGES_DIR = os.path.join(DOCS_DIR, "assets", "images")
 MANIM_LOG_FILE = os.path.join(DOCS_DIR, "assets", "manim_code_log.md")
 
-# Проверка за Manim (за секој случај, иако користиш Geo-Mentor)
+# Проверка за Manim
 try:
     import manim # type: ignore
     MANIM_AVAILABLE = True
 except (ImportError, Exception):
     MANIM_AVAILABLE = False
 
+# Креирај ги папките ако не постојат
 if not os.path.exists(IMAGES_DIR): os.makedirs(IMAGES_DIR)
+if not os.path.exists(os.path.dirname(MANIM_LOG_FILE)): os.makedirs(os.path.dirname(MANIM_LOG_FILE))
 
 def slugify(text):
     if not text: return "unknown"
@@ -50,7 +52,10 @@ def load_template(is_geometry):
 
 def ensure_skill_exists(skill_name, is_theorem=False):
     if not skill_name: return
-    folder = os.path.join(BASE_DIR, "tools", "theorems" if is_theorem else "skill_guides")
+    # Skills сега одат во docs/skill_guides или docs/theorems
+    folder_name = "theorems" if is_theorem else "skill_guides"
+    folder = os.path.join(DOCS_DIR, folder_name)
+    
     if not os.path.exists(folder): os.makedirs(folder)
     
     filename = f"{skill_name}.md"
@@ -100,14 +105,14 @@ def create_problem_file(data):
     prob_id = str(data.get('problem_id', '000'))
     filename = f"{source_slug}_{prob_id}.md"
     
+    # АЖУРИРАНО: Користиме DOCS_DIR
     if grade <= 5:
-        # Сега користиме DOCS_DIR наместо BASE_DIR
         output_dir = os.path.join(DOCS_DIR, "pre_olympiad", f"grade_{grade}", field_dir)
         img_rel_path_prefix = "../../../assets/images"
     else:
-        # Сега користиме DOCS_DIR наместо BASE_DIR
         output_dir = os.path.join(DOCS_DIR, f"grade_{grade}", field_dir)
-        img_rel_path_prefix = "../../assets/images"    
+        img_rel_path_prefix = "../../assets/images"
+    
     os.makedirs(output_dir, exist_ok=True)
     output_path = os.path.join(output_dir, filename)
 
