@@ -48,6 +48,7 @@ tags:
 Во правоаголен триаголник, односот на радиусите на впишаната и опишаната кружница е $2:5$. Определи го односот на катетите.
 
 ## 📐 Скица / Конструкција
+![Problem_geo_right_triangle_radii](https://raw.githubusercontent.com/pc4all/olympiad-math-archive/main/media/images/manim_geo_right_triangle_radii/Problem_geo_right_triangle_radii_ManimCE_v0.19.1.png)
 
 
 ## 🧠 Анализа

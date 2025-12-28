@@ -45,9 +45,7 @@ tags:
 За висините во триаголникот $ABC$ важи $h_c = h_a + h_b$. Ако $a=4$ dm, $b=6$ dm, пресметај го периметарот на $ABC$.
 
 ## 📐 Скица / Конструкција
-
-
-![Визуелизација](../../assets/images/geom_9_area_height.png){ width=500 }
+![Problem_geom_9_area_height](https://raw.githubusercontent.com/pc4all/olympiad-math-archive/main/media/images/manim_geom_9_area_height/Problem_geom_9_area_height_ManimCE_v0.19.1.png)
 ## 🧠 Анализа
 Изрази ги сите висини преку плоштината $P$ и соодветните страни ($h_a = 2P/a$).
 

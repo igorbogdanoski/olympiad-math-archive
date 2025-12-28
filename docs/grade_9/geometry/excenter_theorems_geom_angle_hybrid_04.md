@@ -47,6 +47,7 @@ tags:
 Во триаголникот $ABC$, нека $AY$ е симетрала на внатрешниот агол кај $A$, а $BY$ е симетрала на надворешниот агол кај $B$. Докажи дека тие се сечат под агол: $$\angle AYB = \frac{\gamma}{2}$$
 
 ## 📐 Скица / Конструкција
+![Problem_geom_angle_hybrid_04](https://raw.githubusercontent.com/pc4all/olympiad-math-archive/main/media/images/manim_geom_angle_hybrid_04/Problem_geom_angle_hybrid_04_ManimCE_v0.19.1.png)
 
 
 ![Визуелизација](../../assets/images/geom_angle_hybrid_04.png){ width=500 }
