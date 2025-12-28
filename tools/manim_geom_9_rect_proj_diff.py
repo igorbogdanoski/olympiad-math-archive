@@ -1,77 +1,88 @@
 from manim import *
+import numpy as np
 
-class Problem_geom_9_rect_proj_diff(Scene):
+class RectProjDiff(Scene):
     def construct(self):
-        # Scale
-        scale = 1.5
-        
+        self.camera.background_color = WHITE
         # Parameters
-        q = 1.0 # AH
-        p = 3.0 # HB
-        h = np.sqrt(p * q) # CH
+        # c = 8
+        c = 8
+        # a = c/2 = 4
+        a = 4
+        # b = sqrt(c^2 - a^2) = sqrt(64 - 16) = sqrt(48) = 4sqrt(3) approx 6.928
+        b = np.sqrt(c**2 - a**2)
         
-        # Coordinates
-        H = ORIGIN
-        A = LEFT * q
-        B = RIGHT * p
-        C = UP * h
+        # Points
+        # C at origin
+        C = ORIGIN
+        # A on y-axis? No, let's put AB on x-axis for altitude visualization.
+        # C at top.
+        # h = ab/c = 4 * 6.928 / 8 = 3.464
+        h = a * b / c
+        # p = b^2/c = 48/8 = 6
+        p = b**2 / c
+        # q = a^2/c = 16/8 = 2
+        q = a**2 / c
         
-        # Shift to center
-        center = (A + B + C) / 3
-        shift = -center
+        # D at origin
+        D = ORIGIN
+        A = LEFT * p
+        B = RIGHT * q
+        C_top = UP * h
         
-        A += shift
-        B += shift
-        C += shift
-        H += shift
+        # Create points
+        pA = Dot(A, color=BLACK)
+        pB = Dot(B, color=BLACK)
+        pC = Dot(C_top, color=BLACK)
+        pD = Dot(D, color=BLACK)
         
-        # Apply scale
-        A *= scale
-        B *= scale
-        C *= scale
-        H *= scale
-        
-        # Objects
-        triangle = Polygon(A, B, C, color=BLUE, fill_opacity=0.1)
-        altitude = Line(C, H, color=RED)
+        # Shapes
+        tri = Polygon(A, B, C_top, color=BLUE, fill_opacity=0.1, stroke_color=BLUE)
+        alt = DashedLine(C_top, D, color=RED)
         
         # Labels
-        label_A = MathTex("A").next_to(A, DL)
-        label_B = MathTex("B").next_to(B, DR)
-        label_C = MathTex("C").next_to(C, UP)
-        label_H = MathTex("H").next_to(H, DOWN)
+        lbl_A = MathTex('A', color=BLACK).next_to(A, DOWN+LEFT)
+        lbl_B = MathTex('B', color=BLACK).next_to(B, DOWN+RIGHT)
+        lbl_C = MathTex('C', color=BLACK).next_to(C_top, UP)
+        lbl_D = MathTex('D', color=BLACK).next_to(D, DOWN)
         
-        # Lengths
-        brace_q = Brace(Line(A, H), DOWN)
-        label_q = brace_q.get_text("q")
+        lbl_p = MathTex('p', color=BLACK).next_to(Line(A,D), DOWN, buff=0.1)
+        lbl_q = MathTex('q', color=BLACK).next_to(Line(D,B), DOWN, buff=0.1)
+        lbl_h = MathTex('h', color=RED).next_to(alt, RIGHT, buff=0.1)
         
-        brace_p = Brace(Line(H, B), DOWN)
-        label_p = brace_p.get_text("p")
+        lbl_a = MathTex('a', color=BLACK).next_to(Line(B,C_top), RIGHT, buff=0.1)
+        lbl_b = MathTex('b', color=BLACK).next_to(Line(A,C_top), LEFT, buff=0.1)
         
-        label_a = MathTex("a").next_to(Line(A, C), UL)
-        label_b = MathTex("b").next_to(Line(B, C), UR)
+        # Angles
+        angle_A = Angle(Line(A,B), Line(A,C_top), radius=0.7, color=BLACK)
+        lbl_30 = MathTex(r'30^\circ', color=BLACK).next_to(angle_A, UP+RIGHT)
         
-        # Right angles
-        ra_C = RightAngle(Line(C, A), Line(C, B), length=0.3)
-        ra_H = RightAngle(Line(H, C), Line(H, B), length=0.3)
+        angle_B = Angle(Line(B,C_top), Line(B,A), radius=0.7, color=BLACK)
+        lbl_60 = MathTex(r'60^\circ', color=BLACK).next_to(angle_B, UP+LEFT)
+        
+        right_angle = RightAngle(Line(C_top, A), Line(C_top, B), length=0.4, color=BLACK)
+        
+        # Group
+        scene_objects = VGroup(
+            tri, alt,
+            pA, pB, pC, pD,
+            lbl_A, lbl_B, lbl_C, lbl_D,
+            lbl_p, lbl_q, lbl_h,
+            lbl_a, lbl_b,
+            angle_A, lbl_30, angle_B, lbl_60, right_angle
+        )
+        
+        scene_objects.scale(0.8)
+        scene_objects.shift(UP * 0.5)
         
         # Text
-        text = MathTex(
-            r"p - q = a",
-            r"\implies \text{Angles: } 30^\circ, 60^\circ, 90^\circ"
-        ).arrange(DOWN).to_corner(UL)
+        text = VGroup(
+            MathTex(r'p - q = a', color=BLACK),
+            MathTex(r'\frac{b^2}{c} - \frac{a^2}{c} = a', color=BLACK),
+            MathTex(r'b^2 - a^2 = ac \implies c^2 - 2a^2 = ac', color=BLACK),
+            MathTex(r'c^2 - ac - 2a^2 = 0 \implies (c-2a)(c+a) = 0', color=BLACK),
+            MathTex(r'c = 2a \implies \angle A = 30^\circ, \angle B = 60^\circ', color=BLACK)
+        ).arrange(DOWN).next_to(scene_objects, DOWN).scale(0.7)
         
-        # Angle values
-        angle_A = Angle(Line(A, B), Line(A, C), radius=0.5, color=YELLOW)
-        val_A = MathTex("60^\circ").next_to(angle_A, RIGHT)
-        
-        angle_B = Angle(Line(B, C), Line(B, A), radius=0.5, color=YELLOW)
-        val_B = MathTex("30^\circ").next_to(angle_B, LEFT)
-        
-        self.add(triangle, altitude)
-        self.add(label_A, label_B, label_C, label_H)
-        self.add(brace_q, label_q, brace_p, label_p)
-        self.add(label_a, label_b)
-        self.add(ra_C, ra_H)
+        self.add(scene_objects)
         self.add(text)
-        self.add(angle_A, val_A, angle_B, val_B)

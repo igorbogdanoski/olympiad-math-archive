@@ -1,0 +1,7 @@
+# This file is used internally by FFMPEG.
+file 'file:C:/Users/pc4all/Documents/matholimpiad/olympiad-math-archive/media/videos/manim_geo_test_01/480p15/partial_movie_files/GeometryScene/1584795214_1101260992_223132457.mp4'
+file 'file:C:/Users/pc4all/Documents/matholimpiad/olympiad-math-archive/media/videos/manim_geo_test_01/480p15/partial_movie_files/GeometryScene/4072820271_3189148405_1449134596.mp4'
+file 'file:C:/Users/pc4all/Documents/matholimpiad/olympiad-math-archive/media/videos/manim_geo_test_01/480p15/partial_movie_files/GeometryScene/4072820271_999004111_2613374285.mp4'
+file 'file:C:/Users/pc4all/Documents/matholimpiad/olympiad-math-archive/media/videos/manim_geo_test_01/480p15/partial_movie_files/GeometryScene/4072820271_327108908_649822790.mp4'
+file 'file:C:/Users/pc4all/Documents/matholimpiad/olympiad-math-archive/media/videos/manim_geo_test_01/480p15/partial_movie_files/GeometryScene/4072820271_3135538754_3032421262.mp4'
+file 'file:C:/Users/pc4all/Documents/matholimpiad/olympiad-math-archive/media/videos/manim_geo_test_01/480p15/partial_movie_files/GeometryScene/4072820271_2872842549_2962406189.mp4'
