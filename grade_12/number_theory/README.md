@@ -2,12 +2,15 @@
 
 [⬅️ Назад кон прегледот](../README.md)
 
-**Вкупно задачи:** 7
+**Вкупно задачи:** 10
 
 | ID | Наслов | Тежина | Тип | Клучна Вештина |
 |:---|:---|:---:|:---|:---|
+| [2022_mun_y4_10a](municipal_competition_2022_2022_mun_y4_10a.md) | --- SKILL MAPPING --- | 5/10 | calculation | algebraic_modeling |
 | [2022_mun_y4_1a](municipal_competition_2022_2022_mun_y4_1a.md) | --- SKILL MAPPING --- | 3/10 | calculation | algebraic_modeling |
 | [2022_mun_y4_3a](municipal_competition_2022_2022_mun_y4_3a.md) | --- SKILL MAPPING --- | 3/10 | calculation | place_value_logic |
+| [2022_mun_y4_8a](municipal_competition_2022_2022_mun_y4_8a.md) | --- SKILL MAPPING --- | 5/10 | calculation | number_properties |
+| [2022_mun_y4_9a](municipal_competition_2022_2022_mun_y4_9a.md) | --- SKILL MAPPING --- | 4/10 | calculation | continued_fractions |
 | [2023_mun_y4_1a](municipal_competition_2023_2023_mun_y4_1a.md) | --- SKILL MAPPING --- | 4/10 | calculation | factorization |
 | [2023_mun_y4_1b](municipal_competition_2023_2023_mun_y4_1b.md) | --- SKILL MAPPING --- | 3/10 | calculation | algebraic_manipulation |
 | [2024_mun_y4_1a](municipal_competition_2024_2024_mun_y4_1a.md) | --- SKILL MAPPING --- | 3/10 | logic_puzzle | working_backwards |
