@@ -15,10 +15,14 @@ except ImportError:
 # --- КОНФИГУРАЦИЈА ---
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 BASE_DIR = os.path.abspath(os.path.join(SCRIPT_DIR, "../"))
+DOCS_DIR = os.path.join(BASE_DIR, "docs")  # <--- НОВО: Дефинираме каде е docs папката
+
 TEMPLATES_DIR = os.path.join(BASE_DIR, "templates")
 INPUT_FILE = os.path.join(SCRIPT_DIR, "input.json")
-IMAGES_DIR = os.path.join(BASE_DIR, "assets", "images")
-MANIM_LOG_FILE = os.path.join(BASE_DIR, "assets", "manim_code_log.md")
+
+# Сликите и логовите сега се во docs/assets
+IMAGES_DIR = os.path.join(DOCS_DIR, "assets", "images") 
+MANIM_LOG_FILE = os.path.join(DOCS_DIR, "assets", "manim_code_log.md")
 
 # Проверка за Manim (за секој случај, иако користиш Geo-Mentor)
 try:
@@ -97,12 +101,13 @@ def create_problem_file(data):
     filename = f"{source_slug}_{prob_id}.md"
     
     if grade <= 5:
-        output_dir = os.path.join(BASE_DIR, "pre_olympiad", f"grade_{grade}", field_dir)
+        # Сега користиме DOCS_DIR наместо BASE_DIR
+        output_dir = os.path.join(DOCS_DIR, "pre_olympiad", f"grade_{grade}", field_dir)
         img_rel_path_prefix = "../../../assets/images"
     else:
-        output_dir = os.path.join(BASE_DIR, f"grade_{grade}", field_dir)
-        img_rel_path_prefix = "../../assets/images"
-    
+        # Сега користиме DOCS_DIR наместо BASE_DIR
+        output_dir = os.path.join(DOCS_DIR, f"grade_{grade}", field_dir)
+        img_rel_path_prefix = "../../assets/images"    
     os.makedirs(output_dir, exist_ok=True)
     output_path = os.path.join(output_dir, filename)
 
