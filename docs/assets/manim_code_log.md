@@ -11321,7 +11321,7 @@ class Task_2022_mun_y1_6a(Scene):
 ```python
 from manim import *
 
-class Task_2022_mun_y1_12a(Scene):
+class Task_2022_mun_y1_12a(ThreeDScene):
     def construct(self):
         self.camera.background_color = WHITE
         Text.set_default(color=BLACK)
@@ -11489,8 +11489,8 @@ class Task_2022_mun_y1_3b(Scene):
         # Angle B = 40. Angle A = 140.
         
         # Let's construct it properly
-        B = np.array([0, 0, 0])
-        C = np.array([4, 0, 0]) # BC is horizontal
+        B = np.array([0.0, 0.0, 0.0])
+        C = np.array([4.0, 0.0, 0.0]) # BC is horizontal
         # A is such that angle CBA = 40.
         # Let BA length = 3.
         A = np.array([3 * np.cos(40*DEGREES), 3 * np.sin(40*DEGREES), 0])
@@ -11511,10 +11511,10 @@ class Task_2022_mun_y1_3b(Scene):
         
         # Angles
         a_B = Angle(Line(B,A), Line(B,C), radius=0.5, other_angle=False)
-        l_B = MathTex('40^\circ').next_to(a_B, UR, buff=0.1)
+        l_B = MathTex(r'40^\circ').next_to(a_B, UR, buff=0.1)
         
         a_CAD = Angle(Line(A,C), Line(A,D), radius=0.6)
-        l_CAD = MathTex('57^\circ').next_to(a_CAD, RIGHT, buff=0.1)
+        l_CAD = MathTex(r'57^\circ').next_to(a_CAD, RIGHT, buff=0.1)
         
         a_ACD = Angle(Line(C,A), Line(C,D), radius=0.6, color=RED)
         l_ACD = MathTex('?', color=RED).next_to(a_ACD, UL, buff=0.1)
@@ -11556,7 +11556,7 @@ class Task_2022_mun_y1_10b(Scene):
         C = [A[0], 0, 0]
 
         # Sector
-        sector = Sector(outer_radius=R, angle=45*DEGREES, start_angle=0, color=BLUE, fill_opacity=0.2)
+        sector = Sector(radius=R, angle=45*DEGREES, start_angle=0, color=BLUE, fill_opacity=0.2)
         
         # Triangle
         triangle = Polygon(B, C, A, color=RED, stroke_width=4)
@@ -11598,6 +11598,7 @@ class Task_2022_mun_y1_11b(Scene):
         # Points
         Q = LEFT*1
         R = RIGHT*2
+        S = RIGHT*4
         T = LEFT*0.5 + UP*2
         U = RIGHT*1.5 + UP*2
         
@@ -11805,9 +11806,9 @@ class Task_2022_mun_y2_3a(Scene):
         a3 = 360 - a1 - a2 # 120
         
         # Sectors
-        s1 = Sector(outer_radius=2, angle=a1*DEGREES, start_angle=0, color=BLUE, fill_opacity=0.7)
-        s2 = Sector(outer_radius=2, angle=a2*DEGREES, start_angle=a1*DEGREES, color=RED, fill_opacity=0.7)
-        s3 = Sector(outer_radius=2, angle=a3*DEGREES, start_angle=(a1+a2)*DEGREES, color=GREEN, fill_opacity=0.7)
+        s1 = Sector(radius=2, angle=a1*DEGREES, start_angle=0, color=BLUE, fill_opacity=0.7)
+        s2 = Sector(radius=2, angle=a2*DEGREES, start_angle=a1*DEGREES, color=RED, fill_opacity=0.7)
+        s3 = Sector(radius=2, angle=a3*DEGREES, start_angle=(a1+a2)*DEGREES, color=GREEN, fill_opacity=0.7)
         
         # Labels
         l1 = MathTex('130^\circ').move_to(s1.get_center() * 1.5)
@@ -11943,9 +11944,9 @@ class Task_2022_mun_y2_3a(Scene):
         a3 = 360 - a1 - a2 # 120
         
         # Sectors
-        s1 = Sector(outer_radius=2, angle=a1*DEGREES, start_angle=0, color=BLUE, fill_opacity=0.7)
-        s2 = Sector(outer_radius=2, angle=a2*DEGREES, start_angle=a1*DEGREES, color=RED, fill_opacity=0.7)
-        s3 = Sector(outer_radius=2, angle=a3*DEGREES, start_angle=(a1+a2)*DEGREES, color=GREEN, fill_opacity=0.7)
+        s1 = Sector(radius=2, angle=a1*DEGREES, start_angle=0, color=BLUE, fill_opacity=0.7)
+        s2 = Sector(radius=2, angle=a2*DEGREES, start_angle=a1*DEGREES, color=RED, fill_opacity=0.7)
+        s3 = Sector(radius=2, angle=a3*DEGREES, start_angle=(a1+a2)*DEGREES, color=GREEN, fill_opacity=0.7)
         
         # Labels
         l1 = MathTex('130^\circ').move_to(s1.get_center() * 1.5)
@@ -12030,7 +12031,7 @@ class Task_2022_mun_y2_10a(Scene):
         C = [A[0], 0, 0]
 
         # Sector
-        sector = Sector(outer_radius=R, angle=45*DEGREES, start_angle=0, color=BLUE, fill_opacity=0.2)
+        sector = Sector(radius=R, angle=45*DEGREES, start_angle=0, color=BLUE, fill_opacity=0.2)
         
         # Triangle
         triangle = Polygon(B, C, A, color=RED, stroke_width=4)
@@ -12237,9 +12238,9 @@ class Task_2022_mun_y2_3b(Scene):
         a3 = 360 - a1 - a2 # 120
         
         # Sectors
-        s1 = Sector(outer_radius=2, angle=a1*DEGREES, start_angle=0, color=BLUE, fill_opacity=0.7)
-        s2 = Sector(outer_radius=2, angle=a2*DEGREES, start_angle=a1*DEGREES, color=RED, fill_opacity=0.7)
-        s3 = Sector(outer_radius=2, angle=a3*DEGREES, start_angle=(a1+a2)*DEGREES, color=GREEN, fill_opacity=0.7)
+        s1 = Sector(radius=2, angle=a1*DEGREES, start_angle=0, color=BLUE, fill_opacity=0.7)
+        s2 = Sector(radius=2, angle=a2*DEGREES, start_angle=a1*DEGREES, color=RED, fill_opacity=0.7)
+        s3 = Sector(radius=2, angle=a3*DEGREES, start_angle=(a1+a2)*DEGREES, color=GREEN, fill_opacity=0.7)
         
         # Labels
         l1 = MathTex('130^\circ').move_to(s1.get_center() * 1.5)
@@ -12317,7 +12318,7 @@ class Task_2022_mun_y2_10b(Scene):
         C = [A[0], 0, 0]
 
         # Sector
-        sector = Sector(outer_radius=R, angle=45*DEGREES, start_angle=0, color=BLUE, fill_opacity=0.2)
+        sector = Sector(radius=R, angle=45*DEGREES, start_angle=0, color=BLUE, fill_opacity=0.2)
         
         # Triangle
         triangle = Polygon(B, C, A, color=RED, stroke_width=4)
@@ -13001,7 +13002,8 @@ class Task_2022_mun_y3_20b(Scene):
         
         # Fence
         # x=1.5, y=3 (scaled 8 and 16)
-        fence = Polyline(LEFT*1.5 + UP*1.75, LEFT*1.5 + DOWN*1.25, RIGHT*1.5 + DOWN*1.25, RIGHT*1.5 + UP*1.75)
+        fence = VMobject()
+        fence.set_points_as_corners([LEFT*1.5 + UP*1.75, LEFT*1.5 + DOWN*1.25, RIGHT*1.5 + DOWN*1.25, RIGHT*1.5 + UP*1.75])
         fence.set_color(RED).set_stroke(width=4)
         
         # Labels
@@ -13035,7 +13037,8 @@ class Task_2022_mun_y3_20b(Scene):
         
         # Fence
         # x=1.5, y=3 (scaled 8 and 16)
-        fence = Polyline(LEFT*1.5 + UP*1.75, LEFT*1.5 + DOWN*1.25, RIGHT*1.5 + DOWN*1.25, RIGHT*1.5 + UP*1.75)
+        fence = VMobject()
+        fence.set_points_as_corners([LEFT*1.5 + UP*1.75, LEFT*1.5 + DOWN*1.25, RIGHT*1.5 + DOWN*1.25, RIGHT*1.5 + UP*1.75])
         fence.set_color(RED).set_stroke(width=4)
         
         # Labels
@@ -13069,7 +13072,8 @@ class Task_2022_mun_y3_20b(Scene):
         
         # Fence
         # x=1.5, y=3 (scaled 8 and 16)
-        fence = Polyline(LEFT*1.5 + UP*1.75, LEFT*1.5 + DOWN*1.25, RIGHT*1.5 + DOWN*1.25, RIGHT*1.5 + UP*1.75)
+        fence = VMobject()
+        fence.set_points_as_corners([LEFT*1.5 + UP*1.75, LEFT*1.5 + DOWN*1.25, RIGHT*1.5 + DOWN*1.25, RIGHT*1.5 + UP*1.75])
         fence.set_color(RED).set_stroke(width=4)
         
         # Labels
