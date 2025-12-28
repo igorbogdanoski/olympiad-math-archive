@@ -49,6 +49,8 @@ tags:
 
 ## 📐 Скица / Конструкција
 
+![Визуелизација](../../../assets/images/copernicus_cat2_01.png){ width=500 }
+
 
 ![Визуелизација](../../assets/images/copernicus_cat2_01.png){ width=500 }
 ## 🧠 Анализа
