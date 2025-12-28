@@ -4097,8 +4097,8 @@ class Task_geom_angle_alt_bisector_03(Scene):
         lbl_D = MathTex("D").next_to(D, DOWN)
         lbl_S = MathTex("S").next_to(S, DOWN)
         
-        lbl_beta = MathTex("\beta").next_to(B, UP+RIGHT, buff=0.5)
-        lbl_gamma = MathTex("\gamma").next_to(C, UP+LEFT, buff=0.5)
+        lbl_beta = MathTex(r"\beta").next_to(B, UP+RIGHT, buff=0.5)
+        lbl_gamma = MathTex(r"\gamma").next_to(C, UP+LEFT, buff=0.5)
         
         self.add(tri, alt_AD, bisector_AS)
         self.add(lbl_A, lbl_B, lbl_C, lbl_D, lbl_S, lbl_beta, lbl_gamma)
