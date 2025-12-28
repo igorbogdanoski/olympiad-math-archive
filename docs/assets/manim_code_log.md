@@ -4472,9 +4472,9 @@ class Task_geom_quad_symmetry_05(Scene):
         # D on x-axis, B on y-axis? No, just C=90.
         # Let's put C at (0,0), D at (3,0), B at (0,2).
         # A can be anywhere.
-        D = RIGHT * 3
-        B = UP * 2
-        A = np.array([-1, 3, 0])
+        D = RIGHT * 3.0
+        B = UP * 2.0
+        A = np.array([-1.0, 3.0, 0.0])
         
         # Shift
         center = (A + B + C + D) / 4
