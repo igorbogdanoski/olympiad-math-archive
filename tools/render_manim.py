@@ -13,10 +13,10 @@ except ImportError:
     # Ова е само за проверка, вистинското рендирање оди преку subprocess
     pass
 
-# --- КОНФИГУРАЦИЈА ---
+# --- КОНФИГУРАЦИЈА (АЖУРИРАНА ЗА DOCS) ---
 BASE_DIR = Path(__file__).parent.parent.absolute()
-DOCS_DIR = BASE_DIR / "docs" # <--- НОВО
-IMAGES_DIR = DOCS_DIR / "assets" / "images"
+DOCS_DIR = BASE_DIR / "docs"  # <--- НОВО
+IMAGES_DIR = DOCS_DIR / "assets" / "images" # <--- НОВО
 
 # Креирање на папката ако не постои
 IMAGES_DIR.mkdir(parents=True, exist_ok=True)
@@ -109,4 +109,4 @@ def render_scene(prob_id, code_body):
             shutil.rmtree(temp_media_dir, ignore_errors=True)
 
 if __name__ == "__main__":
-    print("Оваа скрипта се користи како модул од build_problem.py или batch_manim.py")
+    print("Оваа скрипта се користи како модул.")
