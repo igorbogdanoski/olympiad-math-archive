@@ -1,66 +1,99 @@
 from manim import *
 import numpy as np
 
-class Problem_geom_8_2015_square(Scene):
+class SquareDiagonalTrisection(Scene):
     def construct(self):
-        self.camera.background_color = WHITE
-        
         # Parameters
-        a = 4.0
+        side = 6
         
         # Coordinates
-        # A top-left, B top-right, C bottom-right, D bottom-left
-        A = np.array([-a/2, a/2, 0.0])
-        B = np.array([a/2, a/2, 0.0])
-        C = np.array([a/2, -a/2, 0.0])
-        D = np.array([-a/2, -a/2, 0.0])
+        # A bottom-left
+        A = ORIGIN
+        B = RIGHT * side
+        C = RIGHT * side + UP * side
+        D = UP * side
         
         # Midpoints
         M = (C + D) / 2 # Midpoint of CD
         N = (B + C) / 2 # Midpoint of BC
         
         # Intersections
-        # P is intersection of AM and BD
-        # Q is intersection of AN and BD
-        # From analysis: P is 1/3 from D, Q is 2/3 from D (or 1/3 from B)
-        P = D + (B - D) / 3
-        Q = D + 2 * (B - D) / 3
+        # P = AM intersect BD
+        # Line AM: y = (side/ (side/2)) * x? No.
+        # A=(0,0). M=(side/2, side).
+        # Line AM: y = 2x.
+        # Line BD: y = -x + side.
+        # 2x = -x + side => 3x = side => x = side/3.
+        # y = 2*side/3.
+        P = np.array([side/3, 2*side/3, 0])
         
-        # Elements
+        # Q = AN intersect BD
+        # A=(0,0). N=(side, side/2).
+        # Line AN: y = 0.5x.
+        # Line BD: y = -x + side.
+        # 0.5x = -x + side => 1.5x = side => x = side / 1.5 = 2*side/3.
+        # y = side/3.
+        Q = np.array([2*side/3, side/3, 0])
+        
+        # Create points
+        pA = Dot(A)
+        pB = Dot(B)
+        pC = Dot(C)
+        pD = Dot(D)
+        pM = Dot(M)
+        pN = Dot(N)
+        pP = Dot(P, color=RED)
+        pQ = Dot(Q, color=RED)
+        
+        # Shapes
         square = Polygon(A, B, C, D, color=BLUE, fill_opacity=0.1)
-        diag_BD = Line(B, D, color=BLACK)
-        line_AM = Line(A, M, color=RED)
-        line_AN = Line(A, N, color=RED)
+        diag_BD = Line(B, D, color=YELLOW)
+        line_AM = Line(A, M, color=GREEN)
+        line_AN = Line(A, N, color=GREEN)
         
         # Labels
-        lbl_A = Text("A", font_size=24, color=BLACK).next_to(A, UL, buff=0.1)
-        lbl_B = Text("B", font_size=24, color=BLACK).next_to(B, UR, buff=0.1)
-        lbl_C = Text("C", font_size=24, color=BLACK).next_to(C, DR, buff=0.1)
-        lbl_D = Text("D", font_size=24, color=BLACK).next_to(D, DL, buff=0.1)
-        lbl_M = Text("M", font_size=24, color=BLACK).next_to(M, DOWN, buff=0.1)
-        lbl_N = Text("N", font_size=24, color=BLACK).next_to(N, RIGHT, buff=0.1)
+        lbl_A = MathTex("A").next_to(A, DOWN+LEFT)
+        lbl_B = MathTex("B").next_to(B, DOWN+RIGHT)
+        lbl_C = MathTex("C").next_to(C, UP+RIGHT)
+        lbl_D = MathTex("D").next_to(D, UP+LEFT)
+        lbl_M = MathTex("M").next_to(M, UP)
+        lbl_N = MathTex("N").next_to(N, RIGHT)
+        lbl_P = MathTex("P").next_to(P, UP+LEFT, buff=0.1)
+        lbl_Q = MathTex("Q").next_to(Q, DOWN+RIGHT, buff=0.1)
         
-        # Mark equal segments on BD
-        # DP, PQ, QB
-        tick_DP = Line(D, P).get_center()
-        tick_PQ = Line(P, Q).get_center()
-        tick_QB = Line(Q, B).get_center()
+        # Segments on diagonal
+        seg_DP = Line(D, P, color=RED, stroke_width=4)
+        seg_PQ = Line(P, Q, color=ORANGE, stroke_width=4)
+        seg_QB = Line(Q, B, color=RED, stroke_width=4)
         
-        t_DP = Text("|", font_size=16, color=BLACK).move_to(tick_DP).rotate(45*DEGREES).shift(UP*0.1)
-        t_PQ = Text("|", font_size=16, color=BLACK).move_to(tick_PQ).rotate(45*DEGREES).shift(UP*0.1)
-        t_QB = Text("|", font_size=16, color=BLACK).move_to(tick_QB).rotate(45*DEGREES).shift(UP*0.1)
+        # Braces
+        brace_DP = Brace(seg_DP, direction=np.array([-1, 1, 0]))
+        brace_PQ = Brace(seg_PQ, direction=np.array([-1, 1, 0]))
+        brace_QB = Brace(seg_QB, direction=np.array([-1, 1, 0]))
         
-        # Add to scene
-        self.add(square)
-        self.add(diag_BD)
-        self.add(line_AM, line_AN)
-        self.add(lbl_A, lbl_B, lbl_C, lbl_D, lbl_M, lbl_N)
-        self.add(t_DP, t_PQ, t_QB)
+        # Group
+        scene_objects = VGroup(
+            square, diag_BD, line_AM, line_AN,
+            pA, pB, pC, pD, pM, pN, pP, pQ,
+            lbl_A, lbl_B, lbl_C, lbl_D, lbl_M, lbl_N, lbl_P, lbl_Q,
+            seg_DP, seg_PQ, seg_QB
+        )
         
-        # Add text info
-        info = VGroup(
-            MathTex("M \\in CD, CM=MD", color=BLACK, font_size=24),
-            MathTex("N \\in BC, BN=NC", color=BLACK, font_size=24),
-            MathTex("DP = PQ = QB", color=RED, font_size=24)
-        ).arrange(DOWN, aligned_edge=LEFT).to_corner(UL)
-        self.add(info)
+        scene_objects.scale(0.7)
+        scene_objects.shift(LEFT * 2.5)
+        
+        # Text
+        text = VGroup(
+            MathTex(r"\text{Let } P = AM \cap BD, Q = AN \cap BD"),
+            MathTex(r"\triangle ABQ \sim \triangle NDQ \text{ (Wait, } Q \text{ is closer to B)}"),
+            MathTex(r"\text{Actually: } \triangle ADQ \sim \triangle NBQ"),
+            MathTex(r"\frac{DQ}{BQ} = \frac{AD}{BN} = \frac{a}{a/2} = 2 \implies DQ = \frac{2}{3}BD, BQ = \frac{1}{3}BD"),
+            MathTex(r"\triangle ABP \sim \triangle MDP"),
+            MathTex(r"\frac{BP}{DP} = \frac{AB}{DM} = \frac{a}{a/2} = 2 \implies BP = \frac{2}{3}BD, DP = \frac{1}{3}BD"),
+            MathTex(r"PQ = BD - DP - BQ"),
+            MathTex(r"PQ = BD - \frac{1}{3}BD - \frac{1}{3}BD = \frac{1}{3}BD"),
+            MathTex(r"\implies DP = PQ = QB")
+        ).arrange(DOWN, aligned_edge=LEFT).to_edge(RIGHT).scale(0.6)
+        
+        self.add(scene_objects)
+        self.add(text)
