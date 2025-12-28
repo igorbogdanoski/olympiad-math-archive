@@ -48,6 +48,8 @@ tags:
 
 ## 📐 Скица / Конструкција
 
+![Визуелизација](../../assets/images/geom_9_quad_parallel_proof.png)
+
 
 ![Визуелизација](../../assets/images/geom_9_quad_parallel_proof.png){ width=500 }
 ## 🧠 Анализа
