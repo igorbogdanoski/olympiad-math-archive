@@ -8920,7 +8920,7 @@ class Task_2022_mun_g5_1(Scene):
         # Figure 1: Circle
         circle = Circle(radius=1.5, color=BLACK)
         # Sector 1/4
-        sector = Sector(outer_radius=1.5, angle=90*DEGREES, start_angle=0, color=BLUE, fill_opacity=0.5)
+        sector = Sector(radius=1.5, angle=90*DEGREES, start_angle=0, color=BLUE, fill_opacity=0.5)
         lines = VGroup(
             Line(LEFT*1.5, RIGHT*1.5),
             Line(UP*1.5, DOWN*1.5)
