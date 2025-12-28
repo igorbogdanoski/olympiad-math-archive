@@ -13015,3 +13015,71 @@ class Task_2022_mun_y3_20b(Scene):
 
 ```
 ---
+
+### 🆔 Задача: 2022_mun_y3_20b - Оптимизација на плоштина (Жица)
+**📅 Додадено:** 2025-12-27 23:59
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_2022_mun_y3_20b(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+        # Wall
+        wall = Rectangle(width=6, height=0.5, color=GREY, fill_opacity=1).move_to(UP*2)
+        wall_text = Text("Wall").move_to(wall.get_center())
+        
+        # Fence
+        # x=1.5, y=3 (scaled 8 and 16)
+        fence = Polyline(LEFT*1.5 + UP*1.75, LEFT*1.5 + DOWN*1.25, RIGHT*1.5 + DOWN*1.25, RIGHT*1.5 + UP*1.75)
+        fence.set_color(RED).set_stroke(width=4)
+        
+        # Labels
+        lx1 = MathTex('x').next_to(fence, LEFT)
+        lx2 = MathTex('x').next_to(fence, RIGHT)
+        ly = MathTex('y').next_to(fence, DOWN)
+        area = MathTex('P = xy').move_to(ORIGIN)
+        
+        self.add(wall, wall_text, fence, lx1, lx2, ly, area)
+        # --- AI GENERATED CODE END ---
+
+```
+---
+
+### 🆔 Задача: 2022_mun_y3_20b - Оптимизација на плоштина (Жица)
+**📅 Додадено:** 2025-12-28 00:05
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_2022_mun_y3_20b(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+        # Wall
+        wall = Rectangle(width=6, height=0.5, color=GREY, fill_opacity=1).move_to(UP*2)
+        wall_text = Text("Wall").move_to(wall.get_center())
+        
+        # Fence
+        # x=1.5, y=3 (scaled 8 and 16)
+        fence = Polyline(LEFT*1.5 + UP*1.75, LEFT*1.5 + DOWN*1.25, RIGHT*1.5 + DOWN*1.25, RIGHT*1.5 + UP*1.75)
+        fence.set_color(RED).set_stroke(width=4)
+        
+        # Labels
+        lx1 = MathTex('x').next_to(fence, LEFT)
+        lx2 = MathTex('x').next_to(fence, RIGHT)
+        ly = MathTex('y').next_to(fence, DOWN)
+        area = MathTex('P = xy').move_to(ORIGIN)
+        
+        self.add(wall, wall_text, fence, lx1, lx2, ly, area)
+        # --- AI GENERATED CODE END ---
+
+```
+---
