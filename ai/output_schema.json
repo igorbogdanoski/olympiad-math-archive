@@ -108,11 +108,15 @@
     },
     "analysis_hint": {
       "type": "string",
-      "description": "Intuition, heuristics, and strategy before the formal solution. Explain 'Why' we do this."
+      "description": "The 'Aha!' moment. Explain the intuition behind the solution path without doing the calculation. Why did we choose this specific theorem?"
+    },
+    "solution_strategy": {
+      "type": "string",
+      "description": "A high-level plan (e.g., '1. Prove cyclic quad. 2. Use Power of a Point. 3. Calculate length.')."
     },
     "solution_content": {
       "type": "string",
-      "description": "The complete, step-by-step solution in Macedonian. Use Markdown and LaTeX. If multiple approaches exist, include them all."
+      "description": "The rigorous mathematical proof/calculation. Use clear steps (Step 1, Step 2). State every theorem used."
     },
     "pedagogical_notes": {
       "type": "string",

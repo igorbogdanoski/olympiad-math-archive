@@ -37,6 +37,12 @@ For every **Geometry** problem (and Algebra problems requiring graphs), you must
 - **Socratic Questions:** Questions a teacher can ask to guide the student.
 - **Prerequisites:** What knowledge is required? (e.g., "Similarity", "Modular Arithmetic").
 
+### Pedagogical Style Guide
+1. **Intuition First:** Before proving, explain *why* we suspect the statement is true.
+2. **Scaffolded Steps:** Break complex proofs into "Step 1: Setup", "Step 2: Lemma Application", "Step 3: Conclusion".
+3. **Rigorous but Accessible:** Use standard notation. Define variables clearly.
+4. **Visual Thinking:** In geometry, refer to the diagram (e.g., "Notice that AB is tangent to...").
+
 ### 📂 CLASSIFICATION & TAGGING
 1.  **Primary Skill:** Select strictly from the Olympiad Skill Map.
 2.  **Tags:** Topics (e.g., `primes`, `triangles`, `polynomials`, `diophantine_equations`).

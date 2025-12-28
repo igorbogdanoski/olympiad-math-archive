@@ -104,22 +104,18 @@ def generate_manim_image(prob_id, code_body):
 def create_problem_file(data):
     if not data: return
 
-    # --- 1. ОДРЕДУВАЊЕ НА ПАПКА (THE FIX) ---
+    # --- 1. ОДРЕДУВАЊЕ НА ПАПКА ---
     try:
         grade = int(data.get('grade', 9))
     except ValueError: grade = 9
     
-    # Бараме 'field' ИЛИ 'category', ако нема ништо -> 'other'
     raw_field = data.get('field') or data.get('category') or 'other'
-    
-    # Нормализација: "Analytic Geometry" -> "analytic_geometry"
     field_dir = raw_field.lower().strip().replace(" ", "_")
     
     source_slug = slugify(data.get('source', 'unknown'))
     prob_id = str(data.get('problem_id', '000'))
     filename = f"{source_slug}_{prob_id}.md"
     
-    # Патеки
     if grade <= 5:
         output_dir = os.path.join(BASE_DIR, "pre_olympiad", f"grade_{grade}", field_dir)
         img_rel_path_prefix = "../../../assets/images"
@@ -127,7 +123,6 @@ def create_problem_file(data):
         output_dir = os.path.join(BASE_DIR, f"grade_{grade}", field_dir)
         img_rel_path_prefix = "../../assets/images"
     
-    # Креирај ја папката ако ја нема!
     os.makedirs(output_dir, exist_ok=True)
     output_path = os.path.join(output_dir, filename)
 
@@ -141,45 +136,41 @@ def create_problem_file(data):
     for r_skill in data.get('related_skills', []):
         ensure_skill_exists(r_skill, 'theorem' in r_skill or 'lemma' in r_skill)
 
-    # --- 4. VISUALS (Geo-Mentor Support) ---
+    # --- 4. VISUALS ---
     image_filename = f"{prob_id}.png"
     image_abs_path = os.path.join(IMAGES_DIR, image_filename)
-    
     manim_code = data.get('manim_code')
     
-    # ПОДОБРУВАЊЕ: Ако има код, секогаш запишувај го во логот (за Geo-Mentor)
     if manim_code and len(manim_code.strip()) > 0:
         log_manim_code(prob_id, data.get('problem_title', ''), manim_code)
-        
-        # Стариот renderer е исклучен бидејќи користиме batch_manim на крајот
-        # if not os.path.exists(image_abs_path):
-        #     generate_manim_image(prob_id, manim_code)
 
-    # Одлучи дали да прикажеш placeholder во Markdown
     visual_block = ""
     if os.path.exists(image_abs_path):
-        # Сликата веќе постои (автоматски генерирана или рачно додадена)
         visual_block = f"\n![Скица]({img_rel_path_prefix}/{image_filename})\n"
     elif manim_code:
-        # Сликата ја нема, но има код -> Дај инструкција за Geo-Mentor (Fallback)
         safe_id = re.sub(r'[^a-zA-Z0-9_]', '_', prob_id)
         visual_block = f"\n> **👨‍💻 Geo-Mentor Code:**\n> Одете во `assets/manim_code_log.md`, копирајте го кодот за `Task_{safe_id}` и генерирајте ја сликата.\n"
     
-    content = content.replace("<visual_placeholder>", visual_block)
-    content = content.replace("## 🧠 Анализа", f"{visual_block}\n## 🧠 Анализа") # Fallback за стари темплејти
+    # Вметнување на визуелизацијата
+    if "<visual_placeholder>" in content:
+        content = content.replace("<visual_placeholder>", visual_block)
+    else:
+        # Ако нема placeholder, стави го пред Анализата
+        content = content.replace("## 🧠 Анализа", f"{visual_block}\n## 🧠 Анализа")
 
-    # --- 5. ЗАМЕНА НА СОДРЖИНА ---
-    # Metadata
+    # --- 5. ЗАМЕНА НА МЕТАПОДАТОЦИ ---
     content = content.replace("<6-12>", str(grade))
     content = content.replace("<algebra | geometry | number_theory | combinatorics>", field_dir)
     content = content.replace("<1-10>", str(data.get('difficulty', 1)))
     content = content.replace("<problem_type>", data.get('problem_type', 'calculation'))
     content = content.replace("<списание / натпревар / година>", data.get('source', ''))
     content = content.replace("<број_или_шифра>", prob_id)
-    content = content.replace("<mk | en | sr | hr | ru | ...>", data.get('language_original', 'mk'))
+    
+    lang = data.get('language_original', 'mk')
+    content = re.sub(r'<mk\s*\|\s*en[^>]*>', lang, content) 
     content = content.replace("<main_cognitive_tool>", p_skill if p_skill else 'logic')
 
-    # Lists
+    # Листи
     related = data.get('related_skills', [])
     related_str = "\n".join([f"  - {s}" for s in related]) if related else "  - logic"
     content = content.replace("  - <skill_1>\n  - <skill_2>", related_str)
@@ -198,26 +189,56 @@ def create_problem_file(data):
         v_prompt = data.get('visual_prompt', 'No visual prompt provided.')
         content = content.replace("<visual_prompt>", v_prompt if v_prompt else "None")
 
-    # Text & Solution
+    # Текст
     content = content.replace("<Наслов на задачата>", data.get('problem_title', 'Наслов'))
     text_mk = data.get('problem_text_mk', '')
     content = content.replace("<Текст.>", text_mk)
     content = content.replace("<Оригинален текст на задачата. Ако е превод, внимавај на терминологијата.>", text_mk)
     
-    hint = data.get('analysis_hint', 'Нема анализа.')
-    content = content.replace("<Ова е најважниот дел за олимпијци. Не го пишувај решението тука, туку *интуицијата*. Како да се сетам да го користам тој skill?>", hint)
-    content = content.replace("<Зошто повлековме баш таква помошна линија? Каде е \"клучот\" на задачата?>", hint)
+    # --- 6. ПЕДАГОШКИ ДЕЛ (КЛУЧНИ ИЗМЕНИ) ---
+    
+    # А. Анализа (Hint) - Скриена
+    hint_text = data.get('analysis_hint', 'Нема анализа.')
+    strategy_text = data.get('solution_strategy', '') # Ново поле ако го додадеме во JSON
+    
+    full_hint = hint_text
+    if strategy_text:
+        full_hint += f"\n\n**Стратегија:**\n{strategy_text}"
 
-    # Collapsible Solution
+    interactive_hint = f"""
+<details>
+<summary>💡 Прикажи помош (Анализа)</summary>
+
+{full_hint}
+</details>
+"""
+    # Замена на сите можни placeholders за анализа
+    content = re.sub(r'<Ова е најважниот дел.*?skill\?>', interactive_hint, content, flags=re.DOTALL)
+    content = re.sub(r'<Зошто повлековме.*?задачата\?>', interactive_hint, content, flags=re.DOTALL)
+    # Fallback ако темплејтот е веќе чист
+    if "## 🧠 Анализа" in content and interactive_hint not in content:
+         # Ова е малку ризично, подобро е да се потпреме на placeholders, но за секој случај:
+         pass 
+
+    # Б. Решение - Скриено
     sol = data.get('solution_content', 'Решението е во изработка.')
-    collapsible_sol = f"\n<details>\n<summary>👀 Прикажи го решението</summary>\n\n{sol}\n\n</details>\n"
-    content = content.replace("<Детално решение, чекор по чекор.>", collapsible_sol)
-    content = content.replace("<Чекор по чекор. Секој чекор мора да има геометриско оправдување (на пр. \"агли над ист лак\").>", collapsible_sol)
+    collapsible_sol = f"\n<details>\n<summary>📝 Прикажи го целото решение</summary>\n\n{sol}\n\n</details>\n"
+    
+    content = re.sub(r'<Детално решение.*?чекор\.>', collapsible_sol, content, flags=re.DOTALL)
+    content = re.sub(r'<Чекор по чекор.*?лак"\)\.>', collapsible_sol, content, flags=re.DOTALL)
 
+    # В. Краен резултат
+    final_ans = data.get('final_answer', '')
+    if final_ans:
+        content = content.replace("<Краен резултат.>", f"**{final_ans}**")
+    else:
+        content = content.replace("<Краен резултат.>", "")
+
+    # Г. Педагошки белешки
     notes = data.get('pedagogical_notes', '')
-    content = content.replace("<Педагошки забелешки: каде грешат учениците, кои предуслови им требаат.>", notes)
-    content = content.replace("<Педагошки забелешки.>", notes)
+    content = re.sub(r'<Педагошки забелешки.*?>', notes, content, flags=re.DOTALL)
 
+    # --- 7. ЗАПИШУВАЊЕ ---
     with open(output_path, 'w', encoding='utf-8') as f:
         f.write(content)
     

@@ -1,302 +1,117 @@
 import os
 import re
-import subprocess
-import shutil
 import sys
+import hashlib
+from pathlib import Path
+from concurrent.futures import ProcessPoolExecutor
+
+# Обид за импорт на рендерот
+try:
+    from render_manim import render_scene
+except ImportError:
+    print("❌ Грешка: Не можам да го најдам 'render_manim.py'.")
+    sys.exit(1)
 
 # --- КОНФИГУРАЦИЈА ---
-SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
-ARCHIVE_ROOT = os.path.abspath(os.path.join(SCRIPT_DIR, "../"))
-ASSETS_DIR = os.path.join(ARCHIVE_ROOT, "assets", "images")
-LOG_FILE = os.path.join(ARCHIVE_ROOT, "assets", "manim_code_log.md")
-TEMP_MANIM_FILE = os.path.join(SCRIPT_DIR, "temp_scene.py")
+BASE_DIR = Path(__file__).parent.parent.absolute()
+LOG_FILE = BASE_DIR / "assets" / "manim_code_log.md"
+IMAGES_DIR = BASE_DIR / "assets" / "images"
+HASH_FILE = BASE_DIR / "tools" / ".manim_hashes" # Тука памтиме што сме направиле
 
-def check_manim_installed():
-    """Checks if manim is installed and runnable via python -m manim."""
+def get_code_blocks(content):
+    """Ги вади ID-то и кодот од LOG фајлот."""
+    # Ова е regex што бара: ### 🆔 Задача: ID ... ```python CODE ```
+    pattern = r"### 🆔 Задача: (.*?)\s-.*?\n.*?```python\n(.*?)\n```"
+    return re.findall(pattern, content, re.DOTALL)
+
+def load_hashes():
+    if not HASH_FILE.exists(): return {}
+    with open(HASH_FILE, 'r', encoding='utf-8') as f:
+        return dict(line.strip().split('::') for line in f if '::' in line)
+
+def save_hash(prob_id, code_hash):
+    hashes = load_hashes()
+    hashes[prob_id] = code_hash
+    with open(HASH_FILE, 'w', encoding='utf-8') as f:
+        for k, v in hashes.items():
+            f.write(f"{k}::{v}\n")
+
+def process_single_task(args):
+    """Оваа функција се повикува паралелно."""
+    prob_id, code, existing_hash = args
+    prob_id = prob_id.strip()
+    
+    # 1. Пресметај Hash на новиот код
+    current_hash = hashlib.md5(code.encode('utf-8')).hexdigest()
+    
+    target_image = IMAGES_DIR / f"{prob_id}.png"
+    
+    # 2. ПРОВЕРКА: Дали треба да рендираме?
+    # Рендираме САМО АКО: Сликата ја нема ИЛИ Кодот е сменет
+    if target_image.exists() and existing_hash == current_hash:
+        return f"⏭️  {prob_id}: Веќе постои и е ажурирана. Прескокнувам."
+    
+    print(f"🎨 {prob_id}: Започнувам рендирање...")
+    
     try:
-        subprocess.run(
-            [sys.executable, "-m", "manim", "--version"], 
-            check=True, 
-            capture_output=True
-        )
-        return True
-    except subprocess.CalledProcessError:
-        return False
-    except Exception:
-        return False
-
-def load_manim_code_map():
-    """Parses the log file and returns a dict of {problem_id: code}."""
-    if not os.path.exists(LOG_FILE):
-        print(f"⚠️ Log file not found: {LOG_FILE}")
-        return {}
-
-    with open(LOG_FILE, 'r', encoding='utf-8') as f:
-        content = f.read()
-    
-    # Regex to find problem entries
-    # Matches: ### 🆔 Задача: <ID> ... ```python <code> ```
-    pattern = re.compile(
-        r"### 🆔 Задача:\s*([a-zA-Z0-9_\-]+).*?```python\s+(.*?)```",
-        re.DOTALL
-    )
-    
-    code_map = {}
-    for match in pattern.finditer(content):
-        problem_id = match.group(1).strip()
-        code = match.group(2)
-        code_map[problem_id] = code
-    
-    print(f"📚 Loaded {len(code_map)} code snippets from log.")
-    return code_map
-
-def extract_problem_id(content):
-    """Extracts problem_id from YAML frontmatter."""
-    match = re.search(r'^problem_id:\s*(.+)$', content, re.MULTILINE)
-    if match:
-        return match.group(1).strip().replace('"', '').replace("'", "")
-    return None
-
-def extract_manim_code(content):
-    """Бара Python код блок што личи на Manim сцена (fallback)."""
-    match = re.search(r'```python\s+(.*?)```', content, re.DOTALL)
-    if match:
-        code = match.group(1)
-        if "from manim import" in code or "class" in code and "(Scene)" in code:
-            return code
-    return None
-
-def run_manim(code, filename_base):
-    """Го извршува Manim кодот и ја враќа патеката до сликата."""
-    
-    target_name = f"{filename_base}.png"
-    target_path = os.path.join(ASSETS_DIR, target_name)
-    
-    # 0. Провери дали сликата веќе постои
-    if os.path.exists(target_path):
-        # print(f"   ⏭️  Image already exists: {target_name}")
-        return target_name
-
-    # 1. Запиши го кодот во привремен фајл
-    with open(TEMP_MANIM_FILE, 'w', encoding='utf-8') as f:
-        # Осигурај се дека има imports ако фалат
-        if "from manim import" not in code:
-            f.write("from manim import *\n")
-        f.write(code)
-        # Додај config за да зачува само последен фрејм како слика
-        # Користиме config.pixel_height / width за подобар квалитет ако треба
-        f.write(f"\n\nconfig.media_width = '100%'\nconfig.verbosity = 'ERROR'\n")
-
-    # 2. Најди го името на сцената (класата)
-    scene_match = re.search(r'class\s+(\w+)\(Scene\):', code)
-    if not scene_match:
-        print(f"   ⚠️ No Scene class found in code for {filename_base}")
-        return None
-    scene_name = scene_match.group(1)
-    
-    # 3. Изврши Manim команда
-    # Користиме sys.executable за да сме сигурни дека е истиот Python
-    cmd = [
-        sys.executable, "-m", "manim", 
-        "-qm",              # Medium quality
-        "-s",               # Save last frame only (image)
-        "--disable_caching", 
-        "-o", f"{scene_name}.png", 
-        TEMP_MANIM_FILE, 
-        scene_name
-    ]
-    
-    print(f"   🎬 Rendering {scene_name} for {filename_base}...")
-    try:
-        # Capture output to avoid spamming terminal, but print on error
-        result = subprocess.run(cmd, check=True, capture_output=True, encoding='utf-8')
+        # Повик до render_manim (ова е тешкиот дел)
+        success = render_scene(prob_id, code)
         
-        # 4. Најди ја генерираната слика
-        # Manim output structure: media/images/temp_scene/{scene_name}.png
-        expected_output = os.path.join("media", "images", "temp_scene", f"{scene_name}.png")
-        
-        if os.path.exists(expected_output):
-            # 5. Премести ја во assets/images
-            os.makedirs(ASSETS_DIR, exist_ok=True)
-            shutil.move(expected_output, target_path)
-            
-            # Cleanup media folder to save space
-            if os.path.exists("media"):
-                shutil.rmtree("media", ignore_errors=True)
-                
-            return target_name
+        if success:
+            save_hash(prob_id, current_hash) # Запиши дека успеавме со овој код
+            return f"✅ {prob_id}: Успешно генерирана!"
         else:
-            print(f"   ❌ Expected output not found: {expected_output}")
-            # Debug: list dir
-            debug_dir = os.path.dirname(expected_output)
-            if os.path.exists(debug_dir):
-                print(f"   📂 Dir content: {os.listdir(debug_dir)}")
+            return f"❌ {prob_id}: Грешка при рендирање (види логови)."
             
-    except subprocess.CalledProcessError as e:
-        print(f"   ❌ Manim Error for {filename_base}:")
-        print(f"   Command: {' '.join(cmd)}")
-        print(f"   Stderr: {e.stderr}")
-        print(f"   Stdout: {e.stdout}")
     except Exception as e:
-        print(f"   ❌ Unexpected Error: {e}")
-        
-    return None
-
-def update_markdown_with_image(file_path, image_name):
-    with open(file_path, 'r', encoding='utf-8') as f:
-        content = f.read()
-        
-    # Ако веќе има слика, не прави ништо
-    if f"assets/images/{image_name}" in content:
-        # print(f"   ⏭️  Link already exists in Markdown")
-        return True
-
-    file_dir = os.path.dirname(file_path)
-    # Calculate relative path from markdown file to image
-    try:
-        rel_path = os.path.relpath(os.path.join(ASSETS_DIR, image_name), file_dir)
-    except ValueError:
-        # On Windows, if drives are different, relpath fails. Fallback to absolute or root-relative?
-        # Assuming same drive for now.
-        rel_path = f"/assets/images/{image_name}"
-        
-    rel_path = rel_path.replace("\\", "/")
-    
-    new_image_tag = f"\n![Визуелизација]({rel_path})\n"
-    
-    # Strategies for insertion
-    
-    # 1. Replace placeholder
-    placeholder = "<!-- Ова место е резервирано за автоматската слика од Manim -->"
-    if placeholder in content:
-        new_content = content.replace(placeholder, new_image_tag)
-        with open(file_path, 'w', encoding='utf-8') as f:
-            f.write(new_content)
-        print(f"   ✅ Link updated (replaced placeholder)")
-        return True
-
-    # 2. Replace VISUAL PROMPT block
-    # Matches <!-- VISUAL PROMPT: ... --> including multiline
-    visual_prompt_regex = r"<!-- VISUAL PROMPT:.*?-->"
-    if re.search(visual_prompt_regex, content, re.DOTALL):
-        new_content = re.sub(visual_prompt_regex, new_image_tag, content, flags=re.DOTALL)
-        with open(file_path, 'w', encoding='utf-8') as f:
-            f.write(new_content)
-        print(f"   ✅ Link updated (replaced VISUAL PROMPT)")
-        return True
-
-    # 3. Insert after "## 📐 Скица"
-    header_regex = r"(## 📐 Скица.*)"
-    if re.search(header_regex, content):
-        new_content = re.sub(header_regex, r"\1\n" + new_image_tag, content)
-        with open(file_path, 'w', encoding='utf-8') as f:
-            f.write(new_content)
-        print(f"   ✅ Link updated (inserted after Header)")
-        return True
-
-    # 4. Insert before "Geo-Mentor Code"
-    if "> **👨‍💻 Geo-Mentor Code:**" in content:
-        new_content = content.replace("> **👨‍💻 Geo-Mentor Code:**", f"{new_image_tag}\n\n> **👨‍💻 Geo-Mentor Code:**")
-        with open(file_path, 'w', encoding='utf-8') as f:
-            f.write(new_content)
-        print(f"   ✅ Link updated (inserted before Geo-Mentor)")
-        return True
-
-    # 5. Fallback: Insert before Analysis or Solution
-    if "## 🧠 Анализа" in content:
-        new_content = content.replace("## 🧠 Анализа", f"## 📐 Скица\n{new_image_tag}\n\n## 🧠 Анализа")
-        with open(file_path, 'w', encoding='utf-8') as f:
-            f.write(new_content)
-        print(f"   ✅ Link updated (inserted before Analysis)")
-        return True
-        
-    if "## 📝 Решение" in content:
-        new_content = content.replace("## 📝 Решение", f"## 📐 Скица\n{new_image_tag}\n\n## 📝 Решение")
-        with open(file_path, 'w', encoding='utf-8') as f:
-            f.write(new_content)
-        print(f"   ✅ Link updated (inserted before Solution)")
-        return True
-
-    print(f"   ⚠️ Could not find a place to insert image in {os.path.basename(file_path)}")
-    return False
+        return f"❌ {prob_id}: Критична грешка: {str(e)}"
 
 def main():
-    print("🎨 Starting Batch Manim Renderer (v2 - Robust)...")
-    
-    if not check_manim_installed():
-        print("❌ Error: 'manim' is not installed or not found in the current Python environment.")
-        print("   Please run: pip install manim")
+    if not LOG_FILE.exists():
+        print("📭 Нема log фајл. Ништо за работа.")
         return
 
-    # Вчитај ги кодовите од логот
-    manim_code_map = load_manim_code_map()
+    print(f"📂 Читање на задачи од: {LOG_FILE}")
+    with open(LOG_FILE, 'r', encoding='utf-8') as f:
+        content = f.read()
+
+    tasks = get_code_blocks(content)
+    if not tasks:
+        print("📭 Не најдов Manim код во логот.")
+        return
+
+    # --- ДЕДУПЛИКАЦИЈА (SMART FILTER) ---
+    # Ова е делот што го додадовме сега.
+    # Ако имаме повеќе верзии на иста задача, ја сакаме само последната.
+    unique_tasks = {}
+    for pid, code in tasks:
+        # Бидејќи читаме од горе надолу, секој нов запис ќе го пребрише стариот во речникот.
+        # Така на крајот ќе ја имаме само најновата верзија за секое ID.
+        unique_tasks[pid.strip()] = code 
     
-    BATCH_SIZE = 100
-    processed_count = 0
-    scanned_files = 0
-    candidates_found = 0
+    # Конвертирај назад во листа за процесирање
+    final_tasks = list(unique_tasks.items())
     
-    for root, dirs, files in os.walk(ARCHIVE_ROOT):
-        if "tools" in root or "assets" in root or "node_modules" in root or ".git" in root: 
-            continue
-        
-        for file in files:
-            if processed_count >= BATCH_SIZE:
-                print(f"\n🛑 Batch limit of {BATCH_SIZE} reached.")
-                return
-
-            if file.endswith(".md"):
-                scanned_files += 1
-                path = os.path.join(root, file)
-                
-                try:
-                    with open(path, 'r', encoding='utf-8') as f:
-                        content = f.read()
-                except Exception as e:
-                    print(f"❌ Error reading {file}: {e}")
-                    continue
-                
-                # Провери дали веќе има слика (било каква)
-                if "![Визуелизација]" in content:
-                    continue
-
-                # Ако нема слика, провери дали имаме код за неа
-                problem_id = extract_problem_id(content)
-                code = None
-                
-                if problem_id and problem_id in manim_code_map:
-                    candidates_found += 1
-                    # print(f"🔍 Found code in LOG for ID: {problem_id} ({file})")
-                    code = manim_code_map[problem_id]
-                else:
-                    # Fallback: embedded code
-                    code = extract_manim_code(content)
-                    if code:
-                        candidates_found += 1
-                        print(f"🔍 Found embedded code in: {file}")
-                
-                if code:
-                    filename_base = problem_id if problem_id else file.replace(".md", "")
-                    image_name = run_manim(code, filename_base)
-                    
-                    if image_name:
-                        if update_markdown_with_image(path, image_name):
-                            processed_count += 1
-                            print(f"   ✅ Processed: {file}")
-                        else:
-                            print(f"   ❌ Failed to update markdown for {file}")
-                # else:
-                    # print(f"⚠️  No code found for: {file} (ID: {problem_id})")
-
-    print(f"\n🏁 Finished scan.")
-    print(f"   📂 Scanned files: {scanned_files}")
-    print(f"   🎯 Candidates found: {candidates_found}")
-    print(f"   ✅ Successfully processed: {processed_count}")
+    print(f"📦 Вкупно записи во логот: {len(tasks)}")
+    print(f"✨ Уникатни задачи за процесирање: {len(final_tasks)}")
     
-    # Cleanup temp file
-    if os.path.exists(TEMP_MANIM_FILE):
-        os.remove(TEMP_MANIM_FILE)
+    # Вчитување на историјата на хашови
+    hashes = load_hashes()
+    
+    # Подготовка на аргументи
+    work_items = []
+    for pid, code in final_tasks:
+        work_items.append((pid, code, hashes.get(pid.strip())))
 
+    # --- ПАРАЛЕЛНО ИЗВРШУВАЊЕ ---
+    # max_workers=4 е добар баланс. Ако имаш многу јак PC, стави 8.
+    with ProcessPoolExecutor(max_workers=4) as executor:
+        results = list(executor.map(process_single_task, work_items))
+
+    # Печатење резултати
+    print("\n--- ИЗВЕШТАЈ ---")
+    for res in results:
+        print(res)
 
 if __name__ == "__main__":
     main()

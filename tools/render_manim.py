@@ -1,14 +1,25 @@
 import re
 import os
+import sys
 import subprocess
 import shutil
+import tempfile
 from pathlib import Path
 
-# Configuration
-PROJECT_ROOT = Path(__file__).parent.parent
+# Обид за импорт на Manim. Ако го нема, враќаме грешка.
+try:
+    from manim import *
+except ImportError:
+    print("❌ Manim library not found. Install it via 'pip install manim'.")
+    sys.exit(1)
+
+# --- КОНФИГУРАЦИЈА ---
+BASE_DIR = Path(__file__).parent.parent.absolute()
+IMAGES_DIR = BASE_DIR / "assets" / "images"
 LOG_FILE = PROJECT_ROOT / "assets" / "manim_code_log.md"
-IMAGES_DIR = PROJECT_ROOT / "assets" / "images"
-TEMP_SCENE_FILE = PROJECT_ROOT / "temp_manim_render.py"
+
+# Осигурај се дека папката постои
+IMAGES_DIR.mkdir(parents=True, exist_ok=True)
 
 def parse_log_file():
     """Parses the log file and returns a list of (problem_id, code) tuples."""
@@ -32,6 +43,28 @@ def parse_log_file():
         entries.append((problem_id, code))
     
     return entries
+
+def wrap_code_in_class(code_body, class_name="SolutionScene"):
+    """
+    Го пакува 'суровиот' код (само командите) во целосна Manim класа.
+    """
+    return f"""
+from manim import *
+
+class {class_name}(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        # Глобални стилови за да изгледа како скица на хартија
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        Dot.set_default(color=BLACK)
+        Line.set_default(color=BLACK)
+        
+        # --- USER CODE START ---
+{code_body}
+        # --- USER CODE END ---
+"""
 
 def clean_code(code):
     """
@@ -89,69 +122,96 @@ def clean_code(code):
     
     return code
 
-def render_scene(problem_id, code):
-    """Renders the scene and saves the image."""
-    print(f"Processing {problem_id}...")
-    
-    # Check if image already exists
-    image_path = IMAGES_DIR / f"{problem_id}.png"
-    if image_path.exists():
-        print(f"  Image already exists: {image_path}")
-        return
-
-    # Clean code
-    try:
-        code = clean_code(code)
-    except Exception as e:
-        print(f"  ❌ Error cleaning code: {e}")
-        return
-
-    # Write to temp file
-    TEMP_SCENE_FILE.write_text(code, encoding="utf-8")
-    
-    # Run Manim
-    # We need to find the scene name. 
-    # If we wrapped it, it's ProblemScene.
-    # If it was a full class, we need to find the class name.
-    scene_name = "ProblemScene"
-    match = re.search(r"class\s+(\w+)\(Scene\):", code)
-    if match:
-        scene_name = match.group(1)
-
-    cmd = [
-        "python", "-m", "manim", "-ql", "-s", 
-        "--disable_caching",
-        str(TEMP_SCENE_FILE), scene_name
-    ]
+def render_scene(prob_id, code_body):
+    """
+    Ја рендира сликата и ја зачувува во assets/images/{prob_id}.png.
+    Враќа True ако е успешно.
+    """
+    # 1. Креирај привремен фајл за оваа конкретна задача
+    # Користиме tempfile за да нема конфликти при паралелно процесирање
+    fd, temp_path = tempfile.mkstemp(suffix=".py", prefix=f"manim_{prob_id}_")
     
     try:
-        result = subprocess.run(cmd, capture_output=True, text=True, check=True)
-        
-        # Find output
-        # Manim default output: media/images/temp_manim_render/<SceneName>_ManimCE_v0.19.1.png
-        media_dir = PROJECT_ROOT / "media" / "images" / "temp_manim_render"
-        output_file = media_dir / f"{scene_name}_ManimCE_v0.19.1.png"
-        
-        if output_file.exists():
-            # Move to assets
-            IMAGES_DIR.mkdir(parents=True, exist_ok=True)
-            shutil.copy(output_file, image_path)
-            print(f"  ✅ Generated: {image_path}")
-        else:
-            print("  ❌ Output file not found.")
-            # Try to find any png in that folder
-            found_files = list(media_dir.glob("*.png"))
-            if found_files:
-                print(f"  ⚠️ Found other files: {found_files}")
-                shutil.copy(found_files[0], image_path)
-                print(f"  ✅ Generated (fallback): {image_path}")
-            else:
-                print(result.stdout)
+        # 2. Запиши го кодот во привремениот фајл
+        full_code = wrap_code_in_class(code_body)
+        with os.fdopen(fd, 'w', encoding='utf-8') as f:
+            f.write(full_code)
             
-    except subprocess.CalledProcessError as e:
-        print(f"  ❌ Manim failed for {problem_id}")
-        # print(e.stdout) # Too verbose
-        print(e.stderr)
+        # 3. Конфигурирај го Manim
+        # Користиме посебна media_dir за секој процес за да нема мешање
+        temp_media_dir = Path(tempfile.gettempdir()) / f"manim_media_{prob_id}"
+        
+        config.media_dir = str(temp_media_dir)
+        config.images_dir = str(temp_media_dir)
+        config.verbosity = "ERROR"  # Само критични грешки, без спам
+        config.pixel_height = 1080
+        config.pixel_width = 1080
+        config.frame_rate = 15      # Не е битно за слика, но забрзува иницијализација
+        config.dry_run = False
+        
+        # 4. Рендирање
+        # Ова е еквивалент на: manim -s -r 1080,1080 temp_file.py SolutionScene
+        scene = Scene() # Dummy init to access config context if needed, but usually render() handles it
+        
+        # Најсигурен начин е преку command line interface wrapper на Manim
+        # но за брзина ќе користиме директен Python повик ако е можно.
+        # За жал, Manim config е глобален и тежок за ресетирање во thread-ови.
+        # Затоа, најробусно за BATCH е subprocess.
+        
+        # --- SUBPROCESS APPROACH (Најстабилно за Batch) ---
+        cmd = [
+            sys.executable, "-m", "manim", 
+            temp_path, "SolutionScene",
+            "--format=png", "-s", # -s значи "save last frame only"
+            "--media_dir", str(temp_media_dir),
+            "--disable_caching" # За да сме сигурни дека го прави новото
+        ]
+        
+        # Стартувај го Manim во тишина
+        result = subprocess.run(
+            cmd, 
+            capture_output=True, 
+            text=True, 
+            encoding='utf-8'
+        )
+        
+        if result.returncode != 0:
+            print(f"❌ Manim Error for {prob_id}:\n{result.stderr}")
+            return False
+
+        # 5. Најди ја сликата и премести ја
+        # Manim ја става во: media_dir/videos/temp_path/1080p15/SolutionScene.png
+        # Или за слики: media_dir/images/SolutionScene.png (зависи од верзијата)
+        
+        # Пребаруваме рекурзивно бидејќи Manim ги менува патеките често
+        found_image = None
+        for root, dirs, files in os.walk(temp_media_dir):
+            for file in files:
+                if file.endswith(".png") and "SolutionScene" in file:
+                    found_image = Path(root) / file
+                    break
+            if found_image: break
+            
+        if found_image and found_image.exists():
+            target_path = IMAGES_DIR / f"{prob_id}.png"
+            shutil.move(str(found_image), str(target_path))
+            return True
+        else:
+            print(f"❌ Сликата не беше пронајдена во output папката за {prob_id}")
+            return False
+
+    except Exception as e:
+        print(f"❌ Exception во render_manim: {e}")
+        return False
+        
+    finally:
+        # 6. Чистење (Cleanup)
+        # Избриши го Python фајлот
+        if os.path.exists(temp_path):
+            os.remove(temp_path)
+        # Избриши ја привремена папка со видеа
+        if os.path.exists(temp_media_dir):
+            shutil.rmtree(temp_media_dir, ignore_errors=True)
 
 def main():
     entries = parse_log_file()
@@ -166,5 +226,12 @@ def main():
     if TEMP_SCENE_FILE.exists():
         os.remove(TEMP_SCENE_FILE)
 
+# Тест блок (ако ја пуштиш само оваа скрипта)
 if __name__ == "__main__":
+    test_code = "self.add(Circle())"
+    print("Тестирам рендирање...")
+    if render_scene("test_001", test_code):
+        print("✅ Тестот помина!")
+    else:
+        print("❌ Тестот не успеа.")
     main()
