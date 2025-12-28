@@ -1,0 +1,58 @@
+site_name: Geo-Mentor Archive
+site_description: 'Олимписка математика: Архива на задачи со визуелизации и педагошки објаснувања.'
+site_author: 'Geo-Mentor Team'
+site_url: ''
+
+# --- ТЕМА (Material Design) ---
+theme:
+  name: material
+  language: mk
+  palette:
+    # Темна тема (подобро за очи и за Manim видеа)
+    - scheme: slate
+      primary: teal
+      accent: cyan
+      toggle:
+        icon: material/weather-night
+        name: Switch to light mode
+    # Светла тема (опција за корисникот)
+    - scheme: default
+      primary: teal
+      accent: cyan
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to dark mode
+  features:
+    - navigation.tabs        # Горно мени со табови
+    - navigation.sections    # Секции во страничното мени
+    - navigation.expand      # Отвори ги сите менија
+    - navigation.top         # Копче "Back to top"
+    - search.suggest         # Предлози при пребарување
+    - search.highlight       # Означување на најдените зборови
+    - content.code.copy      # Копче за копирање код
+
+# --- ПЛАГИНИ ---
+plugins:
+  - search
+  - awesome-pages:           # Автоматски ги прави менијата од папките
+      filename: .pages
+      collapse_single_pages: true
+
+# --- MATHJAX (За формули) ---
+markdown_extensions:
+  - admonition               # За обоени блокови (Warning, Note)
+  - pymdownx.details         # За <details> (скриени решенија)
+  - pymdownx.superfences     # За подобри code blocks
+  - attr_list
+  - md_in_html
+  - pymdownx.arithmatex:     # Ова е клучно за LaTeX
+      generic: true
+
+extra_javascript:
+  - javascripts/mathjax.js
+  - https://polyfill.io/v3/polyfill.min.js?features=es6
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+
+# --- CSS (Стилови) ---
+extra_css:
+  - stylesheets/extra.css
