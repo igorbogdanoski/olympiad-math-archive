@@ -2,10 +2,14 @@
 
 [⬅️ Назад кон прегледот](../README.md)
 
-**Вкупно задачи:** 12
+**Вкупно задачи:** 16
 
 | ID | Наслов | Тежина | Тип | Клучна Вештина |
 |:---|:---|:---:|:---|:---|
+| [2022_mun_y4_12a](municipal_competition_2022_2022_mun_y4_12a.md) | --- SKILL MAPPING --- | 5/10 | calculation | algebraic_manipulation |
+| [2022_mun_y4_16a](municipal_competition_2022_2022_mun_y4_16a.md) | --- SKILL MAPPING --- | 5/10 | calculation | pattern_recognition |
+| [2022_mun_y4_18a](municipal_competition_2022_2022_mun_y4_18a.md) | --- SKILL MAPPING --- | 6/10 | proof | inequalities |
+| [2022_mun_y4_20a](municipal_competition_2022_2022_mun_y4_20a.md) | --- SKILL MAPPING --- | 5/10 | calculation | vieta_formulas |
 | [2022_mun_y4_2a](municipal_competition_2022_2022_mun_y4_2a.md) | --- SKILL MAPPING --- | 2/10 | calculation | pattern_recognition |
 | [2022_mun_y4_5a](municipal_competition_2022_2022_mun_y4_5a.md) | --- SKILL MAPPING --- | 3/10 | calculation | rates |
 | [2023_mun_y4_2a](municipal_competition_2023_2023_mun_y4_2a.md) | --- SKILL MAPPING --- | 4/10 | proof | substitution |

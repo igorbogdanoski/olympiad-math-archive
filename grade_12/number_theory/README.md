@@ -2,11 +2,13 @@
 
 [⬅️ Назад кон прегледот](../README.md)
 
-**Вкупно задачи:** 10
+**Вкупно задачи:** 12
 
 | ID | Наслов | Тежина | Тип | Клучна Вештина |
 |:---|:---|:---:|:---|:---|
 | [2022_mun_y4_10a](municipal_competition_2022_2022_mun_y4_10a.md) | --- SKILL MAPPING --- | 5/10 | calculation | algebraic_modeling |
+| [2022_mun_y4_13a](municipal_competition_2022_2022_mun_y4_13a.md) | --- SKILL MAPPING --- | 4/10 | calculation | prime_factorization |
+| [2022_mun_y4_15a](municipal_competition_2022_2022_mun_y4_15a.md) | --- SKILL MAPPING --- | 5/10 | calculation | algebraic_manipulation |
 | [2022_mun_y4_1a](municipal_competition_2022_2022_mun_y4_1a.md) | --- SKILL MAPPING --- | 3/10 | calculation | algebraic_modeling |
 | [2022_mun_y4_3a](municipal_competition_2022_2022_mun_y4_3a.md) | --- SKILL MAPPING --- | 3/10 | calculation | place_value_logic |
 | [2022_mun_y4_8a](municipal_competition_2022_2022_mun_y4_8a.md) | --- SKILL MAPPING --- | 5/10 | calculation | number_properties |
