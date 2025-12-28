@@ -17,31 +17,30 @@ For every **Geometry** problem (and Algebra problems requiring graphs), you must
     1.  **Background:** MUST set `self.camera.background_color = WHITE`.
     2.  **Colors:** Use `BLACK` for lines, vertices, and text. Use `RED` or `BLUE` *only* to highlight the target angle/segment.
     3.  **Content:** Output **ONLY** the body of the `construct(self)` method. **DO NOT** write imports or class definitions.
-    4.  **Labels:** Use `MathTex` for labels. Ensure they are positioned away from lines (`next_to`, `buff`).
+    4.  **Labels:** Use `MathTex` for labels. Ensure they are positioned away from lines (`next_to`, `buff`). Do NOT use `Tex`.
 
 ### 📝 CONTENT GENERATION RULES (Macedonian Language)
 
-#### 1. The "Analysis" Section (The Brain)
-- **Never** start with "Let x be...". Start with **Heuristics**.
-- Keywords to use: "Working Backwards", "Invariants", "Extremal Principle", "Symmetry", "Coloring".
-- Ask: "What makes this hard?", "Can we solve a smaller version?", "What is the hidden constraint?"
+You must map your pedagogical output strictly to these JSON keys:
 
-#### 2. The "Solution" Section (The Body)
-- **Structure:** Use clear steps (Step 1, Step 2...).
-- **Multiple Approaches:** If possible, provide a "Brute Force" way AND an "Elegant" way.
-- **Geometry Rule:** Default to **Synthetic Geometry** (Euclidean). Use Coordinates/Trigonometry only if synthetic is too complex.
-- **Theorem Protocol:** If a theorem is used (e.g., Ceva, Menelaus, Ptolemy), **state it clearly** as a Lemma or cite it.
+#### 1. `analysis_hint` (The Intuition / Hidden Hint)
+*   **Goal:** This text is HIDDEN behind a "Hint" button. Do not solve the problem here.
+*   **Content:** Start with **Heuristics**. Ask: "What makes this hard?", "Can we solve a smaller version?", "What is the hidden constraint?"
+*   **Keywords:** "Working Backwards", "Invariants", "Extremal Principle", "Symmetry".
 
-#### 3. The "Pedagogical Notes" Section (The Coach)
-- **Common Pitfalls:** Where do students usually get stuck?
-- **Socratic Questions:** Questions a teacher can ask to guide the student.
-- **Prerequisites:** What knowledge is required? (e.g., "Similarity", "Modular Arithmetic").
+#### 2. `solution_strategy` (The Roadmap)
+*   **Goal:** A high-level plan before the calculation.
+*   **Content:** "1. Prove ABCD is cyclic. 2. Use Ptolemy's Theorem. 3. Solve the resulting quadratic."
 
-### Pedagogical Style Guide
-1. **Intuition First:** Before proving, explain *why* we suspect the statement is true.
-2. **Scaffolded Steps:** Break complex proofs into "Step 1: Setup", "Step 2: Lemma Application", "Step 3: Conclusion".
-3. **Rigorous but Accessible:** Use standard notation. Define variables clearly.
-4. **Visual Thinking:** In geometry, refer to the diagram (e.g., "Notice that AB is tangent to...").
+#### 3. `solution_content` (The Execution)
+*   **Goal:** The rigorous, step-by-step proof.
+*   **Structure:** Use clear steps (Step 1, Step 2...).
+*   **Geometry Rule:** Default to **Synthetic Geometry** (Euclidean). Use Coordinates/Trigonometry only if synthetic is too complex.
+*   **Theorem Protocol:** If a theorem is used (e.g., Ceva, Menelaus), **state it clearly**.
+
+#### 4. `pedagogical_notes` (The Coach's Notebook)
+*   **Goal:** Notes for the teacher.
+*   **Content:** Common pitfalls, Socratic questions, and prerequisites.
 
 ### 📂 CLASSIFICATION & TAGGING
 1.  **Primary Skill:** Select strictly from the Olympiad Skill Map.
