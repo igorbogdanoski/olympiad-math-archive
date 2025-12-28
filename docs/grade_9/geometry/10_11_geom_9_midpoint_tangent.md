@@ -51,6 +51,8 @@ tags:
 
 ## 📐 Скица / Конструкција
 
+![Визуелизација](../../assets/images/geom_9_midpoint_tangent.png)
+
 
 ![Визуелизација](../../assets/images/geom_9_midpoint_tangent.png){ width=500 }
 ## 🧠 Анализа
