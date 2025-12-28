@@ -6,7 +6,7 @@ import tempfile
 import subprocess
 from pathlib import Path
 
-# Обид за импорт на Manim
+# Обид за импорт на Manим
 try:
     from manim import *
 except ImportError:
@@ -14,9 +14,9 @@ except ImportError:
     pass
 
 # --- КОНФИГУРАЦИЈА ---
-# Дефинирање на патеката до коренот на проектот
 BASE_DIR = Path(__file__).parent.parent.absolute()
-IMAGES_DIR = BASE_DIR / "assets" / "images"
+DOCS_DIR = BASE_DIR / "docs" # <--- НОВО
+IMAGES_DIR = DOCS_DIR / "assets" / "images"
 
 # Креирање на папката ако не постои
 IMAGES_DIR.mkdir(parents=True, exist_ok=True)

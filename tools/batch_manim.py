@@ -14,9 +14,12 @@ except ImportError:
 
 # --- КОНФИГУРАЦИЈА ---
 BASE_DIR = Path(__file__).parent.parent.absolute()
-LOG_FILE = BASE_DIR / "assets" / "manim_code_log.md"
-IMAGES_DIR = BASE_DIR / "assets" / "images"
-HASH_FILE = BASE_DIR / "tools" / ".manim_hashes" # Тука памтиме што сме направиле
+DOCS_DIR = BASE_DIR / "docs" # <--- НОВО
+
+# Сега бараме во docs/assets
+LOG_FILE = DOCS_DIR / "assets" / "manim_code_log.md"
+IMAGES_DIR = DOCS_DIR / "assets" / "images"
+HASH_FILE = BASE_DIR / "tools" / ".manim_hashes" # Ова останува во tools
 
 def get_code_blocks(content):
     """Ги вади ID-то и кодот од LOG фајлот."""
