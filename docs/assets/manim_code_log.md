@@ -10097,7 +10097,7 @@ class Task_2022_mun_g6_10(Scene):
         for i in range(4):
             start = angles[i] * DEGREES
             end = angles[i+1] * DEGREES
-            sector = Sector(outer_radius=2, start_angle=start, angle=end-start, color=colors[i], fill_opacity=0.5)
+            sector = Sector(radius=2, start_angle=start, angle=end-start, color=colors[i], fill_opacity=0.5)
             sectors.add(sector)
             
             # Label position
