@@ -35,7 +35,7 @@ forbidden_tools:
 ## 📐 Скица
 
 <div align="center">
-  <img src="../../../assets/images/viviani_theorem_08.png" alt="Визуелизација" width="500"/>
+  <img src="../../assets/images/viviani_theorem_08.png" alt="Визуелизација" width="500"/>
 </div>
 
 ## 🧠 Анализа

@@ -46,7 +46,10 @@ tags:
 ## Текст на задачата
 Во триаголник $ABC$ каде $AB < AC$, нека $AD$ е висината, а $AS$ е симетралата на аголот повлечени од темето $A$. Докажи дека аголот меѓу нив е: $$\angle DAS = \frac{\beta - \gamma}{2}$$
 
-## 📐 Скица / Конструкција
+## 📐 Скица
+
+![Визуелизација](../../assets/images/geom_angle_alt_bisector_03.png){ width=500 }
+ / Конструкција
 
 
 <!-- VISUAL PROMPT: Draw triangle ABC with AC significantly longer than AB. Draw altitude AD from A to BC. Draw internal angle bisector AS from A to BC. Label angle B as beta and angle C as gamma. -->
