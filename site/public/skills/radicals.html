@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="mk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Radicals (Коренување) | Математичка Архива</title>
+    <link rel="stylesheet" href="../style.css">
+    <!-- MathJax -->
+    <script>
+    window.MathJax = {
+      tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$']] },
+      chtml: { scale: 1 }
+    };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="../index.html" class="logo"><i class="fas fa-cube"></i> МатАрхива</a>
+            <div class="nav-links">
+                <a href="../index.html">Почетна</a>
+                <a href="../skills/index.html">Вештини</a>
+                <a href="../theorems/index.html">Теореми</a>
+            </div>
+        </div>
+    </nav>
+    <div class="container main-content">
+<div class="breadcrumbs"><a href="../index.html">Почетна</a> <i class="fas fa-chevron-right separator"></i> <a href="index.html">Skill Guides</a> <i class="fas fa-chevron-right separator"></i> <span class="current">Radicals (Коренување)</span></div>
+    <div class="action-bar">
+        <button onclick="window.print()" class="btn-print"><i class="fas fa-print"></i> Печати</button>
+    </div>
+    
+            <div class="card">
+                <span class="badge badge-category">General</span>
+                <span class="badge badge-difficulty">Grade 8+</span>
+                <h1>Skill Guide – Коренување (Radicals)</h1>
+<h2>💡 Интуиција: Што е ова?</h2>
+<p>Коренувањето е обратна операција на степенувањето.
+Ако $3^2 = 9$, тогаш $\sqrt{9} = 3$.
+Геометриски: Ако имаш квадрат со плоштина $A$, неговата страна е $\sqrt{A}$.</p>
+<hr />
+<h2>🎯 Педагошки насоки</h2>
+<h3>За наставници / тутори</h3>
+<ul>
+<li><strong>Врска со степени:</strong> $\sqrt[n]{x} = x^{1/n}$. Ова ги прави сите правила за корени исти како правилата за степени.</li>
+<li><strong>Дефиниција:</strong> $\sqrt{x}$ (квадратен корен) секогаш означува <strong>позитивен</strong> (или нула) број. Равенката $x^2=9$ има две решенија ($\pm 3$), но $\sqrt{9}$ е само $3$.</li>
+</ul>
+<hr />
+<h2>🛠 Како се користи? (Методологија)</h2>
+<h3>1. Основни својства</h3>
+<ul>
+<li>$\sqrt{a \cdot b} = \sqrt{a} \cdot \sqrt{b}$ (Важи само ако $a, b \ge 0$).</li>
+<li>$\sqrt{\frac{a}{b}} = \frac{\sqrt{a}}{\sqrt{b}}$.</li>
+<li>$\sqrt{a^2} = |a|$ (<strong>Многу важно!</strong>).</li>
+</ul>
+<h3>2. Упростување (Вадење пред корен)</h3>
+<p>Бараме "совршен квадрат" во бројот.
+*   $\sqrt{12} = \sqrt{4 \cdot 3} = \sqrt{4} \cdot \sqrt{3} = 2\sqrt{3}$.
+*   $\sqrt{72} = \sqrt{36 \cdot 2} = 6\sqrt{2}$.</p>
+<h3>3. Рационализација на именител</h3>
+<p>Не сакаме корени во именител (стандард).
+*   <strong>Прост случај:</strong> $\frac{1}{\sqrt{2}} \cdot \frac{\sqrt{2}}{\sqrt{2}} = \frac{\sqrt{2}}{2}$.
+*   <strong>Со збир/разлика:</strong> Користиме разлика на квадрати $(a-b)(a+b) = a^2 - b^2$.
+    *   За $\frac{1}{2-\sqrt{3}}$, множиме со "конјугат" $(2+\sqrt{3})$.
+    *   $\frac{1}{2-\sqrt{3}} \cdot \frac{2+\sqrt{3}}{2+\sqrt{3}} = \frac{2+\sqrt{3}}{4-3} = 2+\sqrt{3}$.</p>
+<h3>4. Двојни корени (Nested Radicals)</h3>
+<p>Формула за упростување $\sqrt{A \pm \sqrt{B}}$:
+Бараме броеви $x, y$ такви што $x+y=A$ и $4xy=B$ (или слични варијации).
+*   $\sqrt{3 + 2\sqrt{2}} = \sqrt{(\sqrt{2}+1)^2} = \sqrt{2}+1$.</p>
+<hr />
+<h2>⚠️ Типични грешки</h2>
+<ul>
+<li><strong>Собирање:</strong> $\sqrt{9+16} \neq \sqrt{9} + \sqrt{16}$.<ul>
+<li>$\sqrt{25} = 5$.</li>
+<li>$3 + 4 = 7$. (Грешка!).</li>
+<li>Коренот не се "дели" преку плус/минус.</li>
+</ul>
+</li>
+<li><strong>Заборавање апсолутна вредност:</strong> $\sqrt{(-3)^2} \neq -3$. Тоа е $|-3| = 3$.</li>
+<li><strong>Негативни броеви:</strong> $\sqrt{-4}$ не постои во реални броеви.</li>
+</ul>
+<hr />
+<h2>🔗 Поврзани skills</h2>
+<ul>
+<li><strong><a href="exponents.md">Exponents</a>:</strong> Корените се дробни експоненти.</li>
+<li><strong><a href="algebraic_manipulation.md">Algebraic Manipulation</a>:</strong> Работа со изрази.</li>
+</ul>
+<hr />
+<h2>📂 Примери од Архивата</h2>
+<ul>
+<li><a href="../../grade_8/algebra/problem_example.md">Grade 8 - Algebra</a> (Упростување)</li>
+</ul>
+            </div>
+            
+    </div>
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Македонска Математичка Архива. Генерирано со Python.</p>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="mk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Law of Sines (Синусна Теорема) | Математичка Архива</title>
+    <link rel="stylesheet" href="../style.css">
+    <!-- MathJax -->
+    <script>
+    window.MathJax = {
+      tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$']] },
+      chtml: { scale: 1 }
+    };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="../index.html" class="logo"><i class="fas fa-cube"></i> МатАрхива</a>
+            <div class="nav-links">
+                <a href="../index.html">Почетна</a>
+                <a href="../skills/index.html">Вештини</a>
+                <a href="../theorems/index.html">Теореми</a>
+            </div>
+        </div>
+    </nav>
+    <div class="container main-content">
+<div class="breadcrumbs"><a href="../index.html">Почетна</a> <i class="fas fa-chevron-right separator"></i> <a href="index.html">Theorems</a> <i class="fas fa-chevron-right separator"></i> <span class="current">Law of Sines (Синусна Теорема)</span></div>
+    <div class="action-bar">
+        <button onclick="window.print()" class="btn-print"><i class="fas fa-print"></i> Печати</button>
+    </div>
+    
+            <div class="card">
+                <span class="badge badge-category">Geometry / Trigonometry</span>
+                <span class="badge badge-difficulty">Intermediate</span>
+                <h1>📜 Law of Sines (Синусна Теорема)</h1>
+<h2>💡 Дефиниција</h2>
+<p>Во било кој триаголник, односот помеѓу должината на страната и синусот од спротивниот агол е <strong>константен</strong>.
+Оваа константа е еднаква на дијаметарот на опишаната кружница ($2R$).</p>
+<p>$$ \frac{a}{\sin \alpha} = \frac{b}{\sin \beta} = \frac{c}{\sin \gamma} = 2R $$</p>
+<hr />
+<h2>🧠 Интуиција</h2>
+<ul>
+<li>Поголем агол "отвора" поголема страна спроти него.</li>
+<li>Ако аголот е мал, страната спроти него мора да е мала за триаголникот да се затвори.</li>
+<li>Врската со $2R$ е клучна: таа го поврзува триаголникот со неговата опишана кружница.</li>
+</ul>
+<hr />
+<h2>📝 Доказ (Преку опишана кружница)</h2>
+<p>Нека е даден $\triangle ABC$ и опишана кружница со радиус $R$.
+Повлекуваме дијаметар од $B$ низ центарот $O$ до точка $D$.
+Триаголникот $BCD$ е правоаголен (агол над дијаметар е $90^\circ$).
+Аголот $\angle BDC = \angle BAC = \alpha$ (перифериски агли над ист лак $BC$).
+Во правоаголниот $\triangle BCD$:
+$$ \sin(\angle BDC) = \frac{\text{спротива}}{\text{хипотенуза}} = \frac{a}{2R} $$
+$$ \sin \alpha = \frac{a}{2R} \implies \frac{a}{\sin \alpha} = 2R $$
+Истото важи и за другите страни.</p>
+<hr />
+<h2>🛠 Каде се користи?</h2>
+<ol>
+<li><strong>AAS (Агол-Агол-Страна):</strong> Знаеме два агли (значи го знаеме и третиот) и една страна. Наоѓаме сè друго.</li>
+<li><strong>SSA (Страна-Страна-Агол):</strong> "Двосмислениот случај". Може да има 0, 1 или 2 решенија.</li>
+<li><strong>Радиус на опишана кружница:</strong> Најбрз начин да се најде $R$ ако знаеме една страна и аголот спроти неа.</li>
+</ol>
+            </div>
+            
+    </div>
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Македонска Математичка Архива. Генерирано со Python.</p>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="mk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sigma_137_138_sigma_adv_07.md | Математичка Архива</title>
+    <link rel="stylesheet" href="../../style.css">
+    <!-- MathJax -->
+    <script>
+    window.MathJax = {
+      tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$']] },
+      chtml: { scale: 1 }
+    };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="../../index.html" class="logo"><i class="fas fa-cube"></i> МатАрхива</a>
+            <div class="nav-links">
+                <a href="../../index.html">Почетна</a>
+                <a href="../../skills/index.html">Вештини</a>
+                <a href="../../theorems/index.html">Теореми</a>
+            </div>
+        </div>
+    </nav>
+    <div class="container main-content">
+<div class="breadcrumbs"><a href="../../index.html">Почетна</a> <i class="fas fa-chevron-right separator"></i> <a href="../index.html">Grade 9</a> <i class="fas fa-chevron-right separator"></i> <span class="current">Algebra</span> <i class="fas fa-chevron-right separator"></i> <span class="current">sigma_137_138_sigma_adv_07.md</span></div>
+    <div class="action-bar">
+        <button onclick="window.print()" class="btn-print"><i class="fas fa-print"></i> Печати</button>
+    </div>
+    <div class='problem-page'><div class='card'><h1>Систем со корени (Куб на бином)</h1>
+<h2>Текст на задачата</h2>
+<p>Нека $a, b &gt; 0$ се такви што $a\sqrt{a} + b\sqrt{b} = 183$ и $a\sqrt{b} + b\sqrt{a} = 182$. Пресметај ја вредноста на $\frac{9}{5}(a + b)$.</p>
+<h2>🧠 Анализа (Клучна идеја)</h2>
+<p>Воведи смена $x=\sqrt{a}, y=\sqrt{b}$. Равенките стануваат $x^3+y^3=183$ и $x^2y+xy^2=182$. Обиди се да формираш $(x+y)^3$.</p>
+<h2>📝 Решение</h2>
+<p>Воведуваме смена $x = \sqrt{a}$ и $y = \sqrt{b}$.
+Системот е:
+1. $x^3 + y^3 = 183$
+2. $x^2y + xy^2 = 182 \implies xy(x+y) = 182$</p>
+<p>Множиме ја втората равенка со 3:
+$$ 3(x^2y + xy^2) = 3 \cdot 182 = 546 $$</p>
+<p>Собираме со првата равенка:
+$$ x^3 + 3x^2y + 3xy^2 + y^3 = 183 + 546 $$
+$$ (x+y)^3 = 729 $$
+$$ x+y = \sqrt[3]{729} = 9 $$</p>
+<p>Сега треба да најдеме $a+b = x^2 + y^2$.
+Знаеме дека $x^2 + y^2 = (x+y)^2 - 2xy$.
+Ни треба $xy$. Од втората равенка:
+$$ xy(x+y) = 182 $$
+$$ xy \cdot 9 = 182 \implies xy = \frac{182}{9} $$</p>
+<p>Пресметуваме $a+b$:
+$$ a+b = 9^2 - 2\left(\frac{182}{9}\right) = 81 - \frac{364}{9} $$
+$$ a+b = \frac{729 - 364}{9} = \frac{365}{9} $$</p>
+<p>Бараната вредност:
+$$ \frac{9}{5}(a+b) = \frac{9}{5} \cdot \frac{365}{9} = \frac{365}{5} = 73 $$</p>
+<p><strong>Резултат:</strong> 73.
+&lt;Користи LaTeX за формули: $x^2$ или $$ x^2 $$&gt;</p>
+<h2>💡 Алтернативен пристап (опционално)</h2>
+<p>&lt;Ако постои решение со друг Skill (на пр. геометриски наместо алгебарски).&gt;</p>
+<h2>🏁 Заклучок</h2>
+<p>&lt;Краен резултат, јасно истакнат во \boxed{}.&gt;</p>
+<h2>👩‍🏫 За наставници</h2>
+<p>Препознавањето на структурата на $(x+y)^3$ е клучно. Без тоа, системот е многу тежок за решавање.</p></div></div>
+    </div>
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Македонска Математичка Архива. Генерирано со Python.</p>
+        </div>
+    </footer>
+</body>
+</html>

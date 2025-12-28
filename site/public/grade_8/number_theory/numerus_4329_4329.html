@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="mk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>numerus_4329_4329.md | Математичка Архива</title>
+    <link rel="stylesheet" href="../../style.css">
+    <!-- MathJax -->
+    <script>
+    window.MathJax = {
+      tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$']] },
+      chtml: { scale: 1 }
+    };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="../../index.html" class="logo"><i class="fas fa-cube"></i> МатАрхива</a>
+            <div class="nav-links">
+                <a href="../../index.html">Почетна</a>
+                <a href="../../skills/index.html">Вештини</a>
+                <a href="../../theorems/index.html">Теореми</a>
+            </div>
+        </div>
+    </nav>
+    <div class="container main-content">
+<div class="breadcrumbs"><a href="../../index.html">Почетна</a> <i class="fas fa-chevron-right separator"></i> <a href="../index.html">Grade 8</a> <i class="fas fa-chevron-right separator"></i> <span class="current">Number_Theory</span> <i class="fas fa-chevron-right separator"></i> <span class="current">numerus_4329_4329.md</span></div>
+    <div class="action-bar">
+        <button onclick="window.print()" class="btn-print"><i class="fas fa-print"></i> Печати</button>
+    </div>
+    <div class='problem-page'><div class='card'><h1>Делење со дропка (НЗД на дропки)</h1>
+<h2>Текст на задачата</h2>
+<p>Определи ја најголемата дропка со која треба да се поделат дропките $\frac{8}{15}, \frac{12}{35}$ и $\frac{20}{21}$ така што во сите три случаи количникот да биде природен број.</p>
+<h2>🧠 Анализа (Клучна идеја)</h2>
+<p>За дропката $\frac{A}{B}$ да биде деливa со $\frac{x}{y}$ и резултатот да е цел број, треба $\frac{A}{B} \cdot \frac{y}{x} = k$. Ова значи дека $x$ мора да го дели $A$, а $B$ мора да го дели $y$. За дропката $\frac{x}{y}$ да биде најголема, броителот $x$ треба да е најголем можен (НЗД), а именителот $y$ најмал можен (НЗС).</p>
+<h2>📝 Решение</h2>
+<p>Нека бараната дропка е $\frac{x}{y}$.
+Условот е количниците да се природни броеви:
+1. $\frac{8}{15} : \frac{x}{y} = \frac{8y}{15x} \in \mathbb{N} \implies x \mid 8, \ 15 \mid y$
+2. $\frac{12}{35} : \frac{x}{y} = \frac{12y}{35x} \in \mathbb{N} \implies x \mid 12, \ 35 \mid y$
+3. $\frac{20}{21} : \frac{x}{y} = \frac{20y}{21x} \in \mathbb{N} \implies x \mid 20, \ 21 \mid y$</p>
+<p>За дропката $\frac{x}{y}$ да биде <strong>максимална</strong>, треба:
+- $x$ да биде најголемиот можен делител на броителите: $x = \text{НЗД}(8, 12, 20) = 4$.
+- $y$ да биде најмалиот можен содржател на именителите: $y = \text{НЗС}(15, 35, 21)$.</p>
+<p>Пресметка на НЗС:
+$15 = 3 \cdot 5$
+$35 = 5 \cdot 7$
+$21 = 3 \cdot 7$
+$y = 3 \cdot 5 \cdot 7 = 105$.</p>
+<p><strong>Резултат:</strong> Бараната дропка е $\boxed{\frac{4}{105}}$.
+&lt;Користи LaTeX за формули: $x^2$ или $$ x^2 $$&gt;</p>
+<h2>💡 Алтернативен пристап (опционално)</h2>
+<p>&lt;Ако постои решение со друг Skill (на пр. геометриски наместо алгебарски).&gt;</p>
+<h2>🏁 Заклучок</h2>
+<p>&lt;Краен резултат, јасно истакнат во \boxed{}.&gt;</p>
+<h2>👩‍🏫 За наставници</h2>
+<p>Ова е дефиницијата за НЗД на дропки. Правилото е: НЗД(дропки) = НЗД(броители) / НЗС(именители).</p></div></div>
+    </div>
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Македонска Математичка Архива. Генерирано со Python.</p>
+        </div>
+    </footer>
+</body>
+</html>

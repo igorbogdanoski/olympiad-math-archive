@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="mk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>10_geom_9_trap_perp_diag.md | Математичка Архива</title>
+    <link rel="stylesheet" href="../../style.css">
+    <!-- MathJax -->
+    <script>
+    window.MathJax = {
+      tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$']] },
+      chtml: { scale: 1 }
+    };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="../../index.html" class="logo"><i class="fas fa-cube"></i> МатАрхива</a>
+            <div class="nav-links">
+                <a href="../../index.html">Почетна</a>
+                <a href="../../skills/index.html">Вештини</a>
+                <a href="../../theorems/index.html">Теореми</a>
+            </div>
+        </div>
+    </nav>
+    <div class="container main-content">
+<div class="breadcrumbs"><a href="../../index.html">Почетна</a> <i class="fas fa-chevron-right separator"></i> <a href="../index.html">Grade 9</a> <i class="fas fa-chevron-right separator"></i> <span class="current">Geometry</span> <i class="fas fa-chevron-right separator"></i> <span class="current">10_geom_9_trap_perp_diag.md</span></div>
+    <div class="action-bar">
+        <button onclick="window.print()" class="btn-print"><i class="fas fa-print"></i> Печати</button>
+    </div>
+    <div class='problem-page'><div class='card'><h1>Плоштина на рамнокрак трапез со нормални дијагонали</h1>
+<h2>Текст на задачата</h2>
+<p>Пресметај ја плоштината на рамнокрак трапез чии дијагонали се взаемно нормални, а средната линија на трапезот е еднаква на $6$ cm.</p>
+<h2>📐 Скица / Конструкција</h2>
+<p>&lt;Опис на цртежот. Кои се клучните точки? Дали има помошни линии?&gt;</p>
+<!-- VISUAL PROMPT: Draw an isosceles trapezoid ABCD with midsegment 6. Draw diagonals AC and BD intersecting at 90 degrees. Extend base AB to E such that BE = CD and connect CE to show a right triangle ACE. -->
+
+<h2>🧠 Анализа</h2>
+<p>Хеуристика: Кога имате нормални дијагонали кај трапез, најмоќната стратегија е <strong>Транслација на дијагонала</strong>. Ова формира помошен правоаголен триаголник кој ги поврзува висината и средната линија.</p>
+<h2>📝 Решение (СИНТЕТИЧКО)</h2>
+<ol>
+<li><strong>Конструкција:</strong> Нека трапезот е $ABCD$ со основи $a$ и $b$. Повлекуваме права низ $C$ паралелна со дијагоналата $BD$ која ја сече правата $AB$ во точка $E$.</li>
+<li><strong>Својства на помошниот триаголник:</strong> Четириаголникот $EBDC$ е паралелограм, па $BE = b$ и $CE = BD$. Во $\triangle ACE$, страната $AE = a+b$. Бидејќи $AC \perp BD$ и $BD \parallel CE$, следува $AC \perp CE$, па $\triangle ACE$ е правоаголен.</li>
+<li><strong>Рамнокрак триаголник:</strong> Трапезот е рамнокрак, па $AC = BD$. Бидејќи $BD = CE$, тогаш $AC = CE$, што значи $\triangle ACE$ е рамнокрак правоаголен триаголник.</li>
+<li><strong>Врска меѓу висината и средната линија:</strong> Висината $h$ на трапезот е висина кон хипотенузата во $\triangle ACE$. Кај рамнокрак правоаголен триаголник, $h = \frac{AE}{2} = \frac{a+b}{2}$. Бидејќи средната линија $m = \frac{a+b}{2} = 6$ cm, следува $h = m = 6$ cm.</li>
+<li><strong>Плоштина:</strong> $P = m \cdot h = 6 \cdot 6 = 36$ cm$^2$.</li>
+</ol>
+<h2>⚠️ Аналитички пристап (само ако е неизбежен)</h2>
+<p>&lt;Ако мора да се користат координати, објасни зошто синтетичкиот пат е претежок.&gt;</p>
+<h2>🏁 Заклучок</h2>
+<p>&lt;Краен резултат.&gt;</p></div></div>
+    </div>
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Македонска Математичка Архива. Генерирано со Python.</p>
+        </div>
+    </footer>
+</body>
+</html>

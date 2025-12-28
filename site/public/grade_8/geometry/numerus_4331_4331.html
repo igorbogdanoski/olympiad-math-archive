@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="mk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>numerus_4331_4331.md | Математичка Архива</title>
+    <link rel="stylesheet" href="../../style.css">
+    <!-- MathJax -->
+    <script>
+    window.MathJax = {
+      tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$']] },
+      chtml: { scale: 1 }
+    };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="../../index.html" class="logo"><i class="fas fa-cube"></i> МатАрхива</a>
+            <div class="nav-links">
+                <a href="../../index.html">Почетна</a>
+                <a href="../../skills/index.html">Вештини</a>
+                <a href="../../theorems/index.html">Теореми</a>
+            </div>
+        </div>
+    </nav>
+    <div class="container main-content">
+<div class="breadcrumbs"><a href="../../index.html">Почетна</a> <i class="fas fa-chevron-right separator"></i> <a href="../index.html">Grade 8</a> <i class="fas fa-chevron-right separator"></i> <span class="current">Geometry</span> <i class="fas fa-chevron-right separator"></i> <span class="current">numerus_4331_4331.md</span></div>
+    <div class="action-bar">
+        <button onclick="window.print()" class="btn-print"><i class="fas fa-print"></i> Печати</button>
+    </div>
+    <div class='problem-page'><div class='card'><h1>Агли во правоаголен триаголник (Помошна линија)</h1>
+<h2>Текст на задачата</h2>
+<p>Нека $\triangle ABC$ е правоаголен со прав агол во $B$. Права $p \parallel BC$ минува низ $A$. Точката $K$ е на $p$ така што $MK = 2AC$ (каде $M$ е пресек на $KC$ со $AB$). Докажи дека $\angle ACB = 3\angle KCB$.</p>
+<h2>📐 Скица / Конструкција</h2>
+<p>&lt;Опис на цртежот. Кои се клучните точки? Дали има помошни линии?&gt;</p>
+<h2>🧠 Анализа</h2>
+<p>Клучот е условот $MK = 2AC$. Во правоаголен триаголник, тежишната линија кон хипотенузата е половина од хипотенузата. Обиди се да повлечеш тежишна линија во $\triangle AKM$.</p>
+<h2>📝 Решение (СИНТЕТИЧКО)</h2>
+<p>Нека $\angle KCB = x$. Треба да докажеме дека $\angle ACB = 3x$.
+Бидејќи $AK \parallel BC$, аглите се наизменични: $\angle AKM = \angle KCB = x$.</p>
+<p>Во $\triangle ABC$, $\angle B = 90^\circ$. Бидејќи $AK \parallel BC$ и $AB \perp BC$, следи $AB \perp AK$, односно $\angle KAM = 90^\circ$.
+Значи $\triangle AKM$ е правоаголен триаголник.</p>
+<h3>Чекор 1: Помошна конструкција</h3>
+<p>Нека $L$ е средина на хипотенузата $MK$. Повлекуваме тежишна линија $AL$.
+Својство: $AL = \frac{1}{2} MK = ML = LK$.
+Од условот $MK = 2AC$, следи $AC = \frac{1}{2} MK$. Значи $AL = AC$.</p>
+<h3>Чекор 2: Ловење агли</h3>
+<ol>
+<li>Во $\triangle ALK$: $AL=LK$, па е рамнокрак. $\angle LAK = \angle LKA = x$.</li>
+<li>Надворешен агол: $\angle ALM = \angle LAK + \angle LKA = x + x = 2x$.</li>
+<li>Во $\triangle ALC$: Имаме $AL=AC$ (од конструкцијата). Значи е рамнокрак.
+   Аголот $\angle ALC$ и $\angle ALM$ се на иста права? Не, $M, L, K$ се колинеарни. $C$ е на правата $MK$. Значи $L$ лежи на $MC$.
+   Значи $\angle ACL = \angle ALC = 2x$.</li>
+</ol>
+<h3>Чекор 3: Финален збир</h3>
+<p>Аголот $\angle ACB$ е всушност $\angle ACL + \angle LCB$.
+Знаеме $\angle ACL = 2x$.
+Знаеме $\angle LCB = \angle KCB = x$ (бидејќи $L$ лежи на $KC$).
+Значи:
+$$ \angle ACB = 2x + x = 3x $$
+$$ \angle ACB = 3 \angle KCB $$</p>
+<p><strong>Доказот е завршен.</strong></p>
+<h2>⚠️ Аналитички пристап (само ако е неизбежен)</h2>
+<p>&lt;Ако мора да се користат координати, објасни зошто синтетичкиот пат е претежок.&gt;</p>
+<h2>🏁 Заклучок</h2>
+<p>&lt;Краен резултат.&gt;</p></div></div>
+    </div>
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Македонска Математичка Архива. Генерирано со Python.</p>
+        </div>
+    </footer>
+</body>
+</html>

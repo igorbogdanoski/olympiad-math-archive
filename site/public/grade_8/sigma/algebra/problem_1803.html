@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="mk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>problem_1803.md | Математичка Архива</title>
+    <link rel="stylesheet" href="../../style.css">
+    <!-- MathJax -->
+    <script>
+    window.MathJax = {
+      tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$']] },
+      chtml: { scale: 1 }
+    };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="../../index.html" class="logo"><i class="fas fa-cube"></i> МатАрхива</a>
+            <div class="nav-links">
+                <a href="../../index.html">Почетна</a>
+                <a href="../../skills/index.html">Вештини</a>
+                <a href="../../theorems/index.html">Теореми</a>
+            </div>
+        </div>
+    </nav>
+    <div class="container main-content">
+<div class="breadcrumbs"><a href="../../index.html">Почетна</a> <i class="fas fa-chevron-right separator"></i> <a href="../index.html">Grade 8</a> <i class="fas fa-chevron-right separator"></i> <span class="current">Sigma\Algebra</span> <i class="fas fa-chevron-right separator"></i> <span class="current">problem_1803.md</span></div>
+    <div class="action-bar">
+        <button onclick="window.print()" class="btn-print"><i class="fas fa-print"></i> Печати</button>
+    </div>
+    <div class='problem-page'><div class='card'><h1>Логаритамска неравенка со параметар</h1>
+<h2>Текст на задачата</h2>
+<p>Да се реши неравенката
+[
+\log_2(x+1) + \log_2(3-x) \ge 1.
+]</p>
+<hr />
+<h2>Анализа</h2>
+<p>Најпрво мора да се одреди <strong>доменот на дефинираност</strong> на логаритмите.
+Потоа, со користење на својствата на логаритмите, неравенката може
+да се сведе на алгебарска неравенка.</p>
+<p>Клучната идеја е дека логаритамските функции се <strong>монотоно растечки</strong>,
+па можеме безбедно да преминеме на еквивалентни неравенки.</p>
+<hr />
+<h2>Решение</h2>
+<p>Ќе решаваме чекор по чекор.</p>
+<h3>Чекор 1: Домен на дефинираност</h3>
+<p>Бидејќи логаритмите мора да бидат дефинирани, потребно е:
+[
+x+1 &gt; 0 \quad \text{и} \quad 3-x &gt; 0.
+]</p>
+<p>Оттука:
+[
+-1 &lt; x &lt; 3.
+]</p>
+<hr />
+<h3>Чекор 2: Спојување на логаритмите</h3>
+<p>Користиме својството:
+[
+\log a + \log b = \log(ab).
+]</p>
+<p>Тогаш неравенката станува:
+[
+\log_2\big((x+1)(3-x)\big) \ge 1.
+]</p>
+<hr />
+<h3>Чекор 3: Отстранување на логаритмот</h3>
+<p>Бидејќи логаритамот со основа 2 е растечка функција, неравенката е
+еквивалентна на:
+[
+(x+1)(3-x) \ge 2^1.
+]</p>
+<p>Односно:
+[
+(x+1)(3-x) \ge 2.
+]</p>
+<hr />
+<h3>Чекор 4: Алгебарска неравенка</h3>
+<p>Го развиваме производот:
+[
+(x+1)(3-x) = -x^2 + 2x + 3.
+]</p>
+<p>Па добиваме:
+[
+-x^2 + 2x + 3 \ge 2.
+]</p>
+<p>Односно:
+[
+-x^2 + 2x + 1 \ge 0.
+]</p>
+<p>Го множиме со (-1) (и го менуваме знакот):
+[
+x^2 - 2x - 1 \le 0.
+]</p>
+<hr />
+<h3>Чекор 5: Решавање на квадратната неравенка</h3>
+<p>Корените на равенката
+[
+x^2 - 2x - 1 = 0
+]
+се:
+[
+x = 1 \pm \sqrt{2}.
+]</p>
+<p>Бидејќи коефициентот пред (x^2) е позитивен, неравенката важи меѓу корените:
+[
+1-\sqrt{2} \le x \le 1+\sqrt{2}.
+]</p>
+<hr />
+<h3>Чекор 6: Пресек со доменот</h3>
+<p>Доменот беше:
+[
+-1 &lt; x &lt; 3.
+]</p>
+<p>Очигледно,
+[
+1-\sqrt{2} &gt; -1 \quad \text{и} \quad 1+\sqrt{2} &lt; 3.
+]</p>
+<p>Затоа решението останува непроменето.</p>
+<hr />
+<h2>Алтернативен пристап (олимписки)</h2>
+<p>Може да се забележи дека изразот
+[
+(x+1)(3-x)
+]
+е квадратна функција со максимум во (x=1).
+Оттука, проверката дали постои интервал каде вредноста е поголема или
+еднаква на 2 се сведува на анализа на таа парабола.</p>
+<hr />
+<h2>Заклучок</h2>
+<p>Решението на дадената неравенка е
+[
+\boxed{1-\sqrt{2} \le x \le 1+\sqrt{2}}.
+]</p>
+<hr />
+<h2>За тутори (опционално)</h2>
+<ul>
+<li>Предуслови: логаритми, квадратни неравенки</li>
+<li>Клучна идеја: прво домен, потоа алгебра</li>
+<li>Типична грешка: прескокнување на условите за дефинираност</li>
+</ul></div></div>
+    </div>
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Македонска Математичка Архива. Генерирано со Python.</p>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="mk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>8_5_geom_quad_symmetry_05.md | Математичка Архива</title>
+    <link rel="stylesheet" href="../../style.css">
+    <!-- MathJax -->
+    <script>
+    window.MathJax = {
+      tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$']] },
+      chtml: { scale: 1 }
+    };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="../../index.html" class="logo"><i class="fas fa-cube"></i> МатАрхива</a>
+            <div class="nav-links">
+                <a href="../../index.html">Почетна</a>
+                <a href="../../skills/index.html">Вештини</a>
+                <a href="../../theorems/index.html">Теореми</a>
+            </div>
+        </div>
+    </nav>
+    <div class="container main-content">
+<div class="breadcrumbs"><a href="../../index.html">Почетна</a> <i class="fas fa-chevron-right separator"></i> <a href="../index.html">Grade 9</a> <i class="fas fa-chevron-right separator"></i> <span class="current">Geometry</span> <i class="fas fa-chevron-right separator"></i> <span class="current">8_5_geom_quad_symmetry_05.md</span></div>
+    <div class="action-bar">
+        <button onclick="window.print()" class="btn-print"><i class="fas fa-print"></i> Печати</button>
+    </div>
+    <div class='problem-page'><div class='card'><h1>Симетрија во конвексен четириаголник</h1>
+<h2>Текст на задачата</h2>
+<p>Даден е конвексен четириаголник $ABCD$ кој има прав агол кај темето $C$. На страната $CD$ постои точка $P$ така што $\angle APD = \angle BPC$ и $\angle BAP = \angle ABC$. Докажи дека $BC = \frac{AP + BP}{2}$.</p>
+<h2>📐 Скица / Конструкција</h2>
+<p>&lt;Опис на цртежот. Кои се клучните точки? Дали има помошни линии?&gt;</p>
+<!-- VISUAL PROMPT: Draw a convex quadrilateral ABCD with a right angle at C. Mark a point P on side CD. Reflect point B across line CD to get B'. Connect A, P, and B' as a straight line. Mark equal angles APD and BPC. -->
+
+<h2>🧠 Анализа</h2>
+<p>Хеуристика: Користи го правиот агол кај $C$ за да ја рефлектираш точката $B$ во однос на страната $CD$. Ова ќе ја 'исправи' искршената линија $AP + PB$ во една права отсечка.</p>
+<h2>📝 Решение (СИНТЕТИЧКО)</h2>
+<ol>
+<li><strong>Конструкција:</strong> Ја продолжуваме страната $BC$ преку темето $C$ до точка $B'$, така што $BC = CB'$. Бидејќи $\angle BCD = 90^\circ$, правата $CD$ е симетрала на отсечката $BB'$.</li>
+<li><strong>Својство на симетрија:</strong> Бидејќи $P$ лежи на $CD$, следува $PB = PB'$ и $\triangle PCB \cong \triangle PCB'$. Оттука $\angle BPC = \angle B'PC$.</li>
+<li><strong>Колинеарност:</strong> Од условот $\angle APD = \angle BPC$ и најденото $\angle BPC = \angle B'PC$, следува дека $\angle APD$ и $\angle B'PC$ се накрсни агли, па точките $A, P, B'$ лежат на една права. Значи $AB' = AP + PB' = AP + BP$.</li>
+<li><strong>Рамнокрак триаголник:</strong> Од условот $\angle BAP = \angle ABC$ следува дека $\angle BAB' = \angle ABB'$, па $\triangle ABB'$ е рамнокрак со $AB' = BB'$.</li>
+<li><strong>Заклучок:</strong> Бидејќи $BB' = 2BC$, имаме $AP + BP = 2BC$, односно $BC = \frac{AP + BP}{2}$.</li>
+</ol>
+<h2>⚠️ Аналитички пристап (само ако е неизбежен)</h2>
+<p>&lt;Ако мора да се користат координати, објасни зошто синтетичкиот пат е претежок.&gt;</p>
+<h2>🏁 Заклучок</h2>
+<p>&lt;Краен резултат.&gt;</p></div></div>
+    </div>
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Македонска Математичка Архива. Генерирано со Python.</p>
+        </div>
+    </footer>
+</body>
+</html>

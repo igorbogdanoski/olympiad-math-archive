@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="mk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>4_mnp_geom_9_contact_tri_sides.md | Математичка Архива</title>
+    <link rel="stylesheet" href="../../style.css">
+    <!-- MathJax -->
+    <script>
+    window.MathJax = {
+      tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$']] },
+      chtml: { scale: 1 }
+    };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="../../index.html" class="logo"><i class="fas fa-cube"></i> МатАрхива</a>
+            <div class="nav-links">
+                <a href="../../index.html">Почетна</a>
+                <a href="../../skills/index.html">Вештини</a>
+                <a href="../../theorems/index.html">Теореми</a>
+            </div>
+        </div>
+    </nav>
+    <div class="container main-content">
+<div class="breadcrumbs"><a href="../../index.html">Почетна</a> <i class="fas fa-chevron-right separator"></i> <a href="../index.html">Grade 9</a> <i class="fas fa-chevron-right separator"></i> <span class="current">Geometry</span> <i class="fas fa-chevron-right separator"></i> <span class="current">4_mnp_geom_9_contact_tri_sides.md</span></div>
+    <div class="action-bar">
+        <button onclick="window.print()" class="btn-print"><i class="fas fa-print"></i> Печати</button>
+    </div>
+    <div class='problem-page'><div class='card'><h1>Страни на контактниот триаголник</h1>
+<h2>Текст на задачата</h2>
+<p>Во $\triangle ABC$ со страни $a, b, c$ и впишан радиус $r$, точките на допир ја формираат $\triangle MNP$. Изрази ги страните на $\triangle MNP$ преку $a, b, c$ и $r$.</p>
+<h2>📐 Скица / Конструкција</h2>
+<p>&lt;Опис на цртежот. Кои се клучните точки? Дали има помошни линии?&gt;</p>
+<!-- VISUAL PROMPT: Draw triangle ABC with an incircle. Mark contact points M, N, P. Connect them to form triangle MNP. Draw the incenter I and connect it to vertices and contact points to show right triangles. -->
+
+<h2>🧠 Анализа</h2>
+<p>Разгледај го рамнокракиот триаголник формиран од две тангентни отсечки и тетивата (страната на MNP). Користи ја висината кон хипотенузата во правоаголниот триаголник формиран со центарот на кружницата.</p>
+<h2>📝 Решение (СИНТЕТИЧКО)</h2>
+<ol>
+<li><strong>Тангентни отсечки:</strong> Од темето $A$, тангентните отсечки до точките $P$ и $N$ се еднакви на $s-a$, каде $s$ е полупериметар.</li>
+<li><strong>Правоаголен триаголник:</strong> Центарот $I$, темето $A$ и допирната точка $N$ формираат правоаголен $\triangle ANI$ (прав агол кај $N$) со катети $s-a$ и $r$.</li>
+<li><strong>Хипотенуза:</strong> Според Питагора, $AI = \sqrt{(s-a)^2 + r^2}$.</li>
+<li><strong>Висина:</strong> Страната на контактниот триаголник $PN$ е двапати поголема од висината на $\triangle ANI$ спуштена кон $AI$. Плоштината $P = \frac{1}{2}r(s-a) = \frac{1}{2}AI \cdot \frac{PN}{2}$.</li>
+<li><strong>Резултат:</strong> $PN = \frac{2r(s-a)}{\sqrt{(s-a)^2 + r^2}}$. Аналогно се добиваат и другите две страни со замена на $(s-a)$ со $(s-b)$ и $(s-c)$.</li>
+</ol>
+<h2>⚠️ Аналитички пристап (само ако е неизбежен)</h2>
+<p>&lt;Ако мора да се користат координати, објасни зошто синтетичкиот пат е претежок.&gt;</p>
+<h2>🏁 Заклучок</h2>
+<p>&lt;Краен резултат.&gt;</p></div></div>
+    </div>
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Македонска Математичка Архива. Генерирано со Python.</p>
+        </div>
+    </footer>
+</body>
+</html>

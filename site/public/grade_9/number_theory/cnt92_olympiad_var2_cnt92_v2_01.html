@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="mk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>cnt92_olympiad_var2_cnt92_v2_01.md | Математичка Архива</title>
+    <link rel="stylesheet" href="../../style.css">
+    <!-- MathJax -->
+    <script>
+    window.MathJax = {
+      tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$']] },
+      chtml: { scale: 1 }
+    };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="../../index.html" class="logo"><i class="fas fa-cube"></i> МатАрхива</a>
+            <div class="nav-links">
+                <a href="../../index.html">Почетна</a>
+                <a href="../../skills/index.html">Вештини</a>
+                <a href="../../theorems/index.html">Теореми</a>
+            </div>
+        </div>
+    </nav>
+    <div class="container main-content">
+<div class="breadcrumbs"><a href="../../index.html">Почетна</a> <i class="fas fa-chevron-right separator"></i> <a href="../index.html">Grade 9</a> <i class="fas fa-chevron-right separator"></i> <span class="current">Number_Theory</span> <i class="fas fa-chevron-right separator"></i> <span class="current">cnt92_olympiad_var2_cnt92_v2_01.md</span></div>
+    <div class="action-bar">
+        <button onclick="window.print()" class="btn-print"><i class="fas fa-print"></i> Печати</button>
+    </div>
+    <div class='problem-page'><div class='card'><p><a href="../../README.md">⬅️ Назад кон Индексот</a> | <a href="../../../tools/skill_guides/logic.md">🧰 Skill: logic</a></p>
+<h1>Деливост со 18</h1>
+<h2>📝 Текст на задачата</h2>
+<p>Петцифрениот број $\overline{54a84}$ е делив со 18, ако цифрата $a$ е еднаква на...</p>
+<h2>🧠 Анализа (Клучна идеја)</h2>
+<p>За број да биде делив со сложен број како 18, треба да биде делив со неговите заемно прости фактори: 2 и 9. Деливоста со 2 е очигледна (завршува на 4). Фокусот е на деливоста со 9: збирот на цифрите мора да биде делив со 9.</p>
+<h2>💡 Решение</h2>
+<details>
+<summary>👀 Прикажи го решението</summary>
+
+**Чекор 1: Правила за деливост**
+Бројот е делив со 18 ако е делив со 2 и со 9.
+*   Деливост со 2: Бројот завршува на 4 (парен), значи условот е исполнет.
+*   Деливост со 9: Збирот на цифрите мора да биде содржател на 9.
+
+**Чекор 2: Поставување на равенката**
+Збирот на цифрите е:
+
+$$ S = 5 + 4 + a + 8 + 4 = 21 + a $$
+
+**Чекор 3: Наоѓање на $a$**
+Бараме цифра $a \in \{0, 1, ..., 9\}$ така што $21 + a$ е делив со 9.
+Првиот број поголем од 21 кој е делив со 9 е 27.
+
+$$ 21 + a = 27 \implies a = 6 $$
+
+Следниот би бил 36, но тогаш $a=15$, што не е цифра.
+Одговор: $a=6$.
+
+</details>
+
+<h2>🏁 Заклучок</h2>
+<p>&lt;Краен резултат.&gt;</p>
+<h2>👩‍🏫 За наставници</h2>
+<p>Потсетете ги учениците дека не треба да делат 'пеш'. Деливоста секогаш се сведува на прости фактори.</p></div></div>
+    </div>
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Македонска Математичка Архива. Генерирано со Python.</p>
+        </div>
+    </footer>
+</body>
+</html>

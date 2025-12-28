@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="mk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sigma_137_138_sigma_adv_02.md | Математичка Архива</title>
+    <link rel="stylesheet" href="../../style.css">
+    <!-- MathJax -->
+    <script>
+    window.MathJax = {
+      tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$']] },
+      chtml: { scale: 1 }
+    };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="../../index.html" class="logo"><i class="fas fa-cube"></i> МатАрхива</a>
+            <div class="nav-links">
+                <a href="../../index.html">Почетна</a>
+                <a href="../../skills/index.html">Вештини</a>
+                <a href="../../theorems/index.html">Теореми</a>
+            </div>
+        </div>
+    </nav>
+    <div class="container main-content">
+<div class="breadcrumbs"><a href="../../index.html">Почетна</a> <i class="fas fa-chevron-right separator"></i> <a href="../index.html">Grade 9</a> <i class="fas fa-chevron-right separator"></i> <span class="current">Number_Theory</span> <i class="fas fa-chevron-right separator"></i> <span class="current">sigma_137_138_sigma_adv_02.md</span></div>
+    <div class="action-bar">
+        <button onclick="window.print()" class="btn-print"><i class="fas fa-print"></i> Печати</button>
+    </div>
+    <div class='problem-page'><div class='card'><h1>Производи на непарни броеви</h1>
+<h2>Текст на задачата</h2>
+<p>Нека $A$ е множеството производи на три последователни непарни броеви, а $B$ е множеството производи на два последователни непарни броеви. Дали постои број $a \in A$ и $b \in B$ такви што $a - b = 2027$?</p>
+<h2>🧠 Анализа (Клучна идеја)</h2>
+<p>Разгледај ги броевите по модул 3. Производ на три последователни непарни броеви секогаш содржи содржател на 3.</p>
+<h2>📝 Решение</h2>
+<p>Елементите на $A$ се од облик $a = (2n-1)(2n+1)(2n+3)$.
+Меѓу три последователни непарни броеви, точно еден е делив со 3. (Пример: 1,3,5 или 3,5,7 или 5,7,9).
+Значи $a$ е секогаш делив со 3.
+$$ a \equiv 0 \pmod 3 $$</p>
+<p>Елементите на $B$ се од облик $b = (2k-1)(2k+1) = 4k^2 - 1$.
+Квадрат на цел број ($k^2$) по модул 3 може да биде 0 или 1.
+- Ако $k \equiv 0 \pmod 3$, тогаш $b \equiv -1 \equiv 2 \pmod 3$.
+- Ако $k \not\equiv 0 \pmod 3$, тогаш $k^2 \equiv 1$, па $b \equiv 4(1)-1 = 3 \equiv 0 \pmod 3$.
+Значи $b \equiv 0$ или $b \equiv 2 \pmod 3$.</p>
+<p>Равенката е $a - b = 2027$.
+По модул 3:
+$$ 0 - b \equiv 2027 \pmod 3 $$
+$$ 2027 = 3 \cdot 675 + 2 \implies 2027 \equiv 2 \pmod 3 $$
+$$ -b \equiv 2 \pmod 3 $$
+$$ b \equiv -2 \equiv 1 \pmod 3 $$</p>
+<p>Но, видовме дека $b$ може да биде само 0 или 2 по модул 3. Никогаш не е 1.
+Добивме контрадикција.</p>
+<p><strong>Заклучок:</strong> Не постојат такви броеви.
+&lt;Користи LaTeX за формули: $x^2$ или $$ x^2 $$&gt;</p>
+<h2>💡 Алтернативен пристап (опционално)</h2>
+<p>&lt;Ако постои решение со друг Skill (на пр. геометриски наместо алгебарски).&gt;</p>
+<h2>🏁 Заклучок</h2>
+<p>&lt;Краен резултат, јасно истакнат во \boxed{}.&gt;</p>
+<h2>👩‍🏫 За наставници</h2>
+<p>Модуларната аритметика е најбрзиот начин за докажување невозможност.</p></div></div>
+    </div>
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Македонска Математичка Архива. Генерирано со Python.</p>
+        </div>
+    </footer>
+</body>
+</html>

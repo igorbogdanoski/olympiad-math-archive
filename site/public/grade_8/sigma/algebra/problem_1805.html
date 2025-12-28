@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="mk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>problem_1805.md | Математичка Архива</title>
+    <link rel="stylesheet" href="../../style.css">
+    <!-- MathJax -->
+    <script>
+    window.MathJax = {
+      tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$']] },
+      chtml: { scale: 1 }
+    };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="../../index.html" class="logo"><i class="fas fa-cube"></i> МатАрхива</a>
+            <div class="nav-links">
+                <a href="../../index.html">Почетна</a>
+                <a href="../../skills/index.html">Вештини</a>
+                <a href="../../theorems/index.html">Теореми</a>
+            </div>
+        </div>
+    </nav>
+    <div class="container main-content">
+<div class="breadcrumbs"><a href="../../index.html">Почетна</a> <i class="fas fa-chevron-right separator"></i> <a href="../index.html">Grade 8</a> <i class="fas fa-chevron-right separator"></i> <span class="current">Sigma\Algebra</span> <i class="fas fa-chevron-right separator"></i> <span class="current">problem_1805.md</span></div>
+    <div class="action-bar">
+        <button onclick="window.print()" class="btn-print"><i class="fas fa-print"></i> Печати</button>
+    </div>
+    <div class='problem-page'><div class='card'><h1>Минимална вредност на симетричен полином</h1>
+<h2>Текст на задачата</h2>
+<p>Нека (x,y,z) се реални броеви такви што
+[
+x+y+z=0 \quad \text{и} \quad x^2+y^2+z^2=6.
+]
+Да се најде најмалата вредност на изразот
+[
+P = x^3+y^3+z^3.
+]</p>
+<hr />
+<h2>Анализа</h2>
+<p>Дадените услови се симетрични, а и изразот што се бара е симетричен.
+Кај вакви задачи е корисно да се изрази бараната величина преку
+основните симетрични збирки:
+[
+x+y+z,\quad xy+yz+zx,\quad xyz.
+]</p>
+<p>Клучна идеја е дека кубниот збир може да се поедностави со позната формула.</p>
+<hr />
+<h2>Решение</h2>
+<p>Ќе решаваме чекор по чекор.</p>
+<h3>Чекор 1: Користење на позната формула</h3>
+<p>Познато е дека:
+[
+x^3+y^3+z^3 - 3xyz = (x+y+z)(x^2+y^2+z^2 - xy-yz-zx).
+]</p>
+<hr />
+<h3>Чекор 2: Примена на условите</h3>
+<p>Бидејќи (x+y+z=0), од формулата следи:
+[
+x^3+y^3+z^3 = 3xyz.
+]</p>
+<p>Значи,
+[
+P = 3xyz.
+]</p>
+<hr />
+<h3>Чекор 3: Наоѓање на (xy+yz+zx)</h3>
+<p>Од идентитетот:
+[
+x^2+y^2+z^2 = (x+y+z)^2 - 2(xy+yz+zx),
+]
+добиваме:
+[
+6 = 0 - 2(xy+yz+zx),
+]
+односно
+[
+xy+yz+zx = -3.
+]</p>
+<hr />
+<h3>Чекор 4: Ограничување на (xyz)</h3>
+<p>Реалните броеви (x,y,z) со фиксни
+[
+x+y+z=0 \quad \text{и} \quad xy+yz+zx=-3
+]
+можат да се разгледуваат како корени на кубна равенка.</p>
+<p>Минималната вредност на (xyz) се постигнува кога две од променливите
+се еднакви.</p>
+<p>Нека:
+[
+y=z=a.
+]</p>
+<p>Тогаш од условот (x+y+z=0) следи:
+[
+x=-2a.
+]</p>
+<hr />
+<h3>Чекор 5: Користење на вториот услов</h3>
+<p>Од условот (x^2+y^2+z^2=6):
+[
+(-2a)^2+a^2+a^2=6
+]
+односно
+[
+6a^2=6,
+]
+па
+[
+a^2=1.
+]</p>
+<p>Оттука:
+[
+a=\pm1.
+]</p>
+<hr />
+<h3>Чекор 6: Пресметка на (P)</h3>
+<ul>
+<li>
+<p>Ако (a=1), тогаш ((x,y,z)=(-2,1,1)) и
+[
+P=-8+1+1=-6.
+]</p>
+</li>
+<li>
+<p>Ако (a=-1), тогаш ((x,y,z)=(2,-1,-1)) и
+[
+P=8-1-1=6.
+]</p>
+</li>
+</ul>
+<hr />
+<h2>Алтернативен пристап (олимписки)</h2>
+<p>Од симетријата и ограничувањата,
+екстремните вредности на симетричниот полином
+се постигнуваат кога две променливи се еднакви.
+Со оваа опсервација, решението се добива со една кратка пресметка.</p>
+<hr />
+<h2>Заклучок</h2>
+<p>Најмалата вредност на изразот е
+[
+\boxed{-6}.
+]</p>
+<hr />
+<h2>За тутори (опционално)</h2>
+<ul>
+<li>Предуслови: симетрични полиноми, формули за куб</li>
+<li>Клучна идеја: редукција на проблемот со симетрија</li>
+<li>Типична грешка: директно пробување без користење на условите</li>
+</ul></div></div>
+    </div>
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Македонска Математичка Архива. Генерирано со Python.</p>
+        </div>
+    </footer>
+</body>
+</html>

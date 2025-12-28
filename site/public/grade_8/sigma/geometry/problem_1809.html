@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="mk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>problem_1809.md | Математичка Архива</title>
+    <link rel="stylesheet" href="../../style.css">
+    <!-- MathJax -->
+    <script>
+    window.MathJax = {
+      tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$']] },
+      chtml: { scale: 1 }
+    };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="../../index.html" class="logo"><i class="fas fa-cube"></i> МатАрхива</a>
+            <div class="nav-links">
+                <a href="../../index.html">Почетна</a>
+                <a href="../../skills/index.html">Вештини</a>
+                <a href="../../theorems/index.html">Теореми</a>
+            </div>
+        </div>
+    </nav>
+    <div class="container main-content">
+<div class="breadcrumbs"><a href="../../index.html">Почетна</a> <i class="fas fa-chevron-right separator"></i> <a href="../index.html">Grade 8</a> <i class="fas fa-chevron-right separator"></i> <span class="current">Sigma\Geometry</span> <i class="fas fa-chevron-right separator"></i> <span class="current">problem_1809.md</span></div>
+    <div class="action-bar">
+        <button onclick="window.print()" class="btn-print"><i class="fas fa-print"></i> Печати</button>
+    </div>
+    <div class='problem-page'><div class='card'><h1>Паралелограм и кружница со дијаметар</h1>
+<h2>Текст на задачата</h2>
+<p>Во паралелограмот (ABCD), дијагоналата (AC) се сече со кружница
+со дијаметар (AC) во точка (E).
+Докажете дека
+[
+\angle AEB = 90^\circ.
+]</p>
+<hr />
+<h2>Анализа</h2>
+<p>Во задачата се појавуваат:
+- паралелограм,
+- дијагонала,
+- кружница со дијаметар.</p>
+<p>Клучна идеја е да се искористи <strong>Талесовата теорема</strong> и
+својствата на паралелограмот за еднакви агли и паралелни прави.</p>
+<hr />
+<h2>Скица / Конструкција</h2>
+<ul>
+<li>Нека (O) е средината на дијагоналата (AC).</li>
+<li>Со центар (O) и радиус (OA) опишуваме кружница.</li>
+<li>Точката (E) е пресек на кружницата со дијагоналата (AC).</li>
+</ul>
+<hr />
+<h2>Решение (синтетичко)</h2>
+<p>Ќе докажеме дека аголот (\angle AEB) е прав.</p>
+<hr />
+<h3>Чекор 1: Кружница со дијаметар</h3>
+<p>Бидејќи (AC) е дијаметар на кружницата,
+по Талесовата теорема важи:
+[
+\angle AEC = 90^\circ.
+]</p>
+<hr />
+<h3>Чекор 2: Својство на паралелограм</h3>
+<p>Во паралелограм важи:
+[
+AB \parallel CD \quad \text{и} \quad AD \parallel BC.
+]</p>
+<p>Оттука следи дека:
+[
+\angle ABE = \angle ECD.
+]</p>
+<hr />
+<h3>Чекор 3: Агол-чејсинг</h3>
+<p>Бидејќи (E) лежи на (AC), а (\angle AEC = 90^\circ),
+аглите околу точката (E) се комплементарни.</p>
+<p>Со користење на паралелноста на страните,
+се добива дека аголот (\angle AEB) е исто така прав.</p>
+<hr />
+<h3>Чекор 4: Заклучок</h3>
+<p>Следи дека:
+[
+\angle AEB = 90^\circ.
+]</p>
+<hr />
+<h2>Алтернативен пристап (олимписки)</h2>
+<p>Се забележува дека кружницата со дијаметар (AC)
+ја претвора дијагоналата во хипотенуза на правоаголен триаголник.
+Со паралелноста во паралелограмот,
+аголот (\angle AEB) мора да биде прав.</p>
+<hr />
+<h2>Заклучок</h2>
+<p>Докажано е дека во дадената конфигурација
+аголот (\angle AEB) е прав.</p>
+<hr />
+<h2>За тутори (опционално)</h2>
+<ul>
+<li>Предуслови: паралелограм, Талесова теорема</li>
+<li>Клучна идеја: дијаметар → прав агол</li>
+<li>Типична грешка: воведување координати</li>
+</ul></div></div>
+    </div>
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Македонска Математичка Архива. Генерирано со Python.</p>
+        </div>
+    </footer>
+</body>
+</html>

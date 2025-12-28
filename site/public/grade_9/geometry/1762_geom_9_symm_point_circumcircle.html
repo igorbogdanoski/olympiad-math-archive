@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="mk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1762_geom_9_symm_point_circumcircle.md | Математичка Архива</title>
+    <link rel="stylesheet" href="../../style.css">
+    <!-- MathJax -->
+    <script>
+    window.MathJax = {
+      tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$']] },
+      chtml: { scale: 1 }
+    };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="../../index.html" class="logo"><i class="fas fa-cube"></i> МатАрхива</a>
+            <div class="nav-links">
+                <a href="../../index.html">Почетна</a>
+                <a href="../../skills/index.html">Вештини</a>
+                <a href="../../theorems/index.html">Теореми</a>
+            </div>
+        </div>
+    </nav>
+    <div class="container main-content">
+<div class="breadcrumbs"><a href="../../index.html">Почетна</a> <i class="fas fa-chevron-right separator"></i> <a href="../index.html">Grade 9</a> <i class="fas fa-chevron-right separator"></i> <span class="current">Geometry</span> <i class="fas fa-chevron-right separator"></i> <span class="current">1762_geom_9_symm_point_circumcircle.md</span></div>
+    <div class="action-bar">
+        <button onclick="window.print()" class="btn-print"><i class="fas fa-print"></i> Печати</button>
+    </div>
+    <div class='problem-page'><div class='card'><h1>Симетрична точка на опишана кружница</h1>
+<h2>Текст на задачата</h2>
+<p>Точката $D$ е во внатрешноста на остроаголниот триаголник $ABC$ за кој важат равенствата $\angle ADB = \angle CDA = 180^\circ - \angle BAC$. Докажи дека симетричната точка $A'$ на точката $A$ во однос на точката $D$ лежи на опишаната кружница околу триаголникот $ABC$.</p>
+<h2>📐 Скица / Конструкција</h2>
+<p>&lt;Опис на цртежот. Кои се клучните точки? Дали има помошни линии?&gt;</p>
+<!-- VISUAL PROMPT: Draw an acute triangle ABC. Pick a point D inside such that angle ADB = angle ADC = 180 - angle A. Reflect A over D to get A'. Show that A, B, A', and C all lie on the same circle. -->
+
+<h2>🧠 Анализа</h2>
+<p>Хеуристика: 'Докажи тетивност преку суплементни агли'. Треба да покажеме дека $\angle BA'C + \angle BAC = 180^\circ$. Прво докажете ја сличноста на триаголниците со точката $D$.</p>
+<h2>📝 Решение (СИНТЕТИЧКО)</h2>
+<ol>
+<li><strong>Сличност:</strong> Нека $\angle BAC = \alpha$. Со 'лов на агли' добиваме дека $\triangle ABD \sim \triangle CAD$ (бидејќи имаат два еднакви агли $\alpha-x$ и $\alpha-y$). Од ова следува $AD^2 = BD \cdot CD$.</li>
+<li><strong>Втора сличност:</strong> Бидејќи $A'D = AD$ (симетрија), тогаш $A'D^2 = BD \cdot CD$, односно $\frac{BD}{A'D} = \frac{A'D}{CD}$. Бидејќи $\angle BDA' = \angle CDA' = \alpha$ (суплементни на $180-\alpha$), следува $\triangle BDA' \sim \triangle A'DC$ (признак САС).</li>
+<li><strong>Агли на четириаголникот:</strong> Од сличноста во чекор 2, наоѓаме дека $\angle BA'D + \angle DA'C = 180^\circ - \alpha$.</li>
+<li><strong>Заклучок:</strong> Во четириаголникот $ABA'C$, $\angle BAC + \angle BA'C = \alpha + (180^\circ - \alpha) = 180^\circ$. Бидејќи збирот на спротивните агли е $180^\circ$, четириаголникот е тетивен, па $A'$ лежи на кружницата.</li>
+</ol>
+<h2>⚠️ Аналитички пристап (само ако е неизбежен)</h2>
+<p>&lt;Ако мора да се користат координати, објасни зошто синтетичкиот пат е претежок.&gt;</p>
+<h2>🏁 Заклучок</h2>
+<p>&lt;Краен резултат.&gt;</p></div></div>
+    </div>
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Македонска Математичка Архива. Генерирано со Python.</p>
+        </div>
+    </footer>
+</body>
+</html>

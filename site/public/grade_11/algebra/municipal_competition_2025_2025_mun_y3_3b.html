@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="mk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>municipal_competition_2025_2025_mun_y3_3b.md | Математичка Архива</title>
+    <link rel="stylesheet" href="../../style.css">
+    <!-- MathJax -->
+    <script>
+    window.MathJax = {
+      tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$']] },
+      chtml: { scale: 1 }
+    };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="../../index.html" class="logo"><i class="fas fa-cube"></i> МатАрхива</a>
+            <div class="nav-links">
+                <a href="../../index.html">Почетна</a>
+                <a href="../../skills/index.html">Вештини</a>
+                <a href="../../theorems/index.html">Теореми</a>
+            </div>
+        </div>
+    </nav>
+    <div class="container main-content">
+<div class="breadcrumbs"><a href="../../index.html">Почетна</a> <i class="fas fa-chevron-right separator"></i> <a href="../index.html">Grade 11</a> <i class="fas fa-chevron-right separator"></i> <span class="current">Algebra</span> <i class="fas fa-chevron-right separator"></i> <span class="current">municipal_competition_2025_2025_mun_y3_3b.md</span></div>
+    <div class="action-bar">
+        <button onclick="window.print()" class="btn-print"><i class="fas fa-print"></i> Печати</button>
+    </div>
+    <div class='problem-page'><div class='card'><p><a href="../../README.md">⬅️ Назад кон Индексот</a> | <a href="../../../tools/skill_guides/logic.md">🧰 Skill: logic</a></p>
+<h1>Систем квадратни равенки</h1>
+<h2>📝 Текст на задачата</h2>
+<p>Нека за $a, b$ реални броеви ($a \neq 0$), равенките $ax^2 + bx + b = 0$ и $ax^2 + ax + b = 0$ имаат реални корени. Производот на еден корен од првата со еден корен од втората равенка е 1. Одреди го збирот $a+b$.</p>
+<h2>🧠 Анализа (Клучна идеја)</h2>
+<p>Нека $y$ е корен на првата, а $z$ на втората равенка. Дадено е $yz=1$, значи $z=1/y$. Заменете го ова во втората равенка за да добиете нова равенка по $y$. Потоа комбинирајте ја со првата равенка.</p>
+<h2>💡 Решение</h2>
+<details>
+<summary>👀 Прикажи го решението</summary>
+
+Нека $y$ е корен на $ax^2 + bx + b = 0$. Значи:
+(1) $ay^2 + by + b = 0$.
+
+Нека $z$ е корен на $ax^2 + ax + b = 0$. Дадено е $yz=1 \implies z = 1/y$.
+Заменуваме во втората равенка:
+
+$$ a(1/y)^2 + a(1/y) + b = 0 $$
+
+Множиме со $y^2$ (јасно $y \neq 0$ бидејќи $b \neq 0$ и $yz=1$):
+(2) $a + ay + by^2 = 0$, односно $by^2 + ay + a = 0$.
+
+**Чекор 2: Собирање на равенките**
+Ги собираме (1) и (2):
+
+$$ (ay^2 + by + b) + (by^2 + ay + a) = 0 $$
+
+$$ (a+b)y^2 + (a+b)y + (a+b) = 0 $$
+
+$$ (a+b)(y^2 + y + 1) = 0 $$
+
+**Чекор 3: Анализа**
+Имаме два случаи:
+1. $y^2 + y + 1 = 0$. Оваа равенка нема реални решенија ($D = 1-4 = -3 < 0$). Бидејќи задачата вели дека корените се реални, овој случај отпаѓа.
+2. $a + b = 0$.
+
+**Заклучок:**
+Мора $a+b=0$.
+
+</details>
+
+<h2>🏁 Заклучок</h2>
+<p>&lt;Краен резултат.&gt;</p>
+<h2>👩‍🏫 За наставници</h2>
+<p>Ова е многу елегантен начин да се избегне наоѓање на самите корени. Симетријата на коефициентите ($a, b, b$ и $b, a, a$) сугерира собирање или одземање.</p></div></div>
+    </div>
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Македонска Математичка Архива. Генерирано со Python.</p>
+        </div>
+    </footer>
+</body>
+</html>

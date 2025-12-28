@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="mk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sigma_137_138_sigma_adv_17.md | Математичка Архива</title>
+    <link rel="stylesheet" href="../../style.css">
+    <!-- MathJax -->
+    <script>
+    window.MathJax = {
+      tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$']] },
+      chtml: { scale: 1 }
+    };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="../../index.html" class="logo"><i class="fas fa-cube"></i> МатАрхива</a>
+            <div class="nav-links">
+                <a href="../../index.html">Почетна</a>
+                <a href="../../skills/index.html">Вештини</a>
+                <a href="../../theorems/index.html">Теореми</a>
+            </div>
+        </div>
+    </nav>
+    <div class="container main-content">
+<div class="breadcrumbs"><a href="../../index.html">Почетна</a> <i class="fas fa-chevron-right separator"></i> <a href="../index.html">Grade 9</a> <i class="fas fa-chevron-right separator"></i> <span class="current">Algebra</span> <i class="fas fa-chevron-right separator"></i> <span class="current">sigma_137_138_sigma_adv_17.md</span></div>
+    <div class="action-bar">
+        <button onclick="window.print()" class="btn-print"><i class="fas fa-print"></i> Печати</button>
+    </div>
+    <div class='problem-page'><div class='card'><h1>Пресметка на сума со функција</h1>
+<h2>Текст на задачата</h2>
+<p>Најди ја вредноста на збирот $S = f(\frac{1}{101}) + f(\frac{2}{101}) + \dots + f(\frac{100}{101})$ за функцијата $f(x) = \frac{a^x}{a^x + \sqrt{a}}$ ($a&gt;0$).</p>
+<h2>🧠 Анализа (Клучна идеја)</h2>
+<p>Провери го збирот на симетрични членови: $f(x) + f(1-x)$. Ако овој збир е константен, можеш да ги групираш собироците во парови.</p>
+<h2>📝 Решение</h2>
+<h3>Чекор 1: Својство на симетрија</h3>
+<p>Пресметуваме $f(1-x)$:
+$$ f(1-x) = \frac{a^{1-x}}{a^{1-x} + \sqrt{a}} = \frac{a/a^x}{a/a^x + \sqrt{a}} $$
+Множиме броител и именител со $a^x$:
+$$ = \frac{a}{a + a^x\sqrt{a}} $$
+Делиме со $\sqrt{a}$:
+$$ = \frac{\sqrt{a}}{\sqrt{a} + a^x} $$</p>
+<p>Сега собираме:
+$$ f(x) + f(1-x) = \frac{a^x}{a^x + \sqrt{a}} + \frac{\sqrt{a}}{a^x + \sqrt{a}} = \frac{a^x + \sqrt{a}}{a^x + \sqrt{a}} = 1 $$</p>
+<h3>Чекор 2: Пресметка на сумата</h3>
+<p>Збирот има членови од облик $f(\frac{k}{101})$ за $k=1, \dots, 100$.
+Ги групираме првиот и последниот, вториот и претпоследниот...
+Парот е $f(\frac{k}{101}) + f(\frac{101-k}{101}) = f(x) + f(1-x) = 1$.</p>
+<p>Вкупно имаме 100 членови.
+Тоа се 50 парови.
+$$ S = 50 \cdot 1 = 50 $$</p>
+<p><strong>Резултат:</strong> 50.
+&lt;Користи LaTeX за формули: $x^2$ или $$ x^2 $$&gt;</p>
+<h2>💡 Алтернативен пристап (опционално)</h2>
+<p>&lt;Ако постои решение со друг Skill (на пр. геометриски наместо алгебарски).&gt;</p>
+<h2>🏁 Заклучок</h2>
+<p>&lt;Краен резултат, јасно истакнат во \boxed{}.&gt;</p>
+<h2>👩‍🏫 За наставници</h2>
+<p>Ова е стандарден 'трик' на натпревари. Секогаш проверувајте $f(x)+f(1-x)$ или $f(x)+f(1/x)$.</p></div></div>
+    </div>
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Македонска Математичка Архива. Генерирано со Python.</p>
+        </div>
+    </footer>
+</body>
+</html>

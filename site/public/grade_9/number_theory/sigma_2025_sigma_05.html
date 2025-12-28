@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="mk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sigma_2025_sigma_05.md | Математичка Архива</title>
+    <link rel="stylesheet" href="../../style.css">
+    <!-- MathJax -->
+    <script>
+    window.MathJax = {
+      tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$']] },
+      chtml: { scale: 1 }
+    };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="../../index.html" class="logo"><i class="fas fa-cube"></i> МатАрхива</a>
+            <div class="nav-links">
+                <a href="../../index.html">Почетна</a>
+                <a href="../../skills/index.html">Вештини</a>
+                <a href="../../theorems/index.html">Теореми</a>
+            </div>
+        </div>
+    </nav>
+    <div class="container main-content">
+<div class="breadcrumbs"><a href="../../index.html">Почетна</a> <i class="fas fa-chevron-right separator"></i> <a href="../index.html">Grade 9</a> <i class="fas fa-chevron-right separator"></i> <span class="current">Number_Theory</span> <i class="fas fa-chevron-right separator"></i> <span class="current">sigma_2025_sigma_05.md</span></div>
+    <div class="action-bar">
+        <button onclick="window.print()" class="btn-print"><i class="fas fa-print"></i> Печати</button>
+    </div>
+    <div class='problem-page'><div class='card'><h1>Диофантова равенка со цифри</h1>
+<h2>Текст на задачата</h2>
+<p>Нека $\overline{ab}^2 + \overline{ac}^2 = 1313$. Пресметај го збирот на цифрите $a, b$ и $c$.</p>
+<h2>🧠 Анализа (Клучна идеја)</h2>
+<p>Користи ограничувања (bounding). Бројот $\overline{ax}$ е приближно $10a$. Значи $2 \cdot (10a)^2 \approx 1313$.</p>
+<h2>📝 Решение</h2>
+<p>Равенката е $(10a+b)^2 + (10a+c)^2 = 1313$.</p>
+<ol>
+<li><strong>Проценка за $a$:</strong>
+   Приближно $200a^2 \approx 1300 \implies a^2 \approx 6.5$.
+   Значи $a$ може да биде 2 или 3.</li>
+<li>Ако $a=3$: $30^2 + 30^2 = 1800 &gt; 1313$. Премногу.</li>
+<li>
+<p>Значи мора <strong>$a=2$</strong>.</p>
+</li>
+<li>
+<p><strong>Барање на $b$ и $c$:</strong>
+   Равенката станува: $(20+b)^2 + (20+c)^2 = 1313$.
+   Анализа на последна цифра:
+   $b^2 + c^2$ завршува на 3.
+   Квадрати на цифри завршуваат на: 0, 1, 4, 5, 6, 9.
+   Кои два квадрати даваат збир што завршува на 3?</p>
+</li>
+<li>$4 + 9 = 13$. (Цифри 2 или 8) и (3 или 7).</li>
+</ol>
+<p>Проверка на паровите:
+   - $22^2 + 23^2 = 484 + 529 = 1013$ (Малку).
+   - $22^2 + 27^2 = 484 + 729 = 1213$ (Малку).
+   - $28^2 + 23^2 = 784 + 529 = 1313$. <strong>ТОЧНО!</strong></p>
+<p>Значи $b=8, c=3$ (или обратно).</p>
+<ol>
+<li><strong>Збир на цифри:</strong>
+   $a+b+c = 2 + 8 + 3 = 13$.</li>
+</ol>
+<p><strong>Резултат:</strong> 13.
+&lt;Користи LaTeX за формули: $x^2$ или $$ x^2 $$&gt;</p>
+<h2>💡 Алтернативен пристап (опционално)</h2>
+<p>&lt;Ако постои решение со друг Skill (на пр. геометриски наместо алгебарски).&gt;</p>
+<h2>🏁 Заклучок</h2>
+<p>&lt;Краен резултат, јасно истакнат во \boxed{}.&gt;</p>
+<h2>👩‍🏫 За наставници</h2>
+<p>Комбинацијата од 'груба проценка' и 'последна цифра' е стандардна стратегија.</p></div></div>
+    </div>
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Македонска Математичка Архива. Генерирано со Python.</p>
+        </div>
+    </footer>
+</body>
+</html>

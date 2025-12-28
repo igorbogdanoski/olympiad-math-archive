@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="mk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>municipal_competition_2025_2025_mun_g9_4.md | Математичка Архива</title>
+    <link rel="stylesheet" href="../../style.css">
+    <!-- MathJax -->
+    <script>
+    window.MathJax = {
+      tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$']] },
+      chtml: { scale: 1 }
+    };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="../../index.html" class="logo"><i class="fas fa-cube"></i> МатАрхива</a>
+            <div class="nav-links">
+                <a href="../../index.html">Почетна</a>
+                <a href="../../skills/index.html">Вештини</a>
+                <a href="../../theorems/index.html">Теореми</a>
+            </div>
+        </div>
+    </nav>
+    <div class="container main-content">
+<div class="breadcrumbs"><a href="../../index.html">Почетна</a> <i class="fas fa-chevron-right separator"></i> <a href="../index.html">Grade 9</a> <i class="fas fa-chevron-right separator"></i> <span class="current">Geometry</span> <i class="fas fa-chevron-right separator"></i> <span class="current">municipal_competition_2025_2025_mun_g9_4.md</span></div>
+    <div class="action-bar">
+        <button onclick="window.print()" class="btn-print"><i class="fas fa-print"></i> Печати</button>
+    </div>
+    <div class='problem-page'><div class='card'><p><a href="../../README.md">⬅️ Назад кон Индексот</a> | <a href="../../../tools/skill_guides/logic.md">🧰 Skill: logic</a></p>
+<h1>Квадрат впишан во триаголник</h1>
+<h2>📝 Текст на задачата</h2>
+<p>Во триаголникот $ABC$ е впишан квадрат $DEFG$ така што $DE$ лежи на $AB$. Ако $AD + EB = 16$ cm и плоштината на триаголникот $GCF$ (над квадратот) е 16 cm², пресметај ја плоштината на квадратот.</p>
+<h2>📐 Скица</h2>
+<!-- Ова место е резервирано за автоматската слика од Manim -->
+
+<blockquote>
+<p><strong>👨‍💻 Geo-Mentor Code:</strong>
+Одете во <code>assets/manim_code_log.md</code>, копирајте го кодот за <code>Task_2025_mun_g9_4</code> и генерирајте ја сликата.</p>
+<p><strong>👨‍💻 Geo-Mentor Code:</strong>
+Одете во <code>assets/manim_code_log.md</code>, копирајте го кодот за <code>Task_2025_mun_g9_4</code> и генерирајте ја сликата.</p>
+</blockquote>
+<h2>🧠 Анализа</h2>
+<p><strong>Зошто е оваа задача тешка?</strong>
+Нека страната на квадратот е $x$. Висината на $\triangle ABC$ е $h$. Висината на малиот триаголник $\triangle GCF$ е $h-x$. Од сличност $\triangle GCF \sim \triangle ABC$, односот на основите е еднаков на односот на висините: $\frac{x}{c} = \frac{h-x}{h}$. Но, тука е подобро да се работи со деловите. $c = AD + x + EB = 16 + x$.</p>
+<p><strong>Конструктивен потег:</strong>
+Нека страната на квадратот е $x$. Висината на $\triangle ABC$ е $h$. Висината на малиот триаголник $\triangle GCF$ е $h-x$. Од сличност $\triangle GCF \sim \triangle ABC$, односот на основите е еднаков на односот на висините: $\frac{x}{c} = \frac{h-x}{h}$. Но, тука е подобро да се работи со деловите. $c = AD + x + EB = 16 + x$.</p>
+<h2>💡 Решение</h2>
+<details>
+<summary>👀 Прикажи го решението</summary>
+
+**Чекор 1: Ознаки**
+Нека страната на квадратот е $x$. Тогаш $GF=x$.
+Основата на триаголникот е $c = AB = AD + DE + EB = (AD+EB) + x = 16 + x$.
+Нека $h$ е висината на $\triangle ABC$ кон $AB$. Висината на $\triangle GCF$ е $h_1 = h - x$.
+
+**Чекор 2: Плоштина на $\triangle GCF$**
+Дадено е $P_{GCF} = 16$.
+
+$$ \frac{1}{2} \cdot GF \cdot h_1 = 16 \implies \frac{1}{2} x (h-x) = 16 \implies x(h-x) = 32 $$
+
+Од тука $h-x = \frac{32}{x}$, па $h = x + \frac{32}{x} = \frac{x^2+32}{x}$.
+
+**Чекор 3: Сличност**
+$\triangle GCF \sim \triangle ABC$. Односот на висините е еднаков на односот на основите:
+
+$$ \frac{h-x}{h} = \frac{GF}{AB} = \frac{x}{16+x} $$
+
+**Чекор 4: Решавање на равенката**
+Заменуваме $h-x = \frac{32}{x}$ и $h = \frac{x^2+32}{x}$:
+
+$$ \frac{32/x}{(x^2+32)/x} = \frac{x}{16+x} $$
+
+$$ \frac{32}{x^2+32} = \frac{x}{16+x} $$
+
+Множиме вкрстено:
+
+$$ 32(16+x) = x(x^2+32) $$
+
+$$ 512 + 32x = x^3 + 32x $$
+
+Членовите $32x$ се поништуваат!
+
+$$ x^3 = 512 $$
+
+$$ x = \sqrt[3]{512} = 8 \text{ cm} $$
+
+**Чекор 5: Плоштина на квадратот**
+
+$$ P = x^2 = 8^2 = 64 \text{ cm}^2 $$
+
+</details>
+
+<h2>🏁 Заклучок</h2>
+<p>&lt;Краен резултат.&gt;</p>
+<h2>👩‍🏫 За наставници</h2>
+<p>Поништувањето на линеарниот член ($32x$) е знак дека задачата е добро поставена. Ако учениците добијат комплицирана кубна равенка, веројатно некаде згрешиле.</p></div></div>
+    </div>
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Македонска Математичка Архива. Генерирано со Python.</p>
+        </div>
+    </footer>
+</body>
+</html>

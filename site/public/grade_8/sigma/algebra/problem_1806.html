@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="mk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>problem_1806.md | Математичка Архива</title>
+    <link rel="stylesheet" href="../../style.css">
+    <!-- MathJax -->
+    <script>
+    window.MathJax = {
+      tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$']] },
+      chtml: { scale: 1 }
+    };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="../../index.html" class="logo"><i class="fas fa-cube"></i> МатАрхива</a>
+            <div class="nav-links">
+                <a href="../../index.html">Почетна</a>
+                <a href="../../skills/index.html">Вештини</a>
+                <a href="../../theorems/index.html">Теореми</a>
+            </div>
+        </div>
+    </nav>
+    <div class="container main-content">
+<div class="breadcrumbs"><a href="../../index.html">Почетна</a> <i class="fas fa-chevron-right separator"></i> <a href="../index.html">Grade 8</a> <i class="fas fa-chevron-right separator"></i> <span class="current">Sigma\Algebra</span> <i class="fas fa-chevron-right separator"></i> <span class="current">problem_1806.md</span></div>
+    <div class="action-bar">
+        <button onclick="window.print()" class="btn-print"><i class="fas fa-print"></i> Печати</button>
+    </div>
+    <div class='problem-page'><div class='card'><h1>Телескопска сума</h1>
+<h2>Текст на задачата</h2>
+<p>Да се пресмета сумата
+[
+S = \frac{1}{1\cdot 2} + \frac{1}{2\cdot 3} + \frac{1}{3\cdot 4} + \cdots + \frac{1}{99\cdot 100}.
+]</p>
+<hr />
+<h2>Анализа</h2>
+<p>Секој член од сумата е облик
+[
+\frac{1}{k(k+1)}.
+]</p>
+<p>Кај вакви изрази, честопати е корисно да се изврши <strong>разложување на
+парцијални дропки</strong>, со што сумата станува телескопска
+(деловите се поништуваат еден со друг).</p>
+<hr />
+<h2>Решение</h2>
+<p>Ќе решаваме чекор по чекор.</p>
+<h3>Чекор 1: Разложување на еден член</h3>
+<p>Го разгледуваме општиот член:
+[
+\frac{1}{k(k+1)}.
+]</p>
+<p>Бараме броеви (A) и (B) такви што:
+[
+\frac{1}{k(k+1)} = \frac{A}{k} + \frac{B}{k+1}.
+]</p>
+<p>Со решавање добиваме:
+[
+\frac{1}{k(k+1)} = \frac{1}{k} - \frac{1}{k+1}.
+]</p>
+<hr />
+<h3>Чекор 2: Препишување на сумата</h3>
+<p>Сумата станува:
+[
+S = \left(1-\frac12\right)
++ \left(\frac12-\frac13\right)
++ \left(\frac13-\frac14\right)
++ \cdots
++ \left(\frac{1}{99}-\frac{1}{100}\right).
+]</p>
+<hr />
+<h3>Чекор 3: Телескопско поништување</h3>
+<p>Забележуваме дека:
+- ( -\frac12 ) се поништува со ( +\frac12 )
+- ( -\frac13 ) се поништува со ( +\frac13 )
+- и така натаму</p>
+<p>Сите средни членови се поништуваат.</p>
+<p>Остануваат само првиот и последниот член:
+[
+S = 1 - \frac{1}{100}.
+]</p>
+<hr />
+<h3>Чекор 4: Крајна вредност</h3>
+<p>Оттука:
+[
+S = \frac{99}{100}.
+]</p>
+<hr />
+<h2>Алтернативен пристап (олимписки)</h2>
+<p>Се забележува дека сумата е телескопска поради идентитетот
+[
+\frac{1}{k(k+1)}=\frac{1}{k}-\frac{1}{k+1}.
+]
+По поништување на сите меѓучленови, остануваат само граничните членови.</p>
+<hr />
+<h2>Заклучок</h2>
+<p>Вредноста на сумата е
+[
+\boxed{\frac{99}{100}}.
+]</p>
+<hr />
+<h2>За тутори (опционално)</h2>
+<ul>
+<li>Предуслови: разложување на дропки</li>
+<li>Клучна идеја: препознавање телескопска структура</li>
+<li>Типична грешка: директно собирање на дропки</li>
+</ul></div></div>
+    </div>
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Македонска Математичка Архива. Генерирано со Python.</p>
+        </div>
+    </footer>
+</body>
+</html>

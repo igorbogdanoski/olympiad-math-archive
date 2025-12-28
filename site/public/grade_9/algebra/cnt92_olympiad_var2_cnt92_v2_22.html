@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="mk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>cnt92_olympiad_var2_cnt92_v2_22.md | Математичка Архива</title>
+    <link rel="stylesheet" href="../../style.css">
+    <!-- MathJax -->
+    <script>
+    window.MathJax = {
+      tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$']] },
+      chtml: { scale: 1 }
+    };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="../../index.html" class="logo"><i class="fas fa-cube"></i> МатАрхива</a>
+            <div class="nav-links">
+                <a href="../../index.html">Почетна</a>
+                <a href="../../skills/index.html">Вештини</a>
+                <a href="../../theorems/index.html">Теореми</a>
+            </div>
+        </div>
+    </nav>
+    <div class="container main-content">
+<div class="breadcrumbs"><a href="../../index.html">Почетна</a> <i class="fas fa-chevron-right separator"></i> <a href="../index.html">Grade 9</a> <i class="fas fa-chevron-right separator"></i> <span class="current">Algebra</span> <i class="fas fa-chevron-right separator"></i> <span class="current">cnt92_olympiad_var2_cnt92_v2_22.md</span></div>
+    <div class="action-bar">
+        <button onclick="window.print()" class="btn-print"><i class="fas fa-print"></i> Печати</button>
+    </div>
+    <div class='problem-page'><div class='card'><p><a href="../../README.md">⬅️ Назад кон Индексот</a> | <a href="../../../tools/skill_guides/logic.md">🧰 Skill: logic</a></p>
+<h1>Параметар во квадратна равенка</h1>
+<h2>📝 Текст на задачата</h2>
+<p>Најмалата вредност на параметарот $a$, за која еден од корените на равенката $x^2 - 6x + a^3 = 0$ е квадрат на другиот, изнесува...</p>
+<h2>🧠 Анализа (Клучна идеја)</h2>
+<p>Користете ги Виетовите формули: $x_1 + x_2 = 6$ и $x_1 x_2 = a^3$. Условот е $x_1 = x_2^2$. Ова води до равенка за $x_2$ која има две решенија. Проверете ги двете за да најдете две вредности за $a$, а потоа одберете ја помалата.</p>
+<h2>💡 Решение</h2>
+<details>
+<summary>👀 Прикажи го решението</summary>
+
+Според Виетовите формули:
+1. $x_1 + x_2 = 6$
+2. $x_1 \cdot x_2 = a^3$
+
+**Чекор 1: Замена на условот**
+Нека $x_1 = x_2^2$. Заменуваме во првата равенка:
+
+$$ x_2^2 + x_2 = 6 \implies x_2^2 + x_2 - 6 = 0 $$
+
+**Чекор 2: Решавање по $x_2$**
+Решенијата на $t^2 + t - 6 = 0$ се:
+
+$$ x_2 = \frac{-1 \pm \sqrt{1 - 4(-6)}}{2} = \frac{-1 \pm 5}{2} $$
+
+Можностите се $x_2 = 2$ или $x_2 = -3$.
+
+**Чекор 3: Наоѓање на $a$**
+Од втората Виетова формула: $a^3 = x_1 x_2 = x_2^2 \cdot x_2 = x_2^3$. Значи $a = x_2$.
+*   Случај 1: $a = 2$
+*   Случај 2: $a = -3$
+
+Бараме најмала вредност: $-3 < 2$.
+Одговор: $a = -3$ (Опција 4).
+
+</details>
+
+<h2>🏁 Заклучок</h2>
+<p>&lt;Краен резултат.&gt;</p>
+<h2>👩‍🏫 За наставници</h2>
+<p>Учениците често забораваат да го проверат второто решение на квадратната равенка. Зборот „најмала вредност“ во текстот е суптилен знак дека има повеќе од едно решение.</p></div></div>
+    </div>
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Македонска Математичка Архива. Генерирано со Python.</p>
+        </div>
+    </footer>
+</body>
+</html>

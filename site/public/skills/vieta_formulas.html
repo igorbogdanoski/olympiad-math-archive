@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="mk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vieta Formulas | Математичка Архива</title>
+    <link rel="stylesheet" href="../style.css">
+    <!-- MathJax -->
+    <script>
+    window.MathJax = {
+      tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$']] },
+      chtml: { scale: 1 }
+    };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="../index.html" class="logo"><i class="fas fa-cube"></i> МатАрхива</a>
+            <div class="nav-links">
+                <a href="../index.html">Почетна</a>
+                <a href="../skills/index.html">Вештини</a>
+                <a href="../theorems/index.html">Теореми</a>
+            </div>
+        </div>
+    </nav>
+    <div class="container main-content">
+<div class="breadcrumbs"><a href="../index.html">Почетна</a> <i class="fas fa-chevron-right separator"></i> <a href="index.html">Skill Guides</a> <i class="fas fa-chevron-right separator"></i> <span class="current">Vieta Formulas</span></div>
+    <div class="action-bar">
+        <button onclick="window.print()" class="btn-print"><i class="fas fa-print"></i> Печати</button>
+    </div>
+    
+            <div class="card">
+                <span class="badge badge-category">General</span>
+                <span class="badge badge-difficulty">All Levels</span>
+                <h1>🌟 Виетови Формули (Vieta's Formulas)</h1>
+<blockquote>
+<p><strong>"Не ја решавај равенката ако не мораш!"</strong></p>
+</blockquote>
+<p>Виетовите формули се мост помеѓу <strong>коефициентите</strong> на еден полином и неговите <strong>корени (решенија)</strong>. Тие ни овозможуваат да пресметуваме изрази со корените ($x_1 + x_2$, $x_1^2 + x_2^2$) без никогаш да ја решиме самата равенка.</p>
+<hr />
+<h2>1. Квадратна Равенка</h2>
+<p>За равенка од облик $ax^2 + bx + c = 0$ ($a \neq 0$) со корени $x_1$ и $x_2$, важи:</p>
+<p>$$
+\begin{cases}
+x_1 + x_2 = -\frac{b}{a} \
+x_1 \cdot x_2 = \frac{c}{a}
+\end{cases}
+$$</p>
+<h3>💡 Олимписки Трик: Симетрични Полиноми</h3>
+<p>На натпреварите ретко бараат само збир или производ. Најчесто бараат:</p>
+<ol>
+<li><strong>Збир на квадрати:</strong>
+    $$ x_1^2 + x_2^2 = (x_1 + x_2)^2 - 2x_1x_2 $$</li>
+<li><strong>Збир на кубови:</strong>
+    $$ x_1^3 + x_2^3 = (x_1 + x_2)(x_1^2 - x_1x_2 + x_2^2) $$</li>
+<li><strong>Разлика на корени:</strong>
+    $$ |x_1 - x_2| = \frac{\sqrt{D}}{|a|} $$</li>
+</ol>
+<hr />
+<h2>2. Кубна Равенка</h2>
+<p>За равенка $ax^3 + bx^2 + cx + d = 0$ со корени $x_1, x_2, x_3$:</p>
+<p>$$
+\begin{cases}
+x_1 + x_2 + x_3 = -\frac{b}{a} \
+x_1x_2 + x_2x_3 + x_3x_1 = \frac{c}{a} \
+x_1x_2x_3 = -\frac{d}{a}
+\end{cases}
+$$</p>
+<hr />
+<h2>⚠️ Чести Грешки</h2>
+<ul>
+<li><strong>Заборавање на минусот:</strong> Најчеста грешка е $x_1+x_2 = \frac{b}{a}$ наместо $-\frac{b}{a}$. Запаметете: знаците одат наизменично $(-, +, -, +)$.</li>
+<li><strong>Коефициентот $a$:</strong> Ако равенката е $2x^2 - 5x + 1 = 0$, збирот е $5/2$, а не 5. Не заборавајте да поделите со $a$.</li>
+<li><strong>Реални корени:</strong> Виетовите формули важат дури и ако корените се комплексни. Но, ако задачата бара „реални решенија“, мора прво да проверите дали $D \ge 0$.</li>
+</ul>
+<hr />
+<h2>🔗 Поврзани Задачи</h2>
+<ul>
+<li><a href="../../grade_10/algebra/2025_mun_y2_1ab.md">2025_mun_y2_1ab</a> - Систем равенки решен преку Виетова врска.</li>
+<li><a href="../../grade_9/algebra/cnt92_v2_16.md">cnt92_v2_16</a> - Збир на координати на пресек.</li>
+</ul>
+            </div>
+            
+    </div>
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Македонска Математичка Архива. Генерирано со Python.</p>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="mk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>numerus_l1_2024_2025_L1_2025_01.md | Математичка Архива</title>
+    <link rel="stylesheet" href="../../style.css">
+    <!-- MathJax -->
+    <script>
+    window.MathJax = {
+      tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$']] },
+      chtml: { scale: 1 }
+    };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="../../index.html" class="logo"><i class="fas fa-cube"></i> МатАрхива</a>
+            <div class="nav-links">
+                <a href="../../index.html">Почетна</a>
+                <a href="../../skills/index.html">Вештини</a>
+                <a href="../../theorems/index.html">Теореми</a>
+            </div>
+        </div>
+    </nav>
+    <div class="container main-content">
+<div class="breadcrumbs"><a href="../../index.html">Почетна</a> <i class="fas fa-chevron-right separator"></i> <a href="../index.html">Grade 9</a> <i class="fas fa-chevron-right separator"></i> <span class="current">Number_Theory</span> <i class="fas fa-chevron-right separator"></i> <span class="current">numerus_l1_2024_2025_L1_2025_01.md</span></div>
+    <div class="action-bar">
+        <button onclick="window.print()" class="btn-print"><i class="fas fa-print"></i> Печати</button>
+    </div>
+    <div class='problem-page'><div class='card'><h1>Верижна дропка</h1>
+<h2>Текст на задачата</h2>
+<p>Одреди ги природните броеви $a, b$ и $c$ за кои важи: $\frac{203}{178} = 1 + \frac{1}{a + \frac{1}{b + \frac{1}{c}}}$.</p>
+<h2>🧠 Анализа (Клучна идеја)</h2>
+<p>Ова е алгоритам на верижни дропки. Одземи го целиот дел, па преврти ја дропката (реципрочна вредност) и повтори.</p>
+<h2>📝 Решение</h2>
+<ol>
+<li>$203 : 178 = 1$ и остаток $25$. Значи $\frac{203}{178} = 1 + \frac{25}{178}$.
+   Споредуваме: $1 + \frac{1}{\frac{178}{25}}$.</li>
+<li>Сега ја разложуваме $\frac{178}{25}$.
+   $178 : 25 = 7$ и остаток $3$. Значи $\frac{178}{25} = 7 + \frac{3}{25}$.
+   Ова значи <strong>$a = 7$</strong>.</li>
+<li>Останува $\frac{3}{25} = \frac{1}{\frac{25}{3}}$.
+   Разложуваме $\frac{25}{3} = 8 + \frac{1}{3}$.
+   Ова значи <strong>$b = 8$</strong> и <strong>$c = 3$</strong>.</li>
+</ol>
+<p><strong>Резултат:</strong> $a=7, b=8, c=3$.
+&lt;Користи LaTeX за формули: $x^2$ или $$ x^2 $$&gt;</p>
+<h2>💡 Алтернативен пристап (опционално)</h2>
+<p>&lt;Ако постои решение со друг Skill (на пр. геометриски наместо алгебарски).&gt;</p>
+<h2>🏁 Заклучок</h2>
+<p>&lt;Краен резултат, јасно истакнат во \boxed{}.&gt;</p>
+<h2>👩‍🏫 За наставници</h2>
+<p>Ова е директна примена на Евклидовиот алгоритам.</p></div></div>
+    </div>
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Македонска Математичка Архива. Генерирано со Python.</p>
+        </div>
+    </footer>
+</body>
+</html>

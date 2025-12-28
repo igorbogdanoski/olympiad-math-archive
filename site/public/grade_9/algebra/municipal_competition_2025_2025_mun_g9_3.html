@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="mk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>municipal_competition_2025_2025_mun_g9_3.md | Математичка Архива</title>
+    <link rel="stylesheet" href="../../style.css">
+    <!-- MathJax -->
+    <script>
+    window.MathJax = {
+      tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$']] },
+      chtml: { scale: 1 }
+    };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="../../index.html" class="logo"><i class="fas fa-cube"></i> МатАрхива</a>
+            <div class="nav-links">
+                <a href="../../index.html">Почетна</a>
+                <a href="../../skills/index.html">Вештини</a>
+                <a href="../../theorems/index.html">Теореми</a>
+            </div>
+        </div>
+    </nav>
+    <div class="container main-content">
+<div class="breadcrumbs"><a href="../../index.html">Почетна</a> <i class="fas fa-chevron-right separator"></i> <a href="../index.html">Grade 9</a> <i class="fas fa-chevron-right separator"></i> <span class="current">Algebra</span> <i class="fas fa-chevron-right separator"></i> <span class="current">municipal_competition_2025_2025_mun_g9_3.md</span></div>
+    <div class="action-bar">
+        <button onclick="window.print()" class="btn-print"><i class="fas fa-print"></i> Печати</button>
+    </div>
+    <div class='problem-page'><div class='card'><p><a href="../../README.md">⬅️ Назад кон Индексот</a> | <a href="../../../tools/skill_guides/logic.md">🧰 Skill: logic</a></p>
+<h1>Алгебарски идентитет со услов</h1>
+<h2>📝 Текст на задачата</h2>
+<p>Нека $x, y, z$ се ненулти реални броеви такви што $x+y+z=0$. Дадено е равенството:</p>
+<p>$$ \frac{x}{y} + \frac{y}{z} + \frac{z}{x} = \frac{x}{z} + \frac{z}{y} + \frac{y}{x} + 1 $$</p>
+<p>Пресметај ја вредноста на изразот $A = \frac{x}{z} + \frac{z}{y} + \frac{y}{x}$.</p>
+<h2>🧠 Анализа (Клучна идеја)</h2>
+<p>Оваа задача може да се реши многу брзо ако го знаете идентитетот: Ако $x+y+z=0$, тогаш $\sum \frac{x}{y} + \sum \frac{y}{x} = -3$. Ако не, тогаш соберете ги двете страни на равенството и доведете ги на заеднички именител.</p>
+<h2>💡 Решение</h2>
+<details>
+<summary>👀 Прикажи го решението</summary>
+
+**Чекор 1: Дефинирање на променливите**
+Нека $L = \frac{x}{y} + \frac{y}{z} + \frac{z}{x}$ и $D = \frac{x}{z} + \frac{z}{y} + \frac{y}{x}$.
+Дадено е $L = D + 1$. Бараме $D$.
+
+**Чекор 2: Анализа на збирот $L+D$**
+Да го пресметаме збирот на сите 6 дропки:
+
+$$ S = L + D = \left(\frac{x}{y} + \frac{y}{x}\right) + \left(\frac{y}{z} + \frac{z}{y}\right) + \left(\frac{z}{x} + \frac{x}{z}\right) $$
+
+Секоја заграда е од облик $\frac{a}{b} + \frac{b}{a} = \frac{a^2+b^2}{ab}$.
+Бидејќи $a+b = -c$ (од условот $x+y+z=0$), важи $a^2+b^2 = (a+b)^2 - 2ab = c^2 - 2ab$.
+Значи $\frac{a^2+b^2}{ab} = \frac{c^2}{ab} - 2$.
+
+Применувајќи го ова за сите три загради:
+
+$$ S = \left(\frac{z^2}{xy} - 2\right) + \left(\frac{x^2}{yz} - 2\right) + \left(\frac{y^2}{zx} - 2\right) $$
+
+$$ S = \frac{z^3 + x^3 + y^3}{xyz} - 6 $$
+
+**Чекор 3: Познат идентитет**
+Ако $x+y+z=0$, тогаш $x^3+y^3+z^3 = 3xyz$.
+Заменуваме:
+
+$$ S = \frac{3xyz}{xyz} - 6 = 3 - 6 = -3 $$
+
+**Чекор 4: Систем равенки**
+Имаме:
+1. $L - D = 1$ (од условот на задачата)
+2. $L + D = -3$ (докажан идентитет)
+
+Одземаме (1) од (2):
+
+$$ (L+D) - (L-D) = -3 - 1 $$
+
+$$ 2D = -4 \implies D = -2 $$
+
+**Алтернативно решение (од сликата):**
+Во решението на сликата се означува заедничката вредност со $a$, се собираат и се добива $2a = -3+1 = -2$, што води до $a=-1$. Но, внимавајте, задачата бара $D$, а равенството е $L = D+1$. Ако $D=a$, тогаш $L=a+1$. Збирот е $2a+1 = -3 \implies 2a=-4 \implies a=-2$. Резултатот е ист.
+
+</details>
+
+<h2>🏁 Заклучок</h2>
+<p>&lt;Краен резултат.&gt;</p>
+<h2>👩‍🏫 За наставници</h2>
+<p>Идентитетот $\sum \frac{x}{y} = -3$ е многу корисен за натпревари. Изведувањето преку $x^3+y^3+z^3=3xyz$ е стандарден доказ.</p></div></div>
+    </div>
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Македонска Математичка Архива. Генерирано со Python.</p>
+        </div>
+    </footer>
+</body>
+</html>

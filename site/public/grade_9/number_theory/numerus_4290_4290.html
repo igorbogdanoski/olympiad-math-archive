@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="mk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>numerus_4290_4290.md | Математичка Архива</title>
+    <link rel="stylesheet" href="../../style.css">
+    <!-- MathJax -->
+    <script>
+    window.MathJax = {
+      tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$']] },
+      chtml: { scale: 1 }
+    };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="../../index.html" class="logo"><i class="fas fa-cube"></i> МатАрхива</a>
+            <div class="nav-links">
+                <a href="../../index.html">Почетна</a>
+                <a href="../../skills/index.html">Вештини</a>
+                <a href="../../theorems/index.html">Теореми</a>
+            </div>
+        </div>
+    </nav>
+    <div class="container main-content">
+<div class="breadcrumbs"><a href="../../index.html">Почетна</a> <i class="fas fa-chevron-right separator"></i> <a href="../index.html">Grade 9</a> <i class="fas fa-chevron-right separator"></i> <span class="current">Number_Theory</span> <i class="fas fa-chevron-right separator"></i> <span class="current">numerus_4290_4290.md</span></div>
+    <div class="action-bar">
+        <button onclick="window.print()" class="btn-print"><i class="fas fa-print"></i> Печати</button>
+    </div>
+    <div class='problem-page'><div class='card'><h1>Деливост со 30</h1>
+<h2>Текст на задачата</h2>
+<p>Нека $a,b,c$ се природни броеви такви што $5a+2b=3c$. Докажи дека $30 \mid (a+b)(b+c)(c+a)$.</p>
+<h2>🧠 Анализа (Клучна идеја)</h2>
+<p>Треба да докажеш деливост со 2, 3 и 5. Користи го условот $5a+2b=3c$ по соодветниот модул.</p>
+<h2>📝 Решение</h2>
+<p>Треба да докажеме дека $P = (a+b)(b+c)(c+a)$ е делив со 2, 3 и 5.</p>
+<ol>
+<li>
+<p><strong>Деливост со 2:</strong>
+    Услов: $5a+2b=3c$. Модул 2: $a + 0 \equiv c \pmod 2 \implies a \equiv c$.
+    Ако $a, c$ се со иста парност, тогаш $a+c$ е парен.
+    Значи $2 \mid (c+a)$, па $2 \mid P$.</p>
+</li>
+<li>
+<p><strong>Деливост со 3:</strong>
+    Услов: $5a+2b=3c$. Модул 3: $2a + 2b \equiv 0 \pmod 3 \implies 2(a+b) \equiv 0 \pmod 3$.
+    Бидејќи НЗД(2,3)=1, следи $a+b \equiv 0 \pmod 3$.
+    Значи $3 \mid (a+b)$, па $3 \mid P$.</p>
+</li>
+<li>
+<p><strong>Деливост со 5:</strong>
+    Услов: $5a+2b=3c$. Модул 5: $2b \equiv 3c \pmod 5$.
+    Множиме со 3 (инверз на 2 mod 5): $6b \equiv 9c \implies b \equiv 4c \equiv -c \pmod 5$.
+    Значи $b+c \equiv 0 \pmod 5$.
+    Значи $5 \mid (b+c)$, па $5 \mid P$.</p>
+</li>
+</ol>
+<p>Бидејќи 2, 3, 5 се заемно прости, $2 \cdot 3 \cdot 5 = 30 \mid P$.
+&lt;Користи LaTeX за формули: $x^2$ или $$ x^2 $$&gt;</p>
+<h2>💡 Алтернативен пристап (опционално)</h2>
+<p>&lt;Ако постои решение со друг Skill (на пр. геометриски наместо алгебарски).&gt;</p>
+<h2>🏁 Заклучок</h2>
+<p>&lt;Краен резултат, јасно истакнат во \boxed{}.&gt;</p>
+<h2>👩‍🏫 За наставници</h2>
+<p>Одличен пример за моќта на модуларната аритметика.</p></div></div>
+    </div>
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Македонска Математичка Архива. Генерирано со Python.</p>
+        </div>
+    </footer>
+</body>
+</html>

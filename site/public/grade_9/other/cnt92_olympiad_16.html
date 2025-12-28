@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="mk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>cnt92_olympiad_16.md | Математичка Архива</title>
+    <link rel="stylesheet" href="../../style.css">
+    <!-- MathJax -->
+    <script>
+    window.MathJax = {
+      tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$']] },
+      chtml: { scale: 1 }
+    };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="../../index.html" class="logo"><i class="fas fa-cube"></i> МатАрхива</a>
+            <div class="nav-links">
+                <a href="../../index.html">Почетна</a>
+                <a href="../../skills/index.html">Вештини</a>
+                <a href="../../theorems/index.html">Теореми</a>
+            </div>
+        </div>
+    </nav>
+    <div class="container main-content">
+<div class="breadcrumbs"><a href="../../index.html">Почетна</a> <i class="fas fa-chevron-right separator"></i> <a href="../index.html">Grade 9</a> <i class="fas fa-chevron-right separator"></i> <span class="current">Other</span> <i class="fas fa-chevron-right separator"></i> <span class="current">cnt92_olympiad_16.md</span></div>
+    <div class="action-bar">
+        <button onclick="window.print()" class="btn-print"><i class="fas fa-print"></i> Печати</button>
+    </div>
+    <div class='problem-page'><div class='card'><p><a href="../../README.md">⬅️ Назад кон Индексот</a> | <a href="../../../tools/skill_guides/logic.md">🧰 Skill: logic</a></p>
+<h1>Збир на координати на пресек</h1>
+<h2>📝 Текст на задачата</h2>
+<p>Збирот на координатите на пресечните точки на графикот на функцијата $y = (\sqrt{5}-\sqrt{3})x^2 - 2x - \sqrt{5} + \sqrt{3}$ со апсцисната оска е еднаков на...</p>
+<h2>📐 Скица</h2>
+<!-- Ова место е резервирано за автоматската слика од Manim -->
+<p><visual_placeholder></p>
+<blockquote>
+<p><strong>⚠️ Скицата недостасува.</strong>
+Стартувајте го кодот од <code>manim_code_log.md</code> за <code>Task_16</code> и зачувајте ја сликата како <code>16.png</code>.</p>
+</blockquote>
+<h2>🧠 Анализа</h2>
+<p><strong>Зошто е оваа задача тешка?</strong>
+Задачата крие едноставен концепт.</p>
+<p><strong>Хеуристика:</strong>
+1.  <strong>Декодирање:</strong> „Пресечни точки со апсцисната оска“ се точките каде $y=0$. Тоа се корените $(x_1, 0)$ и $(x_2, 0)$.
+2.  <strong>Што се бара?</strong> „Збир на координатите“ $\rightarrow (x_1 + 0) + (x_2 + 0) = x_1 + x_2$.
+3.  <strong>Кратенка:</strong> Користете ги <strong>Виетовите формули</strong> ($x_1 + x_2 = -b/a$).</p>
+<p><strong>Конструктивен потег:</strong>
+Задачата крие едноставен концепт.</p>
+<p><strong>Хеуристика:</strong>
+1.  <strong>Декодирање:</strong> „Пресечни точки со апсцисната оска“ се точките каде $y=0$. Тоа се корените $(x_1, 0)$ и $(x_2, 0)$.
+2.  <strong>Што се бара?</strong> „Збир на координатите“ $\rightarrow (x_1 + 0) + (x_2 + 0) = x_1 + x_2$.
+3.  <strong>Кратенка:</strong> Користете ги <strong>Виетовите формули</strong> ($x_1 + x_2 = -b/a$).</p>
+<h2>💡 Решение</h2>
+<details>
+<summary>👀 Прикажи го решението</summary>
+
+Дадена е функцијата $y = ax^2 + bx + c$ каде:
+*   $a = \sqrt{5} - \sqrt{3}$
+*   $b = -2$
+
+**Чекор 1: Виетова формула**
+Бараме $S = x_1 + x_2 = -\frac{b}{a}$.
+$$ S = -\frac{-2}{\sqrt{5} - \sqrt{3}} = \frac{2}{\sqrt{5} - \sqrt{3}} $$
+
+**Чекор 2: Рационализација**
+Множиме со $(\sqrt{5} + \sqrt{3})$:
+$$ S = \frac{2(\sqrt{5} + \sqrt{3})}{5 - 3} = \sqrt{5} + \sqrt{3} $$
+
+</details>
+
+<h2>🏁 Заклучок</h2>
+<p>&lt;Краен резултат.&gt;</p>
+<h2>👩‍🏫 За наставници</h2>
+<p>Внимавајте на терминологијата. „Збир на координати“ е трик прашање бидејќи ординатите се нула.</p></div></div>
+    </div>
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Македонска Математичка Архива. Генерирано со Python.</p>
+        </div>
+    </footer>
+</body>
+</html>

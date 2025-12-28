@@ -1,0 +1,238 @@
+
+    <!DOCTYPE html>
+    <html lang="mk">
+    <head>
+        <meta charset="UTF-8">
+        <title>Општински Натпревар - 8 Одделение</title>
+        
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+    
+    body {
+        font-family: 'Inter', sans-serif;
+        line-height: 1.6;
+        color: #333;
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 40px;
+        background-color: #f9fafb;
+    }
+    .sheet-container {
+        background: white;
+        padding: 50px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        border-radius: 12px;
+    }
+    header {
+        text-align: center;
+        border-bottom: 3px solid #2563eb;
+        padding-bottom: 20px;
+        margin-bottom: 40px;
+    }
+    h1 { color: #1e293b; margin: 0; font-size: 24px; text-transform: uppercase; letter-spacing: 1px; }
+    .subtitle { color: #64748b; font-size: 14px; margin-top: 5px; }
+    
+    .section-title {
+        background: #eff6ff;
+        color: #1d4ed8;
+        padding: 10px 20px;
+        border-radius: 6px;
+        font-weight: 700;
+        margin-top: 40px;
+        margin-bottom: 20px;
+        border-left: 5px solid #2563eb;
+    }
+    
+    .problem-box {
+        margin-bottom: 30px;
+        padding: 20px;
+        border: 1px solid #e2e8f0;
+        border-radius: 8px;
+        background: #fff;
+        transition: transform 0.2s;
+    }
+    .problem-header {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+        font-size: 0.9em;
+        color: #94a3b8;
+        font-weight: 600;
+    }
+    .problem-text { font-size: 1.1em; font-weight: 500; }
+    
+    .solution-box {
+        margin-top: 15px;
+        padding: 15px;
+        background-color: #f0fdf4;
+        border: 1px solid #bbf7d0;
+        border-radius: 6px;
+        color: #166534;
+    }
+    .solution-title { font-weight: bold; color: #15803d; margin-bottom: 5px; display: block; }
+    
+    .workspace {
+        height: 150px;
+        border: 2px dashed #e2e8f0;
+        border-radius: 8px;
+        margin-top: 15px;
+        background: #f8fafc;
+    }
+    
+    .footer {
+        margin-top: 50px;
+        text-align: center;
+        font-size: 0.8em;
+        color: #cbd5e1;
+    }
+    
+    @media print {
+        body { background: white; padding: 0; }
+        .sheet-container { box-shadow: none; padding: 20px; }
+        .problem-box { break-inside: avoid; }
+        .workspace { border: 1px solid #ccc; }
+    }
+</style>
+
+        
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']]
+  }
+};
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    </head>
+    <body>
+        <div class="sheet-container">
+            <header>
+                <h1>Подготовка за Општински Натпревар</h1>
+                <div class="subtitle">Математика - 8 Одделение | 27.12.2025</div>
+                <div class="subtitle" style="color: #2563eb; font-weight: bold; margin-top: 10px;">РЕШЕНИЈА ЗА НАСТАВНИК</div>
+            </header>
+    <div class="section-title">📝 ГЛАВНИ ЗАДАЧИ (40 мин)</div>
+        <div class="problem-box">
+            <div class="problem-header">
+                <span>Задача 1</span>
+                <span>--- SKILL MAPPING (New Standard) ---</span>
+            </div>
+            <div class="problem-text">
+                Одреди ги природните броеви $a, b$ и $c$ за кои важи равенството: $\frac{203}{178} = 1 + \frac{1}{a + \frac{1}{b + \frac{1}{c}}}$.
+            </div>
+        
+            <div class="solution-box">
+                <span class="solution-title">💡 Решение:</span>
+                Го развиваме бројот во верижна дропка:<br>1. $203 : 178 = 1$ и остаток $25$. Значи:<br>   $$ \frac{203}{178} = 1 + \frac{25}{178} = 1 + \frac{1}{\frac{178}{25}} $$<br>2. Сега ја разложуваме дропката $\frac{178}{25}$:<br>   $178 : 25 = 7$ и остаток $3$. Значи:<br>   $$ \frac{178}{25} = 7 + \frac{3}{25} = 7 + \frac{1}{\frac{25}{3}} $$<br>   Од ова гледаме дека <b>$a = 7$<b>.<br>3. Ја разложуваме $\frac{25}{3}$:<br>   $25 : 3 = 8$ и остаток $1$. Значи:<br>   $$ \frac{25}{3} = 8 + \frac{1}{3} $$<br>   Од ова гледаме дека <b>$b = 8$<b> и <b>$c = 3$<b>.<br><br><b>Резултат:<b> $a=7, b=8, c=3$.<br><Користи LaTeX за формули: $x^2$ или $$ x^2 $$>
+            </div>
+            </div>
+        <div class="problem-box">
+            <div class="problem-header">
+                <span>Задача 2</span>
+                <span>tags:</span>
+            </div>
+            <div class="problem-text">
+                Нека $\triangle ABC$ е рамнокрак со основа $AB$ и $\angle ACB = 100^\circ$. Нека $D$ е точка во внатрешноста на $\triangle ABC$ таква што $\angle CBD = 10^\circ$ и $\angle BAD = 20^\circ$. Одреди ја големината на $\angle DCB$.
+            </div>
+        
+            <div class="solution-box">
+                <span class="solution-title">💡 Решение:</span>
+                Дадено е: $\angle C = 100^\circ$, $AC=BC$. Значи аглите при основата се $\angle A = \angle B = \frac{180-100}{2} = 40^\circ$.<br>Дадено е: $\angle CBD = 10^\circ$ (значи $\angle ABD = 30^\circ$) и $\angle BAD = 20^\circ$ (значи $\angle CAD = 20^\circ$).<br><br>### Метод: Тригонометриска форма на Чева<br>Нека $\angle DCB = x$. Тогаш $\angle ACD = 100^\circ - x$.<br>Применуваме Чева за точката $D$ во $\triangle ABC$:<br>$$ \frac{\sin(\angle BAD)}{\sin(\angle CAD)} \cdot \frac{\sin(\angle ACD)}{\sin(\angle BCD)} \cdot \frac{\sin(\angle CBD)}{\sin(\angle ABD)} = 1 $$<br><br>Заменуваме со вредностите:<br>$$ \frac{\sin(20^\circ)}{\sin(20^\circ)} \cdot \frac{\sin(100^\circ - x)}{\sin(x)} \cdot \frac{\sin(10^\circ)}{\sin(30^\circ)} = 1 $$<br><br>Кратиме и средуваме (знаејќи дека $\sin(30^\circ) = 0.5$):<br>$$ 1 \cdot \frac{\sin(100^\circ - x)}{\sin(x)} \cdot \frac{\sin(10^\circ)}{0.5} = 1 $$<br>$$ \frac{\sin(100^\circ - x)}{\sin(x)} = \frac{0.5}{\sin(10^\circ)} $$<br>$$ \frac{\sin(x)}{\sin(100^\circ - x)} = 2\sin(10^\circ) $$<br><br>Оваа равенка има единствено решение за $x \in (0, 100)$. Ќе докажеме дека $x=20^\circ$ е решението.<br>Ако $x=20^\circ$, левата страна е:<br>$$ \frac{\sin(20^\circ)}{\sin(80^\circ)} = \frac{2\sin(10^\circ)\cos(10^\circ)}{\cos(10^\circ)} = 2\sin(10^\circ) $$<br>Ова е точно еднакво на десната страна!<br><br><b>Заклучок:<b> $\angle DCB = \boxed{20^\circ}$.
+            </div>
+            </div>
+        <div class="problem-box">
+            <div class="problem-header">
+                <span>Задача 3</span>
+                <span>tags:</span>
+            </div>
+            <div class="problem-text">
+                Даден е правоаголник $ABCD$. Точката $E$ лежи на $AB$ така што $AE = \frac{1}{3}AB$, $F$ лежи на $BC$ така што $BF = \frac{2}{3}BC$, а $G$ е средина на $AD$. Пресметај ја плоштината на $\triangle EFG$ ако страните на правоаголникот се $a$ и $b$.
+            </div>
+        
+             <div style="text-align: center; margin: 20px 0;">
+                <img src="../assets/images/geo_rect_shade_01.png" style="max-width: 100%; max-height: 300px; border-radius: 8px; border: 1px solid #e2e8f0;">
+             </div>
+             
+            <div class="solution-box">
+                <span class="solution-title">💡 Решение:</span>
+                Решение...
+            </div>
+            </div>
+        <div class="problem-box">
+            <div class="problem-header">
+                <span>Задача 4</span>
+                <span>--- SKILL MAPPING ---</span>
+            </div>
+            <div class="problem-text">
+                Во две одделенија имало вкупно 40 ученици. Нека $x$ е бројот на одлични лани, а $y$ оваа година. Вкупно одлични во двете години има 37 ($x+y=37$). Ако бројот на одлични оваа година се зголеми за 5, тој ќе биде 3 пати помал од половината на ланските одлични. Колку ученици НЕ се одлични оваа година?
+            </div>
+        
+            <div class="solution-box">
+                <span class="solution-title">💡 Решение:</span>
+                <b>Чекор 1: Поставување на системот<b><br>1. $x + y = 37$<br>2. $y + 5 = \frac{1}{3} \cdot \frac{x}{2} = \frac{x}{6}$<br><br><b>Чекор 2: Решавање<b><br>Од втората равенка: $6(y+5) = x \implies x = 6y + 30$.<br>Заменуваме во првата:<br>$$ (6y + 30) + y = 37 $$<br>$$ 7y + 30 = 37 $$<br>$$ 7y = 7 \implies y = 1 $$<br><br>Тогаш $x = 37 - 1 = 36$.<br><br><b>Чекор 3: Одговор на прашањето<b><br>Прашањето е: Колку ученици <b>не<b> покажале одличен успех во тековната година?<br>Вкупно ученици: 40.<br>Одлични оваа година ($y$): 1.<br>Неодлични: $40 - 1 = 39$.<br><br><b>Одговор:<b> 39 ученици.
+            </div>
+            </div><div class="section-title" style="border-color: #7c3aed; color: #7c3aed; background: #f5f3ff;">🚀 ДОПОЛНИТЕЛНИ ЗАДАЧИ (За вежбање)</div>
+        <div class="problem-box">
+            <div class="problem-header">
+                <span>Задача 5</span>
+                <span>Тригонометриски односи во триаголник</span>
+            </div>
+            <div class="problem-text">
+                Во триаголникот \(ABC\) важи:<br>\[<br>\sin A + \sin B = \sin C.<br>\]<br>Докажете дека триаголникот \(ABC\) е правоаголен.<br><br>---
+            </div>
+        
+            <div class="solution-box" style="border-color: #ddd6fe; background: #f5f3ff; color: #5b21b6;">
+                <span class="solution-title">💡 Решение:</span>
+                Ќе докажеме чекор по чекор дека триаголникот мора да биде правоаголен.<br><br>---<br><br>### Чекор 1: Формула за збир на синуси<br><br>Познато е дека:<br>\[<br>\sin A + \sin B<br>= 2 \sin\frac{A+B}{2}\cos\frac{A-B}{2}.<br>\]<br><br>---<br><br>### Чекор 2: Користење на збирот на аглите<br><br>Од условот за триаголник:<br>\[<br>A+B = 180^\circ - C.<br>\]<br><br>Затоа:<br>\[<br>\sin\frac{A+B}{2}<br>= \sin\left(90^\circ - \frac{C}{2}\right)<br>= \cos\frac{C}{2}.<br>\]<br><br>---<br><br>### Чекор 3: Замена во равенката<br><br>Дадениот услов станува:<br>\[<br>2 \cos\frac{C}{2}\cos\frac{A-B}{2} = \sin C.<br>\]<br><br>Но важи:<br>\[<br>\sin C = 2 \sin\frac{C}{2}\cos\frac{C}{2}.<br>\]<br><br>Оттука добиваме:<br>\[<br>2 \cos\frac{C}{2}\cos\frac{A-B}{2}<br>= 2 \sin\frac{C}{2}\cos\frac{C}{2}.<br>\]<br><br>Го делиме изразот со \(2\cos\frac{C}{2}\) (што е различно од нула):<br>\[<br>\cos\frac{A-B}{2} = \sin\frac{C}{2}.<br>\]<br><br>---<br><br>### Чекор 4: Тригонометриска интерпретација<br><br>Равенката<br>\[<br>\cos\frac{A-B}{2} = \sin\frac{C}{2}<br>\]<br>е можна само ако:<br>\[<br>\frac{A-B}{2} + \frac{C}{2} = 90^\circ.<br>\]<br><br>Односно:<br>\[<br>A - B + C = 180^\circ.<br>\]<br><br>---<br><br>### Чекор 5: Заклучок<br><br>Но бидејќи \(A+B+C=180^\circ\),<br>одземајќи ги двете равенки добиваме:<br>\[<br>2B = 0 \quad \Rightarrow \quad B = 0^\circ,<br>\]<br>што не е возможно за триаголник,<br>освен ако<br>\[<br>C = 90^\circ.<br>\]<br><br>Оттука, триаголникот \(ABC\) е правоаголен.<br><br>---
+            </div>
+            </div>
+        <div class="problem-box">
+            <div class="problem-header">
+                <span>Задача 6</span>
+                <span>tags:</span>
+            </div>
+            <div class="problem-text">
+                Во правоаголник е впишан триаголник со основа на едната страна и врв на спротивната. Ако деловите од правоаголникот имаат плоштини 3, 5 и 8 (надвор од триаголникот), колкава е плоштината на триаголникот?
+            </div>
+        
+            <div class="solution-box" style="border-color: #ddd6fe; background: #f5f3ff; color: #5b21b6;">
+                <span class="solution-title">💡 Решение:</span>
+                Нека плоштината на триаголникот е $P_T$, а на правоаголникот $P_{rect}$.<br>Познато својство: Ако триаголник и правоаголник имаат иста основа и иста висина, плоштината на триаголникот е половина од правоаголникот.<br>$$ P_T = \frac{1}{2} P_{rect} $$<br>Ова значи дека збирот на плоштините НАДВОР од триаголникот е исто така половина од правоаголникот.<br>$$ P_{out} = P_T $$<br><br>Дадени се деловите надвор: 3, 5, 8.<br>$$ P_{out} = 3 + 5 + 8 = 16 $$<br>Значи $P_T = 16$.<br><br>(Забелешка: Вториот дел од задачата за магичен квадрат е неповрзан и го испуштивме за јасност).<br><br><b>Резултат:<b> Плоштината е <b>16<b>.
+            </div>
+            </div>
+        <div class="problem-box">
+            <div class="problem-header">
+                <span>Задача 7</span>
+                <span>Телескопска сума</span>
+            </div>
+            <div class="problem-text">
+                Да се пресмета сумата<br>\[<br>S = \frac{1}{1\cdot 2} + \frac{1}{2\cdot 3} + \frac{1}{3\cdot 4} + \cdots + \frac{1}{99\cdot 100}.<br>\]<br><br>---
+            </div>
+        
+            <div class="solution-box" style="border-color: #ddd6fe; background: #f5f3ff; color: #5b21b6;">
+                <span class="solution-title">💡 Решение:</span>
+                Ќе решаваме чекор по чекор.<br><br>### Чекор 1: Разложување на еден член<br><br>Го разгледуваме општиот член:<br>\[<br>\frac{1}{k(k+1)}.<br>\]<br><br>Бараме броеви \(A\) и \(B\) такви што:<br>\[<br>\frac{1}{k(k+1)} = \frac{A}{k} + \frac{B}{k+1}.<br>\]<br><br>Со решавање добиваме:<br>\[<br>\frac{1}{k(k+1)} = \frac{1}{k} - \frac{1}{k+1}.<br>\]<br><br>---<br><br>### Чекор 2: Препишување на сумата<br><br>Сумата станува:<br>\[<br>S = \left(1-\frac12\right)<br>+ \left(\frac12-\frac13\right)<br>+ \left(\frac13-\frac14\right)<br>+ \cdots<br>+ \left(\frac{1}{99}-\frac{1}{100}\right).<br>\]<br><br>---<br><br>### Чекор 3: Телескопско поништување<br><br>Забележуваме дека:<br>- \( -\frac12 \) се поништува со \( +\frac12 \)<br>- \( -\frac13 \) се поништува со \( +\frac13 \)<br>- и така натаму<br><br>Сите средни членови се поништуваат.<br><br>Остануваат само првиот и последниот член:<br>\[<br>S = 1 - \frac{1}{100}.<br>\]<br><br>---<br><br>### Чекор 4: Крајна вредност<br><br>Оттука:<br>\[<br>S = \frac{99}{100}.<br>\]<br><br>---
+            </div>
+            </div>
+        <div class="problem-box">
+            <div class="problem-header">
+                <span>Задача 8</span>
+                <span>--- SKILL MAPPING ---</span>
+            </div>
+            <div class="problem-text">
+                Група работници за 4 дена провериле еден пат. Првиот ден провериле $\frac{1}{17}$ од патот, вториот ден трипати повеќе од првиот, третиот ден за 60 km повеќе од вториот, а четвртиот ден колку првиот и вториот заедно. Колкава е должината на патот?
+            </div>
+        
+            <div class="solution-box" style="border-color: #ddd6fe; background: #f5f3ff; color: #5b21b6;">
+                <span class="solution-title">💡 Решение:</span>
+                Нека $x$ е вкупната должина на патот.<br><br><b>Чекор 1: Изразување по денови<b><br>*   Ден 1: $\frac{1}{17}x$<br>*   Ден 2: $3 \cdot \frac{1}{17}x = \frac{3}{17}x$<br>*   Ден 3: $\frac{3}{17}x + 60$<br>*   Ден 4: $\text{Ден 1} + \text{Ден 2} = \frac{1}{17}x + \frac{3}{17}x = \frac{4}{17}x$<br><br><b>Чекор 2: Поставување на равенката<b><br>Збирот е целиот пат $x$:<br>$$ \frac{1}{17}x + \frac{3}{17}x + \left(\frac{3}{17}x + 60\right) + \frac{4}{17}x = x $$<br><br><b>Чекор 3: Решавање<b><br>Ги собираме членовите со $x$:<br>$$ \left(\frac{1+3+3+4}{17}\right)x + 60 = x $$<br>$$ \frac{11}{17}x + 60 = x $$<br><br>Префрламе $x$ на десна страна:<br>$$ 60 = x - \frac{11}{17}x $$<br>$$ 60 = \frac{17-11}{17}x $$<br>$$ 60 = \frac{6}{17}x $$<br><br>Делиме со 6, множиме со 17:<br>$$ 10 = \frac{1}{17}x \implies x = 170 $$<br><br>Одговор: Патот е долг 170 km.
+            </div>
+            </div>
+            <div class="footer">
+                Генерирано од Olympiad Math Archive AI • © 2025
+            </div>
+        </div>
+    </body>
+    </html>
+    

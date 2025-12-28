@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="mk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Absolute Value | Математичка Архива</title>
+    <link rel="stylesheet" href="../style.css">
+    <!-- MathJax -->
+    <script>
+    window.MathJax = {
+      tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$']] },
+      chtml: { scale: 1 }
+    };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="../index.html" class="logo"><i class="fas fa-cube"></i> МатАрхива</a>
+            <div class="nav-links">
+                <a href="../index.html">Почетна</a>
+                <a href="../skills/index.html">Вештини</a>
+                <a href="../theorems/index.html">Теореми</a>
+            </div>
+        </div>
+    </nav>
+    <div class="container main-content">
+<div class="breadcrumbs"><a href="../index.html">Почетна</a> <i class="fas fa-chevron-right separator"></i> <a href="index.html">Skill Guides</a> <i class="fas fa-chevron-right separator"></i> <span class="current">Absolute Value</span></div>
+    <div class="action-bar">
+        <button onclick="window.print()" class="btn-print"><i class="fas fa-print"></i> Печати</button>
+    </div>
+    
+            <div class="card">
+                <span class="badge badge-category">General</span>
+                <span class="badge badge-difficulty">All Levels</span>
+                <h1>📏 Апсолутна Вредност (Модул)</h1>
+<blockquote>
+<p><strong>"Апсолутната вредност не е само 'бришење на минусот'. Тоа е растојание."</strong></p>
+</blockquote>
+<h2>1. Алгебарска Дефиниција</h2>
+<p>Најсигурниот начин да се ослободите од модулот е преку дефиницијата:</p>
+<p>$$
+|A| = \begin{cases} 
+A, &amp; \text{ако } A \ge 0 \
+-A, &amp; \text{ако } A &lt; 0 
+\end{cases}
+$$</p>
+<p>Кога имаме равенка како $|x-2| + |x+3| = 5$, ја решаваме со <strong>метод на интервали</strong> (кршење на бројната оска во точките каде изразите се нула).</p>
+<hr />
+<h2>2. Геометриска Интерпретација (Олимписки Супер-Моќ)</h2>
+<p>Ова е начинот на кој професионалците ги решаваат задачите за 10 секунди.</p>
+<ul>
+<li>$|x|$ е растојанието од $x$ до $0$.</li>
+<li>$|x - a|$ е растојанието помеѓу точките $x$ и $a$ на бројната оска.</li>
+</ul>
+<h3>Пример: Минимизација</h3>
+<p>Бараме минимум на функцијата $f(x) = |x - 2| + |x - 5|$.
+<strong>Превод:</strong> Бараме точка $x$ таква што збирот на растојанијата до 2 и до 5 е минимален.
+<strong>Решение:</strong> Ако $x$ е помеѓу 2 и 5, збирот е точно растојанието меѓу 2 и 5 (т.е. 3). Ако е надвор, збирот е поголем.
+Минимумот е 3 за секое $x \in [2, 5]$.</p>
+<hr />
+<h2>3. Корисни Својства</h2>
+<ol>
+<li>$\sqrt{x^2} = |x|$ (Многу важно! Не е само $x$).</li>
+<li>$|x|^2 = x^2$.</li>
+<li>$|xy| = |x||y|$.</li>
+<li><strong>Неравенство на триаголник:</strong> $|a + b| \le |a| + |b|$. Равенство важи само ако $a$ и $b$ имаат ист знак ($ab \ge 0$).</li>
+</ol>
+<hr />
+<h2>⚠️ Чести Грешки</h2>
+<ul>
+<li><strong>Пишување $\sqrt{(x-1)^2} = x-1$.</strong> Точно е само ако $x \ge 1$. Правилно е $|x-1|$.</li>
+<li><strong>Заборавање на случајот:</strong> Кога решавате $|x| = 5$, решенијата се $x=5$ И $x=-5$.</li>
+</ul>
+<h2>🔗 Поврзани Задачи</h2>
+<ul>
+<li><a href="../../grade_10/algebra/2025_mun_y2_4a.md">2025_mun_y2_4a</a> - Параметарска равенка со модули.</li>
+<li><a href="../../grade_9/algebra/cnt92_v2_27.md">cnt92_v2_27</a> - Бесконечно многу решенија (геометриски пристап).</li>
+</ul>
+            </div>
+            
+    </div>
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Македонска Математичка Архива. Генерирано со Python.</p>
+        </div>
+    </footer>
+</body>
+</html>

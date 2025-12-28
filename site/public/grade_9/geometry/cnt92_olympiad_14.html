@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="mk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>cnt92_olympiad_14.md | Математичка Архива</title>
+    <link rel="stylesheet" href="../../style.css">
+    <!-- MathJax -->
+    <script>
+    window.MathJax = {
+      tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$']] },
+      chtml: { scale: 1 }
+    };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="../../index.html" class="logo"><i class="fas fa-cube"></i> МатАрхива</a>
+            <div class="nav-links">
+                <a href="../../index.html">Почетна</a>
+                <a href="../../skills/index.html">Вештини</a>
+                <a href="../../theorems/index.html">Теореми</a>
+            </div>
+        </div>
+    </nav>
+    <div class="container main-content">
+<div class="breadcrumbs"><a href="../../index.html">Почетна</a> <i class="fas fa-chevron-right separator"></i> <a href="../index.html">Grade 9</a> <i class="fas fa-chevron-right separator"></i> <span class="current">Geometry</span> <i class="fas fa-chevron-right separator"></i> <span class="current">cnt92_olympiad_14.md</span></div>
+    <div class="action-bar">
+        <button onclick="window.print()" class="btn-print"><i class="fas fa-print"></i> Печати</button>
+    </div>
+    <div class='problem-page'><div class='card'><h1>Позиција на точки во однос на права</h1>
+<h2>Текст на задачата</h2>
+<p>Точките $A(1; 3)$ и $B(2; 5)$ се распоредени во однос на правата $y = \sqrt{2}x + \sqrt{3}$ на одреден начин. Одреди дали се над или под правата.</p>
+<h2>📐 Скица / Конструкција</h2>
+<!-- VISUAL PROMPT: No visual prompt provided. -->
+
+<blockquote>
+<p><strong>👨‍💻 Manim Code (за Geo-Mentor):</strong>
+<code>python
+class Task_14(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        # ... (копирај од логот) ...</code></p>
+</blockquote>
+<h2>🧠 Анализа</h2>
+<p>За да одредиме дали точка $P(x_0, y_0)$ е над или под правата $y = kx + n$, треба да ја споредиме $y$-координатата на точката со вредноста на функцијата во таа $x$-координата. Ако $y_0 &gt; f(x_0)$, точката е над правата. Предизвикот овде е ирационалноста, па користете апроксимации $\sqrt{2} \approx 1.41$ и $\sqrt{3} \approx 1.73$.</p>
+<h2>📝 Решение (СИНТЕТИЧКО)</h2>
+<p>Равенката на правата е $f(x) = \sqrt{2}x + \sqrt{3}$.</p>
+<p><strong>Чекор 1: Проверка за точката $A(1; 3)$</strong>
+Заменуваме $x=1$ во равенката:
+$$ f(1) = \sqrt{2}(1) + \sqrt{3} \approx 1.414 + 1.732 = 3.146 $$
+Бидејќи $y_A = 3$, а $3 &lt; 3.146$, заклучуваме дека $y_A &lt; f(1)$.
+$\Rightarrow$ Точката $A$ е <strong>под</strong> правата.</p>
+<p><strong>Чекор 2: Проверка за точката $B(2; 5)$</strong>
+Заменуваме $x=2$ во равенката:
+$$ f(2) = \sqrt{2}(2) + \sqrt{3} \approx 2(1.414) + 1.732 = 2.828 + 1.732 = 4.56 $$
+Бидејќи $y_B = 5$, а $5 &gt; 4.56$, заклучуваме дека $y_B &gt; f(2)$.
+$\Rightarrow$ Точката $B$ е <strong>над</strong> правата.</p>
+<p><strong>Заклучок:</strong> $A$ е долу, $B$ е горе.</p>
+<h2>🏁 Заклучок</h2>
+<p>&lt;Краен резултат.&gt;</p>
+<h2>👩‍🏫 За наставници</h2>
+<p>Оваа задача ги учи учениците на геометриското значење на неравенките. Не е потребно цртање 'од око', туку алгебарска проверка.</p></div></div>
+    </div>
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Македонска Математичка Архива. Генерирано со Python.</p>
+        </div>
+    </footer>
+</body>
+</html>

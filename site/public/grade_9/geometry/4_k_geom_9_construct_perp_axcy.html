@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="mk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>4_k_geom_9_construct_perp_axcy.md | Математичка Архива</title>
+    <link rel="stylesheet" href="../../style.css">
+    <!-- MathJax -->
+    <script>
+    window.MathJax = {
+      tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$']] },
+      chtml: { scale: 1 }
+    };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="../../index.html" class="logo"><i class="fas fa-cube"></i> МатАрхива</a>
+            <div class="nav-links">
+                <a href="../../index.html">Почетна</a>
+                <a href="../../skills/index.html">Вештини</a>
+                <a href="../../theorems/index.html">Теореми</a>
+            </div>
+        </div>
+    </nav>
+    <div class="container main-content">
+<div class="breadcrumbs"><a href="../../index.html">Почетна</a> <i class="fas fa-chevron-right separator"></i> <a href="../index.html">Grade 9</a> <i class="fas fa-chevron-right separator"></i> <span class="current">Geometry</span> <i class="fas fa-chevron-right separator"></i> <span class="current">4_k_geom_9_construct_perp_axcy.md</span></div>
+    <div class="action-bar">
+        <button onclick="window.print()" class="btn-print"><i class="fas fa-print"></i> Печати</button>
+    </div>
+    <div class='problem-page'><div class='card'><h1>Конструкција на нормални прави во кружница</h1>
+<h2>Текст на задачата</h2>
+<p>Нека $k$ е кружница со дијаметар $AB$, и нека $C$ е произволна точка од отсечката $AB$. Најди две точки $X$ и $Y$ од кружницата $k$ кои се симетрични во однос на $AB$ и такви што правите $AX$ и $CY$ се заемно нормални.</p>
+<h2>📐 Скица / Конструкција</h2>
+<p>&lt;Опис на цртежот. Кои се клучните точки? Дали има помошни линии?&gt;</p>
+<!-- VISUAL PROMPT: Draw a circle with diameter AB. Place a point C on AB. Mark N as the midpoint of CB. Draw a vertical line through N to find points X and Y on the circle. Connect AX and CY to show they are perpendicular. -->
+
+<h2>🧠 Анализа</h2>
+<p>Проекцијата на точката $X$ врз дијаметарот $AB$ го крие клучот. Користи сличност на правоаголни триаголници за да ја најдеш врската помеѓу $C$, $B$ и подножјето на нормалата.</p>
+<h2>📝 Решение (СИНТЕТИЧКО)</h2>
+<ol>
+<li><strong>Означување:</strong> Нека $N$ е подножјето на нормалата од $X$ кон $AB$. Бидејќи $X$ и $Y$ се симетрични во однос на $AB$, $N$ е и подножје на нормалата од $Y$, при што $XN = NY$.</li>
+<li><strong>Агли:</strong> Нека $\angle BAX = \alpha$. Од условот $AX \perp CY$, во правоаголниот $\triangle AMC$ (каде $M$ е пресекот) имаме $\angle ACM = 90^\circ - \alpha$. Тогаш во правоаголниот $\triangle CNY$, $\angle NYC = \alpha$.</li>
+<li><strong>Сличност:</strong> $\triangle ANX \sim \triangle CNY$ (според АА), па $AN/XN = YN/CN$. Бидејќи $XN=YN$, добиваме $XN^2 = AN \cdot CN$.</li>
+<li><strong>Метрика на кружница:</strong> Во правоаголниот $\triangle AXB$, $XN$ е висина, па $XN^2 = AN \cdot NB$.</li>
+<li><strong>Изедначување:</strong> $AN \cdot CN = AN \cdot NB \implies CN = NB$.</li>
+<li><strong>Заклучок:</strong> Точката $N$ е средина на отсечката $CB$. Точките $X$ и $Y$ се пресеци на кружницата со нормалата на $AB$ повлечена низ средината на $CB$.</li>
+</ol>
+<h2>⚠️ Аналитички пристап (само ако е неизбежен)</h2>
+<p>&lt;Ако мора да се користат координати, објасни зошто синтетичкиот пат е претежок.&gt;</p>
+<h2>🏁 Заклучок</h2>
+<p>&lt;Краен резултат.&gt;</p></div></div>
+    </div>
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Македонска Математичка Архива. Генерирано со Python.</p>
+        </div>
+    </footer>
+</body>
+</html>

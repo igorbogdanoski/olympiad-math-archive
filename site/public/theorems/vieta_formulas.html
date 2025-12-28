@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="mk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vieta's Formulas (Виетови формули) | Математичка Архива</title>
+    <link rel="stylesheet" href="../style.css">
+    <!-- MathJax -->
+    <script>
+    window.MathJax = {
+      tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$']] },
+      chtml: { scale: 1 }
+    };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="../index.html" class="logo"><i class="fas fa-cube"></i> МатАрхива</a>
+            <div class="nav-links">
+                <a href="../index.html">Почетна</a>
+                <a href="../skills/index.html">Вештини</a>
+                <a href="../theorems/index.html">Теореми</a>
+            </div>
+        </div>
+    </nav>
+    <div class="container main-content">
+<div class="breadcrumbs"><a href="../index.html">Почетна</a> <i class="fas fa-chevron-right separator"></i> <a href="index.html">Theorems</a> <i class="fas fa-chevron-right separator"></i> <span class="current">Vieta's Formulas (Виетови формули)</span></div>
+    <div class="action-bar">
+        <button onclick="window.print()" class="btn-print"><i class="fas fa-print"></i> Печати</button>
+    </div>
+    
+            <div class="card">
+                <span class="badge badge-category">Algebra</span>
+                <span class="badge badge-difficulty">Intermediate</span>
+                <h1>📜 Vieta's Formulas (Виетови формули)</h1>
+<h2>💡 Дефиниција</h2>
+<p>Виетовите формули ја даваат врската помеѓу <strong>коефициентите</strong> на еден полином и неговите <strong>нули</strong> (решенија).</p>
+<p><strong>За Квадратна равенка ($ax^2 + bx + c = 0$):</strong>
+Ако $x_1$ и $x_2$ се решенијата, тогаш:
+$$ x_1 + x_2 = -\frac{b}{a} $$
+$$ x_1 \cdot x_2 = \frac{c}{a} $$</p>
+<p><strong>За Кубна равенка ($ax^3 + bx^2 + cx + d = 0$):</strong>
+$$ x_1 + x_2 + x_3 = -\frac{b}{a} $$
+$$ x_1x_2 + x_2x_3 + x_3x_1 = \frac{c}{a} $$
+$$ x_1 x_2 x_3 = -\frac{d}{a} $$</p>
+<hr />
+<h2>🧠 Интуиција</h2>
+<p>Ако знаеме дека решенијата се $x_1$ и $x_2$, тогаш равенката мора да изгледа вака:
+$$ a(x - x_1)(x - x_2) = 0 $$
+Ако ги измножиме заградите:
+$$ a(x^2 - x_1x - x_2x + x_1x_2) = ax^2 - a(x_1+x_2)x + a(x_1x_2) $$
+Споредувајќи го ова со $ax^2 + bx + c$, веднаш се гледаат формулите.</p>
+<hr />
+<h2>🛠 Каде се користи?</h2>
+<ol>
+<li><strong>Пресметка на симетрични изрази:</strong> Како $x_1^2 + x_2^2$ без да ги наоѓаме $x_1, x_2$.<ul>
+<li>$x_1^2 + x_2^2 = (x_1+x_2)^2 - 2x_1x_2$.</li>
+</ul>
+</li>
+<li><strong>Конструирање равенка:</strong> Ако ги знаеме збирот и производот на броевите, можеме да напишеме квадратна равенка чии решенија се тие броеви.</li>
+<li><strong>Геометрија:</strong> Кога бараме пресек на права и крива (на пр. кружница), често добиваме квадратна равенка за координатите.</li>
+</ol>
+<hr />
+<h2>🔗 Поврзани задачи</h2>
+<p><em>(Тука ќе ги линкаме новите задачи за средно)</em></p>
+            </div>
+            
+    </div>
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Македонска Математичка Архива. Генерирано со Python.</p>
+        </div>
+    </footer>
+</body>
+</html>

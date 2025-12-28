@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="mk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Set Theory (Множества) | Математичка Архива</title>
+    <link rel="stylesheet" href="../style.css">
+    <!-- MathJax -->
+    <script>
+    window.MathJax = {
+      tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$']] },
+      chtml: { scale: 1 }
+    };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="../index.html" class="logo"><i class="fas fa-cube"></i> МатАрхива</a>
+            <div class="nav-links">
+                <a href="../index.html">Почетна</a>
+                <a href="../skills/index.html">Вештини</a>
+                <a href="../theorems/index.html">Теореми</a>
+            </div>
+        </div>
+    </nav>
+    <div class="container main-content">
+<div class="breadcrumbs"><a href="../index.html">Почетна</a> <i class="fas fa-chevron-right separator"></i> <a href="index.html">Skill Guides</a> <i class="fas fa-chevron-right separator"></i> <span class="current">Set Theory (Множества)</span></div>
+    <div class="action-bar">
+        <button onclick="window.print()" class="btn-print"><i class="fas fa-print"></i> Печати</button>
+    </div>
+    
+            <div class="card">
+                <span class="badge badge-category">General</span>
+                <span class="badge badge-difficulty">Grade 6+</span>
+                <h1>Skill Guide – Множества (Set Theory)</h1>
+<h2>💡 Интуиција: Што е ова?</h2>
+<p>Множество е колекција на објекти (елементи).
+Замислете кутии или вреќи.
+*   <strong>Унија:</strong> Истури сè од двете вреќи во една голема (без дупликати).
+*   <strong>Пресек:</strong> Земи ги само оние работи што ги има и во двете вреќи.</p>
+<hr />
+<h2>🎯 Педагошки насоки</h2>
+<h3>За наставници / тутори</h3>
+<ul>
+<li><strong>Јазик:</strong> Множествата се "граматиката" на модерната математика.</li>
+<li><strong>Венови дијаграми:</strong> Најдобар начин за визуелизација. Кругови кои се сечат.</li>
+<li><strong>Аналогија со Логика:</strong><ul>
+<li>Пресек ($\cap$) $\leftrightarrow$ И ($\land$).</li>
+<li>Унија ($\cup$) $\leftrightarrow$ Или ($\lor$).</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h2>🛠 Како се користи? (Методологија)</h2>
+<h3>1. Основни операции</h3>
+<ul>
+<li><strong>Унија ($A \cup B$):</strong> Елементи што се во A <strong>или</strong> во B (или во двете).</li>
+<li><strong>Пресек ($A \cap B$):</strong> Елементи што се во A <strong>и</strong> во B.</li>
+<li><strong>Разлика ($A \setminus B$):</strong> Елементи што се во A, но <strong>не</strong> се во B.</li>
+<li><strong>Комплемент ($A'$ или $A^c$):</strong> Сè што не е во A (во однос на некое универзално множество).</li>
+</ul>
+<h3>2. Подмножества</h3>
+<ul>
+<li>$A \subseteq B$: Секој елемент од A е и елемент на B.</li>
+<li>Празно множество ($\emptyset$): Подмножество на секое множество.</li>
+</ul>
+<h3>3. Кардиналност (Број на елементи)</h3>
+<p>Ознака: $|A|$ или $n(A)$.
+*   <strong>Принцип на вклучување-исклучување:</strong>
+    $$ |A \cup B| = |A| + |B| - |A \cap B| $$
+    (За да не ги броиме два пати елементите во средината).</p>
+<h3>4. Декартов производ ($A \times B$)</h3>
+<p>Множество од сите подредени парови $(a, b)$ каде $a \in A, b \in B$.
+*   Ако $|A|=3$ и $|B|=2$, тогаш $|A \times B| = 6$.</p>
+<hr />
+<h2>⚠️ Типични грешки</h2>
+<ul>
+<li><strong>Елемент vs Подмножество:</strong><ul>
+<li>$1 \in {1, 2}$ (Точно).</li>
+<li>${1} \subseteq {1, 2}$ (Точно).</li>
+<li>$1 \subseteq {1, 2}$ (ГРЕШКА! Број не е множество).</li>
+<li>${1} \in {1, 2}$ (ГРЕШКА! Освен ако множеството е ${{1}, 2}$).</li>
+</ul>
+</li>
+<li><strong>Празно множество:</strong> $\emptyset$ не е исто што и ${0}$ (множество со еден елемент нула) или ${\emptyset}$ (множество што содржи празно множество). $\emptyset$ е празна кутија.</li>
+</ul>
+<hr />
+<h2>🔗 Поврзани skills</h2>
+<ul>
+<li><strong><a href="logic.md">Logic</a>:</strong> Основата на операциите со множества.</li>
+<li><strong><a href="inclusion_exclusion_principle.md">Inclusion-Exclusion Principle</a>:</strong> Броење на елементи во унии.</li>
+</ul>
+<hr />
+<h2>📂 Примери од Архивата</h2>
+<ul>
+<li><a href="../../grade_6/logic/problem_example.md">Grade 6 - Logic</a> (Венови дијаграми)</li>
+</ul>
+            </div>
+            
+    </div>
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Македонска Математичка Архива. Генерирано со Python.</p>
+        </div>
+    </footer>
+</body>
+</html>

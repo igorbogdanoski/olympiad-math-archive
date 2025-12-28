@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="mk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>numerus_4334_4334.md | Математичка Архива</title>
+    <link rel="stylesheet" href="../../style.css">
+    <!-- MathJax -->
+    <script>
+    window.MathJax = {
+      tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$']] },
+      chtml: { scale: 1 }
+    };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="../../index.html" class="logo"><i class="fas fa-cube"></i> МатАрхива</a>
+            <div class="nav-links">
+                <a href="../../index.html">Почетна</a>
+                <a href="../../skills/index.html">Вештини</a>
+                <a href="../../theorems/index.html">Теореми</a>
+            </div>
+        </div>
+    </nav>
+    <div class="container main-content">
+<div class="breadcrumbs"><a href="../../index.html">Почетна</a> <i class="fas fa-chevron-right separator"></i> <a href="../index.html">Grade 9</a> <i class="fas fa-chevron-right separator"></i> <span class="current">Algebra</span> <i class="fas fa-chevron-right separator"></i> <span class="current">numerus_4334_4334.md</span></div>
+    <div class="action-bar">
+        <button onclick="window.print()" class="btn-print"><i class="fas fa-print"></i> Печати</button>
+    </div>
+    <div class='problem-page'><div class='card'><h1>Скратување на алгебарска дропка</h1>
+<h2>Текст на задачата</h2>
+<p>Скрати ја дропката $P(x) = \frac{ab(x^2 + 1) + x(a^2 + b^2)}{ab(x^2 - 1) + x(a^2 - b^2)}$ и реши ја равенката $P(x) = 5$.</p>
+<h2>🧠 Анализа (Клучна идеја)</h2>
+<p>Групирај ги членовите. Ослободи се од заградите и групирај ги членовите што содржат $a$ и $b$ на паметен начин.</p>
+<h2>📝 Решение</h2>
+<h3>Чекор 1: Факторизација на броителот</h3>
+<p>$$ B = abx^2 + ab + a^2x + b^2x $$
+Групираме:
+$$ B = (abx^2 + a^2x) + (b^2x + ab) $$
+$$ B = ax(bx + a) + b(bx + a) $$
+$$ B = (ax + b)(bx + a) $$</p>
+<h3>Чекор 2: Факторизација на именителот</h3>
+<p>$$ I = abx^2 - ab + a^2x - b^2x $$
+Групираме:
+$$ I = (abx^2 + a^2x) - (b^2x + ab) $$
+$$ I = ax(bx + a) - b(bx + a) $$
+$$ I = (ax - b)(bx + a) $$</p>
+<h3>Чекор 3: Скратување</h3>
+<p>$$ P(x) = \frac{(ax + b)(bx + a)}{(ax - b)(bx + a)} $$
+Под услов $bx + a \ne 0$, кратиме:
+$$ P(x) = \frac{ax + b}{ax - b} $$</p>
+<h3>Чекор 4: Решавање на равенката</h3>
+<p>$$ \frac{ax + b}{ax - b} = 5 $$
+$$ ax + b = 5(ax - b) $$
+$$ ax + b = 5ax - 5b $$
+$$ 6b = 4ax $$
+$$ x = \frac{6b}{4a} = \frac{3b}{2a} $$</p>
+<p><strong>Резултат:</strong> $x = \frac{3b}{2a}$.
+&lt;Користи LaTeX за формули: $x^2$ или $$ x^2 $$&gt;</p>
+<h2>💡 Алтернативен пристап (опционално)</h2>
+<p>&lt;Ако постои решение со друг Skill (на пр. геометриски наместо алгебарски).&gt;</p>
+<h2>🏁 Заклучок</h2>
+<p>&lt;Краен резултат, јасно истакнат во \boxed{}.&gt;</p>
+<h2>👩‍🏫 За наставници</h2>
+<p>Групирањето е уметност. Треба да се бараат заеднички множители.</p></div></div>
+    </div>
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Македонска Математичка Архива. Генерирано со Python.</p>
+        </div>
+    </footer>
+</body>
+</html>

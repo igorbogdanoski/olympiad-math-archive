@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="mk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>cnt92_olympiad_17.md | Математичка Архива</title>
+    <link rel="stylesheet" href="../../style.css">
+    <!-- MathJax -->
+    <script>
+    window.MathJax = {
+      tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$']] },
+      chtml: { scale: 1 }
+    };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="../../index.html" class="logo"><i class="fas fa-cube"></i> МатАрхива</a>
+            <div class="nav-links">
+                <a href="../../index.html">Почетна</a>
+                <a href="../../skills/index.html">Вештини</a>
+                <a href="../../theorems/index.html">Теореми</a>
+            </div>
+        </div>
+    </nav>
+    <div class="container main-content">
+<div class="breadcrumbs"><a href="../../index.html">Почетна</a> <i class="fas fa-chevron-right separator"></i> <a href="../index.html">Grade 9</a> <i class="fas fa-chevron-right separator"></i> <span class="current">Algebra</span> <i class="fas fa-chevron-right separator"></i> <span class="current">cnt92_olympiad_17.md</span></div>
+    <div class="action-bar">
+        <button onclick="window.print()" class="btn-print"><i class="fas fa-print"></i> Печати</button>
+    </div>
+    <div class='problem-page'><div class='card'><p><a href="../../README.md">⬅️ Назад кон Индексот</a> | <a href="../../../tools/skill_guides/logic.md">🧰 Skill: logic</a></p>
+<h1>Тригонометриска неравенка</h1>
+<h2>📝 Текст на задачата</h2>
+<p>Сите решенија на неравенката $(x - \sin 60^\circ)(x - \text{tg } 60^\circ) &lt; 0$ го образуваат множеството...</p>
+<h2>🧠 Анализа (Клучна идеја)</h2>
+<p>Ова е квадратна неравенка од типот $(x-a)(x-b) &lt; 0$. Решението на ваква неравенка е секогаш интервалот помеѓу корените $(a, b)$ (ако $a &lt; b$). Треба само да ги пресметаме тригонометриските вредности.</p>
+<h2>💡 Решение</h2>
+<details>
+<summary>👀 Прикажи го решението</summary>
+
+**Чекор 1: Пресметка на вредностите**
+Знаеме дека:
+*   $\sin 60^\circ = \frac{\sqrt{3}}{2} \approx 0.866$
+*   $\text{tg } 60^\circ = \sqrt{3} \approx 1.732$
+
+**Чекор 2: Поставување на неравенката**
+Неравенката добива облик:
+$$ (x - \frac{\sqrt{3}}{2})(x - \sqrt{3}) < 0 $$
+
+**Чекор 3: Решавање**
+Параболата $y = (x-x_1)(x-x_2)$ е свртена нагоре и е негативна помеѓу своите нули. Бидејќи $\frac{\sqrt{3}}{2} < \sqrt{3}$, решението е:
+$$ x \in \left( \frac{\sqrt{3}}{2}; \sqrt{3} \right) $$
+
+Ова одговара на записот $(0.5\sqrt{3}; \sqrt{3})$.
+
+</details>
+
+<h2>🏁 Заклучок</h2>
+<p>&lt;Краен резултат.&gt;</p>
+<h2>👩‍🏫 За наставници</h2>
+<p>Потсетете ги учениците на правилото „помеѓу корените“ за квадратни неравенки со знак $&lt;$.</p></div></div>
+    </div>
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Македонска Математичка Архива. Генерирано со Python.</p>
+        </div>
+    </footer>
+</body>
+</html>

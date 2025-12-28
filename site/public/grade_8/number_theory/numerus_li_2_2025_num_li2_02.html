@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="mk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>numerus_li_2_2025_num_li2_02.md | Математичка Архива</title>
+    <link rel="stylesheet" href="../../style.css">
+    <!-- MathJax -->
+    <script>
+    window.MathJax = {
+      tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$']] },
+      chtml: { scale: 1 }
+    };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="../../index.html" class="logo"><i class="fas fa-cube"></i> МатАрхива</a>
+            <div class="nav-links">
+                <a href="../../index.html">Почетна</a>
+                <a href="../../skills/index.html">Вештини</a>
+                <a href="../../theorems/index.html">Теореми</a>
+            </div>
+        </div>
+    </nav>
+    <div class="container main-content">
+<div class="breadcrumbs"><a href="../../index.html">Почетна</a> <i class="fas fa-chevron-right separator"></i> <a href="../index.html">Grade 8</a> <i class="fas fa-chevron-right separator"></i> <span class="current">Number_Theory</span> <i class="fas fa-chevron-right separator"></i> <span class="current">numerus_li_2_2025_num_li2_02.md</span></div>
+    <div class="action-bar">
+        <button onclick="window.print()" class="btn-print"><i class="fas fa-print"></i> Печати</button>
+    </div>
+    <div class='problem-page'><div class='card'><h1>Проблем со деливост (НЗС)</h1>
+<h2>Текст на задачата</h2>
+<p>Одреди го најголемиот трицифрен број што собран со 184952 е истовремено делив со 2, 3 и 7.</p>
+<h2>🧠 Анализа (Клучна идеја)</h2>
+<p>Бројот е делив со 2, 3 и 7 ако е делив со нивниот НЗС (42). Најди го остатокот на 184952 при делење со 42.</p>
+<h2>📝 Решение</h2>
+<p>Нека бараниот број е $x$. Условот е $x + 184952$ да биде делив со $\text{НЗС}(2,3,7) = 42$.</p>
+<ol>
+<li>
+<p><strong>Остаток на големиот број:</strong>
+   $184952 : 42 = 4403$ и остаток $26$.
+   Значи $184952 \equiv 26 \pmod{42}$.</p>
+</li>
+<li>
+<p><strong>Равенка:</strong>
+   $$ x + 26 \equiv 0 \pmod{42} $$
+   $$ x \equiv -26 \equiv 16 \pmod{42} $$
+   Значи $x$ е од облик $42k + 16$.</p>
+</li>
+<li>
+<p><strong>Максимизација:</strong>
+   Бараме најголем $x \le 999$.
+   $$ 42k + 16 \le 999 \implies 42k \le 983 \implies k \le 23,4 $$
+   Најголемо $k=23$.
+   $$ x = 42(23) + 16 = 966 + 16 = 982 $$</p>
+</li>
+</ol>
+<p><strong>Резултат:</strong> 982.
+&lt;Користи LaTeX за формули: $x^2$ или $$ x^2 $$&gt;</p>
+<h2>💡 Алтернативен пристап (опционално)</h2>
+<p>&lt;Ако постои решение со друг Skill (на пр. геометриски наместо алгебарски).&gt;</p>
+<h2>🏁 Заклучок</h2>
+<p>&lt;Краен резултат, јасно истакнат во \boxed{}.&gt;</p>
+<h2>👩‍🏫 За наставници</h2>
+<p>Користењето на модуларна аритметика ($a \equiv b$) е многу поелегантно од обично делење.</p></div></div>
+    </div>
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Македонска Математичка Архива. Генерирано со Python.</p>
+        </div>
+    </footer>
+</body>
+</html>
