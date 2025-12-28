@@ -9,45 +9,50 @@ translated: false
 
 # 
 tags:
-  - vectors
-  - angle_chasing
   - geometry
-  - complex_numbers
-  - algebra
-  - triangle_geometry
-  - similarity
-related_skills:
-  - vectors
-  - angle_chasing
-  - complex_numbers
-  - triangle_geometry
-  - similarity--- GEOMETRY SKILLS ---
-geometry_style: synthetic # synthetic | analytic | mixed
-primary_skill: <main_tool> # e.g., angle_chasing, similarity, cyclic_quads
-related_skills:
-  - algebraic_geometry
+  - area
   - triangle_decomposition
-
-allowed_tools:
-  - classical_euclidean
-  - similarity
-  - symmetry
-forbidden_tools:
-  - coordinate_geometry
-  - vectors
-  - complex_numbers
-tags:
-  - geometry
-  - olympiad
+  - identity
+related_skills:
+  - area_formula
+  - algebraic_manipulation
 ---
 
-# Идентитет на нормали во произволен триаголник
+# Problem
+From an arbitrary point $M$ inside triangle $ABC$, perpendiculars are drawn to sides $a, b, c$ with lengths $x, y, z$ respectively. Prove the identity:
+$$\frac{x}{h_a} + \frac{y}{h_b} + \frac{z}{h_c} = 1$$
+where $h_a, h_b, h_c$ are the corresponding altitudes of the triangle.
 
-## Текст на задачата
-Од произволна точка $M$ во внатрешноста на триаголникот $ABC$, повлечени се нормали кон страните $a, b, c$ со должини $x, y, z$ соодветно. Докажи го идентитетот: $$\frac{x}{h_a} + \frac{y}{h_b} + \frac{z}{h_c} = 1$$ каде $h_a, h_b, h_c$ се соодветните висини на триаголникот.
+![Problem Visualization](media/geom_9_sum_altitudes.mp4)
 
-## 📐 Скица / Конструкција
-![Problem_geom_9_sum_altitudes](images/geom_9_sum_altitudes.png)
+# Solution
+Let $P$ be the area of triangle $ABC$.
+We can decompose the area of $\triangle ABC$ into the sum of the areas of three smaller triangles: $\triangle MBC$, $\triangle MCA$, and $\triangle MAB$.
+$$P = P_{MBC} + P_{MCA} + P_{MAB}$$
+
+The area of each smaller triangle can be calculated using the base (side of $\triangle ABC$) and the corresponding height (perpendicular from $M$):
+$$P_{MBC} = \frac{1}{2} a x$$
+$$P_{MCA} = \frac{1}{2} b y$$
+$$P_{MAB} = \frac{1}{2} c z$$
+
+Substituting these into the area sum:
+$$P = \frac{1}{2} a x + \frac{1}{2} b y + \frac{1}{2} c z$$
+
+We also know the area of $\triangle ABC$ can be expressed using its altitudes:
+$$P = \frac{1}{2} a h_a \implies a = \frac{2P}{h_a}$$
+$$P = \frac{1}{2} b h_b \implies b = \frac{2P}{h_b}$$
+$$P = \frac{1}{2} c h_c \implies c = \frac{2P}{h_c}$$
+
+Substitute the expressions for $a, b, c$ into the area equation:
+$$P = \frac{1}{2} \left(\frac{2P}{h_a}\right) x + \frac{1}{2} \left(\frac{2P}{h_b}\right) y + \frac{1}{2} \left(\frac{2P}{h_c}\right) z$$
+
+Simplifying:
+$$P = P \frac{x}{h_a} + P \frac{y}{h_b} + P \frac{z}{h_c}$$
+
+Since $P \neq 0$, we can divide the entire equation by $P$:
+$$1 = \frac{x}{h_a} + \frac{y}{h_b} + \frac{z}{h_c}$$
+
+This proves the identity.
 
 ## 💡 Решение
 

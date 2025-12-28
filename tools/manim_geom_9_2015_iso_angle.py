@@ -1,96 +1,94 @@
 from manim import *
 import numpy as np
 
-class IsoscelesAngle(Scene):
+class GeometryScene(Scene):
     def construct(self):
-        # Parameters
+        # Define parameters
+        # Base angle alpha = 36 degrees
         alpha_deg = 36
         alpha = alpha_deg * DEGREES
+        
         # Base length c = 6
-        c = 6
-        # Height h_c = c/2 * tan(alpha)
-        h_c = c/2 * np.tan(alpha)
+        c_len = 6.0
+        half_c = c_len / 2
+        
+        # Height h_c = (c/2) * tan(alpha)
+        h_c_len = half_c * np.tan(alpha)
         
         # Points
-        # M at origin
-        M = ORIGIN
-        A = LEFT * c / 2
-        B = RIGHT * c / 2
-        C = UP * h_c
+        A = np.array([-half_c, -1, 0])
+        B = np.array([half_c, -1, 0])
+        C = np.array([0, -1 + h_c_len, 0])
         
-        # Bisector AD
-        # D is on BC.
-        # Angle DAB = alpha/2 = 18 deg.
-        # Line AD slope: tan(18).
-        # Line BC equation:
-        # B = (c/2, 0), C = (0, h_c).
-        # Slope BC = -h_c / (c/2) = -2h_c/c = -tan(alpha).
-        # y - 0 = -tan(alpha) * (x - c/2).
-        # Line AD equation: y - 0 = tan(alpha/2) * (x + c/2).
-        # Intersection D.
-        # tan(alpha/2)(x + c/2) = -tan(alpha)(x - c/2).
-        # Let t = tan(alpha/2). tan(alpha) = 2t/(1-t^2).
-        # t(x + c/2) = -2t/(1-t^2) * (x - c/2).
-        # x + c/2 = -2/(1-t^2) * (x - c/2).
-        # (x + c/2)(1-t^2) = -2(x - c/2).
-        # x(1-t^2) + c/2(1-t^2) = -2x + c.
-        # x(3-t^2) = c - c/2(1-t^2) = c(1 - 0.5 + 0.5t^2) = c(0.5 + 0.5t^2).
-        # x = c(1+t^2) / (2(3-t^2)).
-        # y = t * (x + c/2).
+        # Triangle
+        triangle = Polygon(A, B, C, color=BLUE, stroke_width=4)
         
-        t = np.tan(alpha/2)
-        x_D = c * (1 + t**2) / (2 * (3 - t**2))
-        y_D = t * (x_D + c/2)
-        D = np.array([x_D, y_D, 0])
+        # Altitude CD
+        D = (A + B) / 2
+        altitude = DashedLine(C, D, color=RED)
+        label_hc = MathTex("h_c").next_to(altitude, RIGHT, buff=0.05)
         
-        # Create points
-        pA = Dot(A)
-        pB = Dot(B)
-        pC = Dot(C)
-        pM = Dot(M)
-        pD = Dot(D)
+        # Angle bisector AE
+        # Angle A is 36 deg. Bisector is at 18 deg from AB.
+        # Vector AB is (1, 0).
+        # Vector AE direction is (cos 18, sin 18).
+        bisector_angle = alpha / 2
+        dir_AE = np.array([np.cos(bisector_angle), np.sin(bisector_angle), 0])
         
-        # Shapes
-        tri = Polygon(A, B, C, color=BLUE, fill_opacity=0.1)
-        height = DashedLine(C, M, color=RED)
-        bisector = Line(A, D, color=GREEN)
+        # Intersect ray A + t * dir_AE with segment BC
+        # Line BC: P = B + u * (C - B)
+        # A + t * d = B + u * (C - B)
+        # A - B = u * (C - B) - t * d
+        # Solve linear system for t, u
+        # x: Ax - Bx = u(Cx - Bx) - t dx
+        # y: Ay - By = u(Cy - By) - t dy
+        
+        # Ax - Bx = -c_len
+        # Ay - By = 0
+        # Cx - Bx = -half_c
+        # Cy - By = h_c_len
+        
+        # -c = u(-c/2) - t dx
+        # 0 = u(h_c) - t dy
+        
+        # t = u * h_c / dy
+        # -c = -u*c/2 - (u * h_c / dy) * dx
+        # c = u (c/2 + h_c * dx / dy)
+        # u = c / (c/2 + h_c * dx / dy)
+        
+        dx = dir_AE[0]
+        dy = dir_AE[1]
+        
+        u = c_len / (c_len/2 + h_c_len * dx / dy)
+        E = B + u * (C - B)
+        
+        bisector = DashedLine(A, E, color=GREEN)
+        label_l = MathTex("l_\\alpha").next_to(bisector, UP, buff=0.05)
         
         # Labels
-        lbl_A = MathTex("A").next_to(A, DOWN+LEFT)
-        lbl_B = MathTex("B").next_to(B, DOWN+RIGHT)
-        lbl_C = MathTex("C").next_to(C, UP)
-        lbl_M = MathTex("M").next_to(M, DOWN)
-        lbl_D = MathTex("D").next_to(D, UP+RIGHT)
-        
-        lbl_hc = MathTex("h_c").next_to(height, LEFT, buff=0.1)
-        lbl_la = MathTex("l_a").next_to(bisector, UP, buff=0.1)
+        label_A = MathTex("A").next_to(A, DL)
+        label_B = MathTex("B").next_to(B, DR)
+        label_C = MathTex("C").next_to(C, UP)
+        label_D = MathTex("D").next_to(D, DOWN)
+        label_E = MathTex("E").next_to(E, UR)
         
         # Angles
-        angle_A = Angle(Line(A,B), Line(A,C), radius=0.7)
-        lbl_alpha = MathTex(r"\alpha").next_to(angle_A, UP+RIGHT)
+        angle_A = Angle(Line(A, B), Line(A, C), radius=0.5)
+        label_angle_A = MathTex("36^\\circ").next_to(angle_A, RIGHT)
         
-        angle_bisect1 = Angle(Line(A,B), Line(A,D), radius=1.0)
-        angle_bisect2 = Angle(Line(A,D), Line(A,C), radius=1.1)
+        # Equation
+        equation = MathTex("l_\\alpha = 2 h_c").to_corner(UL)
         
         # Group
-        scene_objects = VGroup(
-            tri, height, bisector,
-            pA, pB, pC, pM, pD,
-            lbl_A, lbl_B, lbl_C, lbl_M, lbl_D,
-            lbl_hc, lbl_la,
-            angle_A, lbl_alpha,
-            angle_bisect1, angle_bisect2
-        )
+        scene_group = VGroup(triangle, altitude, bisector, label_A, label_B, label_C, label_D, label_E, label_hc, label_l, angle_A, label_angle_A, equation)
+        scene_group.move_to(ORIGIN)
         
-        scene_objects.scale(1.5)
-        scene_objects.move_to(ORIGIN)
+        # Animations
+        self.play(Create(triangle), run_time=2)
+        self.play(Write(label_A), Write(label_B), Write(label_C))
+        self.play(Create(altitude), Write(label_hc), Write(label_D))
+        self.play(Create(bisector), Write(label_l), Write(label_E))
+        self.play(Create(angle_A), Write(label_angle_A))
+        self.play(Write(equation))
         
-        # Text
-        text = VGroup(
-            MathTex(r"h_c = \frac{l_a}{2}"),
-            MathTex(r"\cos \alpha = \sin(1.5 \alpha)"),
-            MathTex(r"\alpha = 36^\circ")
-        ).arrange(DOWN).next_to(scene_objects, DOWN)
-        
-        self.add(scene_objects)
-        self.add(text)
+        self.wait(2)

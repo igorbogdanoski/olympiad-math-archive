@@ -1,92 +1,78 @@
 from manim import *
 import numpy as np
 
-class Problem_geom_8_2018_para_line(Scene):
+class GeometryScene(Scene):
     def construct(self):
-        self.camera.background_color = WHITE
-        
-        # Coordinates
-        # D at origin
-        D = np.array([0, 0, 0])
-        
-        # Line p is horizontal axis
-        # But let's tilt it slightly to make it look general, or tilt the parallelogram.
-        # Easier to keep line horizontal and tilt parallelogram.
-        
-        # Parallelogram ABCD
-        # D at origin.
-        # A = (2, 2)
-        # C = (4, 1)
-        # B = A + C - D = (6, 3)
-        
-        scale = 1.5
-        A = np.array([-2, 2, 0]) * scale
-        C = np.array([3, 1, 0]) * scale
-        B = (A + C - D)
-        
-        # Shift everything so D is not at center, but line p is visible
-        # Line p passes through D.
-        # Let's make line p horizontal.
-        
-        # Projections
-        # M is projection of A on p (y=0)
-        M = np.array([A[0], 0, 0])
-        # N is projection of B on p
-        N = np.array([B[0], 0, 0])
-        # O is projection of C on p
-        O = np.array([C[0], 0, 0])
-        
-        # Center camera
-        center = (A + B + C + D + M + N)/6
-        self.camera.frame_center = center
-        self.camera.frame_width = 14
-        
-        # Points
-        points = {'A': A, 'B': B, 'C': C, 'D': D, 'M': M, 'N': N, 'O': O}
-        
-        # Parallelogram
-        para = Polygon(A, B, C, D, color=BLUE, fill_opacity=0.1)
-        
-        # Line p
-        line_p = Line(D + LEFT*5, D + RIGHT*8, color=BLACK)
+        # Define line p as x-axis (y=-2)
+        p_y = -2
+        line_p = Line(LEFT * 6 + UP * p_y, RIGHT * 6 + UP * p_y, color=WHITE)
         label_p = MathTex("p").next_to(line_p, RIGHT)
         
+        # Define D on p
+        D = np.array([-2, p_y, 0])
+        
+        # Define A, B, C
+        # A = D + v1
+        # C = D + v2
+        # B = D + v1 + v2
+        
+        v1 = np.array([1, 2, 0])
+        v2 = np.array([4, 1, 0])
+        
+        A = D + v1
+        C = D + v2
+        B = D + v1 + v2
+        
+        # Parallelogram
+        parallelogram = Polygon(A, B, C, D, color=BLUE, stroke_width=4)
+        
         # Perpendiculars
-        perp_AM = DashedLine(A, M, color=RED)
-        perp_BN = DashedLine(B, N, color=RED)
-        perp_CO = DashedLine(C, O, color=RED)
+        # M is proj of A on p
+        M = np.array([A[0], p_y, 0])
+        # N is proj of B on p
+        N = np.array([B[0], p_y, 0])
+        # O is proj of C on p
+        O = np.array([C[0], p_y, 0])
+        
+        line_AM = DashedLine(A, M, color=RED)
+        line_BN = DashedLine(B, N, color=RED)
+        line_CO = DashedLine(C, O, color=RED)
+        
+        label_AM = MathTex("AM").next_to(line_AM, LEFT, buff=0.05).scale(0.7)
+        label_BN = MathTex("BN").next_to(line_BN, RIGHT, buff=0.05).scale(0.7)
+        label_CO = MathTex("OC").next_to(line_CO, RIGHT, buff=0.05).scale(0.7)
         
         # Labels
-        labels = VGroup()
-        for name, point in points.items():
-            direction = UP
-            if name == 'D': direction = DOWN
-            if name == 'M': direction = DOWN
-            if name == 'N': direction = DOWN
-            if name == 'O': direction = DOWN
-            if name == 'A': direction = UP
-            if name == 'B': direction = UP
-            if name == 'C': direction = UP
-            
-            labels.add(MathTex(name).next_to(point, direction))
-            
-        # Right angles
-        ra_M = RightAngle(Line(M, A), Line(M, D), length=0.3, color=BLACK)
-        ra_N = RightAngle(Line(N, B), Line(N, D), length=0.3, color=BLACK)
-        ra_O = RightAngle(Line(O, C), Line(O, D), length=0.3, color=BLACK)
+        label_A = MathTex("A").next_to(A, UP)
+        label_B = MathTex("B").next_to(B, UP)
+        label_C = MathTex("C").next_to(C, UP)
+        label_D = MathTex("D").next_to(D, DOWN)
+        label_M = MathTex("M").next_to(M, DOWN)
+        label_N = MathTex("N").next_to(N, DOWN)
+        label_O = MathTex("O").next_to(O, DOWN)
         
-        # Draw
+        # Diagonals (optional, for proof hint)
+        diag_AC = DashedLine(A, C, color=GRAY)
+        diag_BD = DashedLine(B, D, color=GRAY)
+        
+        # Equation
+        equation = MathTex("AM + OC = BN").to_corner(UL)
+        
+        # Group
+        scene_group = VGroup(line_p, parallelogram, line_AM, line_BN, line_CO, label_A, label_B, label_C, label_D, label_M, label_N, label_O, label_AM, label_BN, label_CO, equation)
+        scene_group.move_to(ORIGIN)
+        
+        # Animations
         self.play(Create(line_p), Write(label_p))
-        self.play(Create(para))
-        self.play(Create(perp_AM), Create(perp_BN), Create(perp_CO))
+        self.play(Create(parallelogram), Write(label_D))
+        self.play(Write(label_A), Write(label_B), Write(label_C))
         
-        dots = VGroup(*[Dot(p) for p in points.values()])
-        self.play(FadeIn(dots), FadeIn(labels))
+        self.play(Create(line_AM), Write(label_M), Write(label_AM))
+        self.play(Create(line_CO), Write(label_O), Write(label_CO))
+        self.play(Create(line_BN), Write(label_N), Write(label_BN))
         
-        self.play(Create(ra_M), Create(ra_N), Create(ra_O))
+        self.play(Create(diag_AC), Create(diag_BD))
         
-        # Add text info
-        info = MathTex("AM + OC = BN", color=RED, font_size=36).to_corner(UL)
-        self.add(info)
+        self.play(Write(equation))
         
         self.wait(2)

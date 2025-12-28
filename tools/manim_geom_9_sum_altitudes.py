@@ -1,106 +1,80 @@
 from manim import *
+import numpy as np
 
-class Problem_geom_9_sum_altitudes(Scene):
+class GeometryScene(Scene):
     def construct(self):
-        # Scale
-        scale = 1.5
+        # Define points
+        A = np.array([-2, -1.5, 0])
+        B = np.array([3, -1.5, 0])
+        C = np.array([0.5, 2.5, 0])
         
-        # Triangle ABC
-        A = UP * 2 + LEFT * 1
-        B = DOWN * 1.5 + LEFT * 2.5
-        C = DOWN * 1.5 + RIGHT * 2.5
+        # Triangle
+        triangle = Polygon(A, B, C, color=BLUE, stroke_width=4)
         
-        # Point M inside
-        M = (A + B + C) / 3 + DOWN * 0.2 + RIGHT * 0.1
+        # Point M
+        M = np.array([0.5, -0.5, 0])
+        dot_M = Dot(M, color=YELLOW)
+        label_M = MathTex("M").next_to(M, UP, buff=0.1)
         
-        # Shift to center
-        center = (A + B + C) / 3
-        shift = -center
+        # Perpendiculars x, y, z
+        # x to BC (a)
+        # y to AC (b)
+        # z to AB (c)
         
-        A += shift
-        B += shift
-        C += shift
-        M += shift
+        def get_proj(P, A, B):
+            vec_AB = B - A
+            unit_AB = vec_AB / np.linalg.norm(vec_AB)
+            return A + np.dot(P - A, unit_AB) * unit_AB
+            
+        proj_M_BC = get_proj(M, B, C)
+        proj_M_AC = get_proj(M, A, C)
+        proj_M_AB = get_proj(M, A, B)
         
-        # Scale
-        A *= scale
-        B *= scale
-        C *= scale
-        M *= scale
+        line_x = DashedLine(M, proj_M_BC, color=RED)
+        line_y = DashedLine(M, proj_M_AC, color=RED)
+        line_z = DashedLine(M, proj_M_AB, color=RED)
         
-        # Objects
-        tri = Polygon(A, B, C, color=BLUE)
+        label_x = MathTex("x").next_to(line_x, RIGHT, buff=0.05).scale(0.8)
+        label_y = MathTex("y").next_to(line_y, LEFT, buff=0.05).scale(0.8)
+        label_z = MathTex("z").next_to(line_z, LEFT, buff=0.05).scale(0.8)
         
-        dot_A = Dot(A, color=WHITE)
-        dot_B = Dot(B, color=WHITE)
-        dot_C = Dot(C, color=WHITE)
-        dot_M = Dot(M, color=RED)
+        # Segments to vertices
+        line_MA = DashedLine(M, A, color=GRAY)
+        line_MB = DashedLine(M, B, color=GRAY)
+        line_MC = DashedLine(M, C, color=GRAY)
         
-        label_A = MathTex("A").next_to(dot_A, UP)
-        label_B = MathTex("B").next_to(dot_B, DL)
-        label_C = MathTex("C").next_to(dot_C, DR)
-        label_M = MathTex("M").next_to(dot_M, UP)
+        # Labels
+        label_A = MathTex("A").next_to(A, DL)
+        label_B = MathTex("B").next_to(B, DR)
+        label_C = MathTex("C").next_to(C, UP)
         
-        # Perpendiculars from M to sides
-        # Side a (BC)
-        # Project M onto BC
-        # Line BC direction
-        v_BC = C - B
-        u_BC = v_BC / np.linalg.norm(v_BC)
-        v_BM = M - B
-        proj_M_BC = B + np.dot(v_BM, u_BC) * u_BC
-        perp_x = Line(M, proj_M_BC, color=YELLOW)
-        label_x = MathTex("x").next_to(perp_x, RIGHT, buff=0.1).scale(0.8)
+        # Areas
+        area_MBC = Polygon(M, B, C, fill_opacity=0.2, fill_color=GREEN, stroke_width=0)
+        area_MCA = Polygon(M, C, A, fill_opacity=0.2, fill_color=ORANGE, stroke_width=0)
+        area_MAB = Polygon(M, A, B, fill_opacity=0.2, fill_color=PURPLE, stroke_width=0)
         
-        # Side b (AC)
-        v_AC = C - A
-        u_AC = v_AC / np.linalg.norm(v_AC)
-        v_AM = M - A
-        proj_M_AC = A + np.dot(v_AM, u_AC) * u_AC
-        perp_y = Line(M, proj_M_AC, color=YELLOW)
-        label_y = MathTex("y").next_to(perp_y, UP, buff=0.1).scale(0.8)
+        # Equation
+        equation = MathTex(r"\frac{x}{h_a} + \frac{y}{h_b} + \frac{z}{h_c} = 1").to_corner(UL)
         
-        # Side c (AB)
-        v_AB = B - A
-        u_AB = v_AB / np.linalg.norm(v_AB)
-        v_AM = M - A
-        proj_M_AB = A + np.dot(v_AM, u_AB) * u_AB
-        perp_z = Line(M, proj_M_AB, color=YELLOW)
-        label_z = MathTex("z").next_to(perp_z, LEFT, buff=0.1).scale(0.8)
+        # Group
+        scene_group = VGroup(triangle, dot_M, label_M, line_x, line_y, line_z, label_x, label_y, label_z, line_MA, line_MB, line_MC, label_A, label_B, label_C, area_MBC, area_MCA, area_MAB, equation)
+        scene_group.move_to(ORIGIN)
         
-        # Altitudes
-        # h_a from A to BC
-        v_BC = C - B
-        u_BC = v_BC / np.linalg.norm(v_BC)
-        v_BA = A - B
-        proj_A_BC = B + np.dot(v_BA, u_BC) * u_BC
-        alt_ha = DashedLine(A, proj_A_BC, color=GREEN)
-        label_ha = MathTex("h_a").next_to(alt_ha, RIGHT, buff=0.1).scale(0.8)
+        # Animations
+        self.play(Create(triangle), run_time=2)
+        self.play(Write(label_A), Write(label_B), Write(label_C))
+        self.play(Create(dot_M), Write(label_M))
         
-        # h_b from B to AC
-        v_AC = C - A
-        u_AC = v_AC / np.linalg.norm(v_AC)
-        v_AB = B - A
-        proj_B_AC = A + np.dot(v_AB, u_AC) * u_AC
-        alt_hb = DashedLine(B, proj_B_AC, color=GREEN)
-        label_hb = MathTex("h_b").next_to(alt_hb, DOWN, buff=0.1).scale(0.8)
+        self.play(Create(line_x), Write(label_x))
+        self.play(Create(line_y), Write(label_y))
+        self.play(Create(line_z), Write(label_z))
         
-        # h_c from C to AB
-        v_AB = B - A
-        u_AB = v_AB / np.linalg.norm(v_AB)
-        v_AC = C - A
-        proj_C_AB = A + np.dot(v_AC, u_AB) * u_AB
-        alt_hc = DashedLine(C, proj_C_AB, color=GREEN)
-        label_hc = MathTex("h_c").next_to(alt_hc, DOWN, buff=0.1).scale(0.8)
+        self.play(Create(line_MA), Create(line_MB), Create(line_MC))
         
-        self.add(tri)
-        self.add(alt_ha, alt_hb, alt_hc)
-        self.add(perp_x, perp_y, perp_z)
-        self.add(dot_A, dot_B, dot_C, dot_M)
-        self.add(label_A, label_B, label_C, label_M)
-        self.add(label_x, label_y, label_z)
-        self.add(label_ha, label_hb, label_hc)
+        self.play(FadeIn(area_MBC))
+        self.play(FadeIn(area_MCA))
+        self.play(FadeIn(area_MAB))
         
-        # Add formula
-        formula = MathTex(r"\frac{x}{h_a} + \frac{y}{h_b} + \frac{z}{h_c} = 1").to_corner(UL)
-        self.add(formula)
+        self.play(Write(equation))
+        
+        self.wait(2)

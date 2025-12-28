@@ -7,17 +7,42 @@ problem_id: geom_9_area_height
 language_original: <mk | en | sr | hr | ...>
 translated: false
 
-# 
 tags:
-  - vectors
-  - angle_chasing
   - geometry
-  - complex_numbers
   - algebra
-  - similarity
+  - area
+  - triangle
 related_skills:
-  - vectors
-  - complex_numbers
+  - area_formula
+  - algebraic_manipulation
+
+# Problem
+Sides of a triangle are $a=4$ and $b=6$. If $h_c = h_a + h_b$, calculate the third side $c$.
+
+![Problem Visualization](media/geom_9_area_height.mp4)
+
+# Solution
+Let $P$ be the area of the triangle. We know that:
+$$P = \frac{1}{2} a h_a = \frac{1}{2} b h_b = \frac{1}{2} c h_c$$
+
+From this, we can express the altitudes in terms of the area and the sides:
+$$h_a = \frac{2P}{a}, \quad h_b = \frac{2P}{b}, \quad h_c = \frac{2P}{c}$$
+
+The problem states that $h_c = h_a + h_b$. Substituting the expressions for the altitudes:
+$$\frac{2P}{c} = \frac{2P}{a} + \frac{2P}{b}$$
+
+Dividing by $2P$ (since $P \neq 0$):
+$$\frac{1}{c} = \frac{1}{a} + \frac{1}{b}$$
+
+Substitute the given values $a=4$ and $b=6$:
+$$\frac{1}{c} = \frac{1}{4} + \frac{1}{6}$$
+$$\frac{1}{c} = \frac{3}{12} + \frac{2}{12}$$
+$$\frac{1}{c} = \frac{5}{12}$$
+
+Therefore:
+$$c = \frac{12}{5} = 2.4$$
+
+The third side is $c = 2.4$.
   - angle_chasing
   - similarity--- GEOMETRY SKILLS ---
 geometry_style: synthetic # synthetic | analytic | mixed

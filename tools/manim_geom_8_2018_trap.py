@@ -1,95 +1,58 @@
 from manim import *
 import numpy as np
 
-class TrapezoidMidpoints(Scene):
+class GeometryScene(Scene):
     def construct(self):
-        self.camera.background_color = WHITE
-        # Parameters
-        a = 8
-        b = 4
-        # MN = (a-b)/2 = 2
-        # Let's choose A=60, B=30 so A+B=90
-        # M at origin
-        M = ORIGIN
-        A = LEFT * a / 2
-        B = RIGHT * a / 2
+        # Define points
+        # M at origin (0,0)
+        M = np.array([0, 0, 0])
         
-        # N position
-        # u = 1, v = sqrt(3)
-        u = 1
-        v = np.sqrt(3)
-        N = np.array([u, v, 0])
+        # a = 6, b = 2.
+        # P = (-2, 0), Q = (2, 0)
+        # N = (0, 2)
+        P = np.array([-2, 0, 0])
+        Q = np.array([2, 0, 0])
+        N = np.array([0, 2, 0])
         
-        # C and D
-        C = N + RIGHT * b / 2
-        D = N + LEFT * b / 2
+        # A = (-3, 0), B = (3, 0)
+        A = np.array([-3, 0, 0])
+        B = np.array([3, 0, 0])
         
-        # Create points
-        pA = Dot(A, color=BLACK)
-        pB = Dot(B, color=BLACK)
-        pC = Dot(C, color=BLACK)
-        pD = Dot(D, color=BLACK)
-        pM = Dot(M, color=BLACK)
-        pN = Dot(N, color=BLACK)
+        # D = (-1, 2), C = (1, 2)
+        D = np.array([-1, 2, 0])
+        C = np.array([1, 2, 0])
         
-        # Shapes
-        trap = Polygon(A, B, C, D, color=BLUE, fill_opacity=0.1, stroke_color=BLUE)
-        seg_MN = Line(M, N, color=RED)
+        # Create objects
+        trapezoid = Polygon(A, B, C, D, color=BLUE, stroke_width=4)
+        segment_MN = Line(M, N, color=RED)
+        
+        # Auxiliary lines
+        line_NP = DashedLine(N, P, color=YELLOW)
+        line_NQ = DashedLine(N, Q, color=YELLOW)
         
         # Labels
-        lbl_A = MathTex('A', color=BLACK).next_to(A, DOWN+LEFT)
-        lbl_B = MathTex('B', color=BLACK).next_to(B, DOWN+RIGHT)
-        lbl_C = MathTex('C', color=BLACK).next_to(C, UP+RIGHT)
-        lbl_D = MathTex('D', color=BLACK).next_to(D, UP+LEFT)
-        lbl_M = MathTex('M', color=BLACK).next_to(M, DOWN)
-        lbl_N = MathTex('N', color=BLACK).next_to(N, UP)
+        label_A = MathTex("A").next_to(A, DL)
+        label_B = MathTex("B").next_to(B, DR)
+        label_C = MathTex("C").next_to(C, UR)
+        label_D = MathTex("D").next_to(D, UL)
+        label_M = MathTex("M").next_to(M, DOWN)
+        label_N = MathTex("N").next_to(N, UP)
+        label_P = MathTex("P").next_to(P, DOWN)
+        label_Q = MathTex("Q").next_to(Q, DOWN)
         
-        # Dimensions
-        lbl_a = MathTex('a', color=BLACK).next_to(Line(A,B), DOWN, buff=0.3)
-        lbl_b = MathTex('b', color=BLACK).next_to(Line(D,C), UP, buff=0.1)
-        lbl_MN = MathTex(r'\frac{a-b}{2}', color=RED).next_to(seg_MN, RIGHT).scale(0.7)
-        
-        # Angles
-        angle_A = Angle(Line(A,B), Line(A,D), radius=0.7, color=BLACK)
-        lbl_alpha = MathTex(r'\alpha', color=BLACK).next_to(angle_A, UP+RIGHT, buff=0.1)
-        
-        angle_B = Angle(Line(B,C), Line(B,A), radius=0.7, color=BLACK)
-        lbl_beta = MathTex(r'\beta', color=BLACK).next_to(angle_B, UP+LEFT, buff=0.1)
-        
-        # Construction: Translate AD to CE
-        E = A + RIGHT * b
-        pE = Dot(E, color=GREEN)
-        line_CE = DashedLine(C, E, color=GREEN)
-        lbl_E = MathTex('E', color=BLACK).next_to(E, DOWN)
-        
-        # Triangle CEB median
-        line_CK = DashedLine(C, np.array([b/2, 0, 0]), color=RED)
-        lbl_K = MathTex('K', color=BLACK).next_to(np.array([b/2, 0, 0]), DOWN)
+        # Right angle at N in triangle NPQ
+        right_angle = RightAngle(Line(N, P), Line(N, Q), length=0.4)
         
         # Group
-        scene_objects = VGroup(
-            trap, seg_MN,
-            pA, pB, pC, pD, pM, pN,
-            lbl_A, lbl_B, lbl_C, lbl_D, lbl_M, lbl_N,
-            lbl_a, lbl_b, lbl_MN,
-            angle_A, lbl_alpha, angle_B, lbl_beta,
-            pE, line_CE, lbl_E,
-            line_CK, lbl_K
-        )
+        scene_group = VGroup(trapezoid, segment_MN, line_NP, line_NQ, label_A, label_B, label_C, label_D, label_M, label_N, label_P, label_Q, right_angle)
+        scene_group.move_to(ORIGIN)
         
-        scene_objects.scale(0.7)
-        scene_objects.shift(UP * 1.5)
+        # Animations
+        self.play(Create(trapezoid), run_time=2)
+        self.play(Write(label_A), Write(label_B), Write(label_C), Write(label_D))
+        self.play(Create(segment_MN), Write(label_M), Write(label_N))
+        self.play(Create(line_NP), Create(line_NQ))
+        self.play(Write(label_P), Write(label_Q))
+        self.play(FadeIn(right_angle))
         
-        # Text
-        text = VGroup(
-            MathTex(r'\text{Construct } CE \parallel AD, E \in AB', color=BLACK),
-            MathTex(r'AE = CD = b \implies EB = a - b', color=BLACK),
-            MathTex(r'\text{Consider } \triangle CEB. \text{ Let } K \text{ be midpoint of } EB.', color=BLACK),
-            MathTex(r'CK \text{ is median. } CK = MN = \frac{a-b}{2}', color=BLACK),
-            MathTex(r'CK = \frac{1}{2} EB \implies \triangle CEB \text{ is right-angled at } C', color=BLACK),
-            MathTex(r'\angle CEB = \angle A \text{ (corresponding)}', color=BLACK),
-            MathTex(r'\angle A + \angle B = 90^\circ', color=BLACK)
-        ).arrange(DOWN, aligned_edge=LEFT).next_to(scene_objects, DOWN).scale(0.6)
-        
-        self.add(scene_objects)
-        self.add(text)
+        self.wait(2)

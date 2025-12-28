@@ -1,85 +1,87 @@
 from manim import *
+import numpy as np
 
-class Problem_geom_9_area_height(Scene):
+class GeometryScene(Scene):
     def construct(self):
-        # Scale
-        scale = 1.0
+        # Define points
+        # a=4, b=6, c=2.4
+        # A at origin
+        A = np.array([0.0, 0.0, 0.0])
         
-        # Parameters
-        a = 4.0
-        b = 6.0
-        c = 2.4
+        # B at (c, 0)
+        c_len = 2.4
+        B = np.array([c_len, 0.0, 0.0])
         
-        # Coordinates
-        # C at origin
-        C = ORIGIN
-        # B on x-axis
-        B = RIGHT * a
-        # A at (x, y)
-        # b^2 = x^2 + y^2
-        # c^2 = (x-a)^2 + y^2 = x^2 - 2ax + a^2 + y^2 = b^2 - 2ax + a^2
-        # 2ax = b^2 + a^2 - c^2
-        # x = (a^2 + b^2 - c^2) / (2a)
-        x_A = (a**2 + b**2 - c**2) / (2 * a)
-        y_A = np.sqrt(b**2 - x_A**2)
-        A = np.array([x_A, y_A, 0])
+        # C coordinates
+        b_len = 6.0
+        a_len = 4.0
+        cos_A = (b_len**2 + c_len**2 - a_len**2) / (2 * b_len * c_len)
+        sin_A = np.sqrt(1 - cos_A**2)
+        C = np.array([b_len * cos_A, b_len * sin_A, 0])
         
-        # Shift to center
+        # Center the triangle
         center = (A + B + C) / 3
-        shift = -center
+        A -= center
+        B -= center
+        C -= center
         
-        A += shift
-        B += shift
-        C += shift
-        
-        # Apply scale
+        # Scale up for visibility
+        scale = 1.5
         A *= scale
         B *= scale
         C *= scale
         
-        # Objects
-        triangle = Polygon(A, B, C, color=BLUE, fill_opacity=0.1)
+        # Create triangle
+        triangle = Polygon(A, B, C, color=BLUE, stroke_width=4)
         
         # Altitudes
-        # h_a from A to BC
-        # BC is on x-axis (before rotation/shift).
-        # Let's compute altitudes properly using vector projection
+        # h_c: from C to AB
+        # Project C onto line AB.
+        # Line AB direction: B-A.
+        vec_AB = B - A
+        unit_AB = vec_AB / np.linalg.norm(vec_AB)
+        proj_C_on_AB = A + np.dot(C - A, unit_AB) * unit_AB
+        h_c_line = DashedLine(C, proj_C_on_AB, color=RED)
+        label_hc = MathTex("h_c").next_to(h_c_line, RIGHT, buff=0.05)
         
-        def get_altitude(P, Q, R):
-            # Altitude from P to QR
-            v_QR = R - Q
-            v_QP = P - Q
-            proj = np.dot(v_QP, v_QR) / np.dot(v_QR, v_QR) * v_QR
-            foot = Q + proj
-            return Line(P, foot, color=RED), foot
-            
-        alt_a, foot_a = get_altitude(A, B, C)
-        alt_b, foot_b = get_altitude(B, C, A)
-        alt_c, foot_c = get_altitude(C, A, B)
+        # h_a: from A to BC
+        vec_BC = C - B
+        unit_BC = vec_BC / np.linalg.norm(vec_BC)
+        proj_A_on_BC = B + np.dot(A - B, unit_BC) * unit_BC
+        h_a_line = DashedLine(A, proj_A_on_BC, color=RED)
+        label_ha = MathTex("h_a").next_to(h_a_line, UP, buff=0.05)
+        
+        # h_b: from B to AC
+        vec_AC = C - A
+        unit_AC = vec_AC / np.linalg.norm(vec_AC)
+        proj_B_on_AC = A + np.dot(B - A, unit_AC) * unit_AC
+        h_b_line = DashedLine(B, proj_B_on_AC, color=RED)
+        label_hb = MathTex("h_b").next_to(h_b_line, UP, buff=0.05)
         
         # Labels
-        label_A = MathTex("A").next_to(A, UP)
+        label_A = MathTex("A").next_to(A, DL)
         label_B = MathTex("B").next_to(B, DR)
-        label_C = MathTex("C").next_to(C, DL)
+        label_C = MathTex("C").next_to(C, UP)
         
-        label_a = MathTex("a=4").next_to(Line(B, C), DOWN)
-        label_b = MathTex("b=6").next_to(Line(A, C), UL)
-        label_c = MathTex("c=2.4").next_to(Line(A, B), UR)
+        # Side labels
+        label_a = MathTex("a=4").next_to(Line(B, C), RIGHT)
+        label_b = MathTex("b=6").next_to(Line(A, C), LEFT)
+        label_c = MathTex("c=?").next_to(Line(A, B), DOWN)
         
-        label_ha = MathTex("h_a").next_to(alt_a, RIGHT, buff=0.05)
-        label_hb = MathTex("h_b").next_to(alt_b, DOWN, buff=0.05)
-        label_hc = MathTex("h_c").next_to(alt_c, UP, buff=0.05)
+        # Equation
+        equation = MathTex("h_c = h_a + h_b").to_corner(UL)
         
-        # Text
-        text = MathTex(
-            r"h_c = h_a + h_b \implies \frac{1}{c} = \frac{1}{a} + \frac{1}{b}",
-            r"\frac{1}{c} = \frac{1}{4} + \frac{1}{6} = \frac{5}{12} \implies c = 2.4",
-            r"L = 4 + 6 + 2.4 = 12.4"
-        ).arrange(DOWN).to_corner(UL)
+        # Group
+        scene_group = VGroup(triangle, h_a_line, h_b_line, h_c_line, label_A, label_B, label_C, label_ha, label_hb, label_hc, label_a, label_b, label_c, equation)
+        scene_group.move_to(ORIGIN)
         
-        self.add(triangle)
-        self.add(alt_a, alt_b, alt_c)
-        self.add(label_A, label_B, label_C)
-        self.add(label_a, label_b, label_c)
-        self.add(label_ha, label_hb, label_hc)
-        self.add(text)
+        # Animations
+        self.play(Create(triangle), run_time=2)
+        self.play(Write(label_A), Write(label_B), Write(label_C))
+        self.play(Write(label_a), Write(label_b), Write(label_c))
+        self.play(Create(h_a_line), Write(label_ha))
+        self.play(Create(h_b_line), Write(label_hb))
+        self.play(Create(h_c_line), Write(label_hc))
+        self.play(Write(equation))
+        
+        self.wait(2)

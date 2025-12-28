@@ -1,0 +1,13 @@
+# This file is used internally by FFMPEG.
+file 'file:C:/Users/pc4all/Documents/matholimpiad/olympiad-math-archive/media/videos/manim_geom_9_sum_altitudes/480p15/partial_movie_files/GeometryScene/1584795214_326700339_223132457.mp4'
+file 'file:C:/Users/pc4all/Documents/matholimpiad/olympiad-math-archive/media/videos/manim_geom_9_sum_altitudes/480p15/partial_movie_files/GeometryScene/4072820271_374010849_3832008631.mp4'
+file 'file:C:/Users/pc4all/Documents/matholimpiad/olympiad-math-archive/media/videos/manim_geom_9_sum_altitudes/480p15/partial_movie_files/GeometryScene/4072820271_2531511519_2443572237.mp4'
+file 'file:C:/Users/pc4all/Documents/matholimpiad/olympiad-math-archive/media/videos/manim_geom_9_sum_altitudes/480p15/partial_movie_files/GeometryScene/4072820271_4057442551_2882449955.mp4'
+file 'file:C:/Users/pc4all/Documents/matholimpiad/olympiad-math-archive/media/videos/manim_geom_9_sum_altitudes/480p15/partial_movie_files/GeometryScene/4072820271_1559611158_2133166189.mp4'
+file 'file:C:/Users/pc4all/Documents/matholimpiad/olympiad-math-archive/media/videos/manim_geom_9_sum_altitudes/480p15/partial_movie_files/GeometryScene/4072820271_3338461017_2289024012.mp4'
+file 'file:C:/Users/pc4all/Documents/matholimpiad/olympiad-math-archive/media/videos/manim_geom_9_sum_altitudes/480p15/partial_movie_files/GeometryScene/4072820271_477749444_3213035593.mp4'
+file 'file:C:/Users/pc4all/Documents/matholimpiad/olympiad-math-archive/media/videos/manim_geom_9_sum_altitudes/480p15/partial_movie_files/GeometryScene/4072820271_3404444121_3874603593.mp4'
+file 'file:C:/Users/pc4all/Documents/matholimpiad/olympiad-math-archive/media/videos/manim_geom_9_sum_altitudes/480p15/partial_movie_files/GeometryScene/4072820271_341163919_745904703.mp4'
+file 'file:C:/Users/pc4all/Documents/matholimpiad/olympiad-math-archive/media/videos/manim_geom_9_sum_altitudes/480p15/partial_movie_files/GeometryScene/4072820271_2056782488_855640717.mp4'
+file 'file:C:/Users/pc4all/Documents/matholimpiad/olympiad-math-archive/media/videos/manim_geom_9_sum_altitudes/480p15/partial_movie_files/GeometryScene/4072820271_1400030389_1460030869.mp4'
+file 'file:C:/Users/pc4all/Documents/matholimpiad/olympiad-math-archive/media/videos/manim_geom_9_sum_altitudes/480p15/partial_movie_files/GeometryScene/4072820271_2872842549_2865131058.mp4'

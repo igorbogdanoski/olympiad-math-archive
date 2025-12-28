@@ -9,44 +9,71 @@ translated: false
 
 # 
 tags:
-  - vectors
-  - angle_chasing
   - geometry
-  - complex_numbers
-  - algebra
-  - triangle_geometry
-  - similarity
+  - trigonometry
+  - isosceles_triangle
+  - angle_bisector
 related_skills:
-  - vectors
-  - angle_chasing
-  - complex_numbers
-  - triangle_geometry
-  - similarity--- GEOMETRY SKILLS ---
-geometry_style: synthetic # synthetic | analytic | mixed
-primary_skill: <main_tool> # e.g., angle_chasing, similarity, cyclic_quads
-related_skills:
-  - angle_chasing
-  - isosceles_triangles
-
-allowed_tools:
-  - classical_euclidean
-  - similarity
-  - symmetry
-forbidden_tools:
-  - coordinate_geometry
-  - vectors
-  - complex_numbers
-tags:
-  - geometry
-  - olympiad
+  - trigonometric_identities
+  - solving_equations
 ---
 
-# Агли кај специфичен рамнокрак триаголник
+# Problem
+Determine the angles of an isosceles triangle $ABC$, where the altitude to the base is half the length of the angle bisector of one of the base angles.
 
-## Текст на задачата
-Одреди ги аглите кај рамнокрак триаголник $ABC$, кај кој висината спуштена кон основата е двапати помала од должината на симетралата на еден од аглите при основата.
+![Problem Visualization](media/geom_9_2015_iso_angle.mp4)
 
-## 📐 Скица / Конструкција
+# Solution
+Let the triangle be $ABC$ with $AC=BC$. Let $\alpha$ be the base angle $\angle A = \angle B$, and $\gamma$ be the vertex angle $\angle C$.
+Let $h_c$ be the altitude to the base $AB$, and $l_\alpha$ be the angle bisector of $\angle A$.
+We are given $l_\alpha = 2 h_c$.
+
+In the right-angled triangle $ADC$ (where $D$ is the midpoint of $AB$), we have:
+$$h_c = AC \sin \alpha$$
+
+The length of the angle bisector $l_\alpha$ is given by the formula:
+$$l_\alpha = \frac{2 AC \cdot AB \cos(\alpha/2)}{AC + AB}$$
+Since $AB = 2 AC \cos \alpha$, we can substitute:
+$$l_\alpha = \frac{2 AC \cdot (2 AC \cos \alpha) \cos(\alpha/2)}{AC + 2 AC \cos \alpha} = \frac{4 AC^2 \cos \alpha \cos(\alpha/2)}{AC(1 + 2 \cos \alpha)} = \frac{4 AC \cos \alpha \cos(\alpha/2)}{1 + 2 \cos \alpha}$$
+
+We are given $l_\alpha = 2 h_c$. Substituting $h_c = AC \sin \alpha$:
+$$\frac{4 AC \cos \alpha \cos(\alpha/2)}{1 + 2 \cos \alpha} = 2 AC \sin \alpha$$
+
+Dividing by $2 AC$ (since $AC \neq 0$):
+$$\frac{2 \cos \alpha \cos(\alpha/2)}{1 + 2 \cos \alpha} = \sin \alpha$$
+$$2 \cos \alpha \cos(\alpha/2) = \sin \alpha (1 + 2 \cos \alpha)$$
+
+Using $\sin \alpha = 2 \sin(\alpha/2) \cos(\alpha/2)$:
+$$2 \cos \alpha \cos(\alpha/2) = 2 \sin(\alpha/2) \cos(\alpha/2) (1 + 2 \cos \alpha)$$
+
+Since $\alpha < 90^\circ$, $\cos(\alpha/2) \neq 0$, so we can divide by $2 \cos(\alpha/2)$:
+$$\cos \alpha = \sin(\alpha/2) (1 + 2 \cos \alpha)$$
+$$\cos \alpha = \sin(\alpha/2) + 2 \sin(\alpha/2) \cos \alpha$$
+$$\cos \alpha (1 - 2 \sin(\alpha/2)) = \sin(\alpha/2)$$
+
+Let $x = \sin(\alpha/2)$. Then $\cos \alpha = 1 - 2 \sin^2(\alpha/2) = 1 - 2x^2$.
+$$(1 - 2x^2)(1 - 2x) = x$$
+$$1 - 2x - 2x^2 + 4x^3 = x$$
+$$4x^3 - 2x^2 - 3x + 1 = 0$$
+
+We check for rational roots. $x=1$ is a root since $4-2-3+1=0$.
+Dividing by $(x-1)$:
+$$(x-1)(4x^2 + 2x - 1) = 0$$
+
+Since $x = \sin(\alpha/2) < 1$ (as $\alpha < 180^\circ$), we solve $4x^2 + 2x - 1 = 0$:
+$$x = \frac{-2 \pm \sqrt{4 - 4(4)(-1)}}{8} = \frac{-2 \pm \sqrt{20}}{8} = \frac{-1 \pm \sqrt{5}}{4}$$
+
+Since $x > 0$, we take the positive root:
+$$x = \frac{\sqrt{5}-1}{4}$$
+
+This value corresponds to $\sin(18^\circ)$.
+So $\alpha/2 = 18^\circ \implies \alpha = 36^\circ$.
+
+The angles of the triangle are:
+$$\angle A = \angle B = 36^\circ$$
+$$\angle C = 180^\circ - 2(36^\circ) = 108^\circ$$
+
+The angles are $36^\circ, 36^\circ, 108^\circ$.
 
 ![Isosceles Angle](images/geom_9_2015_iso_angle.png)
 

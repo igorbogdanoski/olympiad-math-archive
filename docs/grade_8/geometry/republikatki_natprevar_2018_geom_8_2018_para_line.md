@@ -9,44 +9,42 @@ translated: false
 
 # 
 tags:
-  - vectors
-  - angle_chasing
   - geometry
-  - complex_numbers
-  - algebra
-  - triangle_geometry
-  - similarity
+  - parallelogram
+  - perpendiculars
+  - coordinates
 related_skills:
-  - vectors
-  - angle_chasing
-  - complex_numbers
-  - triangle_geometry
-  - similarity--- GEOMETRY SKILLS ---
-geometry_style: synthetic # synthetic | analytic | mixed
-primary_skill: <main_tool> # e.g., angle_chasing, similarity, cyclic_quads
-related_skills:
-  - parallelogram_properties
-  - trapezoid_midline
-
-allowed_tools:
-  - classical_euclidean
-  - similarity
-  - symmetry
-forbidden_tools:
-  - coordinate_geometry
-  - vectors
-  - complex_numbers
-tags:
-  - geometry
-  - olympiad
+  - midpoint_formula
+  - coordinate_geometry_proof
 ---
 
-# Збир на нормали од темиња на паралелограм
+# Problem
+Let parallelogram $ABCD$ and line $p$ have a unique common point $D$. If $M, N, O$ are the feet of the perpendiculars drawn from vertices $A, B, C$ to line $p$, respectively, prove that:
+$$AM + OC = BN$$
 
-## Текст на задачата
-Нека паралелограмот $ABCD$ и правата $p$ имаат единствена заедничка точка $D$. Ако $M, N, O$ се подножјата на нормалите повлечени од темињата $A, B, C$ на правата $p$, соодветно, докажи дека: $$AM + OC = BN$$
+![Problem Visualization](media/geom_8_2018_para_line.mp4)
 
-## 📐 Скица / Конструкција
+# Solution
+Let line $p$ be the x-axis. Since $D$ lies on $p$, its y-coordinate is $y_D = 0$.
+Let $y_A, y_B, y_C$ be the y-coordinates of vertices $A, B, C$.
+The lengths of the perpendiculars are the absolute values of the y-coordinates:
+$$AM = |y_A|, \quad BN = |y_B|, \quad OC = |y_C|$$
+
+Since $ABCD$ is a parallelogram, the diagonals $AC$ and $BD$ bisect each other.
+Let $S$ be the intersection of the diagonals. The y-coordinate of $S$ is the average of the y-coordinates of the endpoints of each diagonal:
+$$y_S = \frac{y_A + y_C}{2} = \frac{y_B + y_D}{2}$$
+
+Since $y_D = 0$, we have:
+$$\frac{y_A + y_C}{2} = \frac{y_B}{2} \implies y_A + y_C = y_B$$
+
+Since the parallelogram lies on one side of the line $p$ (except for point $D$), the y-coordinates $y_A, y_B, y_C$ all have the same sign.
+Therefore, we can sum their absolute values:
+$$|y_A| + |y_C| = |y_B|$$
+
+Substituting the lengths of the perpendiculars:
+$$AM + OC = BN$$
+
+This completes the proof.
 
 ![Parallelogram Line](images/geom_8_2018_para_line.png)
 
