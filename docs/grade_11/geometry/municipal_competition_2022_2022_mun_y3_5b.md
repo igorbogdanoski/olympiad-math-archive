@@ -27,7 +27,7 @@ tags:
   - trigonometry
 ---
 
-[⬅️ Назад кон Индексот](../../README.md) | [🧰 Skill: trigonometry](../../../tools/skill_guides/trigonometry.md)
+[⬅️ Назад кон Индексот](../README.md) | [🧰 Skill: trigonometry](../../skill_guides/trigonometry.md)
 
 # Котангенс во правоаголен триаголник
 

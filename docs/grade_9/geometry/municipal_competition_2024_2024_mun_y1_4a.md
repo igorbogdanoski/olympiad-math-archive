@@ -28,7 +28,7 @@ tags:
   - pythagoras
 ---
 
-[⬅️ Назад кон Индексот](../../README.md) | [🧰 Skill: pythagorean_theorem](../../../tools/skill_guides/pythagorean_theorem.md)
+[⬅️ Назад кон Индексот](../README.md) | [🧰 Skill: pythagorean_theorem](../../skill_guides/pythagorean_theorem.md)
 
 # Тежишни линии во триаголник
 

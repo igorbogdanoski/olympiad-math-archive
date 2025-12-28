@@ -22,7 +22,7 @@ tags:
   - olympiad
 ---
 
-[⬅️ Назад кон Индексот](../../README.md) | [🧰 Skill: factorization](../../../tools/skill_guides/factorization.md)
+[⬅️ Назад кон Индексот](../README.md) | [🧰 Skill: factorization](../../skill_guides/factorization.md)
 
 # Факторизација на квадратен трином
 

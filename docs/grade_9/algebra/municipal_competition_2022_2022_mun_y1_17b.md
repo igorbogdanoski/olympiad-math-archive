@@ -22,7 +22,7 @@ tags:
   - olympiad
 ---
 
-[⬅️ Назад кон Индексот](../../README.md) | [🧰 Skill: completing_the_square](../../../tools/skill_guides/completing_the_square.md)
+[⬅️ Назад кон Индексот](../README.md) | [🧰 Skill: completing_the_square](../../skill_guides/completing_the_square.md)
 
 # Неравенство со две променливи
 

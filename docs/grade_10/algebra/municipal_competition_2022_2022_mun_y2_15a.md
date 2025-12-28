@@ -23,7 +23,7 @@ tags:
   - olympiad
 ---
 
-[⬅️ Назад кон Индексот](../../README.md) | [🧰 Skill: logarithms](../../../tools/skill_guides/logarithms.md)
+[⬅️ Назад кон Индексот](../README.md) | [🧰 Skill: logarithms](../../skill_guides/logarithms.md)
 
 # Логаритамска равенка со тригонометрија
 

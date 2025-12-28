@@ -66,5 +66,5 @@ $3 < 2x + 1 \le 9$.
 ---
 
 ## 📂 Примери од Архивата
-- [Grade 7 - Algebra](../../grade_7/algebra/problem_example.md) (Основна неравенка)
+- [Grade 7 - Algebra](../grade_7/algebra/problem_example.md) (Основна неравенка)
 

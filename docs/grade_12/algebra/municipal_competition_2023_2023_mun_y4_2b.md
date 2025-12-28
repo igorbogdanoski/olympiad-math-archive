@@ -23,7 +23,7 @@ tags:
   - olympiad
 ---
 
-[⬅️ Назад кон Индексот](../../README.md) | [🧰 Skill: discriminant](../../../tools/skill_guides/discriminant.md)
+[⬅️ Назад кон Индексот](../README.md) | [🧰 Skill: discriminant](../../skill_guides/discriminant.md)
 
 # Неравенство со две променливи
 

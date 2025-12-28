@@ -27,7 +27,7 @@ tags:
   - rectangle
 ---
 
-[⬅️ Назад кон Индексот](../../README.md) | [🧰 Skill: coordinate_geometry](../../../tools/skill_guides/coordinate_geometry.md)
+[⬅️ Назад кон Индексот](../../README.md) | [🧰 Skill: coordinate_geometry](../../../skill_guides/coordinate_geometry.md)
 
 # Координати на средина
 

@@ -90,6 +90,6 @@ $$ a_k = f(k) - f(k+1) $$
 
 *(Оваа листа ќе се дополнува)*
 
-- **[Задача: Класична сума](../../grade_7/algebra/telescoping_fractions.md)** - $\sum \frac{1}{n(n+1)}$
-- **[Задача: Корени](../../grade_8/algebra/telescoping_roots.md)** - $\sum \frac{1}{\sqrt{n}+\sqrt{n+1}}$
-- **[Задача: Производи](../../grade_9/algebra/telescoping_products.md)** - Телескопирање при множење (каде се кратат броител и именител).
+- **[Задача: Класична сума](../grade_7/algebra/telescoping_fractions.md)** - $\sum \frac{1}{n(n+1)}$
+- **[Задача: Корени](../grade_8/algebra/telescoping_roots.md)** - $\sum \frac{1}{\sqrt{n}+\sqrt{n+1}}$
+- **[Задача: Производи](../grade_9/algebra/telescoping_products.md)** - Телескопирање при множење (каде се кратат броител и именител).

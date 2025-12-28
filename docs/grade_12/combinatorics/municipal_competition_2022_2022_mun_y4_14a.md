@@ -22,7 +22,7 @@ tags:
   - olympiad
 ---
 
-[⬅️ Назад кон Индексот](../../README.md) | [🧰 Skill: double_counting](../../../tools/skill_guides/double_counting.md)
+[⬅️ Назад кон Индексот](../README.md) | [🧰 Skill: double_counting](../../skill_guides/double_counting.md)
 
 # Кошаркарски турнир
 

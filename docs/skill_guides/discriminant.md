@@ -63,5 +63,5 @@ related_skills:
 ---
 
 ## 📂 Примери од Архивата
-- [Grade 10 - Algebra](../../grade_10/algebra/municipal_competition_2025_2025_mun_y2_1ab.md) (Индиректна примена преку Виет)
+- [Grade 10 - Algebra](../grade_10/algebra/municipal_competition_2025_2025_mun_y2_1ab.md) (Индиректна примена преку Виет)
 

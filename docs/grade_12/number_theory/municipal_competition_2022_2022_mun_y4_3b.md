@@ -22,7 +22,7 @@ tags:
   - olympiad
 ---
 
-[⬅️ Назад кон Индексот](../../README.md) | [🧰 Skill: place_value_logic](../../../tools/skill_guides/place_value_logic.md)
+[⬅️ Назад кон Индексот](../README.md) | [🧰 Skill: place_value_logic](../../skill_guides/place_value_logic.md)
 
 # Производ и збир на цифри
 

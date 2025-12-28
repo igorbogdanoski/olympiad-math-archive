@@ -36,7 +36,7 @@ tags:
   - similarity
 ---
 
-[⬅️ Назад кон Индексот](../../README.md) | [🧰 Skill: logic](../../../tools/skill_guides/logic.md)
+[⬅️ Назад кон Индексот](../README.md) | [🧰 Skill: logic](../../skill_guides/logic.md)
 
 # Конус и впишана топка
 

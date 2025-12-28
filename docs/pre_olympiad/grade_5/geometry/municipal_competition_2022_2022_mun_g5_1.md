@@ -28,7 +28,7 @@ tags:
   - visual_reasoning
 ---
 
-[⬅️ Назад кон Индексот](../../README.md) | [🧰 Skill: fractions](../../../tools/skill_guides/fractions.md)
+[⬅️ Назад кон Индексот](../../README.md) | [🧰 Skill: fractions](../../../skill_guides/fractions.md)
 
 # Споредување на обоени делови
 

@@ -70,5 +70,5 @@ related_skills:
 ---
 
 ## 📂 Примери од Архивата
-- [Grade 5 - Logic](../../pre_olympiad/grade_5/logic/numerus_4359_4359.md) (Вен дијаграми)
+- [Grade 5 - Logic](../pre_olympiad/grade_5/logic/numerus_4359_4359.md) (Вен дијаграми)
 

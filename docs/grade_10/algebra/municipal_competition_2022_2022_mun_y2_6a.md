@@ -22,7 +22,7 @@ tags:
   - olympiad
 ---
 
-[⬅️ Назад кон Индексот](../../README.md) | [🧰 Skill: system_of_equations](../../../tools/skill_guides/system_of_equations.md)
+[⬅️ Назад кон Индексот](../README.md) | [🧰 Skill: system_of_equations](../../skill_guides/system_of_equations.md)
 
 # Годините на Алек, Бодан и Влатко
 

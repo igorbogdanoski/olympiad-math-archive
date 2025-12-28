@@ -23,7 +23,7 @@ tags:
   - olympiad
 ---
 
-[⬅️ Назад кон Индексот](../../README.md) | [🧰 Skill: substitution](../../../tools/skill_guides/substitution.md)
+[⬅️ Назад кон Индексот](../README.md) | [🧰 Skill: substitution](../../skill_guides/substitution.md)
 
 # Функционална равенка
 

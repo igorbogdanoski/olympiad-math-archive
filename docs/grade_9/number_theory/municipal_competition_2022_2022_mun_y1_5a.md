@@ -23,7 +23,7 @@ tags:
   - olympiad
 ---
 
-[⬅️ Назад кон Индексот](../../README.md) | [🧰 Skill: logical_deduction](../../../tools/skill_guides/logical_deduction.md)
+[⬅️ Назад кон Индексот](../README.md) | [🧰 Skill: logical_deduction](../../skill_guides/logical_deduction.md)
 
 # Збир на 10 трицифрени броеви
 

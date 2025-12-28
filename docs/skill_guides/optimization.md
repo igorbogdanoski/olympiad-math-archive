@@ -68,5 +68,5 @@ related_skills:
 ---
 
 ## 📂 Примери од Архивата
-- [Grade 11 - Analysis](../../grade_11/analysis/problem_example.md) (Екстреми на функција)
+- [Grade 11 - Analysis](../grade_11/analysis/problem_example.md) (Екстреми на функција)
 

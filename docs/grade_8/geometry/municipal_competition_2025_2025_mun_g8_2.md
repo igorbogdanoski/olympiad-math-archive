@@ -35,7 +35,7 @@ tags:
   - parallel_lines
 ---
 
-[⬅️ Назад кон Индексот](../../README.md) | [🧰 Skill: logic](../../../tools/skill_guides/logic.md)
+[⬅️ Назад кон Индексот](../README.md) | [🧰 Skill: logic](../../skill_guides/logic.md)
 
 # Агли во трапез
 

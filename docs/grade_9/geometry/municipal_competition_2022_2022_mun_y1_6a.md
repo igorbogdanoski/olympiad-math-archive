@@ -27,7 +27,7 @@ tags:
   - collinearity
 ---
 
-[⬅️ Назад кон Индексот](../../README.md) | [🧰 Skill: similarity](../../../tools/skill_guides/similarity.md)
+[⬅️ Назад кон Индексот](../README.md) | [🧰 Skill: similarity](../../skill_guides/similarity.md)
 
 # Колинеарни квадрати
 

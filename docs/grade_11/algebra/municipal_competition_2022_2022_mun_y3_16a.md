@@ -23,7 +23,7 @@ tags:
   - olympiad
 ---
 
-[⬅️ Назад кон Индексот](../../README.md) | [🧰 Skill: case_analysis](../../../tools/skill_guides/case_analysis.md)
+[⬅️ Назад кон Индексот](../README.md) | [🧰 Skill: case_analysis](../../skill_guides/case_analysis.md)
 
 # Експоненцијална равенка со променлива основа
 

@@ -65,5 +65,5 @@ $50\%$ е исто што и $\frac{50}{100}$ или $0.5$.
 ---
 
 ## 📂 Примери од Архивата
-- [Grade 7 - Arithmetic](../../grade_7/arithmetic/problem_example.md) (Текстуални задачи)
+- [Grade 7 - Arithmetic](../grade_7/arithmetic/problem_example.md) (Текстуални задачи)
 

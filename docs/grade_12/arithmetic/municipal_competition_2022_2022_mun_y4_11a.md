@@ -23,7 +23,7 @@ tags:
   - olympiad
 ---
 
-[⬅️ Назад кон Индексот](../../README.md) | [🧰 Skill: pattern_recognition](../../../tools/skill_guides/pattern_recognition.md)
+[⬅️ Назад кон Индексот](../README.md) | [🧰 Skill: pattern_recognition](../../skill_guides/pattern_recognition.md)
 
 # Аритметичка средина на девет броеви
 

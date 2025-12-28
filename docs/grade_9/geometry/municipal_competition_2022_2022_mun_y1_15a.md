@@ -26,7 +26,7 @@ tags:
   - cuboid
 ---
 
-[⬅️ Назад кон Индексот](../../README.md) | [🧰 Skill: solid_geometry](../../../tools/skill_guides/solid_geometry.md)
+[⬅️ Назад кон Индексот](../README.md) | [🧰 Skill: solid_geometry](../../skill_guides/solid_geometry.md)
 
 # Топење на железни блокови
 

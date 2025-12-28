@@ -23,7 +23,7 @@ tags:
   - olympiad
 ---
 
-[⬅️ Назад кон Индексот](../../README.md) | [🧰 Skill: percentages](../../../tools/skill_guides/percentages.md)
+[⬅️ Назад кон Индексот](../README.md) | [🧰 Skill: percentages](../../skill_guides/percentages.md)
 
 # Промена на дропка (Проценти)
 

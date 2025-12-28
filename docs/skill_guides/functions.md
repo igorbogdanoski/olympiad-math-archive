@@ -65,5 +65,5 @@ related_skills:
 ---
 
 ## 📂 Примери од Архивата
-- [Grade 11 - Analysis](../../grade_11/analysis/municipal_competition_2025_2025_mun_y3_3a.md) (Анализа на функција)
+- [Grade 11 - Analysis](../grade_11/analysis/municipal_competition_2025_2025_mun_y3_3a.md) (Анализа на функција)
 

@@ -23,7 +23,7 @@ tags:
   - olympiad
 ---
 
-[⬅️ Назад кон Индексот](../../README.md) | [🧰 Skill: divisibility_rules](../../../tools/skill_guides/divisibility_rules.md)
+[⬅️ Назад кон Индексот](../README.md) | [🧰 Skill: divisibility_rules](../../skill_guides/divisibility_rules.md)
 
 # Деливост со 15
 

@@ -22,7 +22,7 @@ tags:
   - olympiad
 ---
 
-[⬅️ Назад кон Индексот](../../README.md) | [🧰 Skill: continued_fractions](../../../tools/skill_guides/continued_fractions.md)
+[⬅️ Назад кон Индексот](../README.md) | [🧰 Skill: continued_fractions](../../skill_guides/continued_fractions.md)
 
 # Верижна дропка
 

@@ -27,7 +27,7 @@ tags:
   - number_theory
 ---
 
-[⬅️ Назад кон Индексот](../../README.md) | [🧰 Skill: vieta_formulas](../../../tools/skill_guides/vieta_formulas.md)
+[⬅️ Назад кон Индексот](../README.md) | [🧰 Skill: vieta_formulas](../../skill_guides/vieta_formulas.md)
 
 # Квадратна функција и цели броеви
 

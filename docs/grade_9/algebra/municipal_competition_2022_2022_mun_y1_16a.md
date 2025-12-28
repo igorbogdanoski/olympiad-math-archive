@@ -22,7 +22,7 @@ tags:
   - olympiad
 ---
 
-[⬅️ Назад кон Индексот](../../README.md) | [🧰 Skill: polynomials](../../../tools/skill_guides/polynomials.md)
+[⬅️ Назад кон Индексот](../README.md) | [🧰 Skill: polynomials](../../skill_guides/polynomials.md)
 
 # Збир на коефициенти на полином
 

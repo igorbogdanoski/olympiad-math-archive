@@ -27,7 +27,7 @@ tags:
   - ratios
 ---
 
-[⬅️ Назад кон Индексот](../../README.md) | [🧰 Skill: proportions](../../../tools/skill_guides/proportions.md)
+[⬅️ Назад кон Индексот](../README.md) | [🧰 Skill: proportions](../../skill_guides/proportions.md)
 
 # Тангентен четириаголник
 

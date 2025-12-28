@@ -71,5 +71,5 @@ related_skills:
 ---
 
 ## 📂 Примери од Архивата
-- [Grade 8 - Algebra](../../grade_8/algebra/problem_example.md) (Проценка на израз)
+- [Grade 8 - Algebra](../grade_8/algebra/problem_example.md) (Проценка на израз)
 

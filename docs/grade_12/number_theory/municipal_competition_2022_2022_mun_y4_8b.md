@@ -22,7 +22,7 @@ tags:
   - olympiad
 ---
 
-[⬅️ Назад кон Индексот](../../README.md) | [🧰 Skill: number_properties](../../../tools/skill_guides/number_properties.md)
+[⬅️ Назад кон Индексот](../README.md) | [🧰 Skill: number_properties](../../skill_guides/number_properties.md)
 
 # Вгнездени корени
 

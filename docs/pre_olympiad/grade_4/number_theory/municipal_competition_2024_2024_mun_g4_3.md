@@ -23,7 +23,7 @@ tags:
   - olympiad
 ---
 
-[⬅️ Назад кон Индексот](../../README.md) | [🧰 Skill: interval_arithmetic](../../../tools/skill_guides/interval_arithmetic.md)
+[⬅️ Назад кон Индексот](../../README.md) | [🧰 Skill: interval_arithmetic](../../../skill_guides/interval_arithmetic.md)
 
 # Заокружување пари
 

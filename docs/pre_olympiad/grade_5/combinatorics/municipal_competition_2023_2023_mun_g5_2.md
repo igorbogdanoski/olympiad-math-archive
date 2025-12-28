@@ -23,7 +23,7 @@ tags:
   - olympiad
 ---
 
-[⬅️ Назад кон Индексот](../../README.md) | [🧰 Skill: counting](../../../tools/skill_guides/counting.md)
+[⬅️ Назад кон Индексот](../../README.md) | [🧰 Skill: counting](../../../skill_guides/counting.md)
 
 # Фудбалско првенство
 

@@ -23,7 +23,7 @@ tags:
   - olympiad
 ---
 
-[⬅️ Назад кон Индексот](../../README.md) | [🧰 Skill: parity](../../../tools/skill_guides/parity.md)
+[⬅️ Назад кон Индексот](../README.md) | [🧰 Skill: parity](../../skill_guides/parity.md)
 
 # Прости броеви како збир
 

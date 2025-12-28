@@ -54,5 +54,5 @@ $$ \frac{AF}{FB} \cdot \frac{BD}{DC} \cdot \frac{CE}{EA} = 1 $$
 ---
 
 ## 🔗 Поврзани задачи
-- [Доказ за Тежиште](../../grade_8/geometry/centroid_proof.md)
-- [Задача 4419 (Langley Variant)](../../grade_8/geometry/numerus_4419_4419.md)
+- [Доказ за Тежиште](../grade_8/geometry/centroid_proof.md)
+- [Задача 4419 (Langley Variant)](../grade_8/geometry/numerus_4419_4419.md)

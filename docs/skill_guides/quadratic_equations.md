@@ -65,6 +65,6 @@ $$ x_1 + x_2 = -\frac{b}{a}, \quad x_1 \cdot x_2 = \frac{c}{a} $$
 ---
 
 ## 📂 Примери од Архивата
-- [Grade 8 - Algebra](../../grade_8/algebra/problem_example.md) (Вовед)
-- [Grade 10 - Algebra](../../grade_10/algebra/problem_example.md) (Параметарски равенки)
+- [Grade 8 - Algebra](../grade_8/algebra/problem_example.md) (Вовед)
+- [Grade 10 - Algebra](../grade_10/algebra/problem_example.md) (Параметарски равенки)
 

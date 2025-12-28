@@ -28,5 +28,5 @@ $$ a^2 + b^2 = c^2 $$
 ---
 
 ## 🔗 Поврзани задачи
-- [Задача 4367 (Агол во триаголник)](../../pre_olympiad/grade_6/geometry/numerus_4367_4367.md)
-- [Задача 4421 (Тетивен четириаголник)](../../grade_8/geometry/numerus_4421_4421.md)
+- [Задача 4367 (Агол во триаголник)](../pre_olympiad/grade_6/geometry/numerus_4367_4367.md)
+- [Задача 4421 (Тетивен четириаголник)](../grade_8/geometry/numerus_4421_4421.md)

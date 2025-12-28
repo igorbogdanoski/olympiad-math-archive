@@ -27,7 +27,7 @@ tags:
   - inscribed_figures
 ---
 
-[⬅️ Назад кон Индексот](../../README.md) | [🧰 Skill: area_method](../../../tools/skill_guides/area_method.md)
+[⬅️ Назад кон Индексот](../README.md) | [🧰 Skill: area_method](../../skill_guides/area_method.md)
 
 # Впишани фигури (Квадрат-Круг-Триаголник)
 

@@ -62,4 +62,4 @@ related_skills:
 ---
 
 ## 📂 Примери од Архивата
-- [Grade 11 - Algebra](../../grade_11/algebra/problem_example.md) (Класични примери)
+- [Grade 11 - Algebra](../grade_11/algebra/problem_example.md) (Класични примери)

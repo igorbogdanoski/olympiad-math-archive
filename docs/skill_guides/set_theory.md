@@ -69,5 +69,5 @@ related_skills:
 ---
 
 ## 📂 Примери од Архивата
-- [Grade 6 - Logic](../../grade_6/logic/problem_example.md) (Венови дијаграми)
+- [Grade 6 - Logic](../grade_6/logic/problem_example.md) (Венови дијаграми)
 

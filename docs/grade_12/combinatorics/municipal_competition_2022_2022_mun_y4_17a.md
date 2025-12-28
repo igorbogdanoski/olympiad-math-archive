@@ -22,7 +22,7 @@ tags:
   - olympiad
 ---
 
-[⬅️ Назад кон Индексот](../../README.md) | [🧰 Skill: algebraic_identities](../../../tools/skill_guides/algebraic_identities.md)
+[⬅️ Назад кон Индексот](../README.md) | [🧰 Skill: algebraic_identities](../../skill_guides/algebraic_identities.md)
 
 # Биномна сума
 

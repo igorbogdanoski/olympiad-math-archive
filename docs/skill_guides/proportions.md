@@ -66,5 +66,5 @@ $$ x \cdot y = k \quad \text{или} \quad y = \frac{k}{x} $$
 ---
 
 ## 📂 Примери од Архивата
-- [Grade 7 - Arithmetic](../../grade_7/arithmetic/problem_example.md) (Правило тројно)
+- [Grade 7 - Arithmetic](../grade_7/arithmetic/problem_example.md) (Правило тројно)
 

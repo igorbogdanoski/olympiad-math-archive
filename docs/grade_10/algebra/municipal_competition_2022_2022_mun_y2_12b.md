@@ -23,7 +23,7 @@ tags:
   - olympiad
 ---
 
-[⬅️ Назад кон Индексот](../../README.md) | [🧰 Skill: algebraic_substitution](../../../tools/skill_guides/algebraic_substitution.md)
+[⬅️ Назад кон Индексот](../README.md) | [🧰 Skill: algebraic_substitution](../../skill_guides/algebraic_substitution.md)
 
 # Експоненцијална равенка со тригонометрија
 

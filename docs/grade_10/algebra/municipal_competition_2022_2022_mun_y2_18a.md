@@ -22,7 +22,7 @@ tags:
   - olympiad
 ---
 
-[⬅️ Назад кон Индексот](../../README.md) | [🧰 Skill: inequalities_am_gm](../../../tools/skill_guides/inequalities_am_gm.md)
+[⬅️ Назад кон Индексот](../README.md) | [🧰 Skill: inequalities_am_gm](../../skill_guides/inequalities_am_gm.md)
 
 # Минимум на алгебарски израз
 

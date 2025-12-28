@@ -26,7 +26,7 @@ tags:
   - polygons
 ---
 
-[⬅️ Назад кон Индексот](../../README.md) | [🧰 Skill: angle_chasing](../../../tools/skill_guides/angle_chasing.md)
+[⬅️ Назад кон Индексот](../README.md) | [🧰 Skill: angle_chasing](../../skill_guides/angle_chasing.md)
 
 # Збир на агли во 'стрелка'
 

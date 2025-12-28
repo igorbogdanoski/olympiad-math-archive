@@ -23,7 +23,7 @@ tags:
   - olympiad
 ---
 
-[⬅️ Назад кон Индексот](../../README.md) | [🧰 Skill: prime_factorization](../../../tools/skill_guides/prime_factorization.md)
+[⬅️ Назад кон Индексот](../README.md) | [🧰 Skill: prime_factorization](../../skill_guides/prime_factorization.md)
 
 # Кубови делители на факториели
 

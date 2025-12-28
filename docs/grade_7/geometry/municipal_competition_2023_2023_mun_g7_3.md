@@ -27,7 +27,7 @@ tags:
   - vertical_angles
 ---
 
-[⬅️ Назад кон Индексот](../../README.md) | [🧰 Skill: angle_chasing](../../../tools/skill_guides/angle_chasing.md)
+[⬅️ Назад кон Индексот](../README.md) | [🧰 Skill: angle_chasing](../../skill_guides/angle_chasing.md)
 
 # Агли при пресек на прави
 

@@ -27,7 +27,7 @@ tags:
   - area
 ---
 
-[⬅️ Назад кон Индексот](../../README.md) | [🧰 Skill: area_method](../../../tools/skill_guides/area_method.md)
+[⬅️ Назад кон Индексот](../README.md) | [🧰 Skill: area_method](../../skill_guides/area_method.md)
 
 # Плоштина на шрафиран дел во квадрат
 

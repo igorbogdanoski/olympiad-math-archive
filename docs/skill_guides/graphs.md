@@ -70,4 +70,4 @@ related_skills:
 ---
 
 ## 📂 Примери од Архивата
-- [Grade 10 - Algebra](../../grade_10/algebra/problem_example.md) (Трансформации)
+- [Grade 10 - Algebra](../grade_10/algebra/problem_example.md) (Трансформации)

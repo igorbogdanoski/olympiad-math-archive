@@ -22,7 +22,7 @@ tags:
   - olympiad
 ---
 
-[⬅️ Назад кон Индексот](../../README.md) | [🧰 Skill: modeling](../../../tools/skill_guides/modeling.md)
+[⬅️ Назад кон Индексот](../README.md) | [🧰 Skill: modeling](../../skill_guides/modeling.md)
 
 # Црвени и сини топки
 

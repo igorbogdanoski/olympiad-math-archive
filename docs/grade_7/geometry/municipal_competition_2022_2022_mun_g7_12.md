@@ -27,7 +27,7 @@ tags:
   - diagonal
 ---
 
-[⬅️ Назад кон Индексот](../../README.md) | [🧰 Skill: algebraic_manipulation](../../../tools/skill_guides/algebraic_manipulation.md)
+[⬅️ Назад кон Индексот](../README.md) | [🧰 Skill: algebraic_manipulation](../../skill_guides/algebraic_manipulation.md)
 
 # Периметар на паралелограм и дијагонала
 

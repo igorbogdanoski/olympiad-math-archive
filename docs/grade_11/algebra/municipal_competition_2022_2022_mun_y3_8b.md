@@ -22,7 +22,7 @@ tags:
   - olympiad
 ---
 
-[⬅️ Назад кон Индексот](../../README.md) | [🧰 Skill: trigonometric_equations](../../../tools/skill_guides/trigonometric_equations.md)
+[⬅️ Назад кон Индексот](../README.md) | [🧰 Skill: trigonometric_equations](../../skill_guides/trigonometric_equations.md)
 
 # Тригонометриско неравенство
 

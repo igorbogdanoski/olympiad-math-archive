@@ -23,7 +23,7 @@ tags:
   - olympiad
 ---
 
-[⬅️ Назад кон Индексот](../../README.md) | [🧰 Skill: telescoping](../../../tools/skill_guides/telescoping.md)
+[⬅️ Назад кон Индексот](../README.md) | [🧰 Skill: telescoping](../../skill_guides/telescoping.md)
 
 # Производ на дропки
 

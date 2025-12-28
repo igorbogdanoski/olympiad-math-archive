@@ -67,5 +67,5 @@ related_skills:
 ---
 
 ## 📂 Примери од Архивата
-- [Grade 8 - Algebra](../../grade_8/algebra/problem_example.md) (Упростување)
+- [Grade 8 - Algebra](../grade_8/algebra/problem_example.md) (Упростување)
 

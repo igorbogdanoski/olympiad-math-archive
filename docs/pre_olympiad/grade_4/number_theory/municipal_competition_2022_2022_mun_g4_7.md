@@ -23,7 +23,7 @@ tags:
   - olympiad
 ---
 
-[⬅️ Назад кон Индексот](../../README.md) | [🧰 Skill: fractions](../../../tools/skill_guides/fractions.md)
+[⬅️ Назад кон Индексот](../../README.md) | [🧰 Skill: fractions](../../../skill_guides/fractions.md)
 
 # Пакет со јаткасти плодови
 

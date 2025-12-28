@@ -27,7 +27,7 @@ tags:
   - isosceles_triangle
 ---
 
-[⬅️ Назад кон Индексот](../../README.md) | [🧰 Skill: inequalities](../../../tools/skill_guides/inequalities.md)
+[⬅️ Назад кон Индексот](../README.md) | [🧰 Skill: inequalities](../../skill_guides/inequalities.md)
 
 # Рамнокраки триаголници со целобројни страни
 

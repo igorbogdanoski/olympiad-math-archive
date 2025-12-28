@@ -29,7 +29,7 @@ tags:
   - percentages
 ---
 
-[⬅️ Назад кон Индексот](../../README.md) | [🧰 Skill: visual_reasoning](../../../tools/skill_guides/visual_reasoning.md)
+[⬅️ Назад кон Индексот](../README.md) | [🧰 Skill: visual_reasoning](../../skill_guides/visual_reasoning.md)
 
 # Квадрат со впишани правоаголници
 

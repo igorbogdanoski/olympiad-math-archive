@@ -63,5 +63,5 @@ related_skills:
 ---
 
 ## 📂 Примери од Архивата
-- [Grade 9 - Analytic Geometry](../../grade_9/analytic_geometry/problem_example.md) (Задача со права и точки)
+- [Grade 9 - Analytic Geometry](../grade_9/analytic_geometry/problem_example.md) (Задача со права и точки)
 

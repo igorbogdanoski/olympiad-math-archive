@@ -22,7 +22,7 @@ tags:
   - olympiad
 ---
 
-[⬅️ Назад кон Индексот](../../README.md) | [🧰 Skill: algebraic_modeling](../../../tools/skill_guides/algebraic_modeling.md)
+[⬅️ Назад кон Индексот](../README.md) | [🧰 Skill: algebraic_modeling](../../skill_guides/algebraic_modeling.md)
 
 # Збир на последователни броеви
 

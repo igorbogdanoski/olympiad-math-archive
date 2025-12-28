@@ -62,5 +62,5 @@ $\frac{3}{4}$ значи "три дела од нешто што е поделе
 ---
 
 ## 📂 Примери од Архивата
-- [Grade 5 - Number Theory](../../pre_olympiad/grade_5/number_theory/numerus_4362.md) (Текстуална задача со дропки)
-- [Grade 4 - Arithmetic](../../pre_olympiad/grade_4/arithmetic/numerus_4356_4356.md) (Пресметување со дропки)
+- [Grade 5 - Number Theory](../pre_olympiad/grade_5/number_theory/numerus_4362.md) (Текстуална задача со дропки)
+- [Grade 4 - Arithmetic](../pre_olympiad/grade_4/arithmetic/numerus_4356_4356.md) (Пресметување со дропки)

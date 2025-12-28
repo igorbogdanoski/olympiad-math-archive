@@ -61,5 +61,5 @@ related_skills:
 ---
 
 ## 📂 Примери од Архивата
-- [Grade 10 - Algebra](../../grade_10/algebra/municipal_competition_2025_2025_mun_y2_1ab.md) (Користење на логика за елиминација на случаи кај Виетови формули)
-- [Grade 4 - Logic](../../pre_olympiad/grade_4/word_problem/municipal_competition_2025_2025_mun_g4_3.md) (Текстуални логички загатки)
+- [Grade 10 - Algebra](../grade_10/algebra/municipal_competition_2025_2025_mun_y2_1ab.md) (Користење на логика за елиминација на случаи кај Виетови формули)
+- [Grade 4 - Logic](../pre_olympiad/grade_4/word_problem/municipal_competition_2025_2025_mun_g4_3.md) (Текстуални логички загатки)

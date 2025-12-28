@@ -25,7 +25,7 @@ forbidden_tools:
   - complex_numbers
 ---
 
-[⬅️ Назад кон Индексот](../../README.md) | [🧰 Skill: triangle_decomposition](../../../tools/skill_guides/triangle_decomposition.md)
+[⬅️ Назад кон Индексот](../README.md) | [🧰 Skill: triangle_decomposition](../../skill_guides/triangle_decomposition.md)
 
 # Теорема на Вивиани
 

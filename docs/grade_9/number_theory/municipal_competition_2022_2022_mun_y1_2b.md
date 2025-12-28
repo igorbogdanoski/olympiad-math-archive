@@ -22,7 +22,7 @@ tags:
   - olympiad
 ---
 
-[⬅️ Назад кон Индексот](../../README.md) | [🧰 Skill: divisibility_rules](../../../tools/skill_guides/divisibility_rules.md)
+[⬅️ Назад кон Индексот](../README.md) | [🧰 Skill: divisibility_rules](../../skill_guides/divisibility_rules.md)
 
 # Својства на број со единици и тројки
 

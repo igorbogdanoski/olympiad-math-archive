@@ -23,7 +23,7 @@ tags:
   - olympiad
 ---
 
-[⬅️ Назад кон Индексот](../../README.md) | [🧰 Skill: working_backwards](../../../tools/skill_guides/working_backwards.md)
+[⬅️ Назад кон Индексот](../README.md) | [🧰 Skill: working_backwards](../../skill_guides/working_backwards.md)
 
 # Низа со делење
 

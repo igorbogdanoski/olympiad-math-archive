@@ -27,7 +27,7 @@ tags:
   - rectangle
 ---
 
-[⬅️ Назад кон Индексот](../../README.md) | [🧰 Skill: extremal_principle](../../../tools/skill_guides/extremal_principle.md)
+[⬅️ Назад кон Индексот](../README.md) | [🧰 Skill: extremal_principle](../../skill_guides/extremal_principle.md)
 
 # Оптимизација на плоштина (Жица)
 

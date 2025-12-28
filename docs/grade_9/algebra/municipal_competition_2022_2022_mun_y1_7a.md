@@ -22,7 +22,7 @@ tags:
   - olympiad
 ---
 
-[⬅️ Назад кон Индексот](../../README.md) | [🧰 Skill: functions](../../../tools/skill_guides/functions.md)
+[⬅️ Назад кон Индексот](../README.md) | [🧰 Skill: functions](../../skill_guides/functions.md)
 
 # Функција со прост параметар
 

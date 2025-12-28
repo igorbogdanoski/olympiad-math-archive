@@ -23,7 +23,7 @@ tags:
   - olympiad
 ---
 
-[⬅️ Назад кон Индексот](../../README.md) | [🧰 Skill: modular_arithmetic](../../../tools/skill_guides/modular_arithmetic.md)
+[⬅️ Назад кон Индексот](../README.md) | [🧰 Skill: modular_arithmetic](../../skill_guides/modular_arithmetic.md)
 
 # Пресек на множества
 

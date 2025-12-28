@@ -27,7 +27,7 @@ tags:
   - thales_theorem
 ---
 
-[⬅️ Назад кон Индексот](../../README.md) | [🧰 Skill: similarity](../../../tools/skill_guides/similarity.md)
+[⬅️ Назад кон Индексот](../README.md) | [🧰 Skill: similarity](../../skill_guides/similarity.md)
 
 # Паралелни пресеци во трапез
 

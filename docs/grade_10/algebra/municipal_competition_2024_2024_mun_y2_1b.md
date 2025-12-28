@@ -23,7 +23,7 @@ tags:
   - olympiad
 ---
 
-[⬅️ Назад кон Индексот](../../README.md) | [🧰 Skill: parameter_analysis](../../../tools/skill_guides/parameter_analysis.md)
+[⬅️ Назад кон Индексот](../README.md) | [🧰 Skill: parameter_analysis](../../skill_guides/parameter_analysis.md)
 
 # Параметарска линеарна равенка
 

@@ -27,7 +27,7 @@ tags:
   - units
 ---
 
-[⬅️ Назад кон Индексот](../../README.md) | [🧰 Skill: calculation](../../../tools/skill_guides/calculation.md)
+[⬅️ Назад кон Индексот](../README.md) | [🧰 Skill: calculation](../../skill_guides/calculation.md)
 
 # Должина на отсечка
 

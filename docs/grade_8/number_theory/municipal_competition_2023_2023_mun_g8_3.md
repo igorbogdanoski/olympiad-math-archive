@@ -28,7 +28,7 @@ tags:
   - optimization
 ---
 
-[⬅️ Назад кон Индексот](../../README.md) | [🧰 Skill: factorization](../../../tools/skill_guides/factorization.md)
+[⬅️ Назад кон Индексот](../README.md) | [🧰 Skill: factorization](../../skill_guides/factorization.md)
 
 # Квадар со целобројни рабови
 

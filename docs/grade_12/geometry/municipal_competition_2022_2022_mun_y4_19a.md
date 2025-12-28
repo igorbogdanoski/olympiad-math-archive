@@ -27,7 +27,7 @@ tags:
   - analytic_geometry
 ---
 
-[⬅️ Назад кон Индексот](../../README.md) | [🧰 Skill: transformation_geometry](../../../tools/skill_guides/transformation_geometry.md)
+[⬅️ Назад кон Индексот](../README.md) | [🧰 Skill: transformation_geometry](../../skill_guides/transformation_geometry.md)
 
 # Ротација и координати
 

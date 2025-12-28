@@ -23,7 +23,7 @@ tags:
   - olympiad
 ---
 
-[⬅️ Назад кон Индексот](../../README.md) | [🧰 Skill: divisors](../../../tools/skill_guides/divisors.md)
+[⬅️ Назад кон Индексот](../README.md) | [🧰 Skill: divisors](../../skill_guides/divisors.md)
 
 # Триделиви броеви
 

@@ -69,6 +69,6 @@ $$ f(x) = a(x-x_1)(x-x_2) $$
 ---
 
 ## 📂 Примери од Архивата
-- [Grade 9 - Algebra](../../grade_9/algebra/problem_example.md) (Графици)
-- [Grade 11 - Analysis](../../grade_11/analysis/problem_example.md) (Својства)
+- [Grade 9 - Algebra](../grade_9/algebra/problem_example.md) (Графици)
+- [Grade 11 - Analysis](../grade_11/analysis/problem_example.md) (Својства)
 
