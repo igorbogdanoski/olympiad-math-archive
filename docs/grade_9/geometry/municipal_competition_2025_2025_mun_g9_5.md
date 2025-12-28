@@ -35,9 +35,7 @@ tags:
 
 ## 📐 Скица
 
-<div align="center">
-  <img src="../../assets/images/2025_mun_g9_5.png" alt="Визуелизација" width="500"/>
-</div>
+![Визуелизација](../../assets/images/2025_mun_g9_5.png){ width=500 }
 ## 🧠 Анализа
 **Зошто е оваа задача тешка?**
 Користи ја формулата $P=a^2$.

@@ -36,9 +36,7 @@ tags:
 
 ## 📐 Скица
 
-<div align="center">
-  <img src="../../assets/images/2022_mun_y2_1b.png" alt="Визуелизација" width="500"/>
-</div>
+![Визуелизација](../../assets/images/2022_mun_y2_1b.png){ width=500 }
 ## 🧠 Анализа
 **Зошто е оваа задача тешка?**
 Од плоштината на целиот квадрат одземи ги плоштините на двата правоаголни триаголници $\triangle ABY$ и $\triangle CDX$.
