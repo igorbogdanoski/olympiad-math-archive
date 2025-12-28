@@ -47,6 +47,7 @@ tags:
 Од произволна точка $M$ во внатрешноста на триаголникот $ABC$, повлечени се нормали кон страните $a, b, c$ со должини $x, y, z$ соодветно. Докажи го идентитетот: $$\frac{x}{h_a} + \frac{y}{h_b} + \frac{z}{h_c} = 1$$ каде $h_a, h_b, h_c$ се соодветните висини на триаголникот.
 
 ## 📐 Скица / Конструкција
+![Problem_geom_9_sum_altitudes](https://raw.githubusercontent.com/pc4all/olympiad-math-archive/main/media/images/manim_geom_9_sum_altitudes/Problem_geom_9_sum_altitudes_ManimCE_v0.19.1.png)
 
 
 ![Визуелизација](../../assets/images/geom_9_sum_altitudes.png){ width=500 }

@@ -47,6 +47,7 @@ tags:
 Во конвексниот четириаголник $ABCD$ дијагоналите $AC$ и $BD$ се еднакви. Ако симетралите на страните $AD$ и $BC$ се сечат во точка $P$ која лежи на страната $AB$, докажи дека $\angle DAB = \angle ABC$.
 
 ## 📐 Скица / Конструкција
+![Problem_geom_9_quad_diag_equal_angles](https://raw.githubusercontent.com/pc4all/olympiad-math-archive/main/media/images/manim_geom_9_quad_diag_equal_angles/Problem_geom_9_quad_diag_equal_angles_ManimCE_v0.19.1.png)
 
 
 ![Визуелизација](../../assets/images/geom_9_quad_diag_equal_angles.png){ width=500 }

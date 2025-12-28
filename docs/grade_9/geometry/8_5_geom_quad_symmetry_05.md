@@ -48,6 +48,7 @@ tags:
 Даден е конвексен четириаголник $ABCD$ кој има прав агол кај темето $C$. На страната $CD$ постои точка $P$ така што $\angle APD = \angle BPC$ и $\angle BAP = \angle ABC$. Докажи дека $BC = \frac{AP + BP}{2}$.
 
 ## 📐 Скица
+![Problem_geom_quad_symmetry_05](https://raw.githubusercontent.com/pc4all/olympiad-math-archive/main/media/images/manim_geom_quad_symmetry_05/Problem_geom_quad_symmetry_05_ManimCE_v0.19.1.png)
 
 ![Визуелизација](../../assets/images/geom_quad_symmetry_05.png){ width=500 }
  / Конструкција

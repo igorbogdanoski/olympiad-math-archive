@@ -32,7 +32,7 @@ tags:
 Точките $A(1; 3)$ и $B(2; 5)$ се распоредени во однос на правата $y = \sqrt{2}x + \sqrt{3}$ на одреден начин. Одреди дали се над или под правата.
 
 ## 📐 Скица / Конструкција
-![Визуелизација](../../assets/images/14.png){ width=500 }
+![Problem_cnt92_olympiad_14](https://raw.githubusercontent.com/pc4all/olympiad-math-archive/main/media/images/manim_cnt92_olympiad_14/Problem_cnt92_olympiad_14_ManimCE_v0.19.1.png)
 > **👨‍💻 Manim Code (за Geo-Mentor):**
 > ```python
 > class Task_14(Scene):
