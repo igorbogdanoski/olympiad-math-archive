@@ -11,7 +11,7 @@ tags:
 
 # Кружници што се допираат
 
-<!-- Ова место е резервирано за автоматската слика од Manim -->
+
 
 <div align="center">
   <img src="../../assets/images/test_002.png" alt="Скица" width="500"/>

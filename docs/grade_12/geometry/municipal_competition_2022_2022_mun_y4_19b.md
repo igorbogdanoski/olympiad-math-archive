@@ -11,7 +11,7 @@ tags:
 
 # Ротација и координати
 
-<!-- Ова место е резервирано за автоматската слика од Manim -->
+
 
 <div align="center">
   <img src="../../assets/images/2022_mun_y4_19b.png" alt="Скица" width="500"/>
