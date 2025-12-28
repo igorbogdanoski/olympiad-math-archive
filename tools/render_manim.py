@@ -51,19 +51,36 @@ def render_scene(prob_id, code_body):
     fd, temp_path = tempfile.mkstemp(suffix=".py", prefix=f"manim_{prob_id}_")
     
     try:
-        # 2. Запиши го кодот
-        full_code = wrap_code_in_class(code_body)
+        # 2. Проверка дали кодот веќе содржи класа (за да избегнеме дупло пакување)
+        class_match = re.search(r"class\s+(\w+)\(Scene\):", code_body)
+        
+        if class_match:
+            # Ако веќе има класа, користи ја неа
+            scene_class_name = class_match.group(1)
+            # Додај import ако фали
+            if "from manim import *" not in code_body:
+                full_code = f"from manim import *\n\n{code_body}"
+            else:
+                full_code = code_body
+        else:
+            # Ако нема класа, спакувај го во SolutionScene
+            scene_class_name = "SolutionScene"
+            full_code = wrap_code_in_class(code_body, scene_class_name)
+
+        # 3. Запиши го кодот
         with os.fdopen(fd, 'w', encoding='utf-8') as f:
             f.write(full_code)
             
-        # 3. Конфигурирај привремена папка за media
+        # 4. Конфигурирај привремена папка за media
         temp_media_dir = Path(tempfile.gettempdir()) / f"manim_media_{prob_id}"
         
-        # 4. Стартувај го Manim преку subprocess (најбезбедно)
+        # 5. Стартувај го Manim преку subprocess (најбезбедно)
+        # --quality k = 4k resolution (3840x2160) for print
         cmd = [
             sys.executable, "-m", "manim", 
-            temp_path, "SolutionScene",
+            temp_path, scene_class_name,
             "--format=png", "-s", 
+            "--quality", "k",
             "--media_dir", str(temp_media_dir),
             "--disable_caching"
         ]
@@ -80,11 +97,11 @@ def render_scene(prob_id, code_body):
             print(f"❌ Manim Error for {prob_id}:\n{result.stderr}")
             return False
 
-        # 5. Најди ја сликата и премести ја
+        # 6. Најди ја сликата и премести ја
         found_image = None
         for root, dirs, files in os.walk(temp_media_dir):
             for file in files:
-                if file.endswith(".png") and "SolutionScene" in file:
+                if file.endswith(".png") and scene_class_name in file:
                     found_image = Path(root) / file
                     break
             if found_image: break
