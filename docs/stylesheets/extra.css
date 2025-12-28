@@ -2,3 +2,11 @@
 .md-typeset h1, .md-content__button {
     /* Custom styles can go here */
 }
+
+/* Disable navigation expansion animation */
+.md-nav__toggle ~ .md-nav__list {
+  transition: none !important;
+}
+.md-nav__link {
+  transition: none !important;
+}

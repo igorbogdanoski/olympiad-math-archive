@@ -2,43 +2,18 @@
 grade: 6
 field: geometry
 difficulty: 5
-source: "<натпревар / списание / година>"
+source: "Numerus"
 problem_id: 4367
-language_original: <mk | en | sr | hr | ...>
+language_original: mk
 translated: false
-
-# 
 tags:
-  - vectors
-  - angle_chasing
   - geometry
-  - complex_numbers
-  - algebra
-  - triangle_geometry
-  - similarity
-related_skills:
-  - vectors
-  - angle_chasing
-  - complex_numbers
-  - triangle_geometry
-  - similarity--- GEOMETRY SKILLS ---
-geometry_style: synthetic # synthetic | analytic | mixed
-primary_skill: <main_tool> # e.g., angle_chasing, similarity, cyclic_quads
+  - triangle
+  - equilateral
+  - angles
 related_skills:
   - triangle_properties
   - medians
-
-allowed_tools:
-  - classical_euclidean
-  - similarity
-  - symmetry
-forbidden_tools:
-  - coordinate_geometry
-  - vectors
-  - complex_numbers
-tags:
-  - geometry
-  - olympiad
 ---
 
 # Агол во рамностран триаголник
@@ -47,6 +22,8 @@ tags:
 Нека $P$ е средишна точка на отсечката $AB$. На симетралата $S_{AB}$ на отсечката $AB$ е избрана точка $C$ таква што $AB=AC$. Нека средината на отсечката $AC$ е точката $M$ и нека пресечната точка на отсечката $MB$ со симетралата $S_{AB}$ е точката $Q$. Определи ја големината на $\angle PQB$.
 
 ## 📐 Скица / Конструкција
+
+![Визуелизација](../../../assets/images/4367.png){ width=500 }
 
 
 ## 🧠 Анализа
