@@ -48,7 +48,7 @@ tags:
 
 ## 📐 Скица / Конструкција
 
-![Визуелизација](../../../assets/images/geom_right_tri_bisect_09.png){ width=500 }
+![Визуелизација](../../assets/images/geom_right_tri_bisect_09.png){ width=500 }
 
 
 ![Визуелизација](../../assets/images/geom_right_tri_bisect_09.png){ width=500 }

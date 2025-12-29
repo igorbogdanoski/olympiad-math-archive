@@ -35,7 +35,7 @@ tags:
 
 ## 📐 Скица
 
-![Визуелизација](../../../assets/images/2022_mun_y2_19b.png){ width=500 }
+![Визуелизација](../../assets/images/2022_mun_y2_19b.png){ width=500 }
 
 
 ## 🧠 Анализа

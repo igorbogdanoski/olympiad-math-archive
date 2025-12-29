@@ -1,4 +1,118 @@
-/* Extra CSS for Geo-Mentor Archive */
-.md-typeset h1, .md-content__button {
-    /* Custom styles can go here */
+/* Modern UI Tweaks for Geo-Mentor Archive */
+
+/* 1. Typography & Readability */
+body {
+    font-family: 'Roboto', 'Segoe UI', sans-serif;
+    line-height: 1.6;
+}
+
+/* 2. Hero Section for Home Page */
+.md-typeset h1 {
+    font-weight: 700;
+    color: var(--md-primary-fg-color);
+    margin-bottom: 1.5rem;
+}
+
+/* 3. Card-like styling for Admonitions */
+.md-typeset .admonition, 
+.md-typeset details {
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    border: none !important;
+}
+
+.md-typeset .admonition-title, 
+.md-typeset summary {
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    font-weight: 600;
+}
+
+/* 4. Image Styling (Manim Videos & Diagrams) */
+.md-typeset img, 
+.md-typeset video {
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    margin: 1rem auto;
+    display: block;
+    max-width: 100%;
+}
+
+/* 5. Table Styling */
+.md-typeset table:not([class]) {
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    display: table; /* Fix for full width */
+    width: 100%;
+}
+
+.md-typeset table:not([class]) th {
+    background-color: var(--md-primary-fg-color--light);
+    color: var(--md-primary-bg-color);
+}
+
+/* 6. Custom "Hero" Block for Index */
+.hero-block {
+    text-align: center;
+    padding: 4rem 2rem;
+    background: linear-gradient(135deg, var(--md-primary-fg-color), var(--md-accent-fg-color));
+    color: white;
+    border-radius: 16px;
+    margin-bottom: 2rem;
+}
+
+.hero-block h1 {
+    color: white !important;
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.hero-block p {
+    font-size: 1.2rem;
+    opacity: 0.9;
+}
+
+/* 7. Button Styling */
+.md-button {
+    border-radius: 50px;
+    padding: 0.6em 1.2em;
+    font-weight: bold;
+    transition: transform 0.2s;
+}
+
+.md-button:hover {
+    transform: translateY(-2px);
+}
+
+/* 8. MathJax Display */
+mjx-container[display="true"] {
+    margin: 1.5em 0 !important;
+    padding: 1em;
+    background-color: var(--md-code-bg-color);
+    border-radius: 8px;
+    overflow-x: auto;
+}
+
+/* 9. MathJax Inline Fix */
+.arithmatex, .MathJax {
+    font-family: inherit !important; /* Prevent code font */
+    background-color: transparent !important; /* Prevent code background */
+    color: inherit !important;
+}
+
+/* 10. Solution Steps Styling (for future use) */
+.solution-step {
+    margin-bottom: 1rem;
+    border-left: 4px solid var(--md-primary-fg-color);
+    padding-left: 1rem;
+    background-color: rgba(0,0,0,0.02);
+    border-radius: 0 8px 8px 0;
+    padding: 1rem;
+}
+
+.solution-step h3 {
+    margin-top: 0;
+    color: var(--md-primary-fg-color);
+    font-size: 1.1rem;
 }

@@ -48,7 +48,7 @@ tags:
 
 ## 📐 Скица / Конструкција
 
-![Визуелизација](../../../assets/images/geo_rect_shade_01.png){ width=500 }
+![Визуелизација](../../assets/images/geo_rect_shade_01.png){ width=500 }
 
 
 ![Визуелизација](../../assets/images/geo_rect_shade_01.png){ width=500 }

@@ -24,12 +24,15 @@ theme:
         name: Switch to dark mode
   features:
     - navigation.tabs        # Горно мени со табови
-    - navigation.sections    # Секции во страничното мени
-    - navigation.expand      # Отвори ги сите менија
+    # - navigation.sections  # Секции во страничното мени (Removed for simplicity)
     - navigation.top         # Копче "Back to top"
+    - navigation.tracking    # Следење на скролањето во URL
+    - navigation.instant     # SPA-like feeling (брзо вчитување)
+    - toc.follow             # TOC го следи скролањето
     - search.suggest         # Предлози при пребарување
     - search.highlight       # Означување на најдените зборови
     - content.code.copy      # Копче за копирање код
+    - content.tabs.link      # Линкување на табови
 
 # --- ПЛАГИНИ ---
 plugins:

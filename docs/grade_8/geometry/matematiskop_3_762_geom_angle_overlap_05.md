@@ -48,7 +48,7 @@ tags:
 
 ## 📐 Скица / Конструкција
 
-![Визуелизација](../../../assets/images/geom_angle_overlap_05.png){ width=500 }
+![Визуелизација](../../assets/images/geom_angle_overlap_05.png){ width=500 }
 
 
 ![Визуелизација](../../assets/images/geom_angle_overlap_05.png){ width=500 }

@@ -48,7 +48,7 @@ tags:
 
 ## 📐 Скица / Конструкција
 
-![Визуелизација](../../../assets/images/geom_iso_side_bisector_08.png){ width=500 }
+![Визуелизација](../../assets/images/geom_iso_side_bisector_08.png){ width=500 }
 
 
 ![Визуелизација](../../assets/images/geom_iso_side_bisector_08.png){ width=500 }
