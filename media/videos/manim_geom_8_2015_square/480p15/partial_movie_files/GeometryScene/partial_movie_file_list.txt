@@ -1,0 +1,8 @@
+# This file is used internally by FFMPEG.
+file 'file:C:/Users/pc4all/Documents/matholimpiad/olympiad-math-archive/media/videos/manim_geom_8_2015_square/480p15/partial_movie_files/GeometryScene/1584795214_2514953203_223132457.mp4'
+file 'file:C:/Users/pc4all/Documents/matholimpiad/olympiad-math-archive/media/videos/manim_geom_8_2015_square/480p15/partial_movie_files/GeometryScene/4072820271_1611605498_1057049913.mp4'
+file 'file:C:/Users/pc4all/Documents/matholimpiad/olympiad-math-archive/media/videos/manim_geom_8_2015_square/480p15/partial_movie_files/GeometryScene/4072820271_2275263883_490199875.mp4'
+file 'file:C:/Users/pc4all/Documents/matholimpiad/olympiad-math-archive/media/videos/manim_geom_8_2015_square/480p15/partial_movie_files/GeometryScene/4072820271_3601194050_1971203208.mp4'
+file 'file:C:/Users/pc4all/Documents/matholimpiad/olympiad-math-archive/media/videos/manim_geom_8_2015_square/480p15/partial_movie_files/GeometryScene/4072820271_3149490807_3051585124.mp4'
+file 'file:C:/Users/pc4all/Documents/matholimpiad/olympiad-math-archive/media/videos/manim_geom_8_2015_square/480p15/partial_movie_files/GeometryScene/4072820271_2492537148_115219977.mp4'
+file 'file:C:/Users/pc4all/Documents/matholimpiad/olympiad-math-archive/media/videos/manim_geom_8_2015_square/480p15/partial_movie_files/GeometryScene/4072820271_2872842549_772887984.mp4'

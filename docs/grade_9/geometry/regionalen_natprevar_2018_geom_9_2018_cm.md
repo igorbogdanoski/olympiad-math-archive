@@ -2,32 +2,20 @@
 grade: 9
 field: geometry
 difficulty: 8
-source: "<натпревар / списание / година>"
+source: "Regional Competition 2018"
 problem_id: geom_9_2018_cm
-language_original: <mk | en | sr | hr | ...>
+language_original: mk
 translated: false
-
-# 
 tags:
-  - vectors
-  - angle_chasing
   - geometry
-  - complex_numbers
-  - algebra
-  - triangle_geometry
-  - similarity
-related_skills:
-  - vectors
-  - angle_chasing
-  - complex_numbers
-  - triangle_geometry
-  - similarity--- GEOMETRY SKILLS ---
-geometry_style: synthetic # synthetic | analytic | mixed
-primary_skill: <main_tool> # e.g., angle_chasing, similarity, cyclic_quads
-related_skills:
   - angle_chasing
   - isosceles_triangles
-
+  - construction
+geometry_style: synthetic
+primary_skill: angle_chasing
+related_skills:
+  - isosceles_triangles
+  - construction
 allowed_tools:
   - classical_euclidean
   - similarity
@@ -36,9 +24,6 @@ forbidden_tools:
   - coordinate_geometry
   - vectors
   - complex_numbers
-tags:
-  - geometry
-  - olympiad
 ---
 
 # Должина на симетрала преку разлика на страни
@@ -48,7 +33,7 @@ tags:
 
 ## 📐 Скица / Конструкција
 
-![Triangle Bisector](images/geom_9_2018_cm.png)
+![Geometry Problem](media/geom_9_2018_cm.mp4)
 
 ## 💡 Решение
 

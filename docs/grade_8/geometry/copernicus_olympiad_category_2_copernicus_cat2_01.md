@@ -9,45 +9,56 @@ translated: false
 
 # 
 tags:
-  - vectors
-  - angle_chasing
   - geometry
-  - complex_numbers
-  - algebra
-  - triangle_geometry
-  - similarity
-related_skills:
-  - vectors
-  - angle_chasing
-  - complex_numbers
-  - triangle_geometry
-  - similarity--- GEOMETRY SKILLS ---
-geometry_style: synthetic # synthetic | analytic | mixed
-primary_skill: <main_tool> # e.g., angle_chasing, similarity, cyclic_quads
-related_skills:
+  - square
   - equilateral_triangle
-  - isosceles_triangle
-  - square_properties
-
-allowed_tools:
-  - classical_euclidean
-  - similarity
-  - symmetry
-forbidden_tools:
-  - coordinate_geometry
-  - vectors
-  - complex_numbers
-tags:
-  - geometry
-  - olympiad
+  - angle_chasing
+related_skills:
+  - isosceles_triangle_properties
+  - angle_sum_triangle
 ---
 
-# Рамностран триаголник во квадрат
+# Problem
+Given a square $ABCD$. A point $E$ is chosen inside the square such that $\triangle ABE$ is equilateral. Calculate the size of the angle $\angle DEC$.
 
-## Текст на задачата
-Даден е квадрат $ABCD$. Во неговата внатрешност е избрана точка $E$ така што $\triangle ABE$ е рамностран. Пресметај ја големината на аголот $\angle DEC$.
+![Problem Visualization](media/copernicus_cat2_01.mp4)
 
-## 📐 Скица / Конструкција
+# Solution
+Since $ABCD$ is a square, $AB = BC = CD = DA$ and all angles are $90^\circ$.
+Since $\triangle ABE$ is equilateral, $AB = AE = BE$ and all angles are $60^\circ$.
+
+Consider $\triangle ADE$.
+$AD = AB$ (sides of square) and $AE = AB$ (sides of equilateral triangle).
+Therefore, $AD = AE$, so $\triangle ADE$ is isosceles.
+The angle at the vertex $A$ is:
+$$\angle DAE = \angle DAB - \angle EAB = 90^\circ - 60^\circ = 30^\circ$$
+Since $\triangle ADE$ is isosceles with $AD=AE$, the base angles are equal:
+$$\angle ADE = \angle AED = \frac{180^\circ - 30^\circ}{2} = \frac{150^\circ}{2} = 75^\circ$$
+
+Similarly, consider $\triangle BCE$.
+$BC = AB$ and $BE = AB$, so $BC = BE$. $\triangle BCE$ is isosceles.
+The angle at vertex $B$ is:
+$$\angle CBE = \angle CBA - \angle EBA = 90^\circ - 60^\circ = 30^\circ$$
+The base angles are:
+$$\angle BCE = \angle BEC = \frac{180^\circ - 30^\circ}{2} = 75^\circ$$
+
+Now consider the angles around point $E$.
+Wait, we can find $\angle DEC$ directly from the sum of angles in $\triangle CDE$ or around $E$.
+Let's use the angles at $D$ and $C$.
+$\angle EDC = \angle ADC - \angle ADE = 90^\circ - 75^\circ = 15^\circ$.
+$\angle ECD = \angle BCD - \angle BCE = 90^\circ - 75^\circ = 15^\circ$.
+
+In $\triangle CDE$:
+$$\angle DEC = 180^\circ - (\angle EDC + \angle ECD) = 180^\circ - (15^\circ + 15^\circ) = 180^\circ - 30^\circ = 150^\circ$$
+
+Alternatively, calculating angles around $E$:
+$\angle AEB = 60^\circ$.
+$\angle AED = 75^\circ$.
+$\angle BEC = 75^\circ$.
+The sum of angles around $E$ is $360^\circ$:
+$$\angle DEC = 360^\circ - (60^\circ + 75^\circ + 75^\circ) = 360^\circ - 210^\circ = 150^\circ$$
+
+The angle $\angle DEC$ is $150^\circ$.
 
 ![Equilateral Triangle in Square](images/copernicus_cat2_01.png)
 

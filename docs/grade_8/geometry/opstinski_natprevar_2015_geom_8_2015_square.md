@@ -9,44 +9,51 @@ translated: false
 
 # 
 tags:
-  - vectors
-  - angle_chasing
   - geometry
-  - complex_numbers
-  - algebra
-  - triangle_geometry
-  - similarity
+  - square
+  - centroid
+  - medians
 related_skills:
-  - vectors
-  - angle_chasing
-  - complex_numbers
-  - triangle_geometry
-  - similarity--- GEOMETRY SKILLS ---
-geometry_style: synthetic # synthetic | analytic | mixed
-primary_skill: <main_tool> # e.g., angle_chasing, similarity, cyclic_quads
-related_skills:
-  - similarity
-  - diagonal_properties
-
-allowed_tools:
-  - classical_euclidean
-  - similarity
-  - symmetry
-forbidden_tools:
-  - coordinate_geometry
-  - vectors
-  - complex_numbers
-tags:
-  - geometry
-  - olympiad
+  - centroid_properties
+  - diagonal_trisection
 ---
 
-# Поделба на дијагонала во квадрат
+# Problem
+Given a square $ABCD$. Vertex $A$ is connected to points $M$ and $N$, which are the midpoints of sides $CD$ and $BC$, respectively. Prove that the diagonal $BD$ is divided into three equal parts by the segments $AM$ and $AN$.
 
-## Текст на задачата
-Даден е квадрат $ABCD$. Темето $A$ е поврзано со точките $M$ и $N$, кои се средини на страните $CD$ и $BC$, соодветно. Да се докаже дека дијагоналата $BD$ со отсечките $AM$ и $AN$ поделена е на три еднакви делови.
+![Problem Visualization](media/geom_8_2015_square.mp4)
 
-## 📐 Скица / Конструкција
+# Solution
+Let $P$ be the intersection of $AM$ and $BD$, and $Q$ be the intersection of $AN$ and $BD$.
+We need to prove that $DP = PQ = QB$.
+
+Consider $\triangle ACD$.
+$AM$ is a median of $\triangle ACD$ because $M$ is the midpoint of $CD$.
+The diagonal $BD$ intersects $AC$ at $O$, which is the midpoint of $AC$.
+Thus, $DO$ is also a median of $\triangle ACD$.
+The intersection point $P$ of the medians $AM$ and $DO$ is the centroid of $\triangle ACD$.
+By the property of the centroid, $P$ divides the median $DO$ in the ratio $2:1$ from the vertex $D$.
+However, we are interested in the segment $DP$ on the diagonal $BD$.
+Wait, $P$ lies on $DO$. $DO = \frac{1}{2}BD$.
+The centroid divides the median in ratio $2:1$. So $DP = \frac{2}{3} DO$.
+Substituting $DO = \frac{1}{2}BD$:
+$$DP = \frac{2}{3} \cdot \frac{1}{2} BD = \frac{1}{3} BD$$
+
+Similarly, consider $\triangle ABC$.
+$AN$ is a median of $\triangle ABC$ because $N$ is the midpoint of $BC$.
+$BO$ is a median of $\triangle ABC$ because $O$ is the midpoint of $AC$.
+The intersection point $Q$ of the medians $AN$ and $BO$ is the centroid of $\triangle ABC$.
+Therefore, $Q$ divides the median $BO$ in the ratio $2:1$ from the vertex $B$.
+$$BQ = \frac{2}{3} BO$$
+Substituting $BO = \frac{1}{2}BD$:
+$$BQ = \frac{2}{3} \cdot \frac{1}{2} BD = \frac{1}{3} BD$$
+
+Now we have $DP = \frac{1}{3} BD$ and $BQ = \frac{1}{3} BD$.
+The remaining segment $PQ$ is:
+$$PQ = BD - DP - BQ = BD - \frac{1}{3} BD - \frac{1}{3} BD = \frac{1}{3} BD$$
+
+Thus, $DP = PQ = QB = \frac{1}{3} BD$.
+The diagonal $BD$ is divided into three equal parts.
 
 ![Square Diagonal Division](images/geom_8_2015_square.png)
 

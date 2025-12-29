@@ -28,6 +28,19 @@ class GeometryScene(Scene):
         segment_AM = Line(A, M, color=YELLOW)
         segment_AN = Line(A, N, color=YELLOW)
         
+        # Intersections P and Q
+        # P = AM intersect BD
+        # Q = AN intersect BD
+        # In triangle ACD, P is centroid. P = (A+C+D)/3.
+        P = (A + C + D) / 3
+        # In triangle ABC, Q is centroid. Q = (A+B+C)/3.
+        Q = (A + B + C) / 3
+        
+        dot_P = Dot(P, color=RED)
+        dot_Q = Dot(Q, color=RED)
+        label_P = MathTex("P").next_to(P, UP, buff=0.05)
+        label_Q = MathTex("Q").next_to(Q, DOWN, buff=0.05)
+        
         # Create objects
         square = Polygon(A, B, C, D, color=BLUE, stroke_width=4)
         
@@ -41,7 +54,7 @@ class GeometryScene(Scene):
         label_N = MathTex("N").next_to(N, RIGHT)
         
         # Group
-        scene_group = VGroup(square, diagonal_AC, diagonal_BD, segment_AM, segment_AN, label_A, label_B, label_C, label_D, label_O, label_M, label_N)
+        scene_group = VGroup(square, diagonal_AC, diagonal_BD, segment_AM, segment_AN, dot_P, dot_Q, label_A, label_B, label_C, label_D, label_O, label_M, label_N, label_P, label_Q)
         scene_group.move_to(ORIGIN)
         
         # Animations
@@ -50,5 +63,6 @@ class GeometryScene(Scene):
         self.play(Write(label_A), Write(label_B), Write(label_C), Write(label_D), Write(label_O))
         self.play(Create(segment_AM), Create(segment_AN))
         self.play(Write(label_M), Write(label_N))
+        self.play(Create(dot_P), Write(label_P), Create(dot_Q), Write(label_Q))
         
         self.wait(2)

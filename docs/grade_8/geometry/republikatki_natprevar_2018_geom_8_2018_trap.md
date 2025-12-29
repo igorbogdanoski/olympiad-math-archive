@@ -9,44 +9,49 @@ translated: false
 
 # 
 tags:
-  - vectors
-  - angle_chasing
   - geometry
-  - complex_numbers
-  - algebra
-  - triangle_geometry
-  - similarity
+  - trapezoid
+  - midpoints
+  - angles
 related_skills:
-  - vectors
-  - angle_chasing
-  - complex_numbers
-  - triangle_geometry
-  - similarity--- GEOMETRY SKILLS ---
-geometry_style: synthetic # synthetic | analytic | mixed
-primary_skill: <main_tool> # e.g., angle_chasing, similarity, cyclic_quads
-related_skills:
-  - parallelograms
-  - right_triangles
-
-allowed_tools:
-  - classical_euclidean
-  - similarity
-  - symmetry
-forbidden_tools:
-  - coordinate_geometry
-  - vectors
-  - complex_numbers
-tags:
-  - geometry
-  - olympiad
+  - parallel_translation
+  - right_triangle_median
 ---
 
-# Агли на основа во специфичен трапез
+# Problem
+Given a trapezoid $ABCD$ with bases $AB=a, CD=b, a>b$. Let $M$ and $N$ be the midpoints of the bases $AB$ and $CD$, respectively, and let $MN = \frac{a-b}{2}$. Calculate the sum of the angles at the larger base.
 
-## Текст на задачата
-Даден е трапез $ABCD$ со основи $AB=a, CD=b, a>b$. Нека $M$ и $N$ се средини на основите $AB$ и $CD$, соодветно, и нека $MN = \frac{a-b}{2}$. Пресметај го збирот на аглите на поголемата основа.
+![Problem Visualization](media/geom_8_2018_trap.mp4)
 
-## 📐 Скица / Конструкција
+# Solution
+Let's translate the legs $AD$ and $BC$ parallel to themselves so that they pass through $N$.
+Let $P$ be a point on $AB$ such that $NP \parallel AD$. Then $ANPD$ is a parallelogram, so $AP = DN = b/2$.
+Let $Q$ be a point on $AB$ such that $NQ \parallel BC$. Then $NBCQ$ is a parallelogram, so $QB = NC = b/2$.
+
+The length of the segment $PQ$ is:
+$$PQ = AB - AP - QB = a - \frac{b}{2} - \frac{b}{2} = a - b$$
+
+We are given that $MN = \frac{a-b}{2}$.
+In $\triangle NPQ$, $M$ is the midpoint of $PQ$ because $M$ is the midpoint of $AB$ and $P, Q$ are symmetric with respect to $M$ (since $AP=QB$).
+Wait, let's verify $M$ is the midpoint of $PQ$.
+$AM = a/2$.
+$PM = AM - AP = a/2 - b/2 = (a-b)/2$.
+$MQ = MB - QB = a/2 - b/2 = (a-b)/2$.
+So $M$ is indeed the midpoint of $PQ$.
+
+In $\triangle NPQ$, the median $NM$ has length $\frac{a-b}{2}$, which is exactly half the length of the side $PQ$ ($PQ = a-b$).
+A triangle where the median to a side is half the length of that side is a right-angled triangle.
+Therefore, $\angle PNQ = 90^\circ$.
+
+Since $NP \parallel AD$, $\angle APN = \angle A$ (corresponding angles? No, $NP \parallel AD$, so $\angle A + \angle APN = 180^\circ$ if consecutive interior, or $\angle NPQ = \angle A$ if we extend... wait).
+Actually, $NP \parallel AD \implies \angle NPQ = \angle DAB = \alpha$ (corresponding angles).
+And $NQ \parallel BC \implies \angle NQP = \angle CBA = \beta$ (corresponding angles).
+
+In the right-angled triangle $NPQ$ (right angle at $N$), the sum of the acute angles is $90^\circ$.
+$$\angle NPQ + \angle NQP = 90^\circ$$
+$$\alpha + \beta = 90^\circ$$
+
+So the sum of the angles at the larger base is $90^\circ$.
 
 ![Trapezoid Midpoints](images/geom_8_2018_trap.png)
 

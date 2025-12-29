@@ -9,44 +9,59 @@ translated: false
 
 # 
 tags:
-  - vectors
-  - angle_chasing
   - geometry
-  - complex_numbers
-  - algebra
-  - triangle_geometry
-  - similarity
+  - rectangle
+  - area
+  - subtraction_method
 related_skills:
-  - vectors
-  - angle_chasing
-  - complex_numbers
-  - triangle_geometry
-  - similarity--- GEOMETRY SKILLS ---
-geometry_style: synthetic # synthetic | analytic | mixed
-primary_skill: <main_tool> # e.g., angle_chasing, similarity, cyclic_quads
-related_skills:
-  - complementary_areas
-  - ratio_reasoning
-
-allowed_tools:
-  - classical_euclidean
-  - similarity
-  - symmetry
-forbidden_tools:
-  - coordinate_geometry
-  - vectors
-  - complex_numbers
-tags:
-  - geometry
-  - olympiad
+  - area_calculation
+  - linear_equations
 ---
 
-# Плоштина на впишан триаголник во правоаголник
+# Problem
+In a rectangle $ABCD$ with perimeter $60$ cm, $BC = \frac{2}{3}AB$. On side $AB$, a point $E$ is given such that $AE = \frac{1}{3}AB$, and on side $BC$, a point $F$ is given such that $BF = \frac{2}{3}BC$. If point $G$ is the midpoint of segment $AD$, what is the area of triangle $EFG$?
 
-## Текст на задачата
-Во правоаголник $ABCD$ со периметар $60$ cm, важи $BC = \frac{2}{3}AB$. На страната $AB$ дадена е точка $E$ така што $AE = \frac{1}{3}AB$, а на страната $BC$ дадена е точка $F$ така што $BF = \frac{2}{3}BC$. Ако точката $G$ е средина на отсечката $AD$, колку изнесува плоштината на триаголникот $EFG$?
+![Problem Visualization](media/geom_8_2018_rect.mp4)
 
-## 📐 Скица / Конструкција
+# Solution
+First, let's find the dimensions of the rectangle.
+Let $AB = a$ and $BC = b$.
+We are given $b = \frac{2}{3}a$.
+The perimeter is $2(a+b) = 60 \implies a+b = 30$.
+Substitute $b$:
+$a + \frac{2}{3}a = 30 \implies \frac{5}{3}a = 30 \implies a = 18$.
+Then $b = \frac{2}{3}(18) = 12$.
+So $AB = CD = 18$ cm and $BC = AD = 12$ cm.
+The area of the rectangle is $S_{ABCD} = 18 \cdot 12 = 216$ cm$^2$.
+
+Now let's find the lengths of the segments:
+$AE = \frac{1}{3}AB = \frac{1}{3}(18) = 6$ cm.
+$EB = AB - AE = 18 - 6 = 12$ cm.
+$BF = \frac{2}{3}BC = \frac{2}{3}(12) = 8$ cm.
+$FC = BC - BF = 12 - 8 = 4$ cm.
+$G$ is the midpoint of $AD$, so $AG = GD = \frac{1}{2}AD = \frac{1}{2}(12) = 6$ cm.
+
+We calculate the area of $\triangle EFG$ by subtracting the areas of the three corner shapes from the total area of the rectangle.
+1. Area of $\triangle AGE$:
+   $\triangle AGE$ is a right-angled triangle at $A$.
+   $S_{AGE} = \frac{1}{2} \cdot AG \cdot AE = \frac{1}{2} \cdot 6 \cdot 6 = 18$ cm$^2$.
+
+2. Area of $\triangle EBF$:
+   $\triangle EBF$ is a right-angled triangle at $B$.
+   $S_{EBF} = \frac{1}{2} \cdot EB \cdot BF = \frac{1}{2} \cdot 12 \cdot 8 = 48$ cm$^2$.
+
+3. Area of trapezoid $GDCF$:
+   $GD \parallel FC$ (since $AD \parallel BC$).
+   Height is $DC = AB = 18$ cm.
+   $S_{GDCF} = \frac{GD + FC}{2} \cdot DC = \frac{6 + 4}{2} \cdot 18 = \frac{10}{2} \cdot 18 = 5 \cdot 18 = 90$ cm$^2$.
+
+Total area to subtract:
+$S_{sub} = 18 + 48 + 90 = 156$ cm$^2$.
+
+Area of $\triangle EFG$:
+$S_{EFG} = S_{ABCD} - S_{sub} = 216 - 156 = 60$ cm$^2$.
+
+The area of triangle $EFG$ is $60$ cm$^2$.
 
 ![Rectangle Area](images/geom_8_2018_rect.png)
 

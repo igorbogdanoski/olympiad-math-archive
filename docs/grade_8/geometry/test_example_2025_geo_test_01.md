@@ -9,44 +9,32 @@ translated: false
 
 # 
 tags:
-  - vectors
-  - angle_chasing
   - geometry
-  - complex_numbers
-  - algebra
-  - triangle_geometry
+  - right_triangle
+  - altitude
   - similarity
 related_skills:
-  - vectors
-  - angle_chasing
-  - complex_numbers
-  - triangle_geometry
-  - similarity--- GEOMETRY SKILLS ---
-geometry_style: synthetic # synthetic | analytic | mixed
-primary_skill: <main_tool> # e.g., angle_chasing, similarity, cyclic_quads
-related_skills:
-  - similarity
-  - pythagorean_theorem
-
-allowed_tools:
-  - classical_euclidean
-  - similarity
-  - symmetry
-forbidden_tools:
-  - coordinate_geometry
-  - vectors
-  - complex_numbers
-tags:
-  - geometry
-  - olympiad
+  - geometric_mean_theorem
+  - euclidean_theorems
 ---
 
-# Висина кон хипотенузата
+# Problem
+In a right-angled triangle $ABC$ ($\angle C = 90^\circ$), the altitude $CD$ to the hypotenuse divides it into segments of lengths $AD=4$ cm and $BD=9$ cm. Calculate the length of the altitude $CD$.
 
-## Текст на задачата
-Во правоаголен триаголник $ABC$ ($\angle C = 90^\circ$), висината $CD$ спуштена кон хипотенузата ја дели на отсечки со должини $AD=4$ cm и $BD=9$ cm. Пресметај ја должината на висината $CD$.
+![Problem Visualization](media/geo_test_01.mp4)
 
-## 📐 Скица / Конструкција
+# Solution
+In a right-angled triangle, the altitude to the hypotenuse is the geometric mean of the segments into which it divides the hypotenuse.
+This is a consequence of the similarity of triangles $\triangle ADC \sim \triangle CDB$.
+From the similarity, we have:
+$$\frac{AD}{CD} = \frac{CD}{BD}$$
+$$CD^2 = AD \cdot BD$$
+
+Substituting the given values:
+$$CD^2 = 4 \cdot 9 = 36$$
+$$CD = \sqrt{36} = 6$$
+
+The length of the altitude is $h = 6$ cm.
 
 ![Right Triangle Altitude](images/geo_test_01.png)
 
