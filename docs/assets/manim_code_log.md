@@ -1911,3 +1911,372 @@ def construct(self):
 
 ```
 ---
+
+### ID Zadacha: sigma137_p1868 - Тангентен четириаголник и радиуси
+**Date Dodadeno:** 2026-01-07 23:18
+**Python/Manim Kod:**
+```python
+from manim import *
+
+class Task_sigma137_p1868(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+def construct(self):
+    self.camera.background_color = WHITE
+
+    # 1. Define the main incircle (excircle for the small triangles)
+    R = 1.5
+    circle_main = Circle(radius=R, color=GRAY, stroke_opacity=0.5)
+    
+    # 2. Define tangent points angles to create an obtuse D
+    # Angles in degrees
+    deg_K = 10   # on CD
+    deg_L = 100  # on AD
+    deg_M = 190  # on AB
+    deg_N = 280  # on BC
+    
+    # Points on circle
+    K = R * np.array([np.cos(deg_K*DEGREES), np.sin(deg_K*DEGREES), 0])
+    L = R * np.array([np.cos(deg_L*DEGREES), np.sin(deg_L*DEGREES), 0])
+    M = R * np.array([np.cos(deg_M*DEGREES), np.sin(deg_M*DEGREES), 0])
+    N = R * np.array([np.cos(deg_N*DEGREES), np.sin(deg_N*DEGREES), 0])
+    
+    # Tangent lines helper
+    def get_tangent_intersection(P1, P2, R):
+        # Simplified: intersection of tangents at P1 and P2
+        # The line from origin to intersection bisects the angle
+        mid_angle = (np.arctan2(P1[1], P1[0]) + np.arctan2(P2[1], P2[0])) / 2
+        # Adjust for wrap around
+        diff = np.arctan2(P2[1], P2[0]) - np.arctan2(P1[1], P1[0])
+        if diff < 0: diff += 2*PI
+        dist = R / np.cos(diff/2)
+        # Correct angle logic is tricky, let's use lines
+        return np.array([0,0,0]) # Placeholder, doing manual lines below
+
+    # Manual Tangent Lines construction
+    # Tangent at K (angle 10)
+    line_CD = Line(K + UP*4 + LEFT*0.7, K + DOWN*4 + RIGHT*0.7)
+    # Tangent at L (angle 100)
+    line_AD = Line(L + RIGHT*4 + DOWN*0.7, L + LEFT*4 + UP*0.7)
+    
+    # Intersection D (CD and AD)
+    # We need a proper intersection function
+    def intersect(p1, v1, p2, v2):
+        # p1 + t*v1 = p2 + u*v2
+        # t*v1 - u*v2 = p2 - p1
+        A = np.array([[v1[0], -v2[0]], [v1[1], -v2[1]]])
+        b = p2[:2] - p1[:2]
+        x = np.linalg.solve(A, b)
+        return p1 + x[0] * v1
+
+    # Tangent vectors
+    v_K = np.array([-np.sin(deg_K*DEGREES), np.cos(deg_K*DEGREES), 0])
+    v_L = np.array([-np.sin(deg_L*DEGREES), np.cos(deg_L*DEGREES), 0])
+    v_M = np.array([-np.sin(deg_M*DEGREES), np.cos(deg_M*DEGREES), 0])
+    v_N = np.array([-np.sin(deg_N*DEGREES), np.cos(deg_N*DEGREES), 0])
+
+    D = intersect(K, v_K, L, v_L)
+    A = intersect(L, v_L, M, v_M)
+    B = intersect(M, v_M, N, v_N)
+    C = intersect(N, v_N, K, v_K)
+    
+    # P is intersection of AD and BC
+    P = intersect(A, (D-A), B, (C-B))
+    # Q is intersection of AB and CD
+    Q = intersect(B, (A-B), C, (D-C))
+
+    # Draw Quad
+    quad = Polygon(A, B, C, D, color=BLACK, stroke_width=3)
+    
+    # Draw Extensions
+    ext_P = Line(D, P, color=BLUE)
+    ext_P2 = Line(C, P, color=BLUE)
+    ext_Q = Line(A, Q, color=BLUE)
+    ext_Q2 = Line(D, Q, color=BLUE)
+
+    # Incircles of small triangles
+    # Incenter of PDC
+    # Bisector of P and D
+    # Simplified: just draw small circles tangent to corners
+    # r1 approx
+    r1 = 0.4
+    # Vector from D to P normalized
+    u_DP = (P-D)/np.linalg.norm(P-D)
+    u_DC = (C-D)/np.linalg.norm(C-D)
+    I1 = D + (u_DP + u_DC) * 1.2 # Approximate position
+    circ_1 = Circle(radius=r1, color=RED).move_to(I1)
+
+    # r2 approx
+    u_DQ = (Q-D)/np.linalg.norm(Q-D)
+    u_DA = (A-D)/np.linalg.norm(A-D)
+    I2 = D + (u_DQ + u_DA) * 0.8
+    circ_2 = Circle(radius=0.3, color=RED).move_to(I2)
+
+    # Labels
+    lbls = VGroup(
+        MathTex("A").next_to(A, LEFT),
+        MathTex("B").next_to(B, DOWN),
+        MathTex("C").next_to(C, RIGHT),
+        MathTex("D").next_to(D, DOWN),
+        MathTex("P").next_to(P, UP),
+        MathTex("Q").next_to(Q, LEFT)
+    )
+
+    self.add(circle_main)
+    self.add(quad, ext_P, ext_P2, ext_Q, ext_Q2)
+    self.add(circ_1, circ_2)
+    self.add(lbls)
+        # --- AI GENERATED CODE END ---
+
+```
+---
+
+### ID Zadacha: sigma137_p1868 - Тангентен четириаголник и радиуси
+**Date Dodadeno:** 2026-01-07 23:18
+**Python/Manim Kod:**
+```python
+from manim import *
+
+class Task_sigma137_p1868(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+def construct(self):
+    self.camera.background_color = WHITE
+
+    # 1. Define the main incircle (excircle for the small triangles)
+    R = 1.5
+    circle_main = Circle(radius=R, color=GRAY, stroke_opacity=0.5)
+    
+    # 2. Define tangent points angles to create an obtuse D
+    # Angles in degrees
+    deg_K = 10   # on CD
+    deg_L = 100  # on AD
+    deg_M = 190  # on AB
+    deg_N = 280  # on BC
+    
+    # Points on circle
+    K = R * np.array([np.cos(deg_K*DEGREES), np.sin(deg_K*DEGREES), 0])
+    L = R * np.array([np.cos(deg_L*DEGREES), np.sin(deg_L*DEGREES), 0])
+    M = R * np.array([np.cos(deg_M*DEGREES), np.sin(deg_M*DEGREES), 0])
+    N = R * np.array([np.cos(deg_N*DEGREES), np.sin(deg_N*DEGREES), 0])
+    
+    # Tangent lines helper
+    def get_tangent_intersection(P1, P2, R):
+        # Simplified: intersection of tangents at P1 and P2
+        # The line from origin to intersection bisects the angle
+        mid_angle = (np.arctan2(P1[1], P1[0]) + np.arctan2(P2[1], P2[0])) / 2
+        # Adjust for wrap around
+        diff = np.arctan2(P2[1], P2[0]) - np.arctan2(P1[1], P1[0])
+        if diff < 0: diff += 2*PI
+        dist = R / np.cos(diff/2)
+        # Correct angle logic is tricky, let's use lines
+        return np.array([0,0,0]) # Placeholder, doing manual lines below
+
+    # Manual Tangent Lines construction
+    # Tangent at K (angle 10)
+    line_CD = Line(K + UP*4 + LEFT*0.7, K + DOWN*4 + RIGHT*0.7)
+    # Tangent at L (angle 100)
+    line_AD = Line(L + RIGHT*4 + DOWN*0.7, L + LEFT*4 + UP*0.7)
+    
+    # Intersection D (CD and AD)
+    # We need a proper intersection function
+    def intersect(p1, v1, p2, v2):
+        # p1 + t*v1 = p2 + u*v2
+        # t*v1 - u*v2 = p2 - p1
+        A = np.array([[v1[0], -v2[0]], [v1[1], -v2[1]]])
+        b = p2[:2] - p1[:2]
+        x = np.linalg.solve(A, b)
+        return p1 + x[0] * v1
+
+    # Tangent vectors
+    v_K = np.array([-np.sin(deg_K*DEGREES), np.cos(deg_K*DEGREES), 0])
+    v_L = np.array([-np.sin(deg_L*DEGREES), np.cos(deg_L*DEGREES), 0])
+    v_M = np.array([-np.sin(deg_M*DEGREES), np.cos(deg_M*DEGREES), 0])
+    v_N = np.array([-np.sin(deg_N*DEGREES), np.cos(deg_N*DEGREES), 0])
+
+    D = intersect(K, v_K, L, v_L)
+    A = intersect(L, v_L, M, v_M)
+    B = intersect(M, v_M, N, v_N)
+    C = intersect(N, v_N, K, v_K)
+    
+    # P is intersection of AD and BC
+    P = intersect(A, (D-A), B, (C-B))
+    # Q is intersection of AB and CD
+    Q = intersect(B, (A-B), C, (D-C))
+
+    # Draw Quad
+    quad = Polygon(A, B, C, D, color=BLACK, stroke_width=3)
+    
+    # Draw Extensions
+    ext_P = Line(D, P, color=BLUE)
+    ext_P2 = Line(C, P, color=BLUE)
+    ext_Q = Line(A, Q, color=BLUE)
+    ext_Q2 = Line(D, Q, color=BLUE)
+
+    # Incircles of small triangles
+    # Incenter of PDC
+    # Bisector of P and D
+    # Simplified: just draw small circles tangent to corners
+    # r1 approx
+    r1 = 0.4
+    # Vector from D to P normalized
+    u_DP = (P-D)/np.linalg.norm(P-D)
+    u_DC = (C-D)/np.linalg.norm(C-D)
+    I1 = D + (u_DP + u_DC) * 1.2 # Approximate position
+    circ_1 = Circle(radius=r1, color=RED).move_to(I1)
+
+    # r2 approx
+    u_DQ = (Q-D)/np.linalg.norm(Q-D)
+    u_DA = (A-D)/np.linalg.norm(A-D)
+    I2 = D + (u_DQ + u_DA) * 0.8
+    circ_2 = Circle(radius=0.3, color=RED).move_to(I2)
+
+    # Labels
+    lbls = VGroup(
+        MathTex("A").next_to(A, LEFT),
+        MathTex("B").next_to(B, DOWN),
+        MathTex("C").next_to(C, RIGHT),
+        MathTex("D").next_to(D, DOWN),
+        MathTex("P").next_to(P, UP),
+        MathTex("Q").next_to(Q, LEFT)
+    )
+
+    self.add(circle_main)
+    self.add(quad, ext_P, ext_P2, ext_Q, ext_Q2)
+    self.add(circ_1, circ_2)
+    self.add(lbls)
+        # --- AI GENERATED CODE END ---
+
+```
+---
+
+### ID Zadacha: sigma137_p1868 - Тангентен четириаголник и радиуси
+**Date Dodadeno:** 2026-01-07 23:19
+**Python/Manim Kod:**
+```python
+from manim import *
+
+class Task_sigma137_p1868(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+def construct(self):
+    self.camera.background_color = WHITE
+
+    # 1. Define the main incircle (excircle for the small triangles)
+    R = 1.5
+    circle_main = Circle(radius=R, color=GRAY, stroke_opacity=0.5)
+    
+    # 2. Define tangent points angles to create an obtuse D
+    # Angles in degrees
+    deg_K = 10   # on CD
+    deg_L = 100  # on AD
+    deg_M = 190  # on AB
+    deg_N = 280  # on BC
+    
+    # Points on circle
+    K = R * np.array([np.cos(deg_K*DEGREES), np.sin(deg_K*DEGREES), 0])
+    L = R * np.array([np.cos(deg_L*DEGREES), np.sin(deg_L*DEGREES), 0])
+    M = R * np.array([np.cos(deg_M*DEGREES), np.sin(deg_M*DEGREES), 0])
+    N = R * np.array([np.cos(deg_N*DEGREES), np.sin(deg_N*DEGREES), 0])
+    
+    # Tangent lines helper
+    def get_tangent_intersection(P1, P2, R):
+        # Simplified: intersection of tangents at P1 and P2
+        # The line from origin to intersection bisects the angle
+        mid_angle = (np.arctan2(P1[1], P1[0]) + np.arctan2(P2[1], P2[0])) / 2
+        # Adjust for wrap around
+        diff = np.arctan2(P2[1], P2[0]) - np.arctan2(P1[1], P1[0])
+        if diff < 0: diff += 2*PI
+        dist = R / np.cos(diff/2)
+        # Correct angle logic is tricky, let's use lines
+        return np.array([0,0,0]) # Placeholder, doing manual lines below
+
+    # Manual Tangent Lines construction
+    # Tangent at K (angle 10)
+    line_CD = Line(K + UP*4 + LEFT*0.7, K + DOWN*4 + RIGHT*0.7)
+    # Tangent at L (angle 100)
+    line_AD = Line(L + RIGHT*4 + DOWN*0.7, L + LEFT*4 + UP*0.7)
+    
+    # Intersection D (CD and AD)
+    # We need a proper intersection function
+    def intersect(p1, v1, p2, v2):
+        # p1 + t*v1 = p2 + u*v2
+        # t*v1 - u*v2 = p2 - p1
+        A = np.array([[v1[0], -v2[0]], [v1[1], -v2[1]]])
+        b = p2[:2] - p1[:2]
+        x = np.linalg.solve(A, b)
+        return p1 + x[0] * v1
+
+    # Tangent vectors
+    v_K = np.array([-np.sin(deg_K*DEGREES), np.cos(deg_K*DEGREES), 0])
+    v_L = np.array([-np.sin(deg_L*DEGREES), np.cos(deg_L*DEGREES), 0])
+    v_M = np.array([-np.sin(deg_M*DEGREES), np.cos(deg_M*DEGREES), 0])
+    v_N = np.array([-np.sin(deg_N*DEGREES), np.cos(deg_N*DEGREES), 0])
+
+    D = intersect(K, v_K, L, v_L)
+    A = intersect(L, v_L, M, v_M)
+    B = intersect(M, v_M, N, v_N)
+    C = intersect(N, v_N, K, v_K)
+    
+    # P is intersection of AD and BC
+    P = intersect(A, (D-A), B, (C-B))
+    # Q is intersection of AB and CD
+    Q = intersect(B, (A-B), C, (D-C))
+
+    # Draw Quad
+    quad = Polygon(A, B, C, D, color=BLACK, stroke_width=3)
+    
+    # Draw Extensions
+    ext_P = Line(D, P, color=BLUE)
+    ext_P2 = Line(C, P, color=BLUE)
+    ext_Q = Line(A, Q, color=BLUE)
+    ext_Q2 = Line(D, Q, color=BLUE)
+
+    # Incircles of small triangles
+    # Incenter of PDC
+    # Bisector of P and D
+    # Simplified: just draw small circles tangent to corners
+    # r1 approx
+    r1 = 0.4
+    # Vector from D to P normalized
+    u_DP = (P-D)/np.linalg.norm(P-D)
+    u_DC = (C-D)/np.linalg.norm(C-D)
+    I1 = D + (u_DP + u_DC) * 1.2 # Approximate position
+    circ_1 = Circle(radius=r1, color=RED).move_to(I1)
+
+    # r2 approx
+    u_DQ = (Q-D)/np.linalg.norm(Q-D)
+    u_DA = (A-D)/np.linalg.norm(A-D)
+    I2 = D + (u_DQ + u_DA) * 0.8
+    circ_2 = Circle(radius=0.3, color=RED).move_to(I2)
+
+    # Labels
+    lbls = VGroup(
+        MathTex("A").next_to(A, LEFT),
+        MathTex("B").next_to(B, DOWN),
+        MathTex("C").next_to(C, RIGHT),
+        MathTex("D").next_to(D, DOWN),
+        MathTex("P").next_to(P, UP),
+        MathTex("Q").next_to(Q, LEFT)
+    )
+
+    self.add(circle_main)
+    self.add(quad, ext_P, ext_P2, ext_Q, ext_Q2)
+    self.add(circ_1, circ_2)
+    self.add(lbls)
+        # --- AI GENERATED CODE END ---
+
+```
+---
