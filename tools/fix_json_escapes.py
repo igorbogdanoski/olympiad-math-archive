@@ -52,7 +52,9 @@ for cmd in latex_commands:
     # We replace with \\cmd
     
     pattern = r"(?<!\\)\\" + re.escape(cmd)
-    replacement = r"\\" + cmd
+    # To get two backslashes in the file, we need to pass four backslashes to re.sub
+    # because re.sub treats backslashes in the replacement string as escapes.
+    replacement = r"\\\\" + cmd
     
     content = re.sub(pattern, replacement, content)
 

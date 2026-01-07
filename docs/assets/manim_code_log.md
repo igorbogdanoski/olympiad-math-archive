@@ -1628,3 +1628,83 @@ def construct(self):
 
 ```
 ---
+
+### ID Zadacha: sigma137_p1867 - Аголот $\angle AEF$ преку симетрија
+**Date Dodadeno:** 2026-01-07 22:58
+**Python/Manim Kod:**
+```python
+from manim import *
+
+class Task_sigma137_p1867(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+def construct(self):
+    self.camera.background_color = WHITE
+    
+    # Coordinates
+    # Let C be origin for calculation, then rotate
+    # Easier: Let H be origin (0,0). AB is on x-axis.
+    H = ORIGIN
+    # Let CH = h = 3
+    C = UP * 3
+    # Let AH = 2, HB = 4.5 (arbitrary for right triangle)
+    # Actually, h^2 = p*q. 3^2 = 2 * 4.5. Correct.
+    A = LEFT * 2
+    B = RIGHT * 4.5
+    
+    # E is on CH. Let E be (0, 1.5)
+    E = UP * 1.5
+    
+    # F is on BH (positive x-axis). Let F be (2.5, 0)
+    F = RIGHT * 2.5
+    
+    # D is on BC. We need to find D such that angle conditions hold.
+    # This is hard to construct directly from angles without solving.
+    # Let's just place D on BC visually.
+    # Line BC equation: y - 0 = (3-0)/(0-4.5) * (x - 4.5) => y = -2/3 (x - 4.5)
+    # Let x_D = 3. y_D = -2/3 * (3 - 4.5) = -2/3 * (-1.5) = 1.
+    D = np.array([3, 1, 0])
+    
+    # E_prime (symmetric to E wrt AB)
+    E_prime = DOWN * 1.5
+    
+    # Mobjects
+    triangle = Polygon(A, B, C, color=BLACK, stroke_width=4)
+    altitude = Line(C, H, color=BLACK, stroke_width=2)
+    
+    # Points
+    pts = VGroup(Dot(A), Dot(B), Dot(C), Dot(H), Dot(E), Dot(F), Dot(D), Dot(E_prime))
+    
+    # Segments for the problem
+    seg_AE = Line(A, E, color=BLUE)
+    seg_EF = Line(E, F, color=BLUE)
+    seg_FD = Line(F, D, color=BLUE)
+    seg_AE_prime = DashedLine(A, E_prime, color=RED)
+    seg_E_prime_F = DashedLine(E_prime, F, color=RED)
+    seg_DE_prime = DashedLine(D, E_prime, color=RED)
+    
+    # Labels
+    lbl_A = MathTex("A").next_to(A, DL)
+    lbl_B = MathTex("B").next_to(B, DR)
+    lbl_C = MathTex("C").next_to(C, UP)
+    lbl_H = MathTex("H").next_to(H, DL, buff=0.1)
+    lbl_E = MathTex("E").next_to(E, LEFT)
+    lbl_F = MathTex("F").next_to(F, DOWN)
+    lbl_D = MathTex("D").next_to(D, UR, buff=0.1)
+    lbl_Ep = MathTex("E'").next_to(E_prime, DOWN)
+    
+    self.add(triangle, altitude)
+    self.add(seg_AE, seg_EF, seg_FD, seg_AE_prime, seg_E_prime_F, seg_DE_prime)
+    self.add(pts)
+    self.add(lbl_A, lbl_B, lbl_C, lbl_H, lbl_E, lbl_F, lbl_D, lbl_Ep)
+    
+    # Right angle at H
+    self.add(RightAngle(Line(C, H), Line(H, B), length=0.3))
+        # --- AI GENERATED CODE END ---
+
+```
+---
