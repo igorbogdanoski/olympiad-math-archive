@@ -50,11 +50,76 @@ def process_single_task(args):
         success = render_scene(prob_id, code)
         if success:
             save_hash(prob_id, current_hash)
-            return f"✅ {prob_id}: Успешно генерирана!"
+            # --- НОВО: Автоматско ажурирање на Markdown ---
+            try:
+                update_markdown_reference(prob_id)
+            except Exception as update_err:
+                print(f"⚠️ Грешка при ажурирање на Markdown за {prob_id}: {update_err}")
+            
+            return f"✅ {prob_id}: Успешно генерирана и поврзана!"
         else:
             return f"❌ {prob_id}: Грешка при рендирање."
     except Exception as e:
         return f"❌ {prob_id}: Критична грешка: {str(e)}"
+
+def update_markdown_reference(prob_id):
+    """
+    Search for markdown files containing the 'missing visual' placeholder for this problem
+    and replace it with the image link.
+    """
+    safe_id = re.sub(r'[^a-zA-Z0-9_]', '_', prob_id)
+    placeholder_fragment = f"Task_{safe_id}" 
+    
+    # We scan all .md files in DOCS_DIR
+    for root, dirs, files in os.walk(DOCS_DIR):
+        for file in files:
+            if not file.endswith(".md"): continue
+            
+            file_path = Path(root) / file
+            
+            # Skip the log files themselves and the archive
+            if file_path == LOG_FILE or "manim_code_archive" in str(file_path): 
+                continue
+
+            try:
+                with open(file_path, "r", encoding="utf-8") as f:
+                    content = f.read()
+                
+                # Check if this file has the specific placeholder for this task
+                if placeholder_fragment in content and "> **👨‍💻 Geo-Mentor Code:**" in content:
+                    
+                    # Calculate relative path to image
+                    image_path_abs = IMAGES_DIR / f"{prob_id}.png"
+                    
+                    try:
+                        rel_path = os.path.relpath(image_path_abs, start=file_path.parent)
+                        rel_path = rel_path.replace(os.path.sep, '/')
+                    except ValueError:
+                        print(f"⚠️ Не можам да пресметам релативна патека за {file_path}")
+                        continue
+
+                    # Construct the replacement using Regex to capture the whole block
+                    pattern = re.compile(
+                        r">\s*\*\*👨‍💻 Geo-Mentor Code:\*\*\n"
+                        r">\s*Одете во `assets/manim_code_log.md`.*?" + re.escape(f"Task_{safe_id}") + r".*?\n",
+                        re.DOTALL
+                    )
+                    
+                    # Check if pattern matches
+                    if pattern.search(content):
+                        new_block = f"![Скица]({rel_path})\n"
+                        new_content = pattern.sub(new_block, content)
+                        
+                        if new_content != content:
+                            with open(file_path, "w", encoding="utf-8") as f:
+                                f.write(new_content)
+                            print(f"📎 Ажуриран фајл со слика: {file}")
+                            return True # Found and updated
+
+            except Exception as e:
+                # Ignore read errors
+                pass
+    return False
 
 def main():
     if not LOG_FILE.exists():
