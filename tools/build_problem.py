@@ -272,3 +272,11 @@ if __name__ == "__main__":
             print(f"⚠️ Не успеав да го стартувам batch_manim: {e}")
     else:
         print(f"⚠️ Скриптата {batch_script} не постои.")
+
+    # --- LOG ROTATION ---
+    print("\n🧹 Проверка и чистење на логот за Manim...")
+    try:
+        from archive_logs import rotate_logs
+        rotate_logs()
+    except Exception as e:
+        print(f"⚠️ Грешка при ротација на логови: {e}")
