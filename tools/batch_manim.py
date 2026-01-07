@@ -9,7 +9,7 @@ from concurrent.futures import ProcessPoolExecutor
 try:
     from render_manim import render_scene
 except ImportError:
-    print("❌ Грешка: Не можам да го најдам 'render_manim.py'.")
+    print("ERR Greshka: Ne mozham da go najdam 'render_manim.py'.")
     sys.exit(1)
 
 # --- КОНФИГУРАЦИЈА (АЖУРИРАНА ЗА DOCS) ---
@@ -21,7 +21,7 @@ IMAGES_DIR = DOCS_DIR / "assets" / "images" # <--- НОВО
 HASH_FILE = BASE_DIR / "tools" / ".manim_hashes"
 
 def get_code_blocks(content):
-    pattern = r"### 🆔 Задача: (.*?)\s-.*?\n.*?```python\n(.*?)\n```"
+    pattern = r"### ID Zadacha: (.*?)\s-.*?\n.*?```python\n(.*?)\n```"
     return re.findall(pattern, content, re.DOTALL)
 
 def load_hashes():
@@ -45,7 +45,7 @@ def process_single_task(args):
     if target_image.exists() and existing_hash == current_hash:
         return f"⏭️  {prob_id}: Веќе постои и е ажурирана. Прескокнувам."
     
-    print(f"🎨 {prob_id}: Започнувам рендирање...")
+    print(f"RENDER {prob_id}: Zapochnuvam rendiranje...")
     try:
         success = render_scene(prob_id, code)
         if success:
@@ -54,7 +54,7 @@ def process_single_task(args):
             try:
                 update_markdown_reference(prob_id)
             except Exception as update_err:
-                print(f"⚠️ Грешка при ажурирање на Markdown за {prob_id}: {update_err}")
+                print(f"⚠️ Greshka pri azhuriranje na Markdown za {prob_id}: {update_err}")
             
             return f"✅ {prob_id}: Успешно генерирана и поврзана!"
         else:
@@ -95,7 +95,7 @@ def update_markdown_reference(prob_id):
                         rel_path = os.path.relpath(image_path_abs, start=file_path.parent)
                         rel_path = rel_path.replace(os.path.sep, '/')
                     except ValueError:
-                        print(f"⚠️ Не можам да пресметам релативна патека за {file_path}")
+                        print(f"⚠️ Ne mozham da presmetam relativna pateka za {file_path}")
                         continue
 
                     # Construct the replacement using Regex to capture the whole block
@@ -113,7 +113,7 @@ def update_markdown_reference(prob_id):
                         if new_content != content:
                             with open(file_path, "w", encoding="utf-8") as f:
                                 f.write(new_content)
-                            print(f"📎 Ажуриран фајл со слика: {file}")
+                            print(f"LINK Azhuriran fajl so slika: {file}")
                             return True # Found and updated
 
             except Exception as e:
@@ -121,18 +121,33 @@ def update_markdown_reference(prob_id):
                 pass
     return False
 
+def to_ascii(text):
+    m = {
+        'А': 'A', 'Б': 'B', 'В': 'V', 'Г': 'G', 'Д': 'D', 'Ѓ': 'Gj', 'Е': 'E', 'Ж': 'Zh', 'З': 'Z', 'Ѕ': 'Dz',
+        'И': 'I', 'Ј': 'J', 'К': 'K', 'Л': 'L', 'Љ': 'Lj', 'М': 'M', 'Н': 'N', 'Њ': 'Nj', 'О': 'O', 'П': 'P',
+        'Р': 'R', 'С': 'S', 'Т': 'T', 'Ќ': 'Kj', 'У': 'U', 'Ф': 'F', 'Х': 'H', 'Ц': 'C', 'Ч': 'Ch', 'Џ': 'Dj', 'Ш': 'Sh',
+        'а': 'a', 'б': 'b', 'в': 'v', 'г': 'g', 'д': 'd', 'ѓ': 'gj', 'е': 'e', 'ж': 'zh', 'з': 'z', 'ѕ': 'dz',
+        'и': 'i', 'ј': 'j', 'к': 'k', 'л': 'l', 'љ': 'lj', 'м': 'm', 'н': 'n', 'њ': 'nj', 'о': 'o', 'п': 'p',
+        'р': 'r', 'с': 's', 'т': 't', 'ќ': 'kj', 'у': 'u', 'ф': 'f', 'х': 'h', 'ц': 'c', 'ч': 'ch', 'џ': 'dj', 'ш': 'sh',
+        "✅": "OK", "❌": "ERR", "⏭️": "SKIP", "🎨": "RENDER", "⚠️": "WARN", "📭": "EMPTY", "📂": "READ", "✨": "DONE", "📎": "LINK", "🆔": "ID", "👨‍💻": "DEV"
+    }
+    return "".join(m.get(c, c) for c in text)
+
+def safe_print(obj):
+    print(to_ascii(str(obj)))
+
 def main():
     if not LOG_FILE.exists():
-        print(f"📭 Нема log фајл на локација: {LOG_FILE}")
+        print(f"EMPTY Nema log fajl na lokacija: {LOG_FILE}")
         return
 
-    print(f"📂 Читање на задачи од: {LOG_FILE}")
+    print(f"READ Chitanje na zadachi od: {LOG_FILE}")
     with open(LOG_FILE, 'r', encoding='utf-8') as f:
         content = f.read()
 
     tasks = get_code_blocks(content)
     if not tasks:
-        print("📭 Не најдов Manim код во логот.")
+        print("EMPTY Ne najdov Manim kod vo logot.")
         return
 
     unique_tasks = {}
@@ -140,7 +155,7 @@ def main():
         unique_tasks[pid.strip()] = code 
     
     final_tasks = list(unique_tasks.items())
-    print(f"✨ Уникатни задачи за процесирање: {len(final_tasks)}")
+    print(f"DONE Unikatni zadachi za procesiranje: {len(final_tasks)}")
     
     hashes = load_hashes()
     work_items = []
@@ -150,9 +165,9 @@ def main():
     with ProcessPoolExecutor(max_workers=4) as executor:
         results = list(executor.map(process_single_task, work_items))
 
-    print("\n--- ИЗВЕШТАЈ ---")
+    print("\n--- IZVEShTAJ ---")
     for res in results:
-        print(res)
+        safe_print(res)
 
 if __name__ == "__main__":
     main()

@@ -62,7 +62,7 @@ def ensure_skill_exists(skill_name, is_theorem=False):
     path = os.path.join(folder, filename)
 
     if not os.path.exists(path):
-        print(f"🆕 Креирам нов фајл за вештина: {filename}")
+        print(f"NEW Kreiram nov fajl za veshtina: {filename}")
         content = f"# {skill_name.replace('_', ' ').title()}\n\n*(Автоматски генерирано. Потребно пополнување.)*\n"
         with open(path, 'w', encoding='utf-8') as f:
             f.write(content)
@@ -84,7 +84,7 @@ class {class_name}(Scene):
 {code}
         # --- AI GENERATED CODE END ---
 """
-    entry = f"\n### 🆔 Задача: {prob_id} - {title}\n**📅 Додадено:** {timestamp}\n**🐍 Python/Manim Код:**\n```python\n{full_code}\n```\n---\n"
+    entry = f"\n### ID Zadacha: {prob_id} - {title}\n**Date Dodadeno:** {timestamp}\n**Python/Manim Kod:**\n```python\n{full_code}\n```\n---\n"
     try:
         with open(MANIM_LOG_FILE, "a", encoding="utf-8") as f:
             f.write(entry)
@@ -139,14 +139,14 @@ def create_problem_file(data):
         visual_block = f"\n![Скица]({img_rel_path_prefix}/{image_filename})\n"
     elif manim_code:
         safe_id = re.sub(r'[^a-zA-Z0-9_]', '_', prob_id)
-        visual_block = f"\n> **👨‍💻 Geo-Mentor Code:**\n> Одете во `assets/manim_code_log.md`, копирајте го кодот за `Task_{safe_id}` и генерирајте ја сликата.\n"
+        visual_block = f"\n> **Dev Geo-Mentor Code:**\n> Одете во `assets/manim_code_log.md`, копирајте го кодот за `Task_{safe_id}` и генерирајте ја сликата.\n"
     
     # Вметнување на визуелизацијата
     if "<visual_placeholder>" in content:
         content = content.replace("<visual_placeholder>", visual_block)
     else:
         # Ако нема placeholder, стави го пред Анализата
-        content = content.replace("## 🧠 Анализа", f"{visual_block}\n## 🧠 Анализа")
+        content = content.replace("## Analysis Анализа", f"{visual_block}\n## Analysis Анализа")
 
     # --- 5. ЗАМЕНА НА МЕТАПОДАТОЦИ ---
     content = content.replace("<6-12>", str(grade))
@@ -197,7 +197,7 @@ def create_problem_file(data):
 
     interactive_hint = f"""
 <details>
-<summary>💡 Прикажи помош (Анализа)</summary>
+<summary>Hint Прикажи помош (Анализа)</summary>
 
 {full_hint}
 </details>
@@ -208,7 +208,7 @@ def create_problem_file(data):
     
     # Б. Решение - Скриено
     sol = data.get('solution_content', 'Решението е во изработка.')
-    collapsible_sol = f"\n<details>\n<summary>📝 Прикажи го целото решение</summary>\n\n{sol}\n\n</details>\n"
+    collapsible_sol = f"\n<details>\n<summary>Solution Прикажи го целото решение</summary>\n\n{sol}\n\n</details>\n"
     
     # FIX: Користиме lambda x: collapsible_sol
     content = re.sub(r'<Детално решение.*?чекор\.>', lambda x: collapsible_sol, content, flags=re.DOTALL)
@@ -231,36 +231,36 @@ def create_problem_file(data):
     with open(output_path, 'w', encoding='utf-8') as f:
         f.write(content)
     
-    print(f"✅ УСПЕХ! Креиран фајл: {output_path}")
+    print(f"OK USPEH! Kreiran fajl: {output_path}")
 
 if __name__ == "__main__":
     if os.path.exists(INPUT_FILE):
-        print(f"� [AUTO-FIX] Проверувам и поправам JSON грешки во {INPUT_FILE}...")
+        print(f"Checking and fixing JSON errors in {INPUT_FILE}...")
         try:
              # Повикување на скриптата за поправка како subprocess
             fix_script = os.path.join(SCRIPT_DIR, "fix_json_escapes.py")
             if os.path.exists(fix_script):
                 subprocess.run([sys.executable, fix_script], check=True, capture_output=True)
-                print("✨ JSON Escape fix applied.")
+                print("* JSON Escape fix applied.")
         except Exception as fix_err:
-             print(f"⚠️ Warning: Could not run json fix script: {fix_err}")
+             print(f"! Warning: Could not run json fix script: {fix_err}")
 
-        print(f"�📂 Чitam од фајлот: {INPUT_FILE}")
+        print(f"Reading from file: {INPUT_FILE}")
         try:
             with open(INPUT_FILE, 'r', encoding='utf-8') as f:
                 json_data = json.load(f)
             
             if isinstance(json_data, list):
-                print(f"📦 Детектирав листа од {len(json_data)} задачи. Започнувам...")
+                print(f"[Batch] Detektirav lista od {len(json_data)} zadachi. Zapochnuvam...")
                 for i, problem in enumerate(json_data, 1):
                     create_problem_file(problem)
             else:
                 create_problem_file(json_data)
                 
         except json.JSONDecodeError as e:
-            print(f"❌ ГРЕШКА во input.json: {e}")
+            print(f"❌ GREShKA vo input.json: {e}")
     else:
-        print("📥 Внеси JSON рачно (Ctrl+Z па Enter):")
+        print("📥 Vnesi JSON rachno (Ctrl+Z pa Enter):")
         try:
             input_data = sys.stdin.read()
             if input_data.strip():
@@ -270,23 +270,23 @@ if __name__ == "__main__":
                 else:
                     create_problem_file(json_data)
         except Exception as e:
-            print(f"❌ ГРЕШКА: {e}")
+            print(f"❌ GREShKA: {e}")
 
     # --- AUTOMATED VISUALIZATION GENERATION ---
-    print("\n🎨 Стартувам автоматско генерирање на слики (batch_manim)...")
+    print("\n[Manim] Startuvam avtomatsko generiranje na sliki (batch_manim)...")
     batch_script = os.path.join(SCRIPT_DIR, "batch_manim.py")
     if os.path.exists(batch_script):
         try:
             subprocess.run([sys.executable, batch_script], check=False)
         except Exception as e:
-            print(f"⚠️ Не успеав да го стартувам batch_manim: {e}")
+            print(f"! Ne uspeav da go startuvam batch_manim: {e}")
     else:
-        print(f"⚠️ Скриптата {batch_script} не постои.")
+        print(f"! Skriptata {batch_script} ne postoi.")
 
     # --- LOG ROTATION ---
-    print("\n🧹 Проверка и чистење на логот за Manim...")
+    print("\n[Clean] Proverka i chistenje na logot za Manim...")
     try:
         from archive_logs import rotate_logs
         rotate_logs()
     except Exception as e:
-        print(f"⚠️ Грешка при ротација на логови: {e}")
+        print(f"! Greshka pri rotacija na logovi: {e}")
