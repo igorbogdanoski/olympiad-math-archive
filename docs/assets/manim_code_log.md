@@ -1,176 +1,4 @@
 ### 🆔 Задача: 2022_mun_y4_19b - Ротација и координати
-**📅 Додадено:** 2025-12-28 15:01
-**🐍 Python/Manim Код:**
-```python
-from manim import *
-
-class Task_2022_mun_y4_19b(Scene):
-    def construct(self):
-        self.camera.background_color = WHITE
-        Text.set_default(color=BLACK)
-        MathTex.set_default(color=BLACK)
-        Mobject.set_default(color=BLACK)
-        # --- AI GENERATED CODE START ---
-        axes = Axes(x_range=[0, 7], y_range=[0, 7], x_length=6, y_length=6)
-        
-        A = axes.c2p(1, 2)
-        A1 = axes.c2p(6, 5)
-        B = axes.c2p(1, 4)
-        B1 = axes.c2p(4, 5)
-        M = axes.c2p(2, 6)
-        
-        dots = VGroup(Dot(A), Dot(A1), Dot(B), Dot(B1), Dot(M, color=RED))
-        labels = VGroup(
-            MathTex('A').next_to(A, DL),
-            MathTex('A_1').next_to(A1, UR),
-            MathTex('B').next_to(B, UL),
-            MathTex('B_1').next_to(B1, UR),
-            MathTex('M').next_to(M, UP)
-        ).set_color(BLACK)
-        
-        lines = VGroup(
-            DashedLine(A, A1, color=GREY),
-            DashedLine(B, B1, color=GREY),
-            Line(M, A, color=BLUE, stroke_opacity=0.5),
-            Line(M, A1, color=BLUE, stroke_opacity=0.5)
-        )
-
-        self.add(axes, dots, labels, lines)
-        # --- AI GENERATED CODE END ---
-
-```
----
-
-### 🆔 Задача: 2022_mun_y4_19b - Ротација и координати
-**📅 Додадено:** 2025-12-28 15:03
-**🐍 Python/Manim Код:**
-```python
-from manim import *
-
-class Task_2022_mun_y4_19b(Scene):
-    def construct(self):
-        self.camera.background_color = WHITE
-        Text.set_default(color=BLACK)
-        MathTex.set_default(color=BLACK)
-        Mobject.set_default(color=BLACK)
-        # --- AI GENERATED CODE START ---
-        axes = Axes(x_range=[0, 7], y_range=[0, 7], x_length=6, y_length=6)
-        
-        A = axes.c2p(1, 2)
-        A1 = axes.c2p(6, 5)
-        B = axes.c2p(1, 4)
-        B1 = axes.c2p(4, 5)
-        M = axes.c2p(2, 6)
-        
-        dots = VGroup(Dot(A), Dot(A1), Dot(B), Dot(B1), Dot(M, color=RED))
-        labels = VGroup(
-            MathTex('A').next_to(A, DL),
-            MathTex('A_1').next_to(A1, UR),
-            MathTex('B').next_to(B, UL),
-            MathTex('B_1').next_to(B1, UR),
-            MathTex('M').next_to(M, UP)
-        ).set_color(BLACK)
-        
-        lines = VGroup(
-            DashedLine(A, A1, color=GREY),
-            DashedLine(B, B1, color=GREY),
-            Line(M, A, color=BLUE, stroke_opacity=0.5),
-            Line(M, A1, color=BLUE, stroke_opacity=0.5)
-        )
-
-        self.add(axes, dots, labels, lines)
-        # --- AI GENERATED CODE END ---
-
-```
----
-
-### 🆔 Задача: 2022_mun_y4_19b - Ротација и координати
-**📅 Додадено:** 2025-12-28 15:05
-**🐍 Python/Manim Код:**
-```python
-from manim import *
-
-class Task_2022_mun_y4_19b(Scene):
-    def construct(self):
-        self.camera.background_color = WHITE
-        Text.set_default(color=BLACK)
-        MathTex.set_default(color=BLACK)
-        Mobject.set_default(color=BLACK)
-        # --- AI GENERATED CODE START ---
-        axes = Axes(x_range=[0, 7], y_range=[0, 7], x_length=6, y_length=6)
-        
-        A = axes.c2p(1, 2)
-        A1 = axes.c2p(6, 5)
-        B = axes.c2p(1, 4)
-        B1 = axes.c2p(4, 5)
-        M = axes.c2p(2, 6)
-        
-        dots = VGroup(Dot(A), Dot(A1), Dot(B), Dot(B1), Dot(M, color=RED))
-        labels = VGroup(
-            MathTex('A').next_to(A, DL),
-            MathTex('A_1').next_to(A1, UR),
-            MathTex('B').next_to(B, UL),
-            MathTex('B_1').next_to(B1, UR),
-            MathTex('M').next_to(M, UP)
-        ).set_color(BLACK)
-        
-        lines = VGroup(
-            DashedLine(A, A1, color=GREY),
-            DashedLine(B, B1, color=GREY),
-            Line(M, A, color=BLUE, stroke_opacity=0.5),
-            Line(M, A1, color=BLUE, stroke_opacity=0.5)
-        )
-
-        self.add(axes, dots, labels, lines)
-        # --- AI GENERATED CODE END ---
-
-```
----
-
-### 🆔 Задача: 2022_mun_y4_19b - Ротација и координати
-**📅 Додадено:** 2025-12-28 15:05
-**🐍 Python/Manim Код:**
-```python
-from manim import *
-
-class Task_2022_mun_y4_19b(Scene):
-    def construct(self):
-        self.camera.background_color = WHITE
-        Text.set_default(color=BLACK)
-        MathTex.set_default(color=BLACK)
-        Mobject.set_default(color=BLACK)
-        # --- AI GENERATED CODE START ---
-        axes = Axes(x_range=[0, 7], y_range=[0, 7], x_length=6, y_length=6)
-        
-        A = axes.c2p(1, 2)
-        A1 = axes.c2p(6, 5)
-        B = axes.c2p(1, 4)
-        B1 = axes.c2p(4, 5)
-        M = axes.c2p(2, 6)
-        
-        dots = VGroup(Dot(A), Dot(A1), Dot(B), Dot(B1), Dot(M, color=RED))
-        labels = VGroup(
-            MathTex('A').next_to(A, DL),
-            MathTex('A_1').next_to(A1, UR),
-            MathTex('B').next_to(B, UL),
-            MathTex('B_1').next_to(B1, UR),
-            MathTex('M').next_to(M, UP)
-        ).set_color(BLACK)
-        
-        lines = VGroup(
-            DashedLine(A, A1, color=GREY),
-            DashedLine(B, B1, color=GREY),
-            Line(M, A, color=BLUE, stroke_opacity=0.5),
-            Line(M, A1, color=BLUE, stroke_opacity=0.5)
-        )
-
-        self.add(axes, dots, labels, lines)
-        # --- AI GENERATED CODE END ---
-
-```
----
-
-### 🆔 Задача: 2022_mun_y4_19b - Ротација и координати
 **📅 Додадено:** 2025-12-28 15:21
 **🐍 Python/Manim Код:**
 ```python
@@ -785,6 +613,334 @@ class Task_geo_three_circles_tangent(Scene):
 
 ### 🆔 Задача: sigma137_y1_p2 - Аголот во триаголникот и впишаната кружница
 **📅 Додадено:** 2026-01-07 21:26
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_sigma137_y1_p2(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+def construct(self):
+    self.camera.background_color = WHITE
+
+    # Coordinates based on calculated angles: A=96.5, B=48.25, C=35.25
+    # Scale factor
+    s = 6
+    
+    # Point C at origin
+    C = ORIGIN
+    # Point B on x-axis. Length a. Let's normalize.
+    # Sine rule: a/sin(A) = b/sin(B). Let a = 6.
+    # b = 6 * sin(48.25) / sin(96.5) approx 6 * 0.746 / 0.993 = 4.5
+    
+    B = RIGHT * 6
+    # A is at angle 35.25 from C, length b
+    # 35.25 degrees in radians is 0.615
+    A = np.array([4.5 * np.cos(35.25 * DEGREES), 4.5 * np.sin(35.25 * DEGREES), 0])
+
+    # Incenter O
+    # Bisector of C is simply line at 35.25/2 degrees
+    # Bisector of B is line from B at 180 - 48.25/2 degrees
+    # Intersection calculation (simplified for visual)
+    # Incenter coordinates formula: (aA + bB + cC) / (a+b+c)
+    c_len = np.linalg.norm(A - B)
+    b_len = np.linalg.norm(A - C)
+    a_len = np.linalg.norm(B - C)
+    O = (a_len * A + b_len * B + c_len * C) / (a_len + b_len + c_len)
+
+    # Point K on BC such that CK = AC = b_len
+    K = C + (B - C) * (b_len / a_len)
+
+    # Create Mobjects
+    triangle = Polygon(A, B, C, color=BLACK, stroke_width=4)
+    labels = VGroup(
+        MathTex("A").next_to(A, UP),
+        MathTex("B").next_to(B, RIGHT),
+        MathTex("C").next_to(C, LEFT),
+        MathTex("O").next_to(O, UP, buff=0.1),
+        MathTex("K").next_to(K, DOWN)
+    ).set_color(BLACK)
+
+    # Segments
+    seg_AO = Line(A, O, color=BLUE, stroke_width=3)
+    seg_KO = Line(K, O, color=BLUE, stroke_width=3)
+    seg_BK = Line(B, K, color=RED, stroke_width=4)
+    seg_CK = Line(C, K, color=GREEN, stroke_width=4)
+    seg_AC = Line(A, C, color=GREEN, stroke_width=4)
+
+    # Markings
+    # AC = CK
+    mark_AC = DashedLine(A, C, color=GREEN)
+    
+    # BK = AO = KO
+    # Just highlight them
+
+    self.add(triangle)
+    self.add(seg_AO, seg_KO, seg_BK, seg_CK, seg_AC)
+    self.add(labels)
+
+    # Add angle labels
+    angle_A = Angle(Line(A, B), Line(A, C), radius=0.4, other_angle=True)
+    label_A = MathTex(r"\alpha").next_to(angle_A, UP)
+    
+    self.add(angle_A, label_A)
+        # --- AI GENERATED CODE END ---
+
+```
+---
+
+### 🆔 Задача: sigma137_y1_p2 - Аголот во триаголникот и впишаната кружница
+**📅 Додадено:** 2026-01-07 21:38
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_sigma137_y1_p2(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+def construct(self):
+    self.camera.background_color = WHITE
+
+    # Coordinates based on calculated angles: A=96.5, B=48.25, C=35.25
+    # Scale factor
+    s = 6
+    
+    # Point C at origin
+    C = ORIGIN
+    # Point B on x-axis. Length a. Let's normalize.
+    # Sine rule: a/sin(A) = b/sin(B). Let a = 6.
+    # b = 6 * sin(48.25) / sin(96.5) approx 6 * 0.746 / 0.993 = 4.5
+    
+    B = RIGHT * 6
+    # A is at angle 35.25 from C, length b
+    # 35.25 degrees in radians is 0.615
+    A = np.array([4.5 * np.cos(35.25 * DEGREES), 4.5 * np.sin(35.25 * DEGREES), 0])
+
+    # Incenter O
+    # Bisector of C is simply line at 35.25/2 degrees
+    # Bisector of B is line from B at 180 - 48.25/2 degrees
+    # Intersection calculation (simplified for visual)
+    # Incenter coordinates formula: (aA + bB + cC) / (a+b+c)
+    c_len = np.linalg.norm(A - B)
+    b_len = np.linalg.norm(A - C)
+    a_len = np.linalg.norm(B - C)
+    O = (a_len * A + b_len * B + c_len * C) / (a_len + b_len + c_len)
+
+    # Point K on BC such that CK = AC = b_len
+    K = C + (B - C) * (b_len / a_len)
+
+    # Create Mobjects
+    triangle = Polygon(A, B, C, color=BLACK, stroke_width=4)
+    labels = VGroup(
+        MathTex("A").next_to(A, UP),
+        MathTex("B").next_to(B, RIGHT),
+        MathTex("C").next_to(C, LEFT),
+        MathTex("O").next_to(O, UP, buff=0.1),
+        MathTex("K").next_to(K, DOWN)
+    ).set_color(BLACK)
+
+    # Segments
+    seg_AO = Line(A, O, color=BLUE, stroke_width=3)
+    seg_KO = Line(K, O, color=BLUE, stroke_width=3)
+    seg_BK = Line(B, K, color=RED, stroke_width=4)
+    seg_CK = Line(C, K, color=GREEN, stroke_width=4)
+    seg_AC = Line(A, C, color=GREEN, stroke_width=4)
+
+    # Markings
+    # AC = CK
+    mark_AC = DashedLine(A, C, color=GREEN)
+    
+    # BK = AO = KO
+    # Just highlight them
+
+    self.add(triangle)
+    self.add(seg_AO, seg_KO, seg_BK, seg_CK, seg_AC)
+    self.add(labels)
+
+    # Add angle labels
+    angle_A = Angle(Line(A, B), Line(A, C), radius=0.4, other_angle=True)
+    label_A = MathTex(r"\alpha").next_to(angle_A, UP)
+    
+    self.add(angle_A, label_A)
+        # --- AI GENERATED CODE END ---
+
+```
+---
+
+### 🆔 Задача: sigma137_y1_p2 - Аголот во триаголникот и впишаната кружница
+**📅 Додадено:** 2026-01-07 21:46
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_sigma137_y1_p2(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+def construct(self):
+    self.camera.background_color = WHITE
+
+    # Coordinates based on calculated angles: A=96.5, B=48.25, C=35.25
+    # Scale factor
+    s = 6
+    
+    # Point C at origin
+    C = ORIGIN
+    # Point B on x-axis. Length a. Let's normalize.
+    # Sine rule: a/sin(A) = b/sin(B). Let a = 6.
+    # b = 6 * sin(48.25) / sin(96.5) approx 6 * 0.746 / 0.993 = 4.5
+    
+    B = RIGHT * 6
+    # A is at angle 35.25 from C, length b
+    # 35.25 degrees in radians is 0.615
+    A = np.array([4.5 * np.cos(35.25 * DEGREES), 4.5 * np.sin(35.25 * DEGREES), 0])
+
+    # Incenter O
+    # Bisector of C is simply line at 35.25/2 degrees
+    # Bisector of B is line from B at 180 - 48.25/2 degrees
+    # Intersection calculation (simplified for visual)
+    # Incenter coordinates formula: (aA + bB + cC) / (a+b+c)
+    c_len = np.linalg.norm(A - B)
+    b_len = np.linalg.norm(A - C)
+    a_len = np.linalg.norm(B - C)
+    O = (a_len * A + b_len * B + c_len * C) / (a_len + b_len + c_len)
+
+    # Point K on BC such that CK = AC = b_len
+    K = C + (B - C) * (b_len / a_len)
+
+    # Create Mobjects
+    triangle = Polygon(A, B, C, color=BLACK, stroke_width=4)
+    labels = VGroup(
+        MathTex("A").next_to(A, UP),
+        MathTex("B").next_to(B, RIGHT),
+        MathTex("C").next_to(C, LEFT),
+        MathTex("O").next_to(O, UP, buff=0.1),
+        MathTex("K").next_to(K, DOWN)
+    ).set_color(BLACK)
+
+    # Segments
+    seg_AO = Line(A, O, color=BLUE, stroke_width=3)
+    seg_KO = Line(K, O, color=BLUE, stroke_width=3)
+    seg_BK = Line(B, K, color=RED, stroke_width=4)
+    seg_CK = Line(C, K, color=GREEN, stroke_width=4)
+    seg_AC = Line(A, C, color=GREEN, stroke_width=4)
+
+    # Markings
+    # AC = CK
+    mark_AC = DashedLine(A, C, color=GREEN)
+    
+    # BK = AO = KO
+    # Just highlight them
+
+    self.add(triangle)
+    self.add(seg_AO, seg_KO, seg_BK, seg_CK, seg_AC)
+    self.add(labels)
+
+    # Add angle labels
+    angle_A = Angle(Line(A, B), Line(A, C), radius=0.4, other_angle=True)
+    label_A = MathTex(r"\alpha").next_to(angle_A, UP)
+    
+    self.add(angle_A, label_A)
+        # --- AI GENERATED CODE END ---
+
+```
+---
+
+### 🆔 Задача: sigma137_y1_p2 - Аголот во триаголникот и впишаната кружница
+**📅 Додадено:** 2026-01-07 21:50
+**🐍 Python/Manim Код:**
+```python
+from manim import *
+
+class Task_sigma137_y1_p2(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+def construct(self):
+    self.camera.background_color = WHITE
+
+    # Coordinates based on calculated angles: A=96.5, B=48.25, C=35.25
+    # Scale factor
+    s = 6
+    
+    # Point C at origin
+    C = ORIGIN
+    # Point B on x-axis. Length a. Let's normalize.
+    # Sine rule: a/sin(A) = b/sin(B). Let a = 6.
+    # b = 6 * sin(48.25) / sin(96.5) approx 6 * 0.746 / 0.993 = 4.5
+    
+    B = RIGHT * 6
+    # A is at angle 35.25 from C, length b
+    # 35.25 degrees in radians is 0.615
+    A = np.array([4.5 * np.cos(35.25 * DEGREES), 4.5 * np.sin(35.25 * DEGREES), 0])
+
+    # Incenter O
+    # Bisector of C is simply line at 35.25/2 degrees
+    # Bisector of B is line from B at 180 - 48.25/2 degrees
+    # Intersection calculation (simplified for visual)
+    # Incenter coordinates formula: (aA + bB + cC) / (a+b+c)
+    c_len = np.linalg.norm(A - B)
+    b_len = np.linalg.norm(A - C)
+    a_len = np.linalg.norm(B - C)
+    O = (a_len * A + b_len * B + c_len * C) / (a_len + b_len + c_len)
+
+    # Point K on BC such that CK = AC = b_len
+    K = C + (B - C) * (b_len / a_len)
+
+    # Create Mobjects
+    triangle = Polygon(A, B, C, color=BLACK, stroke_width=4)
+    labels = VGroup(
+        MathTex("A").next_to(A, UP),
+        MathTex("B").next_to(B, RIGHT),
+        MathTex("C").next_to(C, LEFT),
+        MathTex("O").next_to(O, UP, buff=0.1),
+        MathTex("K").next_to(K, DOWN)
+    ).set_color(BLACK)
+
+    # Segments
+    seg_AO = Line(A, O, color=BLUE, stroke_width=3)
+    seg_KO = Line(K, O, color=BLUE, stroke_width=3)
+    seg_BK = Line(B, K, color=RED, stroke_width=4)
+    seg_CK = Line(C, K, color=GREEN, stroke_width=4)
+    seg_AC = Line(A, C, color=GREEN, stroke_width=4)
+
+    # Markings
+    # AC = CK
+    mark_AC = DashedLine(A, C, color=GREEN)
+    
+    # BK = AO = KO
+    # Just highlight them
+
+    self.add(triangle)
+    self.add(seg_AO, seg_KO, seg_BK, seg_CK, seg_AC)
+    self.add(labels)
+
+    # Add angle labels
+    angle_A = Angle(Line(A, B), Line(A, C), radius=0.4, other_angle=True)
+    label_A = MathTex(r"\alpha").next_to(angle_A, UP)
+    
+    self.add(angle_A, label_A)
+        # --- AI GENERATED CODE END ---
+
+```
+---
+
+### 🆔 Задача: sigma137_y1_p2 - Аголот во триаголникот и впишаната кружница
+**📅 Додадено:** 2026-01-07 21:56
 **🐍 Python/Manim Код:**
 ```python
 from manim import *

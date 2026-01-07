@@ -235,7 +235,17 @@ def create_problem_file(data):
 
 if __name__ == "__main__":
     if os.path.exists(INPUT_FILE):
-        print(f"📂 Чitam од фајлот: {INPUT_FILE}")
+        print(f"� [AUTO-FIX] Проверувам и поправам JSON грешки во {INPUT_FILE}...")
+        try:
+             # Повикување на скриптата за поправка како subprocess
+            fix_script = os.path.join(SCRIPT_DIR, "fix_json_escapes.py")
+            if os.path.exists(fix_script):
+                subprocess.run([sys.executable, fix_script], check=True, capture_output=True)
+                print("✨ JSON Escape fix applied.")
+        except Exception as fix_err:
+             print(f"⚠️ Warning: Could not run json fix script: {fix_err}")
+
+        print(f"�📂 Чitam од фајлот: {INPUT_FILE}")
         try:
             with open(INPUT_FILE, 'r', encoding='utf-8') as f:
                 json_data = json.load(f)
