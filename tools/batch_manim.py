@@ -43,24 +43,24 @@ def process_single_task(args):
     target_image = IMAGES_DIR / f"{prob_id}.png"
     
     if target_image.exists() and existing_hash == current_hash:
-        return f"⏭️  {prob_id}: Веќе постои и е ажурирана. Прескокнувам."
+        return f"SKIP {prob_id}: Vekje postoi i e azhurirana. Preskoknuvam."
     
     print(f"RENDER {prob_id}: Zapochnuvam rendiranje...")
     try:
         success = render_scene(prob_id, code)
         if success:
             save_hash(prob_id, current_hash)
-            # --- НОВО: Автоматско ажурирање на Markdown ---
+            # --- NOVO: Avtomatsko azhuriranje na Markdown ---
             try:
                 update_markdown_reference(prob_id)
             except Exception as update_err:
-                print(f"⚠️ Greshka pri azhuriranje na Markdown za {prob_id}: {update_err}")
+                print(f"WARN Greshka pri azhuriranje na Markdown za {prob_id}: {update_err}")
             
-            return f"✅ {prob_id}: Успешно генерирана и поврзана!"
+            return f"OK {prob_id}: Uspeshno generirana i povrzana!"
         else:
-            return f"❌ {prob_id}: Грешка при рендирање."
+            return f"ERR {prob_id}: Greshka pri rendiranje."
     except Exception as e:
-        return f"❌ {prob_id}: Критична грешка: {str(e)}"
+        return f"ERR {prob_id}: Kritichna greshka: {str(e)}"
 
 def update_markdown_reference(prob_id):
     """
@@ -86,7 +86,7 @@ def update_markdown_reference(prob_id):
                     content = f.read()
                 
                 # Check if this file has the specific placeholder for this task
-                if placeholder_fragment in content and "> **👨‍💻 Geo-Mentor Code:**" in content:
+                if placeholder_fragment in content and "> **DEV Geo-Mentor Code:**" in content:
                     
                     # Calculate relative path to image
                     image_path_abs = IMAGES_DIR / f"{prob_id}.png"
@@ -95,13 +95,13 @@ def update_markdown_reference(prob_id):
                         rel_path = os.path.relpath(image_path_abs, start=file_path.parent)
                         rel_path = rel_path.replace(os.path.sep, '/')
                     except ValueError:
-                        print(f"⚠️ Ne mozham da presmetam relativna pateka za {file_path}")
+                        print(f"WARN Ne mozham da presmetam relativna pateka za {file_path}")
                         continue
 
                     # Construct the replacement using Regex to capture the whole block
                     pattern = re.compile(
-                        r">\s*\*\*👨‍💻 Geo-Mentor Code:\*\*\n"
-                        r">\s*Одете во `assets/manim_code_log.md`.*?" + re.escape(f"Task_{safe_id}") + r".*?\n",
+                        r">\s*\*\*DEV Geo-Mentor Code:\*\*\n"
+                        r">\s*Odete vo `assets/manim_code_log.md`.*?" + re.escape(f"Task_{safe_id}") + r".*?\n",
                         re.DOTALL
                     )
                     

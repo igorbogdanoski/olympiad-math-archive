@@ -211,6 +211,7 @@ def create_problem_file(data):
     collapsible_sol = f"\n<details>\n<summary>Solution Прикажи го целото решение</summary>\n\n{sol}\n\n</details>\n"
     
     # FIX: Користиме lambda x: collapsible_sol
+    content = re.sub(r'<Детално решение.*?поинаку\.?>', lambda x: collapsible_sol, content, flags=re.DOTALL)
     content = re.sub(r'<Детално решение.*?чекор\.>', lambda x: collapsible_sol, content, flags=re.DOTALL)
     content = re.sub(r'<Чекор по чекор.*?лак"\)\.>', lambda x: collapsible_sol, content, flags=re.DOTALL)
 
