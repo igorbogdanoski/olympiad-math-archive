@@ -2280,3 +2280,109 @@ def construct(self):
 
 ```
 ---
+
+### ID Zadacha: sigma137_p1868_synthetic - Тангентен четириаголник и радиуси (Синтетичко решение)
+**Date Dodadeno:** 2026-01-07 23:25
+**Python/Manim Kod:**
+```python
+from manim import *
+
+class Task_sigma137_p1868_synthetic(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        Text.set_default(color=BLACK)
+        MathTex.set_default(color=BLACK)
+        Mobject.set_default(color=BLACK)
+        # --- AI GENERATED CODE START ---
+def construct(self):
+    self.camera.background_color = WHITE
+
+    # 1. Setup Tangential Quadrilateral ABCD
+    # We construct it around a central circle (incircle)
+    R = 1.5
+    O = ORIGIN
+    incircle = Circle(radius=R, color=GRAY, stroke_opacity=0.5)
+    
+    # Tangent points angles (tuned for obtuse D)
+    # D needs to be 'sharp' pointing outwards if we look at the quad,
+    # but the internal angle must be > 90.
+    # Let's define lines tangent to the circle.
+    
+    # Tangent 1 (CD): Angle -10 deg
+    # Tangent 2 (AD): Angle 100 deg
+    # Tangent 3 (AB): Angle 190 deg
+    # Tangent 4 (BC): Angle 280 deg
+    
+    # Function to get vertex from two tangent angles
+    def get_vertex(ang1, ang2, radius):
+        # The vertex lies on the line bisecting the angle between normal vectors
+        # Distance is R / cos(half_angle_diff)
+        a1 = ang1 * DEGREES
+        a2 = ang2 * DEGREES
+        mid = (a1 + a2) / 2
+        diff = (a2 - a1) / 2
+        dist = radius / np.cos(diff)
+        return np.array([dist * np.cos(mid), dist * np.sin(mid), 0])
+
+    D = get_vertex(-10, 100, R)
+    A = get_vertex(100, 190, R)
+    B = get_vertex(190, 280, R)
+    C = get_vertex(280, 350, R) # 350 is -10
+
+    # Extensions for P and Q
+    # P is intersection of AD and BC
+    # Line AD passes through A and D
+    # Line BC passes through B and C
+    def line_intersection(p1, p2, p3, p4):
+        x1, y1 = p1[:2]
+        x2, y2 = p2[:2]
+        x3, y3 = p3[:2]
+        x4, y4 = p4[:2]
+        denom = (x1 - x2) * (y3 - y4) - (y1 - y2) * (x3 - x4)
+        if denom == 0: return None
+        t = ((x1 - x3) * (y3 - y4) - (y1 - y3) * (x3 - x4)) / denom
+        return np.array([x1 + t * (x2 - x1), y1 + t * (y2 - y1), 0])
+
+    P = line_intersection(A, D, B, C)
+    Q = line_intersection(A, B, C, D)
+
+    # Draw Main Elements
+    quad = Polygon(A, B, C, D, color=BLACK, stroke_width=3)
+    lines_ext = VGroup(
+        Line(D, P, color=BLUE, stroke_width=2),
+        Line(C, P, color=BLUE, stroke_width=2),
+        Line(A, Q, color=BLUE, stroke_width=2),
+        Line(D, Q, color=BLUE, stroke_width=2)
+    )
+
+    # Small Incircles (Approximate for visual)
+    # Incircle of PDC
+    # Center lies on bisector of D (which is line DO) and bisector of P
+    # Visual approx: Scale down from D
+    I1 = D + (O - D) * 0.25 # Shift towards center
+    r1 = 0.3
+    circ1 = Circle(radius=r1, color=RED).move_to(I1)
+    
+    # Incircle of QAD
+    I2 = D + (O - D) * 0.3
+    r2 = 0.35
+    circ2 = Circle(radius=r2, color=RED).move_to(I2)
+
+    # Labels
+    labels = VGroup(
+        MathTex("A").next_to(A, LEFT),
+        MathTex("B").next_to(B, DOWN),
+        MathTex("C").next_to(C, RIGHT),
+        MathTex("D").next_to(D, UP),
+        MathTex("P").next_to(P, UP),
+        MathTex("Q").next_to(Q, LEFT)
+    ).set_color(BLACK)
+
+    self.add(incircle)
+    self.add(quad, lines_ext)
+    self.add(circ1, circ2)
+    self.add(labels)
+        # --- AI GENERATED CODE END ---
+
+```
+---
