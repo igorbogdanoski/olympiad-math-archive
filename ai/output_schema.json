@@ -57,7 +57,7 @@
     },
     "geometry_style": {
       "type": ["string", "null"],
-      "description": "Method used for geometry problems. Default to 'synthetic'.",
+      "description": "Method used for geometry problems. STRICTLY 'synthetic' unless impossible.",
       "enum": [
         "synthetic",
         "analytic",
@@ -116,11 +116,11 @@
     },
     "solution_content": {
       "type": "string",
-      "description": "The rigorous mathematical proof/calculation. Use clear steps (Step 1, Step 2). State every theorem used."
+      "description": "The rigorous mathematical proof. EXTREMELY DETAILED and accessible to beginners. State every theorem used."
     },
     "pedagogical_notes": {
       "type": "string",
-      "description": "Notes for teachers: common pitfalls and Socratic questions."
+      "description": "Notes including 'Deep Dive', 'Olympian's Advice' (exam strategy), and 'Strategy Review'."
     }
   },
   "required": [
