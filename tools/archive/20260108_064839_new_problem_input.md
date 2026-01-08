@@ -1,19 +1,20 @@
 ---
-difficulty: 6
-grade: 11
-primary_skill: геометриска_оптимизација
+
 problem_id: sigma_137_y3_p2
-related_skills:
-- тригонометриски_идентитети
-- плоштина_на_триаголник
-source: Сигма 137
-tags:
-- тетивен_четириаголник
-- максимална_плоштина
-- косинусна_теорема
-- формула_на_брамагупта
 title: Максимална плоштина на четириаголник и формула на Брамагупта
+grade: 11
+difficulty: 6
 type: geometry
+tags:
+  - тетивен_четириаголник
+  - максимална_плоштина
+  - косинусна_теорема
+  - формула_на_брамагупта
+primary_skill: геометриска_оптимизација
+related_skills:
+  - тригонометриски_идентитети
+  - плоштина_на_триаголник
+source: Сигма 137
 ---
 
 # Максимална плоштина на четириаголник (Брамагупта)
@@ -117,12 +118,6 @@ $$P = \sqrt{(s-a)(s-b)(s-c)(s-d)}$$
 
 **Краен одговор:** Тетивниот четириаголник има максимална плоштина $\boxed{P = \sqrt{(s-a)(s-b)(s-c)(s-d)}}$
 
-
-
----
-### 🎨 Визуелизација
-![Илустрација](/assets/images/sigma_137_y3_p2/sigma_137_y3_p2.png)
-
 ## 👨‍🏫 Менторски Белешки
 1. **Златен Совет:** Оваа формула е всушност генерализација на Хероновата формула за триаголник. Замисли дека едната страна $d$ се намалува до $0$. Четириаголникот станува триаголник, а формулата на Брамагупта се претвора точно во Хероновата формула.
 2. **Чести Грешки:** Учениците често ја користат оваа формула за секој четириаголник. Внимавај! Таа важи **исклучиво** ако четириаголникот е тетивен. За сите останати, плоштината е секогаш помала.
@@ -131,3 +126,47 @@ $$P = \sqrt{(s-a)(s-b)(s-c)(s-d)}$$
 ### 🔗 Поврзани вештини
 * **Примарна вештина:** Планиметриска оптимизација (Максимизација на површина)
 * **Потребни предзнаења:** Косинусна теорема, Својства на тетивни четириаголници.
+
+# Manim Code
+```python
+from manim import *
+
+class SolutionScene(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        
+        # --- CONFIGURATION ---
+        # Define a cyclic quadrilateral for maximum area
+        # Points on a circle with radius 2.5
+        r = 2.5
+        A = r * np.array([np.cos(210 * DEGREES), np.sin(210 * DEGREES), 0])
+        B = r * np.array([np.cos(330 * DEGREES), np.sin(330 * DEGREES), 0])
+        C = r * np.array([np.cos(45 * DEGREES), np.sin(45 * DEGREES), 0])
+        D = r * np.array([np.cos(135 * DEGREES), np.sin(135 * DEGREES), 0])
+        
+        # Shapes
+        circle = Circle(radius=r, color=BLUE, stroke_width=2).move_to(ORIGIN)
+        quad = Polygon(A, B, C, D, color=BLACK, stroke_width=4)
+        diag_e = Line(B, D, color=BLACK, stroke_width=2)
+        
+        # Labels for sides
+        lbl_a = MathTex("a", color=BLACK).next_to(Line(A, B).get_center(), DOWN, buff=0.1)
+        lbl_b = MathTex("b", color=BLACK).next_to(Line(B, C).get_center(), RIGHT, buff=0.1)
+        lbl_c = MathTex("c", color=BLACK).next_to(Line(C, D).get_center(), UP, buff=0.1)
+        lbl_d = MathTex("d", color=BLACK).next_to(Line(D, A).get_center(), LEFT, buff=0.1)
+        lbl_e = MathTex("e", color=BLACK).next_to(diag_e.get_center(), UP, buff=0.1)
+        
+        # Labels for angles
+        lbl_alpha = MathTex("\\alpha", color=RED).move_to(A + 0.6 * RIGHT + 0.4 * UP)
+        lbl_gamma = MathTex("\\gamma", color=RED).move_to(C + 0.6 * LEFT + 0.4 * DOWN)
+        
+        # Title and Final Formula
+        title = MathTex("Max Area: Cyclic Quadrilateral", color=BLACK).to_edge(UP)
+        formula = MathTex("P = \\sqrt{(s-a)(s-b)(s-c)(s-d)}", color=BLACK).to_edge(DOWN, buff=0.5)
+        
+        # Highlight: Opposite angles sum to 180
+        info = MathTex("\\alpha + \\gamma = 180^\\circ", color=RED).scale(0.8).next_to(title, DOWN)
+
+        # Add everything to scene
+        self.add(circle, quad, diag_e, lbl_a, lbl_b, lbl_c, lbl_d, lbl_e, lbl_alpha, lbl_gamma, title, formula, info)
+```
