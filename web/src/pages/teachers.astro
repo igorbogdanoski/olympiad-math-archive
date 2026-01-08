@@ -2,7 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import problems from '../data/problems.json';
 
-// Екстракција на метаподатоци за филтри
+// Екстракција на метаподатоци на серверска страна
 const grades = [...new Set(problems.map(p => p.grade))].filter(g => g !== 'N/A').sort();
 const categories = [...new Set(problems.map(p => p.category))].filter(c => c !== 'N/A').sort();
 ---
@@ -17,7 +17,6 @@ const categories = [...new Set(problems.map(p => p.category))].filter(c => c !==
 		</div>
 
 		<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-			<!-- ФОРМА -->
 			<div class="lg:col-span-1 space-y-6">
 				<div class="bg-white dark:bg-slate-900 p-6 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm">
 					<h3 class="font-bold text-lg mb-6 flex items-center gap-2">
@@ -55,12 +54,11 @@ const categories = [...new Set(problems.map(p => p.category))].filter(c => c !==
                 <div class="bg-amber-50 dark:bg-amber-900/10 p-6 rounded-3xl border border-amber-100 dark:border-amber-900/30">
                     <h4 class="font-bold text-amber-800 dark:text-amber-400 mb-2 italic text-sm">Про Совет:</h4>
                     <p class="text-xs text-amber-700 dark:text-amber-500 leading-relaxed">
-                        Откако ќе го генерирате тестот, користете го копчето за печатење. Системот автоматски ќе ги отстрани менијата и ќе го форматира листот за А4 формат.
+                        Користете го копчето за печатење за автоматско форматирање на А4 лист.
                     </p>
                 </div>
 			</div>
 
-			<!-- PREVIEW -->
 			<div class="lg:col-span-2">
 				<div class="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden min-h-[500px] flex flex-col">
 					<div class="p-6 border-b border-slate-100 dark:border-slate-800 flex justify-between items-center bg-slate-50/50 dark:bg-slate-800/50">
@@ -68,9 +66,6 @@ const categories = [...new Set(problems.map(p => p.category))].filter(c => c !==
 						<div class="flex gap-2">
 							<button id="print-test" class="hidden px-4 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-xs font-bold hover:bg-slate-50 transition-colors">
 								🖨️ Печати Тест
-							</button>
-							<button id="print-keys" class="hidden px-4 py-2 bg-slate-900 dark:bg-blue-600 text-white rounded-xl text-xs font-bold hover:opacity-90 transition-colors">
-								🔑 Печати Решенија
 							</button>
 						</div>
 					</div>
@@ -87,130 +82,51 @@ const categories = [...new Set(problems.map(p => p.category))].filter(c => c !==
 	</div>
 </Layout>
 
-<style is:global>
-    @media print {
-        nav, footer, aside, button, .lg:col-span-1 { display: none !important; }
-        .lg:col-span-2 { width: 100% !important; border: none !important; box-shadow: none !important; }
-        body { background: white !important; color: black !important; }
-        .bg-white { background: white !important; }
-        #test-content { padding: 0 !important; }
-        .page-break { page-break-after: always; }
-    }
-</style>
-
 <script>
-    // Наместо да го импортираме целиот JSON, користиме fetch на сесија
-    // или го дефинираме како глобална променлива која Astro ја инјектира
-    
-    const genBtn = document.getElementById('generate-preview');
-    const printTestBtn = document.getElementById('print-test');
-    const printKeysBtn = document.getElementById('print-keys');
-    const content = document.getElementById('test-content');
+	// Чиста и безбедна скрипта без инјектирани големи JSON објекти
+	const genBtn = document.getElementById('generate-preview');
+	const testContent = document.getElementById('test-content');
+	const printBtn = document.getElementById('print-test');
 
-    let currentTest = [];
+	genBtn?.addEventListener('click', async () => {
+		const grade = (document.getElementById('test-grade') as HTMLSelectElement).value;
+		const cat = (document.getElementById('test-cat') as HTMLSelectElement).value;
+		const count = parseInt((document.getElementById('test-count') as HTMLInputElement).value);
 
-    // Функција за преземање на задачите само кога е потребно
-    async function getProblems() {
-        const res = await fetch('/api/problems.json');
-        return await res.json();
-    }
+		genBtn.innerText = 'Вчитувам...';
+		
+		try {
+			const res = await fetch('/data/problems.json');
+			const problems = await res.json();
+			
+			let filtered = problems;
+			if (grade) filtered = filtered.filter((p: any) => p.grade === grade);
+			if (cat) filtered = filtered.filter((p: any) => p.category === cat);
+			
+			const selected = filtered.sort(() => 0.5 - Math.random()).slice(0, count);
+			
+			if (selected.length === 0) {
+				testContent!.innerHTML = '<p class="text-center text-red-500">Нема пронајдено задачи.</p>';
+				return;
+			}
 
-    genBtn.addEventListener('click', async () => {
-        const grade = (document.getElementById('test-grade') as HTMLSelectElement).value;
-        const cat = (document.getElementById('test-cat') as HTMLSelectElement).value;
-        const count = parseInt((document.getElementById('test-count') as HTMLInputElement).value);
+			let html = `<div class="p-4 space-y-8">`;
+			selected.forEach((p: any, i: number) => {
+				html += `<div class="pb-6 border-b border-slate-100">
+					<p class="font-black text-blue-600 mb-2">Задача #${i+1}</p>
+					<div class="prose max-w-none">${p.body.split('##')[0]}</div>
+				</div>`;
+			});
+			html += `</div>`;
+			
+			testContent!.innerHTML = html;
+			printBtn?.classList.remove('hidden');
+		} catch (e) {
+			console.error(e);
+		} finally {
+			genBtn.innerText = 'Генерирај преглед';
+		}
+	});
 
-        genBtn.innerText = 'Се вчитува...';
-        genBtn.disabled = true;
-
-        try {
-            // Динамички пристап до податоците за да не го кочиме билдот
-            const response = await fetch(window.location.origin + '/data/problems.json');
-            const allProblems = await response.json();
-
-            let filtered = allProblems;
-            if (grade) filtered = filtered.filter(p => p.grade === grade);
-            if (cat) filtered = filtered.filter(p => p.category === cat);
-
-            if (filtered.length === 0) {
-                content.innerHTML = '<div class="text-center py-20 text-red-500 font-bold italic">Не се пронајдени задачи со овие критериуми.</div>';
-                return;
-            }
-
-            currentTest = [...filtered].sort(() => 0.5 - Math.random()).slice(0, count);
-
-            let html = `
-                <div class="print-section">
-                    <div class="text-center mb-10 border-4 border-double border-slate-900 p-6">
-                        <h1 class="text-2xl font-black uppercase mb-2 text-slate-900">Тест по Математика</h1>
-                        <div class="flex justify-between text-sm font-bold text-slate-600">
-                            <span>Име и Презиме: ___________________________</span>
-                            <span>Дата: ${new Date().toLocaleDateString('mk-MK')}</span>
-                        </div>
-                    </div>
-                    <div class="space-y-12">
-            `;
-
-            currentTest.forEach((p, i) => {
-                const questionPart = p.body.split(/##\s+.*Решение/i)[0];
-                html += `
-                    <div class="relative pb-10 border-b border-dashed border-slate-200 last:border-0">
-                        <span class="absolute -left-4 top-0 font-black text-slate-200 text-4xl">#${i+1}</span>
-                        <div class="pl-6 prose prose-slate max-w-none text-slate-900">
-                            ${questionPart.replace(/# .*\n/, '')}
-                        </div>
-                        <div class="mt-10 h-32 border border-slate-100 rounded-xl bg-slate-50/30 flex items-center justify-center text-slate-300 italic text-sm">Простор за работа</div>
-                    </div>
-                `;
-            });
-
-            html += '</div></div>';
-            content.innerHTML = html;
-            
-            printTestBtn.classList.remove('hidden');
-            printKeysBtn.classList.remove('hidden');
-        } catch (e) {
-            content.innerHTML = '<div class="text-center py-20 text-red-500 font-bold">Грешка при вчитување на задачите.</div>';
-        } finally {
-            genBtn.innerText = 'Генерирај преглед';
-            genBtn.disabled = false;
-        }
-    });
-
-    printTestBtn.addEventListener('click', () => {
-        window.print();
-    });
-
-    printKeysBtn.addEventListener('click', () => {
-        let html = '<div class="print-keys-section"><h1 class="text-2xl font-black mb-10 text-red-600 border-b-2 border-red-600 pb-2">Клуч со решенија</h1>';
-        currentTest.forEach((p, i) => {
-            const parts = p.body.split(/##\s+.*Решение/i);
-            const sol = parts.length > 1 ? parts[1] : "Нема внесено решение.";
-            html += `
-                <div class="mb-10 p-6 bg-slate-50 rounded-2xl border border-slate-200">
-                    <h3 class="font-black text-lg mb-4">Задача ${i+1}</h3>
-                    <div class="prose prose-slate max-w-none text-slate-800">
-                        ${sol}
-                    </div>
-                </div>
-            `;
-        });
-        html += '</div>';
-        
-        const win = window.open('', '_blank');
-        win.document.write(`
-            <html>
-                <head>
-                    <title>Клуч со решенија</title>
-                    <script src="https://cdn.tailwindcss.com"></script>
-                    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
-                </head>
-                <body class="p-10 bg-white">
-                    ${html}
-                    <script>window.print();</script>
-                </body>
-            </html>
-        `);
-        win.document.close();
-    });
+	printBtn?.addEventListener('click', () => window.print());
 </script>
