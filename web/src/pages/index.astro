@@ -122,7 +122,7 @@ const getDifficultyColor = (diff: number) => {
 							<div class="aspect-[16/10] bg-slate-50 dark:bg-slate-950 flex items-center justify-center p-6 relative overflow-hidden">
 								<div class="absolute inset-0 bg-blue-600 opacity-0 group-hover:opacity-5 transition-opacity duration-500"></div>
 								<img 
-									src={`/assets/images/${prob.meta.problem_id}/${prob.meta.problem_id}.png`} 
+									src={`/assets/images/${prob.meta.problem_id || prob.filename.replace('.md', '')}/${prob.meta.problem_id || prob.filename.replace('.md', '')}.png`} 
 									alt={prob.filename}
 									class="max-w-full max-h-full object-contain relative z-10 transition-transform duration-700 group-hover:scale-110"
 									onerror="this.src='https://via.placeholder.com/400x250?text=Geo-Mentor+Математика'"

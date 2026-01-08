@@ -82,6 +82,10 @@ sections.intuition = sections.intuition.replace(/^(?:#|##|###)\s+.*(?:Интуи
 sections.solution = sections.solution.replace(/^(?:#|##)\s+.*Решение.*\n/mi, '');
 sections.mentor_notes = sections.mentor_notes.replace(/^(?:#|##)\s+.*(?:Тутори|Наставници|Напомена).*\n/mi, '');
 
+// Пресметка на тежина
+const difficultyLevel = Math.round(difficulty / 2);
+const difficultyColor = difficulty <= 3 ? 'bg-emerald-400' : difficulty <= 7 ? 'bg-amber-400' : 'bg-rose-500';
+
 // Наоѓање слични задачи
 const related = problems
     .filter(p => p.filename !== filename && (p.category === category || p.grade === grade))
@@ -120,11 +124,11 @@ const related = problems
         </header>
 
         <!-- Problem Visualization -->
-        {meta.problem_id && (
+        {(meta.problem_id || filename) && (
           <div class="rounded-3xl overflow-hidden border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 p-2 shadow-sm">
              <div class="bg-slate-50 dark:bg-slate-900 rounded-2xl p-6 flex justify-center">
                 <img 
-                    src={`/assets/images/${meta.problem_id}/${meta.problem_id}.png`} 
+                    src={`/assets/images/${meta.problem_id || filename.replace('.md', '')}/${meta.problem_id || filename.replace('.md', '')}.png`} 
                     alt="Визуелизација"
                     class="max-w-full h-auto rounded-lg max-h-[400px] object-contain"
                     onerror="this.parentElement.parentElement.style.display='none'"
@@ -209,13 +213,9 @@ const related = problems
             <div class="flex justify-between items-center">
               <span class="text-slate-500 text-sm">Тежина</span>
               <div class="flex gap-1">
-                {[...Array(5)].map((_, i) => {
-                  const level = Math.round(difficulty/2);
-                  const color = difficulty <= 3 ? 'bg-emerald-400' : difficulty <= 7 ? 'bg-amber-400' : 'bg-rose-500';
-                  return (
-                    <div class={`w-3 h-3 rounded-full ${i < level ? color : 'bg-slate-200 dark:bg-slate-800'}`}></div>
-                  );
-                })}
+                {[...Array(5)].map((_, i) => (
+                  <div class={`w-3 h-3 rounded-full ${i < difficultyLevel ? difficultyColor : 'bg-slate-200 dark:bg-slate-800'}`}></div>
+                ))}
               </div>
             </div>
 
@@ -259,7 +259,7 @@ const related = problems
             <h3 class="text-lg font-bold text-slate-900 dark:text-white px-2">Слични задачи</h3>
             <div class="space-y-3">
               {related.map(p => (
-                <a href={`/tasks/${p.meta.problem_id}`} class="block p-4 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl hover:border-blue-500 dark:hover:border-blue-500 transition-colors group">
+                <a href={`/tasks/${p.meta.problem_id || p.filename.replace('.md', '')}`} class="block p-4 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl hover:border-blue-500 dark:hover:border-blue-500 transition-colors group">
                   <div class="flex items-center gap-2 mb-1">
                     <span class="text-[9px] font-black text-blue-600 uppercase">{p.category}</span>
                     <span class="w-1 h-1 bg-slate-300 rounded-full"></span>

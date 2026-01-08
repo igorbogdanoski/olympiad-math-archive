@@ -13,7 +13,11 @@ def parse_problem(file_path):
 
     meta = {}
     # Екстракција на YAML frontmatter
-    match = re.search(r'^---(.*?)---', content, re.DOTALL)
+    match = re.search(r'^---\s*\n(.*?)\n---', content, re.DOTALL)
+    if not match:
+        # Пад назад ако нема нови редови веднаш по цртичките
+        match = re.search(r'^---(.*?)---', content, re.DOTALL)
+    
     if match:
         yaml_text = match.group(1)
         for line in yaml_text.split('\n'):
@@ -69,7 +73,7 @@ def build_index(archive_root):
     # Избегнуваме печатење на патеки со кирилица во терминал што не поддржува
     
     for root, dirs, files in os.walk(archive_root):
-        if "tools" in root or "ai" in root or "assets" in root or "public" in root or ".git" in root or "web" in root:
+        if any(x in root for x in ["tools", "ai", "assets", "public", ".git", "web", "skill_guides", "theorems"]):
             continue
             
         for file in files:
@@ -88,6 +92,12 @@ def build_index(archive_root):
                             grade = part.replace("grade_", "")
                         elif part in ["algebra", "geometry", "number_theory", "combinatorics", "logic", "arithmetic", "analysis", "stereometry", "trigonometry"]:
                             category = part
+                    
+                    # Безбедно парсирање на тежина
+                    try:
+                        diff_val = int(meta.get('difficulty', 0))
+                    except (ValueError, TypeError):
+                        diff_val = 0
                             
                     problems.append({
                         "meta": meta,
@@ -96,10 +106,14 @@ def build_index(archive_root):
                         "filename": file,
                         "grade": meta.get('grade', grade),
                         "category": meta.get('type', meta.get('category', category)),
-                        "difficulty": int(meta.get('difficulty', 0))
+                        "difficulty": diff_val
                     })
                 except Exception as e:
-                    print(f"Error parsing {file}: {e}")
+                    # Избегнуваме UnicodeEncodeError при принт
+                    try:
+                        print(f"Error parsing {file}: {e}")
+                    except:
+                        print(f"Error parsing a file (encoding error)")
     
     return problems
 
