@@ -214,6 +214,27 @@ class PlatinumProcessor:
         except SyntaxError as e:
             return f"Синтаксна грешка во Manim кодот: {e}"
 
+    def fix_manim_code(self, code):
+        """
+        Автоматски ги заменува:
+        - Line(..., stroke_dash_pattern=...) -> DashedLine(...)
+        - Аргументи quadrant=1 -> quadrant=[1, -1] (или tuple)
+        """
+        import re
+
+        # 1. Замени stroke_dash_pattern со DashedLine
+        pattern = r'Line\(([^)]*),\s*stroke_dash_pattern\s*=\s*([^\),]+)([^)]*)\)'
+        def replacer(match):
+            before = match.group(1)
+            after = match.group(3)
+            return f'DashedLine({before}{after})'
+        code = re.sub(pattern, replacer, code)
+
+        # 2. Поправи quadrant=1 -> quadrant=[1, -1]
+        code = re.sub(r'quadrant\s*=\s*([0-9]+)', r'quadrant=[1, -1]', code)
+
+        return code
+
     def process_file(self, input_file):
         if not self.check_system():
             return
@@ -251,6 +272,9 @@ class PlatinumProcessor:
         # --- MANIM ---
         manim_code = self.extract_manim_code(post.content)
         if manim_code:
+            # 1. Автоматска корекција на познати Manim багови
+            manim_code = self.fix_manim_code(manim_code)
+            # 2. Синтаксна проверка
             syntax_error = self.check_python_syntax(manim_code)
             if syntax_error:
                 print(f"❌ {syntax_error}")
