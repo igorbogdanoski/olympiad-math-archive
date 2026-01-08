@@ -1,0 +1,69 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import problems from '../../data/problems.json';
+
+export async function getStaticPaths() {
+  const allSkills = [...new Set(problems.flatMap(p => p.meta.related_skills || []))];
+  return allSkills.map(skill => ({
+    params: { skill },
+    props: { skill }
+  }));
+}
+
+const { skill } = Astro.props;
+const skillProblems = problems.filter(p => p.meta.related_skills?.includes(skill));
+
+const cleanBody = (text: string) => {
+  return text.split('##')[0].replace(/[\$\#\*]/g, '').slice(0, 100) + '...';
+};
+
+const getDifficultyColor = (diff: number) => {
+  if (diff <= 3) return 'bg-emerald-500';
+  if (diff <= 7) return 'bg-amber-500';
+  return 'bg-rose-500';
+};
+---
+
+<Layout title={`Задачи со вештина: ${skill.replace(/_/g, ' ')} | МатАрхива`}>
+  <div class="max-w-6xl mx-auto px-4 py-8">
+    <nav class="flex mb-8 text-sm font-medium text-slate-500 gap-2 items-center">
+      <a href="/" class="hover:text-blue-600 transition-colors">Архива</a>
+      <span>/</span>
+      <a href="/skills" class="hover:text-blue-600 transition-colors">Вештини</a>
+      <span>/</span>
+      <span class="text-slate-900 dark:text-slate-100 capitalize">{skill.replace(/_/g, ' ')}</span>
+    </nav>
+
+    <header class="mb-12">
+      <h1 class="text-4xl font-black text-slate-900 dark:text-white mb-4 capitalize">
+        Вештина: {skill.replace(/_/g, ' ')}
+      </h1>
+      <p class="text-slate-500 dark:text-slate-400">
+        Пронајдени се {skillProblems.length} задачи кои ја користат оваа математичка стратегија.
+      </p>
+    </header>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      {skillProblems.map((prob) => (
+        <div class="problem-card group bg-white dark:bg-slate-900 rounded-[2.5rem] shadow-sm border border-slate-100 dark:border-slate-800 overflow-hidden hover:shadow-2xl hover:-translate-y-2 transition-all duration-500">
+          <a href={`/tasks/${prob.meta.problem_id || prob.filename.replace('.md', '')}`} class="block h-full">
+            <div class="p-8">
+              <div class="flex gap-2 mb-4">
+                <span class="text-[9px] font-black uppercase tracking-widest px-3 py-1 bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded-lg border border-blue-100 dark:border-blue-900/50">
+                  {prob.grade} Одд
+                </span>
+                <div class={`w-2 h-2 rounded-full mt-1.5 ${getDifficultyColor(prob.difficulty)}`}></div>
+              </div>
+              <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-4 leading-tight group-hover:text-blue-600 transition-colors">
+                {prob.filename.replace('.md', '').replace(/_/g, ' ')}
+              </h3>
+              <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">
+                {cleanBody(prob.body)}
+              </p>
+            </div>
+          </a>
+        </div>
+      ))}
+    </div>
+  </div>
+</Layout>

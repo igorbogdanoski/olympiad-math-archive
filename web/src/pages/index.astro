@@ -3,8 +3,12 @@ import Layout from '../layouts/Layout.astro';
 import problems from '../data/problems.json';
 
 // Екстракција на уникатни вредности за филтри
-const grades = [...new Set(problems.map(p => p.grade))].sort((a, b) => parseInt(a) - parseInt(b));
-const categories = [...new Set(problems.map(p => p.category))].sort();
+const grades = [...new Set(problems.map(p => p.grade))]
+  .filter(g => g && g !== 'N/A')
+  .sort((a, b) => parseInt(a) - parseInt(b));
+const categories = [...new Set(problems.map(p => p.category))]
+  .filter(c => c && c !== 'N/A')
+  .sort();
 
 const cleanBody = (text: string) => {
   return text.split('##')[0].replace(/[\$\#\*]/g, '').slice(0, 100) + '...';
@@ -111,8 +115,8 @@ const getDifficultyColor = (diff: number) => {
 						class="problem-card group bg-white dark:bg-slate-900 rounded-[2.5rem] shadow-sm border border-slate-100 dark:border-slate-800 overflow-hidden hover:shadow-2xl hover:-translate-y-2 transition-all duration-500"
 						data-grade={prob.grade}
 						data-category={prob.category}
-						data-title={prob.filename.toLowerCase()}
-						data-body={prob.body.toLowerCase()}
+						data-title={prob.filename.toLowerCase().replace(/_/g, ' ')}
+						data-search={cleanBody(prob.body).toLowerCase()}
 					>
 						<a href={`/tasks/${prob.meta.problem_id || prob.filename.replace('.md', '')}`} class="block h-full">
 							<div class="aspect-[16/10] bg-slate-50 dark:bg-slate-950 flex items-center justify-center p-6 relative overflow-hidden">
@@ -172,8 +176,8 @@ const getDifficultyColor = (diff: number) => {
 	// Подготовка на податоци за Fuse.js
 	const searchData = Array.from(cards).map(card => ({
 		id: card.dataset.title,
-		title: card.dataset.title?.replace(/_/g, ' '),
-		body: card.dataset.body,
+		title: card.dataset.title,
+		body: card.dataset.search,
 		element: card
 	}));
 
@@ -209,7 +213,11 @@ const getDifficultyColor = (diff: number) => {
 			}
 		});
 
-		if (countEl) countEl.textContent = visibleCount.toString();
+		// Ажурирај го бројачот со правилна множина
+		if (countEl) {
+			const text = visibleCount === 1 ? 'задача' : 'задачи';
+			countEl.textContent = `${visibleCount} ${text}`;
+		}
 		if (noResults) noResults.style.display = visibleCount === 0 ? 'block' : 'none';
 	}
 

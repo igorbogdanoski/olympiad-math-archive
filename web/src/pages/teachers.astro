@@ -59,27 +59,30 @@ const categories = [...new Set(problems.map(p => p.category))].filter(c => c !==
                 </div>
 			</div>
 
-			<div class="lg:col-span-2">
-				<div class="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden min-h-[500px] flex flex-col">
-					<div class="p-6 border-b border-slate-100 dark:border-slate-800 flex justify-between items-center bg-slate-50/50 dark:bg-slate-800/50">
-						<h3 class="font-bold">Преглед на тест</h3>
-						<div class="flex gap-2">
-							<button id="print-test" class="hidden px-4 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-xs font-bold hover:bg-slate-50 transition-colors">
-								🖨️ Печати Тест
-							</button>
-						</div>
+		<div class="lg:col-span-2">
+			<div class="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden min-h-[500px] flex flex-col">
+				<div class="p-6 border-b border-slate-100 dark:border-slate-800 flex justify-between items-center bg-slate-50/50 dark:bg-slate-800/50">
+					<h3 class="font-bold">Преглед на тест</h3>
+					<div class="flex gap-2">
+						<button id="print-test" class="hidden px-4 py-2 bg-blue-600 text-white rounded-xl text-xs font-bold hover:bg-blue-700 transition-colors">
+							🖨️ Печати Тест
+						</button>
 					</div>
-					
-					<div id="test-content" class="p-8 flex-grow">
-						<div class="flex flex-col items-center justify-center h-full text-slate-400 py-20">
-							<span class="text-6xl mb-4">📄</span>
-							<p>Изберете параметри и кликнете на "Генерирај преглед"</p>
-						</div>
+				</div>
+				
+				<div id="test-content" class="p-8 flex-grow overflow-y-auto">
+					<div class="flex flex-col items-center justify-center h-full text-slate-400 py-20">
+						<span class="text-6xl mb-4">📄</span>
+						<p>Изберете параметри и кликнете на "Генерирај преглед"</p>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+	
+	<!-- KaTeX Client Side for Preview -->
+	<script is:inline src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+	<script is:inline src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
 </Layout>
 
 <script>
@@ -121,6 +124,17 @@ const categories = [...new Set(problems.map(p => p.category))].filter(c => c !==
 			
 			testContent!.innerHTML = html;
 			printBtn?.classList.remove('hidden');
+
+			// Рендерирај LaTeX
+			if (window.renderMathInElement) {
+				window.renderMathInElement(testContent, {
+					delimiters: [
+						{left: '$$', right: '$$', display: true},
+						{left: '$', right: '$', display: false}
+					],
+					throwOnError : false
+				});
+			}
 		} catch (e) {
 			console.error(e);
 		} finally {

@@ -1,0 +1,77 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import fs from 'node:fs';
+import path from 'node:path';
+import katex from 'katex';
+
+export async function getStaticPaths() {
+  const theoremsDir = path.resolve('src/data/theorems');
+  const files = fs.readdirSync(theoremsDir).filter(f => f.endsWith('.md') && !f.startsWith('_'));
+  
+  return files.map(file => ({
+    params: { id: file.replace('.md', '') },
+    props: { filename: file }
+  }));
+}
+
+const { id } = Astro.params;
+const { filename } = Astro.props;
+const theoremsDir = path.resolve('src/data/theorems');
+const filePath = path.join(theoremsDir, filename);
+const rawContent = fs.readFileSync(filePath, 'utf-8');
+
+// Серверско рендерирање на LaTeX
+const renderMath = (text: string) => {
+  if (!text) return "";
+  let processed = text;
+  
+  processed = processed.replace(/\$\$(.*?)\$\$/gs, (_, math) => {
+    try {
+      return katex.renderToString(math.trim(), { displayMode: true, throwOnError: false });
+    } catch (e) { return math; }
+  });
+
+  processed = processed.replace(/\$(.*?)\$/g, (_, math) => {
+    try {
+      return katex.renderToString(math.trim(), { displayMode: false, throwOnError: false });
+    } catch (e) { return math; }
+  });
+
+  return processed;
+};
+
+// Исчисти го содржината
+let content = rawContent.replace(/^---\s*\n[\s\S]*?\n---\s*/, '').replace(/^#\s+.*\n/, '');
+content = renderMath(content);
+const titleMatch = rawContent.match(/^#\s+(.*)/m) || rawContent.match(/title:\s*(.*)/);
+const title = titleMatch ? titleMatch[1] : id.replace(/_/g, ' ');
+---
+
+<Layout title={`${title} | Теореми | МатАрхива`}>
+  <div class="max-w-4xl mx-auto px-4 py-8">
+    <nav class="flex mb-8 text-sm font-medium text-slate-500 gap-2 items-center">
+      <a href="/" class="hover:text-blue-600 transition-colors">Архива</a>
+      <span>/</span>
+      <a href="/theorems" class="hover:text-blue-600 transition-colors">Теореми</a>
+      <span>/</span>
+      <span class="text-slate-900 dark:text-slate-100">{title}</span>
+    </nav>
+
+    <article class="bg-white dark:bg-slate-900 rounded-[3rem] border border-slate-100 dark:border-slate-800 shadow-xl overflow-hidden">
+      <div class="p-10 border-b border-slate-50 dark:border-slate-800 bg-gradient-to-br from-white to-slate-50/50 dark:from-slate-900 dark:to-slate-800/50">
+        <h1 class="text-4xl font-black text-slate-900 dark:text-white leading-tight">
+          {title}
+        </h1>
+      </div>
+      
+      <div class="p-10 prose prose-slate dark:prose-invert prose-lg max-w-none content-math" set:html={content}>
+      </div>
+    </article>
+  </div>
+</Layout>
+
+<style is:global>
+  .content-math .katex-display {
+    @apply my-8 overflow-x-auto overflow-y-hidden py-4 bg-slate-50 dark:bg-slate-800/50 rounded-2xl;
+  }
+</style>

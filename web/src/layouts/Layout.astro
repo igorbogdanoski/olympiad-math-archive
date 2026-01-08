@@ -16,6 +16,12 @@ const { title } = Astro.props;
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
 		
+		<!-- OpenGraph / Social -->
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content="Олимписка Математика: Архива на задачи со визуелизации и педагошки објаснувања." />
+		<meta property="og:image" content="/assets/images/og-image.png" />
+		
 		<!-- KaTeX CSS -->
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
 		

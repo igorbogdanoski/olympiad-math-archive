@@ -1,13 +1,25 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import fs from 'node:fs';
+import path from 'node:path';
 
-// Пример листа на теореми (ова подоцна може да биде во JSON)
-const theorems = [
-  { id: 'pythagorean', name: 'Питагорова Теорема', category: 'Геометрија', difficulty: 'Лесно' },
-  { id: 'euler-line', name: 'Ојлерова Права', category: 'Геометрија', difficulty: 'Средно' },
-  { id: 'fermat-little', name: 'Мала Теорема на Ферма', category: 'Теорија на броеви', difficulty: 'Средно' },
-  { id: 'pigeonhole', name: 'Дирихлеов Принцип', category: 'Комбинаторика', difficulty: 'Средно' },
-];
+// Динамичко читање на сите теореми од src/data/theorems
+const theoremsDir = path.resolve('src/data/theorems');
+const files = fs.readdirSync(theoremsDir).filter(f => f.endsWith('.md') && !f.startsWith('_'));
+
+const theorems = files.map(file => {
+  const content = fs.readFileSync(path.join(theoremsDir, file), 'utf-8');
+  // Едноставно парсирање на насловот од првиот ред ако нема YAML
+  const titleMatch = content.match(/^#\s+(.*)/m);
+  const id = file.replace('.md', '');
+  
+  return {
+    id,
+    name: titleMatch ? titleMatch[1] : id.replace(/_/g, ' '),
+    category: 'Теорија', // Ова може да се подобри со појако парсирање
+    difficulty: 'Различно'
+  };
+});
 ---
 
 <Layout title="Библиотека на Теореми | МатАрхива">

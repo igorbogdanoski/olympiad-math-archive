@@ -16,10 +16,12 @@ def parse_problem(file_path):
     match = re.search(r'^---(.*?)---', content, re.DOTALL)
     if match:
         yaml_text = match.group(1)
-        for line in yaml_text.split(r'\n'):
+        for line in yaml_text.split('\n'):
             if ':' in line:
-                key, val = line.split(':', 1)
-                meta[key.strip()] = val.strip().replace('"', '').replace("'", "")
+                parts = line.split(':', 1)
+                if len(parts) == 2:
+                    key, val = parts
+                    meta[key.strip()] = val.strip().replace('"', '').replace("'", "")
         
         # Екстракција на тагови
         tags = []
@@ -92,8 +94,8 @@ def build_index(archive_root):
                         "body": body,
                         "path": full_path,
                         "filename": file,
-                        "grade": grade,
-                        "category": category,
+                        "grade": meta.get('grade', grade),
+                        "category": meta.get('type', meta.get('category', category)),
                         "difficulty": int(meta.get('difficulty', 0))
                     })
                 except Exception as e:
