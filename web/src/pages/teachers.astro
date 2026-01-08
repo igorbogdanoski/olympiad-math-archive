@@ -99,8 +99,9 @@ const categories = [...new Set(problems.map(p => p.category))].filter(c => c !==
 </style>
 
 <script>
-    import problems from '../data/problems.json';
-
+    // Наместо да го импортираме целиот JSON, користиме fetch на сесија
+    // или го дефинираме како глобална променлива која Astro ја инјектира
+    
     const genBtn = document.getElementById('generate-preview');
     const printTestBtn = document.getElementById('print-test');
     const printKeysBtn = document.getElementById('print-keys');
@@ -108,54 +109,72 @@ const categories = [...new Set(problems.map(p => p.category))].filter(c => c !==
 
     let currentTest = [];
 
-    genBtn.addEventListener('click', () => {
-        const grade = document.getElementById('test-grade').value;
-        const cat = document.getElementById('test-cat').value;
-        const count = parseInt(document.getElementById('test-count').value);
+    // Функција за преземање на задачите само кога е потребно
+    async function getProblems() {
+        const res = await fetch('/api/problems.json');
+        return await res.json();
+    }
 
-        let filtered = problems;
-        if (grade) filtered = filtered.filter(p => p.grade === grade);
-        if (cat) filtered = filtered.filter(p => p.category === cat);
+    genBtn.addEventListener('click', async () => {
+        const grade = (document.getElementById('test-grade') as HTMLSelectElement).value;
+        const cat = (document.getElementById('test-cat') as HTMLSelectElement).value;
+        const count = parseInt((document.getElementById('test-count') as HTMLInputElement).value);
 
-        if (filtered.length === 0) {
-            content.innerHTML = '<div class="text-center py-20 text-red-500 font-bold italic">Не се пронајдени задачи со овие критериуми.</div>';
-            return;
-        }
+        genBtn.innerText = 'Се вчитува...';
+        genBtn.disabled = true;
 
-        // Случаен избор
-        currentTest = [...filtered].sort(() => 0.5 - Math.random()).slice(0, count);
+        try {
+            // Динамички пристап до податоците за да не го кочиме билдот
+            const response = await fetch(window.location.origin + '/data/problems.json');
+            const allProblems = await response.json();
 
-        // Генерирање HTML
-        let html = `
-            <div class="print-section">
-                <div class="text-center mb-10 border-4 border-double border-slate-900 p-6">
-                    <h1 class="text-2xl font-black uppercase mb-2 text-slate-900">Тест по Математика</h1>
-                    <div class="flex justify-between text-sm font-bold text-slate-600">
-                        <span>Име и Презиме: ___________________________</span>
-                        <span>Дата: ${new Date().toLocaleDateString('mk-MK')}</span>
+            let filtered = allProblems;
+            if (grade) filtered = filtered.filter(p => p.grade === grade);
+            if (cat) filtered = filtered.filter(p => p.category === cat);
+
+            if (filtered.length === 0) {
+                content.innerHTML = '<div class="text-center py-20 text-red-500 font-bold italic">Не се пронајдени задачи со овие критериуми.</div>';
+                return;
+            }
+
+            currentTest = [...filtered].sort(() => 0.5 - Math.random()).slice(0, count);
+
+            let html = `
+                <div class="print-section">
+                    <div class="text-center mb-10 border-4 border-double border-slate-900 p-6">
+                        <h1 class="text-2xl font-black uppercase mb-2 text-slate-900">Тест по Математика</h1>
+                        <div class="flex justify-between text-sm font-bold text-slate-600">
+                            <span>Име и Презиме: ___________________________</span>
+                            <span>Дата: ${new Date().toLocaleDateString('mk-MK')}</span>
+                        </div>
                     </div>
-                </div>
-                <div class="space-y-12">
-        `;
-
-        currentTest.forEach((p, i) => {
-            const questionPart = p.body.split(/##\s+.*Решение/i)[0];
-            html += `
-                <div class="relative pb-10 border-b border-dashed border-slate-200 last:border-0">
-                    <span class="absolute -left-4 top-0 font-black text-slate-200 text-4xl">#${i+1}</span>
-                    <div class="pl-6 prose prose-slate max-w-none text-slate-900">
-                        ${questionPart.replace(/# .*\n/, '')}
-                    </div>
-                    <div class="mt-10 h-32 border border-slate-100 rounded-xl bg-slate-50/30 flex items-center justify-center text-slate-300 italic text-sm">Простор за работа</div>
-                </div>
+                    <div class="space-y-12">
             `;
-        });
 
-        html += '</div></div>';
-        content.innerHTML = html;
-        
-        printTestBtn.classList.remove('hidden');
-        printKeysBtn.classList.remove('hidden');
+            currentTest.forEach((p, i) => {
+                const questionPart = p.body.split(/##\s+.*Решение/i)[0];
+                html += `
+                    <div class="relative pb-10 border-b border-dashed border-slate-200 last:border-0">
+                        <span class="absolute -left-4 top-0 font-black text-slate-200 text-4xl">#${i+1}</span>
+                        <div class="pl-6 prose prose-slate max-w-none text-slate-900">
+                            ${questionPart.replace(/# .*\n/, '')}
+                        </div>
+                        <div class="mt-10 h-32 border border-slate-100 rounded-xl bg-slate-50/30 flex items-center justify-center text-slate-300 italic text-sm">Простор за работа</div>
+                    </div>
+                `;
+            });
+
+            html += '</div></div>';
+            content.innerHTML = html;
+            
+            printTestBtn.classList.remove('hidden');
+            printKeysBtn.classList.remove('hidden');
+        } catch (e) {
+            content.innerHTML = '<div class="text-center py-20 text-red-500 font-bold">Грешка при вчитување на задачите.</div>';
+        } finally {
+            genBtn.innerText = 'Генерирај преглед';
+            genBtn.disabled = false;
+        }
     });
 
     printTestBtn.addEventListener('click', () => {

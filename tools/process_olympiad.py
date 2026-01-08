@@ -32,6 +32,7 @@ class PlatinumProcessor:
         self.tools_dir = self.base_dir / "tools"
         self.archive_dir = self.tools_dir / "archive"
         self.index_file = self.base_dir / "web" / "src" / "data" / "problems.json"
+        self.public_index_file = self.base_dir / "web" / "public" / "data" / "problems.json"
         self.videos_dir = self.base_dir / "media" / "videos"
         
         # Привремени патеки
@@ -235,6 +236,9 @@ class PlatinumProcessor:
         try:
             problems = indexer.build_index(str(self.base_dir))
             indexer.save_index(problems, str(self.index_file))
+            # Ажурирај го и јавниот индекс за Teachers алатката
+            self.public_index_file.parent.mkdir(parents=True, exist_ok=True)
+            indexer.save_index(problems, str(self.public_index_file))
             print(f"SUCCESS: Index updated with {len(problems)} tasks.")
         except Exception as e:
             print(f"WARNING: Error updating index: {e}")
