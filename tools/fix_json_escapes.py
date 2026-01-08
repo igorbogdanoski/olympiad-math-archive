@@ -23,7 +23,7 @@ latex_commands = [
     # Formatting & Delimiters
     "text", "textbf", "textit", "mathrm", "mathbf",
     "left", "right", "big", "Big",
-    "quad", "qquad", "\\,", "\\:", "\\;", "\\!",
+    "quad", "qquad", r"\\,", r"\\:", r"\\;", r"\\!",
     
     # Logic
     "implies", "iff", "forall", "exists", "land", "lor", "lnot"
@@ -45,7 +45,7 @@ with open(file_path, "r", encoding="utf-8") as f:
 # 1. Generic Fix: Escape any backslash that is followed by a known LaTeX command
 # Use a loop to handle each command safely
 for cmd in latex_commands:
-    # Pattern: Look for \cmd that is NOT preceded by a backslash
+    # Pattern: Look forr \cmd that is NOT preceded by a backslash
     # (?<!\\) checker matches position where previous char is NOT \
     # then matches \\ (literal backslash)
     # then matches the cmd
@@ -68,7 +68,7 @@ replacements = [
 for old, new in replacements:
     # Use regex for specific replacements to avoid double-escaping
     pattern = r"(?<!\\)" + re.escape(old)
-    content = re.sub(pattern, new.replace('\\', '\\\\'), content)
+    content = re.sub(pattern, new.replace(rr'\\', r'\\\\'), content)
 
 
 # Writing back

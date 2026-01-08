@@ -58,10 +58,10 @@ class GeometryScene(Scene):
         
         # Angles
         angle_A = Angle(Line(A, B), Line(A, C), radius=0.5)
-        label_angle_A = MathTex("40^\\circ").next_to(angle_A, RIGHT)
+        label_angle_A = MathTex(r"40^\\circ").next_to(angle_A, RIGHT)
         
         angle_B = Angle(Line(B, C), Line(B, A), radius=0.7)
-        label_angle_B = MathTex("20^\\circ").next_to(angle_B, LEFT)
+        label_angle_B = MathTex(r"20^\\circ").next_to(angle_B, LEFT)
         
         # Group
         scene_group = VGroup(triangle, bisector_CM, segment_CD, label_A, label_B, label_C, label_M, label_D, angle_A, label_angle_A, angle_B, label_angle_B)

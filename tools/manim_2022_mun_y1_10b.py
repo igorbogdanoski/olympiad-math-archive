@@ -56,14 +56,14 @@ class GeometryScene(Scene):
         
         # Explanation text
         text_group = VGroup(
-            MathTex(r"P_{sector} = \frac{1}{8} P_{circle} = 2\pi"),
-            MathTex(r"P_{circle} = 16\pi \implies R^2 = 16 \implies R=4"),
-            MathTex(r"\angle ABD = \frac{360^\circ}{8} = 45^\circ"),
-            MathTex(r"\triangle ABC \text{ is right-angled}"),
-            MathTex(r"AC = R \sin 45^\circ = 4 \frac{\sqrt{2}}{2} = 2\sqrt{2}"),
-            MathTex(r"BC = R \cos 45^\circ = 4 \frac{\sqrt{2}}{2} = 2\sqrt{2}"),
-            MathTex(r"P_{\triangle ABC} = \frac{1}{2} AC \cdot BC"),
-            MathTex(r"P_{\triangle ABC} = \frac{1}{2} (2\sqrt{2})^2 = \frac{1}{2} \cdot 8 = 4")
+            MathTex(r"P_{sectorr} = \frac{1}{8} P_{cirrcle} = 2\pir),
+            MathTex(r"P_{cirrcle} = 16\pi \implies R^2 = 16 \implies R=4r),
+            MathTex(r"\angle ABD = \frrac{360^\circ}{8} = 45^\circ"),
+            MathTex(r"\trriangle ABC \text{ is right-angled}"),
+            MathTex(r"AC = R \sin 45^\cirrc = 4 \frac{\sqrrt{2}}{2} = 2\sqrt{2}"),
+            MathTex(r"BC = R \cos 45^\cirrc = 4 \frac{\sqrrt{2}}{2} = 2\sqrt{2}"),
+            MathTex(r"P_{\trriangle ABC} = \frac{1}{2} AC \cdot BC"),
+            MathTex(r"P_{\trriangle ABC} = \frac{1}{2} (2\sqrrt{2})^2 = \frac{1}{2} \cdot 8 = 4")
         ).arrange(DOWN, aligned_edge=LEFT).to_edge(RIGHT).scale(0.8)
         
         self.add(scene_objects)

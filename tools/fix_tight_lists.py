@@ -48,7 +48,7 @@ def fix_tight_lists(root_dir):
                         # If previous line is not empty and not a list item
                         if prev_line and not prev_line.startswith('* ') and not prev_line.startswith('- ') and not prev_line.startswith('>'):
                             # Insert blank line
-                            new_lines.append('\n')
+                            new_lines.append(r'\n')
                             modified = True
                 
                 new_lines.append(line)

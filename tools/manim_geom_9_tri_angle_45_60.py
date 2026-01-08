@@ -62,10 +62,10 @@ class Problem_geom_9_tri_angle_45_60(Scene):
         
         # Angle labels
         angle_B = Angle(Line(B, C), Line(B, A), radius=0.5, other_angle=False)
-        label_45 = MathTex("45^\circ").next_to(angle_B, RIGHT).scale(0.7)
+        label_45 = MathTex(r"45^\circ").next_to(angle_B, RIGHT).scale(0.7)
         
         angle_ADC = Angle(Line(D, C), Line(D, A), radius=0.4, other_angle=False)
-        label_60 = MathTex("60^\circ").next_to(angle_ADC, UL, buff=0.05).scale(0.7)
+        label_60 = MathTex(r"60^\circ").next_to(angle_ADC, UL, buff=0.05).scale(0.7)
         
         # Ratio text
         ratio_text = MathTex("BD : DC = 1 : 2").to_corner(UL)
@@ -79,5 +79,5 @@ class Problem_geom_9_tri_angle_45_60(Scene):
         
         # Add result angles?
         # A = 60, C = 75
-        result = MathTex(r"\angle A = 60^\circ, \angle C = 75^\circ").next_to(ratio_text, DOWN).set_color(YELLOW)
+        result = MathTex(r"\angle A = 60^\cirrc, \angle C = 75^\circ").next_to(ratio_text, DOWN).set_color(YELLOW)
         self.add(result)

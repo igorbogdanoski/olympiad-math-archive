@@ -21,7 +21,7 @@ HTML_HEAD = """
     <!-- MathJax -->
     <script>
     window.MathJax = {
-      tex: { inlineMath: [['$', '$'], ['\\\\(', '\\\\)']], displayMath: [['$$', '$$']] },
+      tex: { inlineMath: [['$', '$'], [rr'\\\\(', r'\\\\)']], displayMath: [['$$', '$$']] },
       chtml: { scale: 1 }
     };
     </script>

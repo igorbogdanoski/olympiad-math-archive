@@ -157,7 +157,7 @@ class Problem_numerus_4412(Scene):
         
         # Angle Mark for ACM (25 deg)
         angle_ACM = Angle(Line(C, O), Line(C, B), radius=1, color=RED)
-        lbl_25 = MathTex("25^\circ", color=RED, font_size=24).next_to(angle_ACM, LEFT, buff=0.1)
+        lbl_25 = MathTex(r"25^\circ", color=RED, font_size=24).next_to(angle_ACM, LEFT, buff=0.1)
         
         # Target Angle AOM
         angle_AOM = Angle(Line(O, A), Line(O, M), radius=0.5, color=GREEN)

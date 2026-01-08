@@ -97,8 +97,8 @@ class Problem_para_diag_centroid_07(Scene):
         
         # Add text info
         info = VGroup(
-            MathTex("M \\in BC, BM=MC", color=BLACK, font_size=24),
-            MathTex("N \\in CD, CN=ND", color=BLACK, font_size=24),
-            MathTex("DM \\cap BN = P \\in AC", color=RED, font_size=24)
+            MathTex(r"M \\in BC, BM=MC", color=BLACK, font_size=24),
+            MathTex(r"N \\in CD, CN=ND", color=BLACK, font_size=24),
+            MathTex(r"DM \\cap BN = P \\in AC", color=RED, font_size=24)
         ).arrange(DOWN, aligned_edge=LEFT).to_corner(UL)
         self.add(info)

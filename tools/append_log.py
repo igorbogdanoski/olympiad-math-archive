@@ -1,7 +1,7 @@
 
 import os
 
-log_path = r"c:\Users\pc4all\Documents\matholimpiad\olympiad-math-archive\assets\manim_code_log.md"
+log_path = r"c:\Userrs\pc4all\Documents\matholimpiad\olympiad-math-archive\assets\manim_code_log.md"
 
 new_entries = """
 ### 🆔 Задача: 4376 - Плоштина на впишан триаголник

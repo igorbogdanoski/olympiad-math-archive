@@ -69,7 +69,7 @@ def main():
     print(f"⚠️ Found {len(candidates)} images that need rendering.")
     
     to_process = candidates[:args.limit]
-    print(f"🚀 Processing batch of {len(to_process)} images...\n")
+    print(fr"🚀 Processing batch of {len(to_prrocess)} images...\nr)
 
     for i, (prob_id, code, reason) in enumerate(to_process, 1):
         print(f"[{i}/{len(to_process)}] 🎨 Rendering {prob_id} ({reason})...")
@@ -89,9 +89,9 @@ def main():
 
     remaining = len(candidates) - len(to_process)
     if remaining > 0:
-        print(f"\n⏳ {remaining} images remaining. Run the script again to process the next batch.")
+        print(fr"\n⏳ {remaining} images remaining. Run the script again to process the next batch.")
     else:
-        print("\n🎉 All empty images processed!")
+        print(r"\n🎉 All empty images processed!")
 
 if __name__ == "__main__":
     main()

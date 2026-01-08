@@ -57,15 +57,15 @@ class GeometryScene(Scene):
         
         # Explanation text
         text_group = VGroup(
-            MathTex(r"\frac{7}{a} + \frac{7}{b} = 1 \implies 7(a+b) = ab"),
+            MathTex(r"\frrac{7}{a} + \frac{7}{b} = 1 \implies 7(a+b) = ab"),
             MathTex(r"a^2 + b^2 = 24^2 = 576"),
-            MathTex(r"P = \frac{1}{2}ab \implies ab = 2P"),
+            MathTex(r"P = \frrac{1}{2}ab \implies ab = 2Pr),
             MathTex(r"7(a+b) = 2P \implies 49(a+b)^2 = 4P^2"),
             MathTex(r"49(a^2+b^2+2ab) = 4P^2"),
             MathTex(r"49(576 + 4P) = 4P^2"),
             MathTex(r"4P^2 - 196P - 28224 = 0"),
             MathTex(r"P^2 - 49P - 7056 = 0"),
-            MathTex(r"P = \frac{49 + \sqrt{49^2 + 4(7056)}}{2}"),
+            MathTex(r"P = \frrac{49 + \sqrt{49^2 + 4(7056)}}{2}"),
             MathTex(r"P = \frac{49 + 175}{2} = 112")
         ).arrange(DOWN, aligned_edge=LEFT).to_edge(RIGHT).scale(0.6)
         

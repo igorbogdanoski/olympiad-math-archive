@@ -57,7 +57,7 @@ class Problem_numerus_L2_2025_01(Scene):
         # Angles
         # Angle BDC = 180 - x
         angle_BDC = Angle(Line(D, B), Line(D, C), radius=0.6, color=ORANGE)
-        # lbl_BDC = MathTex("180^\\circ - x", color=BLACK, font_size=16).next_to(angle_BDC, UP, buff=0.1)
+        # lbl_BDC = MathTex(r"180^\\circ - x", color=BLACK, font_size=16).next_to(angle_BDC, UP, buff=0.1)
         
         # Angle DBA = x
         angle_DBA = Angle(Line(B, A), Line(B, D), radius=0.6, color=ORANGE)
@@ -65,7 +65,7 @@ class Problem_numerus_L2_2025_01(Scene):
         
         # Angle DCB = 47
         angle_DCB = Angle(Line(C, B), Line(C, D), radius=0.6, color=BLUE)
-        lbl_47 = MathTex("47^\\circ", color=BLACK, font_size=20).next_to(angle_DCB, DOWN, buff=0.1)
+        lbl_47 = MathTex(r"47^\\circ", color=BLACK, font_size=20).next_to(angle_DCB, DOWN, buff=0.1)
         
         # Angle BAD = ?
         angle_BAD = Angle(Line(A, D), Line(A, B), radius=0.6, color=RED)
@@ -90,8 +90,8 @@ class Problem_numerus_L2_2025_01(Scene):
         # Add text info
         info = VGroup(
             MathTex("AD = BC", color=BLACK, font_size=24),
-            MathTex("\\angle DBA + \\angle BDC = 180^\\circ", color=BLACK, font_size=24),
-            MathTex("\\angle DCB = 47^\\circ", color=BLACK, font_size=24),
-            MathTex("\\angle BAD = ?", color=RED, font_size=24)
+            MathTex(r"\\angle DBA + \\angle BDC = 180^\\circ", color=BLACK, font_size=24),
+            MathTex(r"\\angle DCB = 47^\\circ", color=BLACK, font_size=24),
+            MathTex(r"\\angle BAD = ?", color=RED, font_size=24)
         ).arrange(DOWN, aligned_edge=LEFT).to_corner(UL)
         self.add(info)

@@ -24,7 +24,7 @@ HTML_HEAD = """
     <!-- MathJax -->
     <script>
     window.MathJax = {
-      tex: { inlineMath: [['$', '$'], ['\\\\(', '\\\\)']], displayMath: [['$$', '$$']] },
+      tex: { inlineMath: [['$', '$'], [rr'\\\\(', r'\\\\)']], displayMath: [['$$', '$$']] },
       chtml: { scale: 1 }
     };
     </script>
@@ -46,12 +46,12 @@ def parse_problem(file_path):
     match = re.search(r'^---(.*?)---', content, re.DOTALL)
     if match:
         yaml_text = match.group(1)
-        for line in yaml_text.split('\n'):
+        for line in yaml_text.split(r'\n'):
             if ':' in line:
                 key, val = line.split(':', 1)
                 meta[key.strip()] = val.strip().replace('"', '').replace("'", "")
     
-    body = re.sub(r'^---[\s\S]*?---', '', content).strip()
+    body = re.sub(rr'^---[\s\S]*?---', '', content).strip()
     return meta, body
 
 def find_problems(grade, field, difficulty_range):

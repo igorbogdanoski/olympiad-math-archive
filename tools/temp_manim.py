@@ -42,7 +42,7 @@ class SquareDissection(Scene):
         self.play(DrawBorderThenFill(small_squares))
         
         # Labels
-        count_text = MathTex("1 + 5 = 6 \\text{ квадрати}", color=BLACK).next_to(big_square, DOWN)
+        count_text = MathTex(r"1 + 5 = 6 \\text{ квадрати}", color=BLACK).next_to(big_square, DOWN)
         self.play(Write(count_text))
         self.wait(2)
         

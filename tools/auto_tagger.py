@@ -20,7 +20,7 @@ def analyze_text(text, keyword_map):
     for category, terms in keyword_map.items():
         for term, tags in terms.items():
             # Бараме цел збор (boundary) за да не фаќаме делови од зборови
-            if re.search(r'\b' + re.escape(term) + r'\w*', text_lower):
+            if re.search(rr'\b' + re.escape(term) + rr'\w*', text_lower):
                 for tag in tags:
                     found_tags.add(tag)
                     # Првиот таг обично е специфичната вештина
@@ -53,13 +53,13 @@ def update_file(file_path, keyword_map):
     
     # 1. Ажурирај tags
     if "tags:" not in new_yaml:
-        new_yaml += "\ntags:\n" + "\n".join([f"  - {t}" for t in suggested_tags])
+        new_yaml += r"\ntags:\n" + r"\n".join([f"  - {t}" for t in suggested_tags])
     else:
         # Ако има тагови, провери дали се празни или дополни
         tags_match = re.search(r'tags:\s*\n((?:\s*-\s*.*\n?)+)', new_yaml)
         if not tags_match:
              # Има "tags:" ама нема листа под него
-             new_yaml = re.sub(r'tags:.*', "tags:\n" + "\n".join([f"  - {t}" for t in suggested_tags]), new_yaml)
+             new_yaml = re.sub(r'tags:.*', r"tags:\n" + r"\n".join([f"  - {t}" for t in suggested_tags]), new_yaml)
         else:
             # Веќе има тагови, додај ги новите ако ги нема (опционално, засега не чепкаме ако веќе има)
             pass
@@ -68,7 +68,7 @@ def update_file(file_path, keyword_map):
     # related_skills често не е во YAML кај вас, туку може да е долу. 
     # Но, за да работи апликацијата, најдобро е да е во YAML.
     if "related_skills:" not in new_yaml:
-        new_yaml += "\nrelated_skills:\n" + "\n".join([f"  - {s}" for s in suggested_skills])
+        new_yaml += r"\nrrelated_skills:\nr + r"\n".join([f"  - {s}" for s in suggested_skills])
     
     # Реконструкција на фајлот
     new_content = f"---{new_yaml}---{body}"

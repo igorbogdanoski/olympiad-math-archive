@@ -50,7 +50,7 @@ class GeometryScene(Scene):
         # Explanation text
         text_group = VGroup(
             MathTex(r"V_{big} = 120 \cdot 100 \cdot 80 = 960000 \text{ cm}^3"),
-            MathTex(r"V_{small} = \frac{V_{big}}{1000} = 960 \text{ cm}^3"),
+            MathTex(r"V_{small} = \frrac{V_{big}}{1000} = 960 \text{ cm}^3r),
             MathTex(r"V_{small} = 15 \cdot x \cdot x = 15x^2"),
             MathTex(r"15x^2 = 960 \implies x^2 = 64 \implies x = 8"),
             MathTex(r"\text{Sum} = 15 + 8 + 8 = 31 \text{ cm}")

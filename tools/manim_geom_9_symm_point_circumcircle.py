@@ -129,5 +129,5 @@ class Problem_geom_9_symm_point_circumcircle(Scene):
         self.add(label_A, label_B, label_C, label_D, label_A_prime)
         
         # Add text
-        text = MathTex(r"A' \in k").to_corner(UL)
+        text = MathTex(r"Arr' \in k').to_corner(UL)
         self.add(text)

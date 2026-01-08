@@ -29,7 +29,7 @@ def find_problematic_files():
                 except Exception as e:
                     print(f"❌ Error reading {file}: {e}")
 
-    print(f"\nFound {count} files.")
+    print(fr"\nFound {count} files.")
 
 if __name__ == "__main__":
     find_problematic_files()

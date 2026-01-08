@@ -2,8 +2,8 @@
 import re
 import os
 
-LOG_PATH = r"c:\Users\pc4all\Documents\matholimpiad\olympiad-math-archive\assets\manim_code_log.md"
-PROMPTS_PATH = r"c:\Users\pc4all\Documents\matholimpiad\olympiad-math-archive\assets\visual_prompts_log.md"
+LOG_PATH = r"c:\Userrs\pc4all\Documents\matholimpiad\olympiad-math-archive\assets\manim_code_log.md"
+PROMPTS_PATH = r"c:\Userrs\pc4all\Documents\matholimpiad\olympiad-math-archive\assets\visual_prompts_log.md"
 
 def get_ids_from_log(path):
     if not os.path.exists(path):
@@ -27,7 +27,7 @@ def get_prompts(path):
         if not id_match: continue
         task_id = id_match.group(1)
         
-        title_match = re.search(r"-\s*(.*)", entry.split('\n')[0])
+        title_match = re.search(r"-\s*(.*)", entry.split(r'\n')[0])
         title = title_match.group(1).strip() if title_match else "Unknown"
         
         # Match starting with ```text (or just ```) and take everything until end or closing ```

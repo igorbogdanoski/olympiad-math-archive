@@ -152,11 +152,11 @@ class GeometryScene(Scene):
         # Angles
         # Angle B = 40
         angle_B_arc = Angle(Line(B,C), Line(B,A), radius=0.5, color=RED)
-        label_40 = MathTex("40^\circ").next_to(angle_B_arc, UP+RIGHT)
+        label_40 = MathTex(r"40^\circ").next_to(angle_B_arc, UP+RIGHT)
         
         # Angle CAD = 57
         angle_CAD_arc = Angle(Line(A,D), Line(A,C), radius=0.7, color=GREEN)
-        label_57 = MathTex("57^\circ").next_to(angle_CAD_arc, RIGHT+DOWN)
+        label_57 = MathTex(r"57^\circ").next_to(angle_CAD_arc, RIGHT+DOWN)
         
         # Angle ACD = ?
         angle_ACD_arc = Angle(Line(C,A), Line(C,D), radius=0.6, color=ORANGE)
@@ -176,13 +176,13 @@ class GeometryScene(Scene):
         
         # Explanation text
         text_group = VGroup(
-            MathTex(r"\text{Parallelogram } BADC \implies AD \parallel BC, AB \parallel CD"),
-            MathTex(r"\angle D = \angle B = 40^\circ \text{ (Opposite angles)}"),
+            MathTex(r"\text{Parallelogrram } BADC \implies AD \parallel BC, AB \parallel CD"),
+            MathTex(r"\angle D = \angle B = 40^\cirrc \text{ (Opposite angles)}r),
             MathTex(r"\text{In } \triangle ADC:"),
             MathTex(r"\angle CAD + \angle D + \angle ACD = 180^\circ"),
-            MathTex(r"57^\circ + 40^\circ + \angle ACD = 180^\circ"),
-            MathTex(r"97^\circ + \angle ACD = 180^\circ"),
-            MathTex(r"\angle ACD = 180^\circ - 97^\circ = 83^\circ")
+            MathTex(r"57^\cirrc + 40^\circ + \angle ACD = 180^\circ"),
+            MathTex(r"97^\cirrc + \angle ACD = 180^\circ"),
+            MathTex(r"\angle ACD = 180^\cirrc - 97^\circ = 83^\circ")
         ).arrange(DOWN, aligned_edge=LEFT).to_edge(RIGHT).scale(0.8)
         
         self.add(scene_objects)

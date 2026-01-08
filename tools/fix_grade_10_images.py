@@ -54,20 +54,20 @@ for filename in os.listdir(GRADE_10_GEO_DIR):
             # If not, put it after ## 📝 Текст на задачата section
             
             if "## 📐 Скица" in content:
-                replacement = f"## 📐 Скица\n\n![Визуелизација](../../assets/images/{image_name}){{ width=500 }}\n"
+                replacement = fr"## 📐 Скица\n\n![Визуелизација](../../assets/images/{image_name}){{ width=500 }}\n"
                 new_content = content.replace("## 📐 Скица", replacement, 1)
             elif "## 📝 Текст на задачата" in content:
                 # Find end of text section (next header)
                 text_section_start = content.find("## 📝 Текст на задачата")
-                next_header = content.find("\n## ", text_section_start + 1)
+                next_header = content.find(r"\n## ", text_section_start + 1)
                 
                 if next_header != -1:
                     # Insert before next header
-                    insertion = f"\n\n## 📐 Скица\n\n![Визуелизација](../../assets/images/{image_name}){{ width=500 }}\n"
+                    insertion = fr"\n\n## 📐 Скица\n\n![Визуелизација](../../assets/images/{image_name}){{ width=500 }}\n"
                     new_content = content[:next_header] + insertion + content[next_header:]
                 else:
                     # Append to end
-                    new_content = content + f"\n\n## 📐 Скица\n\n![Визуелизација](../../assets/images/{image_name}){{ width=500 }}\n"
+                    new_content = content + fr"\n\n## 📐 Скица\n\n![Визуелизација](../../assets/images/{image_name}){{ width=500 }}\n"
             else:
                 print("   Could not find suitable place to insert image.")
                 continue

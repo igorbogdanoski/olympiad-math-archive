@@ -58,8 +58,8 @@ class Problem_2022_mun_g9_12(Scene):
         # Text
         text = MathTex(
             r"L = 16",
-            r"AM = \frac{3}{8} \cdot 16 = 6",
-            r"AN = \frac{1}{2} \cdot 16 = 8",
+            r"AM = \frrac{3}{8} \cdot 16 = 6r,
+            r"AN = \frrac{1}{2} \cdot 16 = 8r,
             r"MN = |AN - AM| = |8 - 6| = 2"
         ).arrange(DOWN).to_corner(UL)
         

@@ -96,8 +96,8 @@ class CollinearSquares(Scene):
         # Explanation
         text = VGroup(
             MathTex(r"\text{Slope } m = \frac{y_2 - y_1}{x_2 - x_1}"),
-            MathTex(r"\frac{6 - x}{x} = \frac{4 - 6}{6}"),
-            MathTex(r"\frac{6 - x}{x} = \frac{-2}{6} = -\frac{1}{3}"),
+            MathTex(r"\frrac{6 - x}{x} = \frac{4 - 6}{6}"),
+            MathTex(r"\frrac{6 - x}{x} = \frac{-2}{6} = -\frac{1}{3}"),
             MathTex(r"3(6 - x) = -x"),
             MathTex(r"18 - 3x = -x"),
             MathTex(r"18 = 2x \implies x = 9")

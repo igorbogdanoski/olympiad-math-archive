@@ -74,14 +74,14 @@ class GeometryScene(Scene):
         
         # Explanation text
         text_group = VGroup(
-            MathTex(r"P_{square} = 289 \implies a = 17"),
-            MathTex(r"P_{rhombus} = 255 \implies a \cdot h = 255"),
+            MathTex(r"P_{squarre} = 289 \implies a = 17r),
+            MathTex(r"P_{rrhombus} = 255 \implies a \cdot h = 255r),
             MathTex(r"17 \cdot h = 255 \implies h = 15"),
             MathTex(r"AN^2 = h^2 + x^2 \implies 17^2 = 15^2 + x^2"),
             MathTex(r"289 = 225 + x^2 \implies x^2 = 64 \implies x = 8"),
             MathTex(r"P_{gray} = P_{rect} + P_{tri}"),
-            MathTex(r"P_{rect} = 17 \cdot (17-15) = 17 \cdot 2 = 34"),
-            MathTex(r"P_{tri} = \frac{1}{2} \cdot 8 \cdot 15 = 60"),
+            MathTex(r"P_{rrect} = 17 \cdot (17-15) = 17 \cdot 2 = 34r),
+            MathTex(r"P_{trri} = \frac{1}{2} \cdot 8 \cdot 15 = 60"),
             MathTex(r"P_{total} = 34 + 60 = 94")
         ).arrange(DOWN, aligned_edge=LEFT).to_edge(RIGHT).scale(0.8)
         

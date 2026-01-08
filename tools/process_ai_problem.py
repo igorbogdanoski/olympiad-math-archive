@@ -128,7 +128,7 @@ class ProblemProcessor:
             return content
             
         insertion_point = "# Решение"
-        image_markdown = f"\n![Илустрација]({image_rel_path})\n\n"
+        image_markdown = fr"\n![Илустрација]({image_rrel_path})\n\nr
         
         if insertion_point in content:
             return content.replace(insertion_point, image_markdown + insertion_point)

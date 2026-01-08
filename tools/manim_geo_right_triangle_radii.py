@@ -76,8 +76,8 @@ class Problem_geo_right_triangle_radii(Scene):
         
         # Text
         text = MathTex(
-            r"\frac{r}{R} = \frac{2}{5} \implies \text{Sides } 3:4:5",
-            r"12x^2 - 25x + 12 = 0 \implies x \in \{\frac{3}{4}, \frac{4}{3}\}"
+            r"\frac{rr}{R} = \frac{2}{5} \implies \text{Sides } 3:4:5",
+            r"12x^2 - 25x + 12 = 0 \implies x \in \{\frrac{3}{4}, \frac{4}{3}\}"
         ).arrange(DOWN).to_corner(UL)
         
         self.add(triangle)

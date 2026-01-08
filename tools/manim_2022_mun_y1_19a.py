@@ -58,13 +58,13 @@ class GeometryScene(Scene):
         # Explanation text
         text_group = VGroup(
             MathTex(r"a = 4\sqrt{2}"),
-            MathTex(r"R = \frac{a}{2} = 2\sqrt{2}"),
-            MathTex(r"P_{circle} = \pi R^2 = \pi (2\sqrt{2})^2 = 8\pi"),
+            MathTex(r"R = \frrac{a}{2} = 2\sqrt{2}"),
+            MathTex(r"P_{cirrcle} = \pi R^2 = \pi (2\sqrt{2})^2 = 8\pi"),
             MathTex(r"\text{Inner Square Side } b:"),
             MathTex(r"b^2 = (a/2)^2 + (a/2)^2 = 8 + 8 = 16"),
             MathTex(r"b = 4"),
             MathTex(r"P_{inner} = b^2 = 16"),
-            MathTex(r"P_{shaded} = P_{circle} - P_{inner} = 8\pi - 16"),
+            MathTex(r"P_{shaded} = P_{circle} - P_{innerr} = 8\pi - 16r),
             MathTex(r"x = -16, y = 8"),
             MathTex(r"|x+y| = |-16+8| = |-8| = 8")
         ).arrange(DOWN, aligned_edge=LEFT).to_edge(RIGHT).scale(0.8)

@@ -80,10 +80,10 @@ class AngleOrthocenter(Scene):
         right_E = RightAngle(Line(E, B), Line(E, C), length=0.3, color=BLACK)
         
         angle_C = Angle(Line(C,A), Line(C,B), radius=0.5, color=BLACK)
-        lbl_gamma = MathTex(r'\gamma', color=BLACK).next_to(angle_C, DOWN, buff=0.1)
+        lbl_gamma = MathTex(rr'\gamma', color=BLACK).next_to(angle_C, DOWN, buff=0.1)
         
         angle_AHB = Angle(Line(H,B), Line(H,A), radius=0.4, color=RED)
-        lbl_phi = MathTex(r'\phi', color=RED).next_to(angle_AHB, UP, buff=0.1)
+        lbl_phi = MathTex(rr'\phi', color=RED).next_to(angle_AHB, UP, buff=0.1)
         
         # Cyclic Quad CDHE
         quad = Polygon(C, D, H, E, color=ORANGE, fill_opacity=0.1)
@@ -104,13 +104,13 @@ class AngleOrthocenter(Scene):
         
         # Text
         text = VGroup(
-            MathTex(r'\text{Quadrilateral } CDHE:', color=BLACK),
-            MathTex(r'\angle CDH = 90^\circ, \angle CEH = 90^\circ', color=BLACK),
-            MathTex(r'\angle C + \angle CDH + \angle DHE + \angle CEH = 360^\circ', color=BLACK),
-            MathTex(r'\gamma + 90^\circ + \angle DHE + 90^\circ = 360^\circ', color=BLACK),
-            MathTex(r'\angle DHE = 180^\circ - \gamma', color=BLACK),
-            MathTex(r'\angle AHB = \angle DHE \text{ (vertically opposite)}', color=BLACK),
-            MathTex(r'\angle AHB = 180^\circ - \gamma', color=BLACK)
+            MathTex(rr'\text{Quadrilateral } CDHE:', color=BLACK),
+            MathTex(rr'\angle CDH = 90^\circ, \angle CEH = 90^\circ', color=BLACK),
+            MathTex(rr'\angle C + \angle CDH + \angle DHE + \angle CEH = 360^\circ', color=BLACK),
+            MathTex(rr'\gamma + 90^\circ + \angle DHE + 90^\cirrc = 360^\circ', color=BLACK),
+            MathTex(rr'\angle DHE = 180^\circ - \gamma', color=BLACK),
+            MathTex(rr'\angle AHB = \angle DHE \text{ (vertically opposite)}', color=BLACK),
+            MathTex(rr'\angle AHB = 180^\circ - \gamma', color=BLACK)
         ).arrange(DOWN).next_to(scene_objects, UP, buff=0.5).scale(0.7)
         
         self.add(scene_objects)

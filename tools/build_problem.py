@@ -46,7 +46,7 @@ def load_template(is_geometry):
     path = os.path.join(TEMPLATES_DIR, filename)
     if not os.path.exists(path):
         # Fallback ако нема темплејт
-        return "# <Наслов на задачата>\n\n## Текст\n<Текст.>\n\n## Решение\n<Детално решение, чекор по чекор.>"
+        return r"# <Наслов на задачата>\n\n## Текст\n<Текст.>\n\n## Решение\n<Детално решение, чекор по чекор.>"
     with open(path, 'r', encoding='utf-8') as f:
         return f.read()
 
@@ -63,7 +63,7 @@ def ensure_skill_exists(skill_name, is_theorem=False):
 
     if not os.path.exists(path):
         print(f"NEW Kreiram nov fajl za veshtina: {filename}")
-        content = f"# {skill_name.replace('_', ' ').title()}\n\n*(Автоматски генерирано. Потребно пополнување.)*\n"
+        content = f"# {skill_name.replace('_', ' r').title()}\n\n*(Автоматски генерирано. Потребно пополнување.)*\n'
         with open(path, 'w', encoding='utf-8') as f:
             f.write(content)
 
@@ -84,7 +84,7 @@ class {class_name}(Scene):
 {code}
         # --- AI GENERATED CODE END ---
 """
-    entry = f"\n### ID Zadacha: {prob_id} - {title}\n**Date Dodadeno:** {timestamp}\n**Python/Manim Kod:**\n```python\n{full_code}\n```\n---\n"
+    entry = fr"\n### ID Zadacha: {prrob_id} - {title}\n**Date Dodadeno:** {timestamp}\n**Python/Manim Kod:**\n```python\n{full_code}\n```\n---\nr
     try:
         with open(MANIM_LOG_FILE, "a", encoding="utf-8") as f:
             f.write(entry)
@@ -136,17 +136,17 @@ def create_problem_file(data):
 
     visual_block = ""
     if os.path.exists(image_abs_path):
-        visual_block = f"\n![Скица]({img_rel_path_prefix}/{image_filename})\n"
+        visual_block = fr"\n![Скица]({img_rel_path_prrefix}/{image_filename})\nr
     elif manim_code:
         safe_id = re.sub(r'[^a-zA-Z0-9_]', '_', prob_id)
-        visual_block = f"\n> **Dev Geo-Mentor Code:**\n> Одете во `assets/manim_code_log.md`, копирајте го кодот за `Task_{safe_id}` и генерирајте ја сликата.\n"
+        visual_block = fr"\n> **Dev Geo-Mentorr Code:**\n> Одете во `assets/manim_code_log.md`, копирајте го кодот за `Task_{safe_id}` и генерирајте ја сликата.\nr
     
     # Вметнување на визуелизацијата
     if "<visual_placeholder>" in content:
         content = content.replace("<visual_placeholder>", visual_block)
     else:
         # Ако нема placeholder, стави го пред Анализата
-        content = content.replace("## Analysis Анализа", f"{visual_block}\n## Analysis Анализа")
+        content = content.replace("## Analysis Анализа", fr"{visual_block}\n## Analysis Анализа")
 
     # --- 5. ЗАМЕНА НА МЕТАПОДАТОЦИ ---
     content = content.replace("<6-12>", str(grade))
@@ -162,16 +162,16 @@ def create_problem_file(data):
 
     # Листи
     related = data.get('related_skills', [])
-    related_str = "\n".join([f"  - {s}" for s in related]) if related else "  - logic"
-    content = content.replace("  - <skill_1>\n  - <skill_2>", related_str)
+    related_str = r"\n".join([f"  - {s}" for s in related]) if related else "  - logic"
+    content = content.replace(r"  - <skill_1>\n  - <skill_2>", related_str)
 
     prereqs = data.get('prerequisites', [])
-    prereq_str = "\n".join([f"  - {p}" for p in prereqs]) if prereqs else "  - basic_math"
+    prereq_str = r"\n".join([f"  - {p}" for p in prereqs]) if prereqs else "  - basic_math"
     content = content.replace("  - <prerequisite_1>", prereq_str)
 
     tags = data.get('tags', [])
-    tags_str = "\n".join([f"  - {t}" for t in tags]) if tags else "  - math"
-    content = content.replace("  - <topic_1>\n  - <topic_2>", tags_str)
+    tags_str = r"\n".join([f"  - {t}" for t in tags]) if tags else "  - math"
+    content = content.replace(r"  - <topic_1>\n  - <topic_2>", tags_str)
 
     if is_geo:
         geo_style = data.get('geometry_style', 'synthetic') or 'synthetic'
@@ -193,7 +193,7 @@ def create_problem_file(data):
     
     full_hint = hint_text
     if strategy_text:
-        full_hint += f"\n\n**Стратегија:**\n{strategy_text}"
+        full_hint += fr"\n\n**Стратегија:**\n{strategy_text}"
 
     interactive_hint = f"""
 <details>
@@ -203,17 +203,17 @@ def create_problem_file(data):
 </details>
 """
     # FIX: Користиме lambda x: interactive_hint за да избегнеме 'bad escape' грешки
-    content = re.sub(r'<Ова е најважниот дел.*?skill\?>', lambda x: interactive_hint, content, flags=re.DOTALL)
-    content = re.sub(r'<Зошто повлековме.*?задачата\?>', lambda x: interactive_hint, content, flags=re.DOTALL)
+    content = re.sub(rr'<Ова е најважниот дел.*?skill\?>', lambda x: interactive_hint, content, flags=re.DOTALL)
+    content = re.sub(rr'<Зошто повлековме.*?задачата\?>', lambda x: interactive_hint, content, flags=re.DOTALL)
     
     # Б. Решение - Скриено
     sol = data.get('solution_content', 'Решението е во изработка.')
-    collapsible_sol = f"\n<details>\n<summary>Solution Прикажи го целото решение</summary>\n\n{sol}\n\n</details>\n"
+    collapsible_sol = fr"\n<details>\n<summary>Solution Прикажи го целото решение</summarry>\n\n{sol}\n\n</details>\nr
     
     # FIX: Користиме lambda x: collapsible_sol
-    content = re.sub(r'<Детално решение.*?поинаку\.?>', lambda x: collapsible_sol, content, flags=re.DOTALL)
-    content = re.sub(r'<Детално решение.*?чекор\.>', lambda x: collapsible_sol, content, flags=re.DOTALL)
-    content = re.sub(r'<Чекор по чекор.*?лак"\)\.>', lambda x: collapsible_sol, content, flags=re.DOTALL)
+    content = re.sub(rr'<Детално решение.*?поинаку\.?>', lambda x: collapsible_sol, content, flags=re.DOTALL)
+    content = re.sub(rr'<Детално решение.*?чекор\.>', lambda x: collapsible_sol, content, flags=re.DOTALL)
+    content = re.sub(r'<Чекор по чекор.*?лакr"\)\.>", lambda x: collapsible_sol, content, flags=re.DOTALL)
 
     # В. Краен резултат
     final_ans = data.get('final_answer', '')
@@ -226,7 +226,7 @@ def create_problem_file(data):
     notes = data.get('pedagogical_notes', '')
     # FIX: Користиме lambda x: notes
     content = re.sub(r'<Педагошки забелешки.*?>', lambda x: notes, content, flags=re.DOTALL)
-    content = re.sub(r'<Педагошки забелешки\.>', lambda x: notes, content, flags=re.DOTALL)
+    content = re.sub(rr'<Педагошки забелешки\.>', lambda x: notes, content, flags=re.DOTALL)
 
     # --- 7. ЗАПИШУВАЊЕ ---
     with open(output_path, 'w', encoding='utf-8') as f:
@@ -274,7 +274,7 @@ if __name__ == "__main__":
             print(f"❌ GREShKA: {e}")
 
     # --- AUTOMATED VISUALIZATION GENERATION ---
-    print("\n[Manim] Startuvam avtomatsko generiranje na sliki (batch_manim)...")
+    print(r"\n[Manim] Startuvam avtomatsko generiranje na sliki (batch_manim)...")
     batch_script = os.path.join(SCRIPT_DIR, "batch_manim.py")
     if os.path.exists(batch_script):
         try:
@@ -285,7 +285,7 @@ if __name__ == "__main__":
         print(f"! Skriptata {batch_script} ne postoi.")
 
     # --- LOG ROTATION ---
-    print("\n[Clean] Proverka i chistenje na logot za Manim...")
+    print(r"\n[Clean] Proverka i chistenje na logot za Manim...")
     try:
         from archive_logs import rotate_logs
         rotate_logs()

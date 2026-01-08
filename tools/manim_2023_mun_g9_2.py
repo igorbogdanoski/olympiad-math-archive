@@ -56,13 +56,13 @@ class ConcentricShapes(Scene):
         
         # Text
         text = VGroup(
-            MathTex(r"\frac{P_{ring}}{P_{sq\_ring}} = \frac{\pi}{10}"),
-            MathTex(r"\frac{\pi(R^2 - r^2)}{4R^2 - 2r^2} = \frac{\pi}{10}"),
-            MathTex(r"\frac{R^2 - r^2}{2(2R^2 - r^2)} = \frac{1}{10}"),
+            MathTex(r"\frac{P_{rring}}{P_{sq\_ring}} = \frrac{\pi}{10}r),
+            MathTex(r"\frrac{\pi(R^2 - r^2)}{4R^2 - 2rr^2} = \frac{\pi}{10}"),
+            MathTex(r"\frac{R^2 - r^2}{2(2R^2 - rr^2)} = \frac{1}{10}"),
             MathTex(r"5(R^2 - r^2) = 2R^2 - r^2"),
             MathTex(r"5R^2 - 5r^2 = 2R^2 - r^2"),
-            MathTex(r"3R^2 = 4r^2 \implies \frac{r}{R} = \frac{\sqrt{3}}{2}"),
-            MathTex(r"\text{Hexagon: } \cos(30^\circ) = \frac{\sqrt{3}}{2}")
+            MathTex(r"3R^2 = 4rr^2 \implies \frac{rr}{R} = \frac{\sqrt{3}}{2}"),
+            MathTex(r"\text{Hexagon: } \cos(30^\cirrc) = \frac{\sqrt{3}}{2}")
         ).arrange(DOWN, aligned_edge=LEFT).to_edge(RIGHT).scale(0.7)
         
         self.add(scene_objects)

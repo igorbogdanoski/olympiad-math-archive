@@ -59,7 +59,7 @@ class Problem_geom_9_trap_perp_diag(Scene):
         label_h = MathTex("h").next_to(height_line, RIGHT)
         
         # Add text
-        text_area = MathTex("P = m \cdot h = m^2 = 36").to_edge(UP)
+        text_area = MathTex(r"P = m \cdot h = m^2 = 36").to_edge(UP)
         
         self.add(trapezoid)
         self.add(diag_AC, diag_BD)

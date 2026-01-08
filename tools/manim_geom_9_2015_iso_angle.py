@@ -63,7 +63,7 @@ class GeometryScene(Scene):
         E = B + u * (C - B)
         
         bisector = DashedLine(A, E, color=GREEN)
-        label_l = MathTex("l_\\alpha").next_to(bisector, UP, buff=0.05)
+        label_l = MathTex(r"l_\\alpha").next_to(bisector, UP, buff=0.05)
         
         # Labels
         label_A = MathTex("A").next_to(A, DL)
@@ -74,10 +74,10 @@ class GeometryScene(Scene):
         
         # Angles
         angle_A = Angle(Line(A, B), Line(A, C), radius=0.5)
-        label_angle_A = MathTex("36^\\circ").next_to(angle_A, RIGHT)
+        label_angle_A = MathTex(r"36^\\circ").next_to(angle_A, RIGHT)
         
         # Equation
-        equation = MathTex("l_\\alpha = 2 h_c").to_corner(UL)
+        equation = MathTex(r"l_\\alpha = 2 h_c").to_corner(UL)
         
         # Group
         scene_group = VGroup(triangle, altitude, bisector, label_A, label_B, label_C, label_D, label_E, label_hc, label_l, angle_A, label_angle_A, equation)

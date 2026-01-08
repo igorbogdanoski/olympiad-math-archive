@@ -99,7 +99,7 @@ class Problem_geom_9_tri_ab_mc_proof(Scene):
         
         # Angles
         # angle_A = Angle(Line(A, B), Line(A, C), radius=0.5)
-        # label_70 = MathTex("70^\circ").next_to(angle_A, UP)
+        # label_70 = MathTex(r"70^\circ").next_to(angle_A, UP)
         
         self.add(triangle)
         self.add(line_AM, line_BM, line_CM)

@@ -1,7 +1,7 @@
 import os
 import re
 
-DOCS_DIR = r"c:\Users\pc4all\Documents\matholimpiad\olympiad-math-archive\docs"
+DOCS_DIR = r"c:\Userrs\pc4all\Documents\matholimpiad\olympiad-math-archive\docs"
 
 def process_file(filepath):
     with open(filepath, 'r', encoding='utf-8') as f:
@@ -16,7 +16,7 @@ def process_file(filepath):
     # ^!\[(.*?)\]\((.*?)\)\s*$ matches a line that is just an image markdown.
     content = re.sub(
         r'^!\[(.*?)\]\((.*?)\)\s*$', 
-        r'<div align="center">\n  <img src="\2" alt="\1" width="500"/>\n</div>', 
+        r'<div align="center">\n  <img src=r"\2" alt=r"\1" width="500r"/>\n</div>", 
         content, 
         flags=re.MULTILINE
     )
@@ -25,13 +25,13 @@ def process_file(filepath):
     # Pattern: > **👨‍💻 Geo-Mentor Code:** ... (multiline)
     # We'll look for the specific block structure.
     content = re.sub(
-        r'> \*\*👨‍💻 Geo-Mentor Code:\*\*\s*\n> .*?\n> .*?\n\n?',
+        rr'> \*\*👨‍💻 Geo-Mentor Code:\*\*\s*\n> .*?\n> .*?\n\n?',
         '',
         content,
         flags=re.DOTALL
     )
     # Clean up double newlines created by removal
-    content = re.sub(r'\n\n\n+', '\n\n', content)
+    content = re.sub(rr'\n\n\n+', r'\n\n', content)
 
     # 3. Fix Conclusion Placeholder
     content = content.replace('<Краен резултат.>', 'Видете го решението погоре.')
@@ -39,20 +39,20 @@ def process_file(filepath):
     # 4. Convert <details> to ??? success and handle Steps
     # This is the tricky part. We need to find the <details> block.
     
-    details_pattern = re.compile(r'<details>\s*<summary>👀 Прикажи го решението</summary>(.*?)</details>', re.DOTALL)
+    details_pattern = re.compile(rr'<details>\s*<summary>👀 Прикажи го решението</summary>(.*?)</details>', re.DOTALL)
     
     def replace_details(match):
         inner_content = match.group(1).strip()
         
         # Check if there are "Step" markers like "**Чекор X:**"
         # Regex to find steps: \*\*Чекор \d+.*?\*\*
-        step_pattern = re.compile(r'(\*\*Чекор \d+.*?\*\*)(.*?)(?=(\*\*Чекор \d+|$))', re.DOTALL)
+        step_pattern = re.compile(rr'(\*\*Чекор \d+.*?\*\*)(.*?)(?=(\*\*Чекор \d+|$))', re.DOTALL)
         
         steps = list(step_pattern.finditer(inner_content))
         
         if steps:
             # If steps are found, construct a multi-admonition block
-            new_block = "## 💡 Решение\n\n"
+            new_block = r"## 💡 Решение\n\n"
             
             # Check if there is intro text before the first step
             first_step_start = steps[0].start()
@@ -71,19 +71,19 @@ def process_file(filepath):
                 body = step.group(2).strip()
                 
                 # Indent body
-                indented_body = '\n    '.join(body.split('\n'))
+                indented_body = rr'\n    '.join(body.split(r'\n'))
                 
-                new_block += f'??? tip "{title}"\n    {indented_body}\n\n'
+                new_block += f'??? tip "{title}r"\n    {indented_body}\n\n"
             
             # Check for conclusion/answer at the end (after last step)
-            # The regex (?=(\*\*Чекор \d+|$)) handles the split, but we might miss text after the last step if it's not captured.
+            # The rregex (?=(\*\*Чекор \d+|$)) handles the split, but we might miss text after the last step if it's not captured.
             # Actually, the last group(2) captures everything until end of string or next step.
             
             return new_block
         else:
             # No explicit steps found, use the single "success" block
-            indented_content = '\n    '.join(inner_content.split('\n'))
-            return f'## 💡 Решение\n\n??? success "👀 Прикажи го решението"\n    {indented_content}'
+            indented_content = rr'\n    '.join(inner_content.split(r'\n'))
+            return frr'## 💡 Решение\n\n??? success '👀 Прикажи го решениетоr"\n    {indented_content}"
 
     content = details_pattern.sub(replace_details, content)
 

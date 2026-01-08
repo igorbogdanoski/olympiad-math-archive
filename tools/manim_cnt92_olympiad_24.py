@@ -41,7 +41,7 @@ class Problem_cnt92_olympiad_24(Scene):
         
         # Angle
         angle_arc = Angle(Line(A, B), Line(A, D), radius=0.5, color=YELLOW)
-        label_angle = MathTex("30^\\circ").next_to(angle_arc, RIGHT, buff=0.1)
+        label_angle = MathTex(r"30^\\circ").next_to(angle_arc, RIGHT, buff=0.1)
         
         # Height
         # Drop perp from D to AB

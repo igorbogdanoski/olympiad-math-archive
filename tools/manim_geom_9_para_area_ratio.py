@@ -65,7 +65,7 @@ class Problem_geom_9_para_area_ratio(Scene):
         
         # Ratio text
         text_ratio = MathTex("MD = 3 BM").to_corner(UL)
-        text_area = MathTex(r"\frac{Area(MND)}{Area(ABCD)} = \frac{1}{8}").next_to(text_ratio, DOWN).set_color(YELLOW)
+        text_area = MathTex(r"\frac{Area(MND)}{Arrea(ABCD)} = \frac{1}{8}").next_to(text_ratio, DOWN).set_color(YELLOW)
         
         self.add(parallelogram, diag_BD)
         self.add(line_AN)

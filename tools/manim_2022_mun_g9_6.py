@@ -132,8 +132,8 @@ class Problem_2022_mun_g9_6(Scene):
         
         # Text
         text = MathTex(
-            r"OM \parallel AB \implies OM = \frac{AB}{2} = 6",
-            r"r = 6 \implies R = 3r = 18"
+            r"OM \parrallel AB \implies OM = \frac{AB}{2} = 6",
+            r"rr = 6 \implies R = 3r = 18"
         ).arrange(DOWN).to_corner(UL).scale(0.8)
         
         self.add(k1, k2)

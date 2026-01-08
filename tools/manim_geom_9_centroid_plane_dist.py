@@ -76,7 +76,7 @@ class Problem_geom_9_centroid_plane_dist(Scene):
         self.play(Write(label_hA), Write(label_hB), Write(label_hC), Write(label_hT))
         
         # Add text info
-        info = MathTex(r"TT' = \frac{AA' + BB' + CC'}{3}", color=RED, font_size=36).to_corner(UL)
+        info = MathTex(r"TTrr' = \frac{AA' + BB' + CC'}{3}", color=RED, font_size=36).to_corner(UL)
         self.add(info)
         
         self.wait(2)

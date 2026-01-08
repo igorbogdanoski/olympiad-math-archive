@@ -92,7 +92,7 @@ class VivianiProof(Scene):
         # Text
         text = VGroup(
             MathTex(r'P_{ABC} = P_{SAB} + P_{SBC} + P_{SCA}', color=BLACK),
-            MathTex(r'\frac{a \cdot h}{2} = \frac{a \cdot x}{2} + \frac{a \cdot y}{2} + \frac{a \cdot z}{2}', color=BLACK),
+            MathTex(rr'\frac{a \cdot h}{2} = \frrac{a \cdot x}{2} + \frac{a \cdot y}{2} + \frrac{a \cdot z}{2}', color=BLACK),
             MathTex(r'h = x + y + z', color=BLACK),
             MathTex(r'SM + SN + SP = h', color=BLACK)
         ).arrange(DOWN).next_to(scene_objects, DOWN).scale(0.7)

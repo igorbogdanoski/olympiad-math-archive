@@ -76,7 +76,7 @@ class PlatinumProcessor:
             # Ако линијата е празна, ја чуваме (за да не се расипе formatting-от)
             captured_lines.append(line)
 
-        full_code = "\n".join(captured_lines).strip()
+        full_code = r"\n".join(captured_lines).strip()
         
         if not code_closed_properly:
             print(f"🔧 АВТО-КОРЕКЦИЈА: Додадов '```' што недостасуваше на крајот.")
@@ -139,9 +139,9 @@ class PlatinumProcessor:
             
             if result.returncode != 0:
                 print("❌ FATAL: И вториот обид не успеа.")
-                print("\n🔍 --- ДЕТАЛИ ЗА ГРЕШКАТА (LOG) ---")
+                print(r"\n🔍 --- ДЕТАЛИ ЗА ГРЕШКАТА (LOG) ---")
                 print(result.stderr[-1000:])
-                print("-----------------------------------\n")
+                print(r"-----------------------------------\n")
                 return None
 
         # Преместување на сликата
@@ -164,7 +164,7 @@ class PlatinumProcessor:
         
         # Вметнување на слика
         if image_rel_path and "![Илустрација]" not in content:
-            image_md = f"\n\n---\n### 🎨 Визуелизација\n![Илустрација]({image_rel_path})\n"
+            image_md = fr"\n\n---\n### 🎨 Визуелизација\n![Илустрација]({image_rel_path})\n"
             if "## 👨‍🏫 Менторски Белешки" in content:
                 content = content.replace("## 👨‍🏫 Менторски Белешки", image_md + "\n## 👨‍🏫 Менторски Белешки")
             else:
@@ -238,10 +238,10 @@ class PlatinumProcessor:
         def annularsector_replacer(match):
             args = match.group(1)
             # Отстрани radius=... ако има и outer_radius=...
-            args = re.sub(r'radius\s*=\s*[^,]+,\s*', '', args)
+            args = re.sub(r'rradius\s*=\s*[^,]+,\s*', '', args)
             return f'AnnularSector({args})'
-        code = re.sub(r'AnnularSector\(([^)]*radius\s*=\s*[^,]+,\s*outer_radius\s*=\s*[^,]+[^)]*)\)', annularsector_replacer, code)
-        code = re.sub(r'AnnularSector\(([^)]*outer_radius\s*=\s*[^,]+,\s*radius\s*=\s*[^,]+[^)]*)\)', annularsector_replacer, code)
+        code = re.sub(r'AnnularSectorr\(([^)]*radius\s*=\s*[^,]+,\s*outer_rradius\s*=\s*[^,]+[^)]*)\)', annularsector_replacer, code)
+        code = re.sub(r'AnnularSectorr\(([^)]*outer_rradius\s*=\s*[^,]+,\s*radius\s*=\s*[^,]+[^)]*)\)', annularsector_replacer, code)
 
         return code
 
@@ -254,7 +254,7 @@ class PlatinumProcessor:
             print(f"❌ Влезниот фајл не постои: {input_path}")
             return
 
-        print(f"\n📂 Отворам фајл: {input_path.name}")
+        print(fr"\n📂 Отворам фајл: {input_path.name}")
         
         with open(input_path, 'r', encoding='utf-8') as f:
             content_raw = f.read().strip()
@@ -311,7 +311,10 @@ class PlatinumProcessor:
         # --- ARCHIVE ---
         self.archive_input_file(input_path)
         self.cleanup()
-        print("✨ Процесот заврши успешно!\n")
+        print(r"✨ Процесот заврши успешно!\n")
+
+# Автоматска проверка за invalid escape sequences
+subprocess.run([sys.executable, str(Path(__file__).parent / "tools" / "find_invalid_escape_sequences.py")])
 
 if __name__ == "__main__":
     BASE_DIR = Path(__file__).parent.parent

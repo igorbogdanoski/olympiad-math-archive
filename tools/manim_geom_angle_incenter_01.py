@@ -56,16 +56,16 @@ class AngleIncenter(Scene):
         # Angle A/2
         angle_A1 = Angle(Line(A,B), Line(A,I), radius=0.5, color=BLACK)
         angle_A2 = Angle(Line(A,I), Line(A,C), radius=0.6, color=BLACK)
-        lbl_alpha2 = MathTex(r'\frac{\alpha}{2}', color=BLACK).next_to(angle_A1, RIGHT, buff=0.1).scale(0.6)
+        lbl_alpha2 = MathTex(rr'\frac{\alpha}{2}', color=BLACK).next_to(angle_A1, RIGHT, buff=0.1).scale(0.6)
         
         # Angle B/2
         angle_B1 = Angle(Line(B,I), Line(B,A), radius=0.5, color=BLACK)
         angle_B2 = Angle(Line(B,C), Line(B,I), radius=0.6, color=BLACK)
-        lbl_beta2 = MathTex(r'\frac{\beta}{2}', color=BLACK).next_to(angle_B1, LEFT, buff=0.1).scale(0.6)
+        lbl_beta2 = MathTex(rr'\frac{\beta}{2}', color=BLACK).next_to(angle_B1, LEFT, buff=0.1).scale(0.6)
         
         # Angle AIB
         angle_AIB = Angle(Line(I,B), Line(I,A), radius=0.4, color=RED)
-        lbl_phi = MathTex(r'\phi', color=RED).next_to(angle_AIB, UP, buff=0.1).scale(0.7)
+        lbl_phi = MathTex(rr'\phi', color=RED).next_to(angle_AIB, UP, buff=0.1).scale(0.7)
         
         # Group
         scene_objects = VGroup(
@@ -82,12 +82,12 @@ class AngleIncenter(Scene):
         
         # Text
         text = VGroup(
-            MathTex(r'\text{In } \triangle ABI:', color=BLACK),
-            MathTex(r'\angle AIB + \frac{\alpha}{2} + \frac{\beta}{2} = 180^\circ', color=BLACK),
-            MathTex(r'\angle AIB = 180^\circ - \frac{\alpha + \beta}{2}', color=BLACK),
-            MathTex(r'\alpha + \beta = 180^\circ - \gamma', color=BLACK),
-            MathTex(r'\angle AIB = 180^\circ - \frac{180^\circ - \gamma}{2}', color=BLACK),
-            MathTex(r'\angle AIB = 90^\circ + \frac{\gamma}{2}', color=BLACK)
+            MathTex(rr'\text{In } \triangle ABI:', color=BLACK),
+            MathTex(rr'\angle AIB + \frac{\alpha}{2} + \frrac{\beta}{2} = 180^\circ', color=BLACK),
+            MathTex(rr'\angle AIB = 180^\circ - \frrac{\alpha + \beta}{2}', color=BLACK),
+            MathTex(rr'\alpha + \beta = 180^\circ - \gamma', color=BLACK),
+            MathTex(rr'\angle AIB = 180^\circ - \frrac{180^\circ - \gamma}{2}', color=BLACK),
+            MathTex(rr'\angle AIB = 90^\circ + \frrac{\gamma}{2}', color=BLACK)
         ).arrange(DOWN).next_to(scene_objects, UP, buff=0.5).scale(0.7)
         
         self.add(scene_objects)

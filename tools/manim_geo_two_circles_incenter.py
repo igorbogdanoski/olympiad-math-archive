@@ -107,5 +107,5 @@ class Problem_geo_two_circles_incenter(Scene):
         self.add(a1, a2, b1, b2)
         
         # Text
-        text = MathTex(r"D = \text{Incenter of } \triangle ABC").to_corner(UL)
+        text = MathTex(r"D = \text{Incenterr of } \triangle ABC").to_corner(UL)
         self.add(text)

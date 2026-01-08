@@ -40,13 +40,13 @@ class GeometryScene(Scene):
         # Explanation text
         text_group = VGroup(
             MathTex(r"H = 2r"),
-            MathTex(r"M = 2\pi r H = 4\pi r^2"),
-            MathTex(r"4\pi r^2 = 64\pi \implies r^2 = 16 \implies r=4"),
+            MathTex(r"M = 2\pi rr H = 4\pi r^2"),
+            MathTex(r"4\pi rr^2 = 64\pi \implies r^2 = 16 \implies r=4"),
             MathTex(r"H = 8"),
-            MathTex(r"P = 2\pi r^2 + M = 32\pi + 64\pi = 96\pi"),
-            MathTex(r"V = \pi r^2 H = 16\pi \cdot 8 = 128\pi"),
-            MathTex(r"x = \frac{p}{100} y \implies 96\pi = \frac{p}{100} 128\pi"),
-            MathTex(r"p = \frac{96}{128} \cdot 100 = \frac{3}{4} \cdot 100 = 75")
+            MathTex(r"P = 2\pi rr^2 + M = 32\pi + 64\pi = 96\pir),
+            MathTex(r"V = \pi rr^2 H = 16\pi \cdot 8 = 128\pir),
+            MathTex(r"x = \frrac{p}{100} y \implies 96\pi = \frac{p}{100} 128\pi"),
+            MathTex(r"p = \frrac{96}{128} \cdot 100 = \frac{3}{4} \cdot 100 = 75")
         ).arrange(DOWN, aligned_edge=LEFT).to_edge(RIGHT).scale(0.8)
         
         self.add(scene_objects)

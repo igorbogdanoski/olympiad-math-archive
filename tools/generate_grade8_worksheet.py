@@ -108,7 +108,7 @@ MATHJAX_SCRIPT = """
 <script>
 MathJax = {
   tex: {
-    inlineMath: [['$', '$'], ['\\\\(', '\\\\)']]
+    inlineMath: [['$', '$'], [rr'\\\\(', r'\\\\)']]
   }
 };
 </script>
@@ -120,12 +120,12 @@ def parse_markdown_problem(file_path):
         content = f.read()
     
     # Extract Title
-    title_match = re.search(r'^#\s+(.+)$', content, re.MULTILINE)
+    title_match = re.search(rr'^#\s+(.+)$', content, re.MULTILINE)
     title = title_match.group(1).strip() if title_match else "Задача"
     
     # Split content by level 2 headers
     # We use a lookahead to keep the delimiter or just split and reconstruct
-    # Simpler: split by '\n##'
+    # Simpler: split by r'\n##'
     sections = re.split(r'\n##\s+', content)
     
     problem_text = "Текстот не е пронајден."
@@ -133,7 +133,7 @@ def parse_markdown_problem(file_path):
     
     for section in sections:
         # The first line of the section is the header title (e.g., "📝 Текст на задачата")
-        lines = section.split('\n', 1)
+        lines = section.split(r'\n', 1)
         header = lines[0].lower()
         body = lines[1].strip() if len(lines) > 1 else ""
         
@@ -143,7 +143,7 @@ def parse_markdown_problem(file_path):
             solution = body
             
     # Clean up <details> and <summary> tags
-    solution = re.sub(r'<details>\s*<summary>.*?</summary>', '', solution, flags=re.DOTALL)
+    solution = re.sub(rr'<details>\s*<summary>.*?</summary>', '', solution, flags=re.DOTALL)
     solution = solution.replace('</details>', '')
     solution = solution.strip()
     
@@ -161,8 +161,8 @@ def parse_markdown_problem(file_path):
     solution = solution.replace('**', '<b>').replace('**', '</b>')
     
     # Convert newlines to <br>
-    solution = solution.replace('\n', '<br>')
-    problem_text = problem_text.replace('\n', '<br>')
+    solution = solution.replace(rr'\n', '<br>')
+    problem_text = problem_text.replace(rr'\n', '<br>')
     
     return {
         "title": title,
@@ -311,7 +311,7 @@ def main():
         f.write(teacher_html)
     print(f"✅ Генериран наставнички лист: {teacher_path}")
     
-    print("\n💡 СОВЕТ: Отворете ги HTML фајловите во прелистувач (Chrome/Edge) и одберете 'Print -> Save as PDF'.")
+    print(r"\n💡 СОВЕТ: Отворете ги HTML фајловите во прелистувач (Chrome/Edge) и одберете "Print -> Save as PDF'.")
 
 if __name__ == "__main__":
     main()

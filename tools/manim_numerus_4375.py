@@ -65,11 +65,11 @@ class Problem_numerus_4375(Scene):
         # Angles
         # Angle CBA = 40
         angle_CBA = Angle(Line(B, C), Line(B, A), radius=0.8, color=BLUE)
-        lbl_40 = MathTex("40^\\circ", color=BLACK, font_size=20).next_to(angle_CBA, RIGHT, buff=0.1).shift(UP*0.1)
+        lbl_40 = MathTex(r"40^\\circ", color=BLACK, font_size=20).next_to(angle_CBA, RIGHT, buff=0.1).shift(UP*0.1)
         
         # Angle BAD = 20
         angle_BAD = Angle(Line(A, B), Line(A, D), radius=0.8, color=ORANGE)
-        lbl_20_A = MathTex("20^\\circ", color=BLACK, font_size=20).next_to(angle_BAD, DOWN, buff=0.1)
+        lbl_20_A = MathTex(r"20^\\circ", color=BLACK, font_size=20).next_to(angle_BAD, DOWN, buff=0.1)
         
         # Angle ACD = ?
         angle_ACD = Angle(Line(C, D), Line(C, A), radius=0.8, color=RED)
@@ -95,7 +95,7 @@ class Problem_numerus_4375(Scene):
         # Add text info
         info = VGroup(
             MathTex("BD = BC", color=BLACK, font_size=24),
-            MathTex("\\angle BAD = 20^\\circ", color=BLACK, font_size=24),
-            MathTex("\\angle ACD = ?", color=RED, font_size=24)
+            MathTex(r"\\angle BAD = 20^\\circ", color=BLACK, font_size=24),
+            MathTex(r"\\angle ACD = ?", color=RED, font_size=24)
         ).arrange(DOWN, aligned_edge=LEFT).to_corner(UL)
         self.add(info)

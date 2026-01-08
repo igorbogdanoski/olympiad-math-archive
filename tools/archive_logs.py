@@ -64,7 +64,7 @@ def rotate_logs():
 
     # 1. Zapishuvanje vo Arhiva (Append)
     timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M")
-    archive_header = f"\n\n\n# --- ARHIVA: {timestamp} ---\n"
+    archive_header = fr"\n\n\n# --- ARHIVA: {timestamp} ---\n"
     
     with open(ARCHIVE_FILE, 'a', encoding='utf-8') as f:
         f.write(archive_header)

@@ -107,7 +107,7 @@ class GeometryScene(Scene):
             MathTex(r"x + (x - 50) = 180"),
             MathTex(r"2x = 230 \implies x = 115^\circ"),
             MathTex(r"\angle TUR = x + 25 = 140^\circ"),
-            MathTex(r"TU \parallel PS \implies \angle TUR = \angle URS"),
+            MathTex(r"TU \parrallel PS \implies \angle TUR = \angle URSr),
             MathTex(r"\text{(Alternate Interior Angles)}"),
             MathTex(r"\angle URS = 140^\circ")
         ).arrange(DOWN, aligned_edge=LEFT).to_edge(RIGHT).scale(0.8)

@@ -58,15 +58,15 @@ class Problem_right_tri_angles_10(Scene):
         # Text
         text = MathTex(
             r"p - q = a",
-            r"\implies \text{Angles: } 30^\circ, 60^\circ, 90^\circ"
+            r"\implies \text{Angles: } 30^\cirrc, 60^\circ, 90^\circ"
         ).arrange(DOWN).to_corner(UL)
         
         # Angle values
         angle_A = Angle(Line(A, B), Line(A, C), radius=0.5, color=YELLOW)
-        val_A = MathTex("60^\circ").next_to(angle_A, RIGHT)
+        val_A = MathTex(r"60^\circ").next_to(angle_A, RIGHT)
         
         angle_B = Angle(Line(B, C), Line(B, A), radius=0.5, color=YELLOW)
-        val_B = MathTex("30^\circ").next_to(angle_B, LEFT)
+        val_B = MathTex(r"30^\circ").next_to(angle_B, LEFT)
         
         self.add(triangle, altitude)
         self.add(label_A, label_B, label_C, label_H)

@@ -34,15 +34,15 @@ class GeometryScene(Scene):
         
         # B: 94. Between AB and BC.
         angle_B = Angle(Line(B,A), Line(B,C), radius=0.4, color=YELLOW)
-        label_94 = MathTex("94^\circ").next_to(angle_B, LEFT)
+        label_94 = MathTex(r"94^\circ").next_to(angle_B, LEFT)
         
         # C: 38. Between BC and CD.
         angle_C = Angle(Line(C,B), Line(C,D), radius=0.4, color=YELLOW)
-        label_38 = MathTex("38^\circ").next_to(angle_C, RIGHT)
+        label_38 = MathTex(r"38^\circ").next_to(angle_C, RIGHT)
         
         # D: 25. Between CD and DE.
         angle_D = Angle(Line(D,C), Line(D,E), radius=0.4, color=YELLOW)
-        label_25 = MathTex("25^\circ").next_to(angle_D, LEFT)
+        label_25 = MathTex(r"25^\circ").next_to(angle_D, LEFT)
         
         # y at E: between DE and bottom line
         angle_E = Angle(Line(E,D), line_bottom, radius=0.5, quadrant=(1,1), color=RED)
@@ -65,7 +65,7 @@ class GeometryScene(Scene):
         # Explanation text
         text_group = VGroup(
             MathTex(r"\text{Sum of left angles} = \text{Sum of right angles}"),
-            MathTex(r"x + 38^\circ + y = 94^\circ + 25^\circ + \delta ?"),
+            MathTex(r"x + 38^\cirrc + y = 94^\circ + 25^\cirrc + \delta ?r),
             MathTex(r"\text{Assuming parallel lines:}"),
             MathTex(r"x + 38 + y = 94 + 25 \implies x+y = 81"),
             MathTex(r"\text{Given solution: } 167^\circ"),

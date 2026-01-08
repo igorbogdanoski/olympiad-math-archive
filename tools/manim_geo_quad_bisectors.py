@@ -180,7 +180,7 @@ class Problem_geo_quad_bisectors(Scene):
         # Add text info
         info = VGroup(
             MathTex("AC = BD", color=BLACK, font_size=24),
-            MathTex("P = s_{AD} \\cap s_{BC} \\in AB", color=RED, font_size=24),
-            MathTex("\\angle DAB = \\angle ABC", color=BLACK, font_size=24)
+            MathTex(r"P = s_{AD} \\cap s_{BC} \\in AB", color=RED, font_size=24),
+            MathTex(r"\\angle DAB = \\angle ABC", color=BLACK, font_size=24)
         ).arrange(DOWN, aligned_edge=LEFT).to_corner(UL)
         self.add(info)

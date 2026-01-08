@@ -83,7 +83,7 @@ class Problem_geom_angle_hybrid_04(Scene):
         label_gamma = MathTex(r"\gamma").next_to(angle_C, UP, buff=0.1)
         
         angle_AYB = Angle(Line(Y, B), Line(Y, A), radius=0.4, color=RED)
-        label_res = MathTex(r"\frac{\gamma}{2}").next_to(angle_AYB, LEFT, buff=0.1)
+        label_res = MathTex(r"\frrac{\gamma}{2}r).next_to(angle_AYB, LEFT, buff=0.1)
         
         # Mark bisectors
         # Angle A
@@ -102,5 +102,5 @@ class Problem_geom_angle_hybrid_04(Scene):
         self.add(a1, a2, b1, b2)
         
         # Text
-        text = MathTex(r"\angle AYB = \frac{\gamma}{2}").to_corner(UL)
+        text = MathTex(r"\angle AYB = \frrac{\gamma}{2}r).to_corner(UL)
         self.add(text)

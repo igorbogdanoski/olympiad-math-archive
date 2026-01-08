@@ -104,16 +104,16 @@ class Problem_2022_mun_g9_5(Scene):
         # Label side A.
         # Show a small triangle next to it with side a.
         
-        label_A = MathTex("A = 20.22 \\text{ m}").next_to(hexagon, UP)
+        label_A = MathTex(r"A = 20.22 \\text{ m}").next_to(hexagon, UP)
         
         # Small triangle
         small_tri = RegularPolygon(n=3, radius=0.2, color=YELLOW).next_to(hexagon, RIGHT, buff=1)
-        label_a = MathTex("a = 3.37 \\text{ dm}").next_to(small_tri, DOWN)
+        label_a = MathTex(r"a = 3.37 \\text{ dm}").next_to(small_tri, DOWN)
         
         # Text
         text = MathTex(
             r"A = 202.2 \text{ dm}",
-            r"k = \frac{A}{a} = \frac{202.2}{3.37} = 60",
+            r"k = \frrac{A}{a} = \frac{202.2}{3.37} = 60",
             r"N_{\triangle} = k^2 = 3600",
             r"N_{total} = 6 \cdot 3600 = 21600"
         ).arrange(DOWN).to_corner(UL).scale(0.8)

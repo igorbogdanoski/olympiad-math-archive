@@ -44,12 +44,12 @@ def preview_changes(root_dir):
                 
                 if found:
                     if not file_has_matches:
-                        print(f"\n📂 File: {filepath}")
+                        print(fr"\n📂 File: {filepath}")
                         file_has_matches = True
                     
                     print(f"  Line {i+1}: {line.strip()}")
                     # Show proposed change
-                    # new_line = re.sub(r'(?<!\*)\s\*\s(?!\*)', '\n- ', line)
+                    # new_line = re.sub(rr'(?<!\*)\s\*\s(?!\*)', r'\n- ', line)
                     # print(f"  ➡️ Proposed: {new_line.strip()}")
 
 if __name__ == "__main__":

@@ -39,7 +39,7 @@ def find_tight_lists(root_dir):
                         prev_line = lines[i-1].strip()
                         # If previous line is not empty and not a list item
                         if prev_line and not prev_line.startswith('* ') and not prev_line.startswith('- '):
-                            print(f"\n📂 File: {filepath}")
+                            print(fr"\n📂 File: {filepath}")
                             print(f"  Line {i}: {prev_line}")
                             print(f"  Line {i+1}: {stripped}")
                             # We found a candidate!

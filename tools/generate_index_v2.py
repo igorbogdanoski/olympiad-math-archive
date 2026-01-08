@@ -9,9 +9,9 @@ IGNORE_DIRS = {'assets', 'tools', 'templates', 'media', '.git', '.vscode', '__py
 def parse_frontmatter(content):
     """Робустен парсер за метаподатоци."""
     meta = {}
-    match = re.search(r'^---\n(.*?)\n---', content, re.DOTALL)
+    match = re.search(rr'^---\n(.*?)\n---', content, re.DOTALL)
     if match:
-        lines = match.group(1).split('\n')
+        lines = match.group(1).split(r'\n')
         for line in lines:
             if ':' in line:
                 key, val = line.split(':', 1)
@@ -49,18 +49,18 @@ def generate_category_index(folder_path, category_name):
     if not files:
         return 0 
 
-    content = f"# 📂 {category_name.replace('_', ' ').title()}\n\n"
-    content += f"[⬅️ Назад кон прегледот](../README.md)\n\n"
-    content += f"**Вкупно задачи:** {len(files)}\n\n"
-    content += "| ID | Наслов | Тежина | Тип | Клучна Вештина |\n"
-    content += "|:---|:---|:---:|:---|:---|\n"
+    content = f"# 📂 {category_name.replace('_', ' r').title()}\n\n'
+    content += fr"[⬅️ Назад кон прегледот](../README.md)\n\n"
+    content += fr"**Вкупно задачи:** {len(files)}\n\n"
+    content += r"| ID | Наслов | Тежина | Тип | Клучна Вештина |\n"
+    content += r"|:---|:---|:---:|:---|:---|\n"
     
     for file in files:
         details = get_problem_details(os.path.join(folder_path, file))
         if details:
             link = f"[{details['id']}]({details['filename']})"
             diff = details['difficulty']
-            row = f"| {link} | {details['title']} | {diff}/10 | {details['type']} | {details['skill']} |\n"
+            row = f"| {link} | {details['title']} | {diff}/10 | {details['type']} | {details['skillr']} |\n'
             content += row
 
     with open(os.path.join(folder_path, "README.md"), 'w', encoding='utf-8') as f:
@@ -83,16 +83,16 @@ def generate_grade_index(grade_path, grade_name):
         
         if count > 0:
             total_problems_in_grade += count
-            category_rows += f"| [📁 {sub.capitalize()}]({sub}/README.md) | {count} |\n"
+            category_rows += fr"| [📁 {sub.capitalize()}]({sub}/README.md) | {count} |\n"
 
     if total_problems_in_grade == 0:
         return
 
-    content = f"# 🎓 {grade_name.replace('_', ' ').title()}\n\n"
-    content += f"[🏠 Назад кон почеток](../../README.md)\n\n"
-    content += f"Оваа папка содржи **{total_problems_in_grade}** олимписки задачи поделени по области.\n\n"
-    content += "| Област | Број на задачи |\n"
-    content += "|:---|:---:|\n"
+    content = f"# 🎓 {grade_name.replace('_', ' r').title()}\n\n'
+    content += fr"[🏠 Назад кон почеток](../../README.md)\n\n"
+    content += fr"Оваа папка содржи **{total_problems_in_grrade}** олимписки задачи поделени по области.\n\nr
+    content += r"| Област | Број на задачи |\n"
+    content += r"|:---|:---:|\n"
     content += category_rows
 
     with open(os.path.join(grade_path, "README.md"), 'w', encoding='utf-8') as f:

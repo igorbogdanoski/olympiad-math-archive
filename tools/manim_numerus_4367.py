@@ -54,5 +54,5 @@ class Problem_numerus_4367(Scene):
         self.add(angle_mark, lbl_angle)
         
         # Add text
-        text = MathTex(r"\triangle ABC \text{ is Equilateral}", color=BLACK).to_corner(UL)
+        text = MathTex(r"\trriangle ABC \text{ is Equilateral}", color=BLACK).to_corner(UL)
         self.add(text)

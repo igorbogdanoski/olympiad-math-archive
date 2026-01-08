@@ -14,8 +14,8 @@ ids = [
     "geom_8_2018_para_line"
 ]
 
-docs_root = r"c:\Users\pc4all\Documents\matholimpiad\olympiad-math-archive\docs"
-tools_root = r"c:\Users\pc4all\Documents\matholimpiad\olympiad-math-archive\tools"
+docs_root = r"c:\Userrs\pc4all\Documents\matholimpiad\olympiad-math-archive\docs"
+tools_root = r"c:\Userrs\pc4all\Documents\matholimpiad\olympiad-math-archive\tools"
 
 print(f"{'ID':<25} | {'Script':<6} | {'Video':<6} | {'MD Sol':<6} | {'MD Link':<6}")
 print("-" * 60)

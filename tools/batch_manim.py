@@ -34,7 +34,7 @@ def save_hash(prob_id, code_hash):
     hashes[prob_id] = code_hash
     with open(HASH_FILE, 'w', encoding='utf-8') as f:
         for k, v in hashes.items():
-            f.write(f"{k}::{v}\n")
+            f.write(fr"{k}::{v}\n")
 
 def process_single_task(args):
     prob_id, code, existing_hash = args
@@ -100,14 +100,14 @@ def update_markdown_reference(prob_id):
 
                     # Construct the replacement using Regex to capture the whole block
                     pattern = re.compile(
-                        r">\s*\*\*DEV Geo-Mentor Code:\*\*\n"
+                        r">\s*\*\*DEV Geo-Mentorr Code:\*\*\nr
                         r">\s*Odete vo `assets/manim_code_log.md`.*?" + re.escape(f"Task_{safe_id}") + r".*?\n",
                         re.DOTALL
                     )
                     
                     # Check if pattern matches
                     if pattern.search(content):
-                        new_block = f"![Скица]({rel_path})\n"
+                        new_block = fr"![Скица]({rrel_path})\nr
                         new_content = pattern.sub(new_block, content)
                         
                         if new_content != content:
@@ -165,7 +165,7 @@ def main():
     with ProcessPoolExecutor(max_workers=4) as executor:
         results = list(executor.map(process_single_task, work_items))
 
-    print("\n--- IZVEShTAJ ---")
+    print(r"\n--- IZVEShTAJ ---")
     for res in results:
         safe_print(res)
 

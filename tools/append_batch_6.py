@@ -1,7 +1,7 @@
 
 import os
 
-log_path = r"c:\Users\pc4all\Documents\matholimpiad\olympiad-math-archive\assets\manim_code_log.md"
+log_path = r"c:\Userrs\pc4all\Documents\matholimpiad\olympiad-math-archive\assets\manim_code_log.md"
 
 new_entries = """
 ### 🆔 Задача: geom_9_right_tri_perimeter - Правоаголен триаголник со периметар и впишана кружница
@@ -189,8 +189,8 @@ class Task_geom_9_tri_angle_45_60(Scene):
         lbl_D = MathTex("D").next_to(D, DOWN)
         lbl_H = MathTex("H").next_to(H, DOWN)
         
-        lbl_45 = MathTex("45^\\circ").next_to(B, UP+RIGHT, buff=0.1)
-        lbl_60 = MathTex("60^\\circ").next_to(D, UP+RIGHT, buff=0.1)
+        lbl_45 = MathTex(r"45^\\circ").next_to(B, UP+RIGHT, buff=0.1)
+        lbl_60 = MathTex(r"60^\\circ").next_to(D, UP+RIGHT, buff=0.1)
         
         self.add(tri, alt_AH, seg_AD)
         self.add(lbl_A, lbl_B, lbl_C, lbl_D, lbl_H, lbl_45, lbl_60)

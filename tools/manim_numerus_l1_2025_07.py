@@ -64,7 +64,7 @@ class Problem_numerus_L1_2025_07(Scene):
         # Angles
         # Angle C = 40
         angle_ACB = Angle(Line(C, A), Line(C, B), radius=0.6, color=BLUE)
-        lbl_40 = MathTex("40^\\circ", color=BLACK, font_size=20).next_to(angle_ACB, UR, buff=0.1)
+        lbl_40 = MathTex(r"40^\\circ", color=BLACK, font_size=20).next_to(angle_ACB, UR, buff=0.1)
         
         # Angle ADB = ?
         angle_ADB = Angle(Line(D, A), Line(D, B), radius=1.0, color=RED)
@@ -81,8 +81,8 @@ class Problem_numerus_L1_2025_07(Scene):
         # Add text info
         info = VGroup(
             MathTex("AC=BC", color=BLACK, font_size=24),
-            MathTex("\\angle C = 40^\\circ", color=BLACK, font_size=24),
-            MathTex("ACDE \\text{ is square}", color=GREEN, font_size=24),
-            MathTex("\\angle ADB = ?", color=RED, font_size=24)
+            MathTex(r"\\angle C = 40^\\circ", color=BLACK, font_size=24),
+            MathTex(r"ACDE \\text{ is square}", color=GREEN, font_size=24),
+            MathTex(r"\\angle ADB = ?", color=RED, font_size=24)
         ).arrange(DOWN, aligned_edge=LEFT).to_corner(UL)
         self.add(info)

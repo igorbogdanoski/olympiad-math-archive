@@ -1,7 +1,7 @@
 
 import os
 
-log_path = r"c:\Users\pc4all\Documents\matholimpiad\olympiad-math-archive\assets\manim_code_log.md"
+log_path = r"c:\Userrs\pc4all\Documents\matholimpiad\olympiad-math-archive\assets\manim_code_log.md"
 
 new_entries = """
 ### 🆔 Задача: tri_altitudes_perimeter_09 - Периметар преку однос на висини
@@ -120,7 +120,7 @@ class Task_geom_right_tri_bisect_09(Scene):
         lbl_M = MathTex("M").next_to(M, UP)
         lbl_L = MathTex("L").next_to(L, UP)
         
-        lbl_40 = MathTex("40^\\circ").next_to(A, DOWN+RIGHT, buff=0.5)
+        lbl_40 = MathTex(r"40^\\circ").next_to(A, DOWN+RIGHT, buff=0.5)
         
         self.add(tri, alt_CD, med_CM, bis_CL)
         self.add(lbl_A, lbl_B, lbl_C, lbl_D, lbl_M, lbl_L, lbl_40)
@@ -206,7 +206,7 @@ class Task_geom_iso_bisector_intersect_10(Scene):
         lbl_D = MathTex("D").next_to(D, DOWN)
         lbl_E = MathTex("E").next_to(E, RIGHT)
         lbl_I = MathTex("I").next_to(I, LEFT)
-        lbl_130 = MathTex("130^\\circ").next_to(I, UP+RIGHT, buff=0.1)
+        lbl_130 = MathTex(r"130^\\circ").next_to(I, UP+RIGHT, buff=0.1)
         
         self.add(tri, alt_CD, bis_AE, dot_I)
         self.add(lbl_A, lbl_B, lbl_C, lbl_D, lbl_E, lbl_I, lbl_130)
@@ -276,7 +276,7 @@ class Task_geom_iso_side_bisector_08(Scene):
         lbl_B = MathTex("B").next_to(B, DOWN+RIGHT)
         lbl_C = MathTex("C").next_to(C, UP)
         lbl_D = MathTex("D").next_to(D, RIGHT)
-        lbl_gamma = MathTex("\\gamma").next_to(C, DOWN, buff=0.3)
+        lbl_gamma = MathTex(r"\\gamma").next_to(C, DOWN, buff=0.3)
         
         self.add(tri, perp_bisector, bis_A)
         self.add(lbl_A, lbl_B, lbl_C, lbl_D, lbl_gamma)
@@ -688,7 +688,7 @@ class Task_geom_9_centroid_plane_dist(Scene):
         p3 = np.array([4, -1, 0])
         p4 = np.array([-2, -1, 0])
         plane = Polygon(p1, p2, p3, p4, color=GRAY, fill_opacity=0.2, fill_color=GRAY)
-        lbl_pi = MathTex("\\pi").next_to(p3, RIGHT)
+        lbl_pi = MathTex(r"\\pi").next_to(p3, RIGHT)
         
         # Triangle ABC above
         A = np.array([-2, 2, 0])

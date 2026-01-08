@@ -107,5 +107,5 @@ class Problem_geom_tri_bisector_diff_11(Scene):
         self.add(label_A, label_B, label_C, label_D, label_E)
         
         # Add text
-        text = MathTex(r"\triangle EDC \text{ is isosceles}").to_corner(UL)
+        text = MathTex(r"\trriangle EDC \text{ is isosceles}r).to_corner(UL)
         self.add(text)

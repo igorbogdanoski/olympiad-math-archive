@@ -227,7 +227,7 @@ class Problem_regional_2022_geo_01(Scene):
         
         # Mark Angle ABD = 15
         angle_mark = Angle(Line(B, A), Line(B, D), radius=0.6, color=ORANGE)
-        lbl_15 = MathTex("15^\circ", color=ORANGE, font_size=24).next_to(angle_mark, UP, buff=0.05)
+        lbl_15 = MathTex(r"15^\circ", color=ORANGE, font_size=24).next_to(angle_mark, UP, buff=0.05)
         
         # Labels
         lbl_A = Text("A", font_size=24, color=BLACK).next_to(A, DL, buff=0.1)

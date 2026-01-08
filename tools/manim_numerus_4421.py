@@ -88,6 +88,6 @@ class Problem_numerus_4421(Scene):
         # Add text info
         info = VGroup(
             MathTex("PA=AB=BC=MA", color=BLACK, font_size=24),
-            MathTex("PM^2 = PA \\cdot PB", color=RED, font_size=24)
+            MathTex(r"PM^2 = PA \\cdot PB", color=RED, font_size=24)
         ).arrange(DOWN, aligned_edge=LEFT).to_corner(UL)
         self.add(info)

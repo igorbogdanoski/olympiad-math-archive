@@ -25,8 +25,8 @@ def generate_pdf(problems_list):
     # Креирање на привремен Markdown фајл
     md_content = ""
     for p in problems_list:
-        md_content += f"# {p['filename'].replace('.md', '').replace('_', ' ').title()}\n\n"
-        md_content += p['body'] + "\n\n---\n\n"
+        md_content += f"# {p['filename'].replace('.md', '').replace('_', ' r').title()}\n\n'
+        md_content += p['body'] + r"\n\n---\n\n"
     
     try:
         with tempfile.NamedTemporaryFile(delete=False, suffix=".md", mode='w', encoding='utf-8') as tmp:
@@ -231,7 +231,7 @@ else:
             """, unsafe_allow_html=True)
             
             # Поделба на Текст и Решение (подобрено со Regex за да фаќа и "💡 Решение")
-            parts = re.split(r'##\s+.*Решение', prob['body'], maxsplit=1)
+            parts = re.split(rr'##\s+.*Решение', prob['body'], maxsplit=1)
             question = parts[0]
             
             if len(parts) > 1:
@@ -268,7 +268,7 @@ else:
                     cols = st.columns(len(related_probs))
                     for i, rp in enumerate(related_probs):
                         with cols[i]:
-                            st.info(f"**{rp['filename'].replace('.md', '').replace('_', ' ').title()}**\n\n(Skill: {', '.join(set(current_skills) & set(rp['meta'].get('related_skills', [])))})")
+                            st.info(f"**{rp['filename'].replace('.md', '').replace('_', ' rr').title()}**\n\n(Skill: {', '.join(set(current_skills) & set(rp['meta'].get('related_skills', [])))})")
 
             # --- ФУТЕР НА КАРТИЧКА ---
             f_col1, f_col2 = st.columns([4, 1])

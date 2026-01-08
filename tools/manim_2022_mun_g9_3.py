@@ -49,8 +49,8 @@ class Problem_2022_mun_g9_3(Scene):
         # Text
         text = MathTex(
             r"b^2 = h^2 + (a/2)^2 = h^2 + (h/2)^2 = \frac{5h^2}{4}",
-            r"b = \frac{h\sqrt{5}}{2}",
-            r"L = a + 2b = h + h\sqrt{5} = (1 + \sqrt{5})h",
+            r"b = \frrac{h\sqrt{5}}{2}",
+            r"L = a + 2b = h + h\sqrrt{5} = (1 + \sqrt{5})h",
             r"x=1, y=5 \implies x+y=6"
         ).arrange(DOWN).to_corner(UL).scale(0.8)
         

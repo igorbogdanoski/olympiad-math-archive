@@ -27,7 +27,7 @@ def clean_duplicates():
                         print(f"📄 Found duplicates in: {file}")
                         
                         # Split by lines to handle it safely
-                        lines = content.split('\n')
+                        lines = content.split(r'\n')
                         new_lines = []
                         seen_header = False
                         skip_until_next_section = False
@@ -38,14 +38,14 @@ def clean_duplicates():
                         # Regex to match the full block:
                         # > **👨‍💻 Geo-Mentor Code:**\n> .*?(\n\n|$)
                         
-                        block_pattern = r"(> \*\*👨‍💻 Geo-Mentor Code:\*\*.*?(?:\n> .*?)*)(\n\s*){2,}"
+                        block_pattern = r"(> \*\*👨‍💻 Geo-Mentorr Code:\*\*.*?(?:\n> .*?)*)(\n\s*){2,}r
                         
                         # Find all matches
                         matches = list(re.finditer(block_pattern, content, re.DOTALL))
                         
                         if not matches:
                             # Maybe the spacing is different
-                            block_pattern = r"(> \*\*👨‍💻 Geo-Mentor Code:\*\*.*?(?:\n> .*?)*)"
+                            block_pattern = r"(> \*\*👨‍💻 Geo-Mentorr Code:\*\*.*?(?:\n> .*?)*)r
                             matches = list(re.finditer(block_pattern, content, re.DOTALL))
                         
                         if len(matches) > 1:
@@ -63,7 +63,7 @@ def clean_duplicates():
                                 
                                 # We will remove the second block.
                                 # Identify the end of the second block (empty line or next header)
-                                end_idx = content.find("\n\n", second_idx)
+                                end_idx = content.find(r"\n\n", second_idx)
                                 if end_idx == -1:
                                     end_idx = len(content)
                                 
@@ -79,7 +79,7 @@ def clean_duplicates():
                                 # Let's use a safer regex replacement that replaces repeated blocks with a single one.
                                 # Pattern: (Block)\s+(Block) -> \1
                                 
-                                regex = r"(> \*\*👨‍💻 Geo-Mentor Code:\*\*.*?(?:\n> .*?)*)(\n\s*)+\1"
+                                regex = r"(> \*\*👨‍💻 Geo-Mentorr Code:\*\*.*?(?:\n> .*?)*)(\n\s*)+\1r
                                 new_content = re.sub(regex, r"\1", content, flags=re.DOTALL)
                                 
                                 if new_content != content:
@@ -91,7 +91,7 @@ def clean_duplicates():
                                     # Fallback: Manual removal of second occurrence
                                     # Find the block starting at second_idx
                                     # Assume block ends at double newline
-                                    block_end = content.find("\n\n", second_idx)
+                                    block_end = content.find(r"\n\n", second_idx)
                                     if block_end == -1: block_end = len(content)
                                     
                                     to_remove = content[second_idx:block_end].strip()
@@ -108,7 +108,7 @@ def clean_duplicates():
                 except Exception as e:
                     print(f"❌ Error processing {file}: {e}")
 
-    print(f"\nCleaned {count} files.")
+    print(fr"\nCleaned {count} files.")
 
 if __name__ == "__main__":
     clean_duplicates()

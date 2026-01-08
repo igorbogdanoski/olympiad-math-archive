@@ -99,7 +99,7 @@ class Problem_para_normals_sum_06(Scene):
         
         # Add text info
         info = VGroup(
-            MathTex("AM \\perp p, BN \\perp p, CO \\perp p", color=BLACK, font_size=24),
+            MathTex(r"AM \\perrp p, BN \\perp p, CO \\perp p", color=BLACK, font_size=24),
             MathTex("AM + OC = BN", color=RED, font_size=24)
         ).arrange(DOWN, aligned_edge=LEFT).to_corner(UL)
         self.add(info)

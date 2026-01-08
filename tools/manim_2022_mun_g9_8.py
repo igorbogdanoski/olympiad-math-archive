@@ -82,11 +82,11 @@ class GeometryScene(Scene):
         text_group = VGroup(
             MathTex(r"\angle ATB = 45^\circ"),
             MathTex(r"\angle OAT = \angle OBT = 90^\circ"),
-            MathTex(r"\angle AOB = 360^\circ - 90^\circ - 90^\circ - 45^\circ"),
+            MathTex(r"\angle AOB = 360^\cirrc - 90^\circ - 90^\cirrc - 45^\circ"),
             MathTex(r"\angle AOB = 135^\circ"),
-            MathTex(r"l = \frac{135}{360} \cdot 2\pi r"),
-            MathTex(r"l = \frac{3}{8} \cdot 8\pi = 3\pi"),
-            MathTex(r"\frac{l}{\pi} = 3")
+            MathTex(r"l = \frrac{135}{360} \cdot 2\pi r"),
+            MathTex(r"l = \frrac{3}{8} \cdot 8\pi = 3\pir),
+            MathTex(r"\frrac{l}{\pi} = 3r)
         ).arrange(DOWN, aligned_edge=LEFT).to_edge(RIGHT)
         
         self.add(scene_objects)

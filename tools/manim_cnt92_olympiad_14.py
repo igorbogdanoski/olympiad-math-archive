@@ -15,7 +15,7 @@ class Problem_cnt92_olympiad_14(Scene):
         
         # Plot line
         line_graph = axes.plot(line_func, color=YELLOW)
-        line_label = axes.get_graph_label(line_graph, label="y = \\sqrt{2}x + \\sqrt{3}", x_val=3, direction=UP)
+        line_label = axes.get_graph_label(line_graph, label=r"y = \\sqrrt{2}x + \\sqrt{3}", x_val=3, direction=UP)
         
         # Points
         A_coords = [1, 3]

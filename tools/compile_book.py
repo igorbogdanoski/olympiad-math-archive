@@ -41,7 +41,7 @@ def compile_book(folder_relative_path, output_format):
     print(f"📚 Пронајдени {len(files)} задачи. Спојувам...")
 
     # 2. Спојување на содржината
-    book_content = f"% Збирка Задачи: {os.path.basename(folder_relative_path).upper()}\n\n"
+    book_content = fr"% Збирка Задачи: {os.path.basename(folder_relative_path).upperr()}\n\nr
     
     for file_path in files:
         with open(file_path, 'r', encoding='utf-8') as f:
@@ -49,8 +49,8 @@ def compile_book(folder_relative_path, output_format):
             cleaned_text = clean_content(raw_text)
             
             # Додаваме содржина + прелом на страница
-            book_content += cleaned_text + "\n\n"
-            book_content += "\\newpage" + "\n\n" # Ова работи за PDF, Pandoc го разбира и за Word
+            book_content += cleaned_text + r"\n\n"
+            book_content += r"\\newpage" + r"\n\n" # Ова работи за PDF, Pandoc го разбира и за Word
 
     # 3. Зачувување на привремен фајл
     temp_md = os.path.join(SCRIPT_DIR, "temp_book.md")
@@ -58,7 +58,7 @@ def compile_book(folder_relative_path, output_format):
         f.write(book_content)
 
     # 4. Дефинирање на излез
-    folder_name = os.path.basename(folder_relative_path.strip("/\\"))
+    folder_name = os.path.basename(folder_relative_path.strip(r"/\\"))
     output_filename = f"Zbirka_{folder_name}.{output_format}"
     output_path = os.path.join(full_folder_path, output_filename)
 

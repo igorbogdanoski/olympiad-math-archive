@@ -108,6 +108,6 @@ class Problem_numerus_4331(Scene):
         # Add text info
         info = VGroup(
             MathTex("MK = 2AC", color=RED, font_size=24),
-            MathTex("\\angle ACB = 3 \\angle KCB", color=BLACK, font_size=24)
+            MathTex(r"\\angle ACB = 3 \\angle KCB", color=BLACK, font_size=24)
         ).arrange(DOWN, aligned_edge=LEFT).to_corner(UL)
         self.add(info)

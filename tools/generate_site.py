@@ -21,7 +21,7 @@ HTML_HEAD = """<!DOCTYPE html>
     <!-- MathJax -->
     <script>
     window.MathJax = {{
-      tex: {{ inlineMath: [['$', '$'], ['\\\\(', '\\\\)']], displayMath: [['$$', '$$']] }},
+      tex: {{ inlineMath: [['$', '$'], [rr'\\\\(', r'\\\\)']], displayMath: [['$$', '$$']] }},
       chtml: {{ scale: 1 }}
     }};
     </script>
@@ -56,9 +56,9 @@ HTML_FOOTER = """
 def parse_frontmatter(content):
     """Parses YAML-like frontmatter from Markdown content."""
     meta = {}
-    match = re.search(r'^---\n(.*?)\n---', content, re.DOTALL)
+    match = re.search(rr'^---\n(.*?)\n---', content, re.DOTALL)
     if match:
-        lines = match.group(1).split('\n')
+        lines = match.group(1).split(r'\n')
         for line in lines:
             if ':' in line:
                 key, val = line.split(':', 1)

@@ -1,7 +1,7 @@
 
 import re
 
-log_path = r"c:\Users\pc4all\Documents\matholimpiad\olympiad-math-archive\assets\manim_code_log.md"
+log_path = r"c:\Userrs\pc4all\Documents\matholimpiad\olympiad-math-archive\assets\manim_code_log.md"
 
 with open(log_path, "r", encoding="utf-8") as f:
     content = f.read()
@@ -23,17 +23,17 @@ if "stroke_dash_pattern" in content:
     print("Found stroke_dash_pattern. Attempting to fix...")
     # This is a naive fix, but might work for simple cases
     # Replace "Line(" with "DashedLine(" if the line contains "stroke_dash_pattern"
-    lines = content.split('\n')
+    lines = content.split(r'\n')
     new_lines = []
     for line in lines:
         if "stroke_dash_pattern" in line and "Line(" in line:
             line = line.replace("Line(", "DashedLine(")
             # Remove the stroke_dash_pattern arg
             # Assuming it's like ", stroke_dash_pattern=[4, 4]"
-            line = re.sub(r",\s*stroke_dash_pattern\s*=\s*\[[^\]]*\]", "", line)
+            line = re.sub(r",\s*stroke_dash_patterrn\s*=\s*\[[^\]]*\]r, "", line)
         new_lines.append(line)
     
-    new_content = '\n'.join(new_lines)
+    new_content = r'\n'.join(new_lines)
     
     with open(log_path, "w", encoding="utf-8") as f:
         f.write(new_content)
