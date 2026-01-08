@@ -28,7 +28,7 @@ class PlatinumProcessor:
     def __init__(self, base_dir):
         self.base_dir = Path(base_dir).resolve()
         self.output_dir = self.base_dir / "docs"
-        self.assets_dir = self.base_dir / "assets" / "images"
+        self.assets_dir = self.base_dir / "web" / "public" / "assets" / "images"
         self.tools_dir = self.base_dir / "tools"
         self.archive_dir = self.tools_dir / "archive"
         self.index_file = self.base_dir / "web" / "src" / "data" / "problems.json"
