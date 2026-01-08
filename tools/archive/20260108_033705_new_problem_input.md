@@ -1,19 +1,19 @@
 ---
-difficulty: 5
-geometry_style: synthetic
-grade: 8
-primary_skill: constructive_methods
 problem_id: sigma_137_1874
-related_skills:
-- proof_by_contradiction
-- invariant_analysis
-source: Сигма 137, Задача 1874
-tags:
-- geometry_dissection
-- induction
-- constructive_geometry
 title: Поделба на квадрат на n помали квадрати
+grade: 8
+difficulty: 5
 type: combinatorics
+tags:
+  - geometry_dissection
+  - induction
+  - constructive_geometry
+primary_skill: constructive_methods
+related_skills:
+  - proof_by_contradiction
+  - invariant_analysis
+geometry_style: synthetic
+source: Сигма 137, Задача 1874
 ---
 
 # Поделба на квадрат на n помали квадрати
@@ -110,3 +110,92 @@ type: combinatorics
 ### 🔗 Поврзани вештини
 *   **Примарна вештина:** Конструктивни методи (Constructive Methods).
 *   **Потребни предзнаења:** Математичка индукција, геометрија на квадрат.
+
+# Manim Code
+```python
+from manim import *
+
+class SquareDissection(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        
+        # Title
+        title = Text("Поделба на квадрат (n=4, 6, 7)", font_size=36, color=BLACK).to_edge(UP)
+        self.play(Write(title))
+        
+        # Main Square
+        main_square = Square(side_length=4, color=BLACK)
+        self.play(Create(main_square))
+        self.wait(0.5)
+        
+        # n = 4 (The Cross)
+        label_n4 = MathTex("n=4", color=RED).next_to(main_square, DOWN)
+        h_line = Line(main_square.get_left(), main_square.get_right(), color=BLACK)
+        v_line = Line(main_square.get_top(), main_square.get_bottom(), color=BLACK)
+        
+        self.play(Create(h_line), Create(v_line), Write(label_n4))
+        self.wait(1)
+        
+        # Transition to n = 7 (Divide top-left)
+        label_n7 = MathTex("n=4+3=7", color=RED).next_to(main_square, DOWN)
+        
+        # Define the top-left sub-square area
+        tl_center = main_square.get_corner(UL) + DOWN + RIGHT # Approximate center of TL square
+        
+        # Lines to split the top-left square
+        sub_h = Line(main_square.get_left() + UP, main_square.get_center() + UP, color=BLUE)
+        sub_v = Line(main_square.get_top() + LEFT, main_square.get_center() + LEFT, color=BLUE)
+        
+        self.play(
+            Transform(label_n4, label_n7),
+            Create(sub_h), 
+            Create(sub_v)
+        )
+        self.play(Indicate(VGroup(sub_h, sub_v), color=BLUE))
+        self.wait(2)
+        
+        # Clear for n = 6
+        self.play(
+            FadeOut(h_line), FadeOut(v_line), FadeOut(sub_h), FadeOut(sub_v), 
+            FadeOut(label_n4), FadeOut(main_square)
+        )
+        
+        # n = 6 (L-shape construction)
+        # 5 small squares on border, 1 big inside
+        # Let side = 3. Small squares side = 1.
+        # Top row: 3 squares. Left col: 2 squares (excluding top-left which is shared).
+        
+        square_6 = Square(side_length=4, color=BLACK)
+        label_n6 = MathTex("n=6 \\; (L-shape)", color=RED).next_to(square_6, DOWN)
+        
+        # Grid lines for n=6
+        # We need 1/3 strip on top and left
+        one_third = 4/3
+        
+        # Top strip lines
+        l1 = Line(square_6.get_corner(UL) + DOWN*one_third, square_6.get_corner(UR) + DOWN*one_third, color=BLACK)
+        l2 = Line(square_6.get_corner(UL) + RIGHT*one_third, square_6.get_corner(DL) + RIGHT*one_third, color=BLACK)
+        
+        # Small dividers
+        d1 = Line(square_6.get_corner(UL) + RIGHT*one_third, square_6.get_corner(UL) + RIGHT*one_third + DOWN*one_third, color=BLACK) # Overlap fix
+        d2 = Line(square_6.get_corner(UL) + RIGHT*2*one_third, square_6.get_corner(UL) + RIGHT*2*one_third + DOWN*one_third, color=BLACK)
+        d3 = Line(square_6.get_corner(UL) + DOWN*one_third, square_6.get_corner(UL) + DOWN*one_third + RIGHT*one_third, color=BLACK) # Overlap fix
+        d4 = Line(square_6.get_corner(UL) + DOWN*2*one_third, square_6.get_corner(UL) + DOWN*2*one_third + RIGHT*one_third, color=BLACK)
+        
+        self.play(Create(square_6), Write(label_n6))
+        self.play(Create(l1), Create(l2))
+        self.play(Create(d2), Create(d4))
+        
+        # Highlight the big square
+        big_sq_area = Polygon(
+            square_6.get_corner(DR),
+            square_6.get_corner(DR) + UP*(4 - one_third),
+            square_6.get_corner(UL) + DOWN*one_third + RIGHT*one_third,
+            square_6.get_corner(DR) + LEFT*(4 - one_third),
+            color=BLUE, fill_opacity=0.2
+        )
+        
+        self.play(FadeIn(big_sq_area))
+        self.wait(2)
+'''
+'''
