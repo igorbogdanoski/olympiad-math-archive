@@ -124,6 +124,8 @@ const cleanBody = (text: string) => {
 </Layout>
 
 <script>
+	import Fuse from 'fuse.js';
+
 	const searchInput = document.getElementById('search') as HTMLInputElement;
 	const cards = document.querySelectorAll('.problem-card') as NodeListOf<HTMLElement>;
 	const countEl = document.getElementById('count');
@@ -132,20 +134,35 @@ const cleanBody = (text: string) => {
 	const catFilters = document.querySelectorAll('#cat-filters input') as NodeListOf<HTMLInputElement>;
 	const resetBtn = document.getElementById('reset-filters');
 
+	// Подготовка на податоци за Fuse.js
+	const searchData = Array.from(cards).map(card => ({
+		id: card.dataset.title,
+		title: card.dataset.title?.replace(/_/g, ' '),
+		body: card.dataset.body,
+		element: card
+	}));
+
+	const fuse = new Fuse(searchData, {
+		keys: ['title', 'body'],
+		threshold: 0.3,
+		distance: 100
+	});
+
 	function filter() {
 		const query = searchInput.value.toLowerCase();
 		const selectedGrades = Array.from(gradeFilters).filter(i => i.checked).map(i => i.value);
 		const selectedCats = Array.from(catFilters).filter(i => i.checked).map(i => i.value);
 
 		let visibleCount = 0;
+		
+		// Резултати од Fuzzy Search
+		const fuseResults = query ? fuse.search(query).map(r => r.item.element) : null;
 
 		cards.forEach(card => {
-			const title = card.dataset.title || '';
-			const body = card.dataset.body || '';
 			const grade = card.dataset.grade || '';
 			const cat = card.dataset.category || '';
 
-			const matchesSearch = title.includes(query) || body.includes(query);
+			const matchesSearch = !fuseResults || fuseResults.includes(card);
 			const matchesGrade = selectedGrades.length === 0 || selectedGrades.includes(grade);
 			const matchesCat = selectedCats.length === 0 || selectedCats.includes(cat);
 

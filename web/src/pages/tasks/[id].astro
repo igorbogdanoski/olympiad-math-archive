@@ -1,6 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import problems from '../../data/problems.json';
+import katex from 'katex';
 
 export async function getStaticPaths() {
   return problems.map((prob) => ({
@@ -12,12 +13,34 @@ export async function getStaticPaths() {
 const { prob } = Astro.props;
 const { meta, body, filename, grade, category, difficulty } = prob;
 
+// Серверско рендерирање на LaTeX
+const renderMath = (text: string) => {
+  if (!text) return "";
+  let processed = text;
+  
+  // 1. Display Math $$ ... $$
+  processed = processed.replace(/\$\$(.*?)\$\$/gs, (_, math) => {
+    try {
+      return katex.renderToString(math.trim(), { displayMode: true, throwOnError: false });
+    } catch (e) { return math; }
+  });
+
+  // 2. Inline Math $ ... $
+  processed = processed.replace(/\$(.*?)\$/g, (_, math) => {
+    try {
+      return katex.renderToString(math.trim(), { displayMode: false, throwOnError: false });
+    } catch (e) { return math; }
+  });
+
+  return processed;
+};
+
 // Поделба на прашање и решение
 const parts = body.split(/##\s+.*Решение/i);
-const question = parts[0];
-const solution = parts.length > 1 ? parts[1] : null;
+const question = renderMath(parts[0]);
+const solution = parts.length > 1 ? renderMath(parts[1]) : null;
 
-// Наоѓање слични задачи (иста категорија или одделение)
+// Наоѓање слични задачи
 const related = problems
     .filter(p => p.filename !== filename && (p.category === category || p.grade === grade))
     .sort(() => 0.5 - Math.random())
@@ -72,8 +95,7 @@ const related = problems
             <div class="w-8 h-8 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-blue-600 dark:text-blue-400 font-bold text-sm">1</div>
             <h2 class="text-2xl font-black m-0 tracking-tight">Задача</h2>
           </div>
-          <div class="content-math bg-slate-50 dark:bg-slate-800/30 p-8 rounded-3xl border border-slate-100 dark:border-slate-800 shadow-inner italic">
-            {question}
+          <div class="content-math bg-slate-50 dark:bg-slate-800/30 p-8 rounded-3xl border border-slate-100 dark:border-slate-800 shadow-inner italic" set:html={question}>
           </div>
         </div>
 
@@ -84,8 +106,7 @@ const related = problems
                 <div class="w-8 h-8 rounded-full bg-emerald-100 dark:bg-emerald-900/30 flex items-center justify-center text-emerald-600 dark:text-emerald-400 font-bold text-sm">2</div>
                 <h2 class="text-2xl font-black m-0 tracking-tight">Решение</h2>
             </div>
-            <div class="content-math prose prose-emerald dark:prose-invert prose-lg max-w-none">
-                {solution}
+            <div class="content-math prose prose-emerald dark:prose-invert prose-lg max-w-none" set:html={solution}>
             </div>
           </div>
         )}
@@ -111,25 +132,3 @@ const related = problems
     )}
   </div>
 </Layout>
-
-<script>
-  import renderMathInElement from 'katex/dist/contrib/auto-render.js';
-  
-  const initMath = () => {
-    const elements = document.querySelectorAll('.content-math');
-    elements.forEach(el => {
-      renderMathInElement(el, {
-        delimiters: [
-          {left: '$$', right: '$$', display: true},
-          {left: '$', right: '$', display: false},
-          {left: '\\(', right: '\\)', display: false},
-          {left: '\\[', right: '\\]', display: true}
-        ],
-        throwOnError : false
-      });
-    });
-  };
-
-  document.addEventListener('DOMContentLoaded', initMath);
-  document.addEventListener('astro:after-swap', initMath);
-</script>
