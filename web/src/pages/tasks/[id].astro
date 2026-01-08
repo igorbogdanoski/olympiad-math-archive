@@ -35,10 +35,52 @@ const renderMath = (text: string) => {
   return processed;
 };
 
-// Поделба на прашање и решение
-const parts = body.split(/##\s+.*Решение/i);
-const question = renderMath(parts[0]);
-const solution = parts.length > 1 ? renderMath(parts[1]) : null;
+// Понапредно парсирање на содржината
+const sections = {
+  title: filename.replace('.md', '').replace(/_/g, ' '),
+  text: "",
+  intuition: "",
+  solution: "",
+  mentor_notes: "",
+  source: meta.source || ""
+};
+
+// Обид за поделба на секции врз основа на наслови
+const bodyContent = body.replace(/^#\s+.*\n/m, ''); // Тргни го главниот наслов ако го има
+
+const solutionIndex = bodyContent.search(/(?:#|##)\s+.*Решение/i);
+const intuitionIndex = bodyContent.search(/(?:#|##|###)\s+.*(?:Интуиција|Анализа|Совет)/i);
+const mentorIndex = bodyContent.search(/(?:#|##)\s+.*(?:Тутори|Наставници|Напомена)/i);
+
+let contentEndForText = bodyContent.length;
+if (intuitionIndex !== -1) contentEndForText = Math.min(contentEndForText, intuitionIndex);
+if (solutionIndex !== -1) contentEndForText = Math.min(contentEndForText, solutionIndex);
+if (mentorIndex !== -1) contentEndForText = Math.min(contentEndForText, mentorIndex);
+
+sections.text = renderMath(bodyContent.substring(0, contentEndForText));
+
+if (intuitionIndex !== -1) {
+  let intuitionEnd = bodyContent.length;
+  if (solutionIndex !== -1 && solutionIndex > intuitionIndex) intuitionEnd = Math.min(intuitionEnd, solutionIndex);
+  if (mentorIndex !== -1 && mentorIndex > intuitionIndex) intuitionEnd = Math.min(intuitionEnd, mentorIndex);
+  sections.intuition = renderMath(bodyContent.substring(intuitionIndex, intuitionEnd));
+}
+
+if (solutionIndex !== -1) {
+  let solutionEnd = bodyContent.length;
+  if (mentorIndex !== -1 && mentorIndex > solutionIndex) solutionEnd = Math.min(solutionEnd, mentorIndex);
+  sections.solution = renderMath(bodyContent.substring(solutionIndex, solutionEnd));
+}
+
+if (mentorIndex !== -1) {
+  sections.mentor_notes = renderMath(bodyContent.substring(mentorIndex));
+}
+
+// Исчисти ги насловите од самите секции за поубав приказ
+sections.text = sections.text.replace(/^(?:#|##)\s+.*(?:Текст|Задача).*\n/mi, '');
+sections.intuition = sections.intuition.replace(/^(?:#|##|###)\s+.*(?:Интуиција|Анализа|Совет).*\n/mi, '');
+sections.solution = sections.solution.replace(/^(?:#|##)\s+.*Решение.*\n/mi, '');
+sections.mentor_notes = sections.mentor_notes.replace(/^(?:#|##)\s+.*(?:Тутори|Наставници|Напомена).*\n/mi, '');
 
 // Наоѓање слични задачи
 const related = problems
@@ -47,88 +89,255 @@ const related = problems
     .slice(0, 3);
 ---
 
-<Layout title={`${filename.replace('.md', '').replace(/_/g, ' ')} | МатАрхива`}>
-  <!-- SEO Meta -->
-  <link rel="canonical" href={`/tasks/${meta.problem_id}`} />
-  
-  <div class="max-w-4xl mx-auto">
-    <nav class="flex mb-8 text-xs font-bold uppercase tracking-widest text-slate-400 gap-2 items-center">
-      <a href="/" class="hover:text-blue-600 transition-colors">Архива</a>
-      <span>/</span>
+<Layout title={`${sections.title} | МатАрхива`}>
+  <div class="max-w-6xl mx-auto px-4 py-8">
+    <!-- Breadcrumbs -->
+    <nav class="flex mb-8 text-sm font-medium text-slate-500 gap-2 items-center">
+      <a href="/" class="hover:text-blue-600 transition-colors flex items-center gap-1">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        Архива
+      </a>
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 text-slate-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
       <span class="text-slate-900 dark:text-slate-100">{category}</span>
     </nav>
 
-    <article class="bg-white dark:bg-slate-900 rounded-[2.5rem] shadow-xl shadow-slate-200/50 dark:shadow-none border border-slate-100 dark:border-slate-800 overflow-hidden">
-      {/* Header */}
-      <div class="p-10 border-b border-slate-50 dark:border-slate-800 bg-gradient-to-br from-white to-slate-50/50 dark:from-slate-900 dark:to-slate-800/50">
-        <div class="flex flex-wrap gap-2 mb-6">
-          <span class="px-3 py-1 bg-blue-600 text-white text-[10px] font-black uppercase tracking-tighter rounded-md">Одделение: {grade}</span>
-          <span class="px-3 py-1 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 text-[10px] font-black uppercase tracking-tighter rounded-md">{category}</span>
-          <div class="flex items-center gap-1 ml-auto">
-             {[...Array(5)].map((_, i) => (
-                <div class={`w-2 h-2 rounded-full ${i < Math.round(difficulty/2) ? 'bg-amber-400' : 'bg-slate-200 dark:bg-slate-700'}`}></div>
-             ))}
-             <span class="text-[10px] font-black text-slate-400 ml-2 uppercase">Тежина</span>
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <!-- Main Content Area -->
+      <div class="lg:col-span-2 space-y-8">
+        <header class="mb-8">
+          <div class="flex items-center gap-4 mb-4">
+             <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 text-xs font-bold rounded-full">
+               {grade} одделение
+             </span>
+             <span class="px-3 py-1 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 text-xs font-bold rounded-full uppercase tracking-wider">
+               {category}
+             </span>
           </div>
-        </div>
-        <h1 class="text-3xl md:text-4xl font-black text-slate-900 dark:text-white leading-tight">
-          {filename.replace('.md', '').replace(/_/g, ' ')}
-        </h1>
-      </div>
+          <h1 class="text-4xl md:text-5xl font-black text-slate-900 dark:text-white leading-tight mb-4">
+            {sections.title}
+          </h1>
+          {sections.source && <p class="text-slate-500 italic">Извор: {sections.source}</p>}
+        </header>
 
-      <div class="p-10">
-        {/* Визуелизација */}
+        <!-- Problem Visualization -->
         {meta.problem_id && (
-          <div class="mb-12 rounded-3xl overflow-hidden border border-slate-100 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 p-4 group">
-             <img 
-                src={`/assets/images/${meta.problem_id}/${meta.problem_id}.png`} 
-                alt="Геометриска визуелизација"
-                class="w-full h-auto rounded-2xl mx-auto max-h-[500px] object-contain group-hover:scale-[1.02] transition-transform duration-500"
-                onerror="this.style.display='none'"
-              />
+          <div class="rounded-3xl overflow-hidden border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 p-2 shadow-sm">
+             <div class="bg-slate-50 dark:bg-slate-900 rounded-2xl p-6 flex justify-center">
+                <img 
+                    src={`/assets/images/${meta.problem_id}/${meta.problem_id}.png`} 
+                    alt="Визуелизација"
+                    class="max-w-full h-auto rounded-lg max-h-[400px] object-contain"
+                    onerror="this.parentElement.parentElement.style.display='none'"
+                  />
+             </div>
           </div>
         )}
 
-        {/* Текст */}
-        <div class="prose prose-slate dark:prose-invert prose-lg max-w-none mb-16">
-          <div class="flex items-center gap-3 mb-6">
-            <div class="w-8 h-8 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-blue-600 dark:text-blue-400 font-bold text-sm">1</div>
-            <h2 class="text-2xl font-black m-0 tracking-tight">Задача</h2>
+        <!-- Task Text -->
+        <section class="bg-white dark:bg-slate-900 rounded-[2rem] border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
+          <div class="px-8 py-6 border-b border-slate-100 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/30 flex items-center justify-between">
+            <h2 class="text-xl font-bold flex items-center gap-3 text-slate-900 dark:text-white">
+              <span class="p-2 bg-blue-600 text-white rounded-lg">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><line x1="10" y1="9" x2="8" y2="9"/></svg>
+              </span>
+              Текст на задачата
+            </h2>
+            <button class="text-slate-400 hover:text-blue-600 transition-colors" title="Копирај текст">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            </button>
           </div>
-          <div class="content-math bg-slate-50 dark:bg-slate-800/30 p-8 rounded-3xl border border-slate-100 dark:border-slate-800 shadow-inner italic" set:html={question}>
+          <div class="p-8 prose prose-slate dark:prose-invert prose-lg max-w-none content-math italic text-slate-800 dark:text-slate-200" set:html={sections.text}>
           </div>
-        </div>
+        </section>
 
-        {/* Решение */}
-        {solution && (
-          <div class="space-y-6">
-            <div class="flex items-center gap-3 mb-2">
-                <div class="w-8 h-8 rounded-full bg-emerald-100 dark:bg-emerald-900/30 flex items-center justify-center text-emerald-600 dark:text-emerald-400 font-bold text-sm">2</div>
-                <h2 class="text-2xl font-black m-0 tracking-tight">Решение</h2>
+        <!-- Expert Intuition / Analysis -->
+        {sections.intuition && (
+          <section class="bg-amber-50/50 dark:bg-amber-900/10 rounded-[2rem] border border-amber-100 dark:border-amber-900/30 overflow-hidden">
+            <div class="px-8 py-6 border-b border-amber-100 dark:border-amber-900/30 flex items-center gap-3">
+              <span class="text-2xl">🧠</span>
+              <h2 class="text-xl font-bold text-amber-900 dark:text-amber-400">Експертска Анализа & Интуиција</h2>
             </div>
-            <div class="content-math prose prose-emerald dark:prose-invert prose-lg max-w-none" set:html={solution}>
+            <div class="p-8 prose prose-slate dark:prose-invert prose-lg max-w-none text-slate-700 dark:text-slate-300" set:html={sections.intuition}>
+            </div>
+          </section>
+        )}
+
+        <!-- Solution -->
+        <section class="bg-white dark:bg-slate-900 rounded-[2rem] border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
+           <div class="px-8 py-6 border-b border-slate-100 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/30">
+            <div class="flex items-center justify-between">
+              <h2 class="text-xl font-bold flex items-center gap-3 text-slate-900 dark:text-white">
+                <span class="p-2 bg-emerald-600 text-white rounded-lg">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                </span>
+                Решение
+              </h2>
+              <button id="toggle-solution" class="text-sm font-bold text-blue-600 hover:underline">Прикажи решение</button>
             </div>
           </div>
+          <div id="solution-content" class="p-8 prose prose-slate dark:prose-invert prose-lg max-w-none content-math hidden">
+            {sections.solution ? (
+              <div set:html={sections.solution}></div>
+            ) : (
+              <p class="text-slate-500 italic">Решението за оваа задача е во подготовка...</p>
+            )}
+          </div>
+        </section>
+
+        <!-- Mentor Notes -->
+        {sections.mentor_notes && (
+          <section class="bg-indigo-50/50 dark:bg-indigo-900/10 rounded-[2rem] border border-indigo-100 dark:border-indigo-900/30 overflow-hidden">
+            <div class="px-8 py-6 border-b border-indigo-100 dark:border-indigo-900/30 flex items-center gap-3">
+              <span class="p-2 bg-indigo-600 text-white rounded-lg">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+              </span>
+              <h2 class="text-xl font-bold text-indigo-900 dark:text-indigo-400">Методички насоки за наставници</h2>
+            </div>
+            <div class="p-8 prose prose-indigo dark:prose-invert prose-lg max-w-none text-slate-700 dark:text-slate-300 italic" set:html={sections.mentor_notes}>
+            </div>
+          </section>
         )}
       </div>
-    </article>
 
-    {/* Слични задачи */}
-    {related.length > 0 && (
-        <div class="mt-16">
-            <h3 class="text-xl font-black mb-8 flex items-center gap-2">
-                <span class="w-2 h-8 bg-blue-600 rounded-full"></span>
-                Слични задачи за вежбање
-            </h3>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                {related.map(p => (
-                    <a href={`/tasks/${p.meta.problem_id}`} class="bg-white dark:bg-slate-900 p-6 rounded-3xl border border-slate-100 dark:border-slate-800 hover:shadow-lg transition-all group">
-                        <span class="text-[10px] font-black text-blue-600 uppercase mb-2 block">{p.category}</span>
-                        <h4 class="font-bold text-slate-900 dark:text-white group-hover:text-blue-600 transition-colors line-clamp-2">{p.filename.replace('.md', '').replace(/_/g, ' ')}</h4>
-                    </a>
-                ))}
+      <!-- Sidebar -->
+      <aside class="space-y-8">
+        <!-- Task Meta Card -->
+        <div class="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 p-8 sticky top-8">
+          <h3 class="text-lg font-bold mb-6 text-slate-900 dark:text-white">Детали за задачата</h3>
+          
+          <div class="space-y-6">
+            <div class="flex justify-between items-center">
+              <span class="text-slate-500 text-sm">Тежина</span>
+              <div class="flex gap-1">
+                {[...Array(5)].map((_, i) => {
+                  const level = Math.round(difficulty/2);
+                  const color = difficulty <= 3 ? 'bg-emerald-400' : difficulty <= 7 ? 'bg-amber-400' : 'bg-rose-500';
+                  return (
+                    <div class={`w-3 h-3 rounded-full ${i < level ? color : 'bg-slate-200 dark:bg-slate-800'}`}></div>
+                  );
+                })}
+              </div>
             </div>
+
+            <div class="flex justify-between items-center">
+              <span class="text-slate-500 text-sm">Категорија</span>
+              <span class="text-sm font-bold text-slate-900 dark:text-slate-100 uppercase">{category}</span>
+            </div>
+
+            <div class="flex justify-between items-center">
+              <span class="text-slate-500 text-sm">Одделение</span>
+              <span class="text-sm font-bold text-slate-900 dark:text-slate-100">{grade}</span>
+            </div>
+
+            <div class="pt-6 border-t border-slate-100 dark:border-slate-800">
+              <h4 class="text-xs font-black text-slate-400 uppercase tracking-widest mb-4">Вештини</h4>
+              <div class="flex flex-wrap gap-2">
+                {meta.related_skills && meta.related_skills.length > 0 ? (
+                  meta.related_skills.map((skill: string) => (
+                    <span class="px-2 py-1 bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 text-[10px] font-bold rounded uppercase border border-blue-100 dark:border-blue-900/30">
+                      {skill.replace(/_/g, ' ')}
+                    </span>
+                  ))
+                ) : (
+                  <span class="text-slate-400 text-xs italic">Нема наведени вештини</span>
+                )}
+              </div>
+            </div>
+
+            <div class="pt-6">
+               <button id="share-btn" class="w-full py-3 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-xl font-bold flex items-center justify-center gap-2 hover:opacity-90 transition-opacity">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+                Сподели задача
+               </button>
+            </div>
+          </div>
         </div>
-    )}
+
+        <!-- Related Tasks -->
+        {related.length > 0 && (
+          <div class="space-y-4">
+            <h3 class="text-lg font-bold text-slate-900 dark:text-white px-2">Слични задачи</h3>
+            <div class="space-y-3">
+              {related.map(p => (
+                <a href={`/tasks/${p.meta.problem_id}`} class="block p-4 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl hover:border-blue-500 dark:hover:border-blue-500 transition-colors group">
+                  <div class="flex items-center gap-2 mb-1">
+                    <span class="text-[9px] font-black text-blue-600 uppercase">{p.category}</span>
+                    <span class="w-1 h-1 bg-slate-300 rounded-full"></span>
+                    <span class="text-[9px] font-black text-slate-400 uppercase">{p.grade} одд.</span>
+                  </div>
+                  <h4 class="font-bold text-sm text-slate-800 dark:text-slate-200 group-hover:text-blue-600 transition-colors line-clamp-2">
+                    {p.filename.replace('.md', '').replace(/_/g, ' ')}
+                  </h4>
+                </a>
+              ))}
+            </div>
+          </div>
+        )}
+      </aside>
+    </div>
   </div>
 </Layout>
+
+<script>
+  const toggleBtn = document.getElementById('toggle-solution');
+  const solutionContent = document.getElementById('solution-content');
+  
+  if (toggleBtn && solutionContent) {
+    toggleBtn.addEventListener('click', () => {
+      const isHidden = solutionContent.classList.contains('hidden');
+      if (isHidden) {
+        solutionContent.classList.remove('hidden');
+        toggleBtn.textContent = 'Скриј решение';
+      } else {
+        solutionContent.classList.add('hidden');
+        toggleBtn.textContent = 'Прикажи решение';
+      }
+    });
+  }
+
+  const shareBtn = document.getElementById('share-btn');
+  if (shareBtn) {
+    shareBtn.addEventListener('click', () => {
+      if (navigator.share) {
+        navigator.share({
+          title: document.title,
+          url: window.location.href
+        });
+      } else {
+        navigator.clipboard.writeText(window.location.href);
+        alert('Линкот е копиран во меморијата!');
+      }
+    });
+  }
+</script>
+
+<style is:global>
+  .content-math .katex-display {
+    @apply my-8 overflow-x-auto overflow-y-hidden py-4 bg-slate-50 dark:bg-slate-800/50 rounded-2xl;
+  }
+  .content-math .katex {
+    @apply text-lg md:text-xl;
+  }
+  .prose blockquote {
+    @apply border-l-4 border-blue-500 bg-blue-50 dark:bg-blue-900/20 px-6 py-4 rounded-r-xl not-italic my-6;
+  }
+  .prose p {
+    @apply mb-4 leading-relaxed;
+  }
+  .prose ul {
+    @apply list-disc list-inside mb-4 space-y-2;
+  }
+  .prose ol {
+    @apply list-decimal list-inside mb-4 space-y-2;
+  }
+  .prose h3 {
+    @apply text-xl font-bold mt-8 mb-4 text-slate-900 dark:text-white;
+  }
+  .prose h4 {
+    @apply text-lg font-bold mt-6 mb-3 text-slate-800 dark:text-slate-200;
+  }
+  .prose strong {
+    @apply font-bold text-slate-900 dark:text-white;
+  }
+</style>
+
