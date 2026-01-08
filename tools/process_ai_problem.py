@@ -8,16 +8,12 @@ import sys
 class ProblemProcessor:
     def __init__(self, base_dir):
         self.base_dir = Path(base_dir)
-        # ПРОМЕНА: Сега зачувуваме во 'docs' наместо во 'problems'
         self.output_dir = self.base_dir / "docs" 
         self.assets_dir = self.base_dir / "assets" / "animations"
         self.manim_temp = self.base_dir / "tools" / "temp_manim.py"
-        
-        # Креирај ги папките ако не постојат
         self.assets_dir.mkdir(parents=True, exist_ok=True)
     
     def validate_synthetic_geometry(self, content):
-        """Проверува дали решението користи забранети методи."""
         forbidden_patterns = [
             r'координат', r'complex', r'trigonometr', r'\bz\s*=', r'x\s*=.*y\s*='
         ]
@@ -28,9 +24,17 @@ class ProblemProcessor:
         return warnings
     
     def extract_manim_code(self, markdown_content):
-        pattern = r'# Manim Code\s*```python\s*(.*?)```'
-        match = re.search(pattern, markdown_content, re.DOTALL)
-        return match.group(1).strip() if match else None
+        # Прво го бараме целиот блок со наслов
+        block_pattern = r'(?i)#\s*Manim Code\s*\n\s*```(?:python)?\s*(.*?)```'
+        match = re.search(block_pattern, markdown_content, re.DOTALL)
+        if match:
+            return match.group(1).strip()
+        
+        # Fallback: Само барај ```python блок ако нема наслов (поретко)
+        # code_pattern = r'```python\s*(.*?)```'
+        # match = re.search(code_pattern, markdown_content, re.DOTALL)
+        # return match.group(1).strip() if match else None
+        return None
     
     def run_manim(self, manim_code, problem_id):
         with open(self.manim_temp, 'w', encoding='utf-8') as f:
@@ -70,12 +74,20 @@ class ProblemProcessor:
         replacement = rf'\1\n![Diagram](/{image_path})\n'
         return re.sub(pattern, replacement, content, flags=re.DOTALL, count=1)
     
+    def remove_manim_code_block(self, content):
+        """Агресивно бришење на секцијата Manim Code."""
+        # Варијанта 1: Со наслов
+        pattern = r'(?i)#\s*Manim Code\s*\n\s*```(?:python)?.*?```'
+        content = re.sub(pattern, '', content, flags=re.DOTALL)
+        return content.strip()
+
     def categorize_problem(self, metadata):
-        """Одредува во која папка во 'docs' да ја стави задачата."""
         problem_type = metadata.get('type', 'general')
-        grade = int(metadata.get('grade', 0)) # Осигурај се дека е int
-        
-        # Мапирање на типови (ако има разлика во имињата)
+        try:
+            grade = int(metadata.get('grade', 0))
+        except ValueError:
+            grade = 0
+            
         category_map = {
             'geometry': 'geometry', 
             'algebra': 'algebra', 
@@ -84,11 +96,9 @@ class ProblemProcessor:
             'logic': 'logic', 
             'logic_puzzle': 'logic'
         }
-        
         category_folder = category_map.get(problem_type, 'general')
         grade_folder = f"grade_{grade}"
         
-        # ВРАЌАЊЕ НА СТАРАТА СТРУКТУРА: docs/grade_X/category
         target_dir = self.output_dir / grade_folder / category_folder
         target_dir.mkdir(parents=True, exist_ok=True)
         return target_dir
@@ -131,13 +141,13 @@ class ProblemProcessor:
                 if input("\nПродолжи? (y/n): ").lower() != 'y': return False
         
         manim_code = self.extract_manim_code(markdown_input)
-        image_path = None
         
         if manim_code:
             image_path = self.run_manim(manim_code, problem_id)
             if image_path:
                 full_content = frontmatter.dumps(post)
                 full_content = self.insert_image_in_markdown(full_content, image_path)
+                full_content = self.remove_manim_code_block(full_content)
                 post = frontmatter.loads(full_content)
         
         target_dir = self.categorize_problem(metadata)
@@ -149,7 +159,6 @@ class ProblemProcessor:
         print(f"\n✅ ЗАВРШЕНО! Задачата е преместена во:")
         print(f"   📂 {output_file}")
         
-        # Исчисти го влезниот фајл
         with open(input_path, 'w', encoding='utf-8') as f:
             f.write("")
         
