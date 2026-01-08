@@ -25,18 +25,30 @@ source: <Source Name>
 (This is the most important part. Explain the thought process. "We see a median, so we think about doubling it." "We see numbers modulo 3..." Do not use formal proof here, use intuition.)
 
 ## 📐 Детално Решение
-(Use HTML <details> tags for step-by-step unfolding to allow the student to pause and think)
+- **Format:** Wrap logical blocks in `<details><summary>Title</summary>...</details>`.
+- **CRITICAL SPACING:** You MUST leave an empty line after `<summary>...` and before `</details>`.
+  - CORRECT: 
+    `<summary>Title</summary>`
+    
+    `Content...`
+  - INCORRECT: `<summary>Title</summary>Content...`
 
 <details>
 <summary>Чекор 1: [Наслов на чекорот]</summary>
 
 (Extremely detailed, rigorous proof step. Justify every claim.)
+
+$$ Formula $$
+
+(Text continues...)
+
 </details>
 
 <details>
 <summary>Чекор 2: [Наслов на чекорот]</summary>
 
 (Continue...)
+
 </details>
 
 **Краен одговор:** (State the final answer explicitly boxed: $\boxed{answer}$)
@@ -59,4 +71,3 @@ class SolutionScene(Scene):
         self.camera.background_color = WHITE
         # Complete Manim code here...
 ```
-````

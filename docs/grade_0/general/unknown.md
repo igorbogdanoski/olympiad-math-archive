@@ -1,3 +1,7 @@
+---
+{}
+---
+
 from manim import *
 
 class SolutionScene(Scene):
