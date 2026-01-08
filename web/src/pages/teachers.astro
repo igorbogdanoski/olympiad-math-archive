@@ -1,6 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import problems from '../../tools/problems.json';
+import problems from '../data/problems.json';
 
 // Екстракција на метаподатоци за филтри
 const grades = [...new Set(problems.map(p => p.grade))].filter(g => g !== 'N/A').sort();
@@ -99,7 +99,7 @@ const categories = [...new Set(problems.map(p => p.category))].filter(c => c !==
 </style>
 
 <script>
-    import problems from '../../tools/problems.json';
+    import problems from '../data/problems.json';
 
     const genBtn = document.getElementById('generate-preview');
     const printTestBtn = document.getElementById('print-test');

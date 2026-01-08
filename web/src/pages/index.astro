@@ -1,6 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import problems from '../../tools/problems.json';
+import problems from '../data/problems.json';
 
 // Екстракција на уникатни вредности за филтри
 const grades = [...new Set(problems.map(p => p.grade))].sort();

@@ -31,7 +31,7 @@ class PlatinumProcessor:
         self.assets_dir = self.base_dir / "assets" / "images"
         self.tools_dir = self.base_dir / "tools"
         self.archive_dir = self.tools_dir / "archive"
-        self.index_file = self.tools_dir / "problems.json"
+        self.index_file = self.base_dir / "web" / "src" / "data" / "problems.json"
         self.videos_dir = self.base_dir / "media" / "videos"
         
         # Привремени патеки
