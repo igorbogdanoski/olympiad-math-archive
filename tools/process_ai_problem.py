@@ -3,173 +3,172 @@ import re
 import subprocess
 import frontmatter
 from pathlib import Path
-import sys
+import shutil
 
 class ProblemProcessor:
     def __init__(self, base_dir):
         self.base_dir = Path(base_dir)
         self.output_dir = self.base_dir / "docs" 
-        self.assets_dir = self.base_dir / "assets" / "animations"
+        self.assets_dir = self.base_dir / "assets" / "images" 
         self.manim_temp = self.base_dir / "tools" / "temp_manim.py"
         self.assets_dir.mkdir(parents=True, exist_ok=True)
     
-    def validate_synthetic_geometry(self, content):
-        forbidden_patterns = [
-            r'координат', r'complex', r'trigonometr', r'\bz\s*=', r'x\s*=.*y\s*='
-        ]
-        warnings = []
-        for pattern in forbidden_patterns:
-            if re.search(pattern, content, re.IGNORECASE):
-                warnings.append(f"⚠️ Можен проблем: Најдено '{pattern}' - проверете дали е синтетичко решение")
-        return warnings
-    
+    def sanitize_manim_code(self, code):
+        """
+        Прави брзи поправки на кодот за да избегне LaTeX грешки ако нема инсталација.
+        Заменува MathTex со Text.
+        """
+        # Ако претходно не успеало, пробај да замениш MathTex со Text
+        # Ова е "нечиста" поправка, но врши работа за генерирање слика
+        # code = code.replace("MathTex", "Text")
+        # code = code.replace(r"\text{", "").replace("}", "") # Тргање на LaTeX команди
+        return code
+
     def extract_manim_code(self, markdown_content):
-        # Прво го бараме целиот блок со наслов
-        block_pattern = r'(?i)#\s*Manim Code\s*\n\s*```(?:python)?\s*(.*?)```'
-        match = re.search(block_pattern, markdown_content, re.DOTALL)
+        # Бараме блок што почнува со # Manim Code
+        # и содржи ```python ... ```
+        pattern = r'(?i)#\s*Manim Code\s*\n\s*```(?:python)?\s*(.*?)```'
+        match = re.search(pattern, markdown_content, re.DOTALL)
         if match:
             return match.group(1).strip()
-        
-        # Fallback: Само барај ```python блок ако нема наслов (поретко)
-        # code_pattern = r'```python\s*(.*?)```'
-        # match = re.search(code_pattern, markdown_content, re.DOTALL)
-        # return match.group(1).strip() if match else None
         return None
     
     def run_manim(self, manim_code, problem_id):
+        # 1. Зачувај го привремениот фајл
         with open(self.manim_temp, 'w', encoding='utf-8') as f:
             f.write(manim_code)
         
+        # 2. Најди го името на класата
         class_match = re.search(r'class\s+(\w+)\(Scene\)', manim_code)
         if not class_match:
-            print("❌ Не можам да го најдам класот на сцената")
+            print("❌ Не можам да најдам 'class SceneName(Scene)' во кодот.")
             return None
+        scene_name = class_match.group(1)
         
-        scene_class = class_match.group(1)
-        output_path = self.assets_dir / problem_id
-        output_path.mkdir(exist_ok=True)
+        # 3. Дефинирај патека за излез
+        output_folder = self.assets_dir / problem_id
+        output_folder.mkdir(exist_ok=True, parents=True)
         
+        # 4. Изврши Manim команда (-s за слика, -ql за брзина)
+        # --media_dir ги насочува привремените фајлови
+        # -o го дефинира името на излезната слика
         cmd = [
-            'manim', '-qm', '-o', f'{problem_id}.png', '--format', 'png',
-            '--save_last_frame', str(self.manim_temp), scene_class
+            "manim", "-ql", "-s", 
+            str(self.manim_temp), scene_name,
+            "--media_dir", str(self.base_dir / "media_temp"), # Temp folder we can delete later
+            "-o", f"{problem_id}.png"
         ]
         
-        print(f"🎬 Генерирам Manim анимација за {problem_id}...")
-        try:
-            result = subprocess.run(cmd, capture_output=True, text=True, cwd=str(output_path))
-            if result.returncode == 0:
-                generated_files = list(output_path.glob('*.png'))
-                if generated_files:
-                    print(f"✅ Manim слика генерирана: {generated_files[0].name}")
-                    return f"assets/animations/{problem_id}/{generated_files[0].name}"
-            else:
-                print(f"❌ Manim грешка:\n{result.stderr}")
-                return None
-        except FileNotFoundError:
-            print("❌ Manim не е инсталиран (pip install manim).")
-            return None
-    
-    def insert_image_in_markdown(self, content, image_path):
-        pattern = r'(# Текст на задачата\n.*?\n)'
-        replacement = rf'\1\n![Diagram](/{image_path})\n'
-        return re.sub(pattern, replacement, content, flags=re.DOTALL, count=1)
-    
-    def remove_manim_code_block(self, content):
-        """Агресивно бришење на секцијата Manim Code."""
-        # Варијанта 1: Со наслов
-        pattern = r'(?i)#\s*Manim Code\s*\n\s*```(?:python)?.*?```'
-        content = re.sub(pattern, '', content, flags=re.DOTALL)
-        return content.strip()
-
-    def categorize_problem(self, metadata):
-        problem_type = metadata.get('type', 'general')
-        try:
-            grade = int(metadata.get('grade', 0))
-        except ValueError:
-            grade = 0
+        print(f"🎨 Генерирам илустрација за {problem_id}...")
+        result = subprocess.run(cmd, capture_output=True, text=True)
+        
+        if result.returncode != 0:
+            print("⚠️ Грешка при Manim. Обид 2: Без LaTeX...")
+            # Fallback: Пробај со "Text" наместо "MathTex" ако пукнало за LaTeX
+            safe_code = manim_code.replace("MathTex", "Text")
+            with open(self.manim_temp, 'w', encoding='utf-8') as f:
+                f.write(safe_code)
+            result = subprocess.run(cmd, capture_output=True, text=True)
             
-        category_map = {
-            'geometry': 'geometry', 
-            'algebra': 'algebra', 
-            'number_theory': 'number_theory', 
-            'combinatorics': 'combinatorics',
-            'logic': 'logic', 
-            'logic_puzzle': 'logic'
-        }
-        category_folder = category_map.get(problem_type, 'general')
-        grade_folder = f"grade_{grade}"
-        
-        target_dir = self.output_dir / grade_folder / category_folder
-        target_dir.mkdir(parents=True, exist_ok=True)
-        return target_dir
-    
-    def process(self, input_file_path):
-        print("="*60)
-        print("🚀 OLYMPIAD PROBLEM PROCESSOR (DOCS MODE)")
-        print("="*60)
-        
-        input_path = Path(input_file_path)
-        if not input_path.exists():
-            input_path.touch()
-            print(f"❌ Фајлот {input_path.name} е празен/нов.")
-            return False
+            if result.returncode != 0:
+                print(f"❌ Неуспешно генерирање. Грешка:\n{result.stderr[-300:]}") # Покажи ги последните 300 карактери
+                return None
 
-        with open(input_path, 'r', encoding='utf-8') as f:
-            markdown_input = f.read()
+        # 5. Пронајди ја сликата и премести ја каде што треба
+        # Manim ја става во media_temp/images/temp_manim/problem_id.png
+        # Но со -o, понекогаш е потешко да се најде точно каде завршила.
+        # Најсигурно е да пребараме низ media_temp
+        
+        found_images = list((self.base_dir / "media_temp").rglob(f"{problem_id}.png"))
+        
+        if found_images:
+            source_img = found_images[0]
+            dest_img = output_folder / f"{problem_id}.png"
+            shutil.move(str(source_img), str(dest_img))
+            
+            # Враќаме релативна патека за Markdown (Linux style forward slashes)
+            return f"assets/images/{problem_id}/{problem_id}.png"
+        else:
+            print("❌ Manim заврши, но не ја наоѓам сликата.")
+            return None
 
-        if not markdown_input.strip():
-            print(f"❌ Фајлот {input_path.name} е празен.")
-            return False
+    def remove_manim_block(self, content):
+        pattern = r'(?i)#\s*Manim Code\s*\n\s*```(?:python)?.*?```'
+        # Заменуваме со празен стринг
+        return re.sub(pattern, '', content, flags=re.DOTALL).strip()
 
-        try:
-            post = frontmatter.loads(markdown_input)
-            metadata = post.metadata
-            content = post.content
-        except Exception as e:
-            print(f"❌ Грешка при парсирање YAML: {e}")
-            return False
+    def insert_image_link(self, content, image_rel_path):
+        # Вметни ја сликата веднаш по текстот на задачата
+        # Бараме "# Решение" и вметнуваме пред него
+        if "![Илустрација]" in content: 
+            return content # Веќе има слика
+            
+        insertion_point = "# Решение"
+        image_markdown = f"\n![Илустрација]({image_rel_path})\n\n"
         
-        problem_id = metadata.get('problem_id', 'unknown')
-        print(f"\n📋 Обработувам: {metadata.get('title', 'Без наслов')}")
-        print(f"   ID: {problem_id}")
+        if insertion_point in content:
+            return content.replace(insertion_point, image_markdown + insertion_point)
+        else:
+            # Ако нема # Решение, додај на крај на "Текст на задачата"
+            return content + image_markdown
+
+    def categorize_and_save(self, post, problem_id):
+        meta = post.metadata
+        p_type = meta.get('type', 'general')
+        grade = meta.get('grade', 'other')
         
-        if metadata.get('type') == 'geometry':
-            warnings = self.validate_synthetic_geometry(content)
-            if warnings:
-                print("\n⚠️  ПРЕДУПРЕДУВАЊА:")
-                for w in warnings: print(f"   {w}")
-                if input("\nПродолжи? (y/n): ").lower() != 'y': return False
+        output_path = self.output_dir / f"grade_{grade}" / p_type
+        output_path.mkdir(parents=True, exist_ok=True)
         
-        manim_code = self.extract_manim_code(markdown_input)
+        final_file = output_path / f"{problem_id}.md"
         
-        if manim_code:
-            image_path = self.run_manim(manim_code, problem_id)
-            if image_path:
-                full_content = frontmatter.dumps(post)
-                full_content = self.insert_image_in_markdown(full_content, image_path)
-                full_content = self.remove_manim_code_block(full_content)
-                post = frontmatter.loads(full_content)
-        
-        target_dir = self.categorize_problem(metadata)
-        output_file = target_dir / f"{problem_id}.md"
-        
-        with open(output_file, 'w', encoding='utf-8') as f:
+        with open(final_file, 'w', encoding='utf-8') as f:
             f.write(frontmatter.dumps(post))
         
-        print(f"\n✅ ЗАВРШЕНО! Задачата е преместена во:")
-        print(f"   📂 {output_file}")
+        print(f"✅ Задачата е зачувана во: {final_file}")
+
+    def process_file(self, input_file):
+        input_path = Path(input_file)
+        if not input_path.exists():
+            print("Фајлот не постои.")
+            return
+
+        with open(input_path, 'r', encoding='utf-8') as f:
+            content_raw = f.read()
+
+        try:
+            post = frontmatter.loads(content_raw)
+        except:
+            print("❌ Грешка при читање на YAML метаподатоците.")
+            return
+
+        problem_id = post.metadata.get('problem_id', 'unknown')
+        print(f"--- Обработка на: {problem_id} ---")
+
+        # 1. Извади код
+        manim_code = self.extract_manim_code(content_raw)
         
+        if manim_code:
+            # 2. Генерирај слика
+            image_path = self.run_manim(manim_code, problem_id)
+            
+            if image_path:
+                # 3. Ако успешно, модифицирај ја содржината
+                new_content = self.remove_manim_block(post.content)
+                new_content = self.insert_image_link(new_content, f"/{image_path}") # Додаваме / за апсолутна патека од root
+                post.content = new_content
+        
+        # 4. Зачувај го финалниот фајл
+        self.categorize_and_save(post, problem_id)
+        
+        # 5. Исчисти го влезниот фајл (за да знаеме дека е готово)
         with open(input_path, 'w', encoding='utf-8') as f:
             f.write("")
-        
-        return True
-
-def main():
-    base_dir = Path(__file__).parent.parent
-    input_filename = "new_problem_input.md"
-    input_file_path = base_dir / "tools" / input_filename
-    processor = ProblemProcessor(base_dir)
-    processor.process(input_file_path)
 
 if __name__ == "__main__":
-    main()
+    # Патеки
+    BASE = Path(__file__).parent.parent
+    INPUT_FILE = BASE / "tools" / "new_problem_input.md"
+    
+    proc = ProblemProcessor(BASE)
+    proc.process_file(INPUT_FILE)
