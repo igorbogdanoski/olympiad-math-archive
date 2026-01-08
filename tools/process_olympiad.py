@@ -17,7 +17,7 @@ except ImportError:
 
 class PlatinumProcessor:
     def __init__(self, base_dir):
-        self.base_dir = Path(base_dir)
+        self.base_dir = Path(base_dir).resolve()
         self.output_dir = self.base_dir / "docs"
         self.assets_dir = self.base_dir / "assets" / "images"
         self.tools_dir = self.base_dir / "tools"
@@ -35,58 +35,46 @@ class PlatinumProcessor:
         """Проверува дали Manim е инсталиран во системот."""
         if not shutil.which("manim"):
             print("❌ КРИТИЧНА ГРЕШКА: Manim не е пронајден во системот!")
-            print("👉 Инсталирај го или додај го во PATH.")
             return False
         return True
 
     def extract_manim_code(self, content):
         """
-        ПОПРАВЕНА ВЕРЗИЈА: Не запира на линии што почнуваат со '#' 
-        бидејќи тоа се често Python коментари.
+        Екстрахира Manim код од Markdown содржина.
         """
-        # 1. Најди каде ПОЧНУВА кодот
-        start_pattern = r'(?i)#\s*Manim Code\s*\n\s*```(?:python)?'
-        match_start = re.search(start_pattern, content)
+        # Пофлексибилен Regex: Бара '# Manim Code' (case insensitive) и потоа првиот код блок
+        start_pattern = r'(?i)#\s*Manim Code.*?\n\s*```(?:python)?'
+        match_start = re.search(start_pattern, content, re.DOTALL)
         
         if not match_start:
-            return None
+            return None, None # Враќаме (Code, Full_Block_Text)
 
-        # Ги земаме сите линии ПО почетокот
-        raw_rest = content[match_start.end():]
-        lines = raw_rest.splitlines()
+        # Почеток на самиот код (по ```python)
+        code_start_index = match_start.end()
         
-        captured_lines = []
-        code_closed_properly = False
-
-        for line in lines:
-            stripped = line.strip()
-            
-            # 1. Ако најдеме затворање на кодот (```)
-            if stripped == "```":
-                code_closed_properly = True
-                break
-            
-            # 2. УСЛОВИ ЗА КРАЈ (STOP CONDITIONS)
-            # ВНИМАНИЕ: Тргната е проверката за 'startswith("# ")' бидејќи тоа се Python коментари!
-            # Запираме само на ## (Heading 2), ### (Heading 3) или --- (Horizontal Rule)
-            if line.startswith("## ") or line.startswith("### ") or line.startswith("---"):
-                print("⚠️  Детектирав нова секција. Го прекинувам читањето на кодот тука.")
-                break
-            
-            # Ако линијата е празна, ја чуваме (за да не се расипе formatting-от)
-            captured_lines.append(line)
-
-        full_code = r"\n".join(captured_lines).strip()
+        # Го наоѓаме крајот (```)
+        rest_of_text = content[code_start_index:]
+        end_match = re.search(r'\n\s*```', rest_of_text)
         
-        if not code_closed_properly:
-            print(f"🔧 АВТО-КОРЕКЦИЈА: Додадов '```' што недостасуваше на крајот.")
-            
-        return full_code
+        if not end_match:
+            print("⚠️ Најдов почеток на Manim код, но не и крај (```).")
+            # Обид за спас: земи сè до следната секција '#' или крај
+            code_content = rest_of_text.split('\n#')[0].strip()
+            # Construct the full block for removal later
+            full_block = content[match_start.start():code_start_index] + code_content + "\n```"
+            return code_content, full_block
+
+        code_content = rest_of_text[:end_match.start()].strip()
+        
+        # Го конструираме целиот блок (од # Manim Code до ```) за да можеме да го избришеме подоцна
+        full_block_end_index = code_start_index + end_match.end()
+        full_block = content[match_start.start():full_block_end_index]
+
+        return code_content, full_block
 
     def sanitize_code_safe_mode(self, code):
-        """Напреден Safe Mode: Ги отстранува LaTeX зависностите."""
+        """Safe Mode: Ги отстранува LaTeX зависностите."""
         print("🔧 Активирам SAFE MODE: Конверзија на LaTeX во обичен текст...")
-        
         code = code.replace("MathTex", "Text")
         replacements = {
             r"\\": " ", r"\cdot": "*", r"\frac": "", 
@@ -112,192 +100,181 @@ class PlatinumProcessor:
         with open(self.manim_temp_script, 'w', encoding='utf-8') as f:
             f.write(manim_code)
 
+        # Папка за специфичниот проблем
         problem_assets_dir = self.assets_dir / problem_id
         problem_assets_dir.mkdir(parents=True, exist_ok=True)
+        
+        # Конечна патека каде ја очекуваме сликата
+        final_image_path = problem_assets_dir / f"{problem_id}.png"
 
+        # Команда за Manim
+        # Користиме --media_dir за да ги ставиме привремените фајлови таму
         cmd = [
-            "manim", "-ql", "-s", "-v", "WARNING",
+            "manim", "-ql", "-s", "--disable_caching",
             str(self.manim_temp_script), scene_name,
             "--media_dir", str(self.manim_media_temp),
-            "-o", f"{problem_id}.png"
+            "-o", f"{problem_id}.png" # Го форсираме името на фајлот
         ]
 
         print(f"🎬 Рендерирање на илустрација за: {problem_id}...")
         
         # --- ОБИД 1 ---
-        result = subprocess.run(cmd, capture_output=True, text=True)
+        result = subprocess.run(cmd, capture_output=True, text=True, encoding='utf-8', errors='replace')
         
-        # --- ОБИД 2 (Safe Mode) ---
-        if result.returncode != 0:
-            print("⚠️  Грешка при рендерирање (најверојатно LaTeX).")
+        success = False
+        
+        # Проверка дали фајлот е генериран (Manim понекогаш го закопува длабоко)
+        # Најсигурен начин е со rglob во media_temp папката
+        generated_files = list(self.manim_media_temp.rglob(f"{problem_id}.png"))
+        
+        if result.returncode == 0 and generated_files:
+            success = True
+        else:
+            # --- ОБИД 2 (Safe Mode) ---
+            print("⚠️ Првиот обид не успеа. Пробувам Safe Mode...")
+            if result.returncode != 0:
+                print(f"🔍 Грешка: {result.stderr[-300:]}") # Печати ги последните 300 карактери од грешката
+
             safe_code = self.sanitize_code_safe_mode(manim_code)
             with open(self.manim_temp_script, 'w', encoding='utf-8') as f:
                 f.write(safe_code)
             
-            print("🔄 Втор обид (Safe Mode)...")
-            result = subprocess.run(cmd, capture_output=True, text=True)
+            result = subprocess.run(cmd, capture_output=True, text=True, encoding='utf-8', errors='replace')
+            generated_files = list(self.manim_media_temp.rglob(f"{problem_id}.png"))
             
-            if result.returncode != 0:
-                print("❌ FATAL: И вториот обид не успеа.")
-                print(r"\n🔍 --- ДЕТАЛИ ЗА ГРЕШКАТА (LOG) ---")
+            if result.returncode == 0 and generated_files:
+                success = True
+            else:
+                print("❌ FATAL: Manim не успеа да генерира слика.")
+                print(r"--- LOG START ---")
                 print(result.stderr[-1000:])
-                print(r"-----------------------------------\n")
+                print(r"--- LOG END ---")
                 return None
 
         # Преместување на сликата
-        generated_image = list(self.manim_media_temp.rglob(f"{problem_id}.png"))
-        
-        if generated_image:
-            final_path = problem_assets_dir / f"{problem_id}.png"
-            shutil.move(str(generated_image[0]), str(final_path))
-            print(f"✅ Сликата е креирана: {final_path.name}")
+        if success and generated_files:
+            source_img = generated_files[0]
+            shutil.move(str(source_img), str(final_image_path))
+            print(f"✅ Сликата е креирана: {final_image_path.name}")
             return f"/assets/images/{problem_id}/{problem_id}.png"
-        else:
-            print("❌ Сликата не беше пронајдена по рендерирањето.")
-            return None
+        
+        return None
 
-    def update_markdown_content(self, post, image_rel_path):
+    def update_markdown_content(self, post, image_rel_path, raw_manim_block):
         """Го брише Manim кодот и додава линк до сликата."""
         content = post.content
-        # Бришење на кодот
-        content = re.sub(r'(?i)#\s*Manim Code.*$', '', content, flags=re.DOTALL).strip()
         
-        # Вметнување на слика
-        if image_rel_path and "![Илустрација]" not in content:
+        # 1. Бришење на кодот (Користиме replace со точниот блок што го најдовме претходно)
+        if raw_manim_block:
+            content = content.replace(raw_manim_block, "")
+        
+        # Чистење на заостанати празни редови и Manim секции ако останале
+        content = re.sub(r'(?i)#\s*Manim Code\s*', '', content).strip()
+
+        # 2. Вметнување на слика
+        # Сликата ја ставаме пред "Менторски Белешки" или на крај ако нема белешки
+        if image_rel_path:
             image_md = f"\n\n---\n### 🎨 Визуелизација\n![Илустрација]({image_rel_path})\n"
+            
             if "## 👨‍🏫 Менторски Белешки" in content:
                 content = content.replace("## 👨‍🏫 Менторски Белешки", image_md + "\n## 👨‍🏫 Менторски Белешки")
+            elif "## Решение" in content:
+                 # Ако нема менторски, пробај после решение
+                 content += image_md
             else:
-                content += image_md
+                 content += image_md
+        else:
+            print("⚠️ ВНИМАНИЕ: Сликата не беше генерирана, па не е додадена во фајлот.")
         
         post.content = content
         return post
 
     def archive_input_file(self, input_path):
-        """Го преместува фајлот во Archive и креира нов празен."""
         timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
         filename = input_path.stem
         archive_name = f"{timestamp}_{filename}.md"
         target_path = self.archive_dir / archive_name
         
         shutil.move(str(input_path), str(target_path))
-        print(f"📦 Оригиналниот фајл е безбедно архивиран во: tools/archive/{archive_name}")
-        
         with open(input_path, 'w', encoding='utf-8') as f:
-            f.write("") # Reset
-        print(f"🔄 Креиран е нов, чист фајл: {input_path.name} за следната задача.")
+            f.write("") 
+        print(f"📦 Архивирано во: {archive_name}")
 
     def cleanup(self):
-        """Чистење на ѓубрето."""
         if self.manim_temp_script.exists():
             self.manim_temp_script.unlink()
         if self.manim_media_temp.exists():
             shutil.rmtree(self.manim_media_temp, ignore_errors=True)
 
     def validate_input(self, post):
-        """Валидација на задолжителните полиња."""
         pid = post.metadata.get('problem_id')
         if not pid or pid == 'unknown':
-            print("⛔ СТОП! Недостасува 'problem_id' во задачата.")
-            print("👉 Ве молиме пополнете го полето problem_id пред процесирање.")
+            print("⛔ СТОП! Недостасува 'problem_id'.")
             return False
         return True
 
+    def fix_manim_code(self, code):
+        """Fixes common Manim AI errors"""
+        import re
+        code = re.sub(r'Line\(([^)]*),\s*stroke_dash_pattern\s*=\s*([^\),]+)([^)]*)\)', r'DashedLine(\1\3)', code)
+        code = re.sub(r'quadrant\s*=\s*([0-9]+)', r'quadrant=[1, -1]', code)
+        # Fix AnnularSector duplication logic (simplified)
+        code = re.sub(r'(AnnularSector\([^)]*)\brradius\s*=[^,]+,\s*', r'\1', code) 
+        return code
+
     def check_python_syntax(self, code):
-        """
-        Проверува дали дадениот Python код е синтаксно валиден.
-        Враќа None ако е валиден, или порака за грешка ако не е.
-        """
         try:
             ast.parse(code)
             return None
         except SyntaxError as e:
-            return f"Синтаксна грешка во Manim кодот: {e}"
-
-    def fix_manim_code(self, code):
-        """
-        Автоматски ги заменува:
-        - Line(..., stroke_dash_pattern=...) -> DashedLine(...)
-        - Аргументи quadrant=1 -> quadrant=[1, -1] (или tuple)
-        - AnnularSector(radius=..., outer_radius=...) -> користи само outer_radius
-        """
-        import re
-
-        # 1. Замени stroke_dash_pattern со DashedLine
-        pattern = r'Line\(([^)]*),\s*stroke_dash_pattern\s*=\s*([^\),]+)([^)]*)\)'
-        def replacer(match):
-            before = match.group(1)
-            after = match.group(3)
-            return f'DashedLine({before}{after})'
-        code = re.sub(pattern, replacer, code)
-
-        # 2. Поправи quadrant=1 -> quadrant=[1, -1]
-        code = re.sub(r'quadrant\s*=\s*([0-9]+)', r'quadrant=[1, -1]', code)
-
-        # 3. Поправи AnnularSector со дуплирани radius/outer_radius
-        def annularsector_replacer(match):
-            args = match.group(1)
-            # Отстрани radius=... ако има и outer_radius=...
-            args = re.sub(r'rradius\s*=\s*[^,]+,\s*', '', args)
-            return f'AnnularSector({args})'
-        code = re.sub(r'AnnularSectorr\(([^)]*rradius\s*=\s*[^,]+,\s*outer_rradius\s*=\s*[^,]+[^)]*)\)', annularsector_replacer, code)
-        code = re.sub(r'AnnularSectorr\(([^)]*outer_rradius\s*=\s*[^,]+,\s*rradius\s*=\s*[^,]+[^)]*)\)', annularsector_replacer, code)
-
-        return code
+            return f"Syntax Error: {e}"
 
     def process_file(self, input_file):
-        if not self.check_system():
-            return
+        if not self.check_system(): return
 
-        input_path = Path(input_file)
+        input_path = Path(input_file).resolve()
         if not input_path.exists():
-            print(f"❌ Влезниот фајл не постои: {input_path}")
+            print(f"❌ Фајлот не постои: {input_path}")
             return
 
-        print(fr"\n📂 Отворам фајл: {input_path.name}")
-        
         with open(input_path, 'r', encoding='utf-8') as f:
             content_raw = f.read().strip()
             
         if not content_raw:
-            print("⚠️  Фајлот е празен. Чекам нова задача...")
+            print("⚠️ Фајлот е празен.")
             return
 
         try:
             post = frontmatter.loads(content_raw)
         except Exception as e:
-            print(f"❌ Грешка во YAML форматот: {e}")
+            print(f"❌ YAML грешка: {e}")
             return
 
-        # ВАЛИДАЦИЈА
-        if not self.validate_input(post):
-            return
+        if not self.validate_input(post): return
 
         problem_id = post.metadata.get('problem_id')
         grade = post.metadata.get('grade', 'other')
         p_type = post.metadata.get('type', 'general')
 
-        print(f"⚙️  ID: {problem_id} | Клас: {grade} | Тип: {p_type}")
+        print(f"⚙️  ID: {problem_id} | Клас: {grade}")
 
-        # --- MANIM ---
-        manim_code = self.extract_manim_code(post.content)
+        # --- EXTRACT CODE ---
+        # Сега extract_manim_code враќа ДВЕ работи: самиот код и целиот блок текст за бришење
+        manim_code, full_raw_block = self.extract_manim_code(post.content)
+        
+        image_path = None
         if manim_code:
-            # 1. Автоматска корекција на познати Manim багови
             manim_code = self.fix_manim_code(manim_code)
-            # 2. Синтаксна проверка
-            syntax_error = self.check_python_syntax(manim_code)
-            if syntax_error:
-                print(f"❌ {syntax_error}")
-                print("⛔ Manim нема да се изврши поради синтаксна грешка.")
-                image_path = None
-            else:
+            if not self.check_python_syntax(manim_code):
                 image_path = self.run_manim(manim_code, problem_id)
+            else:
+                print("❌ Синтаксна грешка во Manim кодот.")
         else:
-            print("ℹ️  Нема Manim код во оваа задача.")
-            image_path = None
+            print("ℹ️ Нема Manim код.")
 
-        # --- UPDATE & SAVE ---
-        updated_post = self.update_markdown_content(post, image_path)
+        # --- UPDATE CONTENT ---
+        # Го подаваме full_raw_block за да знае што точно да избрише
+        updated_post = self.update_markdown_content(post, image_path, full_raw_block)
         
         save_dir = self.output_dir / f"grade_{grade}" / p_type
         save_dir.mkdir(parents=True, exist_ok=True)
@@ -306,22 +283,18 @@ class PlatinumProcessor:
         with open(save_path, 'w', encoding='utf-8') as f:
             f.write(frontmatter.dumps(updated_post))
         
-        print(f"💾 Задачата е зачувана: {save_path}")
-
-        # --- ARCHIVE ---
+        print(f"💾 Зачувано: {save_path.name}")
         self.archive_input_file(input_path)
         self.cleanup()
-        print(r"✨ Процесот заврши успешно!\n")
-
-# Автоматска проверка за invalid escape sequences
-subprocess.run([sys.executable, str(Path(__file__).parent / "tools" / "find_invalid_escape_sequences.py")])
+        print(r"✨ Готово!")
 
 if __name__ == "__main__":
     BASE_DIR = Path(__file__).parent.parent
+    # Осигурај се дека оваа патека е точна кај тебе!
     INPUT_FILE = BASE_DIR / "tools" / "new_problem_input.md"
     
     print("="*60)
-    print("💎 PLATINUM OLYMPIAD PROCESSOR - IGOR'S EDITION (FINAL) 💎")
+    print("💎 PLATINUM PROCESSOR - FIX V2 💎")
     print("="*60)
     
     processor = PlatinumProcessor(BASE_DIR)
