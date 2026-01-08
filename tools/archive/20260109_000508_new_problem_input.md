@@ -1,18 +1,18 @@
 ---
-difficulty: 4
-grade: 12
-primary_skill: метод_на_инваријанти
 problem_id: sigma_137_y4_p1857
-related_skills:
-- својства_на_деливост
-- теорија_на_броеви
-source: Sigma 137
-tags:
-- деливост
-- инваријанти
-- двојно_пребројување
 title: Магичен правоаголник со плочки (Финална визуелизација)
+grade: 12
+difficulty: 4
 type: combinatorics
+tags:
+  - деливост
+  - инваријанти
+  - двојно_пребројување
+primary_skill: метод_на_инваријанти
+related_skills:
+  - својства_на_деливост
+  - теорија_на_броеви
+source: Sigma 137
 ---
 
 # Магичен правоаголник со плочки
@@ -81,12 +81,59 @@ $$61 - 1 = 60 \quad (\text{Деливо со 20})$$
 
 **Краен одговор:** $\boxed{1}$
 
-
-
----
-### 🎨 Визуелизација
-![Илустрација](/assets/images/sigma_137_y4_p1857/sigma_137_y4_p1857.png)
-
 ## 👨‍🏫 Менторски Белешки
 1. **Златен Совет:** Секогаш кога имате мрежа $m \times n$, вкупниот збир е содржател на $\text{НЗС}(m, n)$. Ова е универзален клуч за ваков тип задачи.
 2. **Зошто ова е важно:** Оваа задача нè учи на „глобално размислување“. Наместо да се фокусираме на тоа *каде* стојат броевите, ние се фокусираме на тоа *колку* изнесуваат тие во целина.
+
+# Manim Code
+За да ја поправиме визуелизацијата и да спречиме „бегање“ на елементите надвор од екранот, во овој код го користиме методот на групирање (`VGroup`) и централно скалирање. Целата сцена е поместена малку надолу за да има простор за насловите.
+
+```python
+from manim import *
+
+class SolutionScene(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+
+        # --- GRID CONSTRUCTION ---
+        rows, cols = 4, 5
+        square_size = 0.7
+        grid = VGroup()
+        
+        for i in range(rows):
+            for j in range(cols):
+                sq = Square(side_length=square_size, color=BLACK, stroke_width=3)
+                x_pos = (j - (cols - 1) / 2) * square_size
+                y_pos = (i - (rows - 1) / 2) * square_size
+                sq.move_to([x_pos, -y_pos, 0])
+                grid.add(sq)
+        
+        # Center the grid slightly lower to make room for headers
+        grid.scale(0.9).shift(DOWN * 0.5 + LEFT * 1.5)
+
+        # --- LABELS ---
+        row_label = MathTex("4 \\text{ Rows}", color=BLACK).scale(0.7).next_to(grid, LEFT, buff=0.4)
+        col_label = MathTex("5 \\text{ Columns}", color=BLACK).scale(0.7).next_to(grid, DOWN, buff=0.4)
+
+        # --- LOGIC BLOCK (TOP RIGHT) ---
+        logic_title = MathTex("\\text{Properties:}", color=BLACK).scale(0.8)
+        deriv1 = MathTex("S = 4 \\times R", color=BLACK).scale(0.7)
+        deriv2 = MathTex("S = 5 \\times C", color=BLACK).scale(0.7)
+        deriv3 = MathTex("\\implies 20 \\mid S", color=BLUE).scale(0.8)
+        
+        logic_group = VGroup(logic_title, deriv1, deriv2, deriv3).arrange(DOWN, aligned_edge=LEFT, buff=0.2)
+        logic_group.to_corner(UR, buff=0.5).shift(DOWN * 0.5)
+
+        # --- CALCULATION BLOCK (BOTTOM RIGHT) ---
+        calc1 = MathTex("Total \\ Sum = 61", color=BLACK).scale(0.7)
+        calc2 = MathTex("61 - 1 = 60", color=BLACK).scale(0.7)
+        calc3 = MathTex("x = 1", color=RED).scale(1.1)
+        
+        calc_group = VGroup(calc1, calc2, calc3).arrange(DOWN, aligned_edge=LEFT, buff=0.2)
+        calc_group.next_to(logic_group, DOWN, buff=0.8)
+        
+        box = SurroundingRectangle(calc_group, color=RED, buff=0.2)
+
+        # --- RENDER ---
+        self.add(grid, row_label, col_label, logic_group, calc_group, box)
+```
