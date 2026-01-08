@@ -1,19 +1,20 @@
 ---
-difficulty: 4
-grade: 10
-primary_skill: геометриско_средно
+
 problem_id: sigma_137_y2_p3
-related_skills:
-- теорема_на_талес
-- сличност_на_триаголници
-source: Сигма 137
-tags:
-- планиметрија
-- плоштина
-- својства_на_кружница
-- арбелос
 title: Својства на Арбелос и геометриско средно
+grade: 10
+difficulty: 4
 type: geometry
+tags:
+  - планиметрија
+  - плоштина
+  - својства_на_кружница
+  - арбелос
+primary_skill: геометриско_средно
+related_skills:
+  - теорема_на_талес
+  - сличност_на_триаголници
+source: Сигма 137
 ---
 
 # Однос на плоштини во Арбелос
@@ -109,12 +110,6 @@ $$ \frac{P_1}{P_2} = \frac{1/2}{1/4} = 2 $$
 
 **Краен одговор:** $$\boxed{2:1}$$
 
-
-
----
-### 🎨 Визуелизација
-![Илустрација](/assets/images/sigma_137_y2_p3/sigma_137_y2_p3.png)
-
 ## 👨‍🏫 Менторски Белешки
 
 1. **Златен Совет:** Кај секоја задача каде што се појавува висина кон хипотенуза на правоаголен триаголник, веднаш запишете го односот на геометриското средно. Тоа е најчестиот мост помеѓу линеарните отсечки и плоштините.
@@ -124,3 +119,52 @@ $$ \frac{P_1}{P_2} = \frac{1/2}{1/4} = 2 $$
 ### 🔗 Поврзани вештини
 * **Примарна вештина:** Планиметриско пресметкување плоштини.
 * **Потребни предзнаења:** Теорема на Талес и Евклидови теореми за правоаголен триаголник.
+
+# Manim Code
+```python
+from manim import *
+
+class SolutionScene(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        
+        # Parameters
+        r1 = 1.25
+        r2 = 1.75
+        R = r1 + r2
+        
+        # Centers
+        c_large = ORIGIN
+        c_small1 = LEFT * (R - r1)
+        c_small2 = RIGHT * (R - r2)
+        
+        # 1. Shaded Arbelos (Blue)
+        # We simulate the shading by layering: Blue large - White smalls
+        large_blue = Sector(radius=R, angle=PI, fill_color=BLUE, fill_opacity=0.3, stroke_width=0).shift(DOWN*0.5)
+        small1_white = Sector(radius=r1, angle=PI, fill_color=WHITE, fill_opacity=1.0, stroke_width=0).move_to(c_small1 + DOWN*0.5, aligned_edge=DOWN)
+        small2_white = Sector(radius=r2, angle=PI, fill_color=WHITE, fill_opacity=1.0, stroke_width=0).move_to(c_small2 + DOWN*0.5, aligned_edge=DOWN)
+        
+        # 2. Outlines
+        out_large = Arc(radius=R, start_angle=0, angle=PI, color=BLACK, stroke_width=4).shift(DOWN*0.5)
+        out1 = Arc(radius=r1, start_angle=0, angle=PI, color=BLACK, stroke_width=4).move_to(c_small1 + DOWN*0.5, aligned_edge=DOWN)
+        out2 = Arc(radius=r2, start_angle=0, angle=PI, color=BLACK, stroke_width=4).move_to(c_small2 + DOWN*0.5, aligned_edge=DOWN)
+        baseline = Line(LEFT*R, RIGHT*R, color=BLACK, stroke_width=4).shift(DOWN*0.5)
+        
+        # 3. Altitude AT
+        t_pos = LEFT*R + RIGHT*(2*r1)
+        h_val = ( (2*r1)*(2*r2) )**0.5
+        a_pos = t_pos + UP*h_val
+        line_at = Line(t_pos + DOWN*0.5, a_pos + DOWN*0.5, color=RED, stroke_width=5)
+        
+        # 4. Labels
+        lbl_r = MathTex("R", color=BLACK).next_to(LEFT*R + DOWN*0.5, DOWN)
+        lbl_s = MathTex("S", color=BLACK).next_to(RIGHT*R + DOWN*0.5, DOWN)
+        lbl_t = MathTex("T", color=BLACK).next_to(t_pos + DOWN*0.5, DOWN)
+        lbl_a = MathTex("A", color=BLACK).next_to(a_pos + DOWN*0.5, UP)
+        lbl_res = MathTex("Ratio = 2:1", color=BLACK).to_corner(UR)
+
+        # Build scene
+        self.add(large_blue, small1_white, small2_white)
+        self.add(out_large, out1, out2, baseline, line_at)
+        self.add(lbl_r, lbl_s, lbl_t, lbl_a, lbl_res)
+```
