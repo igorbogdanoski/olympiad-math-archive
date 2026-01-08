@@ -219,6 +219,7 @@ class PlatinumProcessor:
         Автоматски ги заменува:
         - Line(..., stroke_dash_pattern=...) -> DashedLine(...)
         - Аргументи quadrant=1 -> quadrant=[1, -1] (или tuple)
+        - AnnularSector(radius=..., outer_radius=...) -> користи само outer_radius
         """
         import re
 
@@ -232,6 +233,15 @@ class PlatinumProcessor:
 
         # 2. Поправи quadrant=1 -> quadrant=[1, -1]
         code = re.sub(r'quadrant\s*=\s*([0-9]+)', r'quadrant=[1, -1]', code)
+
+        # 3. Поправи AnnularSector со дуплирани radius/outer_radius
+        def annularsector_replacer(match):
+            args = match.group(1)
+            # Отстрани radius=... ако има и outer_radius=...
+            args = re.sub(r'radius\s*=\s*[^,]+,\s*', '', args)
+            return f'AnnularSector({args})'
+        code = re.sub(r'AnnularSector\(([^)]*radius\s*=\s*[^,]+,\s*outer_radius\s*=\s*[^,]+[^)]*)\)', annularsector_replacer, code)
+        code = re.sub(r'AnnularSector\(([^)]*outer_radius\s*=\s*[^,]+,\s*radius\s*=\s*[^,]+[^)]*)\)', annularsector_replacer, code)
 
         return code
 
