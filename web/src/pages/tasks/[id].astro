@@ -16,97 +16,106 @@ const { meta, body, filename, grade, category, difficulty } = prob;
 const parts = body.split(/##\s+.*Решение/i);
 const question = parts[0];
 const solution = parts.length > 1 ? parts[1] : null;
+
+// Наоѓање слични задачи (иста категорија или одделение)
+const related = problems
+    .filter(p => p.filename !== filename && (p.category === category || p.grade === grade))
+    .sort(() => 0.5 - Math.random())
+    .slice(0, 3);
 ---
 
-<Layout title={`${filename.replace('.md', '').replace(/_/g, ' ')} - МатАрхива`}>
+<Layout title={`${filename.replace('.md', '').replace(/_/g, ' ')} | МатАрхива`}>
+  <!-- SEO Meta -->
+  <link rel="canonical" href={`/tasks/${meta.problem_id}`} />
+  
   <div class="max-w-4xl mx-auto">
-    <nav class="flex mb-8 text-sm text-slate-500 gap-2 items-center">
-      <a href="/" class="hover:text-blue-600">Почетна</a>
+    <nav class="flex mb-8 text-xs font-bold uppercase tracking-widest text-slate-400 gap-2 items-center">
+      <a href="/" class="hover:text-blue-600 transition-colors">Архива</a>
       <span>/</span>
-      <span class="capitalize">{category}</span>
-      <span>/</span>
-      <span class="text-slate-900 font-medium">{filename.replace('.md', '')}</span>
+      <span class="text-slate-900 dark:text-slate-100">{category}</span>
     </nav>
 
-    <article class="bg-white rounded-3xl shadow-sm border border-slate-200 overflow-hidden">
-      {/* Header секција */}
-      <div class="p-8 border-b border-slate-100 bg-slate-50/50">
-        <div class="flex flex-wrap gap-3 mb-4">
-          <span class="px-3 py-1 bg-blue-100 text-blue-700 text-sm font-bold rounded-full">Одделение: {grade}</span>
-          <span class="px-3 py-1 bg-emerald-100 text-emerald-700 text-sm font-bold rounded-full uppercase">{category}</span>
-          <span class="px-3 py-1 bg-amber-100 text-amber-700 text-sm font-bold rounded-full">Тежина: {difficulty}/10</span>
+    <article class="bg-white dark:bg-slate-900 rounded-[2.5rem] shadow-xl shadow-slate-200/50 dark:shadow-none border border-slate-100 dark:border-slate-800 overflow-hidden">
+      {/* Header */}
+      <div class="p-10 border-b border-slate-50 dark:border-slate-800 bg-gradient-to-br from-white to-slate-50/50 dark:from-slate-900 dark:to-slate-800/50">
+        <div class="flex flex-wrap gap-2 mb-6">
+          <span class="px-3 py-1 bg-blue-600 text-white text-[10px] font-black uppercase tracking-tighter rounded-md">Одделение: {grade}</span>
+          <span class="px-3 py-1 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 text-[10px] font-black uppercase tracking-tighter rounded-md">{category}</span>
+          <div class="flex items-center gap-1 ml-auto">
+             {[...Array(5)].map((_, i) => (
+                <div class={`w-2 h-2 rounded-full ${i < Math.round(difficulty/2) ? 'bg-amber-400' : 'bg-slate-200 dark:bg-slate-700'}`}></div>
+             ))}
+             <span class="text-[10px] font-black text-slate-400 ml-2 uppercase">Тежина</span>
+          </div>
         </div>
-        <h1 class="text-3xl font-extrabold text-slate-900">
+        <h1 class="text-3xl md:text-4xl font-black text-slate-900 dark:text-white leading-tight">
           {filename.replace('.md', '').replace(/_/g, ' ')}
         </h1>
       </div>
 
-      <div class="p-8">
+      <div class="p-10">
         {/* Визуелизација */}
         {meta.problem_id && (
-          <div class="mb-10 rounded-2xl border border-slate-100 bg-white p-4 shadow-inner">
+          <div class="mb-12 rounded-3xl overflow-hidden border border-slate-100 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 p-4 group">
              <img 
                 src={`/assets/images/${meta.problem_id}/${meta.problem_id}.png`} 
-                alt="Визуелизација на задачата"
-                class="w-full h-auto rounded-lg mx-auto max-h-[500px] object-contain"
+                alt="Геометриска визуелизација"
+                class="w-full h-auto rounded-2xl mx-auto max-h-[500px] object-contain group-hover:scale-[1.02] transition-transform duration-500"
                 onerror="this.style.display='none'"
               />
           </div>
         )}
 
-        {/* Текст на задачата */}
-        <div class="prose prose-slate prose-lg max-w-none mb-12">
-          <h2 class="text-xl font-bold text-slate-800 mb-4 flex items-center gap-2">
-            <span class="text-blue-500">📝</span> Текст на задачата
-          </h2>
-          <div class="content-math">
+        {/* Текст */}
+        <div class="prose prose-slate dark:prose-invert prose-lg max-w-none mb-16">
+          <div class="flex items-center gap-3 mb-6">
+            <div class="w-8 h-8 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-blue-600 dark:text-blue-400 font-bold text-sm">1</div>
+            <h2 class="text-2xl font-black m-0 tracking-tight">Задача</h2>
+          </div>
+          <div class="content-math bg-slate-50 dark:bg-slate-800/30 p-8 rounded-3xl border border-slate-100 dark:border-slate-800 shadow-inner italic">
             {question}
           </div>
         </div>
 
         {/* Решение */}
         {solution && (
-          <div class="mt-8 border-t border-slate-100 pt-8">
-            <details class="group bg-slate-50 rounded-2xl p-6 open:bg-white open:shadow-sm transition-all border border-transparent open:border-slate-200">
-              <summary class="list-none cursor-pointer flex justify-between items-center">
-                <h3 class="text-xl font-bold text-slate-800 flex items-center gap-2">
-                  <span class="text-emerald-500">💡</span> Решение
-                </h3>
-                <span class="text-slate-400 group-open:rotate-180 transition-transform">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="Wait 19 9l-7 7-7-7" />
-                  </svg>
-                </span>
-              </summary>
-              <div class="mt-6 prose prose-emerald prose-lg max-w-none content-math">
+          <div class="space-y-6">
+            <div class="flex items-center gap-3 mb-2">
+                <div class="w-8 h-8 rounded-full bg-emerald-100 dark:bg-emerald-900/30 flex items-center justify-center text-emerald-600 dark:text-emerald-400 font-bold text-sm">2</div>
+                <h2 class="text-2xl font-black m-0 tracking-tight">Решение</h2>
+            </div>
+            <div class="content-math prose prose-emerald dark:prose-invert prose-lg max-w-none">
                 {solution}
-              </div>
-            </details>
+            </div>
           </div>
         )}
       </div>
     </article>
 
-    {/* Footer инфо */}
-    <div class="mt-8 p-6 bg-blue-50 rounded-2xl text-blue-800 text-sm">
-      <p><strong>Извор:</strong> {meta.source || 'Архива на Geo-Mentor'}</p>
-      {meta.tags && meta.tags.length > 0 && (
-        <div class="mt-2 flex gap-2 flex-wrap">
-          <strong>Тагови:</strong>
-          {meta.tags.map(tag => (
-            <span class="bg-blue-100 px-2 py-0.5 rounded text-blue-600">#{tag}</span>
-          ))}
+    {/* Слични задачи */}
+    {related.length > 0 && (
+        <div class="mt-16">
+            <h3 class="text-xl font-black mb-8 flex items-center gap-2">
+                <span class="w-2 h-8 bg-blue-600 rounded-full"></span>
+                Слични задачи за вежбање
+            </h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {related.map(p => (
+                    <a href={`/tasks/${p.meta.problem_id}`} class="bg-white dark:bg-slate-900 p-6 rounded-3xl border border-slate-100 dark:border-slate-800 hover:shadow-lg transition-all group">
+                        <span class="text-[10px] font-black text-blue-600 uppercase mb-2 block">{p.category}</span>
+                        <h4 class="font-bold text-slate-900 dark:text-white group-hover:text-blue-600 transition-colors line-clamp-2">{p.filename.replace('.md', '').replace(/_/g, ' ')}</h4>
+                    </a>
+                ))}
+            </div>
         </div>
-      )}
-    </div>
+    )}
   </div>
 </Layout>
 
 <script>
-  // Скрипта за автоматско рендерирање на KaTeX
   import renderMathInElement from 'katex/dist/contrib/auto-render.js';
   
-  document.addEventListener('DOMContentLoaded', () => {
+  const initMath = () => {
     const elements = document.querySelectorAll('.content-math');
     elements.forEach(el => {
       renderMathInElement(el, {
@@ -119,5 +128,8 @@ const solution = parts.length > 1 ? parts[1] : null;
         throwOnError : false
       });
     });
-  });
+  };
+
+  document.addEventListener('DOMContentLoaded', initMath);
+  document.addEventListener('astro:after-swap', initMath);
 </script>
