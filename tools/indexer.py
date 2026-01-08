@@ -26,7 +26,7 @@ def parse_problem(file_path):
         tags_match = re.search(r'tags:\s*\n((?:\s*-\s*.*\n?)+)', yaml_text)
         if tags_match:
             tags_block = tags_match.group(1)
-            tags = [t.strip().replace('- ', '').strip() for t in tags_block.split(rr'\n') if t.strip()]
+            tags = [t.strip().replace('- ', '').strip() for t in tags_block.split('\n') if t.strip()]
         meta['tags'] = tags
 
     # Екстракција на related_skills од content (бидејќи може да е надвор од yaml во некои формати или yaml парсерот е едноставен)
@@ -34,12 +34,12 @@ def parse_problem(file_path):
     skills_match = re.search(r'related_skills:\s*\n((?:\s*-\s*.*\n?)+)', content)
     if skills_match:
         skills_block = skills_match.group(1)
-        related_skills = [s.strip().replace('- ', '').strip() for s in skills_block.split(rr'\n') if s.strip()]
+        related_skills = [s.strip().replace('- ', '').strip() for s in skills_block.split('\n') if s.strip()]
     meta['related_skills'] = related_skills
     
     # Екстракција на телото на задачата
     # 1. Тргни го YAML frontmatter
-    body = re.sub(rr'^---\s*\n[\s\S]*?\n---\s*', '', content).strip()
+    body = re.sub(r'^---\s*\n[\s\S]*?\n---\s*', '', content).strip()
     
     # 2. Агресивно чистење на SKILL MAPPING и TOPICS
     body = re.sub(r'# --- SKILL MAPPING[\s\S]*?(?=\n# |\Z)', '', body)
@@ -49,11 +49,11 @@ def parse_problem(file_path):
     body = re.sub(r'tags:\s*\n(\s*- .*\n)*', '', body)
     
     # 4. Тргни повеќекратни празни редови
-    body = re.sub(rr'\n{3,}', rr'\n\n', body).strip()
+    body = re.sub(r'\n{3,}', r'\n\n', body).strip()
     
     # 5. Конверзија на LaTeX delimiters за Streamlit/Web
-    body = re.sub(rr'\\\[(.*?)\\\]', rr'$$\1$$', body, flags=re.DOTALL)
-    body = re.sub(rr'\\\((.*?)\\\)', rr'$\1$', body, flags=re.DOTALL)
+    body = re.sub(r'\\\[(.*?)\\\]', r'$$\1$$', body, flags=re.DOTALL)
+    body = re.sub(r'\\\((.*?)\\\)', r'$\1$', body, flags=re.DOTALL)
     
     # Проверка за Manim placeholder
     has_manim_placeholder = "<!-- Ова место е резервирано за автоматската слика од Manim -->" in content
@@ -64,10 +64,10 @@ def parse_problem(file_path):
 def build_index(archive_root):
     """Ги наоѓа сите задачи и креира листа од објекти."""
     problems = []
-    print(f"Building index from: {archive_root}")
+    # Избегнуваме печатење на патеки со кирилица во терминал што не поддржува
     
     for root, dirs, files in os.walk(archive_root):
-        if "tools" in root or "ai" in root or "assets" in root or "public" in root or ".git" in root:
+        if "tools" in root or "ai" in root or "assets" in root or "public" in root or ".git" in root or "web" in root:
             continue
             
         for file in files:

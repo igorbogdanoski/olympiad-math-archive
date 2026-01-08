@@ -5,7 +5,16 @@ import shutil
 import sys
 import datetime
 import ast
+import json
 from pathlib import Path
+
+# Обид за импорт на локални модули
+try:
+    import indexer
+except ImportError:
+    # Ако не може да го најде директно, додај ја tools папката во path
+    sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+    import indexer
 
 # Обид за импорт на frontmatter
 try:
@@ -22,6 +31,8 @@ class PlatinumProcessor:
         self.assets_dir = self.base_dir / "assets" / "images"
         self.tools_dir = self.base_dir / "tools"
         self.archive_dir = self.tools_dir / "archive"
+        self.index_file = self.tools_dir / "problems.json"
+        self.videos_dir = self.base_dir / "media" / "videos"
         
         # Привремени патеки
         self.manim_temp_script = self.tools_dir / "temp_manim_render.py"
@@ -94,7 +105,7 @@ class PlatinumProcessor:
     def run_manim(self, manim_code, problem_id):
         scene_name = self.find_scene_class(manim_code)
         if not scene_name:
-            print("❌ ГРЕШКА: Не е пронајдена класа што наследува од Scene.")
+            print("ERROR: Ne e pronajdena klasa sto nasleduva od Scene.")
             return None
 
         with open(self.manim_temp_script, 'w', encoding='utf-8') as f:
@@ -116,7 +127,7 @@ class PlatinumProcessor:
             "-o", f"{problem_id}.png" # Го форсираме името на фајлот
         ]
 
-        print(f"🎬 Рендерирање на илустрација за: {problem_id}...")
+        print(f"Rendering illustration for: {problem_id}...")
         
         # --- ОБИД 1 ---
         result = subprocess.run(cmd, capture_output=True, text=True, encoding='utf-8', errors='replace')
@@ -131,9 +142,9 @@ class PlatinumProcessor:
             success = True
         else:
             # --- ОБИД 2 (Safe Mode) ---
-            print("⚠️ Првиот обид не успеа. Пробувам Safe Mode...")
+            print("WARNING: Prviot obid ne uspea. Probuvam Safe Mode...")
             if result.returncode != 0:
-                print(f"🔍 Грешка: {result.stderr[-300:]}") # Печати ги последните 300 карактери од грешката
+                print(f"Error: {result.stderr[-300:]}") # Печати ги последните 300 карактери од грешката
 
             safe_code = self.sanitize_code_safe_mode(manim_code)
             with open(self.manim_temp_script, 'w', encoding='utf-8') as f:
@@ -145,7 +156,7 @@ class PlatinumProcessor:
             if result.returncode == 0 and generated_files:
                 success = True
             else:
-                print("❌ FATAL: Manim не успеа да генерира слика.")
+                print("FATAL: Manim ne uspea da generira slika.")
                 print(r"--- LOG START ---")
                 print(result.stderr[-1000:])
                 print(r"--- LOG END ---")
@@ -155,7 +166,7 @@ class PlatinumProcessor:
         if success and generated_files:
             source_img = generated_files[0]
             shutil.move(str(source_img), str(final_image_path))
-            print(f"✅ Сликата е креирана: {final_image_path.name}")
+            print(f"OK: Slika e kreirana: {final_image_path.name}")
             return f"/assets/images/{problem_id}/{problem_id}.png"
         
         return None
@@ -198,7 +209,7 @@ class PlatinumProcessor:
         shutil.move(str(input_path), str(target_path))
         with open(input_path, 'w', encoding='utf-8') as f:
             f.write("") 
-        print(f"📦 Архивирано во: {archive_name}")
+        print(f"Archived in: {archive_name}")
 
     def cleanup(self):
         if self.manim_temp_script.exists():
@@ -206,10 +217,32 @@ class PlatinumProcessor:
         if self.manim_media_temp.exists():
             shutil.rmtree(self.manim_media_temp, ignore_errors=True)
 
+    def check_for_videos(self, problem_id):
+        """Проверува дали постојат видеа за овој проблем."""
+        video_extensions = [".mp4", ".mov", ".webm"]
+        # Бараме во media/videos и подпапки
+        for ext in video_extensions:
+            video_files = list(self.videos_dir.rglob(f"{problem_id}{ext}"))
+            if video_files:
+                # Враќаме релативна патека за вебот
+                rel_path = video_files[0].relative_to(self.base_dir).as_posix()
+                return f"/{rel_path}"
+        return None
+
+    def update_web_index(self):
+        """Го ажурира централниот JSON индекс за вебот."""
+        print("Updating web index...")
+        try:
+            problems = indexer.build_index(str(self.base_dir))
+            indexer.save_index(problems, str(self.index_file))
+            print(f"SUCCESS: Index updated with {len(problems)} tasks.")
+        except Exception as e:
+            print(f"WARNING: Error updating index: {e}")
+
     def validate_input(self, post):
         pid = post.metadata.get('problem_id')
         if not pid or pid == 'unknown':
-            print("⛔ СТОП! Недостасува 'problem_id'.")
+            print("STOP: Missing 'problem_id'.")
             return False
         return True
 
@@ -250,13 +283,25 @@ class PlatinumProcessor:
             print(f"❌ YAML грешка: {e}")
             return
 
+        # --- AUTO-GENERATE ID IF MISSING ---
+        if not post.metadata.get('problem_id') or post.metadata.get('problem_id') == 'unknown':
+            new_id = f"prob_{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}"
+            post.metadata['problem_id'] = new_id
+            print(f"ID: Generated new ID: {new_id}")
+
         if not self.validate_input(post): return
 
         problem_id = post.metadata.get('problem_id')
         grade = post.metadata.get('grade', 'other')
         p_type = post.metadata.get('type', 'general')
 
-        print(f"⚙️  ID: {problem_id} | Клас: {grade}")
+        # Проверка за видео пред процесирање
+        video_url = self.check_for_videos(problem_id)
+        if video_url:
+            post.metadata['video_url'] = video_url
+            print(f"VIDEO: Found video: {video_url}")
+
+        print(f"PROCESSING: ID: {problem_id} | Grade: {grade}")
 
         # --- EXTRACT CODE ---
         # Сега extract_manim_code враќа ДВЕ работи: самиот код и целиот блок текст за бришење
@@ -268,9 +313,9 @@ class PlatinumProcessor:
             if not self.check_python_syntax(manim_code):
                 image_path = self.run_manim(manim_code, problem_id)
             else:
-                print("❌ Синтаксна грешка во Manim кодот.")
+                print("ERROR: Syntax error in Manim code.")
         else:
-            print("ℹ️ Нема Manim код.")
+            print("INFO: No Manim code.")
 
         # --- UPDATE CONTENT ---
         # Го подаваме full_raw_block за да знае што точно да избрише
@@ -283,10 +328,14 @@ class PlatinumProcessor:
         with open(save_path, 'w', encoding='utf-8') as f:
             f.write(frontmatter.dumps(updated_post))
         
-        print(f"💾 Зачувано: {save_path.name}")
+        print(f"SAVED: {save_path.name}")
         self.archive_input_file(input_path)
         self.cleanup()
-        print(r"✨ Готово!")
+        
+        # --- АЖУРИРАЊЕ НА ВЕБ ИНДЕКСОТ ---
+        self.update_web_index()
+        
+        print("DONE!")
 
 if __name__ == "__main__":
     BASE_DIR = Path(__file__).parent.parent
@@ -294,7 +343,7 @@ if __name__ == "__main__":
     INPUT_FILE = BASE_DIR / "tools" / "new_problem_input.md"
     
     print("="*60)
-    print("💎 PLATINUM PROCESSOR - FIX V2 💎")
+    print("PLATINUM PROCESSOR - FIX V2")
     print("="*60)
     
     processor = PlatinumProcessor(BASE_DIR)

@@ -1,0 +1,174 @@
+---
+import Layout from '../layouts/Layout.astro';
+import problems from '../../tools/problems.json';
+
+// Екстракција на уникатни вредности за филтри
+const grades = [...new Set(problems.map(p => p.grade))].sort();
+const categories = [...new Set(problems.map(p => p.category))].sort();
+
+const cleanBody = (text: string) => {
+  return text.split('##')[0].replace(/\$\$/g, '$').slice(0, 120) + '...';
+};
+---
+
+<Layout title="МатАрхива - Истражи задачи">
+	<div class="flex flex-col lg:flex-row gap-10">
+		{/* Sidebar Филтри */}
+		<aside class="w-full lg:w-64 flex-shrink-0">
+			<div class="sticky top-24 bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+				<h2 class="text-lg font-bold mb-6 flex items-center gap-2">
+					<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
+					</svg>
+					Филтрирај
+				</h2>
+				
+				<div class="space-y-8">
+					<div>
+						<label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">Одделение</label>
+						<div class="space-y-2" id="grade-filters">
+							{grades.map(g => (
+								<label class="flex items-center gap-2 cursor-pointer group">
+									<input type="checkbox" value={g} class="filter-checkbox w-4 h-4 rounded border-slate-300 text-blue-600 focus:ring-blue-500">
+									<span class="text-sm text-slate-600 group-hover:text-slate-900">{g === 'N/A' ? 'Останато' : `${g}-то`}</span>
+								</label>
+							))}
+						</div>
+					</div>
+
+					<div>
+						<label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">Категорија</label>
+						<div class="space-y-2" id="cat-filters">
+							{categories.map(c => (
+								<label class="flex items-center gap-2 cursor-pointer group">
+									<input type="checkbox" value={c} class="filter-checkbox w-4 h-4 rounded border-slate-300 text-blue-600 focus:ring-blue-500">
+									<span class="text-sm text-slate-600 group-hover:text-slate-900 capitalize">{c}</span>
+								</label>
+							))}
+						</div>
+					</div>
+
+					<button id="reset-filters" class="w-full py-2 text-sm font-medium text-slate-500 hover:text-blue-600 border border-slate-200 rounded-lg hover:border-blue-200 transition-colors">
+						Исчисти филтри
+					</button>
+				</div>
+			</div>
+		</aside>
+
+		{/* Главна содржина */}
+		<div class="flex-grow">
+			<div class="mb-8 flex flex-col md:flex-row md:items-center justify-between gap-4">
+				<div>
+					<h1 class="text-3xl font-black text-slate-900">Архива на задачи</h1>
+					<p class="text-slate-500">Пронајдени <span id="count" class="font-bold text-blue-600">{problems.length}</span> задачи</p>
+				</div>
+				<div class="relative">
+					<input 
+						type="text" 
+						id="search" 
+						placeholder="Пребарај по име или текст..." 
+						class="w-full md:w-80 pl-10 pr-4 py-2 bg-white border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
+					/>
+					<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-slate-400 absolute left-3 top-2.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+					</svg>
+				</div>
+			</div>
+
+			<div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="problems-grid">
+				{problems.map((prob) => (
+					<div 
+						class="problem-card bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
+						data-grade={prob.grade}
+						data-category={prob.category}
+						data-title={prob.filename.toLowerCase()}
+						data-body={prob.body.toLowerCase()}
+					>
+						<a href={`/tasks/${prob.meta.problem_id || prob.filename.replace('.md', '')}`} class="block h-full">
+							<div class="aspect-video bg-slate-50 border-b border-slate-100 flex items-center justify-center p-4">
+								<img 
+									src={`/assets/images/${prob.meta.problem_id}/${prob.meta.problem_id}.png`} 
+									alt={prob.filename}
+									class="max-w-full max-h-full object-contain"
+									onerror="this.src='https://via.placeholder.com/400x225?text=Geo-Mentor+Архива'"
+								/>
+							</div>
+							<div class="p-6">
+								<div class="flex gap-2 mb-3">
+									<span class="text-[10px] uppercase tracking-widest font-black px-2 py-1 bg-blue-600 text-white rounded">
+										{prob.grade} Одд
+									</span>
+									<span class="text-[10px] uppercase tracking-widest font-black px-2 py-1 bg-slate-100 text-slate-600 rounded">
+										{prob.category}
+									</span>
+								</div>
+								<h3 class="text-xl font-bold text-slate-900 mb-2 leading-tight">
+									{prob.filename.replace('.md', '').replace(/_/g, ' ')}
+								</h3>
+								<p class="text-slate-500 text-sm line-clamp-2">
+									{cleanBody(prob.body)}
+								</p>
+							</div>
+						</a>
+					</div>
+				))}
+			</div>
+			
+			<div id="no-results" class="hidden py-20 text-center">
+				<div class="text-6xl mb-4">🔍</div>
+				<h3 class="text-xl font-bold text-slate-900">Нема резултати</h3>
+				<p class="text-slate-500">Пробајте со поинакви филтри или пребарување.</p>
+			</div>
+		</div>
+	</div>
+</Layout>
+
+<script>
+	const searchInput = document.getElementById('search') as HTMLInputElement;
+	const cards = document.querySelectorAll('.problem-card') as NodeListOf<HTMLElement>;
+	const countEl = document.getElementById('count');
+	const noResults = document.getElementById('no-results');
+	const gradeFilters = document.querySelectorAll('#grade-filters input') as NodeListOf<HTMLInputElement>;
+	const catFilters = document.querySelectorAll('#cat-filters input') as NodeListOf<HTMLInputElement>;
+	const resetBtn = document.getElementById('reset-filters');
+
+	function filter() {
+		const query = searchInput.value.toLowerCase();
+		const selectedGrades = Array.from(gradeFilters).filter(i => i.checked).map(i => i.value);
+		const selectedCats = Array.from(catFilters).filter(i => i.checked).map(i => i.value);
+
+		let visibleCount = 0;
+
+		cards.forEach(card => {
+			const title = card.dataset.title || '';
+			const body = card.dataset.body || '';
+			const grade = card.dataset.grade || '';
+			const cat = card.dataset.category || '';
+
+			const matchesSearch = title.includes(query) || body.includes(query);
+			const matchesGrade = selectedGrades.length === 0 || selectedGrades.includes(grade);
+			const matchesCat = selectedCats.length === 0 || selectedCats.includes(cat);
+
+			if (matchesSearch && matchesGrade && matchesCat) {
+				card.style.display = 'block';
+				visibleCount++;
+			} else {
+				card.style.display = 'none';
+			}
+		});
+
+		if (countEl) countEl.textContent = visibleCount.toString();
+		if (noResults) noResults.style.display = visibleCount === 0 ? 'block' : 'none';
+	}
+
+	searchInput?.addEventListener('input', filter);
+	gradeFilters.forEach(i => i.addEventListener('change', filter));
+	catFilters.forEach(i => i.addEventListener('change', filter));
+	
+	resetBtn?.addEventListener('click', () => {
+		gradeFilters.forEach(i => i.checked = false);
+		catFilters.forEach(i => i.checked = false);
+		searchInput.value = '';
+		filter();
+	});
+</script>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="mk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>МатАрхива - Преглед</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap');
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900">
+    <nav class="bg-white border-b sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 h-16 flex justify-between items-center">
+            <div class="flex items-center gap-2">
+                <span class="text-2xl">🧮</span>
+                <span class="font-extrabold text-xl tracking-tight">МатАрхива</span>
+            </div>
+            <div class="flex gap-6 text-sm font-bold text-slate-500">
+                <a href="#" class="text-blue-600">Задачи</a>
+                <a href="#" class="hover:text-slate-900">Теореми</a>
+                <a href="#" class="hover:text-slate-900">За Нас</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-7xl mx-auto px-6 py-12">
+        <div class="mb-12 flex justify-between items-end">
+            <div>
+                <h1 class="text-4xl font-black text-slate-900 mb-2">Архива на задачи</h1>
+                <p class="text-slate-500 font-medium">Вашите најнови математички предизвици</p>
+            </div>
+            <div class="flex gap-2">
+                <span class="px-4 py-2 bg-white border border-slate-200 rounded-xl text-sm font-bold shadow-sm">Сите одделенија</span>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- КАРТИЧКА 1 (Новата задача) -->
+            <div class="bg-white rounded-3xl shadow-xl shadow-slate-200/50 border border-slate-100 overflow-hidden transform hover:-translate-y-2 transition-all duration-300">
+                <div class="aspect-video bg-slate-50 flex items-center justify-center p-4">
+                    <img src="https://via.placeholder.com/400x225/f8fafc/64748b?text=Visualisation+Sigma+135" class="max-w-full max-h-full object-contain">
+                </div>
+                <div class="p-8">
+                    <div class="flex gap-2 mb-4">
+                        <span class="px-2 py-1 bg-blue-600 text-white text-[10px] font-black uppercase tracking-widest rounded">9 Одд</span>
+                        <span class="px-2 py-1 bg-slate-100 text-slate-500 text-[10px] font-black uppercase tracking-widest rounded">Number Theory</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3 leading-tight">Деливост со 44 на израз со големи степени</h3>
+                    <p class="text-slate-500 text-sm mb-6 line-clamp-2 italic">Докажи дека бројот $19^{19} + 69^{69}$ е содржател на бројот 44...</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-amber-500 font-black text-sm">4/10</span>
+                        <button class="text-blue-600 font-extrabold text-sm hover:underline">ВИДИ ПОВЕЌЕ →</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- КАРТИЧКА 2 -->
+            <div class="bg-white rounded-3xl shadow-xl shadow-slate-200/50 border border-slate-100 overflow-hidden opacity-80">
+                <div class="aspect-video bg-slate-100"></div>
+                <div class="p-8">
+                    <div class="flex gap-2 mb-4">
+                        <span class="px-2 py-1 bg-emerald-600 text-white text-[10px] font-black uppercase tracking-widest rounded">8 Одд</span>
+                        <span class="px-2 py-1 bg-slate-100 text-slate-500 text-[10px] font-black uppercase tracking-widest rounded">Geometry</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3 leading-tight">Својства на тежишните линии кај правоаголен триаголник</h3>
+                    <p class="text-slate-500 text-sm mb-6 line-clamp-2 italic">Најди го односот на хипотенузата и...</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-amber-500 font-black text-sm">6/10</span>
+                        <button class="text-blue-600 font-extrabold text-sm hover:underline">ВИДИ ПОВЕЌЕ →</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

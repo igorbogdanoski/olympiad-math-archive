@@ -1,0 +1,197 @@
+---
+import Layout from '../layouts/Layout.astro';
+import problems from '../../tools/problems.json';
+
+// Екстракција на метаподатоци за филтри
+const grades = [...new Set(problems.map(p => p.grade))].filter(g => g !== 'N/A').sort();
+const categories = [...new Set(problems.map(p => p.category))].filter(c => c !== 'N/A').sort();
+---
+
+<Layout title="За Наставници - Генерирај Тест">
+	<div class="max-w-5xl mx-auto">
+		<div class="mb-10">
+			<h1 class="text-4xl font-black mb-4">Алатки за Наставници</h1>
+			<p class="text-slate-500 dark:text-slate-400 text-lg">
+				Креирајте персонализирани тестови и работни листови за вашите ученици во неколку секунди.
+			</p>
+		</div>
+
+		<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+			<!-- ФОРМА -->
+			<div class="lg:col-span-1 space-y-6">
+				<div class="bg-white dark:bg-slate-900 p-6 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm">
+					<h3 class="font-bold text-lg mb-6 flex items-center gap-2">
+						<span class="text-blue-500">⚙️</span> Параметри на тест
+					</h3>
+					
+					<div class="space-y-4">
+						<div>
+							<label class="block text-xs font-black text-slate-400 uppercase tracking-widest mb-2">Одделение</label>
+							<select id="test-grade" class="w-full bg-slate-50 dark:bg-slate-800 border-none rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-blue-500 outline-none">
+								<option value="">Сите</option>
+								{grades.map(g => <option value={g}>{g}-то одделение</option>)}
+							</select>
+						</div>
+
+						<div>
+							<label class="block text-xs font-black text-slate-400 uppercase tracking-widest mb-2">Област</label>
+							<select id="test-cat" class="w-full bg-slate-50 dark:bg-slate-800 border-none rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-blue-500 outline-none">
+								<option value="">Сите области</option>
+								{categories.map(c => <option value={c} class="capitalize">{c}</option>)}
+							</select>
+						</div>
+
+						<div>
+							<label class="block text-xs font-black text-slate-400 uppercase tracking-widest mb-2">Број на задачи</label>
+							<input type="number" id="test-count" value="5" min="1" max="20" class="w-full bg-slate-50 dark:bg-slate-800 border-none rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-blue-500 outline-none" />
+						</div>
+
+						<button id="generate-preview" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 rounded-2xl shadow-lg shadow-blue-500/30 transition-all active:scale-95">
+							Генерирај преглед
+						</button>
+					</div>
+				</div>
+
+                <div class="bg-amber-50 dark:bg-amber-900/10 p-6 rounded-3xl border border-amber-100 dark:border-amber-900/30">
+                    <h4 class="font-bold text-amber-800 dark:text-amber-400 mb-2 italic text-sm">Про Совет:</h4>
+                    <p class="text-xs text-amber-700 dark:text-amber-500 leading-relaxed">
+                        Откако ќе го генерирате тестот, користете го копчето за печатење. Системот автоматски ќе ги отстрани менијата и ќе го форматира листот за А4 формат.
+                    </p>
+                </div>
+			</div>
+
+			<!-- PREVIEW -->
+			<div class="lg:col-span-2">
+				<div class="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden min-h-[500px] flex flex-col">
+					<div class="p-6 border-b border-slate-100 dark:border-slate-800 flex justify-between items-center bg-slate-50/50 dark:bg-slate-800/50">
+						<h3 class="font-bold">Преглед на тест</h3>
+						<div class="flex gap-2">
+							<button id="print-test" class="hidden px-4 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-xs font-bold hover:bg-slate-50 transition-colors">
+								🖨️ Печати Тест
+							</button>
+							<button id="print-keys" class="hidden px-4 py-2 bg-slate-900 dark:bg-blue-600 text-white rounded-xl text-xs font-bold hover:opacity-90 transition-colors">
+								🔑 Печати Решенија
+							</button>
+						</div>
+					</div>
+					
+					<div id="test-content" class="p-8 flex-grow">
+						<div class="flex flex-col items-center justify-center h-full text-slate-400 py-20">
+							<span class="text-6xl mb-4">📄</span>
+							<p>Изберете параметри и кликнете на "Генерирај преглед"</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</Layout>
+
+<style is:global>
+    @media print {
+        nav, footer, aside, button, .lg:col-span-1 { display: none !important; }
+        .lg:col-span-2 { width: 100% !important; border: none !important; box-shadow: none !important; }
+        body { background: white !important; color: black !important; }
+        .bg-white { background: white !important; }
+        #test-content { padding: 0 !important; }
+        .page-break { page-break-after: always; }
+    }
+</style>
+
+<script>
+    import problems from '../../tools/problems.json';
+
+    const genBtn = document.getElementById('generate-preview');
+    const printTestBtn = document.getElementById('print-test');
+    const printKeysBtn = document.getElementById('print-keys');
+    const content = document.getElementById('test-content');
+
+    let currentTest = [];
+
+    genBtn.addEventListener('click', () => {
+        const grade = document.getElementById('test-grade').value;
+        const cat = document.getElementById('test-cat').value;
+        const count = parseInt(document.getElementById('test-count').value);
+
+        let filtered = problems;
+        if (grade) filtered = filtered.filter(p => p.grade === grade);
+        if (cat) filtered = filtered.filter(p => p.category === cat);
+
+        if (filtered.length === 0) {
+            content.innerHTML = '<div class="text-center py-20 text-red-500 font-bold italic">Не се пронајдени задачи со овие критериуми.</div>';
+            return;
+        }
+
+        // Случаен избор
+        currentTest = [...filtered].sort(() => 0.5 - Math.random()).slice(0, count);
+
+        // Генерирање HTML
+        let html = `
+            <div class="print-section">
+                <div class="text-center mb-10 border-4 border-double border-slate-900 p-6">
+                    <h1 class="text-2xl font-black uppercase mb-2 text-slate-900">Тест по Математика</h1>
+                    <div class="flex justify-between text-sm font-bold text-slate-600">
+                        <span>Име и Презиме: ___________________________</span>
+                        <span>Дата: ${new Date().toLocaleDateString('mk-MK')}</span>
+                    </div>
+                </div>
+                <div class="space-y-12">
+        `;
+
+        currentTest.forEach((p, i) => {
+            const questionPart = p.body.split(/##\s+.*Решение/i)[0];
+            html += `
+                <div class="relative pb-10 border-b border-dashed border-slate-200 last:border-0">
+                    <span class="absolute -left-4 top-0 font-black text-slate-200 text-4xl">#${i+1}</span>
+                    <div class="pl-6 prose prose-slate max-w-none text-slate-900">
+                        ${questionPart.replace(/# .*\n/, '')}
+                    </div>
+                    <div class="mt-10 h-32 border border-slate-100 rounded-xl bg-slate-50/30 flex items-center justify-center text-slate-300 italic text-sm">Простор за работа</div>
+                </div>
+            `;
+        });
+
+        html += '</div></div>';
+        content.innerHTML = html;
+        
+        printTestBtn.classList.remove('hidden');
+        printKeysBtn.classList.remove('hidden');
+    });
+
+    printTestBtn.addEventListener('click', () => {
+        window.print();
+    });
+
+    printKeysBtn.addEventListener('click', () => {
+        let html = '<div class="print-keys-section"><h1 class="text-2xl font-black mb-10 text-red-600 border-b-2 border-red-600 pb-2">Клуч со решенија</h1>';
+        currentTest.forEach((p, i) => {
+            const parts = p.body.split(/##\s+.*Решение/i);
+            const sol = parts.length > 1 ? parts[1] : "Нема внесено решение.";
+            html += `
+                <div class="mb-10 p-6 bg-slate-50 rounded-2xl border border-slate-200">
+                    <h3 class="font-black text-lg mb-4">Задача ${i+1}</h3>
+                    <div class="prose prose-slate max-w-none text-slate-800">
+                        ${sol}
+                    </div>
+                </div>
+            `;
+        });
+        html += '</div>';
+        
+        const win = window.open('', '_blank');
+        win.document.write(`
+            <html>
+                <head>
+                    <title>Клуч со решенија</title>
+                    <script src="https://cdn.tailwindcss.com"></script>
+                    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+                </head>
+                <body class="p-10 bg-white">
+                    ${html}
+                    <script>window.print();</script>
+                </body>
+            </html>
+        `);
+        win.document.close();
+    });
+</script>
