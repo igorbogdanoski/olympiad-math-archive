@@ -1,19 +1,19 @@
 ---
-difficulty: 6
-grade: 12
-primary_skill: критериуми_за_деливост
 problem_id: sigma_137_y4_p1856
-related_skills:
-- кинеска_теорема_за_остатоци
-- својства_на_цифри
-source: Sigma 137
-tags:
-- деливост
-- критериуми_за_деливост
-- модуларна_аритметика
-- низи
 title: Деливост со 99 на броеви со специфична структура
+grade: 12
+difficulty: 6
 type: number_theory
+tags:
+  - деливост
+  - критериуми_за_деливост
+  - модуларна_аритметика
+  - низи
+primary_skill: критериуми_за_деливост
+related_skills:
+  - кинеска_теорема_за_остатоци
+  - својства_на_цифри
+source: Sigma 137
 ---
 
 # Деливост со 99 на броеви со специфична структура
@@ -115,12 +115,6 @@ $$11m + 2 \equiv 7 \pmod 9 \implies 2m \equiv 5 \equiv 14 \pmod 9 \implies m \eq
 
 **Краен одговор:** Најмалиот таков број има $\boxed{159}$ цифри.
 
-
-
----
-### 🎨 Визуелизација
-![Илустрација](/assets/images/sigma_137_y4_p1856/sigma_137_y4_p1856.png)
-
 ## 👨‍🏫 Менторски Белешки
 1. **Златен Совет:** Секогаш кога делителот е сложен број, разложи го на заемно прости фактори. Ова е стандардна олимписка техника за „кршење“ на проблемот на помали делови.
 2. **Чести Грешки:** Студентите често го занемаруваат случајот со непарен број цифри, претпоставувајќи дека деливоста со 99 бара „парен“ баланс на цифри. Како што видовме, непарниот случај всушност го дава помалото решение.
@@ -129,3 +123,38 @@ $$11m + 2 \equiv 7 \pmod 9 \implies 2m \equiv 5 \equiv 14 \pmod 9 \implies m \eq
 ### 🔗 Поврзани вештини
 * **Примарна вештина:** Критериуми за деливост (Деливост со 9 и 11).
 * **Потребни предзнаења:** Модуларна аритметика и линеарни конгруенции.
+
+# Manim Code
+```python
+from manim import *
+
+class SolutionScene(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        
+        # --- CONFIGURATION ---
+        # Title of the problem logic
+        title = MathTex("Divisibility \\ by \\ 99", color=BLACK).to_edge(UP)
+        
+        # The key breakdown
+        breakdown = MathTex("99 = 9 \\times 11", color=BLUE).next_to(title, DOWN)
+        
+        # Rules summary
+        rules = VGroup(
+            MathTex("9 \\mid S_1 + S_2", color=BLACK),
+            MathTex("11 \\mid S_1 - S_2", color=BLACK)
+        ).arrange(RIGHT, buff=1).next_to(breakdown, DOWN)
+        
+        # Results comparison
+        even_case = MathTex("N = 2k \\implies N = 198", color=BLACK)
+        odd_case = MathTex("N = 2k + 1 \\implies N = 159", color=BLACK)
+        
+        comparison = VGroup(even_case, odd_case).arrange(DOWN, buff=0.5).next_to(rules, DOWN, buff=1)
+        
+        # Highlighting the winner
+        highlight = SurroundingRectangle(odd_case, color=RED, buff=0.2)
+        ans_label = MathTex("Minimum \\ N = 159", color=RED).next_to(highlight, DOWN)
+
+        # Build final frame
+        self.add(title, breakdown, rules, comparison, highlight, ans_label)
+```
