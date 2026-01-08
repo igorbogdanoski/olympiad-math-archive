@@ -161,6 +161,7 @@ Python Syntax Guardrail: When defining configuration dictionaries (like axis_con
 ✅ Correct: axis_config={"color": BLACK, "include_tip": True}
 
 ❌ Incorrect: axis_config="color": BLACK
+❌ Incorrect: axis_config="color": BLACK (should be axis_config={"color": BLACK})
 
 Completeness: Code must be immediately runnable. No placeholders.
 ```
