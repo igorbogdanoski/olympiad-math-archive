@@ -1,0 +1,49 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+// Пример листа на теореми (ова подоцна може да биде во JSON)
+const theorems = [
+  { id: 'pythagorean', name: 'Питагорова Теорема', category: 'Геометрија', difficulty: 'Лесно' },
+  { id: 'euler-line', name: 'Ојлерова Права', category: 'Геометрија', difficulty: 'Средно' },
+  { id: 'fermat-little', name: 'Мала Теорема на Ферма', category: 'Теорија на броеви', difficulty: 'Средно' },
+  { id: 'pigeonhole', name: 'Дирихлеов Принцип', category: 'Комбинаторика', difficulty: 'Средно' },
+];
+---
+
+<Layout title="Библиотека на Теореми | МатАрхива">
+	<div class="max-w-6xl mx-auto">
+		<header class="mb-16">
+			<span class="text-blue-600 font-black uppercase tracking-widest text-xs mb-4 block">Знаење</span>
+			<h1 class="text-5xl font-black mb-6 text-slate-900 dark:text-white">
+				Библиотека на Теореми
+			</h1>
+			<p class="text-xl text-slate-500 max-w-3xl leading-relaxed">
+				Колекција на клучни математички принципи, докажани визуелно и објаснети за натпреварувачи.
+			</p>
+		</header>
+
+		<div class="grid grid-cols-1 gap-6">
+			{theorems.map(t => (
+				<div class="bg-white dark:bg-slate-900 p-10 rounded-[2.5rem] border border-slate-100 dark:border-slate-800 shadow-sm flex flex-col md:flex-row md:items-center justify-between group hover:border-blue-200 transition-colors">
+					<div>
+						<div class="flex gap-3 mb-4">
+							<span class="px-3 py-1 bg-slate-100 dark:bg-slate-800 text-slate-500 text-[10px] font-black uppercase tracking-tighter rounded-md">{t.category}</span>
+							<span class="px-3 py-1 bg-amber-50 text-amber-600 text-[10px] font-black uppercase tracking-tighter rounded-md">{t.difficulty}</span>
+						</div>
+						<h3 class="text-3xl font-black text-slate-900 dark:text-white group-hover:text-blue-600 transition-colors">
+							{t.name}
+						</h3>
+					</div>
+					<div class="mt-8 md:mt-0">
+						<a href={`/theorems/${t.id}`} class="inline-flex items-center gap-2 px-8 py-4 bg-slate-900 dark:bg-blue-600 text-white rounded-2xl font-bold hover:scale-105 transition-all">
+							Види Доказ 
+							<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+								<path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+							</svg>
+						</a>
+					</div>
+				</div>
+			))}
+		</div>
+	</div>
+</Layout>
