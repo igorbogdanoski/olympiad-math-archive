@@ -1,18 +1,18 @@
 ---
-difficulty: 5
-grade: 11
-primary_skill: parameter_elimination
 problem_id: sigma_138_1875
-related_skills:
-- coordinate_geometry
-- conic_sections
-source: Сигма 138, Задача 1875
-tags:
-- analytic_geometry
-- locus
-- curves
 title: Геометриско место на точки (Локната на Ањези)
+grade: 11
+difficulty: 5
 type: geometry
+tags:
+  - analytic_geometry
+  - locus
+  - curves
+primary_skill: parameter_elimination
+related_skills:
+  - coordinate_geometry
+  - conic_sections
+source: Сигма 138, Задача 1875
 ---
 
 # Геометриско место на точки (Локната на Ањези)
@@ -113,3 +113,138 @@ $$ x(a^2 + y^2) = a^3 $$
 ### 🔗 Поврзани вештини
 *   **Примарна вештина:** Елиминација на параметар (Parameter Elimination).
 *   **Потребни предзнаења:** Равенка на кружница, равенка на права, решавање системи равенки.
+
+# Manim Code
+```python
+from manim import *
+import numpy as np
+
+class AgnesiWitch(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        
+        # --- 1. CONFIGURATION ---
+        # Скалирање: a=4 единици на екранот
+        a_val = 4  
+        
+        axes = Axes(
+            x_range=[-2, 6, 1],
+            y_range=[-4, 4, 1],
+            x_length=10,
+            y_length=7,
+            # ПОПРАВКА: Користиме {} за речникот
+            axis_config={"color": BLACK, "include_tip": True},
+            background_line_style={
+                "stroke_color": TEAL,
+                "stroke_width": 1,
+                "stroke_opacity": 0.2
+            }
+        )
+        
+        # Лабели за оските (Strictly English/Math to avoid LaTeX errors)
+        x_label = axes.get_x_axis_label("x").set_color(BLACK)
+        y_label = axes.get_y_axis_label("y").set_color(BLACK)
+        
+        # --- 2. STATIC GEOMETRY ---
+        # Правата x = a
+        line_fixed = Line(
+            start=axes.c2p(a_val, -4), 
+            end=axes.c2p(a_val, 4), 
+            color=BLACK, 
+            stroke_width=2
+        )
+        label_fixed = MathTex("x=a", color=BLACK).next_to(line_fixed, UP).shift(RIGHT*0.2)
+        
+        # Кружницата: Центар (a/2, 0), Радиус a/2
+        # ВНИМАНИЕ: Во Manim radius е во unit-и, не во координати, затоа множиме со x_unit_size
+        circle_radius = (a_val / 2) * axes.x_unit_size
+        circle = Circle(radius=circle_radius, color=BLUE, stroke_width=3)
+        circle.move_to(axes.c2p(a_val/2, 0))
+        
+        # Додавање на статичните елементи
+        self.play(Create(axes), Write(x_label), Write(y_label))
+        self.play(Create(line_fixed), Write(label_fixed), Create(circle))
+        
+        # --- 3. DYNAMIC GEOMETRY ---
+        # Користиме агол (theta) наместо коефициент (k) за подобра контрола
+        theta = ValueTracker(0.1) 
+        
+        # -- Helper Functions --
+        # Овие функции пресметуваат координати во секој фрејм
+        
+        def get_k():
+            return np.tan(theta.get_value())
+
+        def get_A_coords():
+            # Пресек на y=kx и кружницата
+            k = get_k()
+            # Формули изведени во решението:
+            x = a_val / (1 + k**2)
+            y = (a_val * k) / (1 + k**2)
+            return axes.c2p(x, y)
+
+        def get_B_coords():
+            # Пресек на y=kx и x=a
+            k = get_k()
+            return axes.c2p(a_val, a_val * k)
+
+        def get_M_coords():
+            # M има x од A, y од B
+            pos_A = axes.p2c(get_A_coords())
+            pos_B = axes.p2c(get_B_coords())
+            return axes.c2p(pos_A[0], pos_B[1])
+
+        # -- Dynamic Objects (always_redraw) --
+        
+        # Ротирачката права низ O
+        rotating_line = always_redraw(lambda: Line(
+            start=axes.c2p(-1, -1 * get_k()), # Малку продолжена назад
+            end=get_B_coords(),
+            color=GRAY,
+            stroke_width=2
+        ))
+        
+        # Точките
+        dot_A = always_redraw(lambda: Dot(get_A_coords(), color=RED, radius=0.07))
+        dot_B = always_redraw(lambda: Dot(get_B_coords(), color=GREEN, radius=0.07))
+        dot_M = always_redraw(lambda: Dot(get_M_coords(), color=PURPLE, radius=0.09))
+        
+        # Конструктивните линии (испрекината црвена и зелена)
+        line_vert = always_redraw(lambda: DashedLine(
+            start=get_A_coords(),
+            end=get_M_coords(),
+            color=RED, stroke_width=2
+        ))
+        line_horiz = always_redraw(lambda: DashedLine(
+            start=get_B_coords(),
+            end=get_M_coords(),
+            color=GREEN, stroke_width=2
+        ))
+        
+        # Лабели кои ги следат точките
+        lbl_A = always_redraw(lambda: MathTex("A", color=RED).next_to(dot_A, UL, buff=0.1).scale(0.8))
+        lbl_B = always_redraw(lambda: MathTex("B", color=GREEN).next_to(dot_B, RIGHT, buff=0.1).scale(0.8))
+        lbl_M = always_redraw(lambda: MathTex("M", color=PURPLE).next_to(dot_M, LEFT, buff=0.1).scale(0.8))
+
+        self.add(rotating_line, line_vert, line_horiz, dot_A, dot_B, dot_M, lbl_A, lbl_B, lbl_M)
+        
+        # --- 4. ANIMATION ---
+        
+        # Трага (Trace) што ја црта кривата
+        trace = TracedPath(dot_M.get_center, stroke_color=PURPLE, stroke_width=4, dissipating_time=None)
+        self.add(trace)
+        
+        # Анимација: Го менуваме аголот од -1.2 радијани до +1.2 радијани
+        # (избегнуваме +/- PI/2 каде тангенсот е бесконечен)
+        theta.set_value(-1.2)
+        self.wait(0.5)
+        
+        self.play(theta.animate.set_value(1.2), run_time=6, rate_func=linear)
+        
+        # Финална равенка
+        eq_text = MathTex(r"x(a^2 + y^2) = a^3", color=PURPLE).to_corner(UL)
+        # Користиме Text за обичен текст, но САМО англиски карактери
+        eq_name = Text("Witch of Agnesi", font_size=24, color=BLACK).next_to(eq_text, DOWN)
+        
+        self.play(Write(eq_text), FadeIn(eq_name))
+        self.wait(2)

@@ -127,4 +127,7 @@ When generating Manim code:
 - **LANGUAGE:** **STRICTLY ENGLISH OR MATH SYMBOLS ONLY.** Do NOT use Cyrillic/Macedonian characters in labels (LaTeX crashes).
   - ✅ Correct: `MathTex("Area = 10", color=BLACK)`
   - ❌ Incorrect: `MathTex("Плоштина", color=BLACK)`
+- **Python Syntax Guardrail:** When defining configuration dictionaries (like `axis_config`, `background_line_style`, `legend_config`), **ALWAYS uses curly braces `{}`**.
+  - ✅ Correct: `axis_config={"color": BLACK, "include_tip": True}`
+  - ❌ Incorrect: `axis_config="color": BLACK`
 - **Completeness:** Code must be immediately runnable. No placeholders.

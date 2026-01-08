@@ -1,18 +1,18 @@
 ---
-difficulty: 5
-grade: 11
-primary_skill: parameter_elimination
 problem_id: sigma_138_1875
-related_skills:
-- coordinate_geometry
-- conic_sections
-source: Сигма 138, Задача 1875
-tags:
-- analytic_geometry
-- locus
-- curves
 title: Геометриско место на точки (Локната на Ањези)
+grade: 11
+difficulty: 5
 type: geometry
+tags:
+  - analytic_geometry
+  - locus
+  - curves
+primary_skill: parameter_elimination
+related_skills:
+  - coordinate_geometry
+  - conic_sections
+source: Сигма 138, Задача 1875
 ---
 
 # Геометриско место на точки (Локната на Ањези)
@@ -113,3 +113,138 @@ $$ x(a^2 + y^2) = a^3 $$
 ### 🔗 Поврзани вештини
 *   **Примарна вештина:** Елиминација на параметар (Parameter Elimination).
 *   **Потребни предзнаења:** Равенка на кружница, равенка на права, решавање системи равенки.
+
+# Manim Code
+```python
+from manim import *
+import numpy as np
+
+class AgnesiWitch(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        
+        # --- CONFIGURATION ---
+        a_val = 4  # Scale factor for the geometry (a in the math problem)
+        
+        # Axes
+        axes = Axes(
+            x_range=[-1, 6, 1],
+            y_range=[-4, 4, 1],
+            x_length=10,
+            y_length=7,
+            axis_config={"color": BLACK, "include_tip": True},
+            background_line_style={
+                "stroke_color": TEAL,
+                "stroke_width": 1,
+                "stroke_opacity": 0.2
+            }
+        )
+        
+        # Labels for Axes
+        x_label = axes.get_x_axis_label("x").set_color(BLACK)
+        y_label = axes.get_y_axis_label("y").set_color(BLACK)
+        
+        # --- STATIC GEOMETRY ---
+        # 1. The Line x = a
+        # In the problem, the line is x = a.
+        line_fixed = Line(
+            start=axes.c2p(a_val, -4), 
+            end=axes.c2p(a_val, 4), 
+            color=BLACK, 
+            stroke_width=2
+        )
+        label_fixed = MathTex("x=a", color=BLACK).next_to(line_fixed, UP).shift(RIGHT*0.2)
+        
+        # 2. The Circle
+        # Center at (a/2, 0), Radius a/2
+        circle = Circle(radius=a_val/2 * axes.x_unit_size, color=BLUE, stroke_width=3)
+        circle.move_to(axes.c2p(a_val/2, 0))
+        
+        self.play(Create(axes), Write(x_label), Write(y_label))
+        self.play(Create(line_fixed), Write(label_fixed), Create(circle))
+        
+        # --- DYNAMIC GEOMETRY ---
+        # We use theta (angle) instead of k (slope) to avoid infinity issues at 90 degrees
+        theta = ValueTracker(0.001) 
+        
+        # Helper functions to calculate positions based on theta
+        def get_k():
+            return np.tan(theta.get_value())
+
+        def get_A_pos():
+            # Point A is on the circle. 
+            # Parametric coords derived from problem: x = a/(1+k^2), y = ak/(1+k^2)
+            k = get_k()
+            x = a_val / (1 + k**2)
+            y = (a_val * k) / (1 + k**2)
+            return axes.c2p(x, y)
+
+        def get_B_pos():
+            # Point B is on x=a.
+            # x = a, y = ak
+            k = get_k()
+            return axes.c2p(a_val, a_val * k)
+
+        def get_M_pos():
+            # Point M: x from A, y from B
+            pos_A = axes.p2c(get_A_pos())
+            pos_B = axes.p2c(get_B_pos())
+            return axes.c2p(pos_A[0], pos_B[1])
+
+        # Objects
+        # 1. The rotating line through origin (Line OB)
+        rotating_line = always_redraw(lambda: Line(
+            start=axes.c2p(0,0),
+            end=get_B_pos(),
+            color=GRAY,
+            stroke_width=2
+        ))
+        
+        # 2. Points
+        dot_A = always_redraw(lambda: Dot(get_A_pos(), color=RED, radius=0.06))
+        dot_B = always_redraw(lambda: Dot(get_B_pos(), color=GREEN, radius=0.06))
+        dot_M = always_redraw(lambda: Dot(get_M_pos(), color=PURPLE, radius=0.08))
+        
+        # 3. Construction Lines (Vertical from A, Horizontal from B)
+        line_vert = always_redraw(lambda: DashedLine(
+            start=get_A_pos(),
+            end=get_M_pos(),
+            color=RED, stroke_width=1.5
+        ))
+        line_horiz = always_redraw(lambda: DashedLine(
+            start=get_B_pos(),
+            end=get_M_pos(),
+            color=GREEN, stroke_width=1.5
+        ))
+        
+        # 4. Labels
+        lbl_A = always_redraw(lambda: MathTex("A", color=RED).next_to(dot_A, DL, buff=0.1).scale(0.7))
+        lbl_B = always_redraw(lambda: MathTex("B", color=GREEN).next_to(dot_B, RIGHT, buff=0.1).scale(0.7))
+        lbl_M = always_redraw(lambda: MathTex("M", color=PURPLE).next_to(dot_M, UL, buff=0.1).scale(0.7))
+
+        # Add everything to scene
+        self.add(rotating_line, line_vert, line_horiz, dot_A, dot_B, dot_M, lbl_A, lbl_B, lbl_M)
+        
+        # --- ANIMATION ---
+        
+        # Trace the path of M
+        trace = TracedPath(dot_M.get_center, stroke_color=PURPLE, stroke_width=4, dissipating_time=None)
+        self.add(trace)
+        
+        # Sweep the angle from -80 to +80 degrees
+        # (avoiding exactly 90 where tangent is infinite)
+        
+        # First move to start position without drawing trace
+        theta.set_value(-1.2) 
+        self.wait(0.5)
+        
+        # Animate sweep
+        self.play(theta.animate.set_value(1.2), run_time=5, rate_func=linear)
+        
+        # Show Equation
+        eq_text = MathTex(r"x(a^2 + y^2) = a^3", color=PURPLE).to_corner(UL)
+        eq_name = Text("Witch of Agnesi", font_size=24, color=BLACK).next_to(eq_text, DOWN)
+        
+        self.play(Write(eq_text), FadeIn(eq_name))
+        self.wait(2)
+```
