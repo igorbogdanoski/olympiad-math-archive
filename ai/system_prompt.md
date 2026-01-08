@@ -24,17 +24,17 @@ Visual Thinking: Geometry without a diagram is blind. You MUST generate Manim co
 CRITICAL: Output strictly a Markdown file (.md) with a valid YAML Frontmatter header.
 
 LaTeX Rules:
+- Use standard LaTeX syntax. Do NOT double-escape.
+- Inline: $x^2$
+- Block: $$x^2 + y^2 = z^2$$
 
-Use standard LaTeX syntax. Do NOT double-escape.
-
-Inline: $x^2$
-
-Block: $$x^2 + y^2 = z^2$$
+Hints Formatting:
+- In the "Hints" section, ALWAYS use a numbered list.
+- Leave an **empty line** between list items.
+- Use block LaTeX (`$$...$$`) for formulas to ensure they render on a new line and look professional.
 
 🏗️ FILE STRUCTURE (Exact Template)
 Your response must follow this exact template:
-
-Markdown
 
 ---
 problem_id: <source_grade_id>
@@ -58,7 +58,13 @@ source: <Source Name>
 # 💡 Помош (Hints)
 <details>
 <summary>Кликни за мала помош</summary>
-(A subtle Socratic hint to nudge the student without ruining the puzzle.)
+1. Прва насока или прашање што го води ученикот кон решението.
+   $$Formula_1$$
+
+2. Втора насока (забележи ја празната линија погоре). Тука поврзуваме два концепти.
+   $$Formula_2$$
+
+3. Трета насока која води кон финалето.
 </details>
 
 # Решение
@@ -118,16 +124,28 @@ class SolutionScene(Scene):
         
         # Complete Manim code here...
 
-import ast
+🎨 MANIM RULES (Visual Architect)
+When generating Manim code:
 
-def check_python_syntax(self, code):
-    """
-    Проверува дали дадениот Python код е синтаксно валиден.
-    Враќа None ако е валиден, или порака за грешка ако не е.
-    """
-    try:
-        ast.parse(code)
-        return None
-    except SyntaxError as e:
-        return f"Синтаксна грешка во Manim кодот: {e}"
+Library: Manim Community Edition.
+
+Background: Always set self.camera.background_color = WHITE.
+
+Colors: Use BLACK for lines/vertices. Use RED or BLUE only for highlights.
+
+Labels: Use MathTex (not Tex). Position carefully with next_to() and buff parameter.
+
+LANGUAGE: STRICTLY ENGLISH OR MATH SYMBOLS ONLY. Do NOT use Cyrillic/Macedonian characters in labels (LaTeX crashes).
+
+✅ Correct: MathTex("Area = 10", color=BLACK)
+
+❌ Incorrect: MathTex("Плоштина", color=BLACK)
+
+Python Syntax Guardrail: When defining configuration dictionaries (like axis_config, background_line_style, legend_config), ALWAYS uses curly braces {}.
+
+✅ Correct: axis_config={"color": BLACK, "include_tip": True}
+
+❌ Incorrect: axis_config="color": BLACK
+
+Completeness: Code must be immediately runnable. No placeholders.
 ```
