@@ -4,6 +4,7 @@ import subprocess
 import shutil
 import sys
 import datetime
+import ast
 from pathlib import Path
 
 # Обид за импорт на frontmatter
@@ -202,6 +203,17 @@ class PlatinumProcessor:
             return False
         return True
 
+    def check_python_syntax(self, code):
+        """
+        Проверува дали дадениот Python код е синтаксно валиден.
+        Враќа None ако е валиден, или порака за грешка ако не е.
+        """
+        try:
+            ast.parse(code)
+            return None
+        except SyntaxError as e:
+            return f"Синтаксна грешка во Manim кодот: {e}"
+
     def process_file(self, input_file):
         if not self.check_system():
             return
@@ -238,11 +250,17 @@ class PlatinumProcessor:
 
         # --- MANIM ---
         manim_code = self.extract_manim_code(post.content)
-        image_path = None
         if manim_code:
-            image_path = self.run_manim(manim_code, problem_id)
+            syntax_error = self.check_python_syntax(manim_code)
+            if syntax_error:
+                print(f"❌ {syntax_error}")
+                print("⛔ Manim нема да се изврши поради синтаксна грешка.")
+                image_path = None
+            else:
+                image_path = self.run_manim(manim_code, problem_id)
         else:
             print("ℹ️  Нема Manim код во оваа задача.")
+            image_path = None
 
         # --- UPDATE & SAVE ---
         updated_post = self.update_markdown_content(post, image_path)
