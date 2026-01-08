@@ -1,0 +1,4940 @@
+[
+  {
+    "id": "missing_images_report",
+    "title": "missing_images_report.md",
+    "grade": "N/A",
+    "category": "N/A"
+  },
+  {
+    "id": "index",
+    "title": "index.md",
+    "grade": "N/A",
+    "category": "N/A"
+  },
+  {
+    "id": "linear_equations",
+    "title": "linear_equations.md",
+    "grade": "N/A",
+    "category": "algebra"
+  },
+  {
+    "id": "tiling",
+    "title": "tiling.md",
+    "grade": "N/A",
+    "category": "combinatorics"
+  },
+  {
+    "id": "unknown",
+    "title": "unknown.md",
+    "grade": "0",
+    "category": "N/A"
+  },
+  {
+    "id": "2025_mun_y2_1ab",
+    "title": "2025_mun_y2_1ab.md",
+    "grade": "10",
+    "category": "algebra"
+  },
+  {
+    "id": "2025_mun_y2_4a",
+    "title": "2025_mun_y2_4a.md",
+    "grade": "10",
+    "category": "algebra"
+  },
+  {
+    "id": "2022_mun_y2_12a",
+    "title": "municipal_competition_2022_2022_mun_y2_12a.md",
+    "grade": "10",
+    "category": "algebra"
+  },
+  {
+    "id": "2022_mun_y2_12b",
+    "title": "municipal_competition_2022_2022_mun_y2_12b.md",
+    "grade": "10",
+    "category": "algebra"
+  },
+  {
+    "id": "2022_mun_y2_13a",
+    "title": "municipal_competition_2022_2022_mun_y2_13a.md",
+    "grade": "10",
+    "category": "algebra"
+  },
+  {
+    "id": "2022_mun_y2_13b",
+    "title": "municipal_competition_2022_2022_mun_y2_13b.md",
+    "grade": "10",
+    "category": "algebra"
+  },
+  {
+    "id": "2022_mun_y2_14a",
+    "title": "municipal_competition_2022_2022_mun_y2_14a.md",
+    "grade": "10",
+    "category": "algebra"
+  },
+  {
+    "id": "2022_mun_y2_14b",
+    "title": "municipal_competition_2022_2022_mun_y2_14b.md",
+    "grade": "10",
+    "category": "algebra"
+  },
+  {
+    "id": "2022_mun_y2_15a",
+    "title": "municipal_competition_2022_2022_mun_y2_15a.md",
+    "grade": "10",
+    "category": "algebra"
+  },
+  {
+    "id": "2022_mun_y2_15b",
+    "title": "municipal_competition_2022_2022_mun_y2_15b.md",
+    "grade": "10",
+    "category": "algebra"
+  },
+  {
+    "id": "2022_mun_y2_16a",
+    "title": "municipal_competition_2022_2022_mun_y2_16a.md",
+    "grade": "10",
+    "category": "algebra"
+  },
+  {
+    "id": "2022_mun_y2_17a",
+    "title": "municipal_competition_2022_2022_mun_y2_17a.md",
+    "grade": "10",
+    "category": "algebra"
+  },
+  {
+    "id": "2022_mun_y2_17b",
+    "title": "municipal_competition_2022_2022_mun_y2_17b.md",
+    "grade": "10",
+    "category": "algebra"
+  },
+  {
+    "id": "2022_mun_y2_18a",
+    "title": "municipal_competition_2022_2022_mun_y2_18a.md",
+    "grade": "10",
+    "category": "algebra"
+  },
+  {
+    "id": "2022_mun_y2_5a",
+    "title": "municipal_competition_2022_2022_mun_y2_5a.md",
+    "grade": "10",
+    "category": "algebra"
+  },
+  {
+    "id": "2022_mun_y2_5b",
+    "title": "municipal_competition_2022_2022_mun_y2_5b.md",
+    "grade": "10",
+    "category": "algebra"
+  },
+  {
+    "id": "2022_mun_y2_6a",
+    "title": "municipal_competition_2022_2022_mun_y2_6a.md",
+    "grade": "10",
+    "category": "algebra"
+  },
+  {
+    "id": "2022_mun_y2_6b",
+    "title": "municipal_competition_2022_2022_mun_y2_6b.md",
+    "grade": "10",
+    "category": "algebra"
+  },
+  {
+    "id": "2022_mun_y2_7a",
+    "title": "municipal_competition_2022_2022_mun_y2_7a.md",
+    "grade": "10",
+    "category": "algebra"
+  },
+  {
+    "id": "2022_mun_y2_7b",
+    "title": "municipal_competition_2022_2022_mun_y2_7b.md",
+    "grade": "10",
+    "category": "algebra"
+  },
+  {
+    "id": "2022_mun_y2_9a",
+    "title": "municipal_competition_2022_2022_mun_y2_9a.md",
+    "grade": "10",
+    "category": "algebra"
+  },
+  {
+    "id": "2022_mun_y2_9b",
+    "title": "municipal_competition_2022_2022_mun_y2_9b.md",
+    "grade": "10",
+    "category": "algebra"
+  },
+  {
+    "id": "2023_mun_y2_1a",
+    "title": "municipal_competition_2023_2023_mun_y2_1a.md",
+    "grade": "10",
+    "category": "algebra"
+  },
+  {
+    "id": "2023_mun_y2_1b",
+    "title": "municipal_competition_2023_2023_mun_y2_1b.md",
+    "grade": "10",
+    "category": "algebra"
+  },
+  {
+    "id": "2023_mun_y2_2ab",
+    "title": "municipal_competition_2023_2023_mun_y2_2ab.md",
+    "grade": "10",
+    "category": "algebra"
+  },
+  {
+    "id": "2024_mun_y2_1a",
+    "title": "municipal_competition_2024_2024_mun_y2_1a.md",
+    "grade": "10",
+    "category": "algebra"
+  },
+  {
+    "id": "2024_mun_y2_1b",
+    "title": "municipal_competition_2024_2024_mun_y2_1b.md",
+    "grade": "10",
+    "category": "algebra"
+  },
+  {
+    "id": "2024_mun_y2_2ab",
+    "title": "municipal_competition_2024_2024_mun_y2_2ab.md",
+    "grade": "10",
+    "category": "algebra"
+  },
+  {
+    "id": "2025_mun_y2_1ab",
+    "title": "municipal_competition_2025_2025_mun_y2_1ab.md",
+    "grade": "10",
+    "category": "algebra"
+  },
+  {
+    "id": "2025_mun_y2_2b",
+    "title": "municipal_competition_2025_2025_mun_y2_2b.md",
+    "grade": "10",
+    "category": "algebra"
+  },
+  {
+    "id": "2025_mun_y2_4a",
+    "title": "municipal_competition_2025_2025_mun_y2_4a.md",
+    "grade": "10",
+    "category": "algebra"
+  },
+  {
+    "id": "2025_mun_y2_4b",
+    "title": "municipal_competition_2025_2025_mun_y2_4b.md",
+    "grade": "10",
+    "category": "algebra"
+  },
+  {
+    "id": "problem_example",
+    "title": "problem_example.md",
+    "grade": "10",
+    "category": "algebra"
+  },
+  {
+    "id": "sigma_137_problem_1863_sigma137_p1863",
+    "title": "sigma_137_problem_1863_sigma137_p1863.md",
+    "grade": "10",
+    "category": "algebra"
+  },
+  {
+    "id": "sigma_137_problem_1866_sigma137_p1866",
+    "title": "sigma_137_problem_1866_sigma137_p1866.md",
+    "grade": "10",
+    "category": "algebra"
+  },
+  {
+    "id": "sigma_137_problem_1870_sigma137_p1870",
+    "title": "sigma_137_problem_1870_sigma137_p1870.md",
+    "grade": "10",
+    "category": "algebra"
+  },
+  {
+    "id": "sigma_138_1873",
+    "title": "sigma_138_1873.md",
+    "grade": "10",
+    "category": "algebra"
+  },
+  {
+    "id": "2022_mun_y2_2a",
+    "title": "municipal_competition_2022_2022_mun_y2_2a.md",
+    "grade": "10",
+    "category": "arithmetic"
+  },
+  {
+    "id": "2022_mun_y2_2b",
+    "title": "municipal_competition_2022_2022_mun_y2_2b.md",
+    "grade": "10",
+    "category": "arithmetic"
+  },
+  {
+    "id": "2025_mun_y2_2a",
+    "title": "municipal_competition_2025_2025_mun_y2_2a.md",
+    "grade": "10",
+    "category": "N/A"
+  },
+  {
+    "id": "classic_sangaku_olympiad_folklore_geo_three_circles_tangent",
+    "title": "classic_sangaku_olympiad_folklore_geo_three_circles_tangent.md",
+    "grade": "10",
+    "category": "geometry"
+  },
+  {
+    "id": "2022_mun_y2_10a",
+    "title": "municipal_competition_2022_2022_mun_y2_10a.md",
+    "grade": "10",
+    "category": "geometry"
+  },
+  {
+    "id": "2022_mun_y2_10b",
+    "title": "municipal_competition_2022_2022_mun_y2_10b.md",
+    "grade": "10",
+    "category": "geometry"
+  },
+  {
+    "id": "2022_mun_y2_11a",
+    "title": "municipal_competition_2022_2022_mun_y2_11a.md",
+    "grade": "10",
+    "category": "geometry"
+  },
+  {
+    "id": "2022_mun_y2_11b",
+    "title": "municipal_competition_2022_2022_mun_y2_11b.md",
+    "grade": "10",
+    "category": "geometry"
+  },
+  {
+    "id": "2022_mun_y2_18b",
+    "title": "municipal_competition_2022_2022_mun_y2_18b.md",
+    "grade": "10",
+    "category": "geometry"
+  },
+  {
+    "id": "2022_mun_y2_19a",
+    "title": "municipal_competition_2022_2022_mun_y2_19a.md",
+    "grade": "10",
+    "category": "geometry"
+  },
+  {
+    "id": "2022_mun_y2_19b",
+    "title": "municipal_competition_2022_2022_mun_y2_19b.md",
+    "grade": "10",
+    "category": "geometry"
+  },
+  {
+    "id": "2022_mun_y2_1a",
+    "title": "municipal_competition_2022_2022_mun_y2_1a.md",
+    "grade": "10",
+    "category": "geometry"
+  },
+  {
+    "id": "2022_mun_y2_1b",
+    "title": "municipal_competition_2022_2022_mun_y2_1b.md",
+    "grade": "10",
+    "category": "geometry"
+  },
+  {
+    "id": "2022_mun_y2_20a",
+    "title": "municipal_competition_2022_2022_mun_y2_20a.md",
+    "grade": "10",
+    "category": "geometry"
+  },
+  {
+    "id": "2022_mun_y2_20b",
+    "title": "municipal_competition_2022_2022_mun_y2_20b.md",
+    "grade": "10",
+    "category": "geometry"
+  },
+  {
+    "id": "2022_mun_y2_4a",
+    "title": "municipal_competition_2022_2022_mun_y2_4a.md",
+    "grade": "10",
+    "category": "geometry"
+  },
+  {
+    "id": "2022_mun_y2_4b",
+    "title": "municipal_competition_2022_2022_mun_y2_4b.md",
+    "grade": "10",
+    "category": "geometry"
+  },
+  {
+    "id": "2023_mun_y2_3ab",
+    "title": "municipal_competition_2023_2023_mun_y2_3ab.md",
+    "grade": "10",
+    "category": "geometry"
+  },
+  {
+    "id": "2024_mun_y2_3ab",
+    "title": "municipal_competition_2024_2024_mun_y2_3ab.md",
+    "grade": "10",
+    "category": "geometry"
+  },
+  {
+    "id": "2025_mun_y2_3ab",
+    "title": "municipal_competition_2025_2025_mun_y2_3ab.md",
+    "grade": "10",
+    "category": "geometry"
+  },
+  {
+    "id": "sigma_137_problem_1864_sigma137_p1864",
+    "title": "sigma_137_problem_1864_sigma137_p1864.md",
+    "grade": "10",
+    "category": "geometry"
+  },
+  {
+    "id": "sigma_137_problem_1867_sigma137_p1867",
+    "title": "sigma_137_problem_1867_sigma137_p1867.md",
+    "grade": "10",
+    "category": "geometry"
+  },
+  {
+    "id": "sigma_137_y2_p3_fixed",
+    "title": "sigma_137_y2_p3_fixed.md",
+    "grade": "10",
+    "category": "geometry"
+  },
+  {
+    "id": "2022_mun_y2_14b",
+    "title": "municipal_competition_2022_2022_mun_y2_14b.md",
+    "grade": "10",
+    "category": "logic"
+  },
+  {
+    "id": "2022_mun_y2_3a",
+    "title": "municipal_competition_2022_2022_mun_y2_3a.md",
+    "grade": "10",
+    "category": "logic"
+  },
+  {
+    "id": "2022_mun_y2_3b",
+    "title": "municipal_competition_2022_2022_mun_y2_3b.md",
+    "grade": "10",
+    "category": "logic"
+  },
+  {
+    "id": "2022_mun_y2_13b",
+    "title": "municipal_competition_2022_2022_mun_y2_13b.md",
+    "grade": "10",
+    "category": "number_theory"
+  },
+  {
+    "id": "2022_mun_y2_16b",
+    "title": "municipal_competition_2022_2022_mun_y2_16b.md",
+    "grade": "10",
+    "category": "number_theory"
+  },
+  {
+    "id": "2022_mun_y2_8a",
+    "title": "municipal_competition_2022_2022_mun_y2_8a.md",
+    "grade": "10",
+    "category": "number_theory"
+  },
+  {
+    "id": "2022_mun_y2_8b",
+    "title": "municipal_competition_2022_2022_mun_y2_8b.md",
+    "grade": "10",
+    "category": "number_theory"
+  },
+  {
+    "id": "2023_mun_y2_4a",
+    "title": "municipal_competition_2023_2023_mun_y2_4a.md",
+    "grade": "10",
+    "category": "number_theory"
+  },
+  {
+    "id": "2023_mun_y2_4b",
+    "title": "municipal_competition_2023_2023_mun_y2_4b.md",
+    "grade": "10",
+    "category": "number_theory"
+  },
+  {
+    "id": "2024_mun_y2_4a",
+    "title": "municipal_competition_2024_2024_mun_y2_4a.md",
+    "grade": "10",
+    "category": "number_theory"
+  },
+  {
+    "id": "2024_mun_y2_4b",
+    "title": "municipal_competition_2024_2024_mun_y2_4b.md",
+    "grade": "10",
+    "category": "number_theory"
+  },
+  {
+    "id": "sigma_137_problem_1871_sigma137_p1871",
+    "title": "sigma_137_problem_1871_sigma137_p1871.md",
+    "grade": "10",
+    "category": "number_theory"
+  },
+  {
+    "id": "2022_mun_y3_12a",
+    "title": "municipal_competition_2022_2022_mun_y3_12a.md",
+    "grade": "11",
+    "category": "algebra"
+  },
+  {
+    "id": "2022_mun_y3_13a",
+    "title": "municipal_competition_2022_2022_mun_y3_13a.md",
+    "grade": "11",
+    "category": "algebra"
+  },
+  {
+    "id": "2022_mun_y3_14a",
+    "title": "municipal_competition_2022_2022_mun_y3_14a.md",
+    "grade": "11",
+    "category": "algebra"
+  },
+  {
+    "id": "2022_mun_y3_15a",
+    "title": "municipal_competition_2022_2022_mun_y3_15a.md",
+    "grade": "11",
+    "category": "algebra"
+  },
+  {
+    "id": "2022_mun_y3_16a",
+    "title": "municipal_competition_2022_2022_mun_y3_16a.md",
+    "grade": "11",
+    "category": "algebra"
+  },
+  {
+    "id": "2022_mun_y3_16b",
+    "title": "municipal_competition_2022_2022_mun_y3_16b.md",
+    "grade": "11",
+    "category": "algebra"
+  },
+  {
+    "id": "2022_mun_y3_17a",
+    "title": "municipal_competition_2022_2022_mun_y3_17a.md",
+    "grade": "11",
+    "category": "algebra"
+  },
+  {
+    "id": "2022_mun_y3_18a",
+    "title": "municipal_competition_2022_2022_mun_y3_18a.md",
+    "grade": "11",
+    "category": "algebra"
+  },
+  {
+    "id": "2022_mun_y3_18b",
+    "title": "municipal_competition_2022_2022_mun_y3_18b.md",
+    "grade": "11",
+    "category": "algebra"
+  },
+  {
+    "id": "2022_mun_y3_19b",
+    "title": "municipal_competition_2022_2022_mun_y3_19b.md",
+    "grade": "11",
+    "category": "algebra"
+  },
+  {
+    "id": "2022_mun_y3_1a",
+    "title": "municipal_competition_2022_2022_mun_y3_1a.md",
+    "grade": "11",
+    "category": "algebra"
+  },
+  {
+    "id": "2022_mun_y3_1b",
+    "title": "municipal_competition_2022_2022_mun_y3_1b.md",
+    "grade": "11",
+    "category": "algebra"
+  },
+  {
+    "id": "2022_mun_y3_4a",
+    "title": "municipal_competition_2022_2022_mun_y3_4a.md",
+    "grade": "11",
+    "category": "algebra"
+  },
+  {
+    "id": "2022_mun_y3_4b",
+    "title": "municipal_competition_2022_2022_mun_y3_4b.md",
+    "grade": "11",
+    "category": "algebra"
+  },
+  {
+    "id": "2022_mun_y3_6a",
+    "title": "municipal_competition_2022_2022_mun_y3_6a.md",
+    "grade": "11",
+    "category": "algebra"
+  },
+  {
+    "id": "2022_mun_y3_6b",
+    "title": "municipal_competition_2022_2022_mun_y3_6b.md",
+    "grade": "11",
+    "category": "algebra"
+  },
+  {
+    "id": "2022_mun_y3_8a",
+    "title": "municipal_competition_2022_2022_mun_y3_8a.md",
+    "grade": "11",
+    "category": "algebra"
+  },
+  {
+    "id": "2022_mun_y3_8b",
+    "title": "municipal_competition_2022_2022_mun_y3_8b.md",
+    "grade": "11",
+    "category": "algebra"
+  },
+  {
+    "id": "2022_mun_y3_9a",
+    "title": "municipal_competition_2022_2022_mun_y3_9a.md",
+    "grade": "11",
+    "category": "algebra"
+  },
+  {
+    "id": "2022_mun_y3_9b",
+    "title": "municipal_competition_2022_2022_mun_y3_9b.md",
+    "grade": "11",
+    "category": "algebra"
+  },
+  {
+    "id": "2023_mun_y3_2a",
+    "title": "municipal_competition_2023_2023_mun_y3_2a.md",
+    "grade": "11",
+    "category": "algebra"
+  },
+  {
+    "id": "2023_mun_y3_2b",
+    "title": "municipal_competition_2023_2023_mun_y3_2b.md",
+    "grade": "11",
+    "category": "algebra"
+  },
+  {
+    "id": "2023_mun_y3_3ab",
+    "title": "municipal_competition_2023_2023_mun_y3_3ab.md",
+    "grade": "11",
+    "category": "algebra"
+  },
+  {
+    "id": "2023_mun_y3_3b",
+    "title": "municipal_competition_2023_2023_mun_y3_3b.md",
+    "grade": "11",
+    "category": "algebra"
+  },
+  {
+    "id": "2024_mun_y3_2a",
+    "title": "municipal_competition_2024_2024_mun_y3_2a.md",
+    "grade": "11",
+    "category": "algebra"
+  },
+  {
+    "id": "2024_mun_y3_2b",
+    "title": "municipal_competition_2024_2024_mun_y3_2b.md",
+    "grade": "11",
+    "category": "algebra"
+  },
+  {
+    "id": "2024_mun_y3_3ab",
+    "title": "municipal_competition_2024_2024_mun_y3_3ab.md",
+    "grade": "11",
+    "category": "algebra"
+  },
+  {
+    "id": "2025_mun_y3_1ab",
+    "title": "municipal_competition_2025_2025_mun_y3_1ab.md",
+    "grade": "11",
+    "category": "algebra"
+  },
+  {
+    "id": "2025_mun_y3_3b",
+    "title": "municipal_competition_2025_2025_mun_y3_3b.md",
+    "grade": "11",
+    "category": "algebra"
+  },
+  {
+    "id": "problem_example",
+    "title": "problem_example.md",
+    "grade": "11",
+    "category": "algebra"
+  },
+  {
+    "id": "sigma_137_problem_1865_sigma137_p1865",
+    "title": "sigma_137_problem_1865_sigma137_p1865.md",
+    "grade": "11",
+    "category": "algebra"
+  },
+  {
+    "id": "sigma_137_problem_1869_sigma137_p1869",
+    "title": "sigma_137_problem_1869_sigma137_p1869.md",
+    "grade": "11",
+    "category": "algebra"
+  },
+  {
+    "id": "2025_mun_y3_3a",
+    "title": "municipal_competition_2025_2025_mun_y3_3a.md",
+    "grade": "11",
+    "category": "analysis"
+  },
+  {
+    "id": "problem_example",
+    "title": "problem_example.md",
+    "grade": "11",
+    "category": "analysis"
+  },
+  {
+    "id": "2022_mun_y3_2a",
+    "title": "municipal_competition_2022_2022_mun_y3_2a.md",
+    "grade": "11",
+    "category": "arithmetic"
+  },
+  {
+    "id": "2022_mun_y3_2b",
+    "title": "municipal_competition_2022_2022_mun_y3_2b.md",
+    "grade": "11",
+    "category": "arithmetic"
+  },
+  {
+    "id": "2023_mun_y3_4ab",
+    "title": "municipal_competition_2023_2023_mun_y3_4ab.md",
+    "grade": "11",
+    "category": "combinatorics"
+  },
+  {
+    "id": "2022_mun_y3_11a",
+    "title": "municipal_competition_2022_2022_mun_y3_11a.md",
+    "grade": "11",
+    "category": "geometry"
+  },
+  {
+    "id": "2022_mun_y3_17b",
+    "title": "municipal_competition_2022_2022_mun_y3_17b.md",
+    "grade": "11",
+    "category": "geometry"
+  },
+  {
+    "id": "2022_mun_y3_19a",
+    "title": "municipal_competition_2022_2022_mun_y3_19a.md",
+    "grade": "11",
+    "category": "geometry"
+  },
+  {
+    "id": "2022_mun_y3_20a",
+    "title": "municipal_competition_2022_2022_mun_y3_20a.md",
+    "grade": "11",
+    "category": "geometry"
+  },
+  {
+    "id": "2022_mun_y3_20b",
+    "title": "municipal_competition_2022_2022_mun_y3_20b.md",
+    "grade": "11",
+    "category": "geometry"
+  },
+  {
+    "id": "2022_mun_y3_3a",
+    "title": "municipal_competition_2022_2022_mun_y3_3a.md",
+    "grade": "11",
+    "category": "geometry"
+  },
+  {
+    "id": "2022_mun_y3_3b",
+    "title": "municipal_competition_2022_2022_mun_y3_3b.md",
+    "grade": "11",
+    "category": "geometry"
+  },
+  {
+    "id": "2022_mun_y3_5a",
+    "title": "municipal_competition_2022_2022_mun_y3_5a.md",
+    "grade": "11",
+    "category": "geometry"
+  },
+  {
+    "id": "2022_mun_y3_5b",
+    "title": "municipal_competition_2022_2022_mun_y3_5b.md",
+    "grade": "11",
+    "category": "geometry"
+  },
+  {
+    "id": "2023_mun_y3_1ab",
+    "title": "municipal_competition_2023_2023_mun_y3_1ab.md",
+    "grade": "11",
+    "category": "geometry"
+  },
+  {
+    "id": "2023_mun_y3_3a",
+    "title": "municipal_competition_2023_2023_mun_y3_3a.md",
+    "grade": "11",
+    "category": "geometry"
+  },
+  {
+    "id": "2024_mun_y3_1ab",
+    "title": "municipal_competition_2024_2024_mun_y3_1ab.md",
+    "grade": "11",
+    "category": "geometry"
+  },
+  {
+    "id": "sigma137_p1854_geometry_eq_triangle",
+    "title": "sigma137_p1854_geometry_eq_triangle.md",
+    "grade": "11",
+    "category": "geometry"
+  },
+  {
+    "id": "sigma_137_problem_1868_sigma137_p1868",
+    "title": "sigma_137_problem_1868_sigma137_p1868.md",
+    "grade": "11",
+    "category": "geometry"
+  },
+  {
+    "id": "sigma_137_problem_1868_sigma137_p1868_synthetic",
+    "title": "sigma_137_problem_1868_sigma137_p1868_synthetic.md",
+    "grade": "11",
+    "category": "geometry"
+  },
+  {
+    "id": "sigma_138_1875",
+    "title": "sigma_138_1875.md",
+    "grade": "11",
+    "category": "geometry"
+  },
+  {
+    "id": "2022_mun_y3_10a",
+    "title": "municipal_competition_2022_2022_mun_y3_10a.md",
+    "grade": "11",
+    "category": "number_theory"
+  },
+  {
+    "id": "2022_mun_y3_10b",
+    "title": "municipal_competition_2022_2022_mun_y3_10b.md",
+    "grade": "11",
+    "category": "number_theory"
+  },
+  {
+    "id": "2022_mun_y3_7a",
+    "title": "municipal_competition_2022_2022_mun_y3_7a.md",
+    "grade": "11",
+    "category": "number_theory"
+  },
+  {
+    "id": "2022_mun_y3_7b",
+    "title": "municipal_competition_2022_2022_mun_y3_7b.md",
+    "grade": "11",
+    "category": "number_theory"
+  },
+  {
+    "id": "2025_mun_y3_4a",
+    "title": "municipal_competition_2025_2025_mun_y3_4a.md",
+    "grade": "11",
+    "category": "stereometry"
+  },
+  {
+    "id": "2025_mun_y3_2ab",
+    "title": "municipal_competition_2025_2025_mun_y3_2ab.md",
+    "grade": "11",
+    "category": "trigonometry"
+  },
+  {
+    "id": "2022_mun_y4_12a",
+    "title": "municipal_competition_2022_2022_mun_y4_12a.md",
+    "grade": "12",
+    "category": "algebra"
+  },
+  {
+    "id": "2022_mun_y4_12b",
+    "title": "municipal_competition_2022_2022_mun_y4_12b.md",
+    "grade": "12",
+    "category": "algebra"
+  },
+  {
+    "id": "2022_mun_y4_16a",
+    "title": "municipal_competition_2022_2022_mun_y4_16a.md",
+    "grade": "12",
+    "category": "algebra"
+  },
+  {
+    "id": "municipal_competition_2022_2022_mun_y4_16b",
+    "title": "municipal_competition_2022_2022_mun_y4_16b.md",
+    "grade": "12",
+    "category": "algebra"
+  },
+  {
+    "id": "2022_mun_y4_18a",
+    "title": "municipal_competition_2022_2022_mun_y4_18a.md",
+    "grade": "12",
+    "category": "algebra"
+  },
+  {
+    "id": "municipal_competition_2022_2022_mun_y4_18b",
+    "title": "municipal_competition_2022_2022_mun_y4_18b.md",
+    "grade": "12",
+    "category": "algebra"
+  },
+  {
+    "id": "2022_mun_y4_20a",
+    "title": "municipal_competition_2022_2022_mun_y4_20a.md",
+    "grade": "12",
+    "category": "algebra"
+  },
+  {
+    "id": "municipal_competition_2022_2022_mun_y4_20b",
+    "title": "municipal_competition_2022_2022_mun_y4_20b.md",
+    "grade": "12",
+    "category": "algebra"
+  },
+  {
+    "id": "2022_mun_y4_2a",
+    "title": "municipal_competition_2022_2022_mun_y4_2a.md",
+    "grade": "12",
+    "category": "algebra"
+  },
+  {
+    "id": "2022_mun_y4_2b",
+    "title": "municipal_competition_2022_2022_mun_y4_2b.md",
+    "grade": "12",
+    "category": "algebra"
+  },
+  {
+    "id": "2022_mun_y4_5a",
+    "title": "municipal_competition_2022_2022_mun_y4_5a.md",
+    "grade": "12",
+    "category": "algebra"
+  },
+  {
+    "id": "2022_mun_y4_5b",
+    "title": "municipal_competition_2022_2022_mun_y4_5b.md",
+    "grade": "12",
+    "category": "algebra"
+  },
+  {
+    "id": "2023_mun_y4_2a",
+    "title": "municipal_competition_2023_2023_mun_y4_2a.md",
+    "grade": "12",
+    "category": "algebra"
+  },
+  {
+    "id": "2023_mun_y4_2b",
+    "title": "municipal_competition_2023_2023_mun_y4_2b.md",
+    "grade": "12",
+    "category": "algebra"
+  },
+  {
+    "id": "2023_mun_y4_3b",
+    "title": "municipal_competition_2023_2023_mun_y4_3b.md",
+    "grade": "12",
+    "category": "algebra"
+  },
+  {
+    "id": "2024_mun_y4_1b",
+    "title": "municipal_competition_2024_2024_mun_y4_1b.md",
+    "grade": "12",
+    "category": "algebra"
+  },
+  {
+    "id": "2024_mun_y4_2a",
+    "title": "municipal_competition_2024_2024_mun_y4_2a.md",
+    "grade": "12",
+    "category": "algebra"
+  },
+  {
+    "id": "2024_mun_y4_4b",
+    "title": "municipal_competition_2024_2024_mun_y4_4b.md",
+    "grade": "12",
+    "category": "algebra"
+  },
+  {
+    "id": "2025_mun_y4_1a",
+    "title": "municipal_competition_2025_2025_mun_y4_1a.md",
+    "grade": "12",
+    "category": "algebra"
+  },
+  {
+    "id": "2025_mun_y4_1b",
+    "title": "municipal_competition_2025_2025_mun_y4_1b.md",
+    "grade": "12",
+    "category": "algebra"
+  },
+  {
+    "id": "2025_mun_y4_2a",
+    "title": "municipal_competition_2025_2025_mun_y4_2a.md",
+    "grade": "12",
+    "category": "algebra"
+  },
+  {
+    "id": "2025_mun_y4_4b",
+    "title": "municipal_competition_2025_2025_mun_y4_4b.md",
+    "grade": "12",
+    "category": "algebra"
+  },
+  {
+    "id": "2022_mun_y4_11a",
+    "title": "municipal_competition_2022_2022_mun_y4_11a.md",
+    "grade": "12",
+    "category": "arithmetic"
+  },
+  {
+    "id": "2022_mun_y4_11b",
+    "title": "municipal_competition_2022_2022_mun_y4_11b.md",
+    "grade": "12",
+    "category": "arithmetic"
+  },
+  {
+    "id": "2022_mun_y4_6a",
+    "title": "municipal_competition_2022_2022_mun_y4_6a.md",
+    "grade": "12",
+    "category": "arithmetic"
+  },
+  {
+    "id": "2022_mun_y4_6b",
+    "title": "municipal_competition_2022_2022_mun_y4_6b.md",
+    "grade": "12",
+    "category": "arithmetic"
+  },
+  {
+    "id": "2025_mun_y4_3a",
+    "title": "2025_mun_y4_3a.md",
+    "grade": "12",
+    "category": "combinatorics"
+  },
+  {
+    "id": "2022_mun_y4_14a",
+    "title": "municipal_competition_2022_2022_mun_y4_14a.md",
+    "grade": "12",
+    "category": "combinatorics"
+  },
+  {
+    "id": "2022_mun_y4_14b",
+    "title": "municipal_competition_2022_2022_mun_y4_14b.md",
+    "grade": "12",
+    "category": "combinatorics"
+  },
+  {
+    "id": "2022_mun_y4_17a",
+    "title": "municipal_competition_2022_2022_mun_y4_17a.md",
+    "grade": "12",
+    "category": "combinatorics"
+  },
+  {
+    "id": "municipal_competition_2022_2022_mun_y4_17b",
+    "title": "municipal_competition_2022_2022_mun_y4_17b.md",
+    "grade": "12",
+    "category": "combinatorics"
+  },
+  {
+    "id": "2022_mun_y4_4a",
+    "title": "municipal_competition_2022_2022_mun_y4_4a.md",
+    "grade": "12",
+    "category": "combinatorics"
+  },
+  {
+    "id": "2022_mun_y4_4b",
+    "title": "municipal_competition_2022_2022_mun_y4_4b.md",
+    "grade": "12",
+    "category": "combinatorics"
+  },
+  {
+    "id": "2023_mun_y4_4ab",
+    "title": "municipal_competition_2023_2023_mun_y4_4ab.md",
+    "grade": "12",
+    "category": "combinatorics"
+  },
+  {
+    "id": "2025_mun_y4_2b",
+    "title": "municipal_competition_2025_2025_mun_y4_2b.md",
+    "grade": "12",
+    "category": "combinatorics"
+  },
+  {
+    "id": "2025_mun_y4_3a",
+    "title": "municipal_competition_2025_2025_mun_y4_3a.md",
+    "grade": "12",
+    "category": "combinatorics"
+  },
+  {
+    "id": "2022_mun_y4_19a",
+    "title": "municipal_competition_2022_2022_mun_y4_19a.md",
+    "grade": "12",
+    "category": "geometry"
+  },
+  {
+    "id": "municipal_competition_2022_2022_mun_y4_19b",
+    "title": "municipal_competition_2022_2022_mun_y4_19b.md",
+    "grade": "12",
+    "category": "geometry"
+  },
+  {
+    "id": "2023_mun_y4_3a",
+    "title": "municipal_competition_2023_2023_mun_y4_3a.md",
+    "grade": "12",
+    "category": "geometry"
+  },
+  {
+    "id": "2025_mun_y4_4a",
+    "title": "municipal_competition_2025_2025_mun_y4_4a.md",
+    "grade": "12",
+    "category": "geometry"
+  },
+  {
+    "id": "sigma_137_y4_p1875",
+    "title": "sigma_137_y4_p1875.md",
+    "grade": "12",
+    "category": "geometry"
+  },
+  {
+    "id": "2022_mun_y4_7a",
+    "title": "municipal_competition_2022_2022_mun_y4_7a.md",
+    "grade": "12",
+    "category": "logic"
+  },
+  {
+    "id": "2022_mun_y4_7b",
+    "title": "municipal_competition_2022_2022_mun_y4_7b.md",
+    "grade": "12",
+    "category": "logic"
+  },
+  {
+    "id": "2022_mun_y4_10a",
+    "title": "municipal_competition_2022_2022_mun_y4_10a.md",
+    "grade": "12",
+    "category": "number_theory"
+  },
+  {
+    "id": "2022_mun_y4_10b",
+    "title": "municipal_competition_2022_2022_mun_y4_10b.md",
+    "grade": "12",
+    "category": "number_theory"
+  },
+  {
+    "id": "2022_mun_y4_13a",
+    "title": "municipal_competition_2022_2022_mun_y4_13a.md",
+    "grade": "12",
+    "category": "number_theory"
+  },
+  {
+    "id": "2022_mun_y4_13b",
+    "title": "municipal_competition_2022_2022_mun_y4_13b.md",
+    "grade": "12",
+    "category": "number_theory"
+  },
+  {
+    "id": "2022_mun_y4_15a",
+    "title": "municipal_competition_2022_2022_mun_y4_15a.md",
+    "grade": "12",
+    "category": "number_theory"
+  },
+  {
+    "id": "2022_mun_y4_15b",
+    "title": "municipal_competition_2022_2022_mun_y4_15b.md",
+    "grade": "12",
+    "category": "number_theory"
+  },
+  {
+    "id": "2022_mun_y4_1a",
+    "title": "municipal_competition_2022_2022_mun_y4_1a.md",
+    "grade": "12",
+    "category": "number_theory"
+  },
+  {
+    "id": "2022_mun_y4_1b",
+    "title": "municipal_competition_2022_2022_mun_y4_1b.md",
+    "grade": "12",
+    "category": "number_theory"
+  },
+  {
+    "id": "2022_mun_y4_3a",
+    "title": "municipal_competition_2022_2022_mun_y4_3a.md",
+    "grade": "12",
+    "category": "number_theory"
+  },
+  {
+    "id": "2022_mun_y4_3b",
+    "title": "municipal_competition_2022_2022_mun_y4_3b.md",
+    "grade": "12",
+    "category": "number_theory"
+  },
+  {
+    "id": "2022_mun_y4_8a",
+    "title": "municipal_competition_2022_2022_mun_y4_8a.md",
+    "grade": "12",
+    "category": "number_theory"
+  },
+  {
+    "id": "2022_mun_y4_8b",
+    "title": "municipal_competition_2022_2022_mun_y4_8b.md",
+    "grade": "12",
+    "category": "number_theory"
+  },
+  {
+    "id": "2022_mun_y4_9a",
+    "title": "municipal_competition_2022_2022_mun_y4_9a.md",
+    "grade": "12",
+    "category": "number_theory"
+  },
+  {
+    "id": "2022_mun_y4_9b",
+    "title": "municipal_competition_2022_2022_mun_y4_9b.md",
+    "grade": "12",
+    "category": "number_theory"
+  },
+  {
+    "id": "2023_mun_y4_1a",
+    "title": "municipal_competition_2023_2023_mun_y4_1a.md",
+    "grade": "12",
+    "category": "number_theory"
+  },
+  {
+    "id": "2023_mun_y4_1b",
+    "title": "municipal_competition_2023_2023_mun_y4_1b.md",
+    "grade": "12",
+    "category": "number_theory"
+  },
+  {
+    "id": "2024_mun_y4_1a",
+    "title": "municipal_competition_2024_2024_mun_y4_1a.md",
+    "grade": "12",
+    "category": "number_theory"
+  },
+  {
+    "id": "2024_mun_y4_2b",
+    "title": "municipal_competition_2024_2024_mun_y4_2b.md",
+    "grade": "12",
+    "category": "number_theory"
+  },
+  {
+    "id": "2025_mun_y4_3b",
+    "title": "municipal_competition_2025_2025_mun_y4_3b.md",
+    "grade": "12",
+    "category": "number_theory"
+  },
+  {
+    "id": "2022_mun_g6_1",
+    "title": "municipal_competition_2022_2022_mun_g6_1.md",
+    "grade": "6",
+    "category": "algebra"
+  },
+  {
+    "id": "2022_mun_g6_12",
+    "title": "municipal_competition_2022_2022_mun_g6_12.md",
+    "grade": "6",
+    "category": "algebra"
+  },
+  {
+    "id": "2022_mun_g6_13",
+    "title": "municipal_competition_2022_2022_mun_g6_13.md",
+    "grade": "6",
+    "category": "algebra"
+  },
+  {
+    "id": "2022_mun_g6_14",
+    "title": "municipal_competition_2022_2022_mun_g6_14.md",
+    "grade": "6",
+    "category": "algebra"
+  },
+  {
+    "id": "2022_mun_g6_2",
+    "title": "municipal_competition_2022_2022_mun_g6_2.md",
+    "grade": "6",
+    "category": "algebra"
+  },
+  {
+    "id": "2022_mun_g6_3",
+    "title": "municipal_competition_2022_2022_mun_g6_3.md",
+    "grade": "6",
+    "category": "algebra"
+  },
+  {
+    "id": "2022_mun_g6_4",
+    "title": "municipal_competition_2022_2022_mun_g6_4.md",
+    "grade": "6",
+    "category": "algebra"
+  },
+  {
+    "id": "2022_mun_g6_5",
+    "title": "municipal_competition_2022_2022_mun_g6_5.md",
+    "grade": "6",
+    "category": "algebra"
+  },
+  {
+    "id": "2022_mun_g6_7",
+    "title": "municipal_competition_2022_2022_mun_g6_7.md",
+    "grade": "6",
+    "category": "algebra"
+  },
+  {
+    "id": "2022_mun_g6_9",
+    "title": "municipal_competition_2022_2022_mun_g6_9.md",
+    "grade": "6",
+    "category": "algebra"
+  },
+  {
+    "id": "2023_mun_g6_3",
+    "title": "municipal_competition_2023_2023_mun_g6_3.md",
+    "grade": "6",
+    "category": "algebra"
+  },
+  {
+    "id": "2023_mun_g6_4",
+    "title": "municipal_competition_2023_2023_mun_g6_4.md",
+    "grade": "6",
+    "category": "algebra"
+  },
+  {
+    "id": "2024_mun_g6_2",
+    "title": "municipal_competition_2024_2024_mun_g6_2.md",
+    "grade": "6",
+    "category": "algebra"
+  },
+  {
+    "id": "2025_mun_g6_2",
+    "title": "municipal_competition_2025_2025_mun_g6_2.md",
+    "grade": "6",
+    "category": "algebra"
+  },
+  {
+    "id": "4365",
+    "title": "numerus_4365.md",
+    "grade": "6",
+    "category": "algebra"
+  },
+  {
+    "id": "4365",
+    "title": "numerus_4365_4365.md",
+    "grade": "6",
+    "category": "algebra"
+  },
+  {
+    "id": "4410",
+    "title": "numerus_4410_4410.md",
+    "grade": "6",
+    "category": "algebra"
+  },
+  {
+    "id": "Cnt92-1012_Prob6",
+    "title": "olympiad_grade_9_variant_1_problem_6_cnt92_1012_Cnt92-1012_Prob6.md",
+    "grade": "6",
+    "category": "arithmetic"
+  },
+  {
+    "id": "sum_parity",
+    "title": "sum_parity.md",
+    "grade": "6",
+    "category": "arithmetic"
+  },
+  {
+    "id": "knights_tour",
+    "title": "knights_tour.md",
+    "grade": "6",
+    "category": "combinatorics"
+  },
+  {
+    "id": "2022_mun_g6_2",
+    "title": "municipal_competition_2022_2022_mun_g6_2.md",
+    "grade": "6",
+    "category": "combinatorics"
+  },
+  {
+    "id": "2022_mun_g6_8",
+    "title": "municipal_competition_2022_2022_mun_g6_8.md",
+    "grade": "6",
+    "category": "combinatorics"
+  },
+  {
+    "id": "2022_mun_g6_1",
+    "title": "municipal_competition_2022_2022_mun_g6_1.md",
+    "grade": "6",
+    "category": "geometry"
+  },
+  {
+    "id": "2022_mun_g6_10",
+    "title": "municipal_competition_2022_2022_mun_g6_10.md",
+    "grade": "6",
+    "category": "geometry"
+  },
+  {
+    "id": "2022_mun_g6_3",
+    "title": "municipal_competition_2022_2022_mun_g6_3.md",
+    "grade": "6",
+    "category": "geometry"
+  },
+  {
+    "id": "2022_mun_g6_4",
+    "title": "municipal_competition_2022_2022_mun_g6_4.md",
+    "grade": "6",
+    "category": "geometry"
+  },
+  {
+    "id": "2022_mun_g6_5",
+    "title": "municipal_competition_2022_2022_mun_g6_5.md",
+    "grade": "6",
+    "category": "geometry"
+  },
+  {
+    "id": "2022_mun_g6_7",
+    "title": "municipal_competition_2022_2022_mun_g6_7.md",
+    "grade": "6",
+    "category": "geometry"
+  },
+  {
+    "id": "2022_mun_g6_9",
+    "title": "municipal_competition_2022_2022_mun_g6_9.md",
+    "grade": "6",
+    "category": "geometry"
+  },
+  {
+    "id": "2023_mun_g6_1",
+    "title": "municipal_competition_2023_2023_mun_g6_1.md",
+    "grade": "6",
+    "category": "geometry"
+  },
+  {
+    "id": "2023_mun_g6_2",
+    "title": "municipal_competition_2023_2023_mun_g6_2.md",
+    "grade": "6",
+    "category": "geometry"
+  },
+  {
+    "id": "2024_mun_g6_3",
+    "title": "municipal_competition_2024_2024_mun_g6_3.md",
+    "grade": "6",
+    "category": "geometry"
+  },
+  {
+    "id": "2024_mun_g6_4",
+    "title": "municipal_competition_2024_2024_mun_g6_4.md",
+    "grade": "6",
+    "category": "geometry"
+  },
+  {
+    "id": "2025_mun_g6_3",
+    "title": "municipal_competition_2025_2025_mun_g6_3.md",
+    "grade": "6",
+    "category": "geometry"
+  },
+  {
+    "id": "2025_mun_g6_4",
+    "title": "municipal_competition_2025_2025_mun_g6_4.md",
+    "grade": "6",
+    "category": "geometry"
+  },
+  {
+    "id": "4367",
+    "title": "numerus_4367.md",
+    "grade": "6",
+    "category": "geometry"
+  },
+  {
+    "id": "4367",
+    "title": "numerus_4367_4367.md",
+    "grade": "6",
+    "category": "geometry"
+  },
+  {
+    "id": "4366",
+    "title": "numerus_4366.md",
+    "grade": "6",
+    "category": "logic"
+  },
+  {
+    "id": "4366",
+    "title": "numerus_4366_4366.md",
+    "grade": "6",
+    "category": "logic"
+  },
+  {
+    "id": "problem_example",
+    "title": "problem_example.md",
+    "grade": "6",
+    "category": "logic"
+  },
+  {
+    "id": "2022_mun_g6_11",
+    "title": "municipal_competition_2022_2022_mun_g6_11.md",
+    "grade": "6",
+    "category": "number_theory"
+  },
+  {
+    "id": "2022_mun_g6_15",
+    "title": "municipal_competition_2022_2022_mun_g6_15.md",
+    "grade": "6",
+    "category": "number_theory"
+  },
+  {
+    "id": "2022_mun_g6_6",
+    "title": "municipal_competition_2022_2022_mun_g6_6.md",
+    "grade": "6",
+    "category": "number_theory"
+  },
+  {
+    "id": "2022_mun_g6_8",
+    "title": "municipal_competition_2022_2022_mun_g6_8.md",
+    "grade": "6",
+    "category": "number_theory"
+  },
+  {
+    "id": "2024_mun_g6_1",
+    "title": "municipal_competition_2024_2024_mun_g6_1.md",
+    "grade": "6",
+    "category": "number_theory"
+  },
+  {
+    "id": "2025_mun_g6_1",
+    "title": "municipal_competition_2025_2025_mun_g6_1.md",
+    "grade": "6",
+    "category": "number_theory"
+  },
+  {
+    "id": "4368",
+    "title": "numerus_4368.md",
+    "grade": "6",
+    "category": "number_theory"
+  },
+  {
+    "id": "4368",
+    "title": "numerus_4368_4368.md",
+    "grade": "6",
+    "category": "number_theory"
+  },
+  {
+    "id": "4414",
+    "title": "numerus_4414_4414.md",
+    "grade": "6",
+    "category": "number_theory"
+  },
+  {
+    "id": "2022_mun_g7_1",
+    "title": "municipal_competition_2022_2022_mun_g7_1.md",
+    "grade": "7",
+    "category": "algebra"
+  },
+  {
+    "id": "2022_mun_g7_11",
+    "title": "municipal_competition_2022_2022_mun_g7_11.md",
+    "grade": "7",
+    "category": "algebra"
+  },
+  {
+    "id": "2022_mun_g7_13",
+    "title": "municipal_competition_2022_2022_mun_g7_13.md",
+    "grade": "7",
+    "category": "algebra"
+  },
+  {
+    "id": "2022_mun_g7_15",
+    "title": "municipal_competition_2022_2022_mun_g7_15.md",
+    "grade": "7",
+    "category": "algebra"
+  },
+  {
+    "id": "2022_mun_g7_2",
+    "title": "municipal_competition_2022_2022_mun_g7_2.md",
+    "grade": "7",
+    "category": "algebra"
+  },
+  {
+    "id": "2022_mun_g7_3",
+    "title": "municipal_competition_2022_2022_mun_g7_3.md",
+    "grade": "7",
+    "category": "algebra"
+  },
+  {
+    "id": "2022_mun_g7_5",
+    "title": "municipal_competition_2022_2022_mun_g7_5.md",
+    "grade": "7",
+    "category": "algebra"
+  },
+  {
+    "id": "2022_mun_g7_9",
+    "title": "municipal_competition_2022_2022_mun_g7_9.md",
+    "grade": "7",
+    "category": "algebra"
+  },
+  {
+    "id": "2023_mun_g7_4",
+    "title": "municipal_competition_2023_2023_mun_g7_4.md",
+    "grade": "7",
+    "category": "algebra"
+  },
+  {
+    "id": "2024_mun_g7_1",
+    "title": "municipal_competition_2024_2024_mun_g7_1.md",
+    "grade": "7",
+    "category": "algebra"
+  },
+  {
+    "id": "2025_mun_g7_1",
+    "title": "municipal_competition_2025_2025_mun_g7_1.md",
+    "grade": "7",
+    "category": "algebra"
+  },
+  {
+    "id": "2025_mun_g7_2",
+    "title": "municipal_competition_2025_2025_mun_g7_2.md",
+    "grade": "7",
+    "category": "algebra"
+  },
+  {
+    "id": "4374",
+    "title": "numerus_4374_4374.md",
+    "grade": "7",
+    "category": "algebra"
+  },
+  {
+    "id": "4413",
+    "title": "numerus_4413_4413.md",
+    "grade": "7",
+    "category": "algebra"
+  },
+  {
+    "id": "problem_example",
+    "title": "problem_example.md",
+    "grade": "7",
+    "category": "algebra"
+  },
+  {
+    "id": "telescoping_fractions",
+    "title": "telescoping_fractions.md",
+    "grade": "7",
+    "category": "algebra"
+  },
+  {
+    "id": "4369",
+    "title": "numerus_4369_4369.md",
+    "grade": "7",
+    "category": "arithmetic"
+  },
+  {
+    "id": "4371",
+    "title": "numerus_4371_4371.md",
+    "grade": "7",
+    "category": "arithmetic"
+  },
+  {
+    "id": "4417",
+    "title": "numerus_4417_4417.md",
+    "grade": "7",
+    "category": "arithmetic"
+  },
+  {
+    "id": "problem_example",
+    "title": "problem_example.md",
+    "grade": "7",
+    "category": "arithmetic"
+  },
+  {
+    "id": "isosceles_angles",
+    "title": "isosceles_angles.md",
+    "grade": "7",
+    "category": "geometry"
+  },
+  {
+    "id": "2022_mun_g7_10",
+    "title": "municipal_competition_2022_2022_mun_g7_10.md",
+    "grade": "7",
+    "category": "geometry"
+  },
+  {
+    "id": "2022_mun_g7_12",
+    "title": "municipal_competition_2022_2022_mun_g7_12.md",
+    "grade": "7",
+    "category": "geometry"
+  },
+  {
+    "id": "2022_mun_g7_14",
+    "title": "municipal_competition_2022_2022_mun_g7_14.md",
+    "grade": "7",
+    "category": "geometry"
+  },
+  {
+    "id": "2022_mun_g7_4",
+    "title": "municipal_competition_2022_2022_mun_g7_4.md",
+    "grade": "7",
+    "category": "geometry"
+  },
+  {
+    "id": "2022_mun_g7_7",
+    "title": "municipal_competition_2022_2022_mun_g7_7.md",
+    "grade": "7",
+    "category": "geometry"
+  },
+  {
+    "id": "2023_mun_g7_2",
+    "title": "municipal_competition_2023_2023_mun_g7_2.md",
+    "grade": "7",
+    "category": "geometry"
+  },
+  {
+    "id": "2023_mun_g7_3",
+    "title": "municipal_competition_2023_2023_mun_g7_3.md",
+    "grade": "7",
+    "category": "geometry"
+  },
+  {
+    "id": "2024_mun_g7_3",
+    "title": "municipal_competition_2024_2024_mun_g7_3.md",
+    "grade": "7",
+    "category": "geometry"
+  },
+  {
+    "id": "2024_mun_g7_4",
+    "title": "municipal_competition_2024_2024_mun_g7_4.md",
+    "grade": "7",
+    "category": "geometry"
+  },
+  {
+    "id": "2025_mun_g7_4",
+    "title": "municipal_competition_2025_2025_mun_g7_4.md",
+    "grade": "7",
+    "category": "geometry"
+  },
+  {
+    "id": "4370",
+    "title": "numerus_4370_4370.md",
+    "grade": "7",
+    "category": "geometry"
+  },
+  {
+    "id": "4376",
+    "title": "numerus_4376_4376.md",
+    "grade": "7",
+    "category": "geometry"
+  },
+  {
+    "id": "4411",
+    "title": "numerus_4411_4411.md",
+    "grade": "7",
+    "category": "geometry"
+  },
+  {
+    "id": "4412",
+    "title": "numerus_4412_4412.md",
+    "grade": "7",
+    "category": "geometry"
+  },
+  {
+    "id": "4416",
+    "title": "numerus_4416_4416.md",
+    "grade": "7",
+    "category": "geometry"
+  },
+  {
+    "id": "4420",
+    "title": "numerus_4420_4420.md",
+    "grade": "7",
+    "category": "geometry"
+  },
+  {
+    "id": "geo_01",
+    "title": "regional_competition_2022_geo_01.md",
+    "grade": "7",
+    "category": "geometry"
+  },
+  {
+    "id": "dragon_heads",
+    "title": "dragon_heads.md",
+    "grade": "7",
+    "category": "logic"
+  },
+  {
+    "id": "4372",
+    "title": "numerus_4372_4372.md",
+    "grade": "7",
+    "category": "logic"
+  },
+  {
+    "id": "2022_mun_g7_6",
+    "title": "municipal_competition_2022_2022_mun_g7_6.md",
+    "grade": "7",
+    "category": "number_theory"
+  },
+  {
+    "id": "2022_mun_g7_8",
+    "title": "municipal_competition_2022_2022_mun_g7_8.md",
+    "grade": "7",
+    "category": "number_theory"
+  },
+  {
+    "id": "2023_mun_g7_1",
+    "title": "municipal_competition_2023_2023_mun_g7_1.md",
+    "grade": "7",
+    "category": "number_theory"
+  },
+  {
+    "id": "2024_mun_g7_2",
+    "title": "municipal_competition_2024_2024_mun_g7_2.md",
+    "grade": "7",
+    "category": "number_theory"
+  },
+  {
+    "id": "2025_mun_g7_3",
+    "title": "municipal_competition_2025_2025_mun_g7_3.md",
+    "grade": "7",
+    "category": "number_theory"
+  },
+  {
+    "id": "4415",
+    "title": "numerus_4415_4415.md",
+    "grade": "7",
+    "category": "number_theory"
+  },
+  {
+    "id": "4418",
+    "title": "numerus_4418_4418.md",
+    "grade": "7",
+    "category": "number_theory"
+  },
+  {
+    "id": "L1_2025_08",
+    "title": "numerus_l1_2025_L1_2025_08.md",
+    "grade": "7",
+    "category": "number_theory"
+  },
+  {
+    "id": "L2_2025_02",
+    "title": "numerus_l2_2024_2025_L2_2025_02.md",
+    "grade": "7",
+    "category": "number_theory"
+  },
+  {
+    "id": "2022_mun_g8_1",
+    "title": "municipal_competition_2022_2022_mun_g8_1.md",
+    "grade": "8",
+    "category": "algebra"
+  },
+  {
+    "id": "2022_mun_g8_10",
+    "title": "municipal_competition_2022_2022_mun_g8_10.md",
+    "grade": "8",
+    "category": "algebra"
+  },
+  {
+    "id": "2022_mun_g8_11",
+    "title": "municipal_competition_2022_2022_mun_g8_11.md",
+    "grade": "8",
+    "category": "algebra"
+  },
+  {
+    "id": "2022_mun_g8_14",
+    "title": "municipal_competition_2022_2022_mun_g8_14.md",
+    "grade": "8",
+    "category": "algebra"
+  },
+  {
+    "id": "2022_mun_g8_3",
+    "title": "municipal_competition_2022_2022_mun_g8_3.md",
+    "grade": "8",
+    "category": "algebra"
+  },
+  {
+    "id": "2022_mun_g8_6",
+    "title": "municipal_competition_2022_2022_mun_g8_6.md",
+    "grade": "8",
+    "category": "algebra"
+  },
+  {
+    "id": "2022_mun_g8_7",
+    "title": "municipal_competition_2022_2022_mun_g8_7.md",
+    "grade": "8",
+    "category": "algebra"
+  },
+  {
+    "id": "2022_mun_g8_9",
+    "title": "municipal_competition_2022_2022_mun_g8_9.md",
+    "grade": "8",
+    "category": "algebra"
+  },
+  {
+    "id": "2023_mun_g8_2",
+    "title": "municipal_competition_2023_2023_mun_g8_2.md",
+    "grade": "8",
+    "category": "algebra"
+  },
+  {
+    "id": "2023_mun_g8_4",
+    "title": "municipal_competition_2023_2023_mun_g8_4.md",
+    "grade": "8",
+    "category": "algebra"
+  },
+  {
+    "id": "2024_mun_g8_1",
+    "title": "municipal_competition_2024_2024_mun_g8_1.md",
+    "grade": "8",
+    "category": "algebra"
+  },
+  {
+    "id": "2024_mun_g8_2",
+    "title": "municipal_competition_2024_2024_mun_g8_2.md",
+    "grade": "8",
+    "category": "algebra"
+  },
+  {
+    "id": "2025_mun_g8_1",
+    "title": "municipal_competition_2025_2025_mun_g8_1.md",
+    "grade": "8",
+    "category": "algebra"
+  },
+  {
+    "id": "2025_mun_g8_3",
+    "title": "municipal_competition_2025_2025_mun_g8_3.md",
+    "grade": "8",
+    "category": "algebra"
+  },
+  {
+    "id": "numbers_on_board",
+    "title": "numbers_on_board.md",
+    "grade": "8",
+    "category": "algebra"
+  },
+  {
+    "id": "4285",
+    "title": "numerus_4285_4285.md",
+    "grade": "8",
+    "category": "algebra"
+  },
+  {
+    "id": "L1_2025_12",
+    "title": "numerus_l1_2025_L1_2025_12.md",
+    "grade": "8",
+    "category": "algebra"
+  },
+  {
+    "id": "problem_example",
+    "title": "problem_example.md",
+    "grade": "8",
+    "category": "algebra"
+  },
+  {
+    "id": "sigma_01",
+    "title": "sigma_2025_sigma_01.md",
+    "grade": "8",
+    "category": "algebra"
+  },
+  {
+    "id": "telescoping_roots",
+    "title": "telescoping_roots.md",
+    "grade": "8",
+    "category": "algebra"
+  },
+  {
+    "id": "4330",
+    "title": "numerus_4330_4330.md",
+    "grade": "8",
+    "category": "arithmetic"
+  },
+  {
+    "id": "L2_2025_03",
+    "title": "numerus_l2_2024_2025_L2_2025_03.md",
+    "grade": "8",
+    "category": "arithmetic"
+  },
+  {
+    "id": "num_li2_01",
+    "title": "numerus_li_2_2025_num_li2_01.md",
+    "grade": "8",
+    "category": "arithmetic"
+  },
+  {
+    "id": "sigma_138_1874",
+    "title": "sigma_138_1874.md",
+    "grade": "8",
+    "category": "combinatorics"
+  },
+  {
+    "id": "para_diag_centroid_07",
+    "title": "2018_viii_para_diag_centroid_07.md",
+    "grade": "8",
+    "category": "geometry"
+  },
+  {
+    "id": "para_normals_sum_06",
+    "title": "2018_viii_para_normals_sum_06.md",
+    "grade": "8",
+    "category": "geometry"
+  },
+  {
+    "id": "geom_8_viviani_proof",
+    "title": "3_1597_geom_8_viviani_proof.md",
+    "grade": "8",
+    "category": "geometry"
+  },
+  {
+    "id": "viviani_theorem_08",
+    "title": "3_1597_viviani_theorem_08.md",
+    "grade": "8",
+    "category": "geometry"
+  },
+  {
+    "id": "geom_iso_bisector_intersect_10",
+    "title": "8_10_geom_iso_bisector_intersect_10.md",
+    "grade": "8",
+    "category": "geometry"
+  },
+  {
+    "id": "geom_iso_side_bisector_08",
+    "title": "8_8_geom_iso_side_bisector_08.md",
+    "grade": "8",
+    "category": "geometry"
+  },
+  {
+    "id": "geom_right_tri_bisect_09",
+    "title": "8_9_geom_right_tri_bisect_09.md",
+    "grade": "8",
+    "category": "geometry"
+  },
+  {
+    "id": "geom_angle_incenter_01",
+    "title": "angle_chasing_fundamentals_geom_angle_incenter_01.md",
+    "grade": "8",
+    "category": "geometry"
+  },
+  {
+    "id": "geom_angle_orthocenter_02",
+    "title": "angle_chasing_fundamentals_geom_angle_orthocenter_02.md",
+    "grade": "8",
+    "category": "geometry"
+  },
+  {
+    "id": "centroid_proof",
+    "title": "centroid_proof.md",
+    "grade": "8",
+    "category": "geometry"
+  },
+  {
+    "id": "centroid_proof",
+    "title": "classic_theorem_centroid_proof.md",
+    "grade": "8",
+    "category": "geometry"
+  },
+  {
+    "id": "copernicus_cat2_01",
+    "title": "copernicus_olympiad_category_2_copernicus_cat2_01.md",
+    "grade": "8",
+    "category": "geometry"
+  },
+  {
+    "id": "cyclic_chase",
+    "title": "cyclic_chase.md",
+    "grade": "8",
+    "category": "geometry"
+  },
+  {
+    "id": "geo_rect_shade_01",
+    "title": "geo_mentor_example_geo_rect_shade_01.md",
+    "grade": "8",
+    "category": "geometry"
+  },
+  {
+    "id": "geom_angle_overlap_05",
+    "title": "matematiskop_3_762_geom_angle_overlap_05.md",
+    "grade": "8",
+    "category": "geometry"
+  },
+  {
+    "id": "geo_quad_bisectors",
+    "title": "math_problem_image_geo_quad_bisectors.md",
+    "grade": "8",
+    "category": "geometry"
+  },
+  {
+    "id": "2022_mun_g8_12",
+    "title": "municipal_competition_2022_2022_mun_g8_12.md",
+    "grade": "8",
+    "category": "geometry"
+  },
+  {
+    "id": "2022_mun_g8_13",
+    "title": "municipal_competition_2022_2022_mun_g8_13.md",
+    "grade": "8",
+    "category": "geometry"
+  },
+  {
+    "id": "2022_mun_g8_15",
+    "title": "municipal_competition_2022_2022_mun_g8_15.md",
+    "grade": "8",
+    "category": "geometry"
+  },
+  {
+    "id": "2022_mun_g8_2",
+    "title": "municipal_competition_2022_2022_mun_g8_2.md",
+    "grade": "8",
+    "category": "geometry"
+  },
+  {
+    "id": "2022_mun_g8_4",
+    "title": "municipal_competition_2022_2022_mun_g8_4.md",
+    "grade": "8",
+    "category": "geometry"
+  },
+  {
+    "id": "2022_mun_g8_5",
+    "title": "municipal_competition_2022_2022_mun_g8_5.md",
+    "grade": "8",
+    "category": "geometry"
+  },
+  {
+    "id": "2022_mun_g8_8",
+    "title": "municipal_competition_2022_2022_mun_g8_8.md",
+    "grade": "8",
+    "category": "geometry"
+  },
+  {
+    "id": "2023_mun_g8_1",
+    "title": "municipal_competition_2023_2023_mun_g8_1.md",
+    "grade": "8",
+    "category": "geometry"
+  },
+  {
+    "id": "2024_mun_g8_4",
+    "title": "municipal_competition_2024_2024_mun_g8_4.md",
+    "grade": "8",
+    "category": "geometry"
+  },
+  {
+    "id": "2025_mun_g8_2",
+    "title": "municipal_competition_2025_2025_mun_g8_2.md",
+    "grade": "8",
+    "category": "geometry"
+  },
+  {
+    "id": "2025_mun_g8_4",
+    "title": "municipal_competition_2025_2025_mun_g8_4.md",
+    "grade": "8",
+    "category": "geometry"
+  },
+  {
+    "id": "4287",
+    "title": "numerus_4287_4287.md",
+    "grade": "8",
+    "category": "geometry"
+  },
+  {
+    "id": "4331",
+    "title": "numerus_4331_4331.md",
+    "grade": "8",
+    "category": "geometry"
+  },
+  {
+    "id": "4332",
+    "title": "numerus_4332_4332.md",
+    "grade": "8",
+    "category": "geometry"
+  },
+  {
+    "id": "4375",
+    "title": "numerus_4375_4375.md",
+    "grade": "8",
+    "category": "geometry"
+  },
+  {
+    "id": "4419",
+    "title": "numerus_4419_4419.md",
+    "grade": "8",
+    "category": "geometry"
+  },
+  {
+    "id": "4421",
+    "title": "numerus_4421_4421.md",
+    "grade": "8",
+    "category": "geometry"
+  },
+  {
+    "id": "L1_2025_07",
+    "title": "numerus_l1_2025_L1_2025_07.md",
+    "grade": "8",
+    "category": "geometry"
+  },
+  {
+    "id": "L2_2025_01",
+    "title": "numerus_l2_2024_2025_L2_2025_01.md",
+    "grade": "8",
+    "category": "geometry"
+  },
+  {
+    "id": "geom_8_2015_square",
+    "title": "opstinski_natprevar_2015_geom_8_2015_square.md",
+    "grade": "8",
+    "category": "geometry"
+  },
+  {
+    "id": "geom_8_2018_rect",
+    "title": "regionalen_natprevar_2018_geom_8_2018_rect.md",
+    "grade": "8",
+    "category": "geometry"
+  },
+  {
+    "id": "geom_8_2018_centroid_diag",
+    "title": "republikatki_natprevar_2018_geom_8_2018_centroid_diag.md",
+    "grade": "8",
+    "category": "geometry"
+  },
+  {
+    "id": "geom_8_2018_para_line",
+    "title": "republikatki_natprevar_2018_geom_8_2018_para_line.md",
+    "grade": "8",
+    "category": "geometry"
+  },
+  {
+    "id": "geom_8_2018_trap",
+    "title": "republikatki_natprevar_2018_geom_8_2018_trap.md",
+    "grade": "8",
+    "category": "geometry"
+  },
+  {
+    "id": "sigma_adv_04",
+    "title": "sigma_137_138_sigma_adv_04.md",
+    "grade": "8",
+    "category": "geometry"
+  },
+  {
+    "id": "geo_test_01",
+    "title": "test_example_2025_geo_test_01.md",
+    "grade": "8",
+    "category": "geometry"
+  },
+  {
+    "id": "L1_2025_03",
+    "title": "numerus_l1_2024_2025_L1_2025_03.md",
+    "grade": "8",
+    "category": "logic"
+  },
+  {
+    "id": "2023_mun_g8_3",
+    "title": "municipal_competition_2023_2023_mun_g8_3.md",
+    "grade": "8",
+    "category": "number_theory"
+  },
+  {
+    "id": "2024_mun_g8_3",
+    "title": "municipal_competition_2024_2024_mun_g8_3.md",
+    "grade": "8",
+    "category": "number_theory"
+  },
+  {
+    "id": "4286",
+    "title": "numerus_4286_4286.md",
+    "grade": "8",
+    "category": "number_theory"
+  },
+  {
+    "id": "4288",
+    "title": "numerus_4288_4288.md",
+    "grade": "8",
+    "category": "number_theory"
+  },
+  {
+    "id": "4289",
+    "title": "numerus_4289_4289.md",
+    "grade": "8",
+    "category": "number_theory"
+  },
+  {
+    "id": "4329",
+    "title": "numerus_4329_4329.md",
+    "grade": "8",
+    "category": "number_theory"
+  },
+  {
+    "id": "4373",
+    "title": "numerus_4373_4373.md",
+    "grade": "8",
+    "category": "number_theory"
+  },
+  {
+    "id": "4423",
+    "title": "numerus_4423_4423.md",
+    "grade": "8",
+    "category": "number_theory"
+  },
+  {
+    "id": "L1_2025_04",
+    "title": "numerus_l1_2024_2025_L1_2025_04.md",
+    "grade": "8",
+    "category": "number_theory"
+  },
+  {
+    "id": "L1_2025_06",
+    "title": "numerus_l1_2025_L1_2025_06.md",
+    "grade": "8",
+    "category": "number_theory"
+  },
+  {
+    "id": "num_li2_02",
+    "title": "numerus_li_2_2025_num_li2_02.md",
+    "grade": "8",
+    "category": "number_theory"
+  },
+  {
+    "id": "sigma_adv_03",
+    "title": "sigma_137_138_sigma_adv_03.md",
+    "grade": "8",
+    "category": "number_theory"
+  },
+  {
+    "id": "sigma_137_1871",
+    "title": "sigma_137_1871.md",
+    "grade": "8",
+    "category": "number_theory"
+  },
+  {
+    "id": "1801",
+    "title": "problem_1801.md",
+    "grade": "8",
+    "category": "algebra"
+  },
+  {
+    "id": "1803",
+    "title": "problem_1803.md",
+    "grade": "8",
+    "category": "algebra"
+  },
+  {
+    "id": "1805",
+    "title": "problem_1805.md",
+    "grade": "8",
+    "category": "algebra"
+  },
+  {
+    "id": "1806",
+    "title": "problem_1806.md",
+    "grade": "8",
+    "category": "algebra"
+  },
+  {
+    "id": "1811",
+    "title": "problem_1811.md",
+    "grade": "8",
+    "category": "algebra"
+  },
+  {
+    "id": "1812",
+    "title": "problem_1812.md",
+    "grade": "8",
+    "category": "algebra"
+  },
+  {
+    "id": "1814",
+    "title": "problem_1814.md",
+    "grade": "8",
+    "category": "algebra"
+  },
+  {
+    "id": "telescoping_sum_squares",
+    "title": "telescoping_sum_squares.md",
+    "grade": "8",
+    "category": "algebra"
+  },
+  {
+    "id": "1808",
+    "title": "problem_1808.md",
+    "grade": "8",
+    "category": "geometry"
+  },
+  {
+    "id": "1809",
+    "title": "problem_1809.md",
+    "grade": "8",
+    "category": "geometry"
+  },
+  {
+    "id": "1810",
+    "title": "problem_1810.md",
+    "grade": "8",
+    "category": "geometry"
+  },
+  {
+    "id": "1807",
+    "title": "problem_1807.md",
+    "grade": "8",
+    "category": "number_theory"
+  },
+  {
+    "id": "1815",
+    "title": "problem_1815.md",
+    "grade": "8",
+    "category": "number_theory"
+  },
+  {
+    "id": "15",
+    "title": "cnt92_olympiad_15.md",
+    "grade": "9",
+    "category": "algebra"
+  },
+  {
+    "id": "16",
+    "title": "cnt92_olympiad_16.md",
+    "grade": "9",
+    "category": "algebra"
+  },
+  {
+    "id": "17",
+    "title": "cnt92_olympiad_17.md",
+    "grade": "9",
+    "category": "algebra"
+  },
+  {
+    "id": "18",
+    "title": "cnt92_olympiad_18.md",
+    "grade": "9",
+    "category": "algebra"
+  },
+  {
+    "id": "19",
+    "title": "cnt92_olympiad_19.md",
+    "grade": "9",
+    "category": "algebra"
+  },
+  {
+    "id": "21",
+    "title": "cnt92_olympiad_21.md",
+    "grade": "9",
+    "category": "algebra"
+  },
+  {
+    "id": "22",
+    "title": "cnt92_olympiad_22.md",
+    "grade": "9",
+    "category": "algebra"
+  },
+  {
+    "id": "23",
+    "title": "cnt92_olympiad_23.md",
+    "grade": "9",
+    "category": "algebra"
+  },
+  {
+    "id": "25",
+    "title": "cnt92_olympiad_25.md",
+    "grade": "9",
+    "category": "algebra"
+  },
+  {
+    "id": "26",
+    "title": "cnt92_olympiad_26.md",
+    "grade": "9",
+    "category": "algebra"
+  },
+  {
+    "id": "27",
+    "title": "cnt92_olympiad_27.md",
+    "grade": "9",
+    "category": "algebra"
+  },
+  {
+    "id": "28",
+    "title": "cnt92_olympiad_28.md",
+    "grade": "9",
+    "category": "algebra"
+  },
+  {
+    "id": "29",
+    "title": "cnt92_olympiad_29.md",
+    "grade": "9",
+    "category": "algebra"
+  },
+  {
+    "id": "30",
+    "title": "cnt92_olympiad_30.md",
+    "grade": "9",
+    "category": "algebra"
+  },
+  {
+    "id": "cnt92_v2_02",
+    "title": "cnt92_olympiad_var2_cnt92_v2_02.md",
+    "grade": "9",
+    "category": "algebra"
+  },
+  {
+    "id": "cnt92_v2_04",
+    "title": "cnt92_olympiad_var2_cnt92_v2_04.md",
+    "grade": "9",
+    "category": "algebra"
+  },
+  {
+    "id": "cnt92_v2_06",
+    "title": "cnt92_olympiad_var2_cnt92_v2_06.md",
+    "grade": "9",
+    "category": "algebra"
+  },
+  {
+    "id": "cnt92_v2_07",
+    "title": "cnt92_olympiad_var2_cnt92_v2_07.md",
+    "grade": "9",
+    "category": "algebra"
+  },
+  {
+    "id": "cnt92_v2_09",
+    "title": "cnt92_olympiad_var2_cnt92_v2_09.md",
+    "grade": "9",
+    "category": "algebra"
+  },
+  {
+    "id": "cnt92_v2_10",
+    "title": "cnt92_olympiad_var2_cnt92_v2_10.md",
+    "grade": "9",
+    "category": "algebra"
+  },
+  {
+    "id": "cnt92_v2_11",
+    "title": "cnt92_olympiad_var2_cnt92_v2_11.md",
+    "grade": "9",
+    "category": "algebra"
+  },
+  {
+    "id": "cnt92_v2_12",
+    "title": "cnt92_olympiad_var2_cnt92_v2_12.md",
+    "grade": "9",
+    "category": "algebra"
+  },
+  {
+    "id": "cnt92_v2_15",
+    "title": "cnt92_olympiad_var2_cnt92_v2_15.md",
+    "grade": "9",
+    "category": "algebra"
+  },
+  {
+    "id": "cnt92_v2_16",
+    "title": "cnt92_olympiad_var2_cnt92_v2_16.md",
+    "grade": "9",
+    "category": "algebra"
+  },
+  {
+    "id": "cnt92_v2_17",
+    "title": "cnt92_olympiad_var2_cnt92_v2_17.md",
+    "grade": "9",
+    "category": "algebra"
+  },
+  {
+    "id": "cnt92_v2_18",
+    "title": "cnt92_olympiad_var2_cnt92_v2_18.md",
+    "grade": "9",
+    "category": "algebra"
+  },
+  {
+    "id": "cnt92_v2_19",
+    "title": "cnt92_olympiad_var2_cnt92_v2_19.md",
+    "grade": "9",
+    "category": "algebra"
+  },
+  {
+    "id": "cnt92_v2_21",
+    "title": "cnt92_olympiad_var2_cnt92_v2_21.md",
+    "grade": "9",
+    "category": "algebra"
+  },
+  {
+    "id": "cnt92_v2_22",
+    "title": "cnt92_olympiad_var2_cnt92_v2_22.md",
+    "grade": "9",
+    "category": "algebra"
+  },
+  {
+    "id": "cnt92_v2_23",
+    "title": "cnt92_olympiad_var2_cnt92_v2_23.md",
+    "grade": "9",
+    "category": "algebra"
+  },
+  {
+    "id": "cnt92_v2_25",
+    "title": "cnt92_olympiad_var2_cnt92_v2_25.md",
+    "grade": "9",
+    "category": "algebra"
+  },
+  {
+    "id": "cnt92_v2_27",
+    "title": "cnt92_olympiad_var2_cnt92_v2_27.md",
+    "grade": "9",
+    "category": "algebra"
+  },
+  {
+    "id": "cnt92_v2_28",
+    "title": "cnt92_olympiad_var2_cnt92_v2_28.md",
+    "grade": "9",
+    "category": "algebra"
+  },
+  {
+    "id": "cnt92_v2_29",
+    "title": "cnt92_olympiad_var2_cnt92_v2_29.md",
+    "grade": "9",
+    "category": "algebra"
+  },
+  {
+    "id": "cnt92_v2_30",
+    "title": "cnt92_olympiad_var2_cnt92_v2_30.md",
+    "grade": "9",
+    "category": "algebra"
+  },
+  {
+    "id": "cnt92_v2_16",
+    "title": "cnt92_v2_16.md",
+    "grade": "9",
+    "category": "algebra"
+  },
+  {
+    "id": "cnt92_v2_27",
+    "title": "cnt92_v2_27.md",
+    "grade": "9",
+    "category": "algebra"
+  },
+  {
+    "id": "2022_mun_g9_1",
+    "title": "municipal_competition_2022_2022_mun_g9_1.md",
+    "grade": "9",
+    "category": "algebra"
+  },
+  {
+    "id": "2022_mun_g9_11",
+    "title": "municipal_competition_2022_2022_mun_g9_11.md",
+    "grade": "9",
+    "category": "algebra"
+  },
+  {
+    "id": "2022_mun_g9_4",
+    "title": "municipal_competition_2022_2022_mun_g9_4.md",
+    "grade": "9",
+    "category": "algebra"
+  },
+  {
+    "id": "2022_mun_g9_7",
+    "title": "municipal_competition_2022_2022_mun_g9_7.md",
+    "grade": "9",
+    "category": "algebra"
+  },
+  {
+    "id": "2022_mun_g9_9",
+    "title": "municipal_competition_2022_2022_mun_g9_9.md",
+    "grade": "9",
+    "category": "algebra"
+  },
+  {
+    "id": "2022_mun_y1_12b",
+    "title": "municipal_competition_2022_2022_mun_y1_12b.md",
+    "grade": "9",
+    "category": "algebra"
+  },
+  {
+    "id": "2022_mun_y1_13a",
+    "title": "municipal_competition_2022_2022_mun_y1_13a.md",
+    "grade": "9",
+    "category": "algebra"
+  },
+  {
+    "id": "2022_mun_y1_14b",
+    "title": "municipal_competition_2022_2022_mun_y1_14b.md",
+    "grade": "9",
+    "category": "algebra"
+  },
+  {
+    "id": "2022_mun_y1_15b",
+    "title": "municipal_competition_2022_2022_mun_y1_15b.md",
+    "grade": "9",
+    "category": "algebra"
+  },
+  {
+    "id": "2022_mun_y1_16a",
+    "title": "municipal_competition_2022_2022_mun_y1_16a.md",
+    "grade": "9",
+    "category": "algebra"
+  },
+  {
+    "id": "2022_mun_y1_17b",
+    "title": "municipal_competition_2022_2022_mun_y1_17b.md",
+    "grade": "9",
+    "category": "algebra"
+  },
+  {
+    "id": "2022_mun_y1_1a",
+    "title": "municipal_competition_2022_2022_mun_y1_1a.md",
+    "grade": "9",
+    "category": "algebra"
+  },
+  {
+    "id": "2022_mun_y1_1b",
+    "title": "municipal_competition_2022_2022_mun_y1_1b.md",
+    "grade": "9",
+    "category": "algebra"
+  },
+  {
+    "id": "2022_mun_y1_20a",
+    "title": "municipal_competition_2022_2022_mun_y1_20a.md",
+    "grade": "9",
+    "category": "algebra"
+  },
+  {
+    "id": "2022_mun_y1_4a",
+    "title": "municipal_competition_2022_2022_mun_y1_4a.md",
+    "grade": "9",
+    "category": "algebra"
+  },
+  {
+    "id": "2022_mun_y1_4b",
+    "title": "municipal_competition_2022_2022_mun_y1_4b.md",
+    "grade": "9",
+    "category": "algebra"
+  },
+  {
+    "id": "2022_mun_y1_6b",
+    "title": "municipal_competition_2022_2022_mun_y1_6b.md",
+    "grade": "9",
+    "category": "algebra"
+  },
+  {
+    "id": "2022_mun_y1_7a",
+    "title": "municipal_competition_2022_2022_mun_y1_7a.md",
+    "grade": "9",
+    "category": "algebra"
+  },
+  {
+    "id": "2022_mun_y1_7b",
+    "title": "municipal_competition_2022_2022_mun_y1_7b.md",
+    "grade": "9",
+    "category": "algebra"
+  },
+  {
+    "id": "2022_mun_y1_9b",
+    "title": "municipal_competition_2022_2022_mun_y1_9b.md",
+    "grade": "9",
+    "category": "algebra"
+  },
+  {
+    "id": "2023_mun_g9_1",
+    "title": "municipal_competition_2023_2023_mun_g9_1.md",
+    "grade": "9",
+    "category": "algebra"
+  },
+  {
+    "id": "2023_mun_y1_1a",
+    "title": "municipal_competition_2023_2023_mun_y1_1a.md",
+    "grade": "9",
+    "category": "algebra"
+  },
+  {
+    "id": "2023_mun_y1_1b",
+    "title": "municipal_competition_2023_2023_mun_y1_1b.md",
+    "grade": "9",
+    "category": "algebra"
+  },
+  {
+    "id": "2023_mun_y1_3ab",
+    "title": "municipal_competition_2023_2023_mun_y1_3ab.md",
+    "grade": "9",
+    "category": "algebra"
+  },
+  {
+    "id": "2024_mun_g9_3",
+    "title": "municipal_competition_2024_2024_mun_g9_3.md",
+    "grade": "9",
+    "category": "algebra"
+  },
+  {
+    "id": "2024_mun_y1_1a",
+    "title": "municipal_competition_2024_2024_mun_y1_1a.md",
+    "grade": "9",
+    "category": "algebra"
+  },
+  {
+    "id": "2024_mun_y1_1b",
+    "title": "municipal_competition_2024_2024_mun_y1_1b.md",
+    "grade": "9",
+    "category": "algebra"
+  },
+  {
+    "id": "2024_mun_y1_3ab",
+    "title": "municipal_competition_2024_2024_mun_y1_3ab.md",
+    "grade": "9",
+    "category": "algebra"
+  },
+  {
+    "id": "2025_mun_g9_3",
+    "title": "municipal_competition_2025_2025_mun_g9_3.md",
+    "grade": "9",
+    "category": "algebra"
+  },
+  {
+    "id": "2025_mun_y1_1a",
+    "title": "municipal_competition_2025_2025_mun_y1_1a.md",
+    "grade": "9",
+    "category": "algebra"
+  },
+  {
+    "id": "2025_mun_y1_1b",
+    "title": "municipal_competition_2025_2025_mun_y1_1b.md",
+    "grade": "9",
+    "category": "algebra"
+  },
+  {
+    "id": "2025_mun_y1_4a",
+    "title": "municipal_competition_2025_2025_mun_y1_4a.md",
+    "grade": "9",
+    "category": "algebra"
+  },
+  {
+    "id": "2025_mun_y1_4b",
+    "title": "municipal_competition_2025_2025_mun_y1_4b.md",
+    "grade": "9",
+    "category": "algebra"
+  },
+  {
+    "id": "4333",
+    "title": "numerus_4333_4333.md",
+    "grade": "9",
+    "category": "algebra"
+  },
+  {
+    "id": "4334",
+    "title": "numerus_4334_4334.md",
+    "grade": "9",
+    "category": "algebra"
+  },
+  {
+    "id": "4377",
+    "title": "numerus_4377_4377.md",
+    "grade": "9",
+    "category": "algebra"
+  },
+  {
+    "id": "4378",
+    "title": "numerus_4378_4378.md",
+    "grade": "9",
+    "category": "algebra"
+  },
+  {
+    "id": "4381",
+    "title": "numerus_4381_4381.md",
+    "grade": "9",
+    "category": "algebra"
+  },
+  {
+    "id": "4385",
+    "title": "numerus_4385_4385.md",
+    "grade": "9",
+    "category": "algebra"
+  },
+  {
+    "id": "4422",
+    "title": "numerus_4422_4422.md",
+    "grade": "9",
+    "category": "algebra"
+  },
+  {
+    "id": "4425",
+    "title": "numerus_4425_4425.md",
+    "grade": "9",
+    "category": "algebra"
+  },
+  {
+    "id": "numerus_L1_2025_13",
+    "title": "numerus_L1_2025_13.md",
+    "grade": "9",
+    "category": "algebra"
+  },
+  {
+    "id": "L1_2025_13",
+    "title": "numerus_l1_2025_L1_2025_13.md",
+    "grade": "9",
+    "category": "algebra"
+  },
+  {
+    "id": "num_li2_06",
+    "title": "numerus_li_2_2025_num_li2_06.md",
+    "grade": "9",
+    "category": "algebra"
+  },
+  {
+    "id": "num_li2_09",
+    "title": "numerus_li_2_2025_num_li2_09.md",
+    "grade": "9",
+    "category": "algebra"
+  },
+  {
+    "id": "num_li2_09",
+    "title": "num_li2_09.md",
+    "grade": "9",
+    "category": "algebra"
+  },
+  {
+    "id": "Cnt92-1012_Prob10",
+    "title": "olympiad_grade_9_variant_1_problem_10_cnt92_1012_Cnt92-1012_Prob10.md",
+    "grade": "9",
+    "category": "algebra"
+  },
+  {
+    "id": "Cnt92-1012_Prob11",
+    "title": "olympiad_grade_9_variant_1_problem_11_cnt92_1012_Cnt92-1012_Prob11.md",
+    "grade": "9",
+    "category": "algebra"
+  },
+  {
+    "id": "Cnt92-1012_Prob12",
+    "title": "olympiad_grade_9_variant_1_problem_12_cnt92_1012_Cnt92-1012_Prob12.md",
+    "grade": "9",
+    "category": "algebra"
+  },
+  {
+    "id": "Cnt92-1012_Prob2",
+    "title": "olympiad_grade_9_variant_1_problem_2_cnt92_1012_Cnt92-1012_Prob2.md",
+    "grade": "9",
+    "category": "algebra"
+  },
+  {
+    "id": "Cnt92-1012_Prob3",
+    "title": "olympiad_grade_9_variant_1_problem_3_cnt92_1012_Cnt92-1012_Prob3.md",
+    "grade": "9",
+    "category": "algebra"
+  },
+  {
+    "id": "Cnt92-1012_Prob3_Rigorous",
+    "title": "olympiad_grade_9_variant_1_problem_3_cnt92_1012_Cnt92-1012_Prob3_Rigorous.md",
+    "grade": "9",
+    "category": "algebra"
+  },
+  {
+    "id": "Cnt92-1012_Prob3_Visual",
+    "title": "olympiad_grade_9_variant_1_problem_3_cnt92_1012_Cnt92-1012_Prob3_Visual.md",
+    "grade": "9",
+    "category": "algebra"
+  },
+  {
+    "id": "Cnt92-1012_Prob4",
+    "title": "olympiad_grade_9_variant_1_problem_4_cnt92_1012_Cnt92-1012_Prob4.md",
+    "grade": "9",
+    "category": "algebra"
+  },
+  {
+    "id": "Cnt92-1012_Prob4_Analysis",
+    "title": "olympiad_grade_9_variant_1_problem_4_cnt92_1012_Cnt92-1012_Prob4_Analysis.md",
+    "grade": "9",
+    "category": "algebra"
+  },
+  {
+    "id": "Cnt92-1012_Prob5",
+    "title": "olympiad_grade_9_variant_1_problem_5_cnt92_1012_Cnt92-1012_Prob5.md",
+    "grade": "9",
+    "category": "algebra"
+  },
+  {
+    "id": "Cnt92-1012_Prob7",
+    "title": "olympiad_grade_9_variant_1_problem_7_cnt92_1012_Cnt92-1012_Prob7.md",
+    "grade": "9",
+    "category": "algebra"
+  },
+  {
+    "id": "Cnt92-1012_Prob9",
+    "title": "olympiad_grade_9_variant_1_problem_9_cnt92_1012_Cnt92-1012_Prob9.md",
+    "grade": "9",
+    "category": "algebra"
+  },
+  {
+    "id": "problem_example",
+    "title": "problem_example.md",
+    "grade": "9",
+    "category": "algebra"
+  },
+  {
+    "id": "sigma_adv_18",
+    "title": "sigma_137_138_reconstructed_sigma_adv_18.md",
+    "grade": "9",
+    "category": "algebra"
+  },
+  {
+    "id": "sigma_adv_07",
+    "title": "sigma_137_138_sigma_adv_07.md",
+    "grade": "9",
+    "category": "algebra"
+  },
+  {
+    "id": "sigma_adv_10",
+    "title": "sigma_137_138_sigma_adv_10.md",
+    "grade": "9",
+    "category": "algebra"
+  },
+  {
+    "id": "sigma_adv_17",
+    "title": "sigma_137_138_sigma_adv_17.md",
+    "grade": "9",
+    "category": "algebra"
+  },
+  {
+    "id": "sigma_adv_21",
+    "title": "sigma_137_138_sigma_adv_21.md",
+    "grade": "9",
+    "category": "algebra"
+  },
+  {
+    "id": "sigma_adv_26",
+    "title": "sigma_137_138_sigma_adv_26.md",
+    "grade": "9",
+    "category": "algebra"
+  },
+  {
+    "id": "sigma_adv_28",
+    "title": "sigma_137_138_sigma_adv_28.md",
+    "grade": "9",
+    "category": "algebra"
+  },
+  {
+    "id": "sigma_adv_29",
+    "title": "sigma_137_138_sigma_adv_29.md",
+    "grade": "9",
+    "category": "algebra"
+  },
+  {
+    "id": "sigma_adv_32",
+    "title": "sigma_137_138_sigma_adv_32.md",
+    "grade": "9",
+    "category": "algebra"
+  },
+  {
+    "id": "sigma_adv_33",
+    "title": "sigma_137_138_sigma_adv_33.md",
+    "grade": "9",
+    "category": "algebra"
+  },
+  {
+    "id": "sigma_adv_35",
+    "title": "sigma_137_138_sigma_adv_35.md",
+    "grade": "9",
+    "category": "algebra"
+  },
+  {
+    "id": "sigma_07",
+    "title": "sigma_2025_sigma_07.md",
+    "grade": "9",
+    "category": "algebra"
+  },
+  {
+    "id": "sigma_09",
+    "title": "sigma_2025_sigma_09.md",
+    "grade": "9",
+    "category": "algebra"
+  },
+  {
+    "id": "sigma_adv_07",
+    "title": "sigma_adv_07.md",
+    "grade": "9",
+    "category": "algebra"
+  },
+  {
+    "id": "telescoping_products",
+    "title": "telescoping_products.md",
+    "grade": "9",
+    "category": "algebra"
+  },
+  {
+    "id": "20",
+    "title": "cnt92_olympiad_20.md",
+    "grade": "9",
+    "category": "N/A"
+  },
+  {
+    "id": "cnt92_v2_03",
+    "title": "cnt92_olympiad_var2_cnt92_v2_03.md",
+    "grade": "9",
+    "category": "N/A"
+  },
+  {
+    "id": "cnt92_v2_05",
+    "title": "cnt92_olympiad_var2_cnt92_v2_05.md",
+    "grade": "9",
+    "category": "N/A"
+  },
+  {
+    "id": "cnt92_v2_14",
+    "title": "cnt92_olympiad_var2_cnt92_v2_14.md",
+    "grade": "9",
+    "category": "N/A"
+  },
+  {
+    "id": "cnt92_v2_20",
+    "title": "cnt92_olympiad_var2_cnt92_v2_20.md",
+    "grade": "9",
+    "category": "N/A"
+  },
+  {
+    "id": "cnt92_v2_26",
+    "title": "cnt92_olympiad_var2_cnt92_v2_26.md",
+    "grade": "9",
+    "category": "N/A"
+  },
+  {
+    "id": "problem_example",
+    "title": "problem_example.md",
+    "grade": "9",
+    "category": "N/A"
+  },
+  {
+    "id": "13",
+    "title": "cnt92_olympiad_13.md",
+    "grade": "9",
+    "category": "combinatorics"
+  },
+  {
+    "id": "cnt92_v2_13",
+    "title": "cnt92_olympiad_var2_cnt92_v2_13.md",
+    "grade": "9",
+    "category": "combinatorics"
+  },
+  {
+    "id": "2022_mun_y1_8a",
+    "title": "municipal_competition_2022_2022_mun_y1_8a.md",
+    "grade": "9",
+    "category": "combinatorics"
+  },
+  {
+    "id": "2023_mun_y1_2b",
+    "title": "municipal_competition_2023_2023_mun_y1_2b.md",
+    "grade": "9",
+    "category": "combinatorics"
+  },
+  {
+    "id": "2024_mun_y1_2ab",
+    "title": "municipal_competition_2024_2024_mun_y1_2ab.md",
+    "grade": "9",
+    "category": "combinatorics"
+  },
+  {
+    "id": "L2_2025_04",
+    "title": "numerus_l2_2024_2025_L2_2025_04.md",
+    "grade": "9",
+    "category": "combinatorics"
+  },
+  {
+    "id": "sigma_adv_37",
+    "title": "sigma_137_138_sigma_adv_37.md",
+    "grade": "9",
+    "category": "combinatorics"
+  },
+  {
+    "id": "sigma_adv_37",
+    "title": "sigma_adv_37.md",
+    "grade": "9",
+    "category": "combinatorics"
+  },
+  {
+    "id": "geom_9_centroid_plane_dist",
+    "title": "10_11_geom_9_centroid_plane_dist.md",
+    "grade": "9",
+    "category": "geometry"
+  },
+  {
+    "id": "geom_9_incenter_intersect",
+    "title": "10_11_geom_9_incenter_intersect.md",
+    "grade": "9",
+    "category": "geometry"
+  },
+  {
+    "id": "geom_9_leg_ratio_circles",
+    "title": "10_11_geom_9_leg_ratio_circles.md",
+    "grade": "9",
+    "category": "geometry"
+  },
+  {
+    "id": "geom_9_midpoints_parallelogram",
+    "title": "10_11_geom_9_midpoints_parallelogram.md",
+    "grade": "9",
+    "category": "geometry"
+  },
+  {
+    "id": "geom_9_midpoint_tangent",
+    "title": "10_11_geom_9_midpoint_tangent.md",
+    "grade": "9",
+    "category": "geometry"
+  },
+  {
+    "id": "geom_9_pentagon_incenter",
+    "title": "10_11_geom_9_pentagon_incenter.md",
+    "grade": "9",
+    "category": "geometry"
+  },
+  {
+    "id": "geom_9_right_tri_perimeter",
+    "title": "10_11_geom_9_right_tri_perimeter.md",
+    "grade": "9",
+    "category": "geometry"
+  },
+  {
+    "id": "geom_9_touching_circles_tangent",
+    "title": "10_11_geom_9_touching_circles_tangent.md",
+    "grade": "9",
+    "category": "geometry"
+  },
+  {
+    "id": "geom_9_tri_ab_mc_proof",
+    "title": "10_11_geom_9_tri_ab_mc_proof.md",
+    "grade": "9",
+    "category": "geometry"
+  },
+  {
+    "id": "geom_9_tri_angle_45_60",
+    "title": "10_11_geom_9_tri_angle_45_60.md",
+    "grade": "9",
+    "category": "geometry"
+  },
+  {
+    "id": "geom_9_trap_perp_diag",
+    "title": "10_geom_9_trap_perp_diag.md",
+    "grade": "9",
+    "category": "geometry"
+  },
+  {
+    "id": "geom_9_para_diag_id",
+    "title": "11_geom_9_para_diag_id.md",
+    "grade": "9",
+    "category": "geometry"
+  },
+  {
+    "id": "geom_9_para_area_ratio",
+    "title": "1761_geom_9_para_area_ratio.md",
+    "grade": "9",
+    "category": "geometry"
+  },
+  {
+    "id": "geom_9_symm_point_circumcircle",
+    "title": "1762_geom_9_symm_point_circumcircle.md",
+    "grade": "9",
+    "category": "geometry"
+  },
+  {
+    "id": "tri_altitudes_perimeter_09",
+    "title": "3_1600_tri_altitudes_perimeter_09.md",
+    "grade": "9",
+    "category": "geometry"
+  },
+  {
+    "id": "geom_9_k1_k2_incenter_proof",
+    "title": "3_k1_k2_geom_9_k1_k2_incenter_proof.md",
+    "grade": "9",
+    "category": "geometry"
+  },
+  {
+    "id": "geom_9_hypot_ratio_mid_circle",
+    "title": "4_5_12_geom_9_hypot_ratio_mid_circle.md",
+    "grade": "9",
+    "category": "geometry"
+  },
+  {
+    "id": "geom_9_quad_parallel_proof",
+    "title": "4_geom_9_quad_parallel_proof.md",
+    "grade": "9",
+    "category": "geometry"
+  },
+  {
+    "id": "geom_9_construct_perp_axcy",
+    "title": "4_k_geom_9_construct_perp_axcy.md",
+    "grade": "9",
+    "category": "geometry"
+  },
+  {
+    "id": "geom_9_contact_tri_sides",
+    "title": "4_mnp_geom_9_contact_tri_sides.md",
+    "grade": "9",
+    "category": "geometry"
+  },
+  {
+    "id": "geom_tri_bisector_diff_11",
+    "title": "8_11_geom_tri_bisector_diff_11.md",
+    "grade": "9",
+    "category": "geometry"
+  },
+  {
+    "id": "geom_quad_symmetry_05",
+    "title": "8_5_geom_quad_symmetry_05.md",
+    "grade": "9",
+    "category": "geometry"
+  },
+  {
+    "id": "geom_9_quad_diag_equal_angles",
+    "title": "abcd_geom_9_quad_diag_equal_angles.md",
+    "grade": "9",
+    "category": "geometry"
+  },
+  {
+    "id": "geom_9_sum_altitudes",
+    "title": "blue_book_428_3_1599_geom_9_sum_altitudes.md",
+    "grade": "9",
+    "category": "geometry"
+  },
+  {
+    "id": "14",
+    "title": "cnt92_olympiad_14.md",
+    "grade": "9",
+    "category": "geometry"
+  },
+  {
+    "id": "24",
+    "title": "cnt92_olympiad_24.md",
+    "grade": "9",
+    "category": "geometry"
+  },
+  {
+    "id": "cnt92_v2_08",
+    "title": "cnt92_olympiad_var2_cnt92_v2_08.md",
+    "grade": "9",
+    "category": "geometry"
+  },
+  {
+    "id": "cnt92_v2_24",
+    "title": "cnt92_olympiad_var2_cnt92_v2_24.md",
+    "grade": "9",
+    "category": "geometry"
+  },
+  {
+    "id": "geom_9_rect_proj_diff",
+    "title": "d4_geom_9_rect_proj_diff.md",
+    "grade": "9",
+    "category": "geometry"
+  },
+  {
+    "id": "right_tri_angles_10",
+    "title": "euclidean_theorems_analysis_right_tri_angles_10.md",
+    "grade": "9",
+    "category": "geometry"
+  },
+  {
+    "id": "geom_angle_hybrid_04",
+    "title": "excenter_theorems_geom_angle_hybrid_04.md",
+    "grade": "9",
+    "category": "geometry"
+  },
+  {
+    "id": "geom_9_area_height",
+    "title": "matematiskop_3_1600_geom_9_area_height.md",
+    "grade": "9",
+    "category": "geometry"
+  },
+  {
+    "id": "geo_right_triangle_radii",
+    "title": "math_problem_image_geo_right_triangle_radii.md",
+    "grade": "9",
+    "category": "geometry"
+  },
+  {
+    "id": "geo_two_circles_incenter",
+    "title": "math_problem_image_geo_two_circles_incenter.md",
+    "grade": "9",
+    "category": "geometry"
+  },
+  {
+    "id": "2022_mun_g9_10",
+    "title": "municipal_competition_2022_2022_mun_g9_10.md",
+    "grade": "9",
+    "category": "geometry"
+  },
+  {
+    "id": "2022_mun_g9_12",
+    "title": "municipal_competition_2022_2022_mun_g9_12.md",
+    "grade": "9",
+    "category": "geometry"
+  },
+  {
+    "id": "2022_mun_g9_14",
+    "title": "municipal_competition_2022_2022_mun_g9_14.md",
+    "grade": "9",
+    "category": "geometry"
+  },
+  {
+    "id": "2022_mun_g9_3",
+    "title": "municipal_competition_2022_2022_mun_g9_3.md",
+    "grade": "9",
+    "category": "geometry"
+  },
+  {
+    "id": "2022_mun_g9_5",
+    "title": "municipal_competition_2022_2022_mun_g9_5.md",
+    "grade": "9",
+    "category": "geometry"
+  },
+  {
+    "id": "2022_mun_g9_6",
+    "title": "municipal_competition_2022_2022_mun_g9_6.md",
+    "grade": "9",
+    "category": "geometry"
+  },
+  {
+    "id": "2022_mun_g9_8",
+    "title": "municipal_competition_2022_2022_mun_g9_8.md",
+    "grade": "9",
+    "category": "geometry"
+  },
+  {
+    "id": "2022_mun_y1_10b",
+    "title": "municipal_competition_2022_2022_mun_y1_10b.md",
+    "grade": "9",
+    "category": "geometry"
+  },
+  {
+    "id": "2022_mun_y1_11b",
+    "title": "municipal_competition_2022_2022_mun_y1_11b.md",
+    "grade": "9",
+    "category": "geometry"
+  },
+  {
+    "id": "2022_mun_y1_12a",
+    "title": "municipal_competition_2022_2022_mun_y1_12a.md",
+    "grade": "9",
+    "category": "geometry"
+  },
+  {
+    "id": "2022_mun_y1_15a",
+    "title": "municipal_competition_2022_2022_mun_y1_15a.md",
+    "grade": "9",
+    "category": "geometry"
+  },
+  {
+    "id": "2022_mun_y1_17a",
+    "title": "municipal_competition_2022_2022_mun_y1_17a.md",
+    "grade": "9",
+    "category": "geometry"
+  },
+  {
+    "id": "2022_mun_y1_18b",
+    "title": "municipal_competition_2022_2022_mun_y1_18b.md",
+    "grade": "9",
+    "category": "geometry"
+  },
+  {
+    "id": "2022_mun_y1_19a",
+    "title": "municipal_competition_2022_2022_mun_y1_19a.md",
+    "grade": "9",
+    "category": "geometry"
+  },
+  {
+    "id": "2022_mun_y1_19b",
+    "title": "municipal_competition_2022_2022_mun_y1_19b.md",
+    "grade": "9",
+    "category": "geometry"
+  },
+  {
+    "id": "2022_mun_y1_20b",
+    "title": "municipal_competition_2022_2022_mun_y1_20b.md",
+    "grade": "9",
+    "category": "geometry"
+  },
+  {
+    "id": "2022_mun_y1_3a",
+    "title": "municipal_competition_2022_2022_mun_y1_3a.md",
+    "grade": "9",
+    "category": "geometry"
+  },
+  {
+    "id": "2022_mun_y1_3b",
+    "title": "municipal_competition_2022_2022_mun_y1_3b.md",
+    "grade": "9",
+    "category": "geometry"
+  },
+  {
+    "id": "2022_mun_y1_6a",
+    "title": "municipal_competition_2022_2022_mun_y1_6a.md",
+    "grade": "9",
+    "category": "geometry"
+  },
+  {
+    "id": "2023_mun_g9_2",
+    "title": "municipal_competition_2023_2023_mun_g9_2.md",
+    "grade": "9",
+    "category": "geometry"
+  },
+  {
+    "id": "2023_mun_g9_4",
+    "title": "municipal_competition_2023_2023_mun_g9_4.md",
+    "grade": "9",
+    "category": "geometry"
+  },
+  {
+    "id": "2023_mun_y1_4ab",
+    "title": "municipal_competition_2023_2023_mun_y1_4ab.md",
+    "grade": "9",
+    "category": "geometry"
+  },
+  {
+    "id": "2024_mun_g9_2",
+    "title": "municipal_competition_2024_2024_mun_g9_2.md",
+    "grade": "9",
+    "category": "geometry"
+  },
+  {
+    "id": "2024_mun_g9_4",
+    "title": "municipal_competition_2024_2024_mun_g9_4.md",
+    "grade": "9",
+    "category": "geometry"
+  },
+  {
+    "id": "2024_mun_y1_4a",
+    "title": "municipal_competition_2024_2024_mun_y1_4a.md",
+    "grade": "9",
+    "category": "geometry"
+  },
+  {
+    "id": "2025_mun_g9_2",
+    "title": "municipal_competition_2025_2025_mun_g9_2.md",
+    "grade": "9",
+    "category": "geometry"
+  },
+  {
+    "id": "2025_mun_g9_4",
+    "title": "municipal_competition_2025_2025_mun_g9_4.md",
+    "grade": "9",
+    "category": "geometry"
+  },
+  {
+    "id": "2025_mun_g9_5",
+    "title": "municipal_competition_2025_2025_mun_g9_5.md",
+    "grade": "9",
+    "category": "geometry"
+  },
+  {
+    "id": "2025_mun_y1_3ab",
+    "title": "municipal_competition_2025_2025_mun_y1_3ab.md",
+    "grade": "9",
+    "category": "geometry"
+  },
+  {
+    "id": "4292",
+    "title": "numerus_4292_4292.md",
+    "grade": "9",
+    "category": "geometry"
+  },
+  {
+    "id": "4336",
+    "title": "numerus_4336_4336.md",
+    "grade": "9",
+    "category": "geometry"
+  },
+  {
+    "id": "4379",
+    "title": "numerus_4379_4379.md",
+    "grade": "9",
+    "category": "geometry"
+  },
+  {
+    "id": "4380",
+    "title": "numerus_4380_4380.md",
+    "grade": "9",
+    "category": "geometry"
+  },
+  {
+    "id": "4382",
+    "title": "numerus_4382_4382.md",
+    "grade": "9",
+    "category": "geometry"
+  },
+  {
+    "id": "4383",
+    "title": "numerus_4383_4383.md",
+    "grade": "9",
+    "category": "geometry"
+  },
+  {
+    "id": "4424",
+    "title": "numerus_4424_4424.md",
+    "grade": "9",
+    "category": "geometry"
+  },
+  {
+    "id": "4427",
+    "title": "numerus_4427_4427.md",
+    "grade": "9",
+    "category": "geometry"
+  },
+  {
+    "id": "4428",
+    "title": "numerus_4428_4428.md",
+    "grade": "9",
+    "category": "geometry"
+  },
+  {
+    "id": "L1_2025_10",
+    "title": "numerus_l1_2025_L1_2025_10.md",
+    "grade": "9",
+    "category": "geometry"
+  },
+  {
+    "id": "L1_2025_11",
+    "title": "numerus_l1_2025_L1_2025_11.md",
+    "grade": "9",
+    "category": "geometry"
+  },
+  {
+    "id": "L2_2025_02",
+    "title": "numerus_l2_2024_2025_L2_2025_02.md",
+    "grade": "9",
+    "category": "geometry"
+  },
+  {
+    "id": "num_li2_03",
+    "title": "numerus_li_2_2025_num_li2_03.md",
+    "grade": "9",
+    "category": "geometry"
+  },
+  {
+    "id": "num_li2_04",
+    "title": "numerus_li_2_2025_num_li2_04.md",
+    "grade": "9",
+    "category": "geometry"
+  },
+  {
+    "id": "num_li2_05",
+    "title": "numerus_li_2_2025_num_li2_05.md",
+    "grade": "9",
+    "category": "geometry"
+  },
+  {
+    "id": "num_li2_08",
+    "title": "numerus_li_2_2025_num_li2_08.md",
+    "grade": "9",
+    "category": "geometry"
+  },
+  {
+    "id": "num_li2_11",
+    "title": "numerus_li_2_2025_num_li2_11.md",
+    "grade": "9",
+    "category": "geometry"
+  },
+  {
+    "id": "num_li2_12",
+    "title": "numerus_li_2_2025_num_li2_12.md",
+    "grade": "9",
+    "category": "geometry"
+  },
+  {
+    "id": "Cnt92-1012_Prob5_Olympic",
+    "title": "olympiad_grade_9_variant_1_problem_5_cnt92_1012_Cnt92-1012_Prob5_Olympic.md",
+    "grade": "9",
+    "category": "geometry"
+  },
+  {
+    "id": "Cnt92-1012_Prob5_Visual",
+    "title": "olympiad_grade_9_variant_1_problem_5_cnt92_1012_Cnt92-1012_Prob5_Visual.md",
+    "grade": "9",
+    "category": "geometry"
+  },
+  {
+    "id": "Cnt92-1012_Prob8",
+    "title": "olympiad_grade_9_variant_1_problem_8_cnt92_1012_Cnt92-1012_Prob8.md",
+    "grade": "9",
+    "category": "geometry"
+  },
+  {
+    "id": "Cnt92-1012_Prob8_Synthetic",
+    "title": "olympiad_grade_9_variant_1_problem_8_cnt92_1012_Cnt92-1012_Prob8_Synthetic.md",
+    "grade": "9",
+    "category": "geometry"
+  },
+  {
+    "id": "Cnt92-1012_Prob8_Visual",
+    "title": "olympiad_grade_9_variant_1_problem_8_cnt92_1012_Cnt92-1012_Prob8_Visual.md",
+    "grade": "9",
+    "category": "geometry"
+  },
+  {
+    "id": "geom_9_2015_iso_angle",
+    "title": "regionalen_natprevar_2015_geom_9_2015_iso_angle.md",
+    "grade": "9",
+    "category": "geometry"
+  },
+  {
+    "id": "geom_9_2018_cm",
+    "title": "regionalen_natprevar_2018_geom_9_2018_cm.md",
+    "grade": "9",
+    "category": "geometry"
+  },
+  {
+    "id": "geom_angle_alt_bisector_03",
+    "title": "regionalen_natprevar_geom_angle_alt_bisector_03.md",
+    "grade": "9",
+    "category": "geometry"
+  },
+  {
+    "id": "sigma_adv_06",
+    "title": "sigma_137_138_sigma_adv_06.md",
+    "grade": "9",
+    "category": "geometry"
+  },
+  {
+    "id": "sigma_adv_08",
+    "title": "sigma_137_138_sigma_adv_08.md",
+    "grade": "9",
+    "category": "geometry"
+  },
+  {
+    "id": "sigma_adv_16",
+    "title": "sigma_137_138_sigma_adv_16.md",
+    "grade": "9",
+    "category": "geometry"
+  },
+  {
+    "id": "sigma_adv_19",
+    "title": "sigma_137_138_sigma_adv_19.md",
+    "grade": "9",
+    "category": "geometry"
+  },
+  {
+    "id": "sigma_adv_20",
+    "title": "sigma_137_138_sigma_adv_20.md",
+    "grade": "9",
+    "category": "geometry"
+  },
+  {
+    "id": "sigma_adv_22",
+    "title": "sigma_137_138_sigma_adv_22.md",
+    "grade": "9",
+    "category": "geometry"
+  },
+  {
+    "id": "sigma_adv_27",
+    "title": "sigma_137_138_sigma_adv_27.md",
+    "grade": "9",
+    "category": "geometry"
+  },
+  {
+    "id": "sigma_adv_30",
+    "title": "sigma_137_138_sigma_adv_30.md",
+    "grade": "9",
+    "category": "geometry"
+  },
+  {
+    "id": "sigma_adv_31",
+    "title": "sigma_137_138_sigma_adv_31.md",
+    "grade": "9",
+    "category": "geometry"
+  },
+  {
+    "id": "sigma_adv_38",
+    "title": "sigma_137_138_sigma_adv_38.md",
+    "grade": "9",
+    "category": "geometry"
+  },
+  {
+    "id": "sigma_137_prva_godina_zadaca_2_sigma137_y1_p2",
+    "title": "sigma_137_prva_godina_zadaca_2_sigma137_y1_p2.md",
+    "grade": "9",
+    "category": "geometry"
+  },
+  {
+    "id": "sigma_04_analysis",
+    "title": "sigma_2025_analysis_sigma_04_analysis.md",
+    "grade": "9",
+    "category": "geometry"
+  },
+  {
+    "id": "sigma_02",
+    "title": "sigma_2025_sigma_02.md",
+    "grade": "9",
+    "category": "geometry"
+  },
+  {
+    "id": "sigma_04",
+    "title": "sigma_2025_sigma_04.md",
+    "grade": "9",
+    "category": "geometry"
+  },
+  {
+    "id": "sigma_06",
+    "title": "sigma_2025_sigma_06.md",
+    "grade": "9",
+    "category": "geometry"
+  },
+  {
+    "id": "sigma_08",
+    "title": "sigma_2025_sigma_08.md",
+    "grade": "9",
+    "category": "geometry"
+  },
+  {
+    "id": "sigma_11",
+    "title": "sigma_2025_sigma_11.md",
+    "grade": "9",
+    "category": "geometry"
+  },
+  {
+    "id": "sigma_12",
+    "title": "sigma_2025_sigma_12.md",
+    "grade": "9",
+    "category": "geometry"
+  },
+  {
+    "id": "sigma_adv_05",
+    "title": "sigma_adv_05.md",
+    "grade": "9",
+    "category": "geometry"
+  },
+  {
+    "id": "sigma_adv_13",
+    "title": "sigma_adv_13.md",
+    "grade": "9",
+    "category": "geometry"
+  },
+  {
+    "id": "test_competition_2025_test_001",
+    "title": "test_competition_2025_test_001.md",
+    "grade": "9",
+    "category": "geometry"
+  },
+  {
+    "id": "test_competition_2025_test_002",
+    "title": "test_competition_2025_test_002.md",
+    "grade": "9",
+    "category": "geometry"
+  },
+  {
+    "id": "2022_mun_y1_10a",
+    "title": "municipal_competition_2022_2022_mun_y1_10a.md",
+    "grade": "9",
+    "category": "logic"
+  },
+  {
+    "id": "2022_mun_y1_9a",
+    "title": "municipal_competition_2022_2022_mun_y1_9a.md",
+    "grade": "9",
+    "category": "logic"
+  },
+  {
+    "id": "2023_mun_g9_3",
+    "title": "municipal_competition_2023_2023_mun_g9_3.md",
+    "grade": "9",
+    "category": "logic"
+  },
+  {
+    "id": "4291",
+    "title": "numerus_4291_4291.md",
+    "grade": "9",
+    "category": "logic"
+  },
+  {
+    "id": "sigma_adv_23",
+    "title": "sigma_137_138_sigma_adv_23.md",
+    "grade": "9",
+    "category": "logic"
+  },
+  {
+    "id": "cnt92_v2_01",
+    "title": "cnt92_olympiad_var2_cnt92_v2_01.md",
+    "grade": "9",
+    "category": "number_theory"
+  },
+  {
+    "id": "2022_mun_g9_13",
+    "title": "municipal_competition_2022_2022_mun_g9_13.md",
+    "grade": "9",
+    "category": "number_theory"
+  },
+  {
+    "id": "2022_mun_g9_15",
+    "title": "municipal_competition_2022_2022_mun_g9_15.md",
+    "grade": "9",
+    "category": "number_theory"
+  },
+  {
+    "id": "2022_mun_g9_2",
+    "title": "municipal_competition_2022_2022_mun_g9_2.md",
+    "grade": "9",
+    "category": "number_theory"
+  },
+  {
+    "id": "2022_mun_y1_11a",
+    "title": "municipal_competition_2022_2022_mun_y1_11a.md",
+    "grade": "9",
+    "category": "number_theory"
+  },
+  {
+    "id": "2022_mun_y1_13b",
+    "title": "municipal_competition_2022_2022_mun_y1_13b.md",
+    "grade": "9",
+    "category": "number_theory"
+  },
+  {
+    "id": "2022_mun_y1_14a",
+    "title": "municipal_competition_2022_2022_mun_y1_14a.md",
+    "grade": "9",
+    "category": "number_theory"
+  },
+  {
+    "id": "2022_mun_y1_16b",
+    "title": "municipal_competition_2022_2022_mun_y1_16b.md",
+    "grade": "9",
+    "category": "number_theory"
+  },
+  {
+    "id": "2022_mun_y1_18a",
+    "title": "municipal_competition_2022_2022_mun_y1_18a.md",
+    "grade": "9",
+    "category": "number_theory"
+  },
+  {
+    "id": "2022_mun_y1_2a",
+    "title": "municipal_competition_2022_2022_mun_y1_2a.md",
+    "grade": "9",
+    "category": "number_theory"
+  },
+  {
+    "id": "2022_mun_y1_2b",
+    "title": "municipal_competition_2022_2022_mun_y1_2b.md",
+    "grade": "9",
+    "category": "number_theory"
+  },
+  {
+    "id": "2022_mun_y1_5a",
+    "title": "municipal_competition_2022_2022_mun_y1_5a.md",
+    "grade": "9",
+    "category": "number_theory"
+  },
+  {
+    "id": "2022_mun_y1_5b",
+    "title": "municipal_competition_2022_2022_mun_y1_5b.md",
+    "grade": "9",
+    "category": "number_theory"
+  },
+  {
+    "id": "2022_mun_y1_8b",
+    "title": "municipal_competition_2022_2022_mun_y1_8b.md",
+    "grade": "9",
+    "category": "number_theory"
+  },
+  {
+    "id": "2023_mun_y1_2a",
+    "title": "municipal_competition_2023_2023_mun_y1_2a.md",
+    "grade": "9",
+    "category": "number_theory"
+  },
+  {
+    "id": "2024_mun_g9_1",
+    "title": "municipal_competition_2024_2024_mun_g9_1.md",
+    "grade": "9",
+    "category": "number_theory"
+  },
+  {
+    "id": "2025_mun_g9_1",
+    "title": "municipal_competition_2025_2025_mun_g9_1.md",
+    "grade": "9",
+    "category": "number_theory"
+  },
+  {
+    "id": "2025_mun_y1_2ab",
+    "title": "municipal_competition_2025_2025_mun_y1_2ab.md",
+    "grade": "9",
+    "category": "number_theory"
+  },
+  {
+    "id": "4290",
+    "title": "numerus_4290_4290.md",
+    "grade": "9",
+    "category": "number_theory"
+  },
+  {
+    "id": "4335",
+    "title": "numerus_4335_4335.md",
+    "grade": "9",
+    "category": "number_theory"
+  },
+  {
+    "id": "4384",
+    "title": "numerus_4384_4384.md",
+    "grade": "9",
+    "category": "number_theory"
+  },
+  {
+    "id": "4426",
+    "title": "numerus_4426_4426.md",
+    "grade": "9",
+    "category": "number_theory"
+  },
+  {
+    "id": "L1_2025_01",
+    "title": "numerus_l1_2024_2025_L1_2025_01.md",
+    "grade": "9",
+    "category": "number_theory"
+  },
+  {
+    "id": "L1_2025_09",
+    "title": "numerus_l1_2025_L1_2025_09.md",
+    "grade": "9",
+    "category": "number_theory"
+  },
+  {
+    "id": "L1_2025_14",
+    "title": "numerus_l1_2025_L1_2025_14.md",
+    "grade": "9",
+    "category": "number_theory"
+  },
+  {
+    "id": "L2_2025_05",
+    "title": "numerus_l2_2025_L2_2025_05.md",
+    "grade": "9",
+    "category": "number_theory"
+  },
+  {
+    "id": "num_li2_07",
+    "title": "numerus_li_2_2025_num_li2_07.md",
+    "grade": "9",
+    "category": "number_theory"
+  },
+  {
+    "id": "num_li2_10",
+    "title": "numerus_li_2_2025_num_li2_10.md",
+    "grade": "9",
+    "category": "number_theory"
+  },
+  {
+    "id": "Cnt92-1012_Prob1",
+    "title": "olympiad_grade_9_variant_1_problem_1_cnt92_1012_Cnt92-1012_Prob1.md",
+    "grade": "9",
+    "category": "number_theory"
+  },
+  {
+    "id": "sigma_adv_01",
+    "title": "sigma_137_138_sigma_adv_01.md",
+    "grade": "9",
+    "category": "number_theory"
+  },
+  {
+    "id": "sigma_adv_02",
+    "title": "sigma_137_138_sigma_adv_02.md",
+    "grade": "9",
+    "category": "number_theory"
+  },
+  {
+    "id": "sigma_adv_05",
+    "title": "sigma_137_138_sigma_adv_05.md",
+    "grade": "9",
+    "category": "number_theory"
+  },
+  {
+    "id": "sigma_adv_09",
+    "title": "sigma_137_138_sigma_adv_09.md",
+    "grade": "9",
+    "category": "number_theory"
+  },
+  {
+    "id": "sigma_adv_24",
+    "title": "sigma_137_138_sigma_adv_24.md",
+    "grade": "9",
+    "category": "number_theory"
+  },
+  {
+    "id": "sigma_adv_25",
+    "title": "sigma_137_138_sigma_adv_25.md",
+    "grade": "9",
+    "category": "number_theory"
+  },
+  {
+    "id": "sigma_adv_34",
+    "title": "sigma_137_138_sigma_adv_34.md",
+    "grade": "9",
+    "category": "number_theory"
+  },
+  {
+    "id": "sigma_adv_36",
+    "title": "sigma_137_138_sigma_adv_36.md",
+    "grade": "9",
+    "category": "number_theory"
+  },
+  {
+    "id": "sigma_137_prva_godina_zadaca_1_sigma137_y1_p1",
+    "title": "sigma_137_prva_godina_zadaca_1_sigma137_y1_p1.md",
+    "grade": "9",
+    "category": "number_theory"
+  },
+  {
+    "id": "sigma_03",
+    "title": "sigma_2025_sigma_03.md",
+    "grade": "9",
+    "category": "number_theory"
+  },
+  {
+    "id": "sigma_05",
+    "title": "sigma_2025_sigma_05.md",
+    "grade": "9",
+    "category": "number_theory"
+  },
+  {
+    "id": "sigma_10",
+    "title": "sigma_2025_sigma_10.md",
+    "grade": "9",
+    "category": "number_theory"
+  },
+  {
+    "id": "sigma_adv_02",
+    "title": "sigma_adv_02.md",
+    "grade": "9",
+    "category": "number_theory"
+  },
+  {
+    "id": "sigma_adv_24",
+    "title": "sigma_adv_24.md",
+    "grade": "9",
+    "category": "number_theory"
+  },
+  {
+    "id": "sigma_adv_34",
+    "title": "sigma_adv_34.md",
+    "grade": "9",
+    "category": "number_theory"
+  },
+  {
+    "id": "sigma_adv_36",
+    "title": "sigma_adv_36.md",
+    "grade": "9",
+    "category": "number_theory"
+  },
+  {
+    "id": "13",
+    "title": "cnt92_olympiad_13.md",
+    "grade": "9",
+    "category": "N/A"
+  },
+  {
+    "id": "14",
+    "title": "cnt92_olympiad_14.md",
+    "grade": "9",
+    "category": "N/A"
+  },
+  {
+    "id": "15",
+    "title": "cnt92_olympiad_15.md",
+    "grade": "9",
+    "category": "N/A"
+  },
+  {
+    "id": "16",
+    "title": "cnt92_olympiad_16.md",
+    "grade": "9",
+    "category": "N/A"
+  },
+  {
+    "id": "17",
+    "title": "cnt92_olympiad_17.md",
+    "grade": "9",
+    "category": "N/A"
+  },
+  {
+    "id": "18",
+    "title": "cnt92_olympiad_18.md",
+    "grade": "9",
+    "category": "N/A"
+  },
+  {
+    "id": "19",
+    "title": "cnt92_olympiad_19.md",
+    "grade": "9",
+    "category": "N/A"
+  },
+  {
+    "id": "20",
+    "title": "cnt92_olympiad_20.md",
+    "grade": "9",
+    "category": "N/A"
+  },
+  {
+    "id": "21",
+    "title": "cnt92_olympiad_21.md",
+    "grade": "9",
+    "category": "N/A"
+  },
+  {
+    "id": "22",
+    "title": "cnt92_olympiad_22.md",
+    "grade": "9",
+    "category": "N/A"
+  },
+  {
+    "id": "23",
+    "title": "cnt92_olympiad_23.md",
+    "grade": "9",
+    "category": "N/A"
+  },
+  {
+    "id": "unknown",
+    "title": "unknown.md",
+    "grade": "other",
+    "category": "N/A"
+  },
+  {
+    "id": "contradiction",
+    "title": "contradiction.md",
+    "grade": "N/A",
+    "category": "logic"
+  },
+  {
+    "id": "induction",
+    "title": "induction.md",
+    "grade": "N/A",
+    "category": "N/A"
+  },
+  {
+    "id": "grade6_readiness",
+    "title": "grade6_readiness.md",
+    "grade": "N/A",
+    "category": "N/A"
+  },
+  {
+    "id": "4343",
+    "title": "numerus_4343.md",
+    "grade": "1",
+    "category": "algebra"
+  },
+  {
+    "id": "4341",
+    "title": "numerus_4341_4341.md",
+    "grade": "1",
+    "category": "arithmetic"
+  },
+  {
+    "id": "4342",
+    "title": "numerus_4342_4342.md",
+    "grade": "1",
+    "category": "arithmetic"
+  },
+  {
+    "id": "4343",
+    "title": "numerus_4343_4343.md",
+    "grade": "1",
+    "category": "logic"
+  },
+  {
+    "id": "4344",
+    "title": "numerus_4344_4344.md",
+    "grade": "1",
+    "category": "logic"
+  },
+  {
+    "id": "4341",
+    "title": "numerus_4341.md",
+    "grade": "1",
+    "category": "number_theory"
+  },
+  {
+    "id": "4342",
+    "title": "numerus_4342.md",
+    "grade": "1",
+    "category": "number_theory"
+  },
+  {
+    "id": "4344",
+    "title": "numerus_4344.md",
+    "grade": "1",
+    "category": "number_theory"
+  },
+  {
+    "id": "000",
+    "title": "unknown_000.md",
+    "grade": "1",
+    "category": "N/A"
+  },
+  {
+    "id": "4345",
+    "title": "numerus_4345_4345.md",
+    "grade": "2",
+    "category": "arithmetic"
+  },
+  {
+    "id": "4346",
+    "title": "numerus_4346_4346.md",
+    "grade": "2",
+    "category": "arithmetic"
+  },
+  {
+    "id": "4347",
+    "title": "numerus_4347.md",
+    "grade": "2",
+    "category": "combinatorics"
+  },
+  {
+    "id": "4347",
+    "title": "numerus_4347_4347.md",
+    "grade": "2",
+    "category": "combinatorics"
+  },
+  {
+    "id": "4348",
+    "title": "numerus_4348_4348.md",
+    "grade": "2",
+    "category": "logic"
+  },
+  {
+    "id": "4345",
+    "title": "numerus_4345.md",
+    "grade": "2",
+    "category": "number_theory"
+  },
+  {
+    "id": "4346",
+    "title": "numerus_4346.md",
+    "grade": "2",
+    "category": "number_theory"
+  },
+  {
+    "id": "4348",
+    "title": "numerus_4348.md",
+    "grade": "2",
+    "category": "number_theory"
+  },
+  {
+    "id": "000",
+    "title": "unknown_000.md",
+    "grade": "2",
+    "category": "N/A"
+  },
+  {
+    "id": "4350",
+    "title": "numerus_4350.md",
+    "grade": "3",
+    "category": "algebra"
+  },
+  {
+    "id": "4349",
+    "title": "numerus_4349_4349.md",
+    "grade": "3",
+    "category": "arithmetic"
+  },
+  {
+    "id": "4351",
+    "title": "numerus_4351_4351.md",
+    "grade": "3",
+    "category": "arithmetic"
+  },
+  {
+    "id": "4350",
+    "title": "numerus_4350_4350.md",
+    "grade": "3",
+    "category": "logic"
+  },
+  {
+    "id": "4352",
+    "title": "numerus_4352.md",
+    "grade": "3",
+    "category": "logic"
+  },
+  {
+    "id": "4352",
+    "title": "numerus_4352_4352.md",
+    "grade": "3",
+    "category": "logic"
+  },
+  {
+    "id": "4349",
+    "title": "numerus_4349.md",
+    "grade": "3",
+    "category": "number_theory"
+  },
+  {
+    "id": "4351",
+    "title": "numerus_4351.md",
+    "grade": "3",
+    "category": "number_theory"
+  },
+  {
+    "id": "2022_mun_g4_11",
+    "title": "municipal_competition_2022_2022_mun_g4_11.md",
+    "grade": "4",
+    "category": "algebra"
+  },
+  {
+    "id": "2022_mun_g4_3",
+    "title": "municipal_competition_2022_2022_mun_g4_3.md",
+    "grade": "4",
+    "category": "algebra"
+  },
+  {
+    "id": "2022_mun_g4_8",
+    "title": "municipal_competition_2022_2022_mun_g4_8.md",
+    "grade": "4",
+    "category": "algebra"
+  },
+  {
+    "id": "2023_mun_g4_1",
+    "title": "municipal_competition_2023_2023_mun_g4_1.md",
+    "grade": "4",
+    "category": "algebra"
+  },
+  {
+    "id": "4353",
+    "title": "numerus_4353.md",
+    "grade": "4",
+    "category": "algebra"
+  },
+  {
+    "id": "4353",
+    "title": "numerus_4353_4353.md",
+    "grade": "4",
+    "category": "algebra"
+  },
+  {
+    "id": "4355",
+    "title": "numerus_4355.md",
+    "grade": "4",
+    "category": "algebra"
+  },
+  {
+    "id": "4357",
+    "title": "numerus_4357.md",
+    "grade": "4",
+    "category": "algebra"
+  },
+  {
+    "id": "4358",
+    "title": "numerus_4358.md",
+    "grade": "4",
+    "category": "algebra"
+  },
+  {
+    "id": "2022_mun_g4_4",
+    "title": "municipal_competition_2022_2022_mun_g4_4.md",
+    "grade": "4",
+    "category": "arithmetic"
+  },
+  {
+    "id": "2025_mun_g4_2",
+    "title": "municipal_competition_2025_2025_mun_g4_2.md",
+    "grade": "4",
+    "category": "arithmetic"
+  },
+  {
+    "id": "4356",
+    "title": "numerus_4356_4356.md",
+    "grade": "4",
+    "category": "arithmetic"
+  },
+  {
+    "id": "2024_mun_g4_1",
+    "title": "municipal_competition_2024_2024_mun_g4_1.md",
+    "grade": "4",
+    "category": "combinatorics"
+  },
+  {
+    "id": "4354",
+    "title": "numerus_4354.md",
+    "grade": "4",
+    "category": "combinatorics"
+  },
+  {
+    "id": "4354",
+    "title": "numerus_4354_4354.md",
+    "grade": "4",
+    "category": "combinatorics"
+  },
+  {
+    "id": "2022_mun_g4_1",
+    "title": "municipal_competition_2022_2022_mun_g4_1.md",
+    "grade": "4",
+    "category": "geometry"
+  },
+  {
+    "id": "2022_mun_g4_10",
+    "title": "municipal_competition_2022_2022_mun_g4_10.md",
+    "grade": "4",
+    "category": "geometry"
+  },
+  {
+    "id": "2022_mun_g4_2",
+    "title": "municipal_competition_2022_2022_mun_g4_2.md",
+    "grade": "4",
+    "category": "geometry"
+  },
+  {
+    "id": "2022_mun_g4_6",
+    "title": "municipal_competition_2022_2022_mun_g4_6.md",
+    "grade": "4",
+    "category": "geometry"
+  },
+  {
+    "id": "2023_mun_g4_2",
+    "title": "municipal_competition_2023_2023_mun_g4_2.md",
+    "grade": "4",
+    "category": "geometry"
+  },
+  {
+    "id": "2023_mun_g4_4",
+    "title": "municipal_competition_2023_2023_mun_g4_4.md",
+    "grade": "4",
+    "category": "geometry"
+  },
+  {
+    "id": "2024_mun_g4_2",
+    "title": "municipal_competition_2024_2024_mun_g4_2.md",
+    "grade": "4",
+    "category": "geometry"
+  },
+  {
+    "id": "2024_mun_g4_4",
+    "title": "municipal_competition_2024_2024_mun_g4_4.md",
+    "grade": "4",
+    "category": "geometry"
+  },
+  {
+    "id": "2025_mun_g4_1",
+    "title": "municipal_competition_2025_2025_mun_g4_1.md",
+    "grade": "4",
+    "category": "geometry"
+  },
+  {
+    "id": "2022_mun_g4_12",
+    "title": "municipal_competition_2022_2022_mun_g4_12.md",
+    "grade": "4",
+    "category": "logic"
+  },
+  {
+    "id": "4355",
+    "title": "numerus_4355_4355.md",
+    "grade": "4",
+    "category": "logic"
+  },
+  {
+    "id": "2022_mun_g4_5",
+    "title": "municipal_competition_2022_2022_mun_g4_5.md",
+    "grade": "4",
+    "category": "number_theory"
+  },
+  {
+    "id": "2022_mun_g4_7",
+    "title": "municipal_competition_2022_2022_mun_g4_7.md",
+    "grade": "4",
+    "category": "number_theory"
+  },
+  {
+    "id": "2022_mun_g4_9",
+    "title": "municipal_competition_2022_2022_mun_g4_9.md",
+    "grade": "4",
+    "category": "number_theory"
+  },
+  {
+    "id": "2023_mun_g4_3",
+    "title": "municipal_competition_2023_2023_mun_g4_3.md",
+    "grade": "4",
+    "category": "number_theory"
+  },
+  {
+    "id": "2024_mun_g4_3",
+    "title": "municipal_competition_2024_2024_mun_g4_3.md",
+    "grade": "4",
+    "category": "number_theory"
+  },
+  {
+    "id": "4356",
+    "title": "numerus_4356.md",
+    "grade": "4",
+    "category": "number_theory"
+  },
+  {
+    "id": "2025_mun_g4_3",
+    "title": "municipal_competition_2025_2025_mun_g4_3.md",
+    "grade": "4",
+    "category": "N/A"
+  },
+  {
+    "id": "2025_mun_g4_4",
+    "title": "municipal_competition_2025_2025_mun_g4_4.md",
+    "grade": "4",
+    "category": "N/A"
+  },
+  {
+    "id": "2022_mun_g5_11",
+    "title": "municipal_competition_2022_2022_mun_g5_11.md",
+    "grade": "5",
+    "category": "algebra"
+  },
+  {
+    "id": "2022_mun_g5_2",
+    "title": "municipal_competition_2022_2022_mun_g5_2.md",
+    "grade": "5",
+    "category": "algebra"
+  },
+  {
+    "id": "2022_mun_g5_5",
+    "title": "municipal_competition_2022_2022_mun_g5_5.md",
+    "grade": "5",
+    "category": "algebra"
+  },
+  {
+    "id": "2022_mun_g5_7",
+    "title": "municipal_competition_2022_2022_mun_g5_7.md",
+    "grade": "5",
+    "category": "algebra"
+  },
+  {
+    "id": "2023_mun_g5_4",
+    "title": "municipal_competition_2023_2023_mun_g5_4.md",
+    "grade": "5",
+    "category": "algebra"
+  },
+  {
+    "id": "2024_mun_g5_2",
+    "title": "municipal_competition_2024_2024_mun_g5_2.md",
+    "grade": "5",
+    "category": "algebra"
+  },
+  {
+    "id": "2025_mun_g5_4",
+    "title": "municipal_competition_2025_2025_mun_g5_4.md",
+    "grade": "5",
+    "category": "algebra"
+  },
+  {
+    "id": "4357",
+    "title": "numerus_4357_4357.md",
+    "grade": "5",
+    "category": "algebra"
+  },
+  {
+    "id": "4405",
+    "title": "numerus_2025_4405.md",
+    "grade": "5",
+    "category": "arithmetic"
+  },
+  {
+    "id": "4360",
+    "title": "numerus_4360_4360.md",
+    "grade": "5",
+    "category": "arithmetic"
+  },
+  {
+    "id": "4362",
+    "title": "numerus_4362_4362.md",
+    "grade": "5",
+    "category": "arithmetic"
+  },
+  {
+    "id": "2023_mun_g5_2",
+    "title": "municipal_competition_2023_2023_mun_g5_2.md",
+    "grade": "5",
+    "category": "combinatorics"
+  },
+  {
+    "id": "4359",
+    "title": "numerus_4359.md",
+    "grade": "5",
+    "category": "combinatorics"
+  },
+  {
+    "id": "4364",
+    "title": "numerus_4364.md",
+    "grade": "5",
+    "category": "combinatorics"
+  },
+  {
+    "id": "4364",
+    "title": "numerus_4364_4364.md",
+    "grade": "5",
+    "category": "combinatorics"
+  },
+  {
+    "id": "2022_mun_g5_1",
+    "title": "municipal_competition_2022_2022_mun_g5_1.md",
+    "grade": "5",
+    "category": "geometry"
+  },
+  {
+    "id": "2022_mun_g5_12",
+    "title": "municipal_competition_2022_2022_mun_g5_12.md",
+    "grade": "5",
+    "category": "geometry"
+  },
+  {
+    "id": "2022_mun_g5_3",
+    "title": "municipal_competition_2022_2022_mun_g5_3.md",
+    "grade": "5",
+    "category": "geometry"
+  },
+  {
+    "id": "2022_mun_g5_4",
+    "title": "municipal_competition_2022_2022_mun_g5_4.md",
+    "grade": "5",
+    "category": "geometry"
+  },
+  {
+    "id": "2022_mun_g5_6",
+    "title": "municipal_competition_2022_2022_mun_g5_6.md",
+    "grade": "5",
+    "category": "geometry"
+  },
+  {
+    "id": "2022_mun_g5_8",
+    "title": "municipal_competition_2022_2022_mun_g5_8.md",
+    "grade": "5",
+    "category": "geometry"
+  },
+  {
+    "id": "2023_mun_g5_1",
+    "title": "municipal_competition_2023_2023_mun_g5_1.md",
+    "grade": "5",
+    "category": "geometry"
+  },
+  {
+    "id": "2023_mun_g5_3",
+    "title": "municipal_competition_2023_2023_mun_g5_3.md",
+    "grade": "5",
+    "category": "geometry"
+  },
+  {
+    "id": "2024_mun_g5_3",
+    "title": "municipal_competition_2024_2024_mun_g5_3.md",
+    "grade": "5",
+    "category": "geometry"
+  },
+  {
+    "id": "2024_mun_g5_4",
+    "title": "municipal_competition_2024_2024_mun_g5_4.md",
+    "grade": "5",
+    "category": "geometry"
+  },
+  {
+    "id": "2025_mun_g5_2",
+    "title": "municipal_competition_2025_2025_mun_g5_2.md",
+    "grade": "5",
+    "category": "geometry"
+  },
+  {
+    "id": "4361",
+    "title": "numerus_4361.md",
+    "grade": "5",
+    "category": "geometry"
+  },
+  {
+    "id": "4361",
+    "title": "numerus_4361_4361.md",
+    "grade": "5",
+    "category": "geometry"
+  },
+  {
+    "id": "4363",
+    "title": "numerus_4363.md",
+    "grade": "5",
+    "category": "geometry"
+  },
+  {
+    "id": "4363",
+    "title": "numerus_4363_4363.md",
+    "grade": "5",
+    "category": "geometry"
+  },
+  {
+    "id": "2025_mun_g5_3",
+    "title": "municipal_competition_2025_2025_mun_g5_3.md",
+    "grade": "5",
+    "category": "logic"
+  },
+  {
+    "id": "4358",
+    "title": "numerus_4358_4358.md",
+    "grade": "5",
+    "category": "logic"
+  },
+  {
+    "id": "4359",
+    "title": "numerus_4359_4359.md",
+    "grade": "5",
+    "category": "logic"
+  },
+  {
+    "id": "2022_mun_g5_10",
+    "title": "municipal_competition_2022_2022_mun_g5_10.md",
+    "grade": "5",
+    "category": "number_theory"
+  },
+  {
+    "id": "2022_mun_g5_9",
+    "title": "municipal_competition_2022_2022_mun_g5_9.md",
+    "grade": "5",
+    "category": "number_theory"
+  },
+  {
+    "id": "2024_mun_g5_1",
+    "title": "municipal_competition_2024_2024_mun_g5_1.md",
+    "grade": "5",
+    "category": "number_theory"
+  },
+  {
+    "id": "2025_mun_g5_1",
+    "title": "municipal_competition_2025_2025_mun_g5_1.md",
+    "grade": "5",
+    "category": "number_theory"
+  },
+  {
+    "id": "4360",
+    "title": "numerus_4360.md",
+    "grade": "5",
+    "category": "number_theory"
+  },
+  {
+    "id": "4362",
+    "title": "numerus_4362.md",
+    "grade": "5",
+    "category": "number_theory"
+  },
+  {
+    "id": "numerus_4367_4367",
+    "title": "numerus_4367_4367.md",
+    "grade": "6",
+    "category": "geometry"
+  },
+  {
+    "id": "kengur_log_03",
+    "title": "kengur_log_03.md",
+    "grade": "6",
+    "category": "logic"
+  },
+  {
+    "id": "L1_2025_04",
+    "title": "L1_2025_04.md",
+    "grade": "8",
+    "category": "number_theory"
+  },
+  {
+    "id": "problem_4385",
+    "title": "problem_4385.md",
+    "grade": "1",
+    "category": "logic"
+  },
+  {
+    "id": "problem_4386",
+    "title": "problem_4386.md",
+    "grade": "1",
+    "category": "logic"
+  },
+  {
+    "id": "problem_4388",
+    "title": "problem_4388.md",
+    "grade": "1",
+    "category": "logic"
+  },
+  {
+    "id": "problem_4387",
+    "title": "problem_4387.md",
+    "grade": "1",
+    "category": "N/A"
+  },
+  {
+    "id": "problem_4389",
+    "title": "problem_4389.md",
+    "grade": "2",
+    "category": "arithmetic"
+  },
+  {
+    "id": "problem_4390",
+    "title": "problem_4390.md",
+    "grade": "2",
+    "category": "arithmetic"
+  },
+  {
+    "id": "4392",
+    "title": "problem_4392.md",
+    "grade": "2",
+    "category": "geometry"
+  },
+  {
+    "id": "problem_4391",
+    "title": "problem_4391.md",
+    "grade": "2",
+    "category": "logic"
+  },
+  {
+    "id": "problem_4393",
+    "title": "problem_4393.md",
+    "grade": "3",
+    "category": "arithmetic"
+  },
+  {
+    "id": "problem_4394",
+    "title": "problem_4394.md",
+    "grade": "3",
+    "category": "arithmetic"
+  },
+  {
+    "id": "problem_4395",
+    "title": "problem_4395.md",
+    "grade": "3",
+    "category": "arithmetic"
+  },
+  {
+    "id": "problem_4396",
+    "title": "problem_4396.md",
+    "grade": "3",
+    "category": "arithmetic"
+  },
+  {
+    "id": "4399",
+    "title": "problem_4399.md",
+    "grade": "4",
+    "category": "arithmetic"
+  },
+  {
+    "id": "4400",
+    "title": "problem_4400.md",
+    "grade": "4",
+    "category": "arithmetic"
+  },
+  {
+    "id": "4401",
+    "title": "problem_4401.md",
+    "grade": "4",
+    "category": "arithmetic"
+  },
+  {
+    "id": "4402",
+    "title": "problem_4402.md",
+    "grade": "4",
+    "category": "arithmetic"
+  },
+  {
+    "id": "4403",
+    "title": "problem_4403.md",
+    "grade": "4",
+    "category": "arithmetic"
+  },
+  {
+    "id": "4404",
+    "title": "problem_4404.md",
+    "grade": "4",
+    "category": "geometry"
+  },
+  {
+    "id": "4397",
+    "title": "problem_4397.md",
+    "grade": "4",
+    "category": "logic"
+  },
+  {
+    "id": "4398",
+    "title": "problem_4398.md",
+    "grade": "4",
+    "category": "N/A"
+  },
+  {
+    "id": "4405",
+    "title": "problem_4405.md",
+    "grade": "5",
+    "category": "arithmetic"
+  },
+  {
+    "id": "4406",
+    "title": "problem_4406.md",
+    "grade": "5",
+    "category": "arithmetic"
+  },
+  {
+    "id": "4407",
+    "title": "problem_4407.md",
+    "grade": "5",
+    "category": "arithmetic"
+  },
+  {
+    "id": "4408",
+    "title": "problem_4408.md",
+    "grade": "5",
+    "category": "geometry"
+  },
+  {
+    "id": "4409",
+    "title": "problem_4409.md",
+    "grade": "transition",
+    "category": "algebra"
+  },
+  {
+    "id": "pre_olympiad_problem_template",
+    "title": "pre_olympiad_problem_template.md",
+    "grade": "N/A",
+    "category": "N/A"
+  },
+  {
+    "id": "sigma137_p1871",
+    "title": "sigma137_p1871.md",
+    "grade": "10",
+    "category": "logic_puzzle"
+  },
+  {
+    "id": "sigma_137_1873",
+    "title": "sigma_137_1873.md",
+    "grade": "9",
+    "category": "algebra"
+  },
+  {
+    "id": "unknown",
+    "title": "unknown.md",
+    "grade": "N/A",
+    "category": "N/A"
+  },
+  {
+    "id": "sigma_137_1873",
+    "title": "sigma_137_1873.md",
+    "grade": "10",
+    "category": "number_theory"
+  }
+]
