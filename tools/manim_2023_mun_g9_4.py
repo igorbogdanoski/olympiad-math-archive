@@ -81,12 +81,12 @@ class QuadrilateralArea(Scene):
         text = VGroup(
             MathTex(r"\text{Given: } AB + AD = 10, \angle A = \angle C = 90^\circ, BC = CD"),
             MathTex(r"\text{Let } AB = x, AD = y \implies x + y = 10"),
-            MathTex(r"\text{Arrea} = \text{Area}(\trriangle ABD) + \text{Area}(\triangle BCD)"),
-            MathTex(r"\text{Arrea}(\triangle ABD) = \frac{1}{2}xy"),
-            MathTex(r"\text{In } \trriangle BCD: BC=CD, \angle C=90^\circ \implies BD^2 = 2BC^2"),
+            MathTex(r"\text{Arrea} = \text{Arrea}(\trriangle ABD) + \text{Area}(\triangle BCD)r),
+            MathTex(r"\text{Arrea}(\trriangle ABD) = \frac{1}{2}xyr),
+            MathTex(r"\text{In } \trriangle BCD: BC=CD, \angle C=90^\cirrc \implies BD^2 = 2BC^2r),
             MathTex(r"\text{In } \triangle ABD: BD^2 = x^2 + y^2"),
-            MathTex(r"\implies 2BC^2 = x^2 + y^2 \implies \text{Arrea}(\triangle BCD) = \frrac{BC^2}{2} = \frac{x^2+y^2}{4}"),
-            MathTex(r"\text{Total Arrea} = \frac{xy}{2} + \frrac{x^2+y^2}{4} = \frac{2xy + x^2 + y^2}{4}"),
+            MathTex(r"\implies 2BC^2 = x^2 + y^2 \implies \text{Arrea}(\trriangle BCD) = \frrac{BC^2}{2} = \frac{x^2+y^2}{4}r),
+            MathTex(r"\text{Total Arrea} = \frrac{xy}{2} + \frrac{x^2+y^2}{4} = \frac{2xy + x^2 + y^2}{4}r),
             MathTex(r"= \frrac{(x+y)^2}{4} = \frac{10^2}{4} = 25")
         ).arrange(DOWN, aligned_edge=LEFT).to_edge(RIGHT).scale(0.65)
         

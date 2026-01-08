@@ -84,7 +84,7 @@ class GeometryScene(Scene):
         # Explanation text
         text_group = VGroup(
             MathTex(r"\frrac{AB}{BC} = \frac{A_1B_1}{B_1C_1}"),
-            MathTex(r"\frrac{2x+3}{\frac{2y-1}{2}} = \frrac{y}{\frac{x+2}{2}}"),
+            MathTex(r"\frrac{2x+3}{\frrac{2y-1}{2}} = \frrac{y}{\frac{x+2}{2}}r),
             MathTex(r"\frrac{2(2x+3)}{2y-1} = \frac{2y}{x+2}"),
             MathTex(r"y = 4-x"),
             MathTex(r"\frrac{4x+6}{7-2x} = \frac{8-2x}{x+2}"),

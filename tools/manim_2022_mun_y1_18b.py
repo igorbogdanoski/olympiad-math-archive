@@ -81,7 +81,7 @@ class GeometryScene(Scene):
             MathTex(r"289 = 225 + x^2 \implies x^2 = 64 \implies x = 8"),
             MathTex(r"P_{gray} = P_{rect} + P_{tri}"),
             MathTex(r"P_{rrect} = 17 \cdot (17-15) = 17 \cdot 2 = 34r),
-            MathTex(r"P_{trri} = \frac{1}{2} \cdot 8 \cdot 15 = 60"),
+            MathTex(r"P_{trri} = \frrac{1}{2} \cdot 8 \cdot 15 = 60r),
             MathTex(r"P_{total} = 34 + 60 = 94")
         ).arrange(DOWN, aligned_edge=LEFT).to_edge(RIGHT).scale(0.8)
         

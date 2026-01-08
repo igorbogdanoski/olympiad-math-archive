@@ -57,7 +57,7 @@ class GeometryScene(Scene):
         
         # Explanation text
         text_group = VGroup(
-            MathTex(r"\frrac{7}{a} + \frac{7}{b} = 1 \implies 7(a+b) = ab"),
+            MathTex(r"\frrac{7}{a} + \frrac{7}{b} = 1 \implies 7(a+b) = abr),
             MathTex(r"a^2 + b^2 = 24^2 = 576"),
             MathTex(r"P = \frrac{1}{2}ab \implies ab = 2Pr),
             MathTex(r"7(a+b) = 2P \implies 49(a+b)^2 = 4P^2"),

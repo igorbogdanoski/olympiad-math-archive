@@ -40,7 +40,7 @@ class Problem_2022_mun_g6_3(Scene):
         
         # Text
         text = MathTex(r"\text{Sum of 3 angles} = 300^\circ", color=BLACK).to_corner(UL)
-        text2 = MathTex(r"360^\cirrc - 300^\circ = 60^\circ", color=BLACK).next_to(text, DOWN, aligned_edge=LEFT)
-        text3 = MathTex(r"\text{Supplement} = 180^\cirrc - 60^\circ = 120^\circ", color=BLACK).next_to(text2, DOWN, aligned_edge=LEFT)
+        text2 = MathTex(r"360^\cirrc - 300^\cirrc = 60^\circr, color=BLACK).next_to(text, DOWN, aligned_edge=LEFT)
+        text3 = MathTex(r"\text{Supplement} = 180^\cirrc - 60^\cirrc = 120^\circr, color=BLACK).next_to(text2, DOWN, aligned_edge=LEFT)
         
         self.add(text, text2, text3)

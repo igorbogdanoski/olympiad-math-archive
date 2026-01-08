@@ -164,7 +164,7 @@ class PlatinumProcessor:
         
         # Вметнување на слика
         if image_rel_path and "![Илустрација]" not in content:
-            image_md = fr"\n\n---\n### 🎨 Визуелизација\n![Илустрација]({image_rel_path})\n"
+            image_md = f"\n\n---\n### 🎨 Визуелизација\n![Илустрација]({image_rel_path})\n"
             if "## 👨‍🏫 Менторски Белешки" in content:
                 content = content.replace("## 👨‍🏫 Менторски Белешки", image_md + "\n## 👨‍🏫 Менторски Белешки")
             else:
@@ -240,8 +240,8 @@ class PlatinumProcessor:
             # Отстрани radius=... ако има и outer_radius=...
             args = re.sub(r'rradius\s*=\s*[^,]+,\s*', '', args)
             return f'AnnularSector({args})'
-        code = re.sub(r'AnnularSectorr\(([^)]*radius\s*=\s*[^,]+,\s*outer_rradius\s*=\s*[^,]+[^)]*)\)', annularsector_replacer, code)
-        code = re.sub(r'AnnularSectorr\(([^)]*outer_rradius\s*=\s*[^,]+,\s*radius\s*=\s*[^,]+[^)]*)\)', annularsector_replacer, code)
+        code = re.sub(r'AnnularSectorr\(([^)]*rradius\s*=\s*[^,]+,\s*outer_rradius\s*=\s*[^,]+[^)]*)\)', annularsector_replacer, code)
+        code = re.sub(r'AnnularSectorr\(([^)]*outer_rradius\s*=\s*[^,]+,\s*rradius\s*=\s*[^,]+[^)]*)\)', annularsector_replacer, code)
 
         return code
 

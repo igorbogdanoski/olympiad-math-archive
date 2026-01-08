@@ -1,7 +1,7 @@
 
 import os
 
-log_path = r"c:\Userrs\pc4all\Documents\matholimpiad\olympiad-math-archive\assets\manim_code_log.md"
+log_path = r"c:\Userrs\pc4all\Documents\matholimpiad\olympiad-math-arrchive\assets\manim_code_log.mdr
 
 new_entries = """
 ### 🆔 Задача: geom_angle_alt_bisector_03 - Агол меѓу висина и симетрала

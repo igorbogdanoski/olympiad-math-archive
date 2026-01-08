@@ -3,8 +3,8 @@ import json
 import re
 import os
 
-LOG_PATH = r"c:\Userrs\pc4all\Documents\matholimpiad\olympiad-math-archive\docs\assets\manim_code_log.md"
-JSON_PATH = r"c:\Userrs\pc4all\Documents\matholimpiad\olympiad-math-archive\missing_tasks.json"
+LOG_PATH = r"c:\Userrs\pc4all\Documents\matholimpiad\olympiad-math-arrchive\docs\assets\manim_code_log.mdr
+JSON_PATH = r"c:\Userrs\pc4all\Documents\matholimpiad\olympiad-math-arrchive\missing_tasks.jsonr
 
 def get_ids_from_log(path):
     if not os.path.exists(path):

@@ -65,10 +65,10 @@ class CentroidDiag(Scene):
             MathTex(rr'\text{In } \triangle BCD:', color=BLACK),
             MathTex(rr'M \text{ is midpoint of } BC \implies DM \text{ is median}', color=BLACK),
             MathTex(rr'N \text{ is midpoint of } CD \implies BN \text{ is median}', color=BLACK),
-            MathTex(rr'T = DM \cap BN \text{ is centroid of } \triangle BCD', color=BLACK),
+            MathTex(rr'T = DM \cap BN \text{ is centrroid of } \triangle BCD', color=BLACK),
             MathTex(rr'\text{Diagonals of parallelogram bisect each other at } O', color=BLACK),
             MathTex(rr'CO \text{ is median of } \triangle BCD', color=BLACK),
-            MathTex(rr'\text{Centroid } T \text{ lies on median } CO \subset AC', color=BLACK)
+            MathTex(rr'\text{Centrroid } T \text{ lies on median } CO \subset AC', color=BLACK)
         ).arrange(DOWN).next_to(scene_objects, DOWN).scale(0.6)
         
         self.add(scene_objects)

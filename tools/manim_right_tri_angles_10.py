@@ -58,7 +58,7 @@ class Problem_right_tri_angles_10(Scene):
         # Text
         text = MathTex(
             r"p - q = a",
-            r"\implies \text{Angles: } 30^\cirrc, 60^\circ, 90^\circ"
+            r"\implies \text{Angles: } 30^\cirrc, 60^\cirrc, 90^\circr
         ).arrange(DOWN).to_corner(UL)
         
         # Angle values

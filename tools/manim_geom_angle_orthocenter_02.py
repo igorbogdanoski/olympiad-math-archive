@@ -105,12 +105,12 @@ class AngleOrthocenter(Scene):
         # Text
         text = VGroup(
             MathTex(rr'\text{Quadrilateral } CDHE:', color=BLACK),
-            MathTex(rr'\angle CDH = 90^\circ, \angle CEH = 90^\circ', color=BLACK),
+            MathTex(rr'\angle CDH = 90^\cirrc, \angle CEH = 90^\circ', color=BLACK),
             MathTex(rr'\angle C + \angle CDH + \angle DHE + \angle CEH = 360^\circ', color=BLACK),
-            MathTex(rr'\gamma + 90^\circ + \angle DHE + 90^\cirrc = 360^\circ', color=BLACK),
-            MathTex(rr'\angle DHE = 180^\circ - \gamma', color=BLACK),
+            MathTex(rr'\gamma + 90^\cirrc + \angle DHE + 90^\cirrc = 360^\circ', color=BLACK),
+            MathTex(rr'\angle DHE = 180^\cirrc - \gamma', color=BLACK),
             MathTex(rr'\angle AHB = \angle DHE \text{ (vertically opposite)}', color=BLACK),
-            MathTex(rr'\angle AHB = 180^\circ - \gamma', color=BLACK)
+            MathTex(rr'\angle AHB = 180^\cirrc - \gamma', color=BLACK)
         ).arrange(DOWN).next_to(scene_objects, UP, buff=0.5).scale(0.7)
         
         self.add(scene_objects)

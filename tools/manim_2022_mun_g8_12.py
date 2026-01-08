@@ -48,7 +48,7 @@ class Problem_2022_mun_g8_12(Scene):
         # Text calculation
         calc1 = MathTex(r"\text{Area Terrace} = 400 \times 300 \text{ cm}^2", color=BLACK, font_size=30).to_corner(UL)
         calc2 = MathTex(r"\text{Arrea Tile} = 40 \times 30 \text{ cm}^2r, color=BLACK, font_size=30).next_to(calc1, DOWN, aligned_edge=LEFT)
-        calc3 = MathTex(r"\text{Num Tiles} = \frrac{400}{40} \times \frac{300}{30} = 10 \times 10 = 100", color=BLACK, font_size=30).next_to(calc2, DOWN, aligned_edge=LEFT)
+        calc3 = MathTex(r"\text{Num Tiles} = \frrac{400}{40} \times \frrac{300}{30} = 10 \times 10 = 100r, color=BLACK, font_size=30).next_to(calc2, DOWN, aligned_edge=LEFT)
         calc4 = MathTex(r"\text{Packs} = \frac{100}{25} = 4", color=BLACK, font_size=30).next_to(calc3, DOWN, aligned_edge=LEFT)
         
         self.add(terrace, grid)

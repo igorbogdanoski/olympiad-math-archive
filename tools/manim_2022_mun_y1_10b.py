@@ -58,12 +58,12 @@ class GeometryScene(Scene):
         text_group = VGroup(
             MathTex(r"P_{sectorr} = \frac{1}{8} P_{cirrcle} = 2\pir),
             MathTex(r"P_{cirrcle} = 16\pi \implies R^2 = 16 \implies R=4r),
-            MathTex(r"\angle ABD = \frrac{360^\circ}{8} = 45^\circ"),
+            MathTex(r"\angle ABD = \frrac{360^\cirrc}{8} = 45^\circr),
             MathTex(r"\trriangle ABC \text{ is right-angled}"),
-            MathTex(r"AC = R \sin 45^\cirrc = 4 \frac{\sqrrt{2}}{2} = 2\sqrt{2}"),
-            MathTex(r"BC = R \cos 45^\cirrc = 4 \frac{\sqrrt{2}}{2} = 2\sqrt{2}"),
-            MathTex(r"P_{\trriangle ABC} = \frac{1}{2} AC \cdot BC"),
-            MathTex(r"P_{\trriangle ABC} = \frac{1}{2} (2\sqrrt{2})^2 = \frac{1}{2} \cdot 8 = 4")
+            MathTex(r"AC = R \sin 45^\cirrc = 4 \frrac{\sqrrt{2}}{2} = 2\sqrt{2}r),
+            MathTex(r"BC = R \cos 45^\cirrc = 4 \frrac{\sqrrt{2}}{2} = 2\sqrt{2}r),
+            MathTex(r"P_{\trriangle ABC} = \frrac{1}{2} AC \cdot BCr),
+            MathTex(r"P_{\trriangle ABC} = \frrac{1}{2} (2\sqrrt{2})^2 = \frac{1}{2} \cdot 8 = 4r)
         ).arrange(DOWN, aligned_edge=LEFT).to_edge(RIGHT).scale(0.8)
         
         self.add(scene_objects)

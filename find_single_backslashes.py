@@ -20,7 +20,7 @@ with open('tools/input.json', 'r', encoding='utf-8') as f:
                     i += 6
                     continue
             
-            print(f"CRITICAL ERROR: Invalid escape \\{follow} (char code {ord(follow)}) at index {i}")
+            print(fr"CRITICAL ERROR: Invalid escape \\{follow} (char code {ord(follow)}) at index {i}")
             print(f"Context: {content[max(0, i-20):min(len(content), i+20)]}")
             i += 1
         else:

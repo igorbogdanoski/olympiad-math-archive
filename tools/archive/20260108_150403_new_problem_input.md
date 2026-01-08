@@ -1,18 +1,18 @@
 ---
-difficulty: 4
-grade: 10
-primary_skill: метод_на_воведување_смена
 problem_id: sigma_137_y4_p1847
-related_skills:
-- анализа_на_домен
-- пресек_на_множества_решенија
-source: Sigma 137
-tags:
-- рационални_неравенки
-- метод_на_смена
-- квадратни_неравенки
 title: Решавање рационална неравенка со воведување смена
+grade: 10
+difficulty: 4
 type: algebra
+tags:
+  - рационални_неравенки
+  - метод_на_смена
+  - квадратни_неравенки
+primary_skill: метод_на_воведување_смена
+related_skills:
+  - анализа_на_домен
+  - пресек_на_множества_решенија
+source: Sigma 137
 ---
 
 # Решавање рационална неравенка со воведување смена
@@ -113,3 +113,46 @@ $$x \in [-2, -1] \cup$$
 ### 🔗 Поврзани вештини
 * **Примарна вештина:** Алгебарска супституција.
 * **Потребни предзнаења:** Квадратни неравенки, метод на интервали.
+
+# Manim Code
+```python
+from manim import *
+
+class SolutionScene(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        
+        # --- CONFIGURATION ---
+        axes = Axes(
+            x_range=[-3, 2, 1],
+            y_range=[-1, 5, 1],
+            axis_config={"color": BLACK, "include_tip": True},
+            tips=False
+        ).scale(0.8)
+        
+        # Define f(x) = x^2 + x + 3/(x^2 + x + 1)
+        # Using a raw string (r"") prevents issues with escape characters
+        func = axes.plot(
+            lambda x: x**2 + x + 3 / (x**2 + x + 1),
+            x_range=[-2.5, 1.5],
+            color=BLACK,
+            stroke_width=4
+        )
+        
+        # Limit line y = 3
+        limit_line = axes.plot(lambda x: 3, color=RED, stroke_width=2)
+        
+        # Highlight solution intervals [-2, -1] and
+        area1 = axes.get_area(func, x_range=[-2, -1], color=BLUE, opacity=0.3)
+        area2 = axes.get_area(func, x_range=, color=BLUE, opacity=0.3)
+        
+        # Labels
+        lbl_f = MathTex(r"f(x) = x^2 + x + \frac{3}{x^2+x+1}", color=BLACK).scale(0.6).to_corner(UL)
+        lbl_y3 = MathTex(r"y = 3", color=RED).scale(0.7).next_to(limit_line, RIGHT, buff=0.1)
+        
+        # Answer text
+        ans = MathTex(r"x \in [-2, -1] \cup", color=BLUE).to_edge(DOWN)
+
+        # Build final frame
+        self.add(axes, func, limit_line, area1, area2, lbl_f, lbl_y3, ans)
+```

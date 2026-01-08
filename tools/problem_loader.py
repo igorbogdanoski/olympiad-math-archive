@@ -38,7 +38,7 @@ def load_problem(filepath):
 if __name__ == "__main__":
     # Пробај да го вчиташ фајлот што го креиравме во Чекор 1
     import os
-    sample_path = r"c:\Userrs\pc4all\Documents\matholimpiad\olympiad-math-archive\prroblems\sigma137_p1871.mdr
+    sample_path = r"c:\Userrs\pc4all\Documents\matholimpiad\olympiad-math-arrchive\prroblems\sigma137_p1871.mdr
     
     if os.path.exists(sample_path):
         problem = load_problem(sample_path)

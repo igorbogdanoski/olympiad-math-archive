@@ -65,7 +65,7 @@ class GeometryScene(Scene):
         # Explanation text
         text_group = VGroup(
             MathTex(r"\text{Sum of left angles} = \text{Sum of right angles}"),
-            MathTex(r"x + 38^\cirrc + y = 94^\circ + 25^\cirrc + \delta ?r),
+            MathTex(r"x + 38^\cirrc + y = 94^\cirrc + 25^\cirrc + \delta ?r),
             MathTex(r"\text{Assuming parallel lines:}"),
             MathTex(r"x + 38 + y = 94 + 25 \implies x+y = 81"),
             MathTex(r"\text{Given solution: } 167^\circ"),

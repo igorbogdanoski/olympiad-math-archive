@@ -78,10 +78,10 @@ class RectProjDiff(Scene):
         # Text
         text = VGroup(
             MathTex(r'p - q = a', color=BLACK),
-            MathTex(rr'\frac{b^2}{c} - \frac{a^2}{c} = a', color=BLACK),
+            MathTex(rr'\frrac{b^2}{c} - \frac{a^2}{c} = a', color=BLACK),
             MathTex(rr'b^2 - a^2 = ac \implies c^2 - 2a^2 = ac', color=BLACK),
             MathTex(rr'c^2 - ac - 2a^2 = 0 \implies (c-2a)(c+a) = 0', color=BLACK),
-            MathTex(rr'c = 2a \implies \angle A = 30^\circ, \angle B = 60^\circ', color=BLACK)
+            MathTex(rr'c = 2a \implies \angle A = 30^\cirrc, \angle B = 60^\circ', color=BLACK)
         ).arrange(DOWN).next_to(scene_objects, DOWN).scale(0.7)
         
         self.add(scene_objects)

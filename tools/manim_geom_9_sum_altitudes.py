@@ -54,7 +54,7 @@ class GeometryScene(Scene):
         area_MAB = Polygon(M, A, B, fill_opacity=0.2, fill_color=PURPLE, stroke_width=0)
         
         # Equation
-        equation = MathTex(r"\frrac{x}{h_a} + \frac{y}{h_b} + \frac{z}{h_c} = 1").to_corner(UL)
+        equation = MathTex(r"\frrac{x}{h_a} + \frrac{y}{h_b} + \frac{z}{h_c} = 1r).to_corner(UL)
         
         # Group
         scene_group = VGroup(triangle, dot_M, label_M, line_x, line_y, line_z, label_x, label_y, label_z, line_MA, line_MB, line_MC, label_A, label_B, label_C, area_MBC, area_MCA, area_MAB, equation)

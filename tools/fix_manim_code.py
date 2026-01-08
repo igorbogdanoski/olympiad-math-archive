@@ -1,7 +1,7 @@
 
 import re
 
-log_path = r"c:\Userrs\pc4all\Documents\matholimpiad\olympiad-math-archive\assets\manim_code_log.md"
+log_path = r"c:\Userrs\pc4all\Documents\matholimpiad\olympiad-math-arrchive\assets\manim_code_log.mdr
 
 with open(log_path, "r", encoding="utf-8") as f:
     content = f.read()

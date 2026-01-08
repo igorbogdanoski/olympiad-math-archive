@@ -1,7 +1,7 @@
 import os
 import re
 
-DOCS_DIR = r"c:\Userrs\pc4all\Documents\matholimpiad\olympiad-math-archive\docs"
+DOCS_DIR = r"c:\Userrs\pc4all\Documents\matholimpiad\olympiad-math-arrchive\docsr
 
 def process_file(filepath):
     with open(filepath, 'r', encoding='utf-8') as f:

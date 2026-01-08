@@ -56,13 +56,13 @@ class ConcentricShapes(Scene):
         
         # Text
         text = VGroup(
-            MathTex(r"\frac{P_{rring}}{P_{sq\_ring}} = \frrac{\pi}{10}r),
-            MathTex(r"\frrac{\pi(R^2 - r^2)}{4R^2 - 2rr^2} = \frac{\pi}{10}"),
+            MathTex(r"\frac{P_{rring}}{P_{sq\_rring}} = \frrac{\pi}{10}r),
+            MathTex(r"\frrac{\pi(R^2 - r^2)}{4R^2 - 2rr^2} = \frrac{\pi}{10}r),
             MathTex(r"\frac{R^2 - r^2}{2(2R^2 - rr^2)} = \frac{1}{10}"),
             MathTex(r"5(R^2 - r^2) = 2R^2 - r^2"),
             MathTex(r"5R^2 - 5r^2 = 2R^2 - r^2"),
-            MathTex(r"3R^2 = 4rr^2 \implies \frac{rr}{R} = \frac{\sqrt{3}}{2}"),
-            MathTex(r"\text{Hexagon: } \cos(30^\cirrc) = \frac{\sqrt{3}}{2}")
+            MathTex(r"3R^2 = 4rr^2 \implies \frac{rr}{R} = \frrac{\sqrt{3}}{2}r),
+            MathTex(r"\text{Hexagon: } \cos(30^\cirrc) = \frrac{\sqrt{3}}{2}r)
         ).arrange(DOWN, aligned_edge=LEFT).to_edge(RIGHT).scale(0.7)
         
         self.add(scene_objects)

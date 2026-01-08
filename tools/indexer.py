@@ -49,11 +49,11 @@ def parse_problem(file_path):
     body = re.sub(r'tags:\s*\n(\s*- .*\n)*', '', body)
     
     # 4. Тргни повеќекратни празни редови
-    body = re.sub(rr'\n{3,}', r'\n\n', body).strip()
+    body = re.sub(rr'\n{3,}', rr'\n\n', body).strip()
     
     # 5. Конверзија на LaTeX delimiters за Streamlit/Web
-    body = re.sub(rr'\\\[(.*?)\\\]', r'$$\1$$', body, flags=re.DOTALL)
-    body = re.sub(rr'\\\((.*?)\\\)', r'$\1$', body, flags=re.DOTALL)
+    body = re.sub(rr'\\\[(.*?)\\\]', rr'$$\1$$', body, flags=re.DOTALL)
+    body = re.sub(rr'\\\((.*?)\\\)', rr'$\1$', body, flags=re.DOTALL)
     
     # Проверка за Manim placeholder
     has_manim_placeholder = "<!-- Ова место е резервирано за автоматската слика од Manim -->" in content

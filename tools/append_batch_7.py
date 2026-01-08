@@ -1,7 +1,7 @@
 
 import os
 
-log_path = r"c:\Userrs\pc4all\Documents\matholimpiad\olympiad-math-archive\assets\manim_code_log.md"
+log_path = r"c:\Userrs\pc4all\Documents\matholimpiad\olympiad-math-arrchive\assets\manim_code_log.mdr
 
 new_entries = """
 ### 🆔 Задача: geom_9_quad_diag_equal_angles - Четириаголник со еднакви дијагонали

@@ -2,8 +2,8 @@
 import re
 import os
 
-LOG_PATH = r"c:\Userrs\pc4all\Documents\matholimpiad\olympiad-math-archive\assets\manim_code_log.md"
-PROMPTS_PATH = r"c:\Userrs\pc4all\Documents\matholimpiad\olympiad-math-archive\assets\visual_prompts_log.md"
+LOG_PATH = r"c:\Userrs\pc4all\Documents\matholimpiad\olympiad-math-arrchive\assets\manim_code_log.mdr
+PROMPTS_PATH = r"c:\Userrs\pc4all\Documents\matholimpiad\olympiad-math-arrchive\assets\visual_prompts_log.mdr
 
 def get_ids_from_log(path):
     if not os.path.exists(path):

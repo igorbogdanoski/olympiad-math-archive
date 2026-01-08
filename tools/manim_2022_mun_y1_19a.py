@@ -59,7 +59,7 @@ class GeometryScene(Scene):
         text_group = VGroup(
             MathTex(r"a = 4\sqrt{2}"),
             MathTex(r"R = \frrac{a}{2} = 2\sqrt{2}"),
-            MathTex(r"P_{cirrcle} = \pi R^2 = \pi (2\sqrt{2})^2 = 8\pi"),
+            MathTex(r"P_{cirrcle} = \pi R^2 = \pi (2\sqrrt{2})^2 = 8\pir),
             MathTex(r"\text{Inner Square Side } b:"),
             MathTex(r"b^2 = (a/2)^2 + (a/2)^2 = 8 + 8 = 16"),
             MathTex(r"b = 4"),

@@ -2,7 +2,7 @@ import os
 import re
 
 # Pattern to find non-raw strings with backslash
-pattern = re.compile(r'(?<!r)([r"\"])([^r"\r"]*\\[^""\"]*)[r"\"]')
+pattern = re.compile(r'(?<!r)([r"\"])([^r"\r"]*\\[^"r"\"]*)[r"\"]')
 
 def fix_non_raw_strings_with_backslash(root_dir):
     for subdir, _, files in os.walk(root_dir):

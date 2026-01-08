@@ -1,7 +1,7 @@
 
 import os
 
-log_path = r"c:\Userrs\pc4all\Documents\matholimpiad\olympiad-math-archive\assets\manim_code_log.md"
+log_path = r"c:\Userrs\pc4all\Documents\matholimpiad\olympiad-math-arrchive\assets\manim_code_log.mdr
 
 new_entries = """
 ### 🆔 Задача: tri_altitudes_perimeter_09 - Периметар преку однос на висини

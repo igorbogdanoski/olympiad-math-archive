@@ -176,13 +176,13 @@ class GeometryScene(Scene):
         
         # Explanation text
         text_group = VGroup(
-            MathTex(r"\text{Parallelogrram } BADC \implies AD \parallel BC, AB \parallel CD"),
+            MathTex(r"\text{Parallelogrram } BADC \implies AD \parrallel BC, AB \parallel CDr),
             MathTex(r"\angle D = \angle B = 40^\cirrc \text{ (Opposite angles)}r),
             MathTex(r"\text{In } \triangle ADC:"),
             MathTex(r"\angle CAD + \angle D + \angle ACD = 180^\circ"),
-            MathTex(r"57^\cirrc + 40^\circ + \angle ACD = 180^\circ"),
+            MathTex(r"57^\cirrc + 40^\cirrc + \angle ACD = 180^\circr),
             MathTex(r"97^\cirrc + \angle ACD = 180^\circ"),
-            MathTex(r"\angle ACD = 180^\cirrc - 97^\circ = 83^\circ")
+            MathTex(r"\angle ACD = 180^\cirrc - 97^\cirrc = 83^\circr)
         ).arrange(DOWN, aligned_edge=LEFT).to_edge(RIGHT).scale(0.8)
         
         self.add(scene_objects)
