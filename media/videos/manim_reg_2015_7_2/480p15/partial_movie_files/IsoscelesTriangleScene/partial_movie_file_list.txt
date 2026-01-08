@@ -1,0 +1,6 @@
+# This file is used internally by FFMPEG.
+file 'file:C:/Users/pc4all/Documents/matholimpiad/olympiad-math-archive/media/videos/manim_reg_2015_7_2/480p15/partial_movie_files/IsoscelesTriangleScene/1584795214_1448167915_223132457.mp4'
+file 'file:C:/Users/pc4all/Documents/matholimpiad/olympiad-math-archive/media/videos/manim_reg_2015_7_2/480p15/partial_movie_files/IsoscelesTriangleScene/4072820271_2546588464_2283163862.mp4'
+file 'file:C:/Users/pc4all/Documents/matholimpiad/olympiad-math-archive/media/videos/manim_reg_2015_7_2/480p15/partial_movie_files/IsoscelesTriangleScene/4072820271_1023524513_313405744.mp4'
+file 'file:C:/Users/pc4all/Documents/matholimpiad/olympiad-math-archive/media/videos/manim_reg_2015_7_2/480p15/partial_movie_files/IsoscelesTriangleScene/4072820271_4028549912_1889928687.mp4'
+file 'file:C:/Users/pc4all/Documents/matholimpiad/olympiad-math-archive/media/videos/manim_reg_2015_7_2/480p15/partial_movie_files/IsoscelesTriangleScene/4072820271_2872842549_2165345605.mp4'
