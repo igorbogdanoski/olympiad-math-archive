@@ -85,7 +85,7 @@ class PlatinumProcessor:
 
     def sanitize_code_safe_mode(self, code):
         """Safe Mode: Ги отстранува LaTeX зависностите."""
-        print("🔧 Активирам SAFE MODE: Конверзија на LaTeX во обичен текст...")
+        print("SAFE MODE: Converting LaTeX to plain text...")
         code = code.replace("MathTex", "Text")
         replacements = {
             r"\\": " ", r"\cdot": "*", r"\frac": "", 
@@ -195,7 +195,7 @@ class PlatinumProcessor:
             else:
                  content += image_md
         else:
-            print("⚠️ ВНИМАНИЕ: Сликата не беше генерирана, па не е додадена во фајлот.")
+            print("WARNING: Image was not generated and not added to file.")
         
         post.content = content
         return post
@@ -251,6 +251,11 @@ class PlatinumProcessor:
         import re
         code = re.sub(r'Line\(([^)]*),\s*stroke_dash_pattern\s*=\s*([^\),]+)([^)]*)\)', r'DashedLine(\1\3)', code)
         code = re.sub(r'quadrant\s*=\s*([0-9]+)', r'quadrant=[1, -1]', code)
+        # Fix DASHED name error in all variants
+        code = code.replace("line_config={'stroke_dash_pattern': DASHED}", "")
+        code = code.replace("stroke_dash_pattern=DASHED", "")
+        code = code.replace("stroke_style=DASHED", "")
+        code = code.replace("DASHED", "True") # Last resort to avoid NameError
         # Fix AnnularSector duplication logic (simplified)
         code = re.sub(r'(AnnularSector\([^)]*)\brradius\s*=[^,]+,\s*', r'\1', code) 
         return code
@@ -274,13 +279,13 @@ class PlatinumProcessor:
             content_raw = f.read().strip()
             
         if not content_raw:
-            print("⚠️ Фајлот е празен.")
+            print("WARNING: File is empty.")
             return
 
         try:
             post = frontmatter.loads(content_raw)
         except Exception as e:
-            print(f"❌ YAML грешка: {e}")
+            print(f"ERROR: YAML error: {e}")
             return
 
         # --- AUTO-GENERATE ID IF MISSING ---
