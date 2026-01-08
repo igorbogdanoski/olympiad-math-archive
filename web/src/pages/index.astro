@@ -11,7 +11,14 @@ const categories = [...new Set(problems.map(p => p.category))]
   .sort();
 
 const cleanBody = (text: string) => {
-  return text.split('##')[0].replace(/[\$\#\*]/g, '').slice(0, 100) + '...';
+  if (!text) return "";
+  return text
+    .split('##')[0] // Земи го само текстот пред првиот поднаслов
+    .replace(/\[.*?\]\(.*?\)/g, '') // Избриши ги сите Markdown линкови
+    .replace(/[\$\#\*\_]/g, '') // Избриши ги специјалните Markdown знаци
+    .replace(/\n/g, ' ') // Претвори ги новите редови во празно место
+    .trim()
+    .slice(0, 120) + '...';
 };
 
 const getDifficultyColor = (diff: number) => {
