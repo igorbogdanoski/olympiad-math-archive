@@ -1,22 +1,3 @@
-# Пример задача со вгнездено решение и слика
-
-## Задача
-
-Во триаголникот ABC, точките се дадени со координати:
-A = (-1, 2), B = (-2.5, -1), C = (2, -1).
-Најдете ја точката Y која е пресек на аголните бисектриси од A и B, и прикажете го триаголникот со сите релевантни елементи.
-
-## Решение
-
-Сликата подолу го илустрира решението:
-
-![Решение](../media/images/temp_manim_render/SolutionScene_ManimCE_v0.19.1.png)
-
----
-
-### Manim код за визуализација
-
-```python
 from manim import *
 import numpy as np
 
@@ -56,4 +37,3 @@ class SolutionScene(Scene):
         ayb_arc = Angle(Line(Y, B), Line(Y, A), radius=0.4, color=RED)
         self.add(ext_line, triangle, bisector_a, bisector_b, dot_y, cross, highlight, gamma_arc, ayb_arc)
         self.add(lbl_A, lbl_B, lbl_C, lbl_Y, res)
-```
