@@ -59,7 +59,7 @@ def render_scene(prob_id, code_body):
             scene_class_name = class_match.group(1)
             # Додај import ако фали
             if "from manim import *" not in code_body:
-                full_code = fr"from manim imporrt *\n\n{code_body}r
+                full_code = f"from manim import *\n\n{code_body}"
             else:
                 full_code = code_body
         else:
@@ -94,7 +94,7 @@ def render_scene(prob_id, code_body):
         )
         
         if result.returncode != 0:
-            print(fr"❌ Manim Error for {prrob_id}:\n{result.stderr}")
+            print(f"❌ Manim Error for {prob_id}:\n{result.stderr}")
             return False
 
         # 6. Најди ја сликата и премести ја

@@ -9,7 +9,7 @@ const categories = [...new Set(problems.map(p => p.category))].filter(c => c !==
 
 <Layout title="За Наставници - Генерирај Тест">
 	<div class="max-w-5xl mx-auto">
-		<div class="mb-10">
+		<div class="mb-10 no-print">
 			<h1 class="text-4xl font-black mb-4">Алатки за Наставници</h1>
 			<p class="text-slate-500 dark:text-slate-400 text-lg">
 				Креирајте персонализирани тестови и работни листови за вашите ученици во неколку секунди.
@@ -17,63 +17,73 @@ const categories = [...new Set(problems.map(p => p.category))].filter(c => c !==
 		</div>
 
 		<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-			<div class="lg:col-span-1 space-y-6">
-				<div class="bg-white dark:bg-slate-900 p-6 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm">
-					<h3 class="font-bold text-lg mb-6 flex items-center gap-2">
-						<span class="text-blue-500">⚙️</span> Параметри на тест
+			<div class="lg:col-span-1 space-y-6 no-print">
+				<div class="bg-white dark:bg-slate-900 p-8 rounded-[2.5rem] border border-slate-200 dark:border-slate-800 shadow-sm">
+					<h3 class="font-bold text-lg mb-6 flex items-center gap-3">
+						<span class="p-2 bg-blue-600 text-white rounded-lg text-sm">
+							<svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
+						</span>
+						Параметри на тест
 					</h3>
 					
-					<div class="space-y-4">
+					<div class="space-y-6">
 						<div>
-							<label class="block text-xs font-black text-slate-400 uppercase tracking-widest mb-2">Одделение</label>
-							<select id="test-grade" class="w-full bg-slate-50 dark:bg-slate-800 border-none rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-blue-500 outline-none">
+							<label class="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-3">Одделение</label>
+							<select id="test-grade" class="w-full bg-slate-50 dark:bg-slate-800 border-none rounded-xl px-4 py-3.5 text-sm font-bold focus:ring-2 focus:ring-blue-500 outline-none transition-all">
 								<option value="">Сите</option>
 								{grades.map(g => <option value={g}>{g}-то одделение</option>)}
 							</select>
 						</div>
 
 						<div>
-							<label class="block text-xs font-black text-slate-400 uppercase tracking-widest mb-2">Област</label>
-							<select id="test-cat" class="w-full bg-slate-50 dark:bg-slate-800 border-none rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-blue-500 outline-none">
+							<label class="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-3">Област</label>
+							<select id="test-cat" class="w-full bg-slate-50 dark:bg-slate-800 border-none rounded-xl px-4 py-3.5 text-sm font-bold focus:ring-2 focus:ring-blue-500 outline-none transition-all">
 								<option value="">Сите области</option>
 								{categories.map(c => <option value={c} class="capitalize">{c}</option>)}
 							</select>
 						</div>
 
 						<div>
-							<label class="block text-xs font-black text-slate-400 uppercase tracking-widest mb-2">Број на задачи</label>
-							<input type="number" id="test-count" value="5" min="1" max="20" class="w-full bg-slate-50 dark:bg-slate-800 border-none rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-blue-500 outline-none" />
+							<label class="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-3">Број на задачи</label>
+							<input type="number" id="test-count" value="5" min="1" max="20" class="w-full bg-slate-50 dark:bg-slate-800 border-none rounded-xl px-4 py-3.5 text-sm font-bold focus:ring-2 focus:ring-blue-500 outline-none transition-all" />
 						</div>
 
-						<button id="generate-preview" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 rounded-2xl shadow-lg shadow-blue-500/30 transition-all active:scale-95">
-							Генерирај преглед
+						<button id="generate-preview" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 rounded-2xl shadow-lg shadow-blue-500/20 transition-all active:scale-95 flex items-center justify-center gap-2">
+							<span>Генерирај преглед</span>
 						</button>
 					</div>
 				</div>
 
-                <div class="bg-amber-50 dark:bg-amber-900/10 p-6 rounded-3xl border border-amber-100 dark:border-amber-900/30">
-                    <h4 class="font-bold text-amber-800 dark:text-amber-400 mb-2 italic text-sm">Про Совет:</h4>
-                    <p class="text-xs text-amber-700 dark:text-amber-500 leading-relaxed">
-                        Користете го копчето за печатење за автоматско форматирање на А4 лист.
+                <div class="bg-indigo-50/50 dark:bg-indigo-900/10 p-6 rounded-3xl border border-indigo-100 dark:border-indigo-900/30">
+                    <h4 class="font-bold text-indigo-900 dark:text-indigo-400 mb-2 italic text-sm">Про Совет:</h4>
+                    <p class="text-xs text-indigo-700 dark:text-indigo-500 leading-relaxed font-medium">
+                        Користете го копчето за печатење за автоматско форматирање на А4 лист. Сите наслови и менија ќе бидат автоматски сокриени.
                     </p>
                 </div>
 			</div>
 
 		<div class="lg:col-span-2">
-			<div class="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden min-h-[500px] flex flex-col">
-				<div class="p-6 border-b border-slate-100 dark:border-slate-800 flex justify-between items-center bg-slate-50/50 dark:bg-slate-800/50">
-					<h3 class="font-bold">Преглед на тест</h3>
+			<div class="bg-white dark:bg-slate-900 rounded-[2.5rem] border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden min-h-[600px] flex flex-col transition-all">
+				<div class="p-8 border-b border-slate-100 dark:border-slate-800 flex justify-between items-center bg-slate-50/50 dark:bg-slate-800/30 no-print">
+					<h3 class="font-black text-slate-900 dark:text-white uppercase tracking-tight">Преглед на тест</h3>
 					<div class="flex gap-2">
-						<button id="print-test" class="hidden px-4 py-2 bg-blue-600 text-white rounded-xl text-xs font-bold hover:bg-blue-700 transition-colors">
+						<button id="print-test" class="hidden px-6 py-2.5 bg-blue-600 text-white rounded-xl text-xs font-black hover:bg-blue-700 transition-all shadow-lg shadow-blue-500/20 active:scale-95 uppercase tracking-widest">
 							🖨️ Печати Тест
 						</button>
 					</div>
 				</div>
 				
-				<div id="test-content" class="p-8 flex-grow overflow-y-auto">
-					<div class="flex flex-col items-center justify-center h-full text-slate-400 py-20">
-						<span class="text-6xl mb-4">📄</span>
-						<p>Изберете параметри и кликнете на "Генерирај преглед"</p>
+				<div id="test-content" class="p-10 flex-grow overflow-y-auto">
+					<div class="print-only hidden text-center mb-10 border-b-2 border-black pb-6">
+						<h1 class="text-2xl font-black uppercase mb-2">Математички Тест</h1>
+						<div class="flex justify-between mt-4 font-bold">
+							<span>Име и презиме: ______________________</span>
+							<span>Дата: __________</span>
+						</div>
+					</div>
+					<div class="flex flex-col items-center justify-center h-full text-slate-400 py-20 no-print">
+						<span class="text-7xl mb-6 opacity-20">📄</span>
+						<p class="font-bold uppercase tracking-widest text-xs">Изберете параметри и кликнете на "Генерирај преглед"</p>
 					</div>
 				</div>
 			</div>
@@ -113,11 +123,12 @@ const categories = [...new Set(problems.map(p => p.category))].filter(c => c !==
 				return;
 			}
 
-			let html = `<div class="p-4 space-y-8">`;
+			let html = `<div class="space-y-12">`;
 			selected.forEach((p: any, i: number) => {
-				html += `<div class="pb-6 border-b border-slate-100">
-					<p class="font-black text-blue-600 mb-2">Задача #${i+1}</p>
-					<div class="prose max-w-none">${p.body.split('##')[0]}</div>
+				html += `<div class="break-inside-avoid pb-8 border-b border-slate-100 dark:border-slate-800 last:border-0">
+					<p class="font-black text-blue-600 mb-4 uppercase tracking-widest text-[10px] no-print">Задача #${i+1}</p>
+					<p class="hidden print:block font-bold mb-4 text-lg">Задача ${i+1}.</p>
+					<div class="prose dark:prose-invert max-w-none text-slate-800 dark:text-slate-200">${p.body.split('##')[0]}</div>
 				</div>`;
 			});
 			html += `</div>`;

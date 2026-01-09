@@ -142,26 +142,18 @@ class SolutionScene(Scene):
 🎨 MANIM RULES (Visual Architect)
 When generating Manim code:
 
-Library: Manim Community Edition.
+1. **Library**: Manim Community Edition.
+2. **Colors**: Background MUST be WHITE. Lines/Points MUST be BLACK.
+3. **Labels**: Use MathTex for all labels. ALWAYS specify color=BLACK.
+4. **No Cyrillic**: STRICTLY English/Math symbols in labels (Cyrillic crashes LaTeX). 
+5. **Dashed Lines**: Use DashedLine(start, end) class. DO NOT use stroke_dash_pattern argument in Line().
+6. **Dots**: Create points first: A = np.array([x, y, 0]). Then pt_a = Dot(A, color=BLACK).
+7. **Explicit Coordinates**: Define all points clearly at the top of construct().
+8. **Scaling**: Manim screen is 14.22x8.0 units. Ensure your diagram fits and is centered. Use stroke_width=4.
+9. **Final State**: The script captures the final frame. Ensure self.add() is called for all elements.
 
-Background: Always set self.camera.background_color = WHITE.
-
-Colors: Use BLACK for lines/vertices. Use RED or BLUE only for highlights.
-
-Labels: Use MathTex (not Tex). Position carefully with next_to() and buff parameter. 
-
-LANGUAGE: STRICTLY ENGLISH OR MATH SYMBOLS ONLY. Do NOT use Cyrillic/Macedonian characters in labels (LaTeX crashes).
-
-✅ Correct: MathTex("Area = 10", color=BLACK)
-
-❌ Incorrect: MathTex("Плоштина", color=BLACK)
-
-Python Syntax Guardrail: When defining configuration dictionaries (like axis_config, background_line_style, legend_config), ALWAYS uses curly braces {}.
-
-✅ Correct: axis_config={"color": BLACK, "include_tip": True}
-
-❌ Incorrect: axis_config="color": BLACK
-❌ Incorrect: axis_config="color": BLACK (should be axis_config={"color": BLACK})
-
-Completeness: Code must be immediately runnable. No placeholders.
+✅ Correct Labeling: 
+pt_a = Dot(ORIGIN, color=BLACK)
+lbl_a = MathTex("A", color=BLACK).next_to(pt_a, UP)
+self.add(pt_a, lbl_a)
 ```

@@ -1,0 +1,2 @@
+# This file is used internally by FFMPEG.
+file 'file:C:/Users/pc4all/Documents/matholimpiad/olympiad-math-archive/media/videos/temp_manim_render/1080p60/partial_movie_files/ZigZagTriangleScene/2724447040_2230675760_1272071946.mp4'

@@ -117,7 +117,7 @@ const related = problems
 <Layout title={`${sections.title} | МатАрхива`}>
   <div class="max-w-6xl mx-auto px-4 py-8">
     <!-- Breadcrumbs -->
-    <nav class="flex mb-8 text-sm font-medium text-slate-500 gap-2 items-center">
+    <nav class="flex mb-8 text-sm font-medium text-slate-500 gap-2 items-center no-print">
       <a href="/" class="hover:text-blue-600 transition-colors flex items-center gap-1">
         <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
         Архива
@@ -130,7 +130,7 @@ const related = problems
       <!-- Main Content Area -->
       <div class="lg:col-span-2 space-y-8">
         <header class="mb-8">
-          <div class="flex items-center gap-4 mb-4">
+          <div class="flex items-center gap-4 mb-4 no-print">
              <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 text-xs font-bold rounded-full">
                {grade} одделение
              </span>
@@ -142,11 +142,15 @@ const related = problems
             {sections.title}
           </h1>
           {sections.source && <p class="text-slate-500 italic">Извор: {sections.source}</p>}
+          
+          <div class="hidden print-only mt-4 text-sm text-slate-400 border-t pt-4">
+            Архива: {category} | {grade} одделение | {difficulty}/10 тежина
+          </div>
         </header>
 
         <!-- Problem Visualization -->
         {(meta.problem_id || filename) && (
-          <div class="rounded-3xl overflow-hidden border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 p-2 shadow-sm">
+          <div class="rounded-3xl overflow-hidden border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 p-2 shadow-sm break-inside-avoid">
              <div class="bg-slate-50 dark:bg-slate-900 rounded-2xl p-6 flex justify-center">
                 <img 
                     src={`/assets/images/${meta.problem_id || filename.replace('.md', '')}/${meta.problem_id || filename.replace('.md', '')}.png`} 
@@ -158,26 +162,47 @@ const related = problems
           </div>
         )}
 
+        <!-- Video Lesson -->
+        {meta.video_url && (
+          <section class="bg-slate-900 rounded-[2rem] overflow-hidden shadow-2xl no-print">
+            <div class="px-8 py-4 bg-slate-800 border-b border-slate-700 flex items-center gap-3">
+              <span class="flex h-3 w-3 rounded-full bg-red-500 animate-pulse"></span>
+              <h3 class="text-white font-bold text-sm uppercase tracking-widest">Видео Лекција</h3>
+            </div>
+            <div class="aspect-video">
+              <video 
+                src={meta.video_url} 
+                controls 
+                class="w-full h-full"
+                poster={`/assets/images/${meta.problem_id || filename.replace('.md', '')}/${meta.problem_id || filename.replace('.md', '')}.png`}
+              >
+                Вашиот прелистувач не поддржува видео.
+              </video>
+            </div>
+          </section>
+        )}
+
         <!-- Task Text -->
-        <section class="bg-white dark:bg-slate-900 rounded-[2rem] border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
-          <div class="px-8 py-6 border-b border-slate-100 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/30 flex items-center justify-between">
+        <section class="bg-white dark:bg-slate-900 rounded-[2rem] border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden break-inside-avoid">
+          <div class="px-8 py-6 border-b border-slate-100 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/30 flex items-center justify-between no-print">
             <h2 class="text-xl font-bold flex items-center gap-3 text-slate-900 dark:text-white">
               <span class="p-2 bg-blue-600 text-white rounded-lg">
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><line x1="10" y1="9" x2="8" y2="9"/></svg>
               </span>
               Текст на задачата
             </h2>
-            <button class="text-slate-400 hover:text-blue-600 transition-colors" title="Копирај текст">
+            <button id="copy-text" class="text-slate-400 hover:text-blue-600 transition-colors p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800" title="Копирај текст">
               <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
             </button>
           </div>
-          <div class="p-8 prose prose-slate dark:prose-invert prose-lg max-w-none content-math italic text-slate-800 dark:text-slate-200" set:html={sections.text}>
+          <div class="print-only hidden px-8 py-4 border-b border-slate-100 font-bold text-lg">Задача:</div>
+          <div id="problem-body" class="p-8 prose prose-slate dark:prose-invert prose-lg max-w-none content-math italic text-slate-800 dark:text-slate-200" set:html={sections.text}>
           </div>
         </section>
 
         <!-- Expert Intuition / Analysis -->
         {sections.intuition && (
-          <section class="bg-amber-50/50 dark:bg-amber-900/10 rounded-[2rem] border border-amber-100 dark:border-amber-900/30 overflow-hidden">
+          <section class="bg-amber-50/50 dark:bg-amber-900/10 rounded-[2rem] border border-amber-100 dark:border-amber-900/30 overflow-hidden break-inside-avoid">
             <div class="px-8 py-6 border-b border-amber-100 dark:border-amber-900/30 flex items-center gap-3">
               <span class="text-2xl">🧠</span>
               <h2 class="text-xl font-bold text-amber-900 dark:text-amber-400">Експертска Анализа & Интуиција</h2>
@@ -188,8 +213,8 @@ const related = problems
         )}
 
         <!-- Solution -->
-        <section class="bg-white dark:bg-slate-900 rounded-[2rem] border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
-           <div class="px-8 py-6 border-b border-slate-100 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/30">
+        <section class="bg-white dark:bg-slate-900 rounded-[2rem] border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden break-inside-avoid">
+           <div class="px-8 py-6 border-b border-slate-100 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/30 no-print">
             <div class="flex items-center justify-between">
               <h2 class="text-xl font-bold flex items-center gap-3 text-slate-900 dark:text-white">
                 <span class="p-2 bg-emerald-600 text-white rounded-lg">
@@ -200,7 +225,8 @@ const related = problems
               <button id="toggle-solution" class="text-sm font-bold text-blue-600 hover:underline">Прикажи решение</button>
             </div>
           </div>
-          <div id="solution-content" class="p-8 prose prose-slate dark:prose-invert prose-lg max-w-none content-math hidden">
+          <div class="print-only hidden px-8 py-4 border-b border-slate-100 font-bold text-lg">Решение:</div>
+          <div id="solution-content" class="p-8 prose prose-slate dark:prose-invert prose-lg max-w-none content-math hidden print:block">
             {sections.solution ? (
               <div set:html={sections.solution}></div>
             ) : (
@@ -211,7 +237,7 @@ const related = problems
 
         <!-- Mentor Notes -->
         {sections.mentor_notes && (
-          <section class="bg-indigo-50/50 dark:bg-indigo-900/10 rounded-[2rem] border border-indigo-100 dark:border-indigo-900/30 overflow-hidden">
+          <section class="bg-indigo-50/50 dark:bg-indigo-900/10 rounded-[2rem] border border-indigo-100 dark:border-indigo-900/30 overflow-hidden break-inside-avoid">
             <div class="px-8 py-6 border-b border-indigo-100 dark:border-indigo-900/30 flex items-center gap-3">
               <span class="p-2 bg-indigo-600 text-white rounded-lg">
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
@@ -225,7 +251,7 @@ const related = problems
       </div>
 
       <!-- Sidebar -->
-      <aside class="space-y-8">
+      <aside class="space-y-8 no-print">
         <!-- Task Meta Card -->
         <div class="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 p-8 sticky top-8">
           <h3 class="text-lg font-bold mb-6 text-slate-900 dark:text-white">Детали за задачата</h3>
@@ -265,10 +291,14 @@ const related = problems
               </div>
             </div>
 
-            <div class="pt-6">
-               <button id="share-btn" class="w-full py-3 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-xl font-bold flex items-center justify-center gap-2 hover:opacity-90 transition-opacity">
+            <div class="pt-6 grid grid-cols-2 gap-3">
+               <button id="share-btn" class="py-3 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
-                Сподели задача
+                Сподели
+               </button>
+               <button id="print-page" class="py-3 bg-blue-600 text-white rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-blue-700 transition-colors shadow-lg shadow-blue-500/20">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+                Печати
                </button>
             </div>
           </div>
@@ -312,6 +342,29 @@ const related = problems
       } else {
         solutionContent.classList.add('hidden');
         toggleBtn.textContent = 'Прикажи решение';
+      }
+    });
+  }
+
+  const printBtn = document.getElementById('print-page');
+  if (printBtn) {
+    printBtn.addEventListener('click', () => {
+      window.print();
+    });
+  }
+
+  const copyBtn = document.getElementById('copy-text');
+  if (copyBtn) {
+    copyBtn.addEventListener('click', () => {
+      const body = document.getElementById('problem-body');
+      if (body) {
+        navigator.clipboard.writeText(body.innerText).then(() => {
+          const originalSvg = copyBtn.innerHTML;
+          copyBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>';
+          setTimeout(() => {
+            copyBtn.innerHTML = originalSvg;
+          }, 2000);
+        });
       }
     });
   }

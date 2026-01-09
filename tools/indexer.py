@@ -1,6 +1,7 @@
 import os
 import re
 import json
+from pathlib import Path
 
 def parse_problem(file_path):
     """Чита фајл и враќа метаподатоци и содржина."""
@@ -80,16 +81,25 @@ def build_index(archive_root):
     # Избегнуваме печатење на патеки со кирилица во терминал што не поддржува
     
     for root, dirs, files in os.walk(archive_root):
-        if any(x in root for x in ["tools", "ai", "assets", "public", ".git", "web", "skill_guides", "theorems"]):
+        # Агресивно игнорирање на системски фолдери и фајлови во коренот
+        if any(x in root for x in ["tools", "ai", "assets", "public", ".git", "web", "skill_guides", "theorems", "generated_worksheets", "media"]):
             continue
+        
+        # Игнорирај го коренот на docs (каде се README, MAINTENANCE итн.)
+        if Path(root).resolve() == Path(archive_root).resolve() or Path(root).name == "docs":
+            if "grade_" not in root: # Дозволи ако е docs/grade_X
+                continue
             
         for file in files:
-            if file.endswith(".md") and file not in ["README.md", "problem_template.md", "geometry_problem_template.md"]:
+            # Само .md фајлови кои не се системски
+            if file.endswith(".md") and not file.startswith("_") and file not in ["README.md", "problem_template.md", "geometry_problem_template.md", "MAINTENANCE.md", "plan.md"]:
                 path = os.path.join(root, file)
                 try:
                     meta, body, full_path = parse_problem(path)
                     
-                    # Изведување на grade/category од патеката
+                    # Игнорирај задачи кои се празни или се "Work in Progress"
+                    if not body or "Work in Progress" in body or len(body) < 50:
+                        continue
                     parts = os.path.normpath(path).split(os.sep)
                     grade = "N/A"
                     category = "N/A"

@@ -136,10 +136,10 @@ def create_problem_file(data):
 
     visual_block = ""
     if os.path.exists(image_abs_path):
-        visual_block = fr"\n![Скица]({img_rel_path_prrefix}/{image_filename})\nr
+        visual_block = f"\n![Скица]({img_rel_path_prefix}/{image_filename})\n"
     elif manim_code:
         safe_id = re.sub(r'[^a-zA-Z0-9_]', '_', prob_id)
-        visual_block = fr"\n> **Dev Geo-Mentorr Code:**\n> Одете во `assets/manim_code_log.md`, копирајте го кодот за `Task_{safe_id}` и генерирајте ја сликата.\nr
+        visual_block = f"\n> **Dev Geo-Mentor Code:**\n> Одете во `assets/manim_code_log.md`, копирајте го кодот за `Task_{safe_id}` и генерирајте ја сликата.\n"
     
     # Вметнување на визуелизацијата
     if "<visual_placeholder>" in content:

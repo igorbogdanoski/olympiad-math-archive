@@ -11,10 +11,12 @@ from pathlib import Path
 # Обид за импорт на локални модули
 try:
     import indexer
+    from manim_utils import fix_manim_common_errors, sanitize_for_latex_free
 except ImportError:
     # Ако не може да го најде директно, додај ја tools папката во path
     sys.path.append(os.path.dirname(os.path.abspath(__file__)))
     import indexer
+    from manim_utils import fix_manim_common_errors, sanitize_for_latex_free
 
 # Обид за импорт на frontmatter
 try:
@@ -28,6 +30,10 @@ class PlatinumProcessor:
     def __init__(self, base_dir):
         self.base_dir = Path(base_dir).resolve()
         self.output_dir = self.base_dir / "docs"
+        # Adjusted assets path to match process_ai_problem.py if that's the preferred structure
+        # In process_ai_problem.py it was: self.assets_dir = self.base_dir / "assets" / "images"
+        # In process_olympiad.py it was: self.assets_dir = self.base_dir / "web" / "public" / "assets" / "images"
+        # Let's check which one is used in the Astro app.
         self.assets_dir = self.base_dir / "web" / "public" / "assets" / "images"
         self.tools_dir = self.base_dir / "tools"
         self.archive_dir = self.tools_dir / "archive"
@@ -85,16 +91,9 @@ class PlatinumProcessor:
         return code_content, full_block
 
     def sanitize_code_safe_mode(self, code):
-        """Safe Mode: Ги отстранува LaTeX зависностите."""
-        print("SAFE MODE: Converting LaTeX to plain text...")
-        code = code.replace("MathTex", "Text")
-        replacements = {
-            r"\\": " ", r"\cdot": "*", r"\frac": "", 
-            r"{": "", r"}": "", r"\boxed": ""
-        }
-        for old, new in replacements.items():
-            code = code.replace(old, new)
-        return code
+        """Safe Mode: Ги отстранува LaTeX зависностите преку manim_utils."""
+        print("🔧 SAFE MODE: Converting LaTeX to plain text...")
+        return sanitize_for_latex_free(code)
 
     def find_scene_class(self, code):
         """Наоѓа било каква Scene класа."""
@@ -120,9 +119,9 @@ class PlatinumProcessor:
         final_image_path = problem_assets_dir / f"{problem_id}.png"
 
         # Команда за Manim
-        # Користиме --media_dir за да ги ставиме привремените фајлови таму
+        # -qh = Quality High (1080p)
         cmd = [
-            "manim", "-ql", "-s", "--disable_caching",
+            "manim", "-qh", "-s", "--disable_caching",
             str(self.manim_temp_script), scene_name,
             "--media_dir", str(self.manim_media_temp),
             "-o", f"{problem_id}.png" # Го форсираме името на фајлот
@@ -131,12 +130,13 @@ class PlatinumProcessor:
         print(f"Rendering illustration for: {problem_id}...")
         
         # --- ОБИД 1 ---
+        # Fixed: capture_output and text=True can cause encoding issues on Windows with some Manim outputs
+        # Using encoding='utf-8' and errors='replace' for robustness
         result = subprocess.run(cmd, capture_output=True, text=True, encoding='utf-8', errors='replace')
         
         success = False
         
         # Проверка дали фајлот е генериран (Manim понекогаш го закопува длабоко)
-        # Најсигурен начин е со rglob во media_temp папката
         generated_files = list(self.manim_media_temp.rglob(f"{problem_id}.png"))
         
         if result.returncode == 0 and generated_files:
@@ -145,7 +145,7 @@ class PlatinumProcessor:
             # --- ОБИД 2 (Safe Mode) ---
             print("WARNING: Prviot obid ne uspea. Probuvam Safe Mode...")
             if result.returncode != 0:
-                print(f"Error: {result.stderr[-300:]}") # Печати ги последните 300 карактери од грешката
+                print(f"Error: {result.stderr[-300:]}") 
 
             safe_code = self.sanitize_code_safe_mode(manim_code)
             with open(self.manim_temp_script, 'w', encoding='utf-8') as f:
@@ -168,9 +168,16 @@ class PlatinumProcessor:
             source_img = generated_files[0]
             shutil.move(str(source_img), str(final_image_path))
             print(f"OK: Slika e kreirana: {final_image_path.name}")
+            # Correct relative path for the web (assuming /assets/images is public)
             return f"/assets/images/{problem_id}/{problem_id}.png"
         
         return None
+
+    def fix_manim_code_logic(self, code):
+        """Fixes common Manim AI errors via manim_utils"""
+        print("🔧 Applying automated fixes to Manim code...")
+        return fix_manim_common_errors(code)
+
 
     def update_markdown_content(self, post, image_rel_path, raw_manim_block):
         """Го брише Manim кодот и додава линк до сликата."""
@@ -250,20 +257,6 @@ class PlatinumProcessor:
             return False
         return True
 
-    def fix_manim_code(self, code):
-        """Fixes common Manim AI errors"""
-        import re
-        code = re.sub(r'Line\(([^)]*),\s*stroke_dash_pattern\s*=\s*([^\),]+)([^)]*)\)', r'DashedLine(\1\3)', code)
-        code = re.sub(r'quadrant\s*=\s*([0-9]+)', r'quadrant=[1, -1]', code)
-        # Fix DASHED name error in all variants
-        code = code.replace("line_config={'stroke_dash_pattern': DASHED}", "")
-        code = code.replace("stroke_dash_pattern=DASHED", "")
-        code = code.replace("stroke_style=DASHED", "")
-        code = code.replace("DASHED", "True") # Last resort to avoid NameError
-        # Fix AnnularSector duplication logic (simplified)
-        code = re.sub(r'(AnnularSector\([^)]*)\brradius\s*=[^,]+,\s*', r'\1', code) 
-        return code
-
     def check_python_syntax(self, code):
         try:
             ast.parse(code)
@@ -318,7 +311,7 @@ class PlatinumProcessor:
         
         image_path = None
         if manim_code:
-            manim_code = self.fix_manim_code(manim_code)
+            manim_code = self.fix_manim_code_logic(manim_code)
             if not self.check_python_syntax(manim_code):
                 image_path = self.run_manim(manim_code, problem_id)
             else:
@@ -347,6 +340,11 @@ class PlatinumProcessor:
         print("DONE!")
 
 if __name__ == "__main__":
+    import io
+    # Handle Windows encoding
+    if sys.stdout.encoding != 'utf-8':
+        sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
+
     BASE_DIR = Path(__file__).parent.parent
     # Осигурај се дека оваа патека е точна кај тебе!
     INPUT_FILE = BASE_DIR / "tools" / "new_problem_input.md"
