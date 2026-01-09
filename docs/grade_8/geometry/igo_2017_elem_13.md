@@ -1,19 +1,19 @@
 ---
-problem_id: igo_2017_elem_13
-title: Агли во триаголник со зиг-заг верига
-grade: 8
 difficulty: 5
-type: geometry
-tags:
-  - рамнокрак_триаголник
-  - аголно_бркање
-  - igo_elementary
-  - надворешен_агол
+grade: 8
 primary_skill: аголно_бркање
+problem_id: igo_2017_elem_13
 related_skills:
-  - својства_на_рамнокрак_триаголник
-  - теорема_за_надворешен_агол
+- својства_на_рамнокрак_триаголник
+- теорема_за_надворешен_агол
 source: IGO 2017, Elementary
+tags:
+- рамнокрак_триаголник
+- аголно_бркање
+- igo_elementary
+- надворешен_агол
+title: Агли во триаголник со зиг-заг верига
+type: geometry
 ---
 
 # Агли во триаголник со зиг-заг верига
@@ -118,49 +118,3 @@ $$ 9x = 180^\circ \implies x = 20^\circ $$
 ### 🔗 Поврзани вештини
 * **Примарна вештина:** Аголно бркање (Angle Chasing)
 * **Потребни предзнаења:** Теорема за надворешен агол, својства на рамнокрак триаголник.
-
-# Manim Code
-```python
-from manim import *
-import numpy as np
-
-class SolutionScene(Scene):
-    def construct(self):
-        self.camera.background_color = WHITE
-        
-        # --- CONFIGURATION (20-80-80 Triangle) ---
-        # Vertex A at the top
-        A = np.array()
-        L = 6.0
-        angle_A = 20 * DEGREES
-        
-        # Vertices B and C
-        B = A + L * np.array([-np.sin(angle_A/2), -np.cos(angle_A/2), 0])
-        C = A + L * np.array([np.sin(angle_A/2), -np.cos(angle_A/2), 0])
-        
-        # Zig-zag points AD=DE=EF=FG=GC (Approximate positions for visual)
-        # Point D on AC, E on AB, F on AC, G on AB
-        D = A + 0.25 * (C - A)
-        E = A + 0.45 * (B - A)
-        F = A + 0.65 * (C - A)
-        G = A + 0.85 * (B - A)
-        
-        # --- GEOMETRY ---
-        tri_abc = Polygon(A, B, C, color=BLACK, stroke_width=4)
-        zigzag = Polyline(A, D, E, F, G, C, color=BLUE, stroke_width=3)
-        
-        # Labels (Strictly English/Math)
-        lbl_A = MathTex("A", color=BLACK).next_to(A, UP)
-        lbl_B = MathTex("B", color=BLACK).next_to(B, DL)
-        lbl_C = MathTex("C", color=BLACK).next_to(C, DR)
-        
-        # Angle label for A
-        arc_a = Angle(Line(A, B), Line(A, C), radius=0.6, color=BLACK)
-        lbl_x = MathTex("x", color=BLACK).scale(0.8).next_to(arc_a, DOWN, buff=0.1)
-        
-        # Results text
-        res = MathTex("20^\\circ, 80^\\circ, 80^\\circ", color=BLACK).to_edge(DOWN)
-        
-        # Rendering
-        self.add(tri_abc, zigzag, lbl_A, lbl_B, lbl_C, arc_a, lbl_x, res)
-```
