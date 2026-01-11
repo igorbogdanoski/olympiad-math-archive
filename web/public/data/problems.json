@@ -45,6 +45,27 @@
   },
   {
     "meta": {
+      "difficulty": "5",
+      "grade": "10",
+      "problem_id": "latex_test",
+      "source": "Test",
+      "tags": [
+        "test"
+      ],
+      "title": "LaTeX Test Problem",
+      "type": "algebra",
+      "related_skills": [],
+      "has_manim_placeholder": false
+    },
+    "body": "## Test Problem\n\nTest mathematical expression: $\\left| z^3 + \\frac{1}{z^3} \\right| \\leq 2$\n\n## Solution\n\nThis is a test to verify LaTeX rendering works.\n\n#```python\nfrom manim import *\n\nclass LaTeXTest(Scene):\n    def construct(self):\n        title = Text(LaTeX Test, color=BLACK)\n        self.play(Write(title))\n\n        eq = MathTex(r\\left| z^3 + \\frac{1}{z^3} \\right| \\leq 2, color=BLACK)\n        self.play(Write(eq))\n\n        self.wait(2)\n\n---\n### 🎨 Визуелизација\n![Илустрација](/assets/images/latex_test/latex_test.png)",
+    "path": "C:\\Users\\pc4all\\Documents\\matholimpiad\\olympiad-math-archive\\docs\\grade_10\\algebra\\latex_test.md",
+    "filename": "latex_test.md",
+    "grade": "10",
+    "category": "algebra",
+    "difficulty": 5
+  },
+  {
+    "meta": {
       "grade": "10",
       "field": "algebra",
       "difficulty": "4",
