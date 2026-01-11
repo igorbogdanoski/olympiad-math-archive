@@ -17,7 +17,7 @@ Test mathematical expression: $\left| z^3 + \frac{1}{z^3} \right| \leq 2$
 
 This is a test to verify LaTeX rendering works.
 
-#```python
+```python
 from manim import *
 
 class LaTeXTest(Scene):
@@ -30,6 +30,8 @@ class LaTeXTest(Scene):
 
         self.wait(2)
 
----
-### 🎨 Визуелизација
-![Илустрација](/assets/images/latex_test/latex_test.png)
+    ---
+
+    ### 🎨 Визуелизација
+
+    ![Илустрација](/assets/images/latex_test/latex_test.png) 
