@@ -2,3 +2,5 @@
 **📅 Додадено:** 2025-12-28 15:21
 **🐍 Python/Manim Код:**
 ```python
+# Code archived and moved to separate files
+```

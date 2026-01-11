@@ -3,3 +3,5 @@
 **📅 Додадено:** 2025-12-26 19:23
 **🐍 Python/Manim Код (Копирај во Geo-Mentor):**
 ```python
+# Code archived and moved to separate files
+```

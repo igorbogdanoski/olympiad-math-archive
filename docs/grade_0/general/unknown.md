@@ -149,4 +149,5 @@ $$ 0 = 2(a-b)^2 $$
 *   **Потребни предзнаења:** Системи линеарни равенки, плоштина.
 
 ## Manim Code
-```python
+
+(Code extracted to separate Manim files in tools/ directory)
