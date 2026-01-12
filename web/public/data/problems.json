@@ -1888,6 +1888,30 @@
     "meta": {
       "difficulty": "6",
       "grade": "10",
+      "problem_id": "sigma139_p1891",
+      "source": "Sigma 139, Zadaca 1891",
+      "tags": [
+        "geometry",
+        "cyclic_quadrilateral",
+        "metric_relations",
+        "orthodiagonal"
+      ],
+      "title": "Растојанија во ортодијагонален четириаголник",
+      "type": "geometry",
+      "related_skills": [],
+      "has_manim_placeholder": false
+    },
+    "body": "# Текст на задачата\nНека $ABCD$ е четириаголник со $AC \\perp BD$ и нека $P$ е пресечна точка на $AC$ и $BD$. Ако растојанието од $P$ до $AB$ е еднакво на 99, растојанието од $P$ до $BC$ е еднакво на 63 и растојанието од $P$ до $CD$ е еднакво на 77, пресметај го растојанието од $P$ до $AD$.\n\n# Решение\n## Стратегија\nОва е задача за **ортодијагонален четириаголник** (дијагоналите се сечат под прав агол).\nКлучната идеја е да се искористи својството на тетивни четириаголници кои се формираат кога ќе се спуштат нормали од пресекот на дијагоналите кон страните.\nПостои позната релација за растојанијата од пресекот на дијагоналите до страните во тангентен четириаголник, но овде четириаголникот е ортодијагонален.\nДали постои врска од типот $\\frac{1}{h_a^2} + \\frac{1}{h_c^2} = \\frac{1}{h_b^2} + \\frac{1}{h_d^2}$?\nИли можеби врска со аглите?\nАко $P$ е пресекот, тогаш $\\triangle APB, \\triangle BPC, \\triangle CPD, \\triangle DPA$ се правоаголни триаголници.\nРастојанието од $P$ до $AB$ е висината $h_{AB}$ во правоаголниот $\\triangle APB$.\nВажи $\\frac{1}{h_{AB}^2} = \\frac{1}{PA^2} + \\frac{1}{PB^2}$.\nОва ќе ни даде систем равенки.\n\n## 📐 Детално Решение\n\n<details>\n<summary>Чекор 1: Означување и геометриски релации</summary>\n\nНека $PA=a, PB=b, PC=c, PD=d$.\nБидејќи дијагоналите се нормални, триаголниците $\\triangle APB, \\triangle BPC, \\triangle CPD, \\triangle DPA$ се правоаголни во темето $P$.\nНека $h_1, h_2, h_3, h_4$ се растојанијата од $P$ до $AB, BC, CD, DA$ соодветно.\nДадено е:\n$h_1 = 99$\n$h_2 = 63$\n$h_3 = 77$\nБараме $h_4 = x$.\n\nВо правоаголен триаголник со катети $x, y$ и висина кон хипотенузата $h$, важи релацијата:\n$$ \\frac{1}{h^2} = \\frac{1}{x^2} + \\frac{1}{y^2} $$\n\nПрименувајќи го ова за нашите четири триаголници:\n1.  $\\triangle APB: \\quad \\frac{1}{h_1^2} = \\frac{1}{a^2} + \\frac{1}{b^2}$\n2.  $\\triangle BPC: \\quad \\frac{1}{h_2^2} = \\frac{1}{b^2} + \\frac{1}{c^2}$\n3.  $\\triangle CPD: \\quad \\frac{1}{h_3^2} = \\frac{1}{c^2} + \\frac{1}{d^2}$\n4.  $\\triangle DPA: \\quad \\frac{1}{h_4^2} = \\frac{1}{d^2} + \\frac{1}{a^2}$\n\n</details>\n\n<details>\n<summary>Чекор 2: Комбинирање на равенките</summary>\n\nЗабележуваме дека ако ги собереме (1) и (3), и (2) и (4), ќе ги добиеме истите членови на десната страна:\n$$ \\frac{1}{h_1^2} + \\frac{1}{h_3^2} = \\left(\\frac{1}{a^2} + \\frac{1}{b^2}\\right) + \\left(\\frac{1}{c^2} + \\frac{1}{d^2}\\right) = \\frac{1}{a^2} + \\frac{1}{b^2} + \\frac{1}{c^2} + \\frac{1}{d^2} $$\n$$ \\frac{1}{h_2^2} + \\frac{1}{h_4^2} = \\left(\\frac{1}{b^2} + \\frac{1}{c^2}\\right) + \\left(\\frac{1}{d^2} + \\frac{1}{a^2}\\right) = \\frac{1}{a^2} + \\frac{1}{b^2} + \\frac{1}{c^2} + \\frac{1}{d^2} $$\n\nСледи дека:\n$$ \\frac{1}{h_1^2} + \\frac{1}{h_3^2} = \\frac{1}{h_2^2} + \\frac{1}{h_4^2} $$\n\n</details>\n\n<details>\n<summary>Чекор 3: Пресметка</summary>\n\nЗаменуваме со дадените вредности:\n$$ \\frac{1}{99^2} + \\frac{1}{77^2} = \\frac{1}{63^2} + \\frac{1}{x^2} $$\n\nЗа да ја олесниме пресметката, ќе извадиме заеднички множители.\n$99 = 9 \\cdot 11$\n$77 = 7 \\cdot 11$\n$63 = 7 \\cdot 9$\n\n$$ \\frac{1}{(9 \\cdot 11)^2} + \\frac{1}{(7 \\cdot 11)^2} = \\frac{1}{(7 \\cdot 9)^2} + \\frac{1}{x^2} $$\n$$ \\frac{1}{11^2} \\left( \\frac{1}{9^2} + \\frac{1}{7^2} \\right) = \\frac{1}{7^2 \\cdot 9^2} + \\frac{1}{x^2} $$\n$$ \\frac{1}{121} \\left( \\frac{49 + 81}{81 \\cdot 49} \\right) = \\frac{1}{3969} + \\frac{1}{x^2} $$\n$$ \\frac{130}{121 \\cdot 3969} = \\frac{1}{3969} + \\frac{1}{x^2} $$\n\nОва изгледа малку комплицирано за рачна пресметка. Ајде да пробаме поинаку.\n$$ \\frac{1}{x^2} = \\frac{1}{99^2} + \\frac{1}{77^2} - \\frac{1}{63^2} $$\n$$ \\frac{1}{x^2} = \\frac{1}{11^2 \\cdot 9^2} + \\frac{1}{11^2 \\cdot 7^2} - \\frac{1}{7^2 \\cdot 9^2} $$\nЗаеднички именител е $11^2 \\cdot 9^2 \\cdot 7^2 = (11 \\cdot 9 \\cdot 7)^2 = 693^2$.\n$$ \\frac{1}{x^2} = \\frac{7^2 + 9^2 - 11^2}{693^2} $$\n$$ \\frac{1}{x^2} = \\frac{49 + 81 - 121}{693^2} $$\n$$ \\frac{1}{x^2} = \\frac{130 - 121}{693^2} $$\n$$ \\frac{1}{x^2} = \\frac{9}{693^2} $$\n\nКоренуваме:\n$$ \\frac{1}{x} = \\frac{3}{693} $$\n$$ \\frac{1}{x} = \\frac{1}{231} $$\n$$ x = 231 $$\n\n**Заклучок:**\nРастојанието од $P$ до $AD$ е **231**.\n\n# Pedagogical Notes\n1.  **Основна идеја:** Во ортодијагонален четириаголник, збирот на реципрочните вредности на квадратите на висините кон спротивните страни е еднаков. Ова е директна последица на Питагоровата теорема (или поточно, релацијата за висина во правоаголен триаголник).\n2.  **Совет од Олимпиец:** Кога имате броеви како 99, 63, 77, секогаш барајте ги нивните прости множители ($9 \\cdot 11, 7 \\cdot 9, 7 \\cdot 11$). Тоа драстично ја поедноставува аритметиката и овозможува наоѓање на заеднички именител без огромни броеви.\n3.  **Чести грешки:** Директно квадрирање на големите броеви (на пр. $99^2 = 9801$) води до губење време и грешки. Алгебарската манипулација со фактори е многу побезбедна.\n\n```python\nfrom manim import *\n\nclass OrthodiagonalQuad(Scene):\n    def construct(self):\n        self.camera.background_color = WHITE\n        \n        # Title\n        title = Text(Ортодијагонален четириаголник, color=BLACK).to_edge(UP)\n        self.play(Write(title))\n        \n        # Formula\n        formula = MathTex(\n            r\\frac{1}{h_a^2} + \\frac{1}{h_c^2} = \\frac{1}{h_b^2} + \\frac{1}{h_d^2},\n            color=BLUE\n        ).shift(UP)\n        self.play(Write(formula))\n        \n        # Substitution\n        sub = MathTex(\n            r\\frac{1}{99^2} + \\frac{1}{77^2} = \\frac{1}{63^2} + \\frac{1}{x^2},\n            color=BLACK\n        ).next_to(formula, DOWN)\n        self.play(Write(sub))\n        \n        # Factorization\n        factors = MathTex(\n            r\\frac{1}{(9 \\cdot 11)^2} + \\frac{1}{(7 \\cdot 11)^2} - \\frac{1}{(7 \\cdot 9)^2} = \\frac{1}{x^2},\n            color=BLACK\n        ).next_to(sub, DOWN)\n        self.play(Write(factors))\n        \n        # Common Denominator\n        common = MathTex(\n            r\\frac{7^2 + 9^2 - 11^2}{(7 \\cdot 9 \\cdot 11)^2} = \\frac{1}{x^2},\n            color=RED\n        ).next_to(factors, DOWN)\n        self.play(Write(common))\n        \n        # Calculation\n        calc = MathTex(\n            r\\frac{49 + 81 - 121}{693^2} = \\frac{9}{693^2} = \\frac{1}{x^2},\n            color=BLACK\n        ).next_to(common, DOWN)\n        self.play(Write(calc))\n        \n        # Result\n        result = MathTex(\n            r\\frac{1}{x} = \\frac{3}{693} = \\frac{1}{231} \\implies x = 231,\n            color=GREEN\n        ).next_to(calc, DOWN)\n        self.play(Indicate(result))\n        \n        self.wait(2)\n\n</details>\n\n---\n### 🎨 Визуелизација\n![Илустрација](/assets/images/sigma139_p1891/sigma139_p1891.png)",
+    "path": "C:\\Users\\pc4all\\Documents\\matholimpiad\\olympiad-math-archive\\docs\\grade_10\\geometry\\sigma139_p1891.md",
+    "filename": "sigma139_p1891.md",
+    "grade": "10",
+    "category": "geometry",
+    "difficulty": 6
+  },
+  {
+    "meta": {
+      "difficulty": "6",
+      "grade": "10",
       "problem_id": "sigma139_y2_p4",
       "source": "Sigma 139, Vtora godina, Zadaca 4",
       "tags": [
@@ -3476,6 +3500,54 @@
     "meta": {
       "difficulty": "5",
       "grade": "11",
+      "problem_id": "sigma139_p1892",
+      "source": "Sigma 139, Zadaca 1892",
+      "tags": [
+        "logarithms",
+        "inequalities",
+        "domain",
+        "cases"
+      ],
+      "title": "Логаритамска неравенка со променлива основа",
+      "type": "algebra",
+      "related_skills": [],
+      "has_manim_placeholder": false
+    },
+    "body": "# Текст на задачата\nРеши ја неравенката:\n$$ \\log_{x-1}(x^2 + 3x) < 1 $$\n\n# Решение\n## Стратегија\nОва е логаритамска неравенка каде што и основата ($x-1$) и аргументот ($x^2+3x$) содржат променлива.\n1.  Прво мора да ја определиме **дефиниционата област** (доменот) на неравенката. Основата мора да биде позитивна и различна од 1, а аргументот мора да биде позитивен.\n2.  Потоа ќе ја решиме неравенката разгледувајќи два случаи во зависност од основата:\n    *   Случај 1: Основата е поголема од 1 ($x-1 > 1$). Тогаш знакот на неравенството се задржува.\n    *   Случај 2: Основата е помеѓу 0 и 1 ($0 < x-1 < 1$). Тогаш знакот на неравенството се менува.\n3.  На крајот ќе го најдеме пресекот на решенијата со дефиниционата област.\n\n## 📐 Детално Решение\n\n<details>\n<summary>Чекор 1: Дефинициона област</summary>\n\nЗа логаритамот да биде дефиниран, мора да важат следниве услови:\n1.  Аргументот $> 0$:\n    $$ x^2 + 3x > 0 $$\n    $$ x(x+3) > 0 $$\n    Решение: $x \\in (-\\infty, -3) \\cup (0, +\\infty)$.\n\n2.  Основата $> 0$:\n    $$ x - 1 > 0 \\implies x > 1 $$\n\n3.  Основата $\\neq 1$:\n    $$ x - 1 \\neq 1 \\implies x \\neq 2 $$\n\nПресекот на сите овие услови е:\n$$ x \\in (1, 2) \\cup (2, +\\infty) $$\nОва е нашиот домен $D$.\n\n</details>\n\n<details>\n<summary>Чекор 2: Решавање на неравенката</summary>\n\nНеравенката е $\\log_{x-1}(x^2 + 3x) < 1$.\nМожеме да ја запишеме 1 како $\\log_{x-1}(x-1)$.\n$$ \\log_{x-1}(x^2 + 3x) < \\log_{x-1}(x-1) $$\n\n**Случај 1: Основата е поголема од 1**\n$$ x - 1 > 1 \\implies x > 2 $$\nВо овој случај, логаритамската функција е растечка, па знакот на неравенството се задржува:\n$$ x^2 + 3x < x - 1 $$\n$$ x^2 + 2x + 1 < 0 $$\n$$ (x + 1)^2 < 0 $$\nКвадрат на реален број никогаш не е строго помал од 0.\nЗначи, во овој случај **нема решение**.\n\n**Случај 2: Основата е помеѓу 0 и 1**\n$$ 0 < x - 1 < 1 \\implies 1 < x < 2 $$\nВо овој случај, логаритамската функција е опаѓачка, па знакот на неравенството се менува:\n$$ x^2 + 3x > x - 1 $$\n$$ x^2 + 2x + 1 > 0 $$\n$$ (x + 1)^2 > 0 $$\nОва неравенство важи за секој $x \\neq -1$.\nБидејќи работиме во интервалот $x \\in (1, 2)$, условот $x \\neq -1$ е автоматски исполнет.\nЗначи, решението во овој случај е целиот интервал $(1, 2)$.\n\n</details>\n\n<details>\n<summary>Чекор 3: Конечен пресек</summary>\n\nГи обединуваме решенијата од двата случаи и правиме пресек со доменот.\n*   Случај 1 ($x > 2$): Нема решение.\n*   Случај 2 ($1 < x < 2$): Решение е $x \\in (1, 2)$.\n\nДоменот беше $(1, 2) \\cup (2, +\\infty)$.\nПресекот е $(1, 2)$.\n\n**Заклучок:**\nРешението на неравенката е $x \\in (1, 2)$.\n\n# Pedagogical Notes\n1.  **Основна идеја:** Логаритамската функција $f(t) = \\log_a t$ е монотона, но насоката на монотоност зависи од основата $a$. Ако $a > 1$, таа расте (знакот се чува). Ако $0 < a < 1$, таа опаѓа (знакот се врти). Ова е најважното правило за логаритамски неравенки.\n2.  **Совет од Олимпиец:** Никогаш не заборавајте ја дефиниционата област! Многу ученици веднаш почнуваат со антилогаритмирање и добиваат решенија кои се надвор од доменот. Во оваа задача, условот $x>1$ е клучен.\n3.  **Чести грешки:**\n    *   Заборавање да се смени знакот кога основата е помала од 1.\n    *   Заборавање дека основата не смее да биде 1 ($x \\neq 2$).\n    *   Грешка при решавање на $(x+1)^2 < 0$ (некои мислат дека има решение).\n\n```python\nfrom manim import *\n\nclass LogInequality(Scene):\n    def construct(self):\n        self.camera.background_color = WHITE\n        \n        # Title\n        title = Text(Логаритамска неравенка, color=BLACK).to_edge(UP)\n        self.play(Write(title))\n        \n        # Inequality\n        ineq = MathTex(r\\log_{x-1}(x^2 + 3x) < 1, color=BLACK).shift(UP)\n        self.play(Write(ineq))\n        \n        # Domain\n        domain_text = Text(Домен:, color=BLUE, font_size=24).next_to(ineq, DOWN, buff=0.5).to_edge(LEFT)\n        domain_cond = MathTex(\n            r1. \\quad x^2+3x > 0 \\implies x \\in (-\\infty, -3) \\cup (0, \\infty),\n            r2. \\quad x-1 > 0 \\implies x > 1,\n            r3. \\quad x-1 \\neq 1 \\implies x \\neq 2,\n            color=BLUE, font_size=30\n        ).arrange(DOWN, aligned_edge=LEFT).next_to(domain_text, DOWN, aligned_edge=LEFT)\n        \n        final_domain = MathTex(rD: x \\in (1, 2) \\cup (2, \\infty), color=RED).next_to(domain_cond, DOWN)\n        \n        self.play(Write(domain_text))\n        self.play(Write(domain_cond))\n        self.play(Write(final_domain))\n        \n        # Cases\n        case1 = MathTex(r\\text{Случај 1: } x-1 > 1 \\implies x > 2, color=BLACK, font_size=30).next_to(final_domain, DOWN, buff=0.5).to_edge(LEFT)\n        sol1 = MathTex(rx^2+3x < x-1 \\implies (x+1)^2 < 0 \\implies \\emptyset, color=BLACK, font_size=30).next_to(case1, DOWN, aligned_edge=LEFT)\n        \n        case2 = MathTex(r\\text{Случај 2: } 0 < x-1 < 1 \\implies 1 < x < 2, color=BLACK, font_size=30).next_to(sol1, DOWN, buff=0.2).to_edge(LEFT)\n        sol2 = MathTex(rx^2+3x > x-1 \\implies (x+1)^2 > 0 \\implies \\mathbb{R} \\setminus \\{-1\\}, color=BLACK, font_size=30).next_to(case2, DOWN, aligned_edge=LEFT)\n        \n        self.play(Write(case1))\n        self.play(Write(sol1))\n        self.play(Write(case2))\n        self.play(Write(sol2))\n        \n        # Final Result\n        result = MathTex(rx \\in (1, 2), color=GREEN).next_to(sol2, DOWN, buff=0.5)\n        self.play(Indicate(result))\n        \n        self.wait(2)\n\n</details>",
+    "path": "C:\\Users\\pc4all\\Documents\\matholimpiad\\olympiad-math-archive\\docs\\grade_11\\algebra\\sigma139_p1892.md",
+    "filename": "sigma139_p1892.md",
+    "grade": "11",
+    "category": "algebra",
+    "difficulty": 5
+  },
+  {
+    "meta": {
+      "difficulty": "6",
+      "grade": "11",
+      "problem_id": "sigma139_p1893",
+      "source": "Sigma 139, Zadaca 1893",
+      "tags": [
+        "algebra",
+        "identities",
+        "substitution",
+        "radicals"
+      ],
+      "title": "Алгебарски идентитет со кубни корени",
+      "type": "algebra",
+      "related_skills": [],
+      "has_manim_placeholder": false
+    },
+    "body": "# Текст на задачата\nАко $vw + wu + uv = uvw$ и $xu^3 = yv^3 = zw^3$, каде $u \\neq 0, v \\neq 0, w \\neq 0$, докажи дека\n$$ \\sqrt[3]{x} + \\sqrt[3]{y} + \\sqrt[3]{z} = \\sqrt[3]{xu^2 + yv^2 + zw^2} $$\n\n# Решение\n## Стратегија\nИмаме два услови. Првиот услов $vw + wu + uv = uvw$ може да се трансформира со делење со $uvw$ во попознат облик: $\\frac{1}{u} + \\frac{1}{v} + \\frac{1}{w} = 1$.\nВториот услов $xu^3 = yv^3 = zw^3$ сугерира воведување на параметар $k$. Нека $xu^3 = yv^3 = zw^3 = k^3$. Ова ќе ни овозможи да ги изразиме $x, y, z$ преку $u, v, w$ и $k$.\nПотоа ќе ги замениме овие изрази во равенството што треба да се докаже и ќе видиме дали се добива идентитет.\n\n## 📐 Детално Решение\n\n<details>\n<summary>Чекор 1: Трансформација на првиот услов</summary>\n\nДадено е $vw + wu + uv = uvw$.\nБидејќи $u, v, w \\neq 0$, можеме да поделиме со $uvw$:\n$$ \\frac{vw}{uvw} + \\frac{wu}{uvw} + \\frac{uv}{uvw} = 1 $$\n$$ \\frac{1}{u} + \\frac{1}{v} + \\frac{1}{w} = 1 $$\n\n</details>\n\n<details>\n<summary>Чекор 2: Параметризација на вториот услов</summary>\n\nДадено е $xu^3 = yv^3 = zw^3$.\nНека оваа заедничка вредност е $k^3$ (за полесно коренување подоцна).\n$$ xu^3 = k^3 \\implies x = \\frac{k^3}{u^3} $$\n$$ yv^3 = k^3 \\implies y = \\frac{k^3}{v^3} $$\n$$ zw^3 = k^3 \\implies z = \\frac{k^3}{w^3} $$\n\n</details>\n\n<details>\n<summary>Чекор 3: Пресметка на левата страна (LHS)</summary>\n\n$$ LHS = \\sqrt[3]{x} + \\sqrt[3]{y} + \\sqrt[3]{z} $$\nЗаменуваме со изразите од Чекор 2:\n$$ LHS = \\sqrt[3]{\\frac{k^3}{u^3}} + \\sqrt[3]{\\frac{k^3}{v^3}} + \\sqrt[3]{\\frac{k^3}{w^3}} $$\n$$ LHS = \\frac{k}{u} + \\frac{k}{v} + \\frac{k}{w} $$\n$$ LHS = k \\left( \\frac{1}{u} + \\frac{1}{v} + \\frac{1}{w} \\right) $$\nОд Чекор 1 знаеме дека изразот во заградата е 1.\n$$ LHS = k \\cdot 1 = k $$\n\n</details>\n\n<details>\n<summary>Чекор 4: Пресметка на десната страна (RHS)</summary>\n\n$$ RHS = \\sqrt[3]{xu^2 + yv^2 + zw^2} $$\nЗаменуваме за $x, y, z$:\n$$ xu^2 = \\frac{k^3}{u^3} \\cdot u^2 = \\frac{k^3}{u} $$\n$$ yv^2 = \\frac{k^3}{v^3} \\cdot v^2 = \\frac{k^3}{v} $$\n$$ zw^2 = \\frac{k^3}{w^3} \\cdot w^2 = \\frac{k^3}{w} $$\n\nСега го формираме збирот под коренот:\n$$ xu^2 + yv^2 + zw^2 = \\frac{k^3}{u} + \\frac{k^3}{v} + \\frac{k^3}{w} $$\n$$ = k^3 \\left( \\frac{1}{u} + \\frac{1}{v} + \\frac{1}{w} \\right) $$\nПовторно го користиме условот од Чекор 1:\n$$ = k^3 \\cdot 1 = k^3 $$\n\nЗначи:\n$$ RHS = \\sqrt[3]{k^3} = k $$\n\n**Заклучок:**\nДобивме $LHS = k$ и $RHS = k$.\nСледи дека $LHS = RHS$, со што равенството е докажано.\n\n# Pedagogical Notes\n1.  **Основна идеја:** Оваа задача е одличен пример за моќта на **параметризацијата** ($=k^3$). Кога имате верижно равенство ($A=B=C$), секогаш е добра идеја да го изедначите со нова променлива. Ова ги „разврзува“ променливите и овозможува да се изразат една преку друга.\n2.  **Совет од Олимпиец:** Кога гледате симетричен израз како $vw+wu+uv=uvw$, веднаш помислете на делење со производот $uvw$. Реципрочните вредности често се клучот за поедноставување.\n3.  **Чести грешки:** Учениците често се обидуваат да изразат една променлива (на пр. $x$) преку другите ($y, z$) и да заменуваат, што води до многу посложена алгебра отколку воведувањето на помошна променлива $k$.\n\n```python\nfrom manim import *\n\nclass AlgebraicIdentity(Scene):\n    def construct(self):\n        self.camera.background_color = WHITE\n        \n        # Title\n        title = Text(Алгебарски идентитет, color=BLACK).to_edge(UP)\n        self.play(Write(title))\n        \n        # Condition 1\n        cond1 = MathTex(rvw + wu + uv = uvw, color=BLACK).shift(UP*2)\n        cond1_trans = MathTex(r\\frac{1}{u} + \\frac{1}{v} + \\frac{1}{w} = 1, color=BLUE).next_to(cond1, DOWN)\n        \n        self.play(Write(cond1))\n        self.play(TransformFromCopy(cond1, cond1_trans))\n        \n        # Condition 2\n        cond2 = MathTex(rxu^3 = yv^3 = zw^3 = k^3, color=BLACK).next_to(cond1_trans, DOWN, buff=0.5)\n        self.play(Write(cond2))\n        \n        # Substitution\n        sub = MathTex(\n            rx = \\frac{k^3}{u^3}, \\quad y = \\frac{k^3}{v^3}, \\quad z = \\frac{k^3}{w^3},\n            color=BLACK\n        ).next_to(cond2, DOWN)\n        self.play(Write(sub))\n        \n        # LHS Calculation\n        lhs = MathTex(\n            rLHS = \\frac{k}{u} + \\frac{k}{v} + \\frac{k}{w} = k\\left(\\frac{1}{u} + \\frac{1}{v} + \\frac{1}{w}\\right) = k,\n            color=RED\n        ).next_to(sub, DOWN, buff=0.5)\n        self.play(Write(lhs))\n        \n        # RHS Calculation\n        rhs = MathTex(\n            rRHS = \\sqrt[3]{k^3\\left(\\frac{1}{u} + \\frac{1}{v} + \\frac{1}{w}\\right)} = \\sqrt[3]{k^3} = k,\n            color=GREEN\n        ).next_to(lhs, DOWN)\n        self.play(Write(rhs))\n        \n        # Conclusion\n        final = MathTex(rLHS = RHS, color=BLACK).next_to(rhs, DOWN)\n        self.play(Indicate(final))\n        \n        self.wait(2)\n\n</details>\n\n---\n### 🎨 Визуелизација\n![Илустрација](/assets/images/sigma139_p1893/sigma139_p1893.png)",
+    "path": "C:\\Users\\pc4all\\Documents\\matholimpiad\\olympiad-math-archive\\docs\\grade_11\\algebra\\sigma139_p1893.md",
+    "filename": "sigma139_p1893.md",
+    "grade": "11",
+    "category": "algebra",
+    "difficulty": 6
+  },
+  {
+    "meta": {
+      "difficulty": "5",
+      "grade": "11",
       "problem_id": "sigma139_y3_p1",
       "source": "Sigma 139, Treta godina, Zadaca 1",
       "tags": [
@@ -3488,12 +3560,84 @@
       "related_skills": [],
       "has_manim_placeholder": false
     },
-    "body": "# Текст на задачата\nПресметај го збирот:\n$$ S = \\frac{\\sin 1^\\circ}{\\cos 0^\\circ \\cdot \\cos 1^\\circ} + \\frac{\\sin 1^\\circ}{\\cos 1^\\circ \\cdot \\cos 2^\\circ} + \\frac{\\sin 1^\\circ}{\\cos 2^\\circ \\cdot \\cos 3^\\circ} + \\dots + \\frac{\\sin 1^\\circ}{\\cos 2024^\\circ \\cdot \\cos 2025^\\circ} $$\n\n# Решение\n## Стратегија\nОва е класична задача за **телескопска сума** во тригонометрија.\nКлучната идеја е да се трансформира општиот член на сумата во разлика на два члена.\nЗабележуваме дека во броителот имаме $\\sin 1^\\circ$, а во именителот производ на косинуси од агли чија разлика е токму $1^\\circ$ (на пример, $1^\\circ - 0^\\circ = 1^\\circ$, $2^\\circ - 1^\\circ = 1^\\circ$).\nЌе го искористиме идентитетот за синус од разлика: $\\sin(x-y) = \\sin x \\cos y - \\cos x \\sin y$.\n\n## Чекор по чекор\n\n**Чекор 1: Трансформација на општиот член**\nДа го разгледаме $k$-тиот член на сумата:\n$$ a_k = \\frac{\\sin 1^\\circ}{\\cos k^\\circ \\cdot \\cos (k+1)^\\circ} $$\nБидејќи $1^\\circ = (k+1)^\\circ - k^\\circ$, можеме да запишеме:\n$$ a_k = \\frac{\\sin((k+1)^\\circ - k^\\circ)}{\\cos k^\\circ \\cdot \\cos (k+1)^\\circ} $$\n\n**Чекор 2: Примена на адициона формула**\nГо развиваме броителот:\n$$ \\sin((k+1)^\\circ - k^\\circ) = \\sin(k+1)^\\circ \\cos k^\\circ - \\cos(k+1)^\\circ \\sin k^\\circ $$\nЗаменуваме во изразот за $a_k$:\n$$ a_k = \\frac{\\sin(k+1)^\\circ \\cos k^\\circ - \\cos(k+1)^\\circ \\sin k^\\circ}{\\cos k^\\circ \\cdot \\cos (k+1)^\\circ} $$\n\n**Чекор 3: Разделување на дропката**\nЈа делиме дропката на два дела:\n$$ a_k = \\frac{\\sin(k+1)^\\circ \\cos k^\\circ}{\\cos k^\\circ \\cdot \\cos (k+1)^\\circ} - \\frac{\\cos(k+1)^\\circ \\sin k^\\circ}{\\cos k^\\circ \\cdot \\cos (k+1)^\\circ} $$\nКратиме:\n$$ a_k = \\frac{\\sin(k+1)^\\circ}{\\cos(k+1)^\\circ} - \\frac{\\sin k^\\circ}{\\cos k^\\circ} $$\n$$ a_k = \\tan(k+1)^\\circ - \\tan k^\\circ $$\n\n**Чекор 4: Пресметка на сумата**\nСега ја запишуваме целата сума $S$ користејќи го новиот облик:\n$$ S = (\\tan 1^\\circ - \\tan 0^\\circ) + (\\tan 2^\\circ - \\tan 1^\\circ) + (\\tan 3^\\circ - \\tan 2^\\circ) + \\dots + (\\tan 2025^\\circ - \\tan 2024^\\circ) $$\n\nЗабележуваме дека ова е телескопска сума каде што средните членови се поништуваат:\n*   $+\\tan 1^\\circ$ се поништува со $-\\tan 1^\\circ$\n*   $+\\tan 2^\\circ$ се поништува со $-\\tan 2^\\circ$\n*   ...\n*   $+\\tan 2024^\\circ$ се поништува со $-\\tan 2024^\\circ$\n\nОстануваат само последниот позитивен и првиот негативен член:\n$$ S = \\tan 2025^\\circ - \\tan 0^\\circ $$\n\n**Чекор 5: Финална пресметка**\nЗнаеме дека $\\tan 0^\\circ = 0$.\nЗа $\\tan 2025^\\circ$, ќе го искористиме периодот на тангенсот ($180^\\circ$):\n$$ 2025 = 11 \\cdot 180 + 45 $$\nЗначи:\n$$ \\tan 2025^\\circ = \\tan(11 \\cdot 180^\\circ + 45^\\circ) = \\tan 45^\\circ = 1 $$\n\nКонечно:\n$$ S = 1 - 0 = 1 $$\n\n**Заклучок:**\nВредноста на збирот е **1**.\n\n# Pedagogical Notes\n1.  **Основна идеја:** Кога гледате сума од дропки со тригонометриски функции во именител, секогаш обидете се да го изразите броителот како синус од разликата на аглите во именителот. Ова е универзален „клуч за вакви задачи.\n2.  **Совет од Олимпиец:** Оваа техника работи и за $\\frac{\\sin(x-y)}{\\sin x \\sin y} = \\cot y - \\cot x$. Запомнете ги овие два идентитети, тие се појавуваат многу често.\n3.  **Чести грешки:** Внимавајте на редоследот при одземањето. Дали е $\\tan(k+1) - \\tan k$ или обратно? Проверете со првиот член: $\\frac{\\sin(1-0)}{\\cos 0 \\cos 1} = \\frac{\\sin 1 \\cos 0 - \\cos 1 \\sin 0}{\\cos 0 \\cos 1} = \\tan 1 - \\tan 0$. Значи редоследот е (поголем) - (помал).\n\n```python\nfrom manim import *\n\nclass TelescopingSum(Scene):\n    def construct(self):\n        self.camera.background_color = WHITE\n\n        # Title\n        title = Text(Телескопска сума, color=BLACK).to_edge(UP)\n        self.play(Write(title))\n\n        # General term formula\n        term = MathTex(\n            r\\frac{\\sin((k+1)^\\circ - k^\\circ)}{\\cos k^\\circ \\cos(k+1)^\\circ},\n            color=BLACK\n        ).shift(UP)\n\n        expansion = MathTex(\n            r= \\frac{\\sin(k+1)^\\circ \\cos k^\\circ - \\cos(k+1)^\\circ \\sin k^\\circ}{\\cos k^\\circ \\cos(k+1)^\\circ},\n            color=BLACK\n        ).next_to(term, DOWN)\n\n        result = MathTex(\n            r= \\tan(k+1)^\\circ - \\tan k^\\circ,\n            color=RED\n        ).next_to(expansion, DOWN)\n\n        self.play(Write(term))\n        self.play(Write(expansion))\n        self.play(Write(result))\n        self.play(Indicate(result))\n\n        # Sum visualization\n        sum_tex = MathTex(\n            rS &= (\\tan 1^\\circ - \\tan 0^\\circ) \\\\ &+ (\\tan 2^\\circ - \\tan 1^\\circ) \\\\ &+ \\dots \\\\ &+ (\\tan 2025^\\circ - \\tan 2024^\\circ),\n            color=BLACK\n        ).next_to(result, DOWN, buff=0.5)\n\n        self.play(Write(sum_tex))\n\n        # Cancellation animation (simplified)\n        cancel_line = Line(sum_tex.get_left(), sum_tex.get_right(), color=RED).set_opacity(0.5)\n        # Just showing final result\n        final = MathTex(rS = \\tan 2025^\\circ - \\tan 0^\\circ = 1 - 0 = 1, color=BLUE).next_to(sum_tex, DOWN)\n\n        self.play(Write(final))\n\n        self.wait(2)\n\n---\n### 🎨 Визуелизација\n![Илустрација](/assets/images/sigma139_y3_p1/sigma139_y3_p1.png)",
+    "body": "# Текст на задачата\nПресметај го збирот:\n$$ S = \\frac{\\sin 1^\\circ}{\\cos 0^\\circ \\cdot \\cos 1^\\circ} + \\frac{\\sin 1^\\circ}{\\cos 1^\\circ \\cdot \\cos 2^\\circ} + \\frac{\\sin 1^\\circ}{\\cos 2^\\circ \\cdot \\cos 3^\\circ} + \\dots + \\frac{\\sin 1^\\circ}{\\cos 2024^\\circ \\cdot \\cos 2025^\\circ} $$\n\n# Решение\n## Стратегија\nОва е класична задача за **телескопска сума** во тригонометрија.\nКлучната идеја е да се трансформира општиот член на сумата во разлика на два члена.\nЗабележуваме дека во броителот имаме $\\sin 1^\\circ$, а во именителот производ на косинуси од агли чија разлика е токму $1^\\circ$ (на пример, $1^\\circ - 0^\\circ = 1^\\circ$, $2^\\circ - 1^\\circ = 1^\\circ$).\nЌе го искористиме идентитетот за синус од разлика: $\\sin(x-y) = \\sin x \\cos y - \\cos x \\sin y$.\n\n## 📐 Детално Решение\n\n<details>\n<summary>Чекор 1: Трансформација на општиот член</summary>\n\nДа го разгледаме $k$-тиот член на сумата:\n$ a_k = \\frac{\\sin 1^\\circ}{\\cos k^\\circ \\cdot \\cos (k+1)^\\circ} $\n\nБидејќи $1^\\circ = (k+1)^\\circ - k^\\circ$, можеме да запишеме:\n$ a_k = \\frac{\\sin((k+1)^\\circ - k^\\circ)}{\\cos k^\\circ \\cdot \\cos (k+1)^\\circ} $\n\n</details>\n\n<details>\n<summary>Чекор 2: Примена на адициона формула</summary>\n\nГо развиваме броителот:\n$ \\sin((k+1)^\\circ - k^\\circ) = \\sin(k+1)^\\circ \\cos k^\\circ - \\cos(k+1)^\\circ \\sin k^\\circ $\n\nЗаменуваме во изразот за $a_k$:\n$ a_k = \\frac{\\sin(k+1)^\\circ \\cos k^\\circ - \\cos(k+1)^\\circ \\sin k^\\circ}{\\cos k^\\circ \\cdot \\cos (k+1)^\\circ} $\n\n</details>\n\n<details>\n<summary>Чекор 3: Разделување на дропката</summary>\n\nЈа делиме дропката на два дела:\n$ a_k = \\frac{\\sin(k+1)^\\circ \\cos k^\\circ}{\\cos k^\\circ \\cdot \\cos (k+1)^\\circ} - \\frac{\\cos(k+1)^\\circ \\sin k^\\circ}{\\cos k^\\circ \\cdot \\cos (k+1)^\\circ} $\n\nКратиме:\n$ a_k = \\frac{\\sin(k+1)^\\circ}{\\cos(k+1)^\\circ} - \\frac{\\sin k^\\circ}{\\cos k^\\circ} $\n$ a_k = \\tan(k+1)^\\circ - \\tan k^\\circ $\n\n</details>\n\n<details>\n<summary>Чекор 4: Пресметка на сумата</summary>\n\nСега ја запишуваме целата сума $S$ користејќи го новиот облик:\n$ S = (\\tan 1^\\circ - \\tan 0^\\circ) + (\\tan 2^\\circ - \\tan 1^\\circ) + (\\tan 3^\\circ - \\tan 2^\\circ) + \\dots + (\\tan 2025^\\circ - \\tan 2024^\\circ) $\n\nЗабележуваме дека ова е телескопска сума каде што средните членови се поништуваат:\n*   $+\\tan 1^\\circ$ се поништува со $-\\tan 1^\\circ$\n*   $+\\tan 2^\\circ$ се поништува со $-\\tan 2^\\circ$\n*   ...\n*   $+\\tan 2024^\\circ$ се поништува со $-\\tan 2024^\\circ$\n\nОстануваат само последниот позитивен и првиот негативен член:\n$ S = \\tan 2025^\\circ - \\tan 0^\\circ $\n\n</details>\n\n<details>\n<summary>Чекор 5: Финална пресметка</summary>\n\nЗнаеме дека $\\tan 0^\\circ = 0$.\n\nЗа $\\tan 2025^\\circ$, ќе го искористиме периодот на тангенсот ($180^\\circ$):\n$ 2025 = 11 \\cdot 180 + 45 $\n\nЗначи:\n$ \\tan 2025^\\circ = \\tan(11 \\cdot 180^\\circ + 45^\\circ) = \\tan 45^\\circ = 1 $\n\nКонечно:\n$ S = 1 - 0 = 1 $\n\n</details>\n\n**Заклучок:**\nВредноста на збирот е **1**.\n\n# Pedagogical Notes\n1.  **Основна идеја:** Кога гледате сума од дропки со тригонометриски функции во именител, секогаш обидете се да го изразите броителот како синус од разликата на аглите во именителот. Ова е универзален „клуч“ за вакви задачи.\n2.  **Совет од Олимпиец:** Оваа техника работи и за $\\frac{\\sin(x-y)}{\\sin x \\sin y} = \\cot y - \\cot x$. Запомнете ги овие два идентитети, тие се појавуваат многу често.\n3.  **Чести грешки:** Внимавајте на редоследот при одземањето. Дали е $\\tan(k+1) - \\tan k$ или обратно? Проверете со првиот член: $\\frac{\\sin(1-0)}{\\cos 0 \\cos 1} = \\frac{\\sin 1 \\cos 0 - \\cos 1 \\sin 0}{\\cos 0 \\cos 1} = \\tan 1 - \\tan 0$. Значи редоследот е (поголем) - (помал).\n\n---\n### 🎨 Визуелизација\n![Илустрација](/assets/images/sigma139_y3_p1/sigma139_y3_p1.png)",
     "path": "C:\\Users\\pc4all\\Documents\\matholimpiad\\olympiad-math-archive\\docs\\grade_11\\algebra\\sigma139_y3_p1.md",
     "filename": "sigma139_y3_p1.md",
     "grade": "11",
     "category": "algebra",
     "difficulty": 5
+  },
+  {
+    "meta": {
+      "difficulty": "6",
+      "grade": "11",
+      "problem_id": "sigma139_y3_p2",
+      "source": "Sigma 139, Treta godina, Zadaca 2",
+      "tags": [
+        "trigonometry",
+        "inequalities",
+        "polynomials",
+        "substitution"
+      ],
+      "title": "Тригонометриско неравенство",
+      "type": "algebra",
+      "related_skills": [],
+      "has_manim_placeholder": false
+    },
+    "body": "# Текст на задачата\nДокажи дека за секој реален број $x$ важи:\n$$ 5 + 8\\cos x + 4\\cos 2x + \\cos 3x \\ge 0 $$\n\n# Решение\n## Стратегија\nИзразот содржи косинуси од повеќекратни агли ($x, 2x, 3x$). Најдобра стратегија е да ги изразиме сите членови преку $\\cos x$ користејќи ги формулите за двоен и троен агол.\nОва ќе го трансформира тригонометриското неравенство во алгебарско неравенство за променливата $t = \\cos x$, каде $t \\in [-1, 1]$.\nПотоа ќе треба да докажеме дека добиениот полином $P(t)$ е ненегативен на интервалот $[-1, 1]$.\n\n## 📐 Детално Решение\n\n<details>\n<summary>Чекор 1: Изразување преку $\\cos x$</summary>\n\nГи користиме познатите идентитети:\n1.  $\\cos 2x = 2\\cos^2 x - 1$\n2.  $\\cos 3x = 4\\cos^3 x - 3\\cos x$\n\nНека $t = \\cos x$. Тогаш $\\cos 2x = 2t^2 - 1$ и $\\cos 3x = 4t^3 - 3t$.\n\n</details>\n\n<details>\n<summary>Чекор 2: Замена во неравенството</summary>\n\nГо заменуваме секој член во дадениот израз:\n$ E = 5 + 8t + 4(2t^2 - 1) + (4t^3 - 3t) $\n$ E = 5 + 8t + 8t^2 - 4 + 4t^3 - 3t $\n\nГи групираме членовите по степени:\n$ E = 4t^3 + 8t^2 + 5t + 1 $\n\n</details>\n\n<details>\n<summary>Чекор 3: Факторизација на полиномот</summary>\n\nТреба да докажеме дека $P(t) = 4t^3 + 8t^2 + 5t + 1 \\ge 0$ за секое $t \\in [-1, 1]$.\nДа пробаме да најдеме нули на полиномот.\nПроверуваме за $t = -1$:\n$ P(-1) = 4(-1)^3 + 8(-1)^2 + 5(-1) + 1 = -4 + 8 - 5 + 1 = 0 $\n\nБидејќи $P(-1) = 0$, значи $(t+1)$ е фактор на полиномот.\n\nГо делиме полиномот со $(t+1)$ (на пример, со Хорнерова шема или полиномно делење):\n$ 4t^3 + 8t^2 + 5t + 1 = (t+1)(4t^2 + 4t + 1) $\n\n</details>\n\n<details>\n<summary>Чекор 4: Анализа на квадратниот трином</summary>\n\nВториот множител е $4t^2 + 4t + 1$.\nЗабележуваме дека ова е полн квадрат:\n$ 4t^2 + 4t + 1 = (2t + 1)^2 $\n\nЗначи, целиот израз можеме да го запишеме како:\n$ E = (t+1)(2t+1)^2 $\n\n</details>\n\n<details>\n<summary>Чекор 5: Доказ на неравенството</summary>\n\nВраќаме $t = \\cos x$.\n$ E = (\\cos x + 1)(2\\cos x + 1)^2 $\n\nТреба да докажеме дека $E \\ge 0$.\n1.  Знаеме дека $-1 \\le \\cos x \\le 1$, па $\\cos x + 1 \\ge 0$ за секој реален број $x$.\n2.  Квадратот на кој било реален број е ненегативен, па $(2\\cos x + 1)^2 \\ge 0$.\n\nПроизвод на два ненегативни броја е ненегативен број.\n$ (\\cos x + 1) \\cdot (2\\cos x + 1)^2 \\ge 0 $\n\nСо ова неравенството е докажано.\n\n</details>\n\n**Заклучок:**\nДаденото неравенство важи за секој реален број $x$. Еднаквост се достигнува кога $\\cos x = -1$ (т.е. $x = \\pi + 2k\\pi$) или кога $\\cos x = -1/2$ (т.е. $x = \\pm 2\\pi/3 + 2k\\pi$).\n\n# Pedagogical Notes\n1.  **Основна идеја:** Трансформацијата на тригонометриски полином во алгебарски полином е стандардна техника. Клучно е да се запамети дека новата променлива $t$ е ограничена во $[-1, 1]$.\n2.  **Совет од Олимпиец:** Кога факторизирате полином и добиете полн квадрат (како $(2t+1)^2$), тоа е сигурен знак дека сте на прав пат, бидејќи квадратите се секогаш позитивни, што е идеално за докажување неравенства.\n3.  **Чести грешки:** Заборавање на формулата за $\\cos 3x$. Ако не ја знаете напамет, можете да ја изведете како $\\cos(2x+x) = \\cos 2x \\cos x - \\sin 2x \\sin x$.\n\n```python\nfrom manim import *\n\nclass TrigInequality(Scene):\n    def construct(self):\n        self.camera.background_color = WHITE\n        \n        # Title\n        title = Text(Тригонометриско неравенство, color=BLACK).to_edge(UP)\n        self.play(Write(title))\n        \n        # Original Inequality\n        ineq = MathTex(\n            r5 + 8\\cos x + 4\\cos 2x + \\cos 3x \\ge 0,\n            color=BLACK\n        ).shift(UP)\n        self.play(Write(ineq))\n        \n        # Substitution\n        sub_text = MathTex(r\\text{Смена: } t = \\cos x, color=BLUE).next_to(ineq, DOWN)\n        formulas = MathTex(\n            r\\cos 2x = 2t^2 - 1, \\quad \\cos 3x = 4t^3 - 3t,\n            color=BLUE, font_size=36\n        ).next_to(sub_text, DOWN)\n        \n        self.play(Write(sub_text))\n        self.play(Write(formulas))\n        \n        # Polynomial\n        poly = MathTex(\n            rP(t) &= 5 + 8t + 4(2t^2 - 1) + (4t^3 - 3t) \\\\ &= 4t^3 + 8t^2 + 5t + 1,\n            color=BLACK\n        ).next_to(formulas, DOWN)\n        \n        self.play(Write(poly))\n        \n        # Factorization\n        factored = MathTex(\n            rP(t) = (t+1)(2t+1)^2,\n            color=RED\n        ).next_to(poly, DOWN)\n        \n        self.play(Transform(poly.copy(), factored))\n        \n        # Final Argument\n        argument = MathTex(\n            rt \\ge -1 \\implies t+1 \\ge 0,\n            r\\quad (2t+1)^2 \\ge 0,\n            color=GREEN\n        ).next_to(factored, DOWN)\n        \n        self.play(Write(argument))\n        \n        self.wait(2)",
+    "path": "C:\\Users\\pc4all\\Documents\\matholimpiad\\olympiad-math-archive\\docs\\grade_11\\algebra\\sigma139_y3_p2.md",
+    "filename": "sigma139_y3_p2.md",
+    "grade": "11",
+    "category": "algebra",
+    "difficulty": 6
+  },
+  {
+    "meta": {
+      "difficulty": "5",
+      "grade": "11",
+      "problem_id": "sigma139_y3_p3",
+      "source": "Sigma 139, Treta godina, Zadaca 3",
+      "tags": [
+        "trigonometry",
+        "irrational_equations",
+        "inequalities",
+        "substitution"
+      ],
+      "title": "Тригонометриска равенка со корени",
+      "type": "algebra",
+      "related_skills": [],
+      "has_manim_placeholder": false
+    },
+    "body": "# Текст на задачата\nРеши ја равенката:\n$$ \\sqrt{\\sin^2 x + \\frac{1}{2}} + \\sqrt{\\cos^2 x + \\frac{1}{2}} = 2 $$\n\n# Решение\n## Стратегија\nРавенката содржи збир на два корени. Можеме да ја решиме со квадрирање, но тоа ќе доведе до комплицирани изрази.\nПоелегантен пристап е да воведеме смена. Забележуваме дека $\\sin^2 x + \\cos^2 x = 1$.\nАко ставиме $u = \\sin^2 x$, тогаш $\\cos^2 x = 1 - u$.\nРавенката ќе стане алгебарска равенка по $u$.\nИсто така, можеме да користиме неравенства (на пример, неравенство меѓу средините) за да покажеме дека левата страна е секогаш $\\ge 2$, па равенство важи само во специфичен случај.\n\n## Чекор по чекор\n\n**Чекор 1: Воведување смена**\nНека $u = \\sin^2 x$. Бидејќи $0 \\le \\sin^2 x \\le 1$, важи $u \\in [0, 1]$.\nТогаш $\\cos^2 x = 1 - u$.\nРавенката добива облик:\n$$ \\sqrt{u + \\frac{1}{2}} + \\sqrt{1 - u + \\frac{1}{2}} = 2 $$\n$$ \\sqrt{u + \\frac{1}{2}} + \\sqrt{\\frac{3}{2} - u} = 2 $$\n\n**Чекор 2: Квадрирање на равенката**\nБидејќи двете страни се позитивни, можеме да квадрираме:\n$$ \\left( \\sqrt{u + \\frac{1}{2}} + \\sqrt{\\frac{3}{2} - u} \\right)^2 = 2^2 $$\n$$ \\left( u + \\frac{1}{2} \\right) + 2\\sqrt{\\left(u + \\frac{1}{2}\\right)\\left(\\frac{3}{2} - u\\right)} + \\left( \\frac{3}{2} - u \\right) = 4 $$\n\nГи собираме слободните членови:\n$$ u - u + \\frac{1}{2} + \\frac{3}{2} + 2\\sqrt{\\dots} = 4 $$\n$$ 2 + 2\\sqrt{\\left(u + \\frac{1}{2}\\right)\\left(\\frac{3}{2} - u\\right)} = 4 $$\n\n**Чекор 3: Изолирање на коренот**\n$$ 2\\sqrt{\\left(u + \\frac{1}{2}\\right)\\left(\\frac{3}{2} - u\\right)} = 2 $$\nДелиме со 2:\n$$ \\sqrt{\\left(u + \\frac{1}{2}\\right)\\left(\\frac{3}{2} - u\\right)} = 1 $$\n\n**Чекор 4: Второ квадрирање и решавање**\n$$ \\left(u + \\frac{1}{2}\\right)\\left(\\frac{3}{2} - u\\right) = 1 $$\nГо развиваме изразот:\n$$ \\frac{3}{2}u - u^2 + \\frac{3}{4} - \\frac{1}{2}u = 1 $$\n$$ -u^2 + u + \\frac{3}{4} = 1 $$\n$$ -u^2 + u - \\frac{1}{4} = 0 $$\nМножиме со -1:\n$$ u^2 - u + \\frac{1}{4} = 0 $$\nОва е полн квадрат:\n$$ \\left( u - \\frac{1}{2} \\right)^2 = 0 $$\n\nЗначи, единствено решение за $u$ е:\n$$ u = \\frac{1}{2} $$\n\n**Чекор 5: Враќање на смената**\nИмаме $\\sin^2 x = \\frac{1}{2}$.\n$$ \\sin x = \\pm \\frac{1}{\\sqrt{2}} = \\pm \\frac{\\sqrt{2}}{2} $$\nОва одговара на аглите $x = \\frac{\\pi}{4} + \\frac{k\\pi}{2}$ (или $45^\\circ + 90^\\circ k$).\n\nПопрецизно:\n1.  $\\sin x = \\frac{\\sqrt{2}}{2} \\implies x = \\frac{\\pi}{4} + 2k\\pi$ или $x = \\frac{3\\pi}{4} + 2k\\pi$.\n2.  $\\sin x = -\\frac{\\sqrt{2}}{2} \\implies x = -\\frac{\\pi}{4} + 2k\\pi$ или $x = \\frac{5\\pi}{4} + 2k\\pi$.\n\nСите овие решенија можат да се запишат со една формула:\n$$ x = \\frac{\\pi}{4} + \\frac{k\\pi}{2}, \\quad k \\in \\mathbb{Z} $$\n\n**Заклучок:**\nРешенијата на равенката се $x = \\frac{\\pi}{4} + \\frac{k\\pi}{2}$ за $k \\in \\mathbb{Z}$.\n\n# Pedagogical Notes\n1.  **Основна идеја:** Смената $u = \\sin^2 x$ е многу корисна кога во равенката се појавуваат само квадрати на синус и косинус. Таа го намалува степенот на проблемот и го претвора во алгебарски.\n2.  **Совет од Олимпиец:** Алтернативен пристап е преку неравенството меѓу квадратна и аритметичка средина (QM-AM).\n    Нека $a = \\sqrt{\\sin^2 x + 1/2}$ и $b = \\sqrt{\\cos^2 x + 1/2}$.\n    Знаеме дека $\\frac{a+b}{2} \\le \\sqrt{\\frac{a^2+b^2}{2}}$.\n    $a^2+b^2 = \\sin^2 x + 1/2 + \\cos^2 x + 1/2 = 1 + 1 = 2$.\n    Значи $\\frac{a+b}{2} \\le \\sqrt{\\frac{2}{2}} = 1 \\implies a+b \\le 2$.\n    Равенката бара $a+b=2$. Равенство во QM-AM важи акко $a=b$.\n    $\\sin^2 x + 1/2 = \\cos^2 x + 1/2 \\implies \\sin^2 x = \\cos^2 x \\implies \\tan^2 x = 1$.\n    Ова води до истото решение многу побрзо!\n3.  **Чести грешки:** Заборавање на периодичноста на тригонометриските функции. Решението не е само $45^\\circ$, туку бесконечно многу агли.\n\n```python\nfrom manim import *\n\nclass TrigEquation(Scene):\n    def construct(self):\n        self.camera.background_color = WHITE\n        \n        # Title\n        title = Text(Тригонометриска равенка, color=BLACK).to_edge(UP)\n        self.play(Write(title))\n        \n        # Equation\n        eq = MathTex(\n            r\\sqrt{\\sin^2 x + \\frac{1}{2}} + \\sqrt{\\cos^2 x + \\frac{1}{2}} = 2,\n            color=BLACK\n        ).shift(UP)\n        self.play(Write(eq))\n        \n        # Substitution\n        sub = MathTex(r\\text{Смена: } u = \\sin^2 x \\implies \\cos^2 x = 1-u, color=BLUE).next_to(eq, DOWN)\n        self.play(Write(sub))\n        \n        # Algebraic Equation\n        alg_eq = MathTex(\n            r\\sqrt{u + \\frac{1}{2}} + \\sqrt{\\frac{3}{2} - u} = 2,\n            color=BLACK\n        ).next_to(sub, DOWN)\n        self.play(TransformFromCopy(eq, alg_eq))\n        \n        # Squaring\n        squared = MathTex(\n            r\\left(u + \\frac{1}{2}\\right) + 2\\sqrt{\\dots} + \\left(\\frac{3}{2} - u\\right) = 4,\n            color=BLACK\n        ).next_to(alg_eq, DOWN)\n        \n        simplified = MathTex(\n            r2 + 2\\sqrt{\\dots} = 4 \\implies \\sqrt{\\dots} = 1,\n            color=RED\n        ).next_to(squared, DOWN)\n        \n        self.play(Write(squared))\n        self.play(Write(simplified))\n        \n        # Final Solution\n        sol_u = MathTex(r(u - 1/2)^2 = 0 \\implies u = 1/2, color=GREEN).next_to(simplified, DOWN)\n        sol_x = MathTex(r\\sin^2 x = 1/2 \\implies x = \\frac{\\pi}{4} + \\frac{k\\pi}{2}, color=GREEN).next_to(sol_u, DOWN)\n        \n        self.play(Write(sol_u))\n        self.play(Write(sol_x))\n        self.play(Indicate(sol_x))\n        \n        self.wait(2)\n\n---\n### 🎨 Визуелизација\n![Илустрација](/assets/images/sigma139_y3_p3/sigma139_y3_p3.png)",
+    "path": "C:\\Users\\pc4all\\Documents\\matholimpiad\\olympiad-math-archive\\docs\\grade_11\\algebra\\sigma139_y3_p3.md",
+    "filename": "sigma139_y3_p3.md",
+    "grade": "11",
+    "category": "algebra",
+    "difficulty": 5
+  },
+  {
+    "meta": {
+      "difficulty": "7",
+      "grade": "11",
+      "problem_id": "sigma139_y3_p4",
+      "source": "Sigma 139, Treta godina, Zadaca 4",
+      "tags": [
+        "trigonometry",
+        "cauchy_schwarz",
+        "inequalities",
+        "optimization"
+      ],
+      "title": "Равенка со две променливи и Коши-Шварц",
+      "type": "algebra",
+      "related_skills": [],
+      "has_manim_placeholder": false
+    },
+    "body": "# Текст на задачата\nРеши ја равенката:\n$$ (3\\sin x + \\sqrt{3}\\cos x + 5y)^2 = 37(1 + y^2) $$\n\n# Решение\n## Стратегија\nОва е равенка со две променливи ($x$ и $y$). Обично ваквите равенки имаат бесконечно многу решенија, освен ако не се работи за некој граничен случај (екстрем).\nЗабележуваме дека десната страна е производ на збир на квадрати. Левата страна е квадрат на збир. Ова силно сугерира на **неравенството на Коши-Шварц** (Cauchy-Schwarz).\nНеравенството гласи: $(a_1 b_1 + a_2 b_2 + \\dots)^2 \\le (a_1^2 + a_2^2 + \\dots)(b_1^2 + b_2^2 + \\dots)$.\nЌе се обидеме да ја запишеме левата страна како скаларен производ на два вектора, така што десната страна да биде производ на нивните норми. Ако успееме, тогаш равенството важи само кога векторите се колинеарни.\n\n## 📐 Детално Решение\n\n<details>\n<summary>Чекор 1: Трансформација на левата страна</summary>\n\nИзразот во заградата е $3\\sin x + \\sqrt{3}\\cos x + 5y$.\nМожеме да го гледаме како скаларен производ на векторите:\n$\\vec{u} = (3\\sin x + \\sqrt{3}\\cos x, 5)$ и $\\vec{v} = (1, y)$.\nТогаш левата страна е $(\\vec{u} \\cdot \\vec{v})^2$.\nДесната страна би требало да биде $|\\vec{u}|^2 |\\vec{v}|^2$.\n$|\\vec{v}|^2 = 1^2 + y^2 = 1+y^2$. Ова одговара на едниот множител.\nДали $|\\vec{u}|^2$ е еднакво на 37?\n$|\\vec{u}|^2 = (3\\sin x + \\sqrt{3}\\cos x)^2 + 5^2$.\nОва зависи од $x$, па не е константа. Оваа поделба не е добра.\n\nАјде да пробаме поинаку.\nНека $A = 3\\sin x + \\sqrt{3}\\cos x$.\nРавенката е $(A + 5y)^2 = 37(1 + y^2)$.\nОва личи на Коши-Шварц за векторите $\\vec{a} = (A, 5)$ и $\\vec{b} = (1, y)$?\n$(\\vec{a} \\cdot \\vec{b})^2 = (A + 5y)^2$.\n$|\\vec{a}|^2 |\\vec{b}|^2 = (A^2 + 25)(1 + y^2)$.\nЗа да важи равенството од задачата, треба $A^2 + 25 = 37$, т.е. $A^2 = 12$.\nДали $A$ може да биде $\\sqrt{12}$?\n$A = 3\\sin x + \\sqrt{3}\\cos x$.\nМаксималната вредност на $a\\sin x + b\\cos x$ е $\\sqrt{a^2+b^2}$.\n$\\max(A) = \\sqrt{3^2 + (\\sqrt{3})^2} = \\sqrt{9+3} = \\sqrt{12}$.\nЗначи $A^2 \\le 12$.\nТогаш $A^2 + 25 \\le 12 + 25 = 37$.\n\n</details>\n\n<details>\n<summary>Чекор 2: Примена на Коши-Шварц</summary>\n\nДа ги дефинираме векторите:\n$\\vec{u} = (A, 5)$\n$\\vec{v} = (1, y)$\nСпоред Коши-Шварц:\n$$ (A \\cdot 1 + 5 \\cdot y)^2 \\le (A^2 + 5^2)(1^2 + y^2) $$\n$$ (A + 5y)^2 \\le (A^2 + 25)(1 + y^2) $$\n\nЗнаеме дека $A = 3\\sin x + \\sqrt{3}\\cos x$.\nМаксималната вредност на $A^2$ е 12.\nЗначи $A^2 + 25 \\le 12 + 25 = 37$.\nЗатоа:\n$$ (A + 5y)^2 \\le 37(1 + y^2) $$\n\nРавенката во задачата бара да важи **равенство**:\n$$ (A + 5y)^2 = 37(1 + y^2) $$\n\nОва е можно само ако се исполнети два услови истовремено:\n1.  Мора да важи равенство во неравенството $A^2 \\le 12$. Ова значи $A^2 = 12$, т.е. $A = \\pm \\sqrt{12} = \\pm 2\\sqrt{3}$.\n2.  Мора да важи равенство во Коши-Шварц. Ова значи дека векторите $\\vec{u}$ и $\\vec{v}$ се колинеарни (пропорционални).\n    $$ \\frac{A}{1} = \\frac{5}{y} \\implies y = \\frac{5}{A} $$\n\n</details>\n\n<details>\n<summary>Чекор 3: Решавање на системот</summary>\n\nИмаме два случаи за $A$:\n\n**Случај 1:** $A = 2\\sqrt{3}$.\nТогаш $y = \\frac{5}{2\\sqrt{3}}$.\nТреба да го најдеме $x$ од равенката:\n$$ 3\\sin x + \\sqrt{3}\\cos x = 2\\sqrt{3} $$\nДелиме со $\\sqrt{12} = 2\\sqrt{3}$:\n$$ \\frac{3}{2\\sqrt{3}}\\sin x + \\frac{\\sqrt{3}}{2\\sqrt{3}}\\cos x = 1 $$\n$$ \\frac{\\sqrt{3}}{2}\\sin x + \\frac{1}{2}\\cos x = 1 $$\nОва е синус од збир: $\\sin x \\cos 30^\\circ + \\cos x \\sin 30^\\circ = 1$.\n$$ \\sin(x + 30^\\circ) = 1 $$\n$$ x + \\frac{\\pi}{6} = \\frac{\\pi}{2} + 2k\\pi $$\n$$ x = \\frac{\\pi}{3} + 2k\\pi $$\n\n**Случај 2:** $A = -2\\sqrt{3}$.\nТогаш $y = \\frac{5}{-2\\sqrt{3}} = -\\frac{5}{2\\sqrt{3}}$.\nРавенката за $x$ е:\n$$ 3\\sin x + \\sqrt{3}\\cos x = -2\\sqrt{3} $$\nДелиме со $2\\sqrt{3}$:\n$$ \\sin(x + 30^\\circ) = -1 $$\n$$ x + \\frac{\\pi}{6} = \\frac{3\\pi}{2} + 2k\\pi $$\n$$ x = \\frac{4\\pi}{3} + 2k\\pi $$\n\n**Заклучок:**\nРешенијата се паровите $(x, y)$:\n1.  $x = \\frac{\\pi}{3} + 2k\\pi, \\quad y = \\frac{5\\sqrt{3}}{6}$\n2.  $x = \\frac{4\\pi}{3} + 2k\\pi, \\quad y = -\\frac{5\\sqrt{3}}{6}$\n(каде $k \\in \\mathbb{Z}$).\n\n# Pedagogical Notes\n1.  **Основна идеја:** Методот на помошен агол ($a\\sin x + b\\cos x = \\sqrt{a^2+b^2}\\sin(x+\\phi)$) е клучен за да се види дека максималната вредност на изразот е $\\sqrt{12}$.\n2.  **Совет од Олимпиец:** Кога имате равенка од типот $L(x,y) = R(x,y)$, а знаете дека $L \\le M$ и $R \\ge M$ (или слично ограничување), тогаш единствено решение е кога двете страни се еднакви на $M$. Овде $M$ беше скриено во Коши-Шварц.\n3.  **Чести грешки:** Заборавање на условот за колинеарност кај Коши-Шварц. Не е доволно само $A$ да биде максимум, мора и $y$ да биде соодветно поврзано со $A$.\n\n```python\nfrom manim import *\n\nclass CauchyEquation(Scene):\n    def construct(self):\n        self.camera.background_color = WHITE\n        \n        # Title\n        title = Text(Равенка и Коши-Шварц, color=BLACK).to_edge(UP)\n        self.play(Write(title))\n        \n        # Equation\n        eq = MathTex(\n            r(3\\sin x + \\sqrt{3}\\cos x + 5y)^2 = 37(1 + y^2),\n            color=BLACK\n        ).shift(UP)\n        self.play(Write(eq))\n        \n        # Substitution A\n        sub_A = MathTex(rA = 3\\sin x + \\sqrt{3}\\cos x, color=BLUE).next_to(eq, DOWN)\n        self.play(Write(sub_A))\n        \n        # Cauchy-Schwarz Setup\n        vectors = MathTex(\n            r\\vec{u} = (A, 5), \\quad \\vec{v} = (1, y),\n            color=BLACK\n        ).next_to(sub_A, DOWN)\n        \n        cs_ineq = MathTex(\n            r(A \\cdot 1 + 5 \\cdot y)^2 \\le (A^2 + 25)(1 + y^2),\n            color=RED\n        ).next_to(vectors, DOWN)\n        \n        self.play(Write(vectors))\n        self.play(Write(cs_ineq))\n        \n        # Max Value Logic\n        max_val = MathTex(\n            rA^2 \\le 3^2 + (\\sqrt{3})^2 = 12 \\implies A^2 + 25 \\le 37,\n            color=GREEN\n        ).next_to(cs_ineq, DOWN)\n        \n        self.play(Write(max_val))\n        \n        # Conclusion\n        conclusion = MathTex(\n            r\\text{Равенство } \\iff A^2=12 \\text{ и } \\vec{u} \\parallel \\vec{v},\n            color=BLACK\n        ).next_to(max_val, DOWN)\n        \n        self.play(Write(conclusion))\n        \n        self.wait(2)\n\n</details>\n\n---\n### 🎨 Визуелизација\n![Илустрација](/assets/images/sigma139_y3_p4/sigma139_y3_p4.png)",
+    "path": "C:\\Users\\pc4all\\Documents\\matholimpiad\\olympiad-math-archive\\docs\\grade_11\\algebra\\sigma139_y3_p4.md",
+    "filename": "sigma139_y3_p4.md",
+    "grade": "11",
+    "category": "algebra",
+    "difficulty": 7
   },
   {
     "meta": {
@@ -3534,6 +3678,27 @@
     "grade": "11",
     "category": "algebra",
     "difficulty": 7
+  },
+  {
+    "meta": {
+      "difficulty": "1",
+      "grade": "11",
+      "problem_id": "test_math_display",
+      "source": "Test",
+      "tags": [
+        "test"
+      ],
+      "title": "Test Math Display",
+      "type": "algebra",
+      "related_skills": [],
+      "has_manim_placeholder": false
+    },
+    "body": "# Текст на задачата\nРеши ја равенката: $x^2 + 2x + 1 = 0$\n\n# Решение\n## 📐 Детално Решение\n\n<details>\n<summary>Чекор 1: Формула за квадратен трином</summary>\n\n$$ x^2 + 2x + 1 = (x + 1)^2 $$\n\n</details>\n\n<details>\n<summary>Чекор 2: Решавање</summary>\n\n$$ (x + 1)^2 = 0 \\implies x + 1 = 0 \\implies x = -1 $$\n\n# Pedagogical Notes\nTest math display.\n\n```python\nfrom manim import *\n\nclass TestMath(Scene):\n    def construct(self):\n        self.camera.background_color = WHITE\n\n        # Title\n        title = Text(Test Math, color=BLACK).to_edge(UP)\n        self.play(Write(title))\n\n        # Equation\n        eq = MathTex(rx^2 + 2x + 1 = 0, color=BLACK).shift(UP)\n        self.play(Write(eq))\n\n        # Solution\n        sol = MathTex(r(x + 1)^2 = 0 \\implies x = -1, color=BLACK).next_to(eq, DOWN)\n        self.play(Write(sol))\n\n        self.wait(2)\n\n</details>\n\n---\n### 🎨 Визуелизација\n![Илустрација](/assets/images/test_math_display/test_math_display.png)",
+    "path": "C:\\Users\\pc4all\\Documents\\matholimpiad\\olympiad-math-archive\\docs\\grade_11\\algebra\\test_math_display.md",
+    "filename": "test_math_display.md",
+    "grade": "11",
+    "category": "algebra",
+    "difficulty": 1
   },
   {
     "meta": {
@@ -4074,6 +4239,54 @@
     "grade": "11",
     "category": "geometry",
     "difficulty": 6
+  },
+  {
+    "meta": {
+      "difficulty": "7",
+      "grade": "11",
+      "problem_id": "sigma139_p1894",
+      "source": "Sigma 139, Zadaca 1894",
+      "tags": [
+        "geometry",
+        "golden_ratio",
+        "similar_triangles",
+        "cyclic_quadrilateral"
+      ],
+      "title": "Златен пресек во квадрат",
+      "type": "geometry",
+      "related_skills": [],
+      "has_manim_placeholder": false
+    },
+    "body": "# Текст на задачата\nНека $ABCD$ е квадрат. Отсечката $AB$ е поделена внатрешно со точка $H$ така што $\\overline{AB} \\cdot \\overline{BH} = \\overline{AH}^2$. Нека $E$ е средишна точка на отсечката $AD$ и $X$ е средишна точка на отсечката $AH$. Нека $Y$ е точка од отсечката $EB$ така што $XY$ е нормална на $EB$. Докажи дека $\\overline{XY} = \\overline{XH}$.\n\n# Решение\n## Стратегија\nУсловот $\\overline{AB} \\cdot \\overline{BH} = \\overline{AH}^2$ е дефиницијата за **златен пресек**. Точката $H$ ја дели отсечката $AB$ во златен пресек.\nОва значи дека ако страната на квадратот е $a$, тогаш $AH = \\frac{\\sqrt{5}-1}{2}a$.\nЗадачата бара да докажеме еднаквост на отсечки $XY = XH$. Ова сугерира дека $X$ е центар на кружница што минува низ $Y$ и $H$, или дека $\\triangle XYH$ е рамнокрак.\nБидејќи $XY \\perp EB$, триаголникот $\\triangle XYB$ е правоаголен.\nМожеме да користиме аналитичка геометрија (координати) бидејќи имаме квадрат и многу средишни точки, што ги прави пресметките едноставни.\nАлтернативно, можеме да користиме сличност на триаголници.\n\n## 📐 Детално Решение\n\n<details>\n<summary>Чекор 1: Поставување на координатен систем</summary>\n\nНека $A(0, 2a)$. Тогаш $B(2a, 2a)$, $C(2a, 0)$, $D(0, 0)$.\n(Избираме $2a$ за да избегнеме дропки со средишните точки).\nСтраната на квадратот е $2a$.\n\n</details>\n\n<details>\n<summary>Чекор 2: Координати на точките</summary>\n\n*   $E$ е средина на $AD$. $A(0, 2a), D(0, 0) \\implies E(0, a)$.\n*   $H$ ја дели $AB$ во златен пресек.\n    Условот е $AB \\cdot BH = AH^2$.\n    Нека $AH = x$. Тогаш $BH = 2a - x$.\n    $2a(2a - x) = x^2 \\implies x^2 + 2ax - 4a^2 = 0$.\n    $x = \\frac{-2a + \\sqrt{4a^2 + 16a^2}}{2} = a(\\sqrt{5} - 1)$.\n    Значи $AH = a(\\sqrt{5} - 1)$.\n    Координатите на $H$ се $(a(\\sqrt{5}-1), 2a)$.\n*   $X$ е средина на $AH$.\n    $x_X = \\frac{0 + a(\\sqrt{5}-1)}{2} = \\frac{a(\\sqrt{5}-1)}{2}$.\n    $y_X = 2a$.\n    Значи $X\\left( \\frac{a(\\sqrt{5}-1)}{2}, 2a \\right)$.\n\n</details>\n\n<details>\n<summary>Чекор 3: Равенка на правата $EB$</summary>\n\nТочките се $E(0, a)$ и $B(2a, 2a)$.\nКоефициентот на правец е $k_{EB} = \\frac{2a - a}{2a - 0} = \\frac{a}{2a} = \\frac{1}{2}$.\nРавенката е $y - a = \\frac{1}{2}(x - 0) \\implies y = \\frac{1}{2}x + a$.\n\n</details>\n\n<details>\n<summary>Чекор 4: Равенка на правата $XY$</summary>\n\nПравата $XY$ е нормална на $EB$, па нејзиниот коефициент е $k_{XY} = -2$.\nМинува низ $X\\left( \\frac{a(\\sqrt{5}-1)}{2}, 2a \\right)$.\nРавенката е:\n$y - 2a = -2\\left( x - \\frac{a(\\sqrt{5}-1)}{2} \\right)$\n$y = -2x + a(\\sqrt{5}-1) + 2a = -2x + a(\\sqrt{5}+1)$.\n\n</details>\n\n<details>\n<summary>Чекор 5: Координати на точката $Y$</summary>\n\n$Y$ е пресек на $EB$ и $XY$.\n$\\frac{1}{2}x + a = -2x + a(\\sqrt{5}+1)$\n$\\frac{5}{2}x = a\\sqrt{5}$\n$x = \\frac{2a\\sqrt{5}}{5} = \\frac{2a}{\\sqrt{5}}$.\n$y = \\frac{1}{2}\\left( \\frac{2a}{\\sqrt{5}} \\right) + a = \\frac{a}{\\sqrt{5}} + a = a\\left( 1 + \\frac{1}{\\sqrt{5}} \\right)$.\n\n</details>\n\n<details>\n<summary>Чекор 6: Пресметка на растојанијата</summary>\n\nТреба да докажеме $XY^2 = XH^2$.\n*   Растојание $XH$:\n    $X$ е средина на $AH$, па $XH = \\frac{AH}{2} = \\frac{a(\\sqrt{5}-1)}{2}$.\n    $XH^2 = \\frac{a^2(5 - 2\\sqrt{5} + 1)}{4} = \\frac{a^2(6 - 2\\sqrt{5})}{4} = \\frac{a^2(3 - \\sqrt{5})}{2}$.\n\n*   Растојание $XY$:\n    $X\\left( \\frac{a(\\sqrt{5}-1)}{2}, 2a \\right)$, $Y\\left( \\frac{2a}{\\sqrt{5}}, a\\left(1+\\frac{1}{\\sqrt{5}}\\right) \\right)$.\n    $x_X - x_Y = \\frac{a\\sqrt{5}-a}{2} - \\frac{2a}{\\sqrt{5}} = \\frac{5a - a\\sqrt{5} - 4a}{2\\sqrt{5}} = \\frac{a - a\\sqrt{5}}{2\\sqrt{5}}$.\n    $y_X - y_Y = 2a - a - \\frac{a}{\\sqrt{5}} = a - \\frac{a}{\\sqrt{5}} = \\frac{a\\sqrt{5}-a}{\\sqrt{5}}$.\n\n    $XY^2 = \\left( \\frac{a(1-\\sqrt{5})}{2\\sqrt{5}} \\right)^2 + \\left( \\frac{a(\\sqrt{5}-1)}{\\sqrt{5}} \\right)^2$\n    $XY^2 = \\frac{a^2(1 - 2\\sqrt{5} + 5)}{20} + \\frac{a^2(5 - 2\\sqrt{5} + 1)}{5}$\n    $XY^2 = \\frac{a^2(6 - 2\\sqrt{5})}{20} + \\frac{4a^2(6 - 2\\sqrt{5})}{20}$\n    $XY^2 = \\frac{5a^2(6 - 2\\sqrt{5})}{20} = \\frac{a^2(6 - 2\\sqrt{5})}{4} = \\frac{a^2(3 - \\sqrt{5})}{2}$.\n\n**Заклучок:**\nДобивме дека $XH^2 = \\frac{a^2(3 - \\sqrt{5})}{2}$ и $XY^2 = \\frac{a^2(3 - \\sqrt{5})}{2}$.\nСледи дека $XY = XH$.\n\n# Pedagogical Notes\n1.  **Основна идеја:** Златниот пресек ($\\phi = \\frac{\\sqrt{5}-1}{2}$) има многу интересни алгебарски својства, како $\\phi^2 = 1 - \\phi$. Користењето на координати е често најсигурниот пат кога имаме „тешки“ односи како златниот пресек, бидејќи алгебрата сама се средува.\n2.  **Совет од Олимпиец:** Не плашете се од ирационални броеви во координатите. Ако правилно ги поставите (на пр. $A$ во координатен почеток или на оска), изразите често се кратат. Овде, клучно беше да се избере страната на квадратот како $2a$ за да се избегнат половинки кај средишните точки.\n3.  **Алтернатива:** Задачата може да се реши и со сличност. $\\triangle ABE \\sim \\triangle X'YE'$ (каде $X', E'$ се проекции), но тоа бара многу повеќе интуиција за да се најдат вистинските триаголници.\n\n```python\nfrom manim import *\n\nclass GoldenRatioSquare(Scene):\n    def construct(self):\n        self.camera.background_color = WHITE\n        \n        # Scale factor\n        s = 3\n        \n        # Points\n        A = UP * s + LEFT * s\n        B = UP * s + RIGHT * s\n        C = DOWN * s + RIGHT * s\n        D = DOWN * s + LEFT * s\n        \n        # Square\n        square = Polygon(A, B, C, D, color=BLACK)\n        \n        # Golden Ratio Point H\n        # AH = AB * (sqrt(5)-1)/2\n        # AB length = 2*s\n        # AH len = 2*s * 0.618...\n        phi = (np.sqrt(5) - 1) / 2\n        H = A + RIGHT * (2 * s * phi)\n        \n        # Midpoints\n        E = (A + D) / 2\n        X = (A + H) / 2\n        \n        # Line EB\n        line_EB = Line(E, B, color=BLUE)\n        \n        # Point Y (projection of X onto EB)\n        # Vector EB\n        vec_EB = B - E\n        # Vector EX\n        vec_EX = X - E\n        # Projection scalar\n        t = np.dot(vec_EX, vec_EB) / np.dot(vec_EB, vec_EB)\n        Y = E + t * vec_EB\n        \n        line_XY = Line(X, Y, color=RED)\n        line_XH = Line(X, H, color=GREEN)\n        \n        # Labels\n        labels = VGroup(\n            MathTex(A).next_to(A, UL),\n            MathTex(B).next_to(B, UR),\n            MathTex(C).next_to(C, DR),\n            MathTex(D).next_to(D, DL),\n            MathTex(E).next_to(E, LEFT),\n            MathTex(H).next_to(H, UP),\n            MathTex(X).next_to(X, UP),\n            MathTex(Y).next_to(Y, DOWN)\n        ).set_color(BLACK)\n        \n        # Right angle\n        ra = RightAngle(line_XY, line_EB, length=0.2, color=RED)\n        \n        # Animation\n        self.play(Create(square))\n        self.play(Write(labels))\n        self.play(Create(line_EB))\n        self.play(Create(Dot(H, color=BLACK)), Create(Dot(X, color=BLACK)), Create(Dot(E, color=BLACK)))\n        self.play(Create(line_XY), Create(ra))\n        self.play(Create(line_XH))\n        \n        # Show equality\n        self.play(Indicate(line_XY), Indicate(line_XH))\n        \n        eq_text = MathTex(rXY = XH, color=BLACK).to_edge(DOWN)\n        self.play(Write(eq_text))\n        \n        self.wait(2)\n\n</details>",
+    "path": "C:\\Users\\pc4all\\Documents\\matholimpiad\\olympiad-math-archive\\docs\\grade_11\\geometry\\sigma139_p1894.md",
+    "filename": "sigma139_p1894.md",
+    "grade": "11",
+    "category": "geometry",
+    "difficulty": 7
+  },
+  {
+    "meta": {
+      "difficulty": "7",
+      "grade": "11",
+      "problem_id": "sigma139_p1894_synthetic_final",
+      "source": "Sigma 139, Zadaca 1894",
+      "tags": [
+        "geometry",
+        "synthetic_geometry",
+        "similarity",
+        "golden_ratio"
+      ],
+      "title": "Златен пресек во квадрат (Синтетичко решение)",
+      "type": "geometry",
+      "related_skills": [],
+      "has_manim_placeholder": false
+    },
+    "body": "# Текст на задачата\nНека $ABCD$ е квадрат. Отсечката $AB$ е поделена внатрешно со точка $H$ така што $\\overline{AB} \\cdot \\overline{BH} = \\overline{AH}^2$. Нека $E$ е средишна точка на отсечката $AD$ и $X$ е средишна точка на отсечката $AH$. Нека $Y$ е точка од отсечката $EB$ така што $XY$ е нормална на $EB$. Докажи дека $\\overline{XY} = \\overline{XH}$.\n\n# Решение\n## Стратегија\nЌе користиме **сличност на триаголници** за да ја пресметаме должината на отсечката $XY$.\n1.  Ќе ги изразиме сите должини преку страната на квадратот, користејќи го својството на златниот пресек за точката $H$.\n2.  Ќе воочиме дека триаголниците $\\triangle EAB$ и $\\triangle XYB$ се слични (имаат заеднички агол и по еден прав агол).\n3.  Преку пропорцијата од сличноста ќе ја пресметаме $XY$ и ќе покажеме дека е еднаква на $XH$.\n\n## 📐 Детално Решение\n\n<details>\n<summary>Чекор 1: Анализа на должините</summary>\n\nНека страната на квадратот е $2a$ (за да избегнеме дропки при делење на половина).\nЗначи $AB = AD = 2a$.\nТочката $E$ е средина на $AD$, па $AE = a$.\nВо правоаголниот триаголник $\\triangle EAB$, хипотенузата е:\n$$ EB = \\sqrt{AE^2 + AB^2} = \\sqrt{a^2 + (2a)^2} = \\sqrt{5a^2} = a\\sqrt{5} $$\n\n</details>\n\n<details>\n<summary>Чекор 2: Златен пресек</summary>\n\nУсловот $AB \\cdot BH = AH^2$ значи дека $H$ ја дели $AB$ во златен пресек.\nНека $AH = x$. Тогаш $BH = 2a - x$.\n$$ 2a(2a - x) = x^2 $$\n$$ x^2 + 2ax - 4a^2 = 0 $$\nРешавајќи ја квадратната равенка по $x$:\n$$ x = \\frac{-2a + \\sqrt{4a^2 + 16a^2}}{2} = \\frac{-2a + 2a\\sqrt{5}}{2} = a(\\sqrt{5} - 1) $$\nЗначи, $AH = a(\\sqrt{5} - 1)$.\n\nТочката $X$ е средина на $AH$, па:\n$$ XH = AX = \\frac{AH}{2} = \\frac{a(\\sqrt{5} - 1)}{2} $$\nОва е вредноста што треба да ја добиеме и за $XY$.\n\n</details>\n\n<details>\n<summary>Чекор 3: Сличност на триаголници</summary>\n\nДа ги разгледаме триаголниците $\\triangle EAB$ и $\\triangle XYB$.\n1.  $\\angle ABE$ е заеднички агол за двата триаголници (агол кај темето $B$).\n2.  $\\angle EAB = 90^\\circ$ (агол на квадратот).\n3.  $\\angle XYB = 90^\\circ$ (бидејќи $XY \\perp EB$).\n\nБидејќи имаат по два еднакви агли, триаголниците се слични:\n$$ \\triangle EAB \\sim \\triangle XYB $$\n\n</details>\n\n<details>\n<summary>Чекор 4: Пресметка на $XY$</summary>\n\nОд сличноста следи пропорцијата на соодветните страни:\n$$ \\frac{XY}{EA} = \\frac{BX}{EB} $$\n(Катета спроти агол $B$ во малиот / Катета спроти агол $B$ во големиот = Хипотенуза во малиот / Хипотенуза во големиот? Не, внимателно со страните).\nВо $\\triangle XYB$: $XY$ е катета спроти агол $B$. Хипотенуза е $XB$.\nВо $\\triangle EAB$: $EA$ е катета спроти агол $B$. Хипотенуза е $EB$.\nЗначи пропорцијата е точна:\n$$ \\frac{XY}{EA} = \\frac{XB}{EB} $$\n\nНи треба должината на $XB$.\n$XB = AB - AX = 2a - \\frac{a(\\sqrt{5}-1)}{2} = \\frac{4a - a\\sqrt{5} + a}{2} = \\frac{a(5 - \\sqrt{5})}{2}$.\n\nСега заменуваме во пропорцијата:\n$$ XY = EA \\cdot \\frac{XB}{EB} = a \\cdot \\frac{\\frac{a(5 - \\sqrt{5})}{2}}{a\\sqrt{5}} $$\n$$ XY = \\frac{a(5 - \\sqrt{5})}{2\\sqrt{5}} $$\nРационализираме (множиме и делиме со $\\sqrt{5}$):\n$$ XY = \\frac{a(5\\sqrt{5} - 5)}{2 \\cdot 5} = \\frac{5a(\\sqrt{5} - 1)}{10} = \\frac{a(\\sqrt{5} - 1)}{2} $$\n\n</details>\n\n<details>\n<summary>Чекор 5: Заклучок</summary>\n\nДобивме:\n$$ XY = \\frac{a(\\sqrt{5} - 1)}{2} $$\nОд Чекор 2 имаме:\n$$ XH = \\frac{a(\\sqrt{5} - 1)}{2} $$\nСледи дека $XY = XH$.\n\n# Pedagogical Notes\n1.  **Основна идеја:** Сличноста на триаголници е многу моќна алатка кога имаме прави агли и заеднички темиња. Клучно е правилно да се идентификуваат соодветните страни.\n2.  **Совет од Олимпиец:** Кога работите со златен пресек, често се појавуваат изрази од типот $5-\\sqrt{5}$. Корисно е да знаете дека $\\frac{5-\\sqrt{5}}{\\sqrt{5}} = \\sqrt{5}-1$. Ова алгебарско упростување често е последниот чекор во доказот.\n3.  **Избор на променлива:** Користењето на $2a$ за страната на квадратот наместо $a$ значително ја поедностави работата со средишните точки, избегнувајќи двојни дропки во раните фази.\n\n</details>\n\n---\n### 🎨 Визуелизација\n![Илустрација](/assets/images/sigma139_p1894_synthetic_final/sigma139_p1894_synthetic_final.png)",
+    "path": "C:\\Users\\pc4all\\Documents\\matholimpiad\\olympiad-math-archive\\docs\\grade_11\\geometry\\sigma139_p1894_synthetic_final.md",
+    "filename": "sigma139_p1894_synthetic_final.md",
+    "grade": "11",
+    "category": "geometry",
+    "difficulty": 7
   },
   {
     "meta": {
@@ -5057,6 +5270,102 @@
     "grade": "12",
     "category": "algebra",
     "difficulty": 5
+  },
+  {
+    "meta": {
+      "difficulty": "5",
+      "grade": "12",
+      "problem_id": "sigma139_y4_p1",
+      "source": "Sigma 139, Cetvrta godina, Zadaca 1",
+      "tags": [
+        "polynomials",
+        "factorization",
+        "complex_roots",
+        "quadratic_substitution"
+      ],
+      "title": "Равенка од четврти степен",
+      "type": "algebra",
+      "related_skills": [],
+      "has_manim_placeholder": false
+    },
+    "body": "# Текст на задачата\nРеши ја равенката:\n$$ x^4 + 26x^2 - x + 182 = 0 $$\n\n# Решение\n## Стратегија\nОва е полиномна равенка од четврти степен. Нема очигледни целобројни корени (делителите на 182 се $\\pm 1, \\pm 2, \\pm 7, \\pm 13, \\dots$, но ниту еден не одговара).\nБидејќи коефициентите се реални, ако има комплексни корени, тие доаѓаат во конјугирани парови.\nСтратегијата е да се обидеме да го разложиме полиномот на два квадратни триноми со целобројни коефициенти:\n$$ (x^2 + ax + b)(x^2 + cx + d) = x^4 + 26x^2 - x + 182 $$\nБидејќи коефициентот пред $x^3$ е 0, мора $a+c=0$, т.е. $c=-a$.\nЗначи бараме разложување од облик:\n$$ (x^2 + ax + b)(x^2 - ax + d) = 0 $$\n\n## 📐 Детално Решение\n\n<details>\n<summary>Чекор 1: Поставување на системот равенки</summary>\n\nГо множиме претпоставениот облик:\n$$ (x^2 + ax + b)(x^2 - ax + d) = x^4 - ax^3 + dx^2 + ax^3 - a^2x^2 + adx + bx^2 - abx + bd $$\n$$ = x^4 + (d - a^2 + b)x^2 + (ad - ab)x + bd $$\n\nГи изедначуваме коефициентите со дадената равенка $x^4 + 26x^2 - x + 182$:\n1.  $d - a^2 + b = 26$\n2.  $a(d - b) = -1$\n3.  $bd = 182$\n\n</details>\n\n<details>\n<summary>Чекор 2: Решавање на системот во цели броеви</summary>\n\nОд равенката (2) $a(d-b) = -1$, бидејќи бараме целобројни коефициенти, $a$ мора да биде делител на -1.\nЗначи $a = 1$ или $a = -1$.\nБез губење на општоста, нека $a = 1$.\nТогаш $d - b = -1$, односно $b = d + 1$.\n\nЗаменуваме во равенката (3):\n$$ (d+1)d = 182 $$\n$$ d^2 + d - 182 = 0 $$\nБараме два последователни цели броја чиј производ е 182.\n$13 \\times 14 = 182$.\nЗначи $d = 13$ (бидејќи $13 \\times 14 = 182$) или $d = -14$ (бидејќи $-14 \\times -13 = 182$).\nАко $d=13$, тогаш $b=14$.\nАко $d=-14$, тогаш $b=-13$.\n\nДа провериме која комбинација ја задоволува равенката (1):\n$d - a^2 + b = 26$\nЗа $a=1$:\n*   Случај 1 ($d=13, b=14$): $13 - 1^2 + 14 = 13 - 1 + 14 = 26$. Ова одговара!\n*   Случај 2 ($d=-14, b=-13$): $-14 - 1 - 13 = -28 \\neq 26$.\n\nЗначи, разложувањето е:\n$$ (x^2 + x + 14)(x^2 - x + 13) = 0 $$\n\n</details>\n\n<details>\n<summary>Чекор 3: Решавање на квадратните равенки</summary>\n\nРавенката се распаѓа на две квадратни равенки:\n1.  $x^2 + x + 14 = 0$\n    $$ x_{1,2} = \\frac{-1 \\pm \\sqrt{1^2 - 4(14)}}{2} = \\frac{-1 \\pm \\sqrt{1 - 56}}{2} = \\frac{-1 \\pm \\sqrt{-55}}{2} = \\frac{-1 \\pm i\\sqrt{55}}{2} $$\n\n2.  $x^2 - x + 13 = 0$\n    $$ x_{3,4} = \\frac{1 \\pm \\sqrt{(-1)^2 - 4(13)}}{2} = \\frac{1 \\pm \\sqrt{1 - 52}}{2} = \\frac{1 \\pm \\sqrt{-51}}{2} = \\frac{1 \\pm i\\sqrt{51}}{2} $$\n\n**Заклучок:**\nРавенката има четири комплексни решенија:\n$$ x \\in \\left\\{ \\frac{-1 \\pm i\\sqrt{55}}{2}, \\frac{1 \\pm i\\sqrt{51}}{2} \\right\\} $$\n\n# Pedagogical Notes\n1.  **Основна идеја:** Методот на неопределени коефициенти (Ferrari-ев метод во поедноставена форма) е најмоќната алатка за полиноми од 4-ти степен кога нема рационални корени. Клучот е да се претпостави формата $(x^2+ax+b)(x^2-ax+d)$ поради отсуството на $x^3$.\n2.  **Совет од Олимпиец:** Кога ќе добиете систем како $bd=182$ и $a(d-b)=-1$, секогаш прво барајте целобројни решенија. Бројот 182 изгледа голем, но брзо се факторизира ($2 \\cdot 7 \\cdot 13$). Фактот што $a$ мора да биде $\\pm 1$ драстично го стеснува пребарувањето.\n3.  **Чести грешки:** Грешка во знакот при формирање на системот (на пр. $d+b$ наместо $d-b$). Исто така, заборавање на имагинарната единица $i$ кога дискриминантата е негативна.\n\n```python\nfrom manim import *\n\nclass QuarticEquation(Scene):\n    def construct(self):\n        self.camera.background_color = WHITE\n        \n        # Title\n        title = Text(Равенка од 4-ти степен, color=BLACK).to_edge(UP)\n        self.play(Write(title))\n        \n        # Equation\n        eq = MathTex(rx^4 + 26x^2 - x + 182 = 0, color=BLACK).shift(UP)\n        self.play(Write(eq))\n        \n        # Factorization Strategy\n        strategy = MathTex(\n            r(x^2 + ax + b)(x^2 - ax + d) = 0,\n            color=BLUE\n        ).next_to(eq, DOWN)\n        self.play(Write(strategy))\n        \n        # System of equations\n        system = MathTex(\n            r\\begin{cases} d - a^2 + b = 26 \\\\ a(d - b) = -1 \\\\ bd = 182 \\end{cases},\n            color=BLACK\n        ).next_to(strategy, DOWN)\n        self.play(Write(system))\n        \n        # Integer solution logic\n        logic = MathTex(\n            ra=1 \\implies d-b=-1, \\quad bd=182,\n            r\\implies d=13, b=14,\n            color=RED\n        ).next_to(system, DOWN)\n        self.play(Write(logic))\n        \n        # Factored form\n        factored = MathTex(\n            r(x^2 + x + 14)(x^2 - x + 13) = 0,\n            color=GREEN\n        ).next_to(logic, DOWN)\n        self.play(Write(factored))\n        \n        # Roots\n        roots = MathTex(\n            rx = \\frac{-1 \\pm i\\sqrt{55}}{2}, \\quad x = \\frac{1 \\pm i\\sqrt{51}}{2},\n            color=BLACK\n        ).next_to(factored, DOWN)\n        self.play(Write(roots))\n        \n        self.wait(2)\n\n</details>\n\n---\n### 🎨 Визуелизација\n![Илустрација](/assets/images/sigma139_y4_p1/sigma139_y4_p1.png)",
+    "path": "C:\\Users\\pc4all\\Documents\\matholimpiad\\olympiad-math-archive\\docs\\grade_12\\algebra\\sigma139_y4_p1.md",
+    "filename": "sigma139_y4_p1.md",
+    "grade": "12",
+    "category": "algebra",
+    "difficulty": 5
+  },
+  {
+    "meta": {
+      "difficulty": "5",
+      "grade": "12",
+      "problem_id": "sigma139_y4_p2",
+      "source": "Sigma 139, Cetvrta godina, Zadaca 2",
+      "tags": [
+        "inequalities",
+        "means",
+        "optimization",
+        "convex_function"
+      ],
+      "title": "Неравенство со услов",
+      "type": "algebra",
+      "related_skills": [],
+      "has_manim_placeholder": false
+    },
+    "body": "# Текст на задачата\nЗа произволни броеви $a, b > 0$ важи $a + b = 1$. Докажи дека е исполнето неравенството:\n$$ \\left( a + \\frac{1}{a} \\right)^2 + \\left( b + \\frac{1}{b} \\right)^2 \\ge \\frac{25}{2} $$\n\n# Решение\n## Стратегија\nОва е класично неравенство кое може да се реши на повеќе начини:\n1.  **Квадратна средина (QM-AM):** Да се искористи неравенството $\\sqrt{\\frac{x^2+y^2}{2}} \\ge \\frac{x+y}{2}$.\n2.  **Функција:** Да се разгледа функцијата $f(x) = (x + 1/x)^2$ и да се искористи нејзината конвексност (Јенсеново неравенство).\n3.  **Алгебарски:** Да се развијат квадратите и да се искористи $a+b=1$ за да се сведе на една променлива или на производ $ab$.\n\nЌе го користиме методот со средини (QM-AM) бидејќи е најелегантен и најбрз.\n\n## 📐 Детално Решение\n\n<details>\n<summary>Чекор 1: Примена на неравенството меѓу средините</summary>\n\nНека $x = a + \\frac{1}{a}$ и $y = b + \\frac{1}{b}$.\nСпоред неравенството меѓу квадратна и аритметичка средина (QM $\\ge$ AM):\n$$ \\sqrt{\\frac{x^2 + y^2}{2}} \\ge \\frac{x + y}{2} $$\nКвадрираме:\n$$ \\frac{x^2 + y^2}{2} \\ge \\left( \\frac{x + y}{2} \\right)^2 $$\n$$ x^2 + y^2 \\ge \\frac{(x + y)^2}{2} $$\n\nВо нашиот случај:\n$$ \\left( a + \\frac{1}{a} \\right)^2 + \\left( b + \\frac{1}{b} \\right)^2 \\ge \\frac{1}{2} \\left( a + \\frac{1}{a} + b + \\frac{1}{b} \\right)^2 $$\n\n</details>\n\n<details>\n<summary>Чекор 2: Упростување на десната страна</summary>\n\nГо користиме условот $a + b = 1$.\nИзразот во заградата е:\n$$ S = a + b + \\frac{1}{a} + \\frac{1}{b} = 1 + \\frac{a+b}{ab} = 1 + \\frac{1}{ab} $$\n\nЗначи, треба да го минимизираме изразот $1 + \\frac{1}{ab}$.\nОва е еквивалентно на максимизирање на производот $ab$.\n\n</details>\n\n<details>\n<summary>Чекор 3: Ограничување на производот $ab$</summary>\n\nЗнаеме дека за позитивни броеви важи $AM \\ge GM$:\n$$ \\frac{a+b}{2} \\ge \\sqrt{ab} $$\nБидејќи $a+b=1$:\n$$ \\frac{1}{2} \\ge \\sqrt{ab} $$\nКвадрираме:\n$$ \\frac{1}{4} \\ge ab $$\nЗначи, максималната вредност на $ab$ е $1/4$.\n\n</details>\n\n<details>\n<summary>Чекор 4: Финална проценка</summary>\n\nБидејќи $ab \\le \\frac{1}{4}$, тогаш $\\frac{1}{ab} \\ge 4$.\nСледи:\n$$ S = 1 + \\frac{1}{ab} \\ge 1 + 4 = 5 $$\n\nСега се враќаме на неравенството од Чекор 1:\n$$ \\text{Лева страна} \\ge \\frac{1}{2} S^2 \\ge \\frac{1}{2} (5)^2 = \\frac{25}{2} $$\n\nСо ова неравенството е докажано.\n\n**Заклучок:**\nНеравенството важи, а знак за равенство се достигнува кога $a=b=1/2$.\n\n# Pedagogical Notes\n1.  **Основна идеја:** Комбинацијата на QM-AM и AM-GM е моќна алатка. Прво го „линеаризираме“ проблемот (од квадрати на збир), а потоа го користиме условот за збирот за да го ограничиме производот.\n2.  **Совет од Олимпиец:** Кога имате симетричен израз со $a$ и $b$ и услов $a+b=\\text{const}$, екстремната вредност скоро секогаш се постигнува кога $a=b$. Во овој случај $a=b=1/2$. Проверката на овој случај на почетокот ($ (1/2+2)^2 + (1/2+2)^2 = 2(2.5)^2 = 2(6.25) = 12.5 = 25/2 $) ви дава сигурност кон што целите.\n3.  **Алтернатива (Јенсен):** Функцијата $f(x) = (x+1/x)^2$ е конвексна за $x \\in (0, 1)$.\n    $f'(x) = 2(x+1/x)(1-1/x^2)$.\n    $f''(x) = \\dots > 0$.\n    Според Јенсен: $f(a) + f(b) \\ge 2 f(\\frac{a+b}{2}) = 2 f(1/2) = 2(1/2+2)^2 = 2(2.5)^2 = 12.5$.\n\n```python\nfrom manim import *\n\nclass InequalityProof(Scene):\n    def construct(self):\n        self.camera.background_color = WHITE\n        \n        # Title\n        title = Text(Доказ на неравенство, color=BLACK).to_edge(UP)\n        self.play(Write(title))\n        \n        # Inequality\n        ineq = MathTex(\n            r\\left( a + \\frac{1}{a} \\right)^2 + \\left( b + \\frac{1}{b} \\right)^2 \\ge \\frac{25}{2},\n            color=BLACK\n        ).shift(UP)\n        self.play(Write(ineq))\n        \n        # QM-AM Step\n        qmam = MathTex(\n            rx^2 + y^2 \\ge \\frac{(x+y)^2}{2},\n            color=BLUE\n        ).next_to(ineq, DOWN)\n        self.play(Write(qmam))\n        \n        # Substitution\n        sub = MathTex(\n            r\\ge \\frac{1}{2} \\left( a + b + \\frac{1}{a} + \\frac{1}{b} \\right)^2,\n            color=BLACK\n        ).next_to(qmam, DOWN)\n        self.play(Write(sub))\n        \n        # Using condition a+b=1\n        cond = MathTex(\n            r= \\frac{1}{2} \\left( 1 + \\frac{a+b}{ab} \\right)^2 = \\frac{1}{2} \\left( 1 + \\frac{1}{ab} \\right)^2,\n            color=BLACK\n        ).next_to(sub, DOWN)\n        self.play(Write(cond))\n        \n        # AM-GM Step\n        amgm = MathTex(\n            rab \\le \\left(\\frac{a+b}{2}\\right)^2 = \\frac{1}{4} \\implies \\frac{1}{ab} \\ge 4,\n            color=RED\n        ).next_to(cond, DOWN)\n        self.play(Write(amgm))\n        \n        # Final Result\n        final = MathTex(\n            r\\ge \\frac{1}{2} (1 + 4)^2 = \\frac{25}{2},\n            color=GREEN\n        ).next_to(amgm, DOWN)\n        self.play(Indicate(final))\n        \n        self.wait(2)\n\n</details>\n\n---\n### 🎨 Визуелизација\n![Илустрација](/assets/images/sigma139_y4_p2/sigma139_y4_p2.png)",
+    "path": "C:\\Users\\pc4all\\Documents\\matholimpiad\\olympiad-math-archive\\docs\\grade_12\\algebra\\sigma139_y4_p2.md",
+    "filename": "sigma139_y4_p2.md",
+    "grade": "12",
+    "category": "algebra",
+    "difficulty": 5
+  },
+  {
+    "meta": {
+      "difficulty": "6",
+      "grade": "12",
+      "problem_id": "sigma139_y4_p3",
+      "source": "Sigma 139, Cetvrta godina, Zadaca 3",
+      "tags": [
+        "functions",
+        "quadratic_function",
+        "proof",
+        "composition"
+      ],
+      "title": "Итерации на квадратна функција",
+      "type": "algebra",
+      "related_skills": [],
+      "has_manim_placeholder": false
+    },
+    "body": "# Текст на задачата\nКвадратниот трином $f(x) = ax^2 + bx + c$ е таков што равенката $f(x) = x$ нема реални решенија. Докажи дека и равенката $f(f(x)) = x$ нема реални решенија.\n\n# Решение\n## Стратегија\nОва е класична задача за фиксни точки на функција.\n1.  Условот „$f(x) = x$ нема реални решенија“ значи дека графикот на $f(x)$ не ја сече правата $y=x$.\n2.  Бидејќи $f(x)$ е непрекината функција (парабола), ова значи дека целиот график е или строго над правата $y=x$ (т.е. $f(x) > x$ за секое $x$) или строго под неа (т.е. $f(x) < x$ за секое $x$).\n3.  Ќе го искористиме ова својство за да покажеме дека истото важи и за $f(f(x))$. Ако $f(x) > x$, тогаш $f(f(x)) > f(x) > x$, па $f(f(x)) \\neq x$.\n\n## 📐 Детално Решение\n\n<details>\n<summary>Чекор 1: Анализа на условот</summary>\n\nРавенката $f(x) = x$ е еквивалентна на $f(x) - x = 0$.\nБидејќи оваа равенка нема реални решенија, функцијата $g(x) = f(x) - x$ нема нули.\nБидејќи $g(x)$ е квадратна функција (непрекината), таа мора да биде или секогаш позитивна или секогаш негативна.\n\nИмаме два случаи:\n1.  $f(x) - x > 0$ за секое $x \\in \\mathbb{R}$. Односно, $f(x) > x$.\n2.  $f(x) - x < 0$ за секое $x \\in \\mathbb{R}$. Односно, $f(x) < x$.\n\n</details>\n\n<details>\n<summary>Чекор 2: Анализа на првиот случај</summary>\n\nНека $f(x) > x$ за секое $x \\in \\mathbb{R}$.\nДа го разгледаме изразот $f(f(x))$.\nВо неравенството $f(t) > t$, да ставиме $t = f(x)$.\nДобиваме:\n$$ f(f(x)) > f(x) $$\nНо, од почетната претпоставка знаеме дека $f(x) > x$.\nСо комбинирање на двете неравенства:\n$$ f(f(x)) > f(x) > x $$\nСледи дека $f(f(x)) > x$ за секое $x$.\nЗначи, равенката $f(f(x)) = x$ нема реални решенија (бидејќи левата страна е секогаш строго поголема од десната).\n\n</details>\n\n<details>\n<summary>Чекор 3: Анализа на вториот случај</summary>\n\nНека $f(x) < x$ за секое $x \\in \\mathbb{R}$.\nСлично како претходно, во неравенството $f(t) < t$ ставаме $t = f(x)$.\nДобиваме:\n$$ f(f(x)) < f(x) $$\nОд почетната претпоставка знаеме дека $f(x) < x$.\nСо комбинирање:\n$$ f(f(x)) < f(x) < x $$\nСледи дека $f(f(x)) < x$ за секое $x$.\nЗначи, и во овој случај равенката $f(f(x)) = x$ нема реални решенија.\n\n**Заклучок:**\nВо двата можни случаи докажавме дека $f(f(x)) \\neq x$ за секое реално $x$.\n\n# Pedagogical Notes\n1.  **Основна идеја:** Ако функцијата $f$ „го поместува“ $x$ секогаш во иста насока (секогаш нагоре или секогаш надолу), тогаш двојната примена на функцијата ќе го помести $x$ уште подалеку во истата насока. Затоа е невозможно да се вратиме на почетната точка $x$.\n2.  **Совет од Олимпиец:** Ова тврдење важи не само за квадратни функции, туку за која било непрекината функција дефинирана на $\\mathbb{R}$. Клучното својство е непрекинатоста, која гарантира зачувување на знакот на $f(x)-x$.\n3.  **Чести грешки:** Учениците понекогаш се обидуваат да ја решат равенката $f(f(x))=x$ алгебарски. Ова води до равенка од 4-ти степен која е многу тешка за анализа без овој логички пристап.\n\n```python\nfrom manim import *\n\nclass FunctionIteration(Scene):\n    def construct(self):\n        self.camera.background_color = WHITE\n        \n        # Axes\n        axes = Axes(\n            x_range=[-2, 4, 1],\n            y_range=[-2, 4, 1],\n            axis_config={color: BLACK},\n            x_length=6,\n            y_length=6\n        )\n        \n        # Line y=x\n        line_yx = axes.plot(lambda x: x, color=GRAY, stroke_width=2)\n        label_yx = MathTex(y=x, color=GRAY).next_to(line_yx, UR)\n        \n        # Case 1: f(x) > x\n        func1 = axes.plot(lambda x: 0.5*(x-1)**2 + 2, color=BLUE, x_range=[-1, 3])\n        label_f1 = MathTex(f(x) > x, color=BLUE).next_to(func1, UP)\n        \n        # Animation Case 1\n        self.play(Create(axes), Create(line_yx), Write(label_yx))\n        self.play(Create(func1), Write(label_f1))\n        \n        # Point movement logic\n        x0 = 0.5\n        p0 = Dot(axes.c2p(x0, x0), color=RED)\n        p1 = Dot(axes.c2p(x0, 0.5*(x0-1)**2 + 2), color=RED) # (x, f(x))\n        # f(x0) value\n        fx0 = 0.5*(x0-1)**2 + 2\n        p2 = Dot(axes.c2p(fx0, fx0), color=RED) # (f(x), f(x)) on y=x line\n        p3 = Dot(axes.c2p(fx0, 0.5*(fx0-1)**2 + 2), color=RED) # (f(x), f(f(x)))\n        \n        # Arrows\n        arrow1 = Arrow(p0.get_center(), p1.get_center(), color=GREEN, buff=0)\n        arrow2 = Arrow(p1.get_center(), p2.get_center(), color=GREEN, buff=0) # Project to y=x\n        arrow3 = Arrow(p2.get_center(), p3.get_center(), color=GREEN, buff=0)\n        \n        self.play(Create(p0))\n        self.play(GrowArrow(arrow1), Create(p1))\n        self.play(GrowArrow(arrow2), Create(p2))\n        self.play(GrowArrow(arrow3), Create(p3))\n        \n        # Text explanation\n        text = MathTex(\n            rf(x) > x \\implies f(f(x)) > f(x) > x,\n            color=BLACK\n        ).to_corner(UL)\n        self.play(Write(text))\n        \n        self.wait(2)\n\n</details>\n\n---\n### 🎨 Визуелизација\n![Илустрација](/assets/images/sigma139_y4_p3/sigma139_y4_p3.png)",
+    "path": "C:\\Users\\pc4all\\Documents\\matholimpiad\\olympiad-math-archive\\docs\\grade_12\\algebra\\sigma139_y4_p3.md",
+    "filename": "sigma139_y4_p3.md",
+    "grade": "12",
+    "category": "algebra",
+    "difficulty": 6
+  },
+  {
+    "meta": {
+      "difficulty": "6",
+      "grade": "12",
+      "problem_id": "sigma139_y4_p4",
+      "source": "Sigma 139, Cetvrta godina, Zadaca 4",
+      "tags": [
+        "inequalities",
+        "polynomials",
+        "geometric_series",
+        "proof"
+      ],
+      "title": "Полиномно неравенство",
+      "type": "algebra",
+      "related_skills": [],
+      "has_manim_placeholder": false
+    },
+    "body": "# Текст на задачата\nДокажи дека $x^{2n} - x^{2n-1} + x^{2n-2} - \\dots - x^3 + x^2 - x + 1 \\ge \\frac{1}{2}$, за секој $x \\in \\mathbb{R}$ и $n \\in \\mathbb{N}$.\n\n# Решение\n## Стратегија\nИзразот на левата страна е геометриска прогресија со количник $-x$.\n1.  Ќе го сумираме изразот користејќи ја формулата за збир на геометриска прогресија.\n2.  Ќе го анализираме добиениот рационален израз во зависност од вредноста на $x$.\n3.  Ќе разгледаме посебни случаи (на пр. $x=1, x=-1$) и ќе користиме изводи или елементарни неравенства за да го докажеме тврдењето.\n\n## 📐 Детално Решение\n\n<details>\n<summary>Чекор 1: Сумирање на геометриската прогресија</summary>\n\nНека $S(x) = x^{2n} - x^{2n-1} + \\dots - x + 1$.\nОва е геометриска прогресија со прв член 1, количник $q = -x$ и број на членови $2n+1$.\nФормулата за збир е:\n$$ S(x) = \\frac{1 \\cdot ((-x)^{2n+1} - 1)}{-x - 1} = \\frac{-x^{2n+1} - 1}{-x - 1} = \\frac{x^{2n+1} + 1}{x + 1} $$\nОва важи за $x \\neq -1$.\n\n</details>\n\n<details>\n<summary>Чекор 2: Анализа на случаи</summary>\n\n**Случај 1: $x = -1$**\nАко $x = -1$, тогаш секој член во сумата е:\n$(-1)^{2k} = 1$ или $-(-1)^{2k-1} = -(-1) = 1$.\nСите членови се 1. Има вкупно $2n+1$ членови.\n$$ S(-1) = \\underbrace{1 + 1 + \\dots + 1}_{2n+1} = 2n + 1 $$\nБидејќи $n \\in \\mathbb{N}$, $2n+1 \\ge 3 > 1/2$. Неравенството важи.\n\n**Случај 2: $x > -1$**\nТогаш $x+1 > 0$.\nТреба да докажеме:\n$$ \\frac{x^{2n+1} + 1}{x + 1} \\ge \\frac{1}{2} $$\n$$ 2(x^{2n+1} + 1) \\ge x + 1 $$\n$$ 2x^{2n+1} - x + 1 \\ge 0 $$\nНека $f(x) = 2x^{2n+1} - x + 1$.\nБараме минимум на оваа функција за $x > -1$.\n$f'(x) = 2(2n+1)x^{2n} - 1$.\nСтационарна точка: $x^{2n} = \\frac{1}{2(2n+1)}$.\n$x_0 = \\pm \\sqrt[2n]{\\frac{1}{2(2n+1)}}$.\nБидејќи $2n$ е парен, $x^{2n} \\ge 0$.\nЗа $x \\in [0, 1]$, функцијата може да има минимум.\nНо, полесно е да се види:\nАко $x \\ge 1$, тогаш $S(x) \\ge 1 > 1/2$.\nАко $0 \\le x < 1$, тогаш $S(x)$ е наизменична сума со опаѓачки членови по апсолутна вредност.\n$S(x) = (1-x) + (x^2-x^3) + \\dots + x^{2n}$.\nСекоја заграда е позитивна, па $S(x) > 0$. Но треба $> 1/2$.\n\nАјде да се вратиме на $f(x) = 2x^{2n+1} - x + 1$.\nЗа $x \\in [0, 1]$, $x^{2n+1}$ е мал.\nМинимумот се постигнува за $x_0 = \\left(\\frac{1}{4n+2}\\right)^{\\frac{1}{2n}}$.\nОва е комплицирано.\n\n**Алтернативен пристап за $x > -1$:**\nГрупирање на членовите.\n$S(x) = 1 - x + x^2 - x^3 + \\dots + x^{2n}$.\nЗа $x \\in [0, 1]$:\n$S(x) = \\frac{1+x^{2n+1}}{1+x}$.\nФункцијата $g(x) = \\frac{1}{1+x}$ е опаѓачка. За $x=1$, $g(1)=1/2$.\nБидејќи $x^{2n+1} \\ge 0$, тогаш $S(x) \\ge \\frac{1}{1+x}$.\nАко $x \\le 1$, тогаш $\\frac{1}{1+x} \\ge \\frac{1}{2}$.\nЗначи за $x \\in [0, 1]$, $S(x) \\ge 1/2$.\nЗа $x > 1$, $S(x) = \\frac{x^{2n+1}+1}{x+1}$.\nБидејќи $x^{2n+1}$ расте многу побрзо од $x$, ова е големо.\nПоточно, $x^{2n+1} + 1 > x + 1$ за $x > 1$ (бидејќи $n \\ge 1$).\nЗначи $S(x) > 1 > 1/2$.\n\n**Случај 3: $x < -1$**\nНека $x = -y$, каде $y > 1$.\n$S(x) = \\frac{(-y)^{2n+1} + 1}{-y + 1} = \\frac{-y^{2n+1} + 1}{-(y - 1)} = \\frac{y^{2n+1} - 1}{y - 1}$.\nОва е сума $1 + y + y^2 + \\dots + y^{2n}$.\nБидејќи $y > 1$, сите членови се позитивни.\n$S(x) > 1 > 1/2$.\n\n**Заклучок:**\nВо сите случаи докажавме дека $S(x) \\ge 1/2$.\nЕдинствениот „критичен“ интервал беше $x \\in [0, 1]$, каде искористивме дека $S(x) = \\frac{1+x^{2n+1}}{1+x} \\ge \\frac{1}{1+x} \\ge \\frac{1}{2}$.\n\n# Pedagogical Notes\n1.  **Основна идеја:** Препознавањето на геометриската прогресија е клучот. Тоа го трансформира полиномот во рационална функција која е многу полесна за анализирање.\n2.  **Совет од Олимпиец:** Кога анализирате неравенство со $x^n$, секогаш разгледувајте ги интервалите $(-\\infty, -1), (-1, 0), (0, 1), (1, \\infty)$ посебно, бидејќи однесувањето на степените функции драстично се менува во овие граници.\n3.  **Чести грешки:** Заборавање на случајот $x=-1$ каде именителот станува 0. Овој случај мора да се третира посебно (како лимес или преку оригиналната сума).\n\n```python\nfrom manim import *\n\nclass PolynomialInequality(Scene):\n    def construct(self):\n        self.camera.background_color = WHITE\n        \n        # Title\n        title = Text(Полиномно неравенство, color=BLACK).to_edge(UP)\n        self.play(Write(title))\n        \n        # Inequality\n        ineq = MathTex(\n            rS(x) = x^{2n} - x^{2n-1} + \\dots - x + 1 \\ge \\frac{1}{2},\n            color=BLACK\n        ).shift(UP)\n        self.play(Write(ineq))\n        \n        # Geometric Sum Formula\n        formula = MathTex(\n            rS(x) = \\frac{x^{2n+1} + 1}{x + 1}, \\quad x \\neq -1,\n            color=BLUE\n        ).next_to(ineq, DOWN)\n        self.play(Write(formula))\n        \n        # Case 1: x in [0, 1]\n        case1 = MathTex(\n            r\\text{За } x \\in [0, 1]: \\quad x^{2n+1} \\ge 0,\n            color=BLACK\n        ).next_to(formula, DOWN, buff=0.5)\n        \n        proof1 = MathTex(\n            rS(x) \\ge \\frac{1}{x+1} \\ge \\frac{1}{1+1} = \\frac{1}{2},\n            color=GREEN\n        ).next_to(case1, DOWN)\n        \n        self.play(Write(case1))\n        self.play(Write(proof1))\n        \n        # Case 2: x > 1\n        case2 = MathTex(\n            r\\text{За } x > 1: \\quad S(x) > 1 > \\frac{1}{2},\n            color=BLACK\n        ).next_to(proof1, DOWN, buff=0.5)\n        self.play(Write(case2))\n        \n        self.wait(2)\n\n</details>\n\n---\n### 🎨 Визуелизација\n![Илустрација](/assets/images/sigma139_y4_p4/sigma139_y4_p4.png)",
+    "path": "C:\\Users\\pc4all\\Documents\\matholimpiad\\olympiad-math-archive\\docs\\grade_12\\algebra\\sigma139_y4_p4.md",
+    "filename": "sigma139_y4_p4.md",
+    "grade": "12",
+    "category": "algebra",
+    "difficulty": 6
   },
   {
     "meta": {
@@ -6576,6 +6885,72 @@
     "grade": "12",
     "category": "number_theory",
     "difficulty": 6
+  },
+  {
+    "meta": {
+      "difficulty": "2",
+      "grade": "4",
+      "problem_id": "complete_test",
+      "source": "Complete Test",
+      "tags": [
+        "complete",
+        "test",
+        "manim"
+      ],
+      "title": "Complete Test with All Features",
+      "type": "algebra",
+      "related_skills": [],
+      "has_manim_placeholder": false
+    },
+    "body": "# Текст на задачата\nДокажи дека $a^2 + b^2 \\ge 2ab$.\n\n# Решение\n## Стратегија\nКористи $(a-b)^2 \\ge 0$.\n\n## 📐 Детално Решение\n\n<details>\n<summary>Чекор 1: Разлика на квадрати</summary>\n\n$a^2 + b^2 - 2ab = (a-b)^2$\n\n</details>\n\n<details>\n<summary>Чекор 2: Заклучок</summary>\n\nБидејќи $(a-b)^2 \\ge 0$, тогаш $a^2 + b^2 - 2ab \\ge 0$, па $a^2 + b^2 \\ge 2ab$.\n\n# Pedagogical Notes\n1. **Основна идеја:** $(a-b)^2 = a^2 - 2ab + b^2 \\ge 0$ е основна неравенка.\n2. **Совет од Олимпиец:** Оваа неравенка се користи во многу проблеми со средни вредности.\n3. **Чести грешки:** Не заборавај дека квадрат е секогаш позитивен или нула.\n\n</details>\n\n---\n### 🎨 Визуелизација\n![Илустрација](/assets/images/complete_test/complete_test.png)",
+    "path": "C:\\Users\\pc4all\\Documents\\matholimpiad\\olympiad-math-archive\\docs\\grade_4\\algebra\\complete_test.md",
+    "filename": "complete_test.md",
+    "grade": "4",
+    "category": "algebra",
+    "difficulty": 2
+  },
+  {
+    "meta": {
+      "difficulty": "1",
+      "grade": "5",
+      "problem_id": "final_test",
+      "source": "Final Test",
+      "tags": [
+        "final",
+        "test"
+      ],
+      "title": "Final Test for All Fixes",
+      "type": "algebra",
+      "related_skills": [],
+      "has_manim_placeholder": false
+    },
+    "body": "# Текст на задачата\nРеши $x + 1 = 2$.\n\n# Решение\n## Стратегија\nОдземи 1 од двете страни.\n\n## 📐 Детално Решение\n\n<details>\n<summary>Чекор 1: Одземање</summary>\n\n$x + 1 - 1 = 2 - 1$\n\n</details>\n\n<details>\n<summary>Чекор 2: Решение</summary>\n\n$x = 1$\n\n# Pedagogical Notes\n1. **Основна идеја:** Решувањето равенки бара примена на обратни операции.\n2. **Совет од Олимпиец:** Секогаш проверувај го решението со замена во оригиналната равенка.\n3. **Чести грешки:** Не заборавај да примениш истата операција на двете страни.\n\n```python\nfrom manim import *\n\nclass FinalTest(Scene):\n    def construct(self):\n        self.camera.background_color = WHITE\n        text = Text(x + 1 = 2 ⇒ x = 1, color=BLACK)\n        self.play(Write(text))\n        self.wait(1)\n\n</details>",
+    "path": "C:\\Users\\pc4all\\Documents\\matholimpiad\\olympiad-math-archive\\docs\\grade_5\\algebra\\final_test.md",
+    "filename": "final_test.md",
+    "grade": "5",
+    "category": "algebra",
+    "difficulty": 1
+  },
+  {
+    "meta": {
+      "difficulty": "1",
+      "grade": "6",
+      "problem_id": "debug_final",
+      "source": "Final Debug",
+      "tags": [
+        "debug"
+      ],
+      "title": "Final Debug Test",
+      "type": "algebra",
+      "related_skills": [],
+      "has_manim_placeholder": false
+    },
+    "body": "# Текст на задачата\nШто е $1 + 1$?\n\n# Решение\n## Стратегија\nОсновно собирање.\n\n## 📐 Детално Решение\n\n<details>\n<summary>Чекор 1: Собирање</summary>\n\n$1 + 1 = 2$\n\n# Pedagogical Notes\n1. **Основна идеја:** Собирањето е фундаментална операција.\n2. **Совет:** Внимавајте со цифрите.\n\n</details>",
+    "path": "C:\\Users\\pc4all\\Documents\\matholimpiad\\olympiad-math-archive\\docs\\grade_6\\algebra\\debug_final.md",
+    "filename": "debug_final.md",
+    "grade": "6",
+    "category": "algebra",
+    "difficulty": 1
   },
   {
     "meta": {
@@ -8430,6 +8805,27 @@
   },
   {
     "meta": {
+      "difficulty": "1",
+      "grade": "7",
+      "problem_id": "test_debug",
+      "source": "Debug Test",
+      "tags": [
+        "debug"
+      ],
+      "title": "Debug Pedagogical Notes",
+      "type": "algebra",
+      "related_skills": [],
+      "has_manim_placeholder": false
+    },
+    "body": "# Текст на задачата\nШто е $1 + 1$?\n\n# Решение\n## Стратегија\nОсновно собирање.\n\n## 📐 Детално Решение\n\n<details>\n<summary>Чекор 1: Собирање</summary>\n\n$1 + 1 = 2$\n\n# Pedagogical Notes\n1. **Основна идеја:** Собирањето е фундаментална операција.\n2. **Совет:** Внимавајте со цифрите.\n\n</details>",
+    "path": "C:\\Users\\pc4all\\Documents\\matholimpiad\\olympiad-math-archive\\docs\\grade_7\\algebra\\test_debug.md",
+    "filename": "test_debug.md",
+    "grade": "7",
+    "category": "algebra",
+    "difficulty": 1
+  },
+  {
+    "meta": {
       "grade": "7",
       "field": "arithmetic",
       "difficulty": "3",
@@ -9978,6 +10374,28 @@
     "grade": "8",
     "category": "algebra",
     "difficulty": 6
+  },
+  {
+    "meta": {
+      "difficulty": "2",
+      "grade": "8",
+      "problem_id": "test_pedagogical",
+      "source": "Test Pedagogical",
+      "tags": [
+        "test",
+        "pedagogy"
+      ],
+      "title": "Test Pedagogical Notes Accordion",
+      "type": "algebra",
+      "related_skills": [],
+      "has_manim_placeholder": false
+    },
+    "body": "# Текст на задачата\nРеши $x + 1 = 2$.\n\n# Решение\n## Стратегија\nОва е едноставна равенка.\n\n## 📐 Детално Решение\n\n<details>\n<summary>Чекор 1: Одземање</summary>\n\n$x + 1 - 1 = 2 - 1$\n\n</details>\n\n<details>\n<summary>Чекор 2: Решение</summary>\n\n$x = 1$\n\n# Pedagogical Notes\n1. **Основна идеја:** Решувањето равенки бара примена на обратни операции.\n2. **Совет од Олимпиец:** Секогаш проверувај го решението со замена во оригиналната равенка.\n3. **Чести грешки:** Не заборавај да примениш истата операција на двете страни.\n\n```python\nfrom manim import *\n\nclass PedagogicalTest(Scene):\n    def construct(self):\n        self.camera.background_color = WHITE\n        eq = MathTex(rx + 1 = 2, color=BLACK)\n        self.play(Write(eq))\n        self.wait(1)\n\n</details>",
+    "path": "C:\\Users\\pc4all\\Documents\\matholimpiad\\olympiad-math-archive\\docs\\grade_8\\algebra\\test_pedagogical.md",
+    "filename": "test_pedagogical.md",
+    "grade": "8",
+    "category": "algebra",
+    "difficulty": 2
   },
   {
     "meta": {
@@ -15765,6 +16183,28 @@
     "grade": "9",
     "category": "algebra",
     "difficulty": 6
+  },
+  {
+    "meta": {
+      "difficulty": "3",
+      "grade": "9",
+      "problem_id": "test_fixes",
+      "source": "Test Problem",
+      "tags": [
+        "test",
+        "algebra"
+      ],
+      "title": "Test Problem for Fixes",
+      "type": "algebra",
+      "related_skills": [],
+      "has_manim_placeholder": false
+    },
+    "body": "# Текст на задачата\nДокажи дека $2 + 2 = 4$.\n\n# Решение\n## Стратегија\nОва е едноставна аритметичка равенка.\n\n## 📐 Детално Решение\n\n<details>\n<summary>Чекор 1: Собирање</summary>\n\n$2 + 2 = 4$\n\n</details>\n\n<details>\n<summary>Чекор 2: Проверка</summary>\n\nДа, ова е точно.\n\n# Pedagogical Notes\n1. **Основна идеја:** Собирањето е основна математичка операција.\n2. **Совет:** Внимавајте со броевите.\n\n```python\nfrom manim import *\n\nclass TestScene(Scene):\n    def construct(self):\n        self.camera.background_color = WHITE\n        text = Text(2 + 2 = 4, color=BLACK)\n        self.play(Write(text))\n        self.wait(1)\n\n</details>",
+    "path": "C:\\Users\\pc4all\\Documents\\matholimpiad\\olympiad-math-archive\\docs\\grade_9\\algebra\\test_fixes.md",
+    "filename": "test_fixes.md",
+    "grade": "9",
+    "category": "algebra",
+    "difficulty": 3
   },
   {
     "meta": {

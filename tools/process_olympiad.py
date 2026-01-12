@@ -60,33 +60,32 @@ class PlatinumProcessor:
         """
         Екстрахира Manim код од Markdown содржина.
         """
-        # Пофлексибилен Regex: Бара '# Manim Code' (case insensitive) и потоа првиот код блок
-        start_pattern = r'(?i)#\s*Manim Code.*?\n\s*```(?:python)?'
-        match_start = re.search(start_pattern, content, re.DOTALL)
-        
-        if not match_start:
-            return None, None # Враќаме (Code, Full_Block_Text)
+        # Find '# Manim Code' followed by a code block
+        manim_header_pattern = r'(?i)#\s*Manim Code.*?\n\s*```(?:python)?\s*\n'
+        header_match = re.search(manim_header_pattern, content, re.DOTALL)
 
-        # Почеток на самиот код (по ```python)
-        code_start_index = match_start.end()
-        
-        # Го наоѓаме крајот (```)
-        rest_of_text = content[code_start_index:]
-        end_match = re.search(r'\n\s*```', rest_of_text)
-        
-        if not end_match:
+        if not header_match:
+            return None, None
+
+        # Start of code after the header
+        code_start = header_match.end()
+
+        # Find the closing ```
+        remaining_content = content[code_start:]
+        closing_match = re.search(r'\n\s*```\s*\n', remaining_content)
+
+        if not closing_match:
             print("⚠️ Најдов почеток на Manim код, но не и крај (```).")
-            # Обид за спас: земи сè до следната секција '#' или крај
-            code_content = rest_of_text.split('\n#')[0].strip()
-            # Construct the full block for removal later
-            full_block = content[match_start.start():code_start_index] + code_content + "\n```"
+            # Fallback: take everything until end of file or next section
+            code_content = remaining_content.split('\n#')[0].strip()
+            full_block = content[header_match.start():]
             return code_content, full_block
 
-        code_content = rest_of_text[:end_match.start()].strip()
-        
-        # Го конструираме целиот блок (од # Manim Code до ```) за да можеме да го избришеме подоцна
-        full_block_end_index = code_start_index + end_match.end()
-        full_block = content[match_start.start():full_block_end_index]
+        code_end = code_start + closing_match.start()
+
+        # Extract code and full block
+        code_content = content[code_start:code_end].strip()
+        full_block = content[header_match.start():code_start + closing_match.end()]
 
         return code_content, full_block
 
@@ -178,25 +177,87 @@ class PlatinumProcessor:
         print("🔧 Applying automated fixes to Manim code...")
         return fix_manim_common_errors(code)
 
+    def convert_steps_to_accordion(self, content):
+        """Претвора чекор по чекор форматот во collapsible details/summary."""
+        # Наоѓање на "## Чекор по чекор" секцијата
+        step_pattern = r'(## Чекор по чекор\n\n)(.*?)(\n\n##|$)'
+        match = re.search(step_pattern, content, re.DOTALL)
+
+        if not match:
+            return content
+
+        steps_section = match.group(2)
+
+        # Претворање на секој чекор во details/summary
+        # Наоѓање на сите чекори (bold headers со "**Чекор X:**")
+        step_regex = r'\*\*Чекор (\d+): ([^*]+)\*\*\n(.*?)(?=\n\*\*Чекор \d+:|\n\n##|$)'
+        steps = re.findall(step_regex, steps_section, re.DOTALL)
+
+        if not steps:
+            return content
+
+        # Градење на нова accordion секција
+        accordion_content = "## 📐 Детално Решение\n\n"
+
+        for step_num, step_title, step_content in steps:
+            # Чистење на содржината (отстранување на вишок празни редови)
+            step_content = step_content.strip()
+            accordion_content += f'<details>\n<summary>Чекор {step_num}: {step_title.strip()}</summary>\n\n{step_content}\n\n</details>\n\n'
+
+        # Замена на оригиналната секција
+        new_content = content.replace(match.group(0), accordion_content + match.group(3))
+
+        return new_content
+
+    def convert_pedagogical_notes_to_accordion(self, content):
+        """Претвора Pedagogical Notes секцијата во collapsible details/summary."""
+        # Наоѓање на "# Pedagogical Notes" секцијата - може да биде на крајот од фајлот
+        notes_pattern = r'# Pedagogical Notes\n\n(.*)'
+        match = re.search(notes_pattern, content, re.DOTALL)
+
+        if not match:
+            return content
+
+        notes_section = match.group(1).strip()
+
+        # Ако веќе има details/summary формат, не го менувај
+        if '<details>' in notes_section or '<summary>' in notes_section:
+            return content
+
+        # Градење на нова accordion секција
+        accordion_content = f'# Pedagogical Notes\n\n<details>\n<summary>Педагошки забелешки</summary>\n\n{notes_section}\n\n</details>'
+
+        # Замена на оригиналната секција
+        new_content = content.replace(match.group(0), accordion_content)
+
+        return new_content
 
     def update_markdown_content(self, post, image_rel_path, raw_manim_block):
         """Го брише Manim кодот и додава линк до сликата."""
         content = post.content
-        
-        # 1. Бришење на кодот (Користиме replace со точниот блок што го најдовме претходно)
+
+        # 1. Претворање на чекори во accordion формат
+        content = self.convert_steps_to_accordion(content)
+
+        # 2. Претворање на Pedagogical Notes во accordion формат
+        content = self.convert_pedagogical_notes_to_accordion(content)
+
+        # 3. Бришење на кодот (Користиме replace со точниот блок што го најдовме претходно)
         if raw_manim_block:
             content = content.replace(raw_manim_block, "")
-        
+
         # Чистење на заостанати празни редови и Manim секции ако останале
         content = re.sub(r'(?i)#\s*Manim Code\s*', '', content).strip()
 
-        # 2. Вметнување на слика
+        # 4. Вметнување на слика
         # Сликата ја ставаме пред "Менторски Белешки" или на крај ако нема белешки
         if image_rel_path:
             image_md = f"\n\n---\n### 🎨 Визуелизација\n![Илустрација]({image_rel_path})\n"
-            
+
             if "## 👨‍🏫 Менторски Белешки" in content:
                 content = content.replace("## 👨‍🏫 Менторски Белешки", image_md + "\n## 👨‍🏫 Менторски Белешки")
+            elif "## Pedagogical Notes" in content:
+                content = content.replace("## Pedagogical Notes", image_md + "\n## Pedagogical Notes")
             elif "## Решение" in content:
                  # Ако нема менторски, пробај после решение
                  content += image_md
@@ -204,7 +265,7 @@ class PlatinumProcessor:
                  content += image_md
         else:
             print("WARNING: Image was not generated and not added to file.")
-        
+
         post.content = content
         return post
 
@@ -258,13 +319,27 @@ class PlatinumProcessor:
         return True
 
     def check_python_syntax(self, code):
+        """Enhanced validation for Manim code with more detailed error checking."""
         try:
+            # First check basic Python syntax
             ast.parse(code)
+            # Additional checks for common Manim issues
+            if "from manim import" not in code:
+                return "Missing Manim import statement"
+            if "class " not in code:
+                return "No Scene class defined"
+            if "Scene" not in code:
+                return "Scene class not inherited"
+            if "def construct(self):" not in code:
+                return "construct method not found"
             return None
         except SyntaxError as e:
             return f"Syntax Error: {e}"
+        except Exception as e:
+            return f"Code validation error: {e}"
 
     def process_file(self, input_file):
+        """Process a single input file."""
         if not self.check_system(): return
 
         input_path = Path(input_file).resolve()
@@ -274,7 +349,7 @@ class PlatinumProcessor:
 
         with open(input_path, 'r', encoding='utf-8') as f:
             content_raw = f.read().strip()
-            
+
         if not content_raw:
             print("WARNING: File is empty.")
             return
@@ -308,36 +383,70 @@ class PlatinumProcessor:
         # --- EXTRACT CODE ---
         # Сега extract_manim_code враќа ДВЕ работи: самиот код и целиот блок текст за бришење
         manim_code, full_raw_block = self.extract_manim_code(post.content)
-        
+
         image_path = None
         if manim_code:
             manim_code = self.fix_manim_code_logic(manim_code)
-            if not self.check_python_syntax(manim_code):
-                image_path = self.run_manim(manim_code, problem_id)
+            syntax_error = self.check_python_syntax(manim_code)
+            if syntax_error:
+                print(f"ERROR: {syntax_error}")
             else:
-                print("ERROR: Syntax error in Manim code.")
+                image_path = self.run_manim(manim_code, problem_id)
         else:
             print("INFO: No Manim code.")
 
         # --- UPDATE CONTENT ---
         # Го подаваме full_raw_block за да знае што точно да избрише
         updated_post = self.update_markdown_content(post, image_path, full_raw_block)
-        
+
         save_dir = self.output_dir / f"grade_{grade}" / p_type
         save_dir.mkdir(parents=True, exist_ok=True)
         save_path = save_dir / f"{problem_id}.md"
 
         with open(save_path, 'w', encoding='utf-8') as f:
             f.write(frontmatter.dumps(updated_post))
-        
+
         print(f"SAVED: {save_path.name}")
         self.archive_input_file(input_path)
         self.cleanup()
-        
+
         # --- АЖУРИРАЊЕ НА ВЕБ ИНДЕКСОТ ---
         self.update_web_index()
-        
+
         print("DONE!")
+
+    def process_batch(self, input_files):
+        """Process multiple input files with optimized batch handling."""
+        if not self.check_system(): return
+
+        successful = 0
+        failed = 0
+
+        print(f"🔄 Starting batch processing of {len(input_files)} files...")
+
+        for i, input_file in enumerate(input_files, 1):
+            print(f"\n{'='*50}")
+            print(f"BATCH: Processing file {i}/{len(input_files)}")
+            print(f"{'='*50}")
+
+            try:
+                self.process_file(input_file)
+                successful += 1
+            except Exception as e:
+                print(f"❌ Failed to process {input_file}: {e}")
+                failed += 1
+
+        print(f"\n{'='*60}")
+        print("BATCH PROCESSING COMPLETE")
+        print(f"✅ Successful: {successful}")
+        print(f"❌ Failed: {failed}")
+        print(f"📊 Total: {len(input_files)}")
+        print(f"{'='*60}")
+
+        # Final index update after batch
+        if successful > 0:
+            print("\n🔄 Performing final web index update...")
+            self.update_web_index()
 
 if __name__ == "__main__":
     import io
@@ -346,12 +455,29 @@ if __name__ == "__main__":
         sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
 
     BASE_DIR = Path(__file__).parent.parent
-    # Осигурај се дека оваа патека е точна кај тебе!
-    INPUT_FILE = BASE_DIR / "tools" / "new_problem_input.md"
-    
+
     print("="*60)
-    print("PLATINUM PROCESSOR - FIX V2")
+    print("PLATINUM PROCESSOR - IMPROVED")
     print("="*60)
-    
+
     processor = PlatinumProcessor(BASE_DIR)
-    processor.process_file(INPUT_FILE)
+
+    # Check command line arguments for batch processing
+    if len(sys.argv) > 1:
+        # Batch mode: process multiple files
+        input_files = []
+        for arg in sys.argv[1:]:
+            input_path = Path(arg).resolve()
+            if input_path.exists() and input_path.suffix.lower() == '.md':
+                input_files.append(str(input_path))
+            else:
+                print(f"⚠️ Skipping invalid file: {arg}")
+
+        if input_files:
+            processor.process_batch(input_files)
+        else:
+            print("❌ No valid input files provided for batch processing.")
+    else:
+        # Single file mode (default behavior)
+        INPUT_FILE = BASE_DIR / "tools" / "new_problem_input.md"
+        processor.process_file(INPUT_FILE)
