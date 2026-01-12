@@ -100,14 +100,13 @@ def update_markdown_reference(prob_id):
 
                     # Construct the replacement using Regex to capture the whole block
                     pattern = re.compile(
-                        r">\s*\*\*DEV Geo-Mentorr Code:\*\*\nr
-                        r">\s*Odete vo `assets/manim_code_log.md`.*?" + re.escape(f"Task_{safe_id}") + r".*?\n",
+                        r">\s*\*\*Dev Geo-Mentor Code:\*\*.*?Odete vo `assets/manim_code_log.md`.*?" + re.escape(f"Task_{safe_id}") + r".*?\n",
                         re.DOTALL
                     )
                     
                     # Check if pattern matches
                     if pattern.search(content):
-                        new_block = fr"![Скица]({rrel_path})\nr
+                        new_block = fr"![Скица]({rel_path})\n"
                         new_content = pattern.sub(new_block, content)
                         
                         if new_content != content:
