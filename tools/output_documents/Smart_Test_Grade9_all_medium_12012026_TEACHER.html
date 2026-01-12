@@ -1,0 +1,459 @@
+
+<!DOCTYPE html>
+<html lang="mk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Olympiad Math Test</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+<style>
+/* Modern Typography & Layout */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+    --primary: #2563eb;
+    --secondary: #64748b;
+    --success: #059669;
+    --warning: #d97706;
+    --danger: #dc2626;
+    --light: #f8fafc;
+    --dark: #1e293b;
+    --border: #e2e8f0;
+    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    line-height: 1.6;
+    color: var(--dark);
+    background: var(--light);
+    max-width: 210mm;
+    margin: 0 auto;
+    padding: 20mm;
+    font-size: 11pt;
+}
+
+@media print {
+    body { margin: 0; padding: 15mm; font-size: 10pt; }
+    .no-print { display: none !important; }
+    .page-break { page-break-before: always; }
+}
+
+/* Header Styles */
+.header-section {
+    background: linear-gradient(135deg, var(--primary), #1d4ed8);
+    color: white;
+    padding: 25px;
+    border-radius: 12px;
+    margin-bottom: 30px;
+    text-align: center;
+    box-shadow: var(--shadow);
+}
+
+.header-section h1 {
+    font-size: 28pt;
+    font-weight: 700;
+    margin-bottom: 10px;
+    letter-spacing: -0.5px;
+}
+
+.header-meta {
+    font-size: 12pt;
+    opacity: 0.9;
+    margin-bottom: 20px;
+}
+
+.student-info {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-top: 20px;
+    font-size: 11pt;
+}
+
+.info-field {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 12px 15px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.info-field label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 5px;
+    font-size: 9pt;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.info-field .line {
+    border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+    min-height: 20px;
+    display: block;
+    width: 100%;
+}
+
+/* Problem Styles */
+.problem-card {
+    background: white;
+    border: 2px solid var(--border);
+    border-radius: 12px;
+    margin-bottom: 25px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: all 0.3s ease;
+}
+
+.problem-card:hover {
+    box-shadow: 0 8px 25px -5px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
+}
+
+.problem-header {
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    color: white;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 3px solid var(--primary);
+}
+
+.problem-number {
+    font-size: 16pt;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.problem-number::before {
+    content: "📐";
+    font-size: 18pt;
+}
+
+.problem-meta {
+    font-size: 9pt;
+    opacity: 0.9;
+    text-align: right;
+}
+
+.problem-content {
+    padding: 25px;
+    font-size: 11pt;
+}
+
+.problem-content h1,
+.problem-content h2,
+.problem-content h3 {
+    color: var(--primary);
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.problem-content p {
+    margin-bottom: 12px;
+    text-align: justify;
+}
+
+.problem-content .math {
+    background: #f8fafc;
+    padding: 15px;
+    border-radius: 8px;
+    border-left: 4px solid var(--primary);
+    margin: 15px 0;
+}
+
+/* Teacher Version */
+.teacher-solution {
+    background: linear-gradient(135deg, #fef2f2, #fee2e2);
+    border: 2px solid #fecaca;
+    border-radius: 0 0 12px 12px;
+    padding: 20px;
+    margin-top: -10px;
+    position: relative;
+}
+
+.teacher-solution::before {
+    content: "🎯 РЕШЕНИЕ";
+    position: absolute;
+    top: -12px;
+    left: 20px;
+    background: var(--danger);
+    color: white;
+    padding: 6px 15px;
+    border-radius: 8px 8px 0 0;
+    font-size: 9pt;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+/* Student Version */
+.student-workspace {
+    min-height: 120px;
+    border: 2px dashed #cbd5e1;
+    border-radius: 8px;
+    margin-top: 20px;
+    background: linear-gradient(45deg, #f8fafc 25%, transparent 25%),
+                linear-gradient(-45deg, #f8fafc 25%, transparent 25%),
+                linear-gradient(45deg, transparent 75%, #f8fafc 75%),
+                linear-gradient(-45deg, transparent 75%, #f8fafc 75%);
+    background-size: 20px 20px;
+    background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+    position: relative;
+}
+
+.student-workspace::before {
+    content: "✏️ ПРОСТОР ЗА РЕШЕНИЕ";
+    position: absolute;
+    top: -10px;
+    left: 15px;
+    background: white;
+    color: var(--secondary);
+    padding: 4px 10px;
+    font-size: 8pt;
+    font-weight: 600;
+    border-radius: 4px;
+    border: 1px solid #cbd5e1;
+}
+
+/* Footer */
+.test-footer {
+    margin-top: 40px;
+    padding: 20px;
+    background: var(--secondary);
+    color: white;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 9pt;
+}
+
+.test-footer .stats {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-bottom: 15px;
+}
+
+.stat-item {
+    text-align: center;
+}
+
+.stat-number {
+    font-size: 14pt;
+    font-weight: 700;
+    display: block;
+}
+
+.stat-label {
+    font-size: 8pt;
+    opacity: 0.8;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Print Optimizations */
+@media print {
+    .problem-card { break-inside: avoid; }
+    .page-break { page-break-before: always; }
+    .student-workspace { min-height: 80px; }
+}
+</style>
+
+    <!-- MathJax 3 for better rendering -->
+    <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true,
+        packages: { '[+]': ['color', 'ams'] }
+      },
+      chtml: {
+        scale: 1.0,
+        minScale: 0.5,
+        matchFontHeight: false
+      },
+      startup: {
+        ready: function() {
+          console.log('MathJax is ready!');
+          MathJax.startup.defaultReady();
+        }
+      }
+    };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+</head>
+<body>
+    <div class="no-print" style="background: linear-gradient(135deg, #dbeafe, #bfdbfe); border: 2px solid #3b82f6; color: #1e40af; padding: 20px; margin-bottom: 25px; border-radius: 12px; text-align: center; box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);">
+        <div style="font-size: 18pt; margin-bottom: 10px;">🖨️ КЛУЧ СО РЕШЕНИЈА</div>
+        <div style="font-size: 11pt; margin-bottom: 15px;">
+            <strong>Притисни <code>Ctrl + P</code></strong> за печатење<br>
+            Избери <strong>"Save as PDF"</strong> во дијалогот за зачувување
+        </div>
+        <div style="font-size: 9pt; color: #374151;">
+            Во опциите исклучи "Headers and footers" за чист PDF
+        </div>
+    </div>
+
+        <div class="header-section" style="background: linear-gradient(135deg, #dc2626, #b91c1c);">
+            <h1>КЛУЧ СО РЕШЕНИЈА</h1>
+            <div class="header-meta">
+                Одделение 9 | All | 12.01.2026
+            </div>
+        </div>
+        <div class="problem-card">
+            <div class="problem-header">
+                <div class="problem-number">Задача 1</div>
+                <div class="problem-meta">
+                    Sigma 137 | Тежина: 4/10
+                </div>
+            </div>
+            <div class="problem-content">
+                <p>Определи ги сите парови цели броеви $(a, b)$ такви што збирот $a + b$ е корен на равенката</p>
+<p><div class="math">$$ x^2 + ax + b = 0 $$</div></p>
+<h1>Решение</h1>
+<h2>Стратегија</h2>
+<p>Ова е класична задача од теорија на броеви која се решава со алгебарски манипулации. Еве го планот на напад:</p>
+<p>1.  <strong>Дефиниција за корен:</strong> Штом ни е кажано дека $a+b$ е корен, првиот чекор е директна замена на $x = a+b$ во равенката. Ова ќе ни даде врска помеѓу $a$ и $b$.</p>
+<p>2.  <strong>Квадратна равенка по една променлива:</strong> Ќе добиеме равенка со две непознати ($a$ и $b$). Трикот е да ја гледаме оваа равенка како <em>квадратна равенка по непозната $b$</em> (или $a$), каде другата променлива ја третираме како параметар (коефициент).</p>
+<p>3.  <strong>Анализа на Дискриминанта:</strong> За $b$ да биде цел број, дискриминантата на таа квадратна равенка мора да биде <strong>полн квадрат</strong>. Ова е моќен филтер во Диофантови равенки.</p>
+<p>4.  <strong>Разлика на квадрати:</strong> Условот за дискриминантата ќе го сведеме на равенка од тип $X^2 - Y^2 = N$, која лесно се решава со разложување на множители.</p>
+<h2>Чекор по чекор</h2>
+<p><strong>Чекор 1: Замена на условот</strong></p>
+<p>Бидејќи $x = a+b$ е корен на равенката $x^2 + ax + b = 0$, заменуваме $x$ со $a+b$:</p>
+<p><div class="math">$$ (a+b)^2 + a(a+b) + b = 0 $$</div></p>
+<p><strong>Чекор 2: Средување на изразот</strong></p>
+<p>Ги отвораме заградите и групираме:</p>
+<p><div class="math">$$ (a^2 + 2ab + b^2) + (a^2 + ab) + b = 0 $$</div></p>
+<p><div class="math">$$ 2a^2 + 3ab + b^2 + b = 0 $$</div></p>
+<p>Сега, оваа равенка ќе ја запишеме како квадратна равенка по променливата $b$. Ги групираме членовите што содржат $b^2$, $b$ и слободните членови:</p>
+<p><div class="math">$$ 1 \cdot b^2 + (3a + 1)b + 2a^2 = 0 $$</div></p>
+<p>Ова е квадратна равенка од облик $Ab^2 + Bb + C = 0$, каде:</p>
+<p>*   $A = 1$</p>
+<p>*   $B = 3a + 1$</p>
+<p>*   $C = 2a^2$</p>
+<p><strong>Чекор 3: Услов за целобројност (Дискриминанта)</strong></p>
+<p>За $b$ да биде цел број, решенијата на оваа квадратна равенка мора да бидат цели броеви. Формулата за решенија е:</p>
+<p><div class="math">$$ b_{1,2} = \frac{-(3a+1) \pm \sqrt{D}}{2} $$</div></p>
+<p>За $b$ да биде рационален (и потенцијално цел), дискриминантата $D$ мора да биде <strong>полн квадрат</strong> на некој цел број $k$ ($k \ge 0$).</p>
+<p>Пресметуваме $D$:</p>
+<p><div class="math">$$ D = B^2 - 4AC = (3a+1)^2 - 4(1)(2a^2) $$</div></p>
+<p><div class="math">$$ D = (9a^2 + 6a + 1) - 8a^2 $$</div></p>
+<p><div class="math">$$ D = a^2 + 6a + 1 $$</div></p>
+<p>Значи, бараме $a^2 + 6a + 1 = k^2$.</p>
+<p><strong>Чекор 4: Комплетирање до полн квадрат</strong></p>
+<p>Изразот $a^2 + 6a + 1$ личи на развојот на $(a+3)^2 = a^2 + 6a + 9$.</p>
+<p>За да го искористиме ова, додаваме и одземаме 8:</p>
+<p><div class="math">$$ k^2 = a^2 + 6a + 9 - 8 $$</div></p>
+<p><div class="math">$$ k^2 = (a+3)^2 - 8 $$</div></p>
+<p>Ги префрламе непознатите на една страна:</p>
+<p><div class="math">$$ (a+3)^2 - k^2 = 8 $$</div></p>
+<p>Користиме разлика на квадрати:</p>
+<p><div class="math">$$ (a+3-k)(a+3+k) = 8 $$</div></p>
+<p><strong>Чекор 5: Анализа на делители (Паритет)</strong></p>
+<p>Нека $X = a+3-k$ и $Y = a+3+k$. Имаме $X \cdot Y = 8$.</p>
+<p>Да ги собереме двата множители:</p>
+<p><div class="math">$$ X + Y = (a+3-k) + (a+3+k) = 2a + 6 = 2(a+3) $$</div></p>
+<p>Збирот $X+Y$ е парен број. Ова значи дека $X$ и $Y$ мора да бидат со <strong>иста парност</strong> (или двата се парни, или двата се непарни).</p>
+<p>Бидејќи нивниот производ е 8 (парен број), двата мора да бидат <strong>парни</strong>.</p>
+<p>Можните парови $(X, Y)$ чиј производ е 8 и двата се парни се:</p>
+<p>1.  $(2, 4)$</p>
+<p>2.  $(-2, -4)$</p>
+<p>3.  $(4, 2)$</p>
+<p>4.  $(-4, -2)$</p>
+<p>Бидејќи $Y > X$ (ако претпоставиме $k>0$) или системот е симетричен по однос на знакот на $k$, доволно е да ги разгледаме случаите за $2a+6 = X+Y$.</p>
+<p>*   <strong>Случај 1:</strong> $X=2, Y=4$ (или обратно).</p>
+<p><div class="math">$$ 2a + 6 = 2 + 4 = 6 \implies 2a = 0 \implies a = 0 $$</div></p>
+<p>*   <strong>Случај 2:</strong> $X=-2, Y=-4$ (или обратно).</p>
+<p><div class="math">$$ 2a + 6 = -2 + (-4) = -6 \implies 2a = -12 \implies a = -6 $$</div></p>
+<p><strong>Чекор 6: Наоѓање на $b$</strong></p>
+<p>Сега за секоја најдена вредност на $a$, ја решаваме првичната равенка за $b$: $b^2 + (3a+1)b + 2a^2 = 0$.</p>
+<p>*   <strong>За $a = 0$:</strong></p>
+<p><div class="math">$$ b^2 + (0+1)b + 0 = 0 $$</div></p>
+<p><div class="math">$$ b^2 + b = 0 \implies b(b+1) = 0 $$</div></p>
+<p>Решенија: $b = 0$ или $b = -1$.</p>
+<p>Добиваме парови: <strong>$(0, 0)$</strong> и <strong>$(0, -1)$</strong>.</p>
+<p>*   <strong>За $a = -6$:</strong></p>
+<p><div class="math">$$ b^2 + (3(-6)+1)b + 2(-6)^2 = 0 $$</div></p>
+<p><div class="math">$$ b^2 + (-18+1)b + 2(36) = 0 $$</div></p>
+<p><div class="math">$$ b^2 - 17b + 72 = 0 $$</div></p>
+<p>Бараме два броја со збир 17 и производ 72. Тоа се 8 и 9.</p>
+<p><div class="math">$$ (b-8)(b-9) = 0 $$</div></p>
+<p>Решенија: $b = 8$ или $b = 9$.</p>
+<p>Добиваме парови: <strong>$(-6, 8)$</strong> и <strong>$(-6, 9)$</strong>.</p>
+<p><strong>Заклучок:</strong></p>
+<p>Бараните парови $(a, b)$ се:</p>
+<p><div class="math">$$ (0, 0), \quad (0, -1), \quad (-6, 8), \quad (-6, 9) $$</div></p>
+<h1>Pedagogical Notes</h1>
+<p>1.  <strong>Основна идеја (Дискриминанта како филтер):</strong> Кога имате една равенка со две целобројни непознати која е од втор степен, најмоќната алатка е да ја третирате како квадратна по едната променлива. Условот "решението е цел број" имплицира $\Delta = k^2$. Ова ја претвора алгебрата во теорија на броеви.</p>
+<p>2.  <strong>Совет од Олимпиец (Паритет):</strong> Кога разложувате број на множители (како $XY=8$), секогаш прво проверете ја парноста на $X+Y$. Во нашиот случај $X+Y=2(a+3)$, што е секогаш парно. Ова веднаш ги елиминира случаите како $(1, 8)$ или $(-1, -8)$, штедејќи ви време и намалувајќи ја можноста за грешка.</p>
+<p>3.  <strong>Чести грешки:</strong></p>
+<p>*   Заборавање на негативните фактори (на пр. $-2$ и $-4$).</p>
+<p>*   Грешка при пресметка на дискриминантата (заборавање на коефициентот $A$ или $C$).</p>
+<p>*   Непроверување дали најдените $b$ се навистина цели броеви (иако методот со дискриминанта го гарантира тоа, добро е да се направи брза проверка).</p>
+<h1>Manim Code</h1>
+<p>```python</p>
+<p>from manim import *</p>
+<p>class DiophantineSolution(Scene):</p>
+<p>def construct(self):</p>
+<p>self.camera.background_color = WHITE</p>
+<h1>Title</h1>
+<p>title = Text("Решавање на Диофантова равенка", font_size=36, color=BLACK).to_edge(UP)</p>
+<p>self.add(title)</p>
+<h1>Step 1: The Equation</h1>
+<p>eq1 = MathTex("x^2 + ax + b = 0", color=BLACK).scale(1.2)</p>
+<p>condition = Text("Услов: x = a + b е корен", font_size=24, color=BLUE).next_to(eq1, DOWN)</p>
+<p>self.play(Write(eq1), FadeIn(condition))</p>
+<p>self.wait(1)</p>
+<h1>Step 2: Substitution</h1>
+<p>eq2 = MathTex("(a+b)^2 + a(a+b) + b = 0", color=BLACK)</p>
+<p>self.play(ReplacementTransform(eq1, eq2), FadeOut(condition))</p>
+<p>self.wait(1)</p>
+<h1>Step 3: Rearranging to Quadratic in b</h1>
+<p>eq3 = MathTex("b^2 + (3a+1)b + 2a^2 = 0", color=RED)</p>
+<p>explanation = Text("Квадратна по b", font_size=24, color=RED).next_to(eq3, RIGHT)</p>
+<p>self.play(ReplacementTransform(eq2, eq3), FadeIn(explanation))</p>
+<p>self.wait(1)</p>
+<h1>Step 4: Discriminant</h1>
+<p>disc_text = MathTex("D = (3a+1)^2 - 4(1)(2a^2) = k^2", color=BLACK)</p>
+<p>disc_calc = MathTex("a^2 + 6a + 1 = k^2", color=BLACK)</p>
+<p>self.play(FadeOut(eq3), FadeOut(explanation))</p>
+<p>self.play(Write(disc_text))</p>
+<p>self.play(ReplacementTransform(disc_text, disc_calc))</p>
+<p>self.wait(1)</p>
+<h1>Step 5: Completing the Square</h1>
+<p>square_form = MathTex("(a+3)^2 - 8 = k^2", color=BLACK)</p>
+<p>diff_squares = MathTex("(a+3-k)(a+3+k) = 8", color=BLUE).scale(1.2)</p>
+<p>self.play(ReplacementTransform(disc_calc, square_form))</p>
+<p>self.wait(0.5)</p>
+<p>self.play(ReplacementTransform(square_form, diff_squares))</p>
+<p>self.wait(1)</p>
+<h1>Step 6: Solutions</h1>
+<p>solutions_text = Text("Фактори на 8 со иста парност:", font_size=24, color=BLACK).to_edge(UP).shift(DOWN)</p>
+<p>cases = VGroup(</p>
+<p>MathTex(r"1)\ 2a+6 = 2+4 \Rightarrow a=0", color=BLACK),</p>
+<p>MathTex(r"2)\ 2a+6 = -2-4 \Rightarrow a=-6", color=BLACK)</p>
+<p>).arrange(DOWN, aligned_edge=LEFT).next_to(solutions_text, DOWN)</p>
+<p>self.play(FadeOut(diff_squares), FadeOut(title), Write(solutions_text))</p>
+<p>self.play(Write(cases))</p>
+<p>self.wait(2)</p>
+<h1>Final Answer</h1>
+<p>final_box = SurroundingRectangle(cases, color=BLUE, buff=0.2)</p>
+<p>final_pairs = MathTex(r"(a,b) \in \{(0,0), (0,-1), (-6,8), (-6,9)\}", color=RED).next_to(cases, DOWN, buff=1)</p>
+<p>self.play(Create(final_box), Write(final_pairs))</p>
+<p>self.wait(3)</p>
+            </div>
+            <div class="teacher-solution">
+                <p>Нема решение.</p>
+            </div></div></body></html>

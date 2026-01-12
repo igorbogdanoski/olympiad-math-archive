@@ -106,52 +106,82 @@ const categories = [...new Set(problems.map(p => p.category))].filter(c => c !==
 		const cat = (document.getElementById('test-cat') as HTMLSelectElement).value;
 		const count = parseInt((document.getElementById('test-count') as HTMLInputElement).value);
 
-		genBtn.innerText = 'Вчитувам...';
-		
+		genBtn.innerText = 'Генерирам...';
+
 		try {
-			const res = await fetch('/data/problems.json');
-			const problems = await res.json();
-			
-			let filtered = problems;
-			if (grade) filtered = filtered.filter((p: any) => p.grade === grade);
-			if (cat) filtered = filtered.filter((p: any) => p.category === cat);
-			
-			const selected = filtered.sort(() => 0.5 - Math.random()).slice(0, count);
-			
-			if (selected.length === 0) {
-				testContent!.innerHTML = '<p class="text-center text-red-500">Нема пронајдено задачи.</p>';
+			// Call the SmartTestGenerator API
+			const response = await fetch('/api/generate-test', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify({
+					grade: grade ? parseInt(grade) : null,
+					field: cat || null,
+					count: count,
+					difficulty: 'medium' // Default difficulty
+				})
+			});
+
+			const result = await response.json();
+
+			if (result.error) {
+				testContent!.innerHTML = `<p class="text-center text-red-500">Грешка: ${result.error}</p>`;
 				return;
 			}
 
-			let html = `<div class="space-y-12">`;
-			selected.forEach((p: any, i: number) => {
-				html += `<div class="break-inside-avoid pb-8 border-b border-slate-100 dark:border-slate-800 last:border-0">
-					<p class="font-black text-blue-600 mb-4 uppercase tracking-widest text-[10px] no-print">Задача #${i+1}</p>
-					<p class="hidden print:block font-bold mb-4 text-lg">Задача ${i+1}.</p>
-					<div class="prose dark:prose-invert max-w-none text-slate-800 dark:text-slate-200">${p.body.split('##')[0]}</div>
-				</div>`;
-			});
-			html += `</div>`;
-			
-			testContent!.innerHTML = html;
+			// Display the generated student HTML
+			testContent!.innerHTML = result.studentHtml;
 			printBtn?.classList.remove('hidden');
 
-			// Рендерирај LaTeX
-			if (window.renderMathInElement) {
-				window.renderMathInElement(testContent, {
-					delimiters: [
-						{left: '$$', right: '$$', display: true},
-						{left: '$', right: '$', display: false}
-					],
-					throwOnError : false
-				});
-			}
 		} catch (e) {
-			console.error(e);
+			console.error('Error generating test:', e);
+			testContent!.innerHTML = '<p class="text-center text-red-500">Грешка при генерирање на тестот.</p>';
 		} finally {
 			genBtn.innerText = 'Генерирај преглед';
 		}
 	});
 
-	printBtn?.addEventListener('click', () => window.print());
+	printBtn?.addEventListener('click', () => {
+		// Create a new window with just the test content for printing
+		const testContent = document.getElementById('test-content');
+		if (testContent) {
+			const printWindow = window.open('', '_blank');
+			if (printWindow) {
+				const content = testContent.innerHTML;
+				printWindow.document.write(`
+					<!DOCTYPE html>
+					<html>
+					<head>
+						<title>Математички Тест</title>
+						<meta charset="UTF-8">
+						<style>
+							body {
+								font-family: 'Times New Roman', serif;
+								margin: 0;
+								padding: 20px;
+								font-size: 12pt;
+								line-height: 1.4;
+							}
+							.no-print { display: none !important; }
+							.problem-card {
+								page-break-inside: avoid;
+								margin-bottom: 20px;
+							}
+							@media print {
+								body { margin: 0; padding: 15mm; }
+							}
+						</style>
+					</head>
+					<body>
+						${content}
+					</body>
+					</html>
+				`);
+				printWindow.document.close();
+				printWindow.focus();
+				printWindow.print();
+			}
+		}
+	});
 </script>

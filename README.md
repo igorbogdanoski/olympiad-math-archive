@@ -57,7 +57,41 @@
 2.  **Процес:** Скриптата `tools/build_problem.py` го чита JSON-от.
 3.  **Излез:** Автоматски се креира `.md` фајл во точната папка (`pre_olympiad` или `grade_X`).
 
+### 🏆 SmartTestGenerator - Професионални тестови
+
+**За наставници:** Генерирај професионални математички тестови со современ дизајн.
+
+#### Веб интерфејс (препорачано):
+```bash
+cd web && npm run dev  # Отвора на http://localhost:4321
+# Оди на /teachers и избери параметри
+```
+
+#### Командна линија:
+```bash
+python tools/generate_smart_test.py -g 9 -f algebra -c 5 -d medium
+```
+
+**Карактеристики:**
+- **Dual Output:** Посебни верзии за ученици (со простор за решавање) и наставници (со решенија)
+- **Modern Design:** MathJax 3, Inter fonts, responsive CSS
+- **Intelligent Selection:** Квалитетско рангирање и валидација на проблеми
+- **Print Optimized:** Совршени A4 PDF документи
+
 ---
+
+## 🌐 Веб платформа
+
+**Astro.js веб апликација** за интерактивно истражување на архивата:
+
+- **Teachers Interface:** `/teachers` - генератор на тестови со веб UI
+- **Student Interface:** `/tasks/[id]` - индивидуални задачи со интерактивни решенија
+- **Search & Filter:** Полнотекстualно пребарување по проблеми
+- **Responsive Design:** Работи на desktop и mobile уреди
+
+---
+
+
 
 ## 🤝 Како да придонесеш?
 

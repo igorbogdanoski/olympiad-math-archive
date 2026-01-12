@@ -52,12 +52,27 @@
 
 Имаш три моќни алатки за генерирање документи:
 
-### А. Генератор на Тестови (За наставници)
-Креира тест за ученици и посебен клуч со решенија за наставникот:
+### А. SmartTestGenerator - Паметен генератор на тестови (За наставници)
+Креира **професионални HTML тестови** со современ дизајн, MathJax и оптимизирано печатење:
+
+#### Командна линија:
 ```bash
-# Пример: Тест за 9-то, Геометрија, 3 тешки задачи
-python generate_smart_test.py -g 9 -f geometry -c 3 -d hard
+# Пример: Тест за 9-то одделение, Алгебра, 5 средни задачи
+python tools/generate_smart_test.py -g 9 -f algebra -c 5 -d medium
 ```
+
+#### Веб интерфејс (Препорачано):
+1. Оди на `http://localhost:4321/teachers` (стартувај `npm run dev` во `web/`)
+2. Избери параметри: одделение, област, број на задачи
+3. Кликни "Генерирај преглед"
+4. Кликни "🖨️ Печати тест" за професионален PDF
+
+#### Карактеристики:
+- **Двојни верзии**: Посебни HTML фајлови за ученици и наставници
+- **Интелигентна селекција**: Квалитетско рангирање на проблеми
+- **Modern Design**: Inter fonts, CSS gradients, responsive layout
+- **MathJax 3**: Перфектно математичко рендерирање
+- **Print Ready**: Оптимизирано за A4 печатење
 
 ### Б. Професионални Документи (Работни листови / Картички)
 Генерира HTML/PDF материјали од сите задачи што се моментално во `input.json`:
@@ -78,10 +93,53 @@ python export.py grade_9/geometry/task_01.md --pdf
 
 ---
 
-## 5. 📚 Одржување (Maintenance)
+## 5. 🌐 Веб развој и тестирање
 
-- **Пополнување на Вештини:** Проверувај ги новите фајлови во `tools/skill_guides/` (креирани од скриптата) и пополни ги со содржина (користејќи AI).
-- **Збирки:** За да направиш голема збирка (книга) од цела област:
+### Стартување на веб апликацијата:
 ```bash
-python compile_book.py grade_9/algebra
+cd web
+npm install
+npm run dev  # Отвора на http://localhost:4321
 ```
+
+### Структура на веб апликацијата:
+- **Frontend**: Astro.js + Tailwind CSS
+- **API**: Server-side routes за SmartTestGenerator интеграција
+- **Teachers Interface**: `/teachers` - модерен генератор на тестови
+- **Student Interface**: `/tasks/[id]` - индивидуални задачи
+- **Documentation**: MkDocs за статични страници
+
+### Тестирање:
+```bash
+# E2E тестирање со Playwright
+npm run test
+
+# Unit тестови (доколку се додадат)
+npm run test:unit
+```
+
+---
+
+## 6. 📚 Одржување и надградби (Maintenance)
+
+### Пополнување на системот:
+- **Skill Guides**: Проверувај `tools/skill_guides/` за нови методи
+- **Problem Validation**: Користи SmartTestGenerator за квалитет проверка
+- **Web Updates**: Проверувај API endpoints и UI компоненти
+
+### Напредни алатки:
+```bash
+# Компајлирање книги од цела област
+python tools/compile_book.py grade_9/algebra
+
+# Батч процесирање на проблеми
+python tools/process_olympiad.py
+
+# Визуелизации со Manim
+python tools/batch_manim.py
+```
+
+### Мониторинг и analytics:
+- **Problem Quality**: SmartTestGenerator logs за квалитет метрики
+- **Usage Statistics**: Web analytics за teacher engagement
+- **Performance**: API response times и error rates

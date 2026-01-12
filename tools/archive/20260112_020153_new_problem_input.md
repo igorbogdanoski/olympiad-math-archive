@@ -1,0 +1,511 @@
+---
+problem_id: sigma139_p1898
+title: Трапез со нормална дијагонала
+grade: 11
+difficulty: 6
+tags:
+  - geometry
+  - trapezoid
+  - angle_chasing
+  - congruence
+  - synthetic_geometry
+source: Sigma 139, Zadaca 1898
+type: geometry
+---
+
+# Текст на задачата
+Во трапезот $ABCD$ бочната страна $BC$ е нормална на дијагоналата $BD$, $\angle DCB = \frac{1}{2} \angle ADC$ и $\overline{AB} = \frac{1}{2} \overline{AD}$. Докажи дека $\overline{AC} = \overline{CD}$.
+
+# Решение
+## Стратегија
+Ова е задача за трапез со специфични аголни и метрички својства.
+1.  Ќе ги означиме аглите за да ја искористиме релацијата $\angle C = \frac{1}{2} \angle D$.
+2.  Ќе го искористиме условот $BC \perp BD$ за да најдеме врска меѓу аглите.
+3.  Условот $AB = \frac{1}{2} AD$ сугерира конструкција на средна линија или точка на средината на $AD$.
+4.  Целта е да докажеме дека $\triangle ACD$ е рамнокрак ($AC=CD$), што е еквивалентно на докажување дека $\angle CAD = \angle CDA$.
+
+## Чекор по чекор
+
+**Чекор 1: Означување на аглите**
+Нека $\angle DCB = \alpha$.
+Според условот, $\angle ADC = 2\alpha$.
+Бидејќи $ABCD$ е трапез ($AB \parallel CD$), збирот на аглите при кракот $BC$ е $180^\circ$.
+$\angle ABC + \angle DCB = 180^\circ \implies \angle ABC = 180^\circ - \alpha$.
+
+**Чекор 2: Анализа на правоаголниот триаголник $BCD$**
+Дадено е дека $BC \perp BD$, што значи $\angle DBC = 90^\circ$.
+Во правоаголниот $\triangle BCD$:
+$\angle BDC = 90^\circ - \angle DCB = 90^\circ - \alpha$.
+
+Сега можеме да го најдеме аголот $\angle ADB$:
+$\angle ADC = \angle ADB + \angle BDC$
+$2\alpha = \angle ADB + (90^\circ - \alpha)$
+$\angle ADB = 3\alpha - 90^\circ$.
+
+Исто така, бидејќи $AB \parallel CD$, важи $\angle ABD = \angle BDC = 90^\circ - \alpha$ (наизменични агли).
+
+**Чекор 3: Конструкција на средината на $AD$**
+Нека $M$ е средишна точка на $AD$.
+Дадено е $AB = \frac{1}{2} AD$. Бидејќи $AM = \frac{1}{2} AD$, следи дека $AB = AM$.
+Значи $\triangle ABM$ е рамнокрак триаголник.
+
+**Чекор 4: Поврзување на $M$ со $B$**
+Да го разгледаме $\triangle ABD$.
+Знаеме $\angle ABD = 90^\circ - \alpha$.
+Во $\triangle ABM$, $AB=AM$, па $\angle ABM = \angle AMB$.
+Ова не ни дава директна вредност за аглите.
+
+Ајде да пробаме поинаку.
+Да ја продолжиме $AB$ и $DC$ до пресек во точка $E$.
+Во $\triangle EBC$, $\angle B = 90^\circ$ (ако $EB \perp BC$?). Не, $BD \perp BC$.
+Ајде да се вратиме на $M$.
+Нека $M$ е средина на $AD$.
+Да повлечеме права низ $B$ паралелна со $AD$ која ја сече $CD$ во $K$.
+Тогаш $ABKD$ е паралелограм. $DK = AB = \frac{1}{2} AD$.
+Значи $K$ е средина на $AD$? Не, $K$ е на $CD$.
+$DK = AB$.
+Дали $DK = KC$? Не знаеме.
+
+Ајде да го искористиме условот $AC=CD$. Ова значи $\angle CAD = \angle CDA = 2\alpha$.
+Ако ова е точно, тогаш во $\triangle ACD$:
+$\angle ACD = 180 - 4\alpha$.
+Тогаш $\angle ACB = \alpha - (180-4\alpha) = 5\alpha - 180$.
+Ова изгледа комплицирано.
+
+**Алтернативна стратегија: Продолжување на краците**
+Нека $AD$ и $BC$ се сечат во точка $E$.
+Во $\triangle CDE$: $\angle C = \alpha, \angle D = 2\alpha$.
+Тогаш $\angle E = 180 - 3\alpha$.
+Во $\triangle ABE$: $AB \parallel CD \implies \triangle ABE \sim \triangle DCE$.
+Значи $\angle EAB = 2\alpha, \angle EBA = \alpha$.
+$AB = \frac{1}{2} AD$.
+Нека $AB = x$, тогаш $AD = 2x$.
+Од сличноста: $\frac{EA}{ED} = \frac{AB}{DC}$.
+$EA = ED - AD = ED - 2x$.
+$\frac{ED-2x}{ED} = \frac{x}{DC} \implies 1 - \frac{2x}{ED} = \frac{x}{DC}$.
+
+Ова не води никаде брзо.
+
+**Враќање на средината на $AD$**
+Нека $M$ е средина на $AD$. Тогаш $AM=MD=AB=x$.
+Да го повлечеме $BM$.
+Во $\triangle ABD$, $BM$ е тежишна линија.
+Ако докажеме дека $\triangle ABD$ е правоаголен (со прав агол кај $B$), тогаш $BM = AM = MD = AB$, па $\triangle ABM$ би бил рамностран.
+Дали $\angle ABD = 90^\circ$?
+Знаеме $\angle ABD = 90^\circ - \alpha$.
+Ако $90 - \alpha = 60 \implies \alpha = 30$.
+Ако $\alpha = 30$, тогаш $\angle D = 60, \angle C = 30$.
+Трапезот е рамнокрак? Не.
+Ако $\alpha=30$, $\angle BDC = 60$. $\angle DBC = 90$. $\angle C = 30$.
+$30+60+90=180$. Ова е можно.
+Ако $\alpha=30$, тогаш $\angle ABD = 60$.
+Тогаш $\triangle ABM$ е рамностран (ако $BM=AB$).
+
+Ајде да пробаме да докажеме дека $AC \perp BC$.
+Ако $AC=CD$, тогаш $\triangle ACD$ е рамнокрак.
+$\angle CAD = 2\alpha$.
+$\angle BAC = \angle ACD$ (наизменични).
+$\angle ACD = 180 - 4\alpha$.
+Значи $\angle BAC = 180 - 4\alpha$.
+$\angle DAB = \angle DAC + \angle CAB = 2\alpha + 180 - 4\alpha = 180 - 2\alpha$.
+Но $\angle DAB + \angle ADC = 180$ (за трапез)?
+$(180-2\alpha) + 2\alpha = 180$.
+Ова е секогаш точно за трапез.
+Значи претпоставката $AC=CD$ е конзистентна.
+
+**Клучен чекор: Конструкција на паралелограм**
+Нека $K$ е точка на $CD$ таква што $BK \parallel AD$.
+Тогаш $ABKD$ е паралелограм.
+$BK = AD = 2x$.
+$DK = AB = x$.
+$\angle BKC = \angle ADC = 2\alpha$ (согласни агли).
+Во $\triangle BKC$:
+$\angle BCK = \alpha$.
+$\angle KBC = 180 - (2\alpha + \alpha) = 180 - 3\alpha$.
+Примена на Синусна теорема за $\triangle BKC$:
+$\frac{BK}{\sin \alpha} = \frac{BC}{\sin 2\alpha}$.
+$BK = 2x$.
+$\frac{2x}{\sin \alpha} = \frac{BC}{2\sin \alpha \cos \alpha}$.
+$4x \cos \alpha = BC$.
+
+Сега да го искористиме правоаголниот $\triangle BCD$.
+$BC = CD \cos \alpha$.
+Заменуваме:
+$4x \cos \alpha = CD \cos \alpha$.
+Бидејќи $\alpha < 90$ (агол во трапез), $\cos \alpha \neq 0$.
+Следи $CD = 4x$.
+
+Значи имаме:
+$AB = x$
+$AD = 2x$
+$CD = 4x$
+$BC = 4x \cos \alpha$.
+
+Треба да докажеме $AC = CD = 4x$.
+Во $\triangle ABC$, применуваме Косинусна теорема.
+$AC^2 = AB^2 + BC^2 - 2 AB \cdot BC \cos(\angle B)$.
+$\angle B = 180 - \alpha$. $\cos(180-\alpha) = -\cos \alpha$.
+$AC^2 = x^2 + (4x \cos \alpha)^2 + 2 x (4x \cos \alpha) \cos \alpha$.
+$AC^2 = x^2 + 16x^2 \cos^2 \alpha + 8x^2 \cos^2 \alpha$.
+$AC^2 = x^2 + 24x^2 \cos^2 \alpha$.
+
+За да биде $AC = 4x$, треба $AC^2 = 16x^2$.
+$x^2 + 24x^2 \cos^2 \alpha = 16x^2$.
+$1 + 24 \cos^2 \alpha = 16$.
+$24 \cos^2 \alpha = 15$.
+$\cos^2 \alpha = \frac{15}{24} = \frac{5}{8}$.
+
+Дали ова е секогаш точно?
+Не, ова значи дека $\alpha$ е фиксен.
+Но задачата не вели „најди го аголот“, туку „докажи“.
+Ова значи дека мојата претпоставка за $K$ или пресметките се грешни.
+Или пак $ABKD$ не е паралелограм? Да, по конструкција е.
+Дали $BK = AD$? Да.
+Дали $\angle BKC = \angle D$? Да.
+Дали $BC = CD \cos \alpha$?
+Во правоаголен $\triangle BCD$ (прав агол кај $B$)?
+Не! Условот е $BC \perp BD$. Значи прав агол е $\angle DBC$.
+Хипотенуза е $CD$.
+Значи $\cos(\angle C) = \frac{BC}{CD}$.
+$BC = CD \cos \alpha$.
+Ова е точно.
+
+Каде е грешката?
+Ајде да провериме $\angle ADC = 2\alpha$.
+Во $\triangle BCD$: $\angle BDC = 90 - \alpha$.
+$\angle ADB = 2\alpha - (90-\alpha) = 3\alpha - 90$.
+Во $\triangle ABD$, примена на Синусна теорема:
+$\frac{AB}{\sin(3\alpha-90)} = \frac{AD}{\sin(90-\alpha)}$.
+$\frac{x}{-\cos 3\alpha} = \frac{2x}{\cos \alpha}$.
+$\frac{1}{-\cos 3\alpha} = \frac{2}{\cos \alpha}$.
+$\cos \alpha = -2 \cos 3\alpha$.
+$\cos \alpha = -2 (4\cos^3 \alpha - 3\cos \alpha)$.
+$\cos \alpha = -8\cos^3 \alpha + 6\cos \alpha$.
+$8\cos^3 \alpha = 5\cos \alpha$.
+$8\cos^2 \alpha = 5$.
+$\cos^2 \alpha = \frac{5}{8}$.
+
+Аха! Значи условот на задачата имплицира фиксна вредност за $\alpha$.
+И таа вредност е точно онаа што е потребна за $AC=CD$.
+Бидејќи добивме ист услов $\cos^2 \alpha = 5/8$ и од геометријата на трапезот и од барањето $AC=CD$, тврдењето е точно.
+
+**Синтетички доказ (без тригонометрија):**
+Треба да го избегнеме $\cos \alpha$.
+Имаме $\cos \alpha = -2 \cos 3\alpha$.
+Ова значи $\cos \alpha = 2 \sin(3\alpha - 90)$.
+$\sin(90-\alpha) = 2 \sin(\angle ADB)$.
+Во $\triangle ABD$: $\frac{AB}{\sin \angle ADB} = \frac{AD}{\sin \angle ABD}$.
+$\frac{x}{\sin \angle ADB} = \frac{2x}{\cos \alpha}$.
+$\cos \alpha = 2 \sin \angle ADB$.
+Ова е точно.
+
+Како да докажеме $AC=CD$ без пресметка на $\alpha$?
+Знаеме дека $\triangle BCD$ е правоаголен. Центарот на опишаната кружница е средината на $CD$. Нека е $O$.
+$OB = OC = OD = R$.
+$CD = 2R$.
+$BC = 2R \cos \alpha$.
+$AB = x, AD = 2x$.
+Од претходно $CD = 4x$. Значи $R = 2x$.
+$OD = 2x$.
+Бидејќи $AD = 2x$, следи $AD = OD$.
+Значи $\triangle ADO$ е рамнокрак.
+$\angle DAO = \angle DOA$.
+$\angle DOA$ е надворешен за $\triangle BCD$? Не, $O$ е на $CD$.
+$A, D, O$ се колинеарни? Не.
+$O$ е средина на $CD$.
+$AD = 2x, DO = 2x$.
+Значи $\triangle ADO$ е рамнокрак.
+$\angle ADO = 2\alpha$.
+$\angle DAO = \frac{180 - 2\alpha}{2} = 90 - \alpha$.
+$\angle AOD = 90 - \alpha$.
+
+Сега да го разгледаме $\triangle ACO$.
+$O$ е средина на $CD$.
+Треба да докажеме $AC = CD = 4x$.
+Во $\triangle ADO$, $AO$ може да се пресмета.
+Но, полесно е да се докаже $\angle CAD = 2\alpha$.
+$\angle CAD = \angle DAO = 90 - \alpha$.
+Ова не е $2\alpha$ (освен ако $\alpha=30$, што не е случај бидејќи $\cos^2 30 = 3/4 \neq 5/8$).
+Значи $AC$ не е $CD$?
+Чекај.
+Ако $AC=CD$, тогаш $\triangle ACD$ е рамнокрак.
+$\angle CDA = 2\alpha$.
+Значи $\angle CAD = 2\alpha$.
+А јас добив $\angle DAO = 90-\alpha$.
+Дали $A, C, O$ се колинеарни? Не.
+$O$ е на $CD$. Значи $DAO$ е всушност $DAC$.
+Значи добив $\angle DAC = 90-\alpha$.
+За да биде $AC=CD$, треба $\angle DAC = 2\alpha$.
+Значи $90-\alpha = 2\alpha \implies 3\alpha = 90 \implies \alpha = 30$.
+Но видовме дека $\alpha \neq 30$.
+Значи $AC \neq CD$?
+
+Дали направив грешка во $CD=4x$?
+$BK = 2x$.
+$\frac{2x}{\sin \alpha} = \frac{BC}{\sin 2\alpha} \implies BC = 4x \cos \alpha$.
+Во $\triangle BCD$: $\cos \alpha = \frac{BC}{CD} \implies CD = \frac{BC}{\cos \alpha} = 4x$.
+Ова е точно.
+$AD = 2x$.
+$OD = 2x$.
+$AD = OD$.
+$\triangle ADO$ е рамнокрак.
+$\angle ADO = \angle ADC = 2\alpha$.
+$\angle DAO = \angle DAC = \frac{180-2\alpha}{2} = 90-\alpha$.
+Значи $AC = CD$ е еквивалентно на $90-\alpha = 2\alpha \implies \alpha=30$.
+Но условот на задачата (преку синусната теорема за $\triangle ABD$) даде $\cos^2 \alpha = 5/8$.
+За $\alpha=30$, $\cos^2 30 = 3/4 = 6/8 \neq 5/8$.
+Значи задачата содржи контрадикција?
+Или $AC=CD$ не значи $\angle CAD = \angle CDA$?
+Да, значи.
+Или $O$ не е на $AC$?
+$O$ е средина на $CD$. $A, C, D$ формираат триаголник.
+$AC=CD \iff \angle CAD = \angle CDA$.
+Ова е точно.
+
+Дали можеби $AB = \frac{1}{2} AD$ се однесува на нешто друго?
+Не.
+Дали $\angle DCB = \frac{1}{2} \angle ADC$ е точно?
+Да.
+
+Ајде да проверам пак $\triangle ABD$.
+$\frac{x}{\sin(3\alpha-90)} = \frac{2x}{\cos \alpha}$.
+$\sin(3\alpha-90) = -\cos 3\alpha$.
+$\frac{1}{-\cos 3\alpha} = \frac{2}{\cos \alpha}$.
+$\cos \alpha = -2 \cos 3\alpha$.
+Ова е точно.
+И ова води до $\cos^2 \alpha = 5/8$.
+Ако $\cos^2 \alpha = 5/8$, тогаш $\alpha \approx 37.76^\circ$.
+Тогаш $\angle D = 75.5^\circ$.
+$\angle CAD = 90 - 37.76 = 52.24^\circ$.
+Дали $52.24 = 75.5$? Не.
+Значи $AC \neq CD$.
+
+**Дали можеби текстот е $AC \perp CD$?**
+Не, пишува $AC=CD$.
+
+**Дали можеби $M$ (средина на $AD$) е центар на опишана кружница околу $\triangle ACD$?**
+Тогаш $MA=MD=MC=x$.
+Ако $MC=x$, а $CD=4x$, тогаш $MC+MD = x+x = 2x \neq 4x$. Невозможно.
+
+**Ајде да пробаме да докажеме $AC=CD$ на друг начин.**
+Можеби $CD$ не е $4x$.
+Каде може да е грешката?
+$BK = AD = 2x$. (Паралелограм).
+$\angle KBC = 180 - 3\alpha$.
+$\frac{2x}{\sin \alpha} = \frac{BC}{\sin 2\alpha}$.
+$BC = 4x \cos \alpha$.
+Ова е робустно.
+$CD = BC / \cos \alpha = 4x$.
+И ова е робустно.
+$AD = 2x$.
+Значи $CD = 2 AD$.
+Ова е фиксен однос.
+Во $\triangle ACD$, страните се $AC, 4x, 2x$. Аголот меѓу нив е $2\alpha$.
+$AC^2 = (2x)^2 + (4x)^2 - 2(2x)(4x) \cos 2\alpha$.
+$AC^2 = 4x^2 + 16x^2 - 16x^2 (2\cos^2 \alpha - 1)$.
+$AC^2 = 20x^2 - 32x^2 \cos^2 \alpha + 16x^2$.
+$AC^2 = 36x^2 - 32x^2 \cos^2 \alpha$.
+За да биде $AC = CD = 4x$, треба $AC^2 = 16x^2$.
+$36x^2 - 32x^2 \cos^2 \alpha = 16x^2$.
+$20x^2 = 32x^2 \cos^2 \alpha$.
+$\cos^2 \alpha = \frac{20}{32} = \frac{5}{8}$.
+
+**ЕУРЕКА!**
+Условот $AC=CD$ е еквивалентен на $\cos^2 \alpha = 5/8$.
+Условот од геометријата на трапезот (Синусна за $\triangle ABD$) исто така даде $\cos^2 \alpha = 5/8$.
+Значи, тврдењето е точно!
+Мојата грешка беше во пресметката на аглите на рамнокракиот триаголник $\triangle ADO$.
+$O$ е средина на $CD$. $AD=OD=2x$.
+$\triangle ADO$ е рамнокрак.
+Но $A, D, O$ се темињата.
+Аголот при врвот е $\angle ADO$.
+Но $O$ лежи на $CD$. Значи $\angle ADO$ е всушност $\angle ADC = 2\alpha$.
+Значи $\angle DAO = \frac{180-2\alpha}{2} = 90-\alpha$.
+Ова е аголот $\angle DAC$.
+Значи $\angle DAC = 90-\alpha$.
+За да биде $AC=CD$, треба $\angle DAC = \angle ADC$?
+Не!
+$AC=CD \iff \triangle ACD$ е рамнокрак.
+Основата е $AD$.
+Значи треба $\angle CAD = \angle CDA$.
+$\angle CDA = 2\alpha$.
+Значи треба $90-\alpha = 2\alpha \implies \alpha=30$.
+Ова е контрадикцијата.
+
+**Каде е грешката во резонирањето?**
+Ако $AC=CD$, тогаш $\triangle ACD$ е рамнокрак.
+Кои страни се еднакви? $AC$ и $CD$.
+Значи аглите спроти нив се еднакви.
+$\angle ADC = \angle CAD$.
+Ова е точно.
+Но јас пресметав $AC^2$ преку косинусна теорема и добив дека $AC=4x$ (што е $CD$) ако $\cos^2 \alpha = 5/8$.
+Значи должините се еднакви.
+Зошто аглите не се совпаѓаат?
+$AC^2 = 36x^2 - 32x^2(5/8) = 36x^2 - 20x^2 = 16x^2$.
+$AC = 4x$.
+$CD = 4x$.
+Значи $AC=CD$.
+Триаголникот $ACD$ има страни $4x, 4x, 2x$.
+Аголот спроти $AC$ е $\angle ADC = 2\alpha$.
+Аголот спроти $CD$ е $\angle CAD$.
+Бидејќи страните се еднакви, аглите мора да бидат еднакви.
+$\angle CAD = 2\alpha$.
+Но претходно пресметав $\angle CAD = 90-\alpha$.
+Значи $2\alpha = 90-\alpha \implies \alpha=30$.
+А $\cos^2 30 = 3/4 \neq 5/8$.
+
+**Ова значи дека $AD=OD$ е грешка.**
+$O$ е средина на $CD$. $CD=4x$. $OD=2x$.
+$AD=2x$.
+Значи $AD=OD$.
+Ова е неизбежно.
+Каде е грешката?
+Дали $O$ лежи на $CD$? Да, по дефиниција.
+Дали $\angle ADO$ е аголот на триаголникот?
+Темињата се $A, D, O$.
+Страните се $AD$ и $DO$.
+Аголот меѓу нив е $\angle ADO$.
+Бидејќи $O$ е на правата $CD$, $\angle ADO$ е исто што и $\angle ADC$.
+Кој е $2\alpha$.
+Значи $\triangle ADO$ е рамнокрак со агол при врвот $2\alpha$.
+Аглите при основата $AO$ се $(180-2\alpha)/2 = 90-\alpha$.
+Значи $\angle DAO = 90-\alpha$.
+Бидејќи $O$ е на $CD$, правата $AO$ е исто што и $AC$?
+Не! $A, C, O$ формираат триаголник.
+$O$ е средина на $CD$. $C$ е крајна точка.
+Значи $A, O, C$ не се колинеарни (освен ако $A$ е на $CD$, што не е).
+Значи $\angle DAO$ не е $\angle DAC$.
+$\angle DAO$ е агол меѓу $AD$ и тежишната линија $AO$.
+А $\angle DAC$ е агол меѓу $AD$ и страната $AC$.
+Значи мојот заклучок $\angle DAC = 90-\alpha$ беше погрешен!
+Тоа беше аголот $\angle DAO$.
+
+Значи, нема контрадикција.
+Доказот преку косинусна теорема е валиден.
+Сега треба да го претвориме во синтетички.
+
+**Синтетичко решение:**
+
+1.  **Конструкција:** Нека $K$ е точка на $CD$ таква што $BK \parallel AD$.
+    $ABKD$ е паралелограм $\implies DK=AB=x, BK=AD=2x$.
+    $\angle BKC = \angle ADC = 2\alpha$.
+
+2.  **Анализа на $\triangle BKC$:**
+    $\angle BCK = \alpha$.
+    $\angle KBC = 180 - 3\alpha$.
+    Синусна теорема: $\frac{2x}{\sin \alpha} = \frac{BC}{\sin 2\alpha} \implies BC = 4x \cos \alpha$.
+
+3.  **Анализа на $\triangle BCD$:**
+    Правоаголен ($\angle DBC = 90$).
+    $CD = \frac{BC}{\cos \alpha} = 4x$.
+
+4.  **Анализа на $\triangle ABD$:**
+    $\angle ADB = 3\alpha - 90$.
+    Синусна теорема: $\frac{x}{\sin(3\alpha-90)} = \frac{2x}{\sin(90-\alpha)}$.
+    $\frac{1}{-\cos 3\alpha} = \frac{2}{\cos \alpha} \implies \cos \alpha = -2\cos 3\alpha$.
+    Ова води до идентитетот $8\cos^2 \alpha = 5$.
+
+5.  **Доказ за $AC=CD$:**
+    Во $\triangle ACD$, имаме страни $AD=2x, CD=4x$ и агол $\angle D = 2\alpha$.
+    Треба да докажеме $AC=4x$.
+    Спуштаме висина $AN$ од $A$ кон $CD$.
+    Во правоаголниот $\triangle AND$:
+    $DN = AD \cos 2\alpha = 2x (2\cos^2 \alpha - 1) = 2x (2(5/8) - 1) = 2x (5/4 - 1) = 2x(1/4) = x/2$.
+    $AN^2 = AD^2 - DN^2 = 4x^2 - x^2/4 = 15x^2/4$.
+    
+    Сега во правоаголниот $\triangle ANC$:
+    $CN = CD - DN = 4x - x/2 = 7x/2$.
+    $AC^2 = AN^2 + CN^2 = \frac{15x^2}{4} + \frac{49x^2}{4} = \frac{64x^2}{4} = 16x^2$.
+    $AC = 4x$.
+    
+    Бидејќи $CD = 4x$, следи $AC = CD$.
+
+Ова е комплетно синтетичко решение (со малку тригонометрија за односите, што е дозволено).
+
+# Pedagogical Notes
+1.  **Основна идеја:** Кога имате трапез со однос на краците или дијагоналите, конструкцијата на паралелограм преку повлекување паралела со еден крак е најмоќната алатка. Тоа ги пренесува сите должини и агли во еден триаголник ($\triangle BKC$).
+2.  **Совет од Олимпиец:** Не плашете се да воведете параметар $x$ за најмалата должина. Тоа овозможува лесно следење на односите ($x, 2x, 4x$).
+3.  **Тригонометрија како алатка:** Иако решението е геометриско, тригонометријата (косинусна теорема) често е најбрзиот начин да се провери точноста на хипотезата или да се најде скриениот услов (како $\cos^2 \alpha = 5/8$).
+
+# Manim Code
+```python
+from manim import *
+
+class TrapezoidProof(Scene):
+    def construct(self):
+        self.camera.background_color = WHITE
+        
+        # Setup
+        # cos^2(alpha) = 5/8 => cos(alpha) = sqrt(5/8)
+        alpha_val = np.arccos(np.sqrt(5/8))
+        # x scale
+        x = 1.5
+        
+        # Points
+        # D at origin
+        D = ORIGIN
+        # C on x-axis, CD = 4x
+        C = RIGHT * (4 * x)
+        # A: AD = 2x, angle D = 2*alpha
+        A = 2 * x * np.array([np.cos(2*alpha_val), np.sin(2*alpha_val), 0])
+        # B: AB || CD, AB = x
+        B = A + RIGHT * x
+        
+        # Draw Trapezoid
+        trap = Polygon(A, B, C, D, color=BLACK)
+        diag_BD = Line(B, D, color=BLUE)
+        diag_AC = Line(A, C, color=RED)
+        side_BC = Line(B, C, color=BLACK)
+        
+        self.play(Create(trap))
+        self.play(Create(diag_BD))
+        
+        # Labels
+        lbls = VGroup(
+            MathTex("A").next_to(A, UL),
+            MathTex("B").next_to(B, UR),
+            MathTex("C").next_to(C, DR),
+            MathTex("D").next_to(D, DL)
+        ).set_color(BLACK)
+        self.play(Write(lbls))
+        
+        # Right angle mark
+        ra = RightAngle(diag_BD, side_BC, length=0.3, color=BLUE)
+        self.play(Create(ra))
+        
+        # Lengths text
+        txt_AB = MathTex("x", color=BLACK).next_to(Line(A, B), UP)
+        txt_AD = MathTex("2x", color=BLACK).next_to(Line(A, D), LEFT)
+        
+        self.play(Write(txt_AB), Write(txt_AD))
+        
+        # Construction K
+        # BK || AD
+        K = D + (B - A) # Vector addition
+        # Actually K is on CD such that BK || AD.
+        # Since AB || CD, ABKD is parallelogram. K is projection of B along AD direction? No.
+        # K is on CD. Vector BK = Vector AD.
+        K_pt = B + (D - A) # No, vector AD is A->D. We want B->K = A->D. So K = B + (D-A).
+        # Wait, A->D is down-left. B->K should be down-left.
+        # K should be on CD.
+        # Let's just use the calculated position: K is at x from D.
+        K_pos = RIGHT * x
+        line_BK = Line(B, K_pos, color=GREEN, stroke_dash_pattern=[4, 4])
+        
+        self.play(Create(line_BK))
+        lbl_K = MathTex("K", color=BLACK).next_to(K_pos, DOWN)
+        self.play(Write(lbl_K))
+        
+        # Proof steps visualization
+        step1 = MathTex(r"CD = 4x", color=BLACK).to_corner(UL)
+        step2 = MathTex(r"AC^2 = (2x)^2 + (4x)^2 - 2(2x)(4x)\cos(2\alpha)", color=BLACK).next_to(step1, DOWN, aligned_edge=LEFT)
+        step3 = MathTex(r"\cos^2 \alpha = 5/8 \implies AC = 4x", color=RED).next_to(step2, DOWN, aligned_edge=LEFT)
+        
+        self.play(Write(step1))
+        self.play(Write(step2))
+        self.play(Write(step3))
+        
+        self.play(Create(diag_AC))
+        self.play(Indicate(diag_AC), Indicate(Line(C, D)))
+        
+        self.wait(2)
