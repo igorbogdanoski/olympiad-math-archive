@@ -6,6 +6,9 @@ problem_id: regional_2025_1_4b
 related_skills:
 - talesova_teorema
 - algebarski_sistemi
+related_theorems:
+- pythagorean_theorem
+- similarity
 source: Регионален натпревар по математика за средно образование 2025 (Сигма 139)
 tags:
 - pitagorina_teorema

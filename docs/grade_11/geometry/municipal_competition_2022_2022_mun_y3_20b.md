@@ -1,30 +1,29 @@
 ---
-grade: 11
-field: geometry
 difficulty: 4
-problem_type: calculation
-source: "Municipal_Competition_2022"
-problem_id: 2022_mun_y3_20b
-language_original: <mk | en | sr | hr | ...>
-translated: false
-
-# --- GEOMETRY SKILLS ---
+field: geometry
 geometry_style: analytic
-primary_skill: extremal_principle
-related_skills:
-  - logic
+grade: 11
+language_original: <mk | en | sr | hr | ...>
 prerequisites:
-  - quadratic_function
-
-# --- VISUALIZATION ---
-visual_prompt: "Draw a rectangular area adjacent to a brick wall. The wall is the top side. The other three sides are fenced with wire. Label the vertical sides 'x' and the horizontal side 'y'. Show the total length equation 2x+y=32."
-
+- quadratic_function
+primary_skill: extremal_principle
+problem_id: 2022_mun_y3_20b
+problem_type: calculation
+related_skills:
+- logic
+related_theorems:
+- optimization
+source: Municipal_Competition_2022
 tags:
-  - geometry
-  - olympiad
-  - optimization
-  - area
-  - rectangle
+- geometry
+- olympiad
+- optimization
+- area
+- rectangle
+translated: false
+visual_prompt: Draw a rectangular area adjacent to a brick wall. The wall is the top
+  side. The other three sides are fenced with wire. Label the vertical sides 'x' and
+  the horizontal side 'y'. Show the total length equation 2x+y=32.
 ---
 
 [⬅️ Назад кон Индексот](../README.md) | [🧰 Skill: extremal_principle](../../skill_guides/extremal_principle.md)

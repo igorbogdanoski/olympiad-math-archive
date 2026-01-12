@@ -1,27 +1,25 @@
 ---
-grade: 9
-field: number_theory
 difficulty: 5
-problem_type: calculation
-source: "Municipal_Competition_2022"
-problem_id: 2022_mun_y1_16b
+field: number_theory
+grade: 9
 language_original: mk
-translated: false
-
-# --- SKILL MAPPING ---
-primary_skill: vieta_formulas
-related_skills:
-  - logic
 prerequisites:
-  - quadratic_equation
-  - factorization
-
-# --- TOPICS ---
+- quadratic_equation
+- factorization
+primary_skill: vieta_formulas
+problem_id: 2022_mun_y1_16b
+problem_type: calculation
+related_skills:
+- logic
+related_theorems:
+- vieta_formulas
+source: Municipal_Competition_2022
 tags:
-  - quadratic_equation
-  - primes
-  - integers
-  - olympiad
+- quadratic_equation
+- primes
+- integers
+- olympiad
+translated: false
 ---
 
 [⬅️ Назад кон Индексот](../README.md) | [🧰 Skill: vieta_formulas](../../skill_guides/vieta_formulas.md)

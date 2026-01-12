@@ -2,6 +2,10 @@
 difficulty: 4
 grade: 10
 problem_id: sigma139_y2_p2
+related_theorems:
+- vieta_formulas
+- symmetry
+- polynomial_expansion
 source: Sigma 139, Vtora godina, Zadaca 2
 tags:
 - algebra

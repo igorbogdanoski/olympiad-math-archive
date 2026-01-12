@@ -1,30 +1,28 @@
 ---
-grade: 11
-field: geometry
 difficulty: 4
-problem_type: calculation
-source: "Municipal_Competition_2022"
-problem_id: 2022_mun_y3_5b
-language_original: <mk | en | sr | hr | ...>
-translated: false
-
-# --- GEOMETRY SKILLS ---
+field: geometry
 geometry_style: synthetic
-primary_skill: trigonometry
-related_skills:
-  - logic
+grade: 11
+language_original: <mk | en | sr | hr | ...>
 prerequisites:
-  - pythagorean_theorem
-  - similarity
-
-# --- VISUALIZATION ---
-visual_prompt: "Draw a right triangle ABC (C=90). Draw altitude CH to hypotenuse AB. Label BH=10, BC=16. Mark angle A as alpha."
-
+- pythagorean_theorem
+- similarity
+primary_skill: trigonometry
+problem_id: 2022_mun_y3_5b
+problem_type: calculation
+related_skills:
+- logic
+related_theorems:
+- functions
+source: Municipal_Competition_2022
 tags:
-  - geometry
-  - olympiad
-  - right_triangle
-  - trigonometry
+- geometry
+- olympiad
+- right_triangle
+- trigonometry
+translated: false
+visual_prompt: Draw a right triangle ABC (C=90). Draw altitude CH to hypotenuse AB.
+  Label BH=10, BC=16. Mark angle A as alpha.
 ---
 
 [⬅️ Назад кон Индексот](../README.md) | [🧰 Skill: trigonometry](../../skill_guides/trigonometry.md)

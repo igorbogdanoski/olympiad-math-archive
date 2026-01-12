@@ -6,6 +6,8 @@ problem_id: regional_2025_2_2b
 related_skills:
 - algebarski_metodi
 - linearni_sistemi
+related_theorems:
+- polynomial_expansion
 source: Сигма 139 (Регионален натпревар 2025)
 tags:
 - sistemi_ravenki

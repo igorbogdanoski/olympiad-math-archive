@@ -1,26 +1,24 @@
 ---
-grade: 7
-field: algebra
 difficulty: 3
-problem_type: calculation
-source: "Municipal_Competition_2022"
-problem_id: 2022_mun_g7_2
+field: algebra
+grade: 7
 language_original: mk
-translated: false
-
-# --- SKILL MAPPING ---
-primary_skill: algebraic_manipulation
-related_skills:
-  - logic
 prerequisites:
-  - linear_expressions
-
-# --- TOPICS ---
+- linear_expressions
+primary_skill: algebraic_manipulation
+problem_id: 2022_mun_g7_2
+problem_type: calculation
+related_skills:
+- logic
+related_theorems:
+- probability
+source: Municipal_Competition_2022
 tags:
-  - algebraic_expressions
-  - substitution
-  - pyramid
-  - olympiad
+- algebraic_expressions
+- substitution
+- pyramid
+- olympiad
+translated: false
 ---
 
 [⬅️ Назад кон Индексот](../README.md) | [🧰 Skill: algebraic_manipulation](../../skill_guides/algebraic_manipulation.md)

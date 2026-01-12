@@ -1,15 +1,18 @@
 ---
-grade: 8
-field: algebra
 difficulty: 6
-source: Sigma Magazine
-problem_id: 1805
+field: algebra
+grade: 8
 language_original: mk
-translated: false
+problem_id: 1805
+related_theorems:
+- polynomial_expansion
+- symmetry
+source: Sigma Magazine
 tags:
-  - symmetry
-  - structural_thinking
-  - extremal_principle
+- symmetry
+- structural_thinking
+- extremal_principle
+translated: false
 ---
 
 # Минимална вредност на симетричен полином

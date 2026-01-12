@@ -1,30 +1,22 @@
 ---
-# 
-tags:
-  - algebra
-  - system_of_equations
-related_skills:
-  - system_of_equations--- OLD STANDARD (Компатибилност) ---
-grade: transition
-field: algebra
 difficulty: 4
-source: "Numerus LI 51-2 (2025/2026), problem 4409"
-problem_id: 4409
+field: algebra
+grade: transition
 language_original: mk
-translated: false
-
-# --- NEW SKILL MAP STANDARD (За иднината) ---
 primary_skill: symmetry
+problem_id: 4409
 related_skills:
-  - structural_thinking
-  - algebraic_transformation
-  - logic
-
-# --- TOPICS (Клучни зборови) ---
+- structural_thinking
+- algebraic_transformation
+- logic
+related_theorems:
+- symmetry
+source: Numerus LI 51-2 (2025/2026), problem 4409
 tags:
-  - percentages
-  - proof_intro
-  - system_of_equations
+- percentages
+- proof_intro
+- system_of_equations
+translated: false
 ---
 
 # Задача 4409 — Парфеми со попуст (симетричен доказ)

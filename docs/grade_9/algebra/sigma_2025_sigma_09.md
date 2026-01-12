@@ -1,27 +1,20 @@
 ---
-grade: 9
-field: algebra
 difficulty: 6
-source: "Sigma 2025"
-problem_id: sigma_09
+field: algebra
+grade: 9
 language_original: mk
+primary_skill: inequalities_am_gm
+problem_id: sigma_09
+related_skills:
+- system_of_equations
+related_theorems:
+- am_gm_inequality
+source: Sigma 2025
+tags:
+- <topic_1>
+- <topic_2>
+- olympiad
 translated: false
-
-# 
-tags:
-  - algebra
-  - system_of_equations
-related_skills:
-  - system_of_equations--- SKILL MAPPING (New Standard) ---
-primary_skill: inequalities_am_gm # e.g., symmetry, invariants, telescoping
-related_skills:
-  - system_of_equations
-
-# --- TOPICS ---
-tags:
-  - <topic_1> # e.g., percentages
-  - <topic_2> # e.g., linear_equations
-  - olympiad
 ---
 
 # Цикличен систем равенки

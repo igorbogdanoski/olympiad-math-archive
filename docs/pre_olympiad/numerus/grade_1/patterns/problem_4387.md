@@ -1,13 +1,15 @@
 ---
-grade: 1
-field: patterns
 difficulty: 1
-source: "Numerus LI 51-2 (2025/2026), problem 4387 (page 33)"
+field: patterns
+grade: 1
 language_original: mk
+related_theorems:
+- parity
+source: Numerus LI 51-2 (2025/2026), problem 4387 (page 33)
 tags:
-  - counting
-  - parity
-  - pattern_recognition
+- counting
+- parity
+- pattern_recognition
 ---
 
 # Задача 4387 — Парни страни

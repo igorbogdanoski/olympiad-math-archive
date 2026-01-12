@@ -1,3 +1,9 @@
+---
+related_theorems:
+- optimization
+- symmetry
+---
+
 # Bridge to Middle School – Readiness Test (Grade 6 Entry)
 
 Овој документ дефинира **јасен и педагошки праг**

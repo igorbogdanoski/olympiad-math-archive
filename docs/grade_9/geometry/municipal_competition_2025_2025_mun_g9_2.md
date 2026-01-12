@@ -1,40 +1,28 @@
 ---
-grade: 9
-field: geometry
 difficulty: 3
-problem_type: calculation
-source: "Municipal_Competition_2025"
-problem_id: 2025_mun_g9_2
-language_original: <mk | en | sr | hr | ...>
-translated: false
-
-# 
-tags:
-  - congruence
-  - triangle_geometry
-  - geometry
-  - angle_chasing
-related_skills:
-  - congruence
-  - triangle_geometry
-  - angle_chasing--- GEOMETRY SKILLS ---
+field: geometry
 geometry_style: synthetic
-primary_skill: logic
-related_skills:
-  - logic
+grade: 9
+language_original: <mk | en | sr | hr | ...>
 prerequisites:
-  - basic_math
-
-# --- VISUALIZATION ---
-visual_prompt: "No visual prompt provided."
-
+- basic_math
+primary_skill: logic
+problem_id: 2025_mun_g9_2
+problem_type: calculation
+related_skills:
+- logic
+related_theorems:
+- symmetry
+source: Municipal_Competition_2025
 tags:
-  - geometry
-  - olympiad
-  - isosceles_triangle
-  - equilateral_triangle
-  - congruence
-  - perimeter
+- geometry
+- olympiad
+- isosceles_triangle
+- equilateral_triangle
+- congruence
+- perimeter
+translated: false
+visual_prompt: No visual prompt provided.
 ---
 
 [⬅️ Назад кон Индексот](../README.md) | [🧰 Skill: logic](../../skill_guides/logic.md)

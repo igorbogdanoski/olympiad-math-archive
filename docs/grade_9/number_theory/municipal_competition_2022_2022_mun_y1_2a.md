@@ -1,25 +1,23 @@
 ---
-grade: 9
-field: number_theory
 difficulty: 3
-problem_type: logic_puzzle
-source: "Municipal_Competition_2022"
-problem_id: 2022_mun_y1_2a
+field: number_theory
+grade: 9
 language_original: mk
-translated: false
-
-# --- SKILL MAPPING ---
-primary_skill: divisibility_rules
-related_skills:
-  - logic
 prerequisites:
-  - divisibility_by_3
-
-# --- TOPICS ---
+- divisibility_by_3
+primary_skill: divisibility_rules
+problem_id: 2022_mun_y1_2a
+problem_type: logic_puzzle
+related_skills:
+- logic
+related_theorems:
+- parity
+source: Municipal_Competition_2022
 tags:
-  - divisibility
-  - digits
-  - olympiad
+- divisibility
+- digits
+- olympiad
+translated: false
 ---
 
 [⬅️ Назад кон Индексот](../README.md) | [🧰 Skill: divisibility_rules](../../skill_guides/divisibility_rules.md)

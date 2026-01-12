@@ -2,6 +2,9 @@
 difficulty: 6
 grade: 11
 problem_id: sigma139_p1904_final
+related_theorems:
+- probability
+- complex_numbers
 source: Sigma 139, Zadaca 1904
 tags:
 - geometry

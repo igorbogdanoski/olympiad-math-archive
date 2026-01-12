@@ -1,45 +1,30 @@
 ---
-grade: 9
-field: geometry
-difficulty: 5
-source: "<натпревар / списание / година>"
-problem_id: geo_right_triangle_radii
-language_original: <mk | en | sr | hr | ...>
-translated: false
-
-# 
-tags:
-  - vieta_formulas
-  - vectors
-  - angle_chasing
-  - geometry
-  - complex_numbers
-  - algebra
-  - similarity
-  - polynomials
-related_skills:
-  - vieta_formulas
-  - vectors
-  - angle_chasing
-  - complex_numbers
-  - similarity--- GEOMETRY SKILLS ---
-geometry_style: synthetic # synthetic | analytic | mixed
-primary_skill: <main_tool> # e.g., angle_chasing, similarity, cyclic_quads
-related_skills:
-  - vieta_formulas
-  - algebraic_manipulation
-
 allowed_tools:
-  - classical_euclidean
-  - similarity
-  - symmetry
+- classical_euclidean
+- similarity
+- symmetry
+difficulty: 5
+field: geometry
 forbidden_tools:
-  - coordinate_geometry
-  - vectors
-  - complex_numbers
+- coordinate_geometry
+- vectors
+- complex_numbers
+geometry_style: synthetic
+grade: 9
+language_original: <mk | en | sr | hr | ...>
+primary_skill: <main_tool>
+problem_id: geo_right_triangle_radii
+related_skills:
+- vieta_formulas
+- algebraic_manipulation
+related_theorems:
+- vieta_formulas
+- pythagorean_theorem
+source: <натпревар / списание / година>
 tags:
-  - geometry
-  - olympiad
+- geometry
+- olympiad
+translated: false
 ---
 
 # Однос на катети преку радиуси

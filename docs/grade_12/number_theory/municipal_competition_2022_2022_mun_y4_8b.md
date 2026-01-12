@@ -1,25 +1,23 @@
 ---
-grade: 12
-field: number_theory
 difficulty: 5
-problem_type: calculation
-source: "Municipal_Competition_2022"
-problem_id: 2022_mun_y4_8b
+field: number_theory
+grade: 12
 language_original: mk
-translated: false
-
-# --- SKILL MAPPING ---
-primary_skill: number_properties
-related_skills:
-  - logic
 prerequisites:
-  - square_roots
-
-# --- TOPICS ---
+- square_roots
+primary_skill: number_properties
+problem_id: 2022_mun_y4_8b
+problem_type: calculation
+related_skills:
+- logic
+related_theorems:
+- parity
+source: Municipal_Competition_2022
 tags:
-  - radicals
-  - integers
-  - olympiad
+- radicals
+- integers
+- olympiad
+translated: false
 ---
 
 [⬅️ Назад кон Индексот](../README.md) | [🧰 Skill: number_properties](../../skill_guides/number_properties.md)

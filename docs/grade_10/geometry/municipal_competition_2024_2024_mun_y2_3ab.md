@@ -1,30 +1,27 @@
 ---
-grade: 10
-field: geometry
 difficulty: 5
-problem_type: proof
-source: "Municipal_Competition_2024"
-problem_id: 2024_mun_y2_3ab
-language_original: <mk | en | sr | hr | ...>
-translated: false
-
-# --- GEOMETRY SKILLS ---
+field: geometry
 geometry_style: synthetic
-primary_skill: visual_reasoning
-related_skills:
-  - logic
+grade: 10
+language_original: <mk | en | sr | hr | ...>
 prerequisites:
-  - similarity_area
-
-# --- VISUALIZATION ---
-visual_prompt: "No visual prompt provided."
-
+- similarity_area
+primary_skill: visual_reasoning
+problem_id: 2024_mun_y2_3ab
+problem_type: proof
+related_skills:
+- logic
+related_theorems:
+- similarity
+source: Municipal_Competition_2024
 tags:
-  - geometry
-  - olympiad
-  - area
-  - similarity
-  - parallelogram
+- geometry
+- olympiad
+- area
+- similarity
+- parallelogram
+translated: false
+visual_prompt: No visual prompt provided.
 ---
 
 [⬅️ Назад кон Индексот](../README.md) | [🧰 Skill: visual_reasoning](../../skill_guides/visual_reasoning.md)

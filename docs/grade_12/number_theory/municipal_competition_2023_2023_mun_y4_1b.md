@@ -1,26 +1,24 @@
 ---
-grade: 12
-field: number_theory
 difficulty: 3
-problem_type: calculation
-source: "Municipal_Competition_2023"
-problem_id: 2023_mun_y4_1b
+field: number_theory
+grade: 12
 language_original: mk
-translated: false
-
-# --- SKILL MAPPING ---
-primary_skill: algebraic_manipulation
-related_skills:
-  - logic
 prerequisites:
-  - legendre_formula
-
-# --- TOPICS ---
+- legendre_formula
+primary_skill: algebraic_manipulation
+problem_id: 2023_mun_y4_1b
+problem_type: calculation
+related_skills:
+- logic
+related_theorems:
+- floor_function
+source: Municipal_Competition_2023
 tags:
-  - factorials
-  - divisibility
-  - legendre_formula
-  - olympiad
+- factorials
+- divisibility
+- legendre_formula
+- olympiad
+translated: false
 ---
 
 [⬅️ Назад кон Индексот](../README.md) | [🧰 Skill: algebraic_manipulation](../../skill_guides/algebraic_manipulation.md)

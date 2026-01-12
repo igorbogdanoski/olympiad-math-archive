@@ -1,20 +1,22 @@
 ---
 difficulty: 6
 grade: 11
+primary_skill: rotation_transformation
 problem_id: sigma137_p1854_geometry_eq_triangle
+related_skills:
+- angle_chasing
+- centroid_properties
+related_theorems:
+- symmetry
 source: Сигма 137, Задача 1854
 tags:
-  - geometry
-  - rotation
-  - equilateral_triangle
-  - parallelogram
-  - centroid
+- geometry
+- rotation
+- equilateral_triangle
+- parallelogram
+- centroid
 title: Триаголник, Ротација и Тежиште
 type: geometry
-primary_skill: rotation_transformation
-related_skills:
-  - angle_chasing
-  - centroid_properties
 ---
 
 # 📝 Текст на задачата

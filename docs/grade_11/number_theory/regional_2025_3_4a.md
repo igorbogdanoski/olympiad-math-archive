@@ -6,6 +6,8 @@ problem_id: regional_2025_3_4a
 related_skills:
 - celobrojna_delivost
 - analiza_na_diskriminanta
+related_theorems:
+- parity
 source: Сигма 139 (Регионален натпревар 2025)
 tags:
 - logaritmi

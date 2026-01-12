@@ -1,26 +1,24 @@
 ---
-grade: 11
-field: algebra
 difficulty: 4
-problem_type: calculation
-source: "Municipal_Competition_2024"
-problem_id: 2024_mun_y3_2a
+field: algebra
+grade: 11
 language_original: mk
-translated: false
-
-# --- SKILL MAPPING ---
-primary_skill: algebraic_manipulation
-related_skills:
-  - logic
 prerequisites:
-  - logarithm_properties
-
-# --- TOPICS ---
+- logarithm_properties
+primary_skill: algebraic_manipulation
+problem_id: 2024_mun_y3_2a
+problem_type: calculation
+related_skills:
+- logic
+related_theorems:
+- vieta_formulas
+source: Municipal_Competition_2024
 tags:
-  - logarithms
-  - exponential_equations
-  - substitution
-  - olympiad
+- logarithms
+- exponential_equations
+- substitution
+- olympiad
+translated: false
 ---
 
 [⬅️ Назад кон Индексот](../README.md) | [🧰 Skill: algebraic_manipulation](../../skill_guides/algebraic_manipulation.md)

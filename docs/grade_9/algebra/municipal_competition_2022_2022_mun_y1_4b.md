@@ -1,26 +1,24 @@
 ---
-grade: 9
-field: algebra
 difficulty: 3
-problem_type: calculation
-source: "Municipal_Competition_2022"
-problem_id: 2022_mun_y1_4b
+field: algebra
+grade: 9
 language_original: mk
-translated: false
-
-# --- SKILL MAPPING ---
-primary_skill: pattern_recognition
-related_skills:
-  - logic
 prerequisites:
-  - functions
-  - sum_formula
-
-# --- TOPICS ---
+- functions
+- sum_formula
+primary_skill: pattern_recognition
+problem_id: 2022_mun_y1_4b
+problem_type: calculation
+related_skills:
+- logic
+related_theorems:
+- probability
+source: Municipal_Competition_2022
 tags:
-  - functions
-  - summation
-  - olympiad
+- functions
+- summation
+- olympiad
+translated: false
 ---
 
 [⬅️ Назад кон Индексот](../README.md) | [🧰 Skill: pattern_recognition](../../skill_guides/pattern_recognition.md)

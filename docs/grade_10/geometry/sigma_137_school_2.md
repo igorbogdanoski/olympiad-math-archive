@@ -6,6 +6,9 @@ problem_id: sigma_137_school_2
 related_skills:
 - similarity
 - midsegment_theorem
+related_theorems:
+- vectors
+- similarity
 source: Сигма 137, Задачи од училницата (Втора година)
 tags:
 - vectors

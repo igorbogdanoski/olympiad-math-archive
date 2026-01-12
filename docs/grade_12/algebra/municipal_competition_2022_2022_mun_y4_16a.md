@@ -1,26 +1,24 @@
 ---
-grade: 12
-field: algebra
 difficulty: 5
-problem_type: calculation
-source: "Municipal_Competition_2022"
-problem_id: 2022_mun_y4_16a
+field: algebra
+grade: 12
 language_original: mk
-translated: false
-
-# --- SKILL MAPPING ---
-primary_skill: pattern_recognition
-related_skills:
-  - logic
 prerequisites:
-  - fibonacci_properties
-
-# --- TOPICS ---
+- fibonacci_properties
+primary_skill: pattern_recognition
+problem_id: 2022_mun_y4_16a
+problem_type: calculation
+related_skills:
+- logic
+related_theorems:
+- induction
+source: Municipal_Competition_2022
 tags:
-  - fibonacci
-  - golden_ratio
-  - polynomials
-  - olympiad
+- fibonacci
+- golden_ratio
+- polynomials
+- olympiad
+translated: false
 ---
 
 [⬅️ Назад кон Индексот](../README.md) | [🧰 Skill: pattern_recognition](../../skill_guides/pattern_recognition.md)

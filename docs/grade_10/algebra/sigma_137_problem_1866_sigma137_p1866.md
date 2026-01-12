@@ -1,11 +1,14 @@
 ---
-grade: 10
 difficulty: 4
+grade: 10
+related_theorems:
+- vieta_formulas
+- polynomial_expansion
 tags:
-  - quadratic
-  - roots
-  - coefficients
-  - olympiad
+- quadratic
+- roots
+- coefficients
+- olympiad
 ---
 
 # Трансформација на корените на квадратна равенка

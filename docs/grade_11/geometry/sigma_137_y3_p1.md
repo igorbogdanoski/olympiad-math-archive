@@ -6,6 +6,10 @@ problem_id: sigma_137_y3_p1
 related_skills:
 - синус_од_збир_и_разлика
 - својства_на_агли_во_триаголник
+related_theorems:
+- symmetry
+- trigonometric_identities
+- functions
 source: Сигма 137
 tags:
 - тригонометрија

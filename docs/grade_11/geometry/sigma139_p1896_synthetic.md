@@ -2,6 +2,8 @@
 difficulty: 6
 grade: 11
 problem_id: sigma139_p1896_synthetic
+related_theorems:
+- symmetry
 source: Sigma 139, Zadaca 1896
 tags:
 - geometry

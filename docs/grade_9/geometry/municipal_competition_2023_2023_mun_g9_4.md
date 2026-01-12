@@ -1,31 +1,28 @@
 ---
-grade: 9
-field: geometry
 difficulty: 4
-problem_type: calculation
-source: "Municipal_Competition_2023"
-problem_id: 2023_mun_g9_4
-language_original: <mk | en | sr | hr | ...>
-translated: false
-
-# --- GEOMETRY SKILLS ---
+field: geometry
 geometry_style: synthetic
-primary_skill: algebraic_manipulation
-related_skills:
-  - logic
+grade: 9
+language_original: <mk | en | sr | hr | ...>
 prerequisites:
-  - pythagorean_theorem
-
-# --- VISUALIZATION ---
-visual_prompt: "No visual prompt provided."
-
+- pythagorean_theorem
+primary_skill: algebraic_manipulation
+problem_id: 2023_mun_g9_4
+problem_type: calculation
+related_skills:
+- logic
+related_theorems:
+- pythagorean_theorem
+source: Municipal_Competition_2023
 tags:
-  - geometry
-  - olympiad
-  - quadrilateral
-  - area
-  - pythagoras
-  - algebraic_geometry
+- geometry
+- olympiad
+- quadrilateral
+- area
+- pythagoras
+- algebraic_geometry
+translated: false
+visual_prompt: No visual prompt provided.
 ---
 
 [⬅️ Назад кон Индексот](../README.md) | [🧰 Skill: algebraic_manipulation](../../skill_guides/algebraic_manipulation.md)

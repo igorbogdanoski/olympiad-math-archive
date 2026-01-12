@@ -1,25 +1,23 @@
 ---
-grade: 10
-field: number_theory
 difficulty: 5
-problem_type: calculation
-source: "Municipal_Competition_2022"
-problem_id: 2022_mun_y2_8a
+field: number_theory
+grade: 10
 language_original: mk
-translated: false
-
-# --- SKILL MAPPING ---
-primary_skill: parity
-related_skills:
-  - logic
 prerequisites:
-  - primes
-
-# --- TOPICS ---
+- primes
+primary_skill: parity
+problem_id: 2022_mun_y2_8a
+problem_type: calculation
+related_skills:
+- logic
+related_theorems:
+- parity
+source: Municipal_Competition_2022
 tags:
-  - primes
-  - system_of_equations
-  - olympiad
+- primes
+- system_of_equations
+- olympiad
+translated: false
 ---
 
 [⬅️ Назад кон Индексот](../README.md) | [🧰 Skill: parity](../../skill_guides/parity.md)

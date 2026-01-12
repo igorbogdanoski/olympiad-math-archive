@@ -2,6 +2,9 @@
 difficulty: 6
 grade: 11
 problem_id: sigma139_p1898_final
+related_theorems:
+- geometry_construction
+- trigonometric_identities
 source: Sigma 139, Zadaca 1898
 tags:
 - geometry

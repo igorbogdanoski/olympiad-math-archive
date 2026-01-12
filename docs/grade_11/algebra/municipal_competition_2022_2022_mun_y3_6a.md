@@ -1,25 +1,23 @@
 ---
-grade: 11
-field: algebra
 difficulty: 3
-problem_type: calculation
-source: "Municipal_Competition_2022"
-problem_id: 2022_mun_y3_6a
+field: algebra
+grade: 11
 language_original: mk
-translated: false
-
-# --- SKILL MAPPING ---
-primary_skill: functions
-related_skills:
-  - logic
 prerequisites:
-  - quadratic_function_properties
-
-# --- TOPICS ---
+- quadratic_function_properties
+primary_skill: functions
+problem_id: 2022_mun_y3_6a
+problem_type: calculation
+related_skills:
+- logic
+related_theorems:
+- optimization
+source: Municipal_Competition_2022
 tags:
-  - quadratic_function
-  - range
-  - olympiad
+- quadratic_function
+- range
+- olympiad
+translated: false
 ---
 
 [⬅️ Назад кон Индексот](../README.md) | [🧰 Skill: functions](../../skill_guides/functions.md)

@@ -1,30 +1,23 @@
 ---
-grade: 9
-field: number_theory
 difficulty: 2
-problem_type: calculation
-source: "Cnt92_Olympiad_Var2"
-problem_id: cnt92_v2_01
+field: number_theory
+grade: 9
 language_original: mk
-translated: false
-
-# 
-tags:
-  - number_theory
-  - divisibility
-related_skills:
-  - divisibility--- SKILL MAPPING ---
-primary_skill: logic
-related_skills:
-  - logic
 prerequisites:
-  - basic_math
-
-# --- TOPICS ---
+- basic_math
+primary_skill: logic
+problem_id: cnt92_v2_01
+problem_type: calculation
+related_skills:
+- logic
+related_theorems:
+- parity
+source: Cnt92_Olympiad_Var2
 tags:
-  - divisibility_rules
-  - digits
-  - olympiad
+- divisibility_rules
+- digits
+- olympiad
+translated: false
 ---
 
 [⬅️ Назад кон Индексот](../README.md) | [🧰 Skill: logic](../../skill_guides/logic.md)

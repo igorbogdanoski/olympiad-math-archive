@@ -2,6 +2,8 @@
 difficulty: 6
 grade: 12
 problem_id: sigma139_y4_p3
+related_theorems:
+- functions
 source: Sigma 139, Cetvrta godina, Zadaca 3
 tags:
 - functions

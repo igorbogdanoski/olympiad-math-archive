@@ -1,26 +1,26 @@
 ---
-grade: 10
-field: number_theory
 difficulty: 5
-problem_type: calculation
-source: "Municipal_Competition_2023"
-problem_id: 2023_mun_y2_4a
+field: number_theory
+grade: 10
 language_original: mk
-translated: false
-
-# --- SKILL MAPPING ---
-primary_skill: algebraic_manipulation
-related_skills:
-  - logic
 prerequisites:
-  - factorization
-
-# --- TOPICS ---
+- factorization
+primary_skill: algebraic_manipulation
+problem_id: 2023_mun_y2_4a
+problem_type: calculation
+related_skills:
+- logic
+related_theorems:
+- symmetry
+- combinatorics
+- case_analysis
+source: Municipal_Competition_2023
 tags:
-  - system_of_equations
-  - diophantine_equations
-  - natural_numbers
-  - olympiad
+- system_of_equations
+- diophantine_equations
+- natural_numbers
+- olympiad
+translated: false
 ---
 
 [⬅️ Назад кон Индексот](../README.md) | [🧰 Skill: algebraic_manipulation](../../skill_guides/algebraic_manipulation.md)

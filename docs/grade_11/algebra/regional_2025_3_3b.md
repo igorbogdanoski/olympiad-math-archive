@@ -6,6 +6,9 @@ problem_id: regional_2025_3_3b
 related_skills:
 - trigonometriski_identiteti
 - iracionalni_broevi
+related_theorems:
+- trigonometric_identities
+- functions
 source: Регионален натпревар по математика 2025 (Сигма 139, стр. 56-57)
 tags:
 - trigonometrija

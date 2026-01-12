@@ -6,6 +6,8 @@ problem_id: sigma_137_y2_p3_fixed
 related_skills:
 - геометриско_средно
 - конструкција_на_фигури
+related_theorems:
+- vectors
 source: Сигма 137
 tags:
 - планиметрија

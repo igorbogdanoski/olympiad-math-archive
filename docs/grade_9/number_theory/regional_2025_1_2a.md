@@ -6,6 +6,9 @@ problem_id: regional_2025_1_2a
 related_skills:
 - algebarski_identiteti
 - parnost
+related_theorems:
+- parity
+- fermats_little_theorem
 source: Регионален натпревар по математика за средно образование 2025 (15.02.2025)
 tags:
 - pitagorini_trojki

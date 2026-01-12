@@ -1,26 +1,24 @@
 ---
-grade: 11
-field: algebra
 difficulty: 4
-problem_type: calculation
-source: "Municipal_Competition_2022"
-problem_id: 2022_mun_y3_16a
+field: algebra
+grade: 11
 language_original: mk
-translated: false
-
-# --- SKILL MAPPING ---
-primary_skill: case_analysis
-related_skills:
-  - logic
 prerequisites:
-  - exponent_rules
-  - quadratic_equation
-
-# --- TOPICS ---
+- exponent_rules
+- quadratic_equation
+primary_skill: case_analysis
+problem_id: 2022_mun_y3_16a
+problem_type: calculation
+related_skills:
+- logic
+related_theorems:
+- parity
+source: Municipal_Competition_2022
 tags:
-  - exponential_equation
-  - polynomials
-  - olympiad
+- exponential_equation
+- polynomials
+- olympiad
+translated: false
 ---
 
 [⬅️ Назад кон Индексот](../README.md) | [🧰 Skill: case_analysis](../../skill_guides/case_analysis.md)

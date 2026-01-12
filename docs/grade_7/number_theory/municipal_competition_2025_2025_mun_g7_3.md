@@ -1,31 +1,25 @@
 ---
-grade: 7
-field: number_theory
 difficulty: 3
-problem_type: logic_puzzle
-source: "Municipal_Competition_2025"
-problem_id: 2025_mun_g7_3
+field: number_theory
+grade: 7
 language_original: mk
-translated: false
-
-# 
-tags:
-  - number_theory
-  - divisibility
-related_skills:
-  - divisibility--- SKILL MAPPING ---
-primary_skill: logic
-related_skills:
-  - logic
 prerequisites:
-  - basic_math
-
-# --- TOPICS ---
+- basic_math
+primary_skill: logic
+problem_id: 2025_mun_g7_3
+problem_type: logic_puzzle
+related_skills:
+- logic
+related_theorems:
+- parity
+- case_analysis
+source: Municipal_Competition_2025
 tags:
-  - divisibility_rules
-  - digits
-  - combinatorics
-  - olympiad
+- divisibility_rules
+- digits
+- combinatorics
+- olympiad
+translated: false
 ---
 
 [⬅️ Назад кон Индексот](../README.md) | [🧰 Skill: logic](../../skill_guides/logic.md)

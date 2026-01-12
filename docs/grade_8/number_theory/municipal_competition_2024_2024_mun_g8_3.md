@@ -1,26 +1,24 @@
 ---
-grade: 8
-field: number_theory
 difficulty: 3
-problem_type: proof
-source: "Municipal_Competition_2024"
-problem_id: 2024_mun_g8_3
+field: number_theory
+grade: 8
 language_original: mk
-translated: false
-
-# --- SKILL MAPPING ---
-primary_skill: parity
-related_skills:
-  - logic
 prerequisites:
-  - prime_numbers
-
-# --- TOPICS ---
+- prime_numbers
+primary_skill: parity
+problem_id: 2024_mun_g8_3
+problem_type: proof
+related_skills:
+- logic
+related_theorems:
+- parity
+source: Municipal_Competition_2024
 tags:
-  - primes
-  - parity
-  - consecutive_numbers
-  - olympiad
+- primes
+- parity
+- consecutive_numbers
+- olympiad
+translated: false
 ---
 
 [⬅️ Назад кон Индексот](../README.md) | [🧰 Skill: parity](../../skill_guides/parity.md)

@@ -6,6 +6,11 @@ problem_id: regional_2025_1_2b
 related_skills:
 - algebarski_identiteti
 - ostanoci
+related_theorems:
+- symmetry
+- parity
+- number_theory
+- modular_arithmetic
 source: Регионален натпревар по математика за средно образование 2025 (15.02.2025)
 tags:
 - delivost

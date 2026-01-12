@@ -2,6 +2,8 @@
 difficulty: 6
 grade: 10
 problem_id: sigma139_y2_p4_inequality
+related_theorems:
+- optimization
 source: Sigma 139, Vtora godina, Zadaca 4
 tags:
 - quadratic_function

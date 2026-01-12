@@ -1,26 +1,24 @@
 ---
-grade: 4
-field: number_theory
 difficulty: 2
-problem_type: calculation
-source: "Municipal_Competition_2023"
-problem_id: 2023_mun_g4_3
+field: number_theory
+grade: 4
 language_original: mk
-translated: false
-
-# --- SKILL MAPPING ---
-primary_skill: counting
-related_skills:
-  - logic
 prerequisites:
-  - fractions_basics
-
-# --- TOPICS ---
+- fractions_basics
+primary_skill: counting
+problem_id: 2023_mun_g4_3
+problem_type: calculation
+related_skills:
+- logic
+related_theorems:
+- parity
+source: Municipal_Competition_2023
 tags:
-  - fractions
-  - parity
-  - digits
-  - olympiad
+- fractions
+- parity
+- digits
+- olympiad
+translated: false
 ---
 
 [⬅️ Назад кон Индексот](../../README.md) | [🧰 Skill: counting](../../../skill_guides/counting.md)

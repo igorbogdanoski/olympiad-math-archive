@@ -6,6 +6,10 @@ problem_id: sigma_135_y9_p1
 related_skills:
 - разложување_на_полиноми
 - својства_на_степени
+related_theorems:
+- polynomial_expansion
+- parity
+- number_theory
 source: Sigma 135
 tags:
 - деливост

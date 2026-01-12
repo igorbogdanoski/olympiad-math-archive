@@ -1,3 +1,8 @@
+---
+related_theorems:
+- vieta_formulas
+---
+
 # 📂 Number Theory
 
 [⬅️ Назад кон прегледот](../README.md)

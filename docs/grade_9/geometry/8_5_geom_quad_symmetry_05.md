@@ -1,45 +1,30 @@
 ---
-grade: 9
-field: geometry
-difficulty: 8
-source: "<натпревар / списание / година>"
-problem_id: geom_quad_symmetry_05
-language_original: <mk | en | sr | hr | ...>
-translated: false
-
-# 
-tags:
-  - vectors
-  - angle_chasing
-  - geometry
-  - complex_numbers
-  - algebra
-  - triangle_geometry
-  - similarity
-related_skills:
-  - vectors
-  - angle_chasing
-  - complex_numbers
-  - triangle_geometry
-  - similarity--- GEOMETRY SKILLS ---
-geometry_style: synthetic # synthetic | analytic | mixed
-primary_skill: <main_tool> # e.g., angle_chasing, similarity, cyclic_quads
-related_skills:
-  - symmetry
-  - reflection
-  - isosceles_properties
-
 allowed_tools:
-  - classical_euclidean
-  - similarity
-  - symmetry
+- classical_euclidean
+- similarity
+- symmetry
+difficulty: 8
+field: geometry
 forbidden_tools:
-  - coordinate_geometry
-  - vectors
-  - complex_numbers
+- coordinate_geometry
+- vectors
+- complex_numbers
+geometry_style: synthetic
+grade: 9
+language_original: <mk | en | sr | hr | ...>
+primary_skill: <main_tool>
+problem_id: geom_quad_symmetry_05
+related_skills:
+- symmetry
+- reflection
+- isosceles_properties
+related_theorems:
+- symmetry
+source: <натпревар / списание / година>
 tags:
-  - geometry
-  - olympiad
+- geometry
+- olympiad
+translated: false
 ---
 
 # Симетрија во конвексен четириаголник

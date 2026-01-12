@@ -43,6 +43,14 @@ def parse_problem(file_path):
         skills_block = skills_match.group(1)
         related_skills = [s.strip().replace('- ', '').strip() for s in skills_block.split('\n') if s.strip()]
     meta['related_skills'] = related_skills
+
+    # Екстракција на related_theorems
+    related_theorems = []
+    theorems_match = re.search(r'related_theorems:\s*\n((?:\s*-\s*.*\n?)+)', content)
+    if theorems_match:
+        theorems_block = theorems_match.group(1)
+        related_theorems = [t.strip().replace('- ', '').strip() for t in theorems_block.split('\n') if t.strip()]
+    meta['related_theorems'] = related_theorems
     
     # Екстракција на телото на задачата
     # 1. Тргни го YAML frontmatter

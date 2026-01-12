@@ -1,22 +1,20 @@
 ---
-grade: 9
-field: algebra
 difficulty: 6
-source: "Sigma 137/138"
-problem_id: sigma_adv_28
+field: algebra
+grade: 9
 language_original: mk
-translated: false
-
-# --- SKILL MAPPING (New Standard) ---
-primary_skill: inequalities_means # e.g., symmetry, invariants, telescoping
+primary_skill: inequalities_means
+problem_id: sigma_adv_28
 related_skills:
-  - maclaurin_inequality
-
-# --- TOPICS ---
+- maclaurin_inequality
+related_theorems:
+- polynomial_expansion
+source: Sigma 137/138
 tags:
-  - <topic_1> # e.g., percentages
-  - <topic_2> # e.g., linear_equations
-  - olympiad
+- <topic_1>
+- <topic_2>
+- olympiad
+translated: false
 ---
 
 # Неравенства на средини (Маклорен)

@@ -1,20 +1,24 @@
 ---
-problem_id: sigma_138_1874
-title: Поделба на квадрат на n помали квадрати
-grade: 8
 difficulty: 7
-type: combinatorics
-tags:
-  - geometry
-  - construction
-  - induction
-  - impossibility_proof
-primary_skill: constructive_geometry
-related_skills:
-  - logic
-  - system_of_equations
 geometry_style: synthetic
+grade: 8
+primary_skill: constructive_geometry
+problem_id: sigma_138_1874
+related_skills:
+- logic
+- system_of_equations
+related_theorems:
+- probability
+- parity
+- induction
 source: Сигма 138, Задача 1874
+tags:
+- geometry
+- construction
+- induction
+- impossibility_proof
+title: Поделба на квадрат на n помали квадрати
+type: combinatorics
 ---
 
 # Поделба на квадрат на n помали квадрати

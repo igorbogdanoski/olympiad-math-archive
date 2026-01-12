@@ -1,32 +1,29 @@
 ---
-grade: 9
-field: geometry
 difficulty: 4
-problem_type: calculation
-source: "Municipal_Competition_2022"
-problem_id: 2022_mun_g9_5
-language_original: <mk | en | sr | hr | ...>
-translated: false
-
-# --- GEOMETRY SKILLS ---
+field: geometry
 geometry_style: synthetic
-primary_skill: visual_reasoning
-related_skills:
-  - logic
+grade: 9
+language_original: <mk | en | sr | hr | ...>
 prerequisites:
-  - area_formula
-  - similarity
-
-# --- VISUALIZATION ---
-visual_prompt: "No visual prompt provided."
-
+- area_formula
+- similarity
+primary_skill: visual_reasoning
+problem_id: 2022_mun_g9_5
+problem_type: calculation
+related_skills:
+- logic
+related_theorems:
+- similarity
+source: Municipal_Competition_2022
 tags:
-  - geometry
-  - olympiad
-  - hexagon
-  - triangle
-  - area
-  - tiling
+- geometry
+- olympiad
+- hexagon
+- triangle
+- area
+- tiling
+translated: false
+visual_prompt: No visual prompt provided.
 ---
 
 [⬅️ Назад кон Индексот](../README.md) | [🧰 Skill: visual_reasoning](../../skill_guides/visual_reasoning.md)

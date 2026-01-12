@@ -6,6 +6,11 @@ problem_id: regional_2025_4_1ab
 related_skills:
 - geometriska_progresija
 - algebarski_sistemi
+related_theorems:
+- vieta_formulas
+- symmetry
+- parity
+- polynomial_expansion
 source: Сигма 139 (Регионален натпревар 2025)
 tags:
 - vieti_formuli

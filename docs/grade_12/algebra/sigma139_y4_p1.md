@@ -2,6 +2,10 @@
 difficulty: 5
 grade: 12
 problem_id: sigma139_y4_p1
+related_theorems:
+- polynomial_expansion
+- quadratic_equations
+- number_theory
 source: Sigma 139, Cetvrta godina, Zadaca 1
 tags:
 - polynomials

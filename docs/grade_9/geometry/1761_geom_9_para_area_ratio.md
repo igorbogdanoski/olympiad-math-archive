@@ -1,44 +1,29 @@
 ---
-grade: 9
-field: geometry
-difficulty: 7
-source: "<натпревар / списание / година>"
-problem_id: geom_9_para_area_ratio
-language_original: <mk | en | sr | hr | ...>
-translated: false
-
-# 
-tags:
-  - vectors
-  - angle_chasing
-  - geometry
-  - complex_numbers
-  - algebra
-  - triangle_geometry
-  - similarity
-related_skills:
-  - vectors
-  - angle_chasing
-  - complex_numbers
-  - triangle_geometry
-  - similarity--- GEOMETRY SKILLS ---
-geometry_style: synthetic # synthetic | analytic | mixed
-primary_skill: <main_tool> # e.g., angle_chasing, similarity, cyclic_quads
-related_skills:
-  - similarity
-  - ratio_reasoning
-
 allowed_tools:
-  - classical_euclidean
-  - similarity
-  - symmetry
+- classical_euclidean
+- similarity
+- symmetry
+difficulty: 7
+field: geometry
 forbidden_tools:
-  - coordinate_geometry
-  - vectors
-  - complex_numbers
+- coordinate_geometry
+- vectors
+- complex_numbers
+geometry_style: synthetic
+grade: 9
+language_original: <mk | en | sr | hr | ...>
+primary_skill: <main_tool>
+problem_id: geom_9_para_area_ratio
+related_skills:
+- similarity
+- ratio_reasoning
+related_theorems:
+- similarity
+source: <натпревар / списание / година>
 tags:
-  - geometry
-  - olympiad
+- geometry
+- olympiad
+translated: false
 ---
 
 # Однос на плоштини во поделен паралелограм

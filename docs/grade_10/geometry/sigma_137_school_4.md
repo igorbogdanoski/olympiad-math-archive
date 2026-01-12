@@ -6,6 +6,10 @@ problem_id: sigma_137_school_4
 related_skills:
 - angle_sum
 - trigonometric_identities
+related_theorems:
+- geometry_construction
+- trigonometric_identities
+- functions
 source: Сигма 137, Задачи од училницата (Втора година)
 tags:
 - trigonometry

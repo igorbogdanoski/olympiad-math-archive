@@ -6,6 +6,8 @@ problem_id: sigma_137_school_3
 related_skills:
 - integer_constraints
 - parametric_analysis
+related_theorems:
+- optimization
 source: Сигма 137, Задачи од училницата (Втора година)
 tags:
 - word_problem

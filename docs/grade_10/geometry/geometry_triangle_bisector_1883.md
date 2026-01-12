@@ -6,6 +6,8 @@ problem_id: geometry_triangle_bisector_1883
 related_skills:
 - sine_rule
 - similar_triangles
+related_theorems:
+- similarity
 source: Zbirka_Geom_1883
 tags:
 - triangle

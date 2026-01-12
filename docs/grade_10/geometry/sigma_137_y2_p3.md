@@ -6,6 +6,8 @@ problem_id: sigma_137_y2_p3
 related_skills:
 - теорема_на_талес
 - сличност_на_триаголници
+related_theorems:
+- similarity
 source: Сигма 137
 tags:
 - планиметрија

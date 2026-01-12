@@ -1,15 +1,17 @@
 ---
-grade: 8
-field: algebra
 difficulty: 6
-source: Sigma Magazine
-problem_id: 1812
+field: algebra
+grade: 8
 language_original: mk
-translated: false
+problem_id: 1812
+related_theorems:
+- optimization
+source: Sigma Magazine
 tags:
-  - parameter_analysis
-  - logarithms
-  - boundary_cases
+- parameter_analysis
+- logarithms
+- boundary_cases
+translated: false
 ---
 
 # Логаритамска неравенка со параметар

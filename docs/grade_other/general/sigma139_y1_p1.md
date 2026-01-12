@@ -1,14 +1,16 @@
 ---
-problem_id: sigma139_y1_p1
-title: Најголемиот број со различни цифри
-grade: 11
 difficulty: 4
-tags:
-  - number_theory
-  - digits
-  - equations
-source: Sigma 139, Prva godina, Zadaca 1
+grade: 11
 primary_skill: number_theory
+problem_id: sigma139_y1_p1
+related_theorems:
+- optimization
+source: Sigma 139, Prva godina, Zadaca 1
+tags:
+- number_theory
+- digits
+- equations
+title: Најголемиот број со различни цифри
 ---
 
 # 📝 Текст на задачата

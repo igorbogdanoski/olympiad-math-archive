@@ -1,13 +1,15 @@
 ---
-grade: 10
 difficulty: 7
 geometry_style: synthetic
+grade: 10
+related_theorems:
+- symmetry
 tags:
-  - geometry
-  - olympiad
-  - reflection
-  - cyclic_quadrilateral
-  - right_triangle
+- geometry
+- olympiad
+- reflection
+- cyclic_quadrilateral
+- right_triangle
 ---
 
 # Аголот $\angle AEF$ преку симетрија

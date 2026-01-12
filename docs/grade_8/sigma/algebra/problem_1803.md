@@ -1,15 +1,18 @@
 ---
-grade: 8
-field: algebra
 difficulty: 6
-source: Sigma Magazine
-problem_id: 1803
+field: algebra
+grade: 8
 language_original: mk
-translated: false
+problem_id: 1803
+related_theorems:
+- optimization
+- functions
+source: Sigma Magazine
 tags:
-  - logarithms
-  - monotonicity
-  - algebraic_transformation
+- logarithms
+- monotonicity
+- algebraic_transformation
+translated: false
 ---
 
 # Логаритамска неравенка со параметар

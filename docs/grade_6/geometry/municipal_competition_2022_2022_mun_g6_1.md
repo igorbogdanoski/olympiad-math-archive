@@ -1,30 +1,27 @@
 ---
-grade: 6
-field: geometry
 difficulty: 2
-problem_type: calculation
-source: "Municipal_Competition_2022"
-problem_id: 2022_mun_g6_1
-language_original: <mk | en | sr | hr | ...>
-translated: false
-
-# --- GEOMETRY SKILLS ---
+field: geometry
 geometry_style: analytic
-primary_skill: coordinate_geometry
-related_skills:
-  - logic
+grade: 6
+language_original: <mk | en | sr | hr | ...>
 prerequisites:
-  - coordinates_basics
-
-# --- VISUALIZATION ---
-visual_prompt: "No visual prompt provided."
-
+- coordinates_basics
+primary_skill: coordinate_geometry
+problem_id: 2022_mun_g6_1
+problem_type: calculation
+related_skills:
+- logic
+related_theorems:
+- symmetry
+source: Municipal_Competition_2022
 tags:
-  - geometry
-  - olympiad
-  - coordinates
-  - symmetry
-  - product
+- geometry
+- olympiad
+- coordinates
+- symmetry
+- product
+translated: false
+visual_prompt: No visual prompt provided.
 ---
 
 [⬅️ Назад кон Индексот](../README.md) | [🧰 Skill: coordinate_geometry](../../skill_guides/coordinate_geometry.md)

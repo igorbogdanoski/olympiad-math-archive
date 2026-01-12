@@ -6,6 +6,9 @@ problem_id: sigma_1880
 related_skills:
 - angle_bisector_theorem
 - area_calculation
+related_theorems:
+- pythagorean_theorem
+- similarity
 source: Сигма (претпоставено)
 tags:
 - similarity

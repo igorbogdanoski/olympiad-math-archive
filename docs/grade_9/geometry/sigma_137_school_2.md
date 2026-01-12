@@ -6,6 +6,9 @@ problem_id: sigma_137_school_2
 related_skills:
 - similar_triangles
 - median_properties
+related_theorems:
+- vectors
+- similarity
 source: Сигма 137, Задачи од училницата (Задача 2)
 tags:
 - vectors

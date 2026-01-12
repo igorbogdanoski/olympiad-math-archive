@@ -1,30 +1,28 @@
 ---
-grade: 12
-field: geometry
 difficulty: 4
-problem_type: proof
-source: "Municipal_Competition_2024"
-problem_id: 2024_mun_y4_2a
-language_original: <mk | en | sr | hr | ...>
-translated: false
-
-# --- GEOMETRY SKILLS ---
+field: geometry
 geometry_style: analytic
-primary_skill: vieta_formulas
-related_skills:
-  - logic
+grade: 12
+language_original: <mk | en | sr | hr | ...>
 prerequisites:
-  - polynomial_roots
-
-# --- VISUALIZATION ---
-visual_prompt: "No visual prompt provided."
-
+- polynomial_roots
+primary_skill: vieta_formulas
+problem_id: 2024_mun_y4_2a
+problem_type: proof
+related_skills:
+- logic
+related_theorems:
+- vieta_formulas
+- symmetry
+source: Municipal_Competition_2024
 tags:
-  - geometry
-  - olympiad
-  - polynomials
-  - vieta_formulas
-  - analytic_geometry
+- geometry
+- olympiad
+- polynomials
+- vieta_formulas
+- analytic_geometry
+translated: false
+visual_prompt: No visual prompt provided.
 ---
 
 [⬅️ Назад кон Индексот](../README.md) | [🧰 Skill: vieta_formulas](../../skill_guides/vieta_formulas.md)

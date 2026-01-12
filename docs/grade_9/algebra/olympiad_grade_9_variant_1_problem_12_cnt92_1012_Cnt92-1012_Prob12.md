@@ -1,33 +1,27 @@
 ---
-grade: 9
-field: geometry
 difficulty: 3
-problem_type: calculation
-source: "<натпревар / списание / година>"
-problem_id: Cnt92-1012_Prob12
-language_original: <mk | en | sr | hr | ...>
-translated: false
-
-# 
-tags:
-  - combinatorics
-  - graph_theory
-related_skills:
-  - graph_theory--- GEOMETRY SKILLS ---
+field: geometry
 geometry_style: analytic
-primary_skill: <main_tool>
-related_skills:
-  - quadratic_functions
-  - optimization
+grade: 9
+language_original: <mk | en | sr | hr | ...>
 prerequisites:
-  - basic_math
-
-# --- VISUALIZATION ---
-visual_prompt: "Graph of the parabola y = -x^2 + 2x + 5. The parabola opens downwards. The vertex is at (1, 6). The interval [-2, 2] on the x-axis is highlighted. The points on the graph corresponding to x=-2 and x=2 are marked."
-
+- basic_math
+primary_skill: <main_tool>
+problem_id: Cnt92-1012_Prob12
+problem_type: calculation
+related_skills:
+- quadratic_functions
+- optimization
+related_theorems:
+- optimization
+source: <натпревар / списание / година>
 tags:
-  - geometry
-  - olympiad
+- geometry
+- olympiad
+translated: false
+visual_prompt: Graph of the parabola y = -x^2 + 2x + 5. The parabola opens downwards.
+  The vertex is at (1, 6). The interval [-2, 2] on the x-axis is highlighted. The
+  points on the graph corresponding to x=-2 and x=2 are marked.
 ---
 
 # Најмала вредност на функција на интервал

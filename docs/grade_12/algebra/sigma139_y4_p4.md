@@ -2,6 +2,11 @@
 difficulty: 6
 grade: 12
 problem_id: sigma139_y4_p4
+related_theorems:
+- optimization
+- parity
+- functions
+- case_analysis
 source: Sigma 139, Cetvrta godina, Zadaca 4
 tags:
 - inequalities

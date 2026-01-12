@@ -1,28 +1,22 @@
 ---
-grade: 9
-field: number_theory
 difficulty: 6
-source: "Sigma 137/138"
-problem_id: sigma_adv_36
+field: number_theory
+grade: 9
 language_original: mk
+primary_skill: diophantine_equations
+problem_id: sigma_adv_36
+related_skills:
+- quadratic_equation
+- vieta_formulas
+related_theorems:
+- vieta_formulas
+- parity
+source: Sigma 137/138
+tags:
+- <topic_1>
+- <topic_2>
+- olympiad
 translated: false
-
-# 
-tags:
-  - vieta_formulas
-  - polynomials
-related_skills:
-  - vieta_formulas--- SKILL MAPPING (New Standard) ---
-primary_skill: diophantine_equations # e.g., symmetry, invariants, telescoping
-related_skills:
-  - quadratic_equation
-  - vieta_formulas
-
-# --- TOPICS ---
-tags:
-  - <topic_1> # e.g., percentages
-  - <topic_2> # e.g., linear_equations
-  - olympiad
 ---
 
 # Целобројни корени и коефициенти

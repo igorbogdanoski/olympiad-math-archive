@@ -1,26 +1,24 @@
 ---
-grade: 9
-field: combinatorics
 difficulty: 3
-problem_type: logic_puzzle
-source: "Municipal_Competition_2024"
-problem_id: 2024_mun_y1_2ab
+field: combinatorics
+grade: 9
 language_original: mk
-translated: false
-
-# --- SKILL MAPPING ---
-primary_skill: logic
-related_skills:
-  - logic
 prerequisites:
-  - basic_algebra
-
-# --- TOPICS ---
+- basic_algebra
+primary_skill: logic
+problem_id: 2024_mun_y1_2ab
+problem_type: logic_puzzle
+related_skills:
+- logic
+related_theorems:
+- parity
+source: Municipal_Competition_2024
 tags:
-  - logic
-  - counting
-  - linear_equations
-  - olympiad
+- logic
+- counting
+- linear_equations
+- olympiad
+translated: false
 ---
 
 [⬅️ Назад кон Индексот](../README.md) | [🧰 Skill: logic](../../skill_guides/logic.md)

@@ -7,6 +7,9 @@ related_skills:
 - talesova_teorema
 - Talesova_teorema
 - agol_pomegu_simetrali
+related_theorems:
+- pythagorean_theorem
+- geometry_construction
 source: Регионален натпревар по математика за средно образование 2025 (Сигма 139)
 tags:
 - tektivna_geometrija

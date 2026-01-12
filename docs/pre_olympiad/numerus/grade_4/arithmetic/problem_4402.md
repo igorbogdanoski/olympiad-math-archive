@@ -1,16 +1,18 @@
 ---
-grade: 4
-field: arithmetic
 difficulty: 3
-source: "Numerus LI 51-2 (2025/2026), problem 4402"
-problem_id: 4402
+field: arithmetic
+grade: 4
 language_original: mk
+problem_id: 4402
+related_theorems:
+- combinatorics
+source: Numerus LI 51-2 (2025/2026), problem 4402
 tags:
-  - combinatorics
-  - digits
-  - digit_product
-  - enumeration
-  - bridge_4_5
+- combinatorics
+- digits
+- digit_product
+- enumeration
+- bridge_4_5
 ---
 
 # Задача 4402 — Сумирај трицифрени броеви (производ на цифри = 8)

@@ -6,6 +6,8 @@ problem_id: sigma_geo_1861
 related_skills:
 - својства_на_бисектриса
 - алгебарска_геометрија
+related_theorems:
+- symmetry
 source: Sigma (Internal Math Competition Level)
 tags:
 - осна_симетрија

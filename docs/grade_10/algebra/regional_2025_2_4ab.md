@@ -6,6 +6,10 @@ problem_id: regional_2025_2_4ab
 related_skills:
 - faktorizacija
 - delivost
+related_theorems:
+- polynomial_expansion
+- number_theory
+- case_analysis
 source: Сигма 139 (Регионален натпревар 2025)
 tags:
 - ravenki

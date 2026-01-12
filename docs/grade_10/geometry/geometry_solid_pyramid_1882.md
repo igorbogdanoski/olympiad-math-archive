@@ -6,6 +6,9 @@ problem_id: geometry_solid_pyramid_1882
 related_skills:
 - trigonometric_ratios
 - algebraic_equations
+related_theorems:
+- pythagorean_theorem
+- functions
 source: Zbirka_Geom_1882
 tags:
 - solid_geometry

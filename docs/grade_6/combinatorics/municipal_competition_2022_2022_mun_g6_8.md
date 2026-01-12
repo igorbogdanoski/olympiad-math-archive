@@ -1,26 +1,24 @@
 ---
-grade: 6
-field: combinatorics
 difficulty: 3
-problem_type: calculation
-source: "Municipal_Competition_2022"
-problem_id: 2022_mun_g6_8
+field: combinatorics
+grade: 6
 language_original: mk
-translated: false
-
-# --- SKILL MAPPING ---
-primary_skill: counting
-related_skills:
-  - logic
 prerequisites:
-  - place_value
-
-# --- TOPICS ---
+- place_value
+primary_skill: counting
+problem_id: 2022_mun_g6_8
+problem_type: calculation
+related_skills:
+- logic
+related_theorems:
+- parity
+source: Municipal_Competition_2022
 tags:
-  - counting
-  - digits
-  - divisibility
-  - olympiad
+- counting
+- digits
+- divisibility
+- olympiad
+translated: false
 ---
 
 [⬅️ Назад кон Индексот](../README.md) | [🧰 Skill: counting](../../skill_guides/counting.md)

@@ -1,26 +1,24 @@
 ---
-grade: 10
-field: algebra
 difficulty: 5
-problem_type: calculation
-source: "Municipal_Competition_2022"
-problem_id: 2022_mun_y2_12b
+field: algebra
+grade: 10
 language_original: mk
-translated: false
-
-# --- SKILL MAPPING ---
-primary_skill: algebraic_substitution
-related_skills:
-  - logic
 prerequisites:
-  - exponent_rules
-  - trig_identities
-
-# --- TOPICS ---
+- exponent_rules
+- trig_identities
+primary_skill: algebraic_substitution
+problem_id: 2022_mun_y2_12b
+problem_type: calculation
+related_skills:
+- logic
+related_theorems:
+- number_theory
+source: Municipal_Competition_2022
 tags:
-  - exponential_equation
-  - trigonometry
-  - olympiad
+- exponential_equation
+- trigonometry
+- olympiad
+translated: false
 ---
 
 [⬅️ Назад кон Индексот](../README.md) | [🧰 Skill: algebraic_substitution](../../skill_guides/algebraic_substitution.md)

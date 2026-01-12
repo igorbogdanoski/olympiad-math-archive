@@ -6,6 +6,8 @@ problem_id: sigma_135_y1_p2
 related_skills:
 - својства_на_кружница
 - симетрија
+related_theorems:
+- symmetry
 source: Sigma 135
 tags:
 - кружница

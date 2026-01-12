@@ -1,25 +1,23 @@
 ---
-grade: 10
-field: algebra
 difficulty: 3
-problem_type: calculation
-source: "Municipal_Competition_2022"
-problem_id: 2022_mun_y2_7b
+field: algebra
+grade: 10
 language_original: mk
-translated: false
-
-# --- SKILL MAPPING ---
-primary_skill: vieta_formulas
-related_skills:
-  - logic
 prerequisites:
-  - algebraic_identities
-
-# --- TOPICS ---
+- algebraic_identities
+primary_skill: vieta_formulas
+problem_id: 2022_mun_y2_7b
+problem_type: calculation
+related_skills:
+- logic
+related_theorems:
+- vieta_formulas
+source: Municipal_Competition_2022
 tags:
-  - quadratic_equation
-  - vieta_formulas
-  - olympiad
+- quadratic_equation
+- vieta_formulas
+- olympiad
+translated: false
 ---
 
 [⬅️ Назад кон Индексот](../README.md) | [🧰 Skill: vieta_formulas](../../skill_guides/vieta_formulas.md)

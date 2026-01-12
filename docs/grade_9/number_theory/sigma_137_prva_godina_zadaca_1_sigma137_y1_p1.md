@@ -1,11 +1,13 @@
 ---
-grade: 9
 difficulty: 3
+grade: 9
+related_theorems:
+- floor_function
 tags:
-  - digits
-  - cubes
-  - bounding
-  - olympiad
+- digits
+- cubes
+- bounding
+- olympiad
 ---
 
 # Третиот корен и избришаните цифри

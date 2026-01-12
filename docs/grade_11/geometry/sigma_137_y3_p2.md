@@ -6,6 +6,8 @@ problem_id: sigma_137_y3_p2
 related_skills:
 - тригонометриски_идентитети
 - плоштина_на_триаголник
+related_theorems:
+- optimization
 source: Сигма 137
 tags:
 - тетивен_четириаголник

@@ -6,6 +6,9 @@ problem_id: nat_geo_isosceles_right_45
 related_skills:
 - питагорова_теорема
 - аголно_бркање
+related_theorems:
+- pythagorean_theorem
+- symmetry
 source: Macedonian Olympiad Archive
 tags:
 - рамнокрак_триаголник

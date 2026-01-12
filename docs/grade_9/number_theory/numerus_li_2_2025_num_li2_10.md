@@ -1,28 +1,22 @@
 ---
-grade: 9
-field: number_theory
 difficulty: 5
-source: "Numerus LI-2 2025"
-problem_id: num_li2_10
+field: number_theory
+grade: 9
 language_original: mk
+primary_skill: divisibility_rules
+problem_id: num_li2_10
+related_skills:
+- digits
+- bounding
+related_theorems:
+- symmetry
+- parity
+source: Numerus LI-2 2025
+tags:
+- <topic_1>
+- <topic_2>
+- olympiad
 translated: false
-
-# 
-tags:
-  - number_theory
-  - divisibility
-related_skills:
-  - divisibility--- SKILL MAPPING (New Standard) ---
-primary_skill: divisibility_rules # e.g., symmetry, invariants, telescoping
-related_skills:
-  - digits
-  - bounding
-
-# --- TOPICS ---
-tags:
-  - <topic_1> # e.g., percentages
-  - <topic_2> # e.g., linear_equations
-  - olympiad
 ---
 
 # Четирицифрени броеви (Деливост со 11)

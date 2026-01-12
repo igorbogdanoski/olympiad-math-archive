@@ -1,45 +1,29 @@
 ---
-grade: 9
-field: geometry
-difficulty: 5
-source: "<натпревар / списание / година>"
-problem_id: sigma_adv_37
-language_original: <mk | en | sr | hr | ...>
-translated: false
-
-# 
-tags:
-  - vectors
-  - angle_chasing
-  - geometry
-  - complex_numbers
-  - logic
-  - algebra
-  - similarity
-  - induction
-related_skills:
-  - vectors
-  - angle_chasing
-  - complex_numbers
-  - similarity
-  - induction--- GEOMETRY SKILLS ---
-geometry_style: synthetic # synthetic | analytic | mixed
-primary_skill: <main_tool> # e.g., angle_chasing, similarity, cyclic_quads
-related_skills:
-  - induction
-  - constructive_method
-
 allowed_tools:
-  - classical_euclidean
-  - similarity
-  - symmetry
+- classical_euclidean
+- similarity
+- symmetry
+difficulty: 5
+field: geometry
 forbidden_tools:
-  - coordinate_geometry
-  - vectors
-  - complex_numbers
+- coordinate_geometry
+- vectors
+- complex_numbers
+geometry_style: synthetic
+grade: 9
+language_original: <mk | en | sr | hr | ...>
+primary_skill: <main_tool>
+problem_id: sigma_adv_37
+related_skills:
+- induction
+- constructive_method
+related_theorems:
+- induction
+source: <натпревар / списание / година>
 tags:
-  - geometry
-  - olympiad
+- geometry
+- olympiad
+translated: false
 ---
 
 # Делење на квадрат на n квадрати

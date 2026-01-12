@@ -1,3 +1,9 @@
+---
+related_theorems:
+- vectors
+- complex_numbers
+---
+
 <div class="hero-block">
   <h1>🏆 Olympiad Math Archive</h1>
   <p>Дигитална архива на олимписки задачи, решенија и педагошки водичи за напредни ученици.</p>

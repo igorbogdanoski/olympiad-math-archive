@@ -1,19 +1,21 @@
 ---
-problem_id: regional_2025_3_1ab
-title: Ограниченост на коефициентите на квадратна функција
-grade: 11
 difficulty: 5
-type: algebra
-tags:
-  - kvadratni_funkcii
-  - neravenstva
-  - polinomi
-  - cebisevi_polinomi
+grade: 11
 primary_skill: ocenivanje_na_koeficienti
+problem_id: regional_2025_3_1ab
 related_skills:
-  - neravenstvo_na_triagolnik
-  - evalvacija_na_polinomi
+- neravenstvo_na_triagolnik
+- evalvacija_na_polinomi
+related_theorems:
+- polynomial_expansion
 source: Регионален натпревар по математика 2025 (Сигма 139, стр. 54-55)
+tags:
+- kvadratni_funkcii
+- neravenstva
+- polinomi
+- cebisevi_polinomi
+title: Ограниченост на коефициентите на квадратна функција
+type: algebra
 ---
 
 # Ограниченост на коефициентите на квадратна функција

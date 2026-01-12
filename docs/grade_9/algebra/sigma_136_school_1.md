@@ -6,6 +6,10 @@ problem_id: sigma_136_school_1
 related_skills:
 - summation_techniques
 - algebraic_manipulation
+related_theorems:
+- polynomial_expansion
+- symmetry
+- cauchy_schwarz_inequality
 source: Сигма 136, Задачи од училницата (Прва година)
 tags:
 - functional_equation

@@ -6,6 +6,8 @@ problem_id: custom_geo_isosceles_right_123
 related_skills:
 - питагорова_теорема
 - косинусна_теорема
+related_theorems:
+- pythagorean_theorem
 source: Корисничко прашање (Инспирирано од олимписки техники)
 tags:
 - правоаголен_триаголник

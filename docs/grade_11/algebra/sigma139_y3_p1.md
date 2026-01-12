@@ -2,6 +2,8 @@
 difficulty: 5
 grade: 11
 problem_id: sigma139_y3_p1
+related_theorems:
+- functions
 source: Sigma 139, Treta godina, Zadaca 1
 tags:
 - trigonometry
@@ -102,4 +104,3 @@ $ S = 1 - 0 = 1 $
 ---
 ### 🎨 Визуелизација
 ![Илустрација](/assets/images/sigma139_y3_p1/sigma139_y3_p1.png)
-

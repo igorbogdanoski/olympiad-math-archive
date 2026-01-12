@@ -1,27 +1,25 @@
 ---
-grade: 9
-field: <algebra | number_theory | combinatorics | logic>
 difficulty: 2
-problem_type: calculation
-source: "Olympiad Grade 9, Variant 1, Problem 10 (Cnt92-1012)"
-problem_id: Cnt92-1012_Prob10
+field: <algebra | number_theory | combinatorics | logic>
+grade: 9
 language_original: ru
-translated: false
-
-# --- SKILL MAPPING ---
-primary_skill: inequalities
-related_skills:
-  - interval_arithmetic
-  - fractions
 prerequisites:
-  - basic_math
-
-# --- TOPICS ---
+- basic_math
+primary_skill: inequalities
+problem_id: Cnt92-1012_Prob10
+problem_type: calculation
+related_skills:
+- interval_arithmetic
+- fractions
+related_theorems:
+- optimization
+source: Olympiad Grade 9, Variant 1, Problem 10 (Cnt92-1012)
 tags:
-  - intervals
-  - estimation
-  - bounds
-  - olympiad
+- intervals
+- estimation
+- bounds
+- olympiad
+translated: false
 ---
 
 # Проценка на количник на интервали

@@ -1,22 +1,20 @@
 ---
-grade: 9
-field: number_theory
 difficulty: 5
-source: "Sigma 137/138"
-problem_id: sigma_adv_24
+field: number_theory
+grade: 9
 language_original: mk
-translated: false
-
-# --- SKILL MAPPING (New Standard) ---
-primary_skill: diophantine_equations # e.g., symmetry, invariants, telescoping
+primary_skill: diophantine_equations
+problem_id: sigma_adv_24
 related_skills:
-  - factorization
-
-# --- TOPICS ---
+- factorization
+related_theorems:
+- number_theory
+source: Sigma 137/138
 tags:
-  - <topic_1> # e.g., percentages
-  - <topic_2> # e.g., linear_equations
-  - olympiad
+- <topic_1>
+- <topic_2>
+- olympiad
+translated: false
 ---
 
 # Кубна Диофантова равенка

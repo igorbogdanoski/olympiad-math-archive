@@ -2,6 +2,10 @@
 difficulty: 7
 grade: 11
 problem_id: sigma139_y3_p4
+related_theorems:
+- vectors
+- optimization
+- cauchy_schwarz_inequality
 source: Sigma 139, Treta godina, Zadaca 4
 tags:
 - trigonometry

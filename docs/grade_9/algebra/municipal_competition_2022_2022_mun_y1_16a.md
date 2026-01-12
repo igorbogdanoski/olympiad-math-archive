@@ -1,25 +1,23 @@
 ---
-grade: 9
-field: algebra
 difficulty: 3
-problem_type: calculation
-source: "Municipal_Competition_2022"
-problem_id: 2022_mun_y1_16a
+field: algebra
+grade: 9
 language_original: mk
-translated: false
-
-# --- SKILL MAPPING ---
-primary_skill: polynomials
-related_skills:
-  - logic
 prerequisites:
-  - polynomial_basics
-
-# --- TOPICS ---
+- polynomial_basics
+primary_skill: polynomials
+problem_id: 2022_mun_y1_16a
+problem_type: calculation
+related_skills:
+- logic
+related_theorems:
+- probability
+source: Municipal_Competition_2022
 tags:
-  - polynomials
-  - coefficients
-  - olympiad
+- polynomials
+- coefficients
+- olympiad
+translated: false
 ---
 
 [⬅️ Назад кон Индексот](../README.md) | [🧰 Skill: polynomials](../../skill_guides/polynomials.md)

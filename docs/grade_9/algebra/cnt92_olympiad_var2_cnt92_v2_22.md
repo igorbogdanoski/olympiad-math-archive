@@ -1,31 +1,24 @@
 ---
-grade: 9
-field: algebra
 difficulty: 4
-problem_type: calculation
-source: "Cnt92_Olympiad_Var2"
-problem_id: cnt92_v2_22
+field: algebra
+grade: 9
 language_original: mk
-translated: false
-
-# 
-tags:
-  - vieta_formulas
-  - polynomials
-related_skills:
-  - vieta_formulas--- SKILL MAPPING ---
-primary_skill: logic
-related_skills:
-  - logic
 prerequisites:
-  - basic_math
-
-# --- TOPICS ---
+- basic_math
+primary_skill: logic
+problem_id: cnt92_v2_22
+problem_type: calculation
+related_skills:
+- logic
+related_theorems:
+- vieta_formulas
+source: Cnt92_Olympiad_Var2
 tags:
-  - quadratic_equations
-  - vieta_formulas
-  - parameters
-  - olympiad
+- quadratic_equations
+- vieta_formulas
+- parameters
+- olympiad
+translated: false
 ---
 
 [⬅️ Назад кон Индексот](../README.md) | [🧰 Skill: logic](../../skill_guides/logic.md)

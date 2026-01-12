@@ -6,6 +6,9 @@ problem_id: regional_2025_1_2b_alternative
 related_skills:
 - algebarski_identiteti
 - zbir_na_stepeni
+related_theorems:
+- parity
+- modular_arithmetic
 source: Регионален натпревар 2025 / Сигма 139
 tags:
 - delivost

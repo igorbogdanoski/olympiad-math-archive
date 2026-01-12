@@ -1,28 +1,21 @@
 ---
-grade: 8
-field: number_theory
 difficulty: 4
-source: "Numerus LI-2 2025"
-problem_id: num_li2_02
+field: number_theory
+grade: 8
 language_original: mk
+primary_skill: lcm
+problem_id: num_li2_02
+related_skills:
+- divisibility_rules
+- modular_arithmetic
+related_theorems:
+- modular_arithmetic
+source: Numerus LI-2 2025
+tags:
+- <topic_1>
+- <topic_2>
+- olympiad
 translated: false
-
-# 
-tags:
-  - number_theory
-  - divisibility
-related_skills:
-  - divisibility--- SKILL MAPPING (New Standard) ---
-primary_skill: lcm # e.g., symmetry, invariants, telescoping
-related_skills:
-  - divisibility_rules
-  - modular_arithmetic
-
-# --- TOPICS ---
-tags:
-  - <topic_1> # e.g., percentages
-  - <topic_2> # e.g., linear_equations
-  - olympiad
 ---
 
 # Проблем со деливост (НЗС)

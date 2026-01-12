@@ -1,26 +1,24 @@
 ---
-grade: 12
-field: number_theory
 difficulty: 5
-problem_type: calculation
-source: "Municipal_Competition_2025"
-problem_id: 2025_mun_y4_3b
+field: number_theory
+grade: 12
 language_original: mk
-translated: false
-
-# --- SKILL MAPPING ---
-primary_skill: logic
-related_skills:
-  - logic
 prerequisites:
-  - basic_math
-
-# --- TOPICS ---
+- basic_math
+primary_skill: logic
+problem_id: 2025_mun_y4_3b
+problem_type: calculation
+related_skills:
+- logic
+related_theorems:
+- number_theory
+source: Municipal_Competition_2025
 tags:
-  - diophantine_equations
-  - exponents
-  - factorization
-  - olympiad
+- diophantine_equations
+- exponents
+- factorization
+- olympiad
+translated: false
 ---
 
 [⬅️ Назад кон Индексот](../README.md) | [🧰 Skill: logic](../../skill_guides/logic.md)

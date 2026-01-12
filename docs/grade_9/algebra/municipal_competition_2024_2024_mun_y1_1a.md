@@ -1,26 +1,24 @@
 ---
-grade: 9
-field: algebra
 difficulty: 3
-problem_type: calculation
-source: "Municipal_Competition_2024"
-problem_id: 2024_mun_y1_1a
+field: algebra
+grade: 9
 language_original: mk
-translated: false
-
-# --- SKILL MAPPING ---
-primary_skill: functions
-related_skills:
-  - logic
 prerequisites:
-  - linear_equations
-
-# --- TOPICS ---
+- linear_equations
+primary_skill: functions
+problem_id: 2024_mun_y1_1a
+problem_type: calculation
+related_skills:
+- logic
+related_theorems:
+- functions
+source: Municipal_Competition_2024
 tags:
-  - linear_functions
-  - functional_equation
-  - system_of_equations
-  - olympiad
+- linear_functions
+- functional_equation
+- system_of_equations
+- olympiad
+translated: false
 ---
 
 [⬅️ Назад кон Индексот](../README.md) | [🧰 Skill: functions](../../skill_guides/functions.md)

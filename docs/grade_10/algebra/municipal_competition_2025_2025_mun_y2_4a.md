@@ -1,35 +1,27 @@
 ---
-grade: 10
-field: geometry
 difficulty: 5
-problem_type: calculation
-source: "Municipal_Competition_2025"
-problem_id: 2025_mun_y2_4a
-language_original: <mk | en | sr | hr | ...>
-translated: false
-
-# 
-tags:
-  - functions
-  - analysis
-related_skills:
-  - functions--- GEOMETRY SKILLS ---
+field: geometry
 geometry_style: analytic
-primary_skill: logic
-related_skills:
-  - logic
+grade: 10
+language_original: <mk | en | sr | hr | ...>
 prerequisites:
-  - basic_math
-
-# --- VISUALIZATION ---
-visual_prompt: "No visual prompt provided."
-
+- basic_math
+primary_skill: logic
+problem_id: 2025_mun_y2_4a
+problem_type: calculation
+related_skills:
+- logic
+related_theorems:
+- optimization
+source: Municipal_Competition_2025
 tags:
-  - geometry
-  - olympiad
-  - absolute_value
-  - parameters
-  - functions
+- geometry
+- olympiad
+- absolute_value
+- parameters
+- functions
+translated: false
+visual_prompt: No visual prompt provided.
 ---
 
 [⬅️ Назад кон Индексот](../README.md) | [🧰 Skill: logic](../../skill_guides/logic.md)

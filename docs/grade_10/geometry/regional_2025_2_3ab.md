@@ -6,6 +6,10 @@ problem_id: regional_2025_2_3ab
 related_skills:
 - slicnost_na_triagolnici
 - algebarski_transformacii
+related_theorems:
+- cevas_theorem
+- symmetry
+- similarity
 source: Сигма 139 (Регионален натпревар 2025, задача 3АБ)
 tags:
 - plostina

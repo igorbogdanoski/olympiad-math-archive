@@ -1,13 +1,15 @@
 ---
-grade: 1
-field: logic
 difficulty: 1
-source: "Numerus LI 51-2 (2025/2026), problem 4386 (page 33)"
+field: logic
+grade: 1
 language_original: mk
+related_theorems:
+- optimization
+source: Numerus LI 51-2 (2025/2026), problem 4386 (page 33)
 tags:
-  - number_sense
-  - parity
-  - bounds
+- number_sense
+- parity
+- bounds
 ---
 
 # Задача 4386 — Збир на едноцифрени броеви

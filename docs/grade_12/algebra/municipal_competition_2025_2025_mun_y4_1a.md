@@ -1,31 +1,24 @@
 ---
-grade: 12
-field: algebra
 difficulty: 4
-problem_type: calculation
-source: "Municipal_Competition_2025"
-problem_id: 2025_mun_y4_1a
+field: algebra
+grade: 12
 language_original: mk
-translated: false
-
-# 
-tags:
-  - algebra
-  - system_of_equations
-related_skills:
-  - system_of_equations--- SKILL MAPPING ---
-primary_skill: logic
-related_skills:
-  - logic
 prerequisites:
-  - basic_math
-
-# --- TOPICS ---
+- basic_math
+primary_skill: logic
+problem_id: 2025_mun_y4_1a
+problem_type: calculation
+related_skills:
+- logic
+related_theorems:
+- parity
+source: Municipal_Competition_2025
 tags:
-  - system_of_equations
-  - radicals
-  - completing_the_square
-  - olympiad
+- system_of_equations
+- radicals
+- completing_the_square
+- olympiad
+translated: false
 ---
 
 [⬅️ Назад кон Индексот](../README.md) | [🧰 Skill: logic](../../skill_guides/logic.md)

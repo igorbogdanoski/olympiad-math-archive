@@ -1,26 +1,24 @@
 ---
-grade: 6
-field: algebra
 difficulty: 3
-problem_type: word_problem
-source: "Municipal_Competition_2023"
-problem_id: 2023_mun_g6_4
+field: algebra
+grade: 6
 language_original: mk
-translated: false
-
-# --- SKILL MAPPING ---
-primary_skill: proportions
-related_skills:
-  - logic
 prerequisites:
-  - division
-
-# --- TOPICS ---
+- division
+primary_skill: proportions
+problem_id: 2023_mun_g6_4
+problem_type: word_problem
+related_skills:
+- logic
+related_theorems:
+- optimization
+source: Municipal_Competition_2023
 tags:
-  - ratios
-  - optimization
-  - limiting_factor
-  - olympiad
+- ratios
+- optimization
+- limiting_factor
+- olympiad
+translated: false
 ---
 
 [⬅️ Назад кон Индексот](../README.md) | [🧰 Skill: proportions](../../skill_guides/proportions.md)

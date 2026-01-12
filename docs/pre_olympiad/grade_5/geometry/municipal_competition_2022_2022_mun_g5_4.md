@@ -1,30 +1,27 @@
 ---
-grade: 5
-field: geometry
 difficulty: 3
-problem_type: calculation
-source: "Municipal_Competition_2022"
-problem_id: 2022_mun_g5_4
-language_original: <mk | en | sr | hr | ...>
-translated: false
-
-# --- GEOMETRY SKILLS ---
+field: geometry
 geometry_style: synthetic
-primary_skill: algebraic_manipulation
-related_skills:
-  - logic
+grade: 5
+language_original: <mk | en | sr | hr | ...>
 prerequisites:
-  - perimeter_formula
-
-# --- VISUALIZATION ---
-visual_prompt: "No visual prompt provided."
-
+- perimeter_formula
+primary_skill: algebraic_manipulation
+problem_id: 2022_mun_g5_4
+problem_type: calculation
+related_skills:
+- logic
+related_theorems:
+- symmetry
+source: Municipal_Competition_2022
 tags:
-  - geometry
-  - olympiad
-  - perimeter
-  - segments
-  - algebraic_geometry
+- geometry
+- olympiad
+- perimeter
+- segments
+- algebraic_geometry
+translated: false
+visual_prompt: No visual prompt provided.
 ---
 
 [⬅️ Назад кон Индексот](../../README.md) | [🧰 Skill: algebraic_manipulation](../../../skill_guides/algebraic_manipulation.md)

@@ -1,15 +1,19 @@
 ---
-grade: 8
-field: algebra
 difficulty: 6
-source: Sigma Magazine
-problem_id: 1811
+field: algebra
+grade: 8
 language_original: mk
-translated: false
+problem_id: 1811
+related_theorems:
+- optimization
+- symmetry
+- functions
+source: Sigma Magazine
 tags:
-  - monotonicity
-  - symmetry
-  - basic_inequalities
+- monotonicity
+- symmetry
+- basic_inequalities
+translated: false
 ---
 
 # Експоненцијална неравенка

@@ -1,26 +1,24 @@
 ---
-grade: 12
-field: algebra
 difficulty: 4
-problem_type: proof
-source: "Municipal_Competition_2023"
-problem_id: 2023_mun_y4_2a
+field: algebra
+grade: 12
 language_original: mk
-translated: false
-
-# --- SKILL MAPPING ---
-primary_skill: substitution
-related_skills:
-  - logic
 prerequisites:
-  - functions
-
-# --- TOPICS ---
+- functions
+primary_skill: substitution
+problem_id: 2023_mun_y4_2a
+problem_type: proof
+related_skills:
+- logic
+related_theorems:
+- functions
+source: Municipal_Competition_2023
 tags:
-  - functional_equation
-  - proof
-  - contradiction
-  - olympiad
+- functional_equation
+- proof
+- contradiction
+- olympiad
+translated: false
 ---
 
 [⬅️ Назад кон Индексот](../README.md) | [🧰 Skill: substitution](../../skill_guides/substitution.md)

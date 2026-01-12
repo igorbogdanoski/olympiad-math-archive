@@ -1,25 +1,23 @@
 ---
-grade: 12
-field: combinatorics
 difficulty: 5
-problem_type: logic_puzzle
-source: "Municipal_Competition_2022"
-problem_id: 2022_mun_y4_14a
+field: combinatorics
+grade: 12
 language_original: mk
-translated: false
-
-# --- SKILL MAPPING ---
-primary_skill: double_counting
-related_skills:
-  - logic
 prerequisites:
-  - combinations
-
-# --- TOPICS ---
+- combinations
+primary_skill: double_counting
+problem_id: 2022_mun_y4_14a
+problem_type: logic_puzzle
+related_skills:
+- logic
+related_theorems:
+- graph_theory
+source: Municipal_Competition_2022
 tags:
-  - tournament
-  - graph_theory
-  - olympiad
+- tournament
+- graph_theory
+- olympiad
+translated: false
 ---
 
 [⬅️ Назад кон Индексот](../README.md) | [🧰 Skill: double_counting](../../skill_guides/double_counting.md)

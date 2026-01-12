@@ -1,32 +1,29 @@
 ---
-grade: 11
-field: geometry
 difficulty: 3
-problem_type: calculation
-source: "Municipal_Competition_2024"
-problem_id: 2024_mun_y3_1ab
-language_original: <mk | en | sr | hr | ...>
-translated: false
-
-# --- GEOMETRY SKILLS ---
+field: geometry
 geometry_style: synthetic
-primary_skill: visual_reasoning
-related_skills:
-  - logic
+grade: 11
+language_original: <mk | en | sr | hr | ...>
 prerequisites:
-  - pythagorean_theorem
-  - volume_formula
-
-# --- VISUALIZATION ---
-visual_prompt: "No visual prompt provided."
-
+- pythagorean_theorem
+- volume_formula
+primary_skill: visual_reasoning
+problem_id: 2024_mun_y3_1ab
+problem_type: calculation
+related_skills:
+- logic
+related_theorems:
+- pythagorean_theorem
+source: Municipal_Competition_2024
 tags:
-  - geometry
-  - olympiad
-  - stereometry
-  - pyramid
-  - volume
-  - surface_area
+- geometry
+- olympiad
+- stereometry
+- pyramid
+- volume
+- surface_area
+translated: false
+visual_prompt: No visual prompt provided.
 ---
 
 [⬅️ Назад кон Индексот](../README.md) | [🧰 Skill: visual_reasoning](../../skill_guides/visual_reasoning.md)

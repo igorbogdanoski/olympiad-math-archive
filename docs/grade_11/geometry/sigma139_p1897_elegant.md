@@ -2,6 +2,8 @@
 difficulty: 7
 grade: 11
 problem_id: sigma139_p1897_elegant
+related_theorems:
+- similarity
 source: Sigma 139, Zadaca 1897
 tags:
 - geometry

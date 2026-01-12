@@ -1,34 +1,26 @@
 ---
-grade: 11
-field: algebra
 difficulty: 5
-problem_type: calculation
-source: "Municipal_Competition_2025"
-problem_id: 2025_mun_y3_3b
+field: algebra
+grade: 11
 language_original: mk
-translated: false
-
-# 
-tags:
-  - algebra
-  - vieta_formulas
-  - system_of_equations
-  - polynomials
-related_skills:
-  - vieta_formulas
-  - system_of_equations--- SKILL MAPPING ---
-primary_skill: logic
-related_skills:
-  - logic
 prerequisites:
-  - basic_math
-
-# --- TOPICS ---
+- basic_math
+primary_skill: logic
+problem_id: 2025_mun_y3_3b
+problem_type: calculation
+related_skills:
+- logic
+related_theorems:
+- vieta_formulas
+- symmetry
+- quadratic_equations
+source: Municipal_Competition_2025
 tags:
-  - quadratic_equations
-  - system_of_equations
-  - vieta_formulas
-  - olympiad
+- quadratic_equations
+- system_of_equations
+- vieta_formulas
+- olympiad
+translated: false
 ---
 
 [⬅️ Назад кон Индексот](../README.md) | [🧰 Skill: logic](../../skill_guides/logic.md)

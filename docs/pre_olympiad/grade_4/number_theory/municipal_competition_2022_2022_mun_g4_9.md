@@ -1,26 +1,24 @@
 ---
-grade: 4
-field: number_theory
 difficulty: 3
-problem_type: calculation
-source: "Municipal_Competition_2022"
-problem_id: 2022_mun_g4_9
+field: number_theory
+grade: 4
 language_original: mk
-translated: false
-
-# --- SKILL MAPPING ---
-primary_skill: pattern_recognition
-related_skills:
-  - logic
 prerequisites:
-  - multiplication_properties
-
-# --- TOPICS ---
+- multiplication_properties
+primary_skill: pattern_recognition
+problem_id: 2022_mun_g4_9
+problem_type: calculation
+related_skills:
+- logic
+related_theorems:
+- parity
+source: Municipal_Competition_2022
 tags:
-  - last_digit
-  - parity
-  - multiplication
-  - olympiad
+- last_digit
+- parity
+- multiplication
+- olympiad
+translated: false
 ---
 
 [⬅️ Назад кон Индексот](../../README.md) | [🧰 Skill: pattern_recognition](../../../skill_guides/pattern_recognition.md)

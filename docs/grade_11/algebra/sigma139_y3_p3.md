@@ -2,6 +2,8 @@
 difficulty: 5
 grade: 11
 problem_id: sigma139_y3_p3
+related_theorems:
+- functions
 source: Sigma 139, Treta godina, Zadaca 3
 tags:
 - trigonometry

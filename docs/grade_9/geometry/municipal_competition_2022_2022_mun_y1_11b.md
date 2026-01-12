@@ -1,29 +1,29 @@
 ---
-grade: 9
-field: geometry
 difficulty: 3
-problem_type: calculation
-source: "Municipal_Competition_2022"
-problem_id: 2022_mun_y1_11b
-language_original: <mk | en | sr | hr | ...>
-translated: false
-
-# --- GEOMETRY SKILLS ---
+field: geometry
 geometry_style: synthetic
-primary_skill: angle_chasing
-related_skills:
-  - logic
+grade: 9
+language_original: <mk | en | sr | hr | ...>
 prerequisites:
-  - parallel_lines_transversal
-
-# --- VISUALIZATION ---
-visual_prompt: "Draw two parallel horizontal lines. The bottom line has points P, Q, R, S in order. The top line has points T, U. Draw transversal lines TQ and UR. Label angle PQT as x, angle RQT as x-50, angle TUR as x+25. Mark angle URS with a question mark."
-
+- parallel_lines_transversal
+primary_skill: angle_chasing
+problem_id: 2022_mun_y1_11b
+problem_type: calculation
+related_skills:
+- logic
+related_theorems:
+- probability
+source: Municipal_Competition_2022
 tags:
-  - geometry
-  - olympiad
-  - parallel_lines
-  - angles
+- geometry
+- olympiad
+- parallel_lines
+- angles
+translated: false
+visual_prompt: Draw two parallel horizontal lines. The bottom line has points P, Q,
+  R, S in order. The top line has points T, U. Draw transversal lines TQ and UR. Label
+  angle PQT as x, angle RQT as x-50, angle TUR as x+25. Mark angle URS with a question
+  mark.
 ---
 
 [⬅️ Назад кон Индексот](../README.md) | [🧰 Skill: angle_chasing](../../skill_guides/angle_chasing.md)

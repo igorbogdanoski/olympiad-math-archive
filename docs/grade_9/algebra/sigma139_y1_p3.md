@@ -2,6 +2,8 @@
 difficulty: 5
 grade: 9
 problem_id: sigma139_y1_p3
+related_theorems:
+- number_theory
 source: Sigma 139, Prva godina, Zadaca 3
 tags:
 - algebra

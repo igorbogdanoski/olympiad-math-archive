@@ -6,6 +6,9 @@ problem_id: regional_2025_1_3ab
 related_skills:
 - algebarski_sistemi
 - cetiriagolnici
+related_theorems:
+- pythagorean_theorem
+- similarity
 source: Регионален натпревар по математика за средно образование 2025 (Сигма 139,
   стр. 50-51)
 tags:

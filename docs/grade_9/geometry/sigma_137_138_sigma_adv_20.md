@@ -1,42 +1,29 @@
 ---
-grade: 9
-field: geometry
-difficulty: 6
-source: "<натпревар / списание / година>"
-problem_id: sigma_adv_20
-language_original: <mk | en | sr | hr | ...>
-translated: false
-
-# 
-tags:
-  - vectors
-  - angle_chasing
-  - geometry
-  - complex_numbers
-  - algebra
-  - similarity
-related_skills:
-  - vectors
-  - complex_numbers
-  - angle_chasing
-  - similarity--- GEOMETRY SKILLS ---
-geometry_style: synthetic # synthetic | analytic | mixed
-primary_skill: <main_tool> # e.g., angle_chasing, similarity, cyclic_quads
-related_skills:
-  - tangential_quadrilateral
-  - similarity
-
 allowed_tools:
-  - classical_euclidean
-  - similarity
-  - symmetry
+- classical_euclidean
+- similarity
+- symmetry
+difficulty: 6
+field: geometry
 forbidden_tools:
-  - coordinate_geometry
-  - vectors
-  - complex_numbers
+- coordinate_geometry
+- vectors
+- complex_numbers
+geometry_style: synthetic
+grade: 9
+language_original: <mk | en | sr | hr | ...>
+primary_skill: <main_tool>
+problem_id: sigma_adv_20
+related_skills:
+- tangential_quadrilateral
+- similarity
+related_theorems:
+- similarity
+source: <натпревар / списание / година>
 tags:
-  - geometry
-  - olympiad
+- geometry
+- olympiad
+translated: false
 ---
 
 # Потсечен конус опишан околу топка

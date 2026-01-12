@@ -6,6 +6,11 @@ problem_id: sigma_137_y2_p2
 related_skills:
 - функција_на_чебишев
 - системи_неравенки
+related_theorems:
+- polynomial_expansion
+- probability
+- optimization
+- functions
 source: Сигма 137
 tags:
 - квадратна_функција

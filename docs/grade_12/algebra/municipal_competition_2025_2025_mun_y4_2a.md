@@ -1,34 +1,24 @@
 ---
-grade: 12
-field: algebra
 difficulty: 4
-problem_type: calculation
-source: "Municipal_Competition_2025"
-problem_id: 2025_mun_y4_2a
+field: algebra
+grade: 12
 language_original: mk
-translated: false
-
-# 
-tags:
-  - algebra
-  - geometry
-  - sequences
-  - trigonometry
-related_skills:
-  - sequences
-  - trigonometry--- SKILL MAPPING ---
-primary_skill: logic
-related_skills:
-  - logic
 prerequisites:
-  - basic_math
-
-# --- TOPICS ---
+- basic_math
+primary_skill: logic
+problem_id: 2025_mun_y4_2a
+problem_type: calculation
+related_skills:
+- logic
+related_theorems:
+- trigonometric_identities
+source: Municipal_Competition_2025
 tags:
-  - sequences
-  - trigonometry
-  - recursion
-  - olympiad
+- sequences
+- trigonometry
+- recursion
+- olympiad
+translated: false
 ---
 
 [⬅️ Назад кон Индексот](../README.md) | [🧰 Skill: logic](../../skill_guides/logic.md)

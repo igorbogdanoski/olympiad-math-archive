@@ -6,6 +6,8 @@ problem_id: regional_2025_4_3b
 related_skills:
 - pravilo_na_proizvod
 - logika
+related_theorems:
+- probability
 source: Сигма 139 (Регионален натпревар 2025)
 tags:
 - kombinatorika

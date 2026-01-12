@@ -1,31 +1,31 @@
 ---
-grade: 9
-field: geometry
 difficulty: 5
-problem_type: calculation
-source: "Municipal_Competition_2022"
-problem_id: 2022_mun_y1_20b
-language_original: <mk | en | sr | hr | ...>
-translated: false
-
-# --- GEOMETRY SKILLS ---
+field: geometry
 geometry_style: synthetic
-primary_skill: similarity
-related_skills:
-  - logic
+grade: 9
+language_original: <mk | en | sr | hr | ...>
 prerequisites:
-  - similarity
-  - pythagorean_theorem
-
-# --- VISUALIZATION ---
-visual_prompt: "Draw a right-angled triangle ABC with C at the origin (90 degrees). Inscribe a square CDEF such that D is on AC, F is on BC, and E is on the hypotenuse AB. Label the square side as 7 and the hypotenuse AB as 24."
-
+- similarity
+- pythagorean_theorem
+primary_skill: similarity
+problem_id: 2022_mun_y1_20b
+problem_type: calculation
+related_skills:
+- logic
+related_theorems:
+- pythagorean_theorem
+- similarity
+source: Municipal_Competition_2022
 tags:
-  - geometry
-  - olympiad
-  - right_triangle
-  - square
-  - area
+- geometry
+- olympiad
+- right_triangle
+- square
+- area
+translated: false
+visual_prompt: Draw a right-angled triangle ABC with C at the origin (90 degrees).
+  Inscribe a square CDEF such that D is on AC, F is on BC, and E is on the hypotenuse
+  AB. Label the square side as 7 and the hypotenuse AB as 24.
 ---
 
 [⬅️ Назад кон Индексот](../README.md) | [🧰 Skill: similarity](../../skill_guides/similarity.md)

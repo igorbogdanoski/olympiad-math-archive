@@ -1,39 +1,28 @@
 ---
-grade: 11
-field: geometry
 difficulty: 5
-problem_type: calculation
-source: "Municipal_Competition_2025"
-problem_id: 2025_mun_y3_4a
-language_original: <mk | en | sr | hr | ...>
-translated: false
-
-# 
-tags:
-  - stereometry
-  - geometry
-  - volume
-  - similarity
-related_skills:
-  - volume
-  - similarity--- GEOMETRY SKILLS ---
+field: geometry
 geometry_style: synthetic
-primary_skill: logic
-related_skills:
-  - logic
+grade: 11
+language_original: <mk | en | sr | hr | ...>
 prerequisites:
-  - basic_math
-
-# --- VISUALIZATION ---
-visual_prompt: "No visual prompt provided."
-
+- basic_math
+primary_skill: logic
+problem_id: 2025_mun_y3_4a
+problem_type: calculation
+related_skills:
+- logic
+related_theorems:
+- similarity
+source: Municipal_Competition_2025
 tags:
-  - geometry
-  - olympiad
-  - cone
-  - sphere
-  - volume
-  - similarity
+- geometry
+- olympiad
+- cone
+- sphere
+- volume
+- similarity
+translated: false
+visual_prompt: No visual prompt provided.
 ---
 
 [⬅️ Назад кон Индексот](../README.md) | [🧰 Skill: logic](../../skill_guides/logic.md)

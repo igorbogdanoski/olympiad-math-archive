@@ -1,26 +1,24 @@
 ---
-grade: 7
-field: algebra
 difficulty: 2
-problem_type: calculation
-source: "Municipal_Competition_2022"
-problem_id: 2022_mun_g7_11
+field: algebra
+grade: 7
 language_original: mk
-translated: false
-
-# --- SKILL MAPPING ---
-primary_skill: calculation
-related_skills:
-  - logic
 prerequisites:
-  - fraction_decimal_conversion
-
-# --- TOPICS ---
+- fraction_decimal_conversion
+primary_skill: calculation
+problem_id: 2022_mun_g7_11
+problem_type: calculation
+related_skills:
+- logic
+related_theorems:
+- number_theory
+source: Municipal_Competition_2022
 tags:
-  - decimals
-  - fractions
-  - order_of_operations
-  - olympiad
+- decimals
+- fractions
+- order_of_operations
+- olympiad
+translated: false
 ---
 
 [⬅️ Назад кон Индексот](../README.md) | [🧰 Skill: calculation](../../skill_guides/calculation.md)

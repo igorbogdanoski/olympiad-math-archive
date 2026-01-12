@@ -6,6 +6,8 @@ problem_id: sigma_1882
 related_skills:
 - trigonometry
 - algebraic_manipulation
+related_theorems:
+- pythagorean_theorem
 source: Сигма 138, Задача 1882
 tags:
 - solid_geometry

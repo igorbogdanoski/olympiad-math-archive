@@ -1,13 +1,15 @@
 ---
-grade: 11
 difficulty: 8
 geometry_style: synthetic
+grade: 11
+related_theorems:
+- functions
 tags:
-  - geometry
-  - olympiad
-  - geometry
-  - circles
-  - proof
+- geometry
+- olympiad
+- geometry
+- circles
+- proof
 ---
 
 # Тангентен четириаголник и радиуси (Синтетичко решение)

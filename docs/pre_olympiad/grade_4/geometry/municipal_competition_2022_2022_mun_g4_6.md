@@ -1,30 +1,28 @@
 ---
-grade: 4
-field: geometry
 difficulty: 3
-problem_type: logic_puzzle
-source: "Municipal_Competition_2022"
-problem_id: 2022_mun_g4_6
-language_original: <mk | en | sr | hr | ...>
-translated: false
-
-# --- GEOMETRY SKILLS ---
+field: geometry
 geometry_style: synthetic
-primary_skill: visual_reasoning
-related_skills:
-  - logic
+grade: 4
+language_original: <mk | en | sr | hr | ...>
 prerequisites:
-  - symmetry_basics
-
-# --- VISUALIZATION ---
-visual_prompt: "No visual prompt provided."
-
+- symmetry_basics
+primary_skill: visual_reasoning
+problem_id: 2022_mun_g4_6
+problem_type: logic_puzzle
+related_skills:
+- logic
+related_theorems:
+- probability
+- symmetry
+source: Municipal_Competition_2022
 tags:
-  - geometry
-  - olympiad
-  - symmetry
-  - grid
-  - visual_reasoning
+- geometry
+- olympiad
+- symmetry
+- grid
+- visual_reasoning
+translated: false
+visual_prompt: No visual prompt provided.
 ---
 
 [⬅️ Назад кон Индексот](../../README.md) | [🧰 Skill: visual_reasoning](../../../skill_guides/visual_reasoning.md)

@@ -6,6 +6,11 @@ problem_id: regional_2025_4_3a
 related_skills:
 - sigma_funkcija
 - delivost
+related_theorems:
+- parity
+- induction
+- number_theory
+- functions
 source: Сигма 139 (Регионален натпревар 2024/25)
 tags:
 - teorija_na_broevi

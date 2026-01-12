@@ -1,25 +1,23 @@
 ---
-grade: 11
-field: algebra
 difficulty: 3
-problem_type: calculation
-source: "Municipal_Competition_2022"
-problem_id: 2022_mun_y3_14a
+field: algebra
+grade: 11
 language_original: mk
-translated: false
-
-# --- SKILL MAPPING ---
-primary_skill: functions
-related_skills:
-  - logic
 prerequisites:
-  - quadratic_function
-
-# --- TOPICS ---
+- quadratic_function
+primary_skill: functions
+problem_id: 2022_mun_y3_14a
+problem_type: calculation
+related_skills:
+- logic
+related_theorems:
+- vieta_formulas
+source: Municipal_Competition_2022
 tags:
-  - quadratic_function
-  - vertex
-  - olympiad
+- quadratic_function
+- vertex
+- olympiad
+translated: false
 ---
 
 [⬅️ Назад кон Индексот](../README.md) | [🧰 Skill: functions](../../skill_guides/functions.md)

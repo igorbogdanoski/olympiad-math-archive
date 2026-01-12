@@ -2,6 +2,8 @@
 difficulty: 5
 grade: 12
 problem_id: sigma139_y4_p2
+related_theorems:
+- am_gm_inequality
 source: Sigma 139, Cetvrta godina, Zadaca 2
 tags:
 - inequalities

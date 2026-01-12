@@ -1,11 +1,14 @@
 ---
-grade: 11
 difficulty: 6
+grade: 11
+related_theorems:
+- am_gm_inequality
+- symmetry
 tags:
-  - inequalities
-  - means
-  - symmetric_polynomials
-  - olympiad
+- inequalities
+- means
+- symmetric_polynomials
+- olympiad
 ---
 
 # Неравенство со четири променливи

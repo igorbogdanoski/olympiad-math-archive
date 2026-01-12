@@ -1,31 +1,21 @@
 ---
-grade: 9
-field: algebra
 difficulty: 4
-source: "Sigma 137/138"
-problem_id: sigma_adv_29
+field: algebra
+grade: 9
 language_original: mk
+primary_skill: vieta_formulas
+problem_id: sigma_adv_29
+related_skills:
+- quadratic_equation
+- system_of_equations
+related_theorems:
+- vieta_formulas
+source: Sigma 137/138
+tags:
+- <topic_1>
+- <topic_2>
+- olympiad
 translated: false
-
-# 
-tags:
-  - algebra
-  - vieta_formulas
-  - system_of_equations
-  - polynomials
-related_skills:
-  - vieta_formulas
-  - system_of_equations--- SKILL MAPPING (New Standard) ---
-primary_skill: vieta_formulas # e.g., symmetry, invariants, telescoping
-related_skills:
-  - quadratic_equation
-  - system_of_equations
-
-# --- TOPICS ---
-tags:
-  - <topic_1> # e.g., percentages
-  - <topic_2> # e.g., linear_equations
-  - olympiad
 ---
 
 # Виетови формули со поместување

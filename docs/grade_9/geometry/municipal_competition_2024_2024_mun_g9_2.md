@@ -1,32 +1,29 @@
 ---
-grade: 9
-field: geometry
 difficulty: 4
-problem_type: calculation
-source: "Municipal_Competition_2024"
-problem_id: 2024_mun_g9_2
-language_original: <mk | en | sr | hr | ...>
-translated: false
-
-# --- GEOMETRY SKILLS ---
+field: geometry
 geometry_style: analytic
-primary_skill: coordinate_geometry
-related_skills:
-  - logic
+grade: 9
+language_original: <mk | en | sr | hr | ...>
 prerequisites:
-  - area_formula
-  - similarity
-
-# --- VISUALIZATION ---
-visual_prompt: "No visual prompt provided."
-
+- area_formula
+- similarity
+primary_skill: coordinate_geometry
+problem_id: 2024_mun_g9_2
+problem_type: calculation
+related_skills:
+- logic
+related_theorems:
+- similarity
+source: Municipal_Competition_2024
 tags:
-  - geometry
-  - olympiad
-  - square
-  - area
-  - similarity
-  - coordinates
+- geometry
+- olympiad
+- square
+- area
+- similarity
+- coordinates
+translated: false
+visual_prompt: No visual prompt provided.
 ---
 
 [⬅️ Назад кон Индексот](../README.md) | [🧰 Skill: coordinate_geometry](../../skill_guides/coordinate_geometry.md)

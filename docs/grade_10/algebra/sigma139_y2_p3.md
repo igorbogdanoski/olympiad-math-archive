@@ -2,6 +2,9 @@
 difficulty: 7
 grade: 10
 problem_id: sigma139_y2_p3
+related_theorems:
+- polynomial_expansion
+- complex_numbers
 source: Sigma 139, Vtora godina, Zadaca 3
 tags:
 - complex_numbers

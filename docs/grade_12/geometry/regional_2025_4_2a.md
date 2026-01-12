@@ -6,6 +6,9 @@ problem_id: regional_2025_4_2a
 related_skills:
 - trigonometrija_vo_triagolnik
 - sinusna_teorema
+related_theorems:
+- similarity
+- functions
 source: Сигма 139 (Регионален натпревар 2025)
 tags:
 - kruznica

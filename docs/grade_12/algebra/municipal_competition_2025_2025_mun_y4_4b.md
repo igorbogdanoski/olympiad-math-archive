@@ -1,31 +1,24 @@
 ---
-grade: 12
-field: algebra
 difficulty: 5
-problem_type: proof
-source: "Municipal_Competition_2025"
-problem_id: 2025_mun_y4_4b
+field: algebra
+grade: 12
 language_original: mk
-translated: false
-
-# 
-tags:
-  - algebra
-  - polynomials
-related_skills:
-  - polynomials--- SKILL MAPPING ---
-primary_skill: logic
-related_skills:
-  - logic
 prerequisites:
-  - basic_math
-
-# --- TOPICS ---
+- basic_math
+primary_skill: logic
+problem_id: 2025_mun_y4_4b
+problem_type: proof
+related_skills:
+- logic
+related_theorems:
+- polynomial_expansion
+source: Municipal_Competition_2025
 tags:
-  - inequalities
-  - polynomials
-  - substitution
-  - olympiad
+- inequalities
+- polynomials
+- substitution
+- olympiad
+translated: false
 ---
 
 [⬅️ Назад кон Индексот](../README.md) | [🧰 Skill: logic](../../skill_guides/logic.md)

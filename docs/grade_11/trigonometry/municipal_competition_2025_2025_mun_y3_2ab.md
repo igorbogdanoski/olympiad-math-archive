@@ -1,25 +1,23 @@
 ---
-grade: 11
-field: trigonometry
 difficulty: 3
-problem_type: proof
-source: "Municipal_Competition_2025"
-problem_id: 2025_mun_y3_2ab
+field: trigonometry
+grade: 11
 language_original: mk
-translated: false
-
-# --- SKILL MAPPING ---
-primary_skill: logic
-related_skills:
-  - logic
 prerequisites:
-  - basic_math
-
-# --- TOPICS ---
+- basic_math
+primary_skill: logic
+problem_id: 2025_mun_y3_2ab
+problem_type: proof
+related_skills:
+- logic
+related_theorems:
+- complex_numbers
+source: Municipal_Competition_2025
 tags:
-  - trigonometric_identities
-  - algebraic_manipulation
-  - olympiad
+- trigonometric_identities
+- algebraic_manipulation
+- olympiad
+translated: false
 ---
 
 [⬅️ Назад кон Индексот](../README.md) | [🧰 Skill: logic](../../skill_guides/logic.md)

@@ -1,33 +1,24 @@
 ---
-grade: 10
-field: algebra
 difficulty: 3
-problem_type: calculation
-source: "Municipal_Competition_2025"
-problem_id: 2025_mun_y2_2b
+field: algebra
+grade: 10
 language_original: mk
-translated: false
-
-# 
-tags:
-  - algebra
-  - sequences
-  - polynomials
-related_skills:
-  - sequences
-  - polynomials--- SKILL MAPPING ---
-primary_skill: logic
-related_skills:
-  - logic
 prerequisites:
-  - basic_math
-
-# --- TOPICS ---
+- basic_math
+primary_skill: logic
+problem_id: 2025_mun_y2_2b
+problem_type: calculation
+related_skills:
+- logic
+related_theorems:
+- polynomial_expansion
+source: Municipal_Competition_2025
 tags:
-  - sequences
-  - polynomials
-  - recursion
-  - olympiad
+- sequences
+- polynomials
+- recursion
+- olympiad
+translated: false
 ---
 
 [⬅️ Назад кон Индексот](../README.md) | [🧰 Skill: logic](../../skill_guides/logic.md)

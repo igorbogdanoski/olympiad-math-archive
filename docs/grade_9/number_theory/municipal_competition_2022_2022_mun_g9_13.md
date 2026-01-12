@@ -1,26 +1,24 @@
 ---
-grade: 9
-field: number_theory
 difficulty: 3
-problem_type: calculation
-source: "Municipal_Competition_2022"
-problem_id: 2022_mun_g9_13
+field: number_theory
+grade: 9
 language_original: mk
-translated: false
-
-# --- SKILL MAPPING ---
-primary_skill: factorization
-related_skills:
-  - logic
 prerequisites:
-  - exponent_rules
-
-# --- TOPICS ---
+- exponent_rules
+primary_skill: factorization
+problem_id: 2022_mun_g9_13
+problem_type: calculation
+related_skills:
+- logic
+related_theorems:
+- number_theory
+source: Municipal_Competition_2022
 tags:
-  - exponents
-  - factors
-  - combinatorics
-  - olympiad
+- exponents
+- factors
+- combinatorics
+- olympiad
+translated: false
 ---
 
 [⬅️ Назад кон Индексот](../README.md) | [🧰 Skill: factorization](../../skill_guides/factorization.md)

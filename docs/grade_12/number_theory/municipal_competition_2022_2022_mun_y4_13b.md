@@ -1,26 +1,24 @@
 ---
-grade: 12
-field: number_theory
 difficulty: 4
-problem_type: calculation
-source: "Municipal_Competition_2022"
-problem_id: 2022_mun_y4_13b
+field: number_theory
+grade: 12
 language_original: mk
-translated: false
-
-# --- SKILL MAPPING ---
-primary_skill: prime_factorization
-related_skills:
-  - logic
 prerequisites:
-  - legendre_formula
-
-# --- TOPICS ---
+- legendre_formula
+primary_skill: prime_factorization
+problem_id: 2022_mun_y4_13b
+problem_type: calculation
+related_skills:
+- logic
+related_theorems:
+- number_theory
+source: Municipal_Competition_2022
 tags:
-  - factorials
-  - divisors
-  - cubes
-  - olympiad
+- factorials
+- divisors
+- cubes
+- olympiad
+translated: false
 ---
 
 [⬅️ Назад кон Индексот](../README.md) | [🧰 Skill: prime_factorization](../../skill_guides/prime_factorization.md)

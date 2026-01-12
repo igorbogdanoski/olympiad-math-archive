@@ -1,23 +1,21 @@
 ---
-grade: 8
-field: number_theory
 difficulty: 4
-source: "Sigma 137/138"
-problem_id: sigma_adv_03
+field: number_theory
+grade: 8
 language_original: mk
-translated: false
-
-# --- SKILL MAPPING (New Standard) ---
-primary_skill: diophantine_equations # e.g., symmetry, invariants, telescoping
+primary_skill: diophantine_equations
+problem_id: sigma_adv_03
 related_skills:
-  - percentages
-  - factorization
-
-# --- TOPICS ---
+- percentages
+- factorization
+related_theorems:
+- number_theory
+source: Sigma 137/138
 tags:
-  - <topic_1> # e.g., percentages
-  - <topic_2> # e.g., linear_equations
-  - olympiad
+- <topic_1>
+- <topic_2>
+- olympiad
+translated: false
 ---
 
 # Банкарска провизија

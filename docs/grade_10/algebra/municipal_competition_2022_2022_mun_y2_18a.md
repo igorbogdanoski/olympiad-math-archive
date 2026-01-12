@@ -1,25 +1,25 @@
 ---
-grade: 10
-field: algebra
 difficulty: 4
-problem_type: calculation
-source: "Municipal_Competition_2022"
-problem_id: 2022_mun_y2_18a
+field: algebra
+grade: 10
 language_original: mk
-translated: false
-
-# --- SKILL MAPPING ---
-primary_skill: inequalities_am_gm
-related_skills:
-  - logic
 prerequisites:
-  - algebraic_manipulation
-
-# --- TOPICS ---
+- algebraic_manipulation
+primary_skill: inequalities_am_gm
+problem_id: 2022_mun_y2_18a
+problem_type: calculation
+related_skills:
+- logic
+related_theorems:
+- am_gm_inequality
+- optimization
+- symmetry
+source: Municipal_Competition_2022
 tags:
-  - inequalities
-  - am_gm
-  - olympiad
+- inequalities
+- am_gm
+- olympiad
+translated: false
 ---
 
 [⬅️ Назад кон Индексот](../README.md) | [🧰 Skill: inequalities_am_gm](../../skill_guides/inequalities_am_gm.md)

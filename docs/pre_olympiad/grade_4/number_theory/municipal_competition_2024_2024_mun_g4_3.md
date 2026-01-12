@@ -1,26 +1,24 @@
 ---
-grade: 4
-field: number_theory
 difficulty: 3
-problem_type: logic_puzzle
-source: "Municipal_Competition_2024"
-problem_id: 2024_mun_g4_3
+field: number_theory
+grade: 4
 language_original: mk
-translated: false
-
-# --- SKILL MAPPING ---
-primary_skill: interval_arithmetic
-related_skills:
-  - logic
 prerequisites:
-  - rounding
-
-# --- TOPICS ---
+- rounding
+primary_skill: interval_arithmetic
+problem_id: 2024_mun_g4_3
+problem_type: logic_puzzle
+related_skills:
+- logic
+related_theorems:
+- optimization
+source: Municipal_Competition_2024
 tags:
-  - rounding
-  - intervals
-  - inequalities
-  - olympiad
+- rounding
+- intervals
+- inequalities
+- olympiad
+translated: false
 ---
 
 [⬅️ Назад кон Индексот](../../README.md) | [🧰 Skill: interval_arithmetic](../../../skill_guides/interval_arithmetic.md)

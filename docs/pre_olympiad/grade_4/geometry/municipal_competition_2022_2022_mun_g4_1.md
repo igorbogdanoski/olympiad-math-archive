@@ -1,30 +1,27 @@
 ---
-grade: 4
-field: geometry
 difficulty: 2
-problem_type: logic_puzzle
-source: "Municipal_Competition_2022"
-problem_id: 2022_mun_g4_1
-language_original: <mk | en | sr | hr | ...>
-translated: false
-
-# --- GEOMETRY SKILLS ---
+field: geometry
 geometry_style: synthetic
-primary_skill: counting
-related_skills:
-  - logic
+grade: 4
+language_original: <mk | en | sr | hr | ...>
 prerequisites:
-  - basic_geometry
-
-# --- VISUALIZATION ---
-visual_prompt: "No visual prompt provided."
-
+- basic_geometry
+primary_skill: counting
+problem_id: 2022_mun_g4_1
+problem_type: logic_puzzle
+related_skills:
+- logic
+related_theorems:
+- probability
+source: Municipal_Competition_2022
 tags:
-  - geometry
-  - olympiad
-  - counting
-  - segments
-  - visual_reasoning
+- geometry
+- olympiad
+- counting
+- segments
+- visual_reasoning
+translated: false
+visual_prompt: No visual prompt provided.
 ---
 
 [⬅️ Назад кон Индексот](../../README.md) | [🧰 Skill: counting](../../../skill_guides/counting.md)

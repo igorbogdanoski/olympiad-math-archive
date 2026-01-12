@@ -1,11 +1,13 @@
 ---
-grade: 12
 difficulty: 5
+grade: 12
+related_theorems:
+- induction
 tags:
-  - fibonacci
-  - golden_ratio
-  - polynomials
-  - olympiad
+- fibonacci
+- golden_ratio
+- polynomials
+- olympiad
 ---
 
 # Фибоначи и Златен пресек

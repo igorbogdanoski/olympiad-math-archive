@@ -1,15 +1,17 @@
 ---
-grade: 3
-field: arithmetic
 difficulty: 3
-source: "Numerus LI 51-2 (2025/2026), problem 4394"
+field: arithmetic
+grade: 3
 language_original: mk
+related_theorems:
+- parity
+source: Numerus LI 51-2 (2025/2026), problem 4394
 tags:
-  - number_sense
-  - digits
-  - combinatorics
-  - parity
-  - pattern_recognition
+- number_sense
+- digits
+- combinatorics
+- parity
+- pattern_recognition
 ---
 
 # Задача 4394 — Непарни трицифрени со збир на цифри 3

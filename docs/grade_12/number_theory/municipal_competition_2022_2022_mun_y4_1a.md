@@ -1,25 +1,23 @@
 ---
-grade: 12
-field: number_theory
 difficulty: 3
-problem_type: calculation
-source: "Municipal_Competition_2022"
-problem_id: 2022_mun_y4_1a
+field: number_theory
+grade: 12
 language_original: mk
-translated: false
-
-# --- SKILL MAPPING ---
-primary_skill: algebraic_modeling
-related_skills:
-  - logic
 prerequisites:
-  - arithmetic_progression_sum
-
-# --- TOPICS ---
+- arithmetic_progression_sum
+primary_skill: algebraic_modeling
+problem_id: 2022_mun_y4_1a
+problem_type: calculation
+related_skills:
+- logic
+related_theorems:
+- number_theory
+source: Municipal_Competition_2022
 tags:
-  - arithmetic_progression
-  - sum
-  - olympiad
+- arithmetic_progression
+- sum
+- olympiad
+translated: false
 ---
 
 [⬅️ Назад кон Индексот](../README.md) | [🧰 Skill: algebraic_modeling](../../skill_guides/algebraic_modeling.md)

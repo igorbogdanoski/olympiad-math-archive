@@ -1,21 +1,21 @@
 ---
-grade: 8
-field: geometry
 difficulty: 5
-source: "<натпревар / списание / година>"
-problem_id: geom_8_2015_square
+field: geometry
+grade: 8
 language_original: <mk | en | sr | hr | ...>
-translated: false
-
-# 
-tags:
-  - geometry
-  - square
-  - centroid
-  - medians
+problem_id: geom_8_2015_square
 related_skills:
-  - centroid_properties
-  - diagonal_trisection
+- centroid_properties
+- diagonal_trisection
+related_theorems:
+- similarity
+source: <натпревар / списание / година>
+tags:
+- geometry
+- square
+- centroid
+- medians
+translated: false
 ---
 
 # Problem

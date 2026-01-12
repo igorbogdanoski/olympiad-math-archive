@@ -1,28 +1,23 @@
 ---
-grade: 9
-field: number_theory
 difficulty: 6
-source: "Sigma 137/138"
-problem_id: sigma_adv_34
+field: number_theory
+grade: 9
 language_original: mk
+primary_skill: parity
+problem_id: sigma_adv_34
+related_skills:
+- primes
+- squares
+related_theorems:
+- symmetry
+- parity
+- number_theory
+source: Sigma 137/138
+tags:
+- <topic_1>
+- <topic_2>
+- olympiad
 translated: false
-
-# 
-tags:
-  - number_theory
-  - prime_numbers
-related_skills:
-  - prime_numbers--- SKILL MAPPING (New Standard) ---
-primary_skill: parity # e.g., symmetry, invariants, telescoping
-related_skills:
-  - primes
-  - squares
-
-# --- TOPICS ---
-tags:
-  - <topic_1> # e.g., percentages
-  - <topic_2> # e.g., linear_equations
-  - olympiad
 ---
 
 # Четири прости броеви

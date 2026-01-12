@@ -1,35 +1,27 @@
 ---
-grade: 9
-field: geometry
 difficulty: 5
-problem_type: calculation
-source: "Cnt92_Olympiad"
-problem_id: 16
-language_original: <mk | en | sr | hr | ...>
-translated: false
-
-# 
-tags:
-  - vieta_formulas
-  - polynomials
-related_skills:
-  - vieta_formulas--- GEOMETRY SKILLS ---
+field: geometry
 geometry_style: analytic
-primary_skill: logic
-related_skills:
-  - logic
+grade: 9
+language_original: <mk | en | sr | hr | ...>
 prerequisites:
-  - basic_math
-
-# --- VISUALIZATION ---
-visual_prompt: "No visual prompt provided."
-
+- basic_math
+primary_skill: logic
+problem_id: 16
+problem_type: calculation
+related_skills:
+- logic
+related_theorems:
+- vieta_formulas
+source: Cnt92_Olympiad
 tags:
-  - geometry
-  - olympiad
-  - quadratic_equations
-  - vieta_formulas
-  - radicals
+- geometry
+- olympiad
+- quadratic_equations
+- vieta_formulas
+- radicals
+translated: false
+visual_prompt: No visual prompt provided.
 ---
 
 [⬅️ Назад кон Индексот](../README.md) | [🧰 Skill: logic](../../skill_guides/logic.md)

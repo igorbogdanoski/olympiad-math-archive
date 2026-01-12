@@ -1,36 +1,29 @@
 ---
-grade: 9
-field: geometry
 difficulty: 3
-problem_type: calculation
-source: "Cnt92_Olympiad_Var2"
-problem_id: cnt92_v2_24
-language_original: <mk | en | sr | hr | ...>
-translated: false
-
-# 
-tags:
-  - geometry
-  - area
-related_skills:
-  - area--- GEOMETRY SKILLS ---
+field: geometry
 geometry_style: synthetic
-primary_skill: logic
-related_skills:
-  - logic
+grade: 9
+language_original: <mk | en | sr | hr | ...>
 prerequisites:
-  - basic_math
-
-# --- VISUALIZATION ---
-visual_prompt: "No visual prompt provided."
-
+- basic_math
+primary_skill: logic
+problem_id: cnt92_v2_24
+problem_type: calculation
+related_skills:
+- logic
+related_theorems:
+- am_gm_inequality
+- optimization
+source: Cnt92_Olympiad_Var2
 tags:
-  - geometry
-  - olympiad
-  - parallelogram
-  - area
-  - optimization
-  - inequalities
+- geometry
+- olympiad
+- parallelogram
+- area
+- optimization
+- inequalities
+translated: false
+visual_prompt: No visual prompt provided.
 ---
 
 [⬅️ Назад кон Индексот](../README.md) | [🧰 Skill: logic](../../skill_guides/logic.md)

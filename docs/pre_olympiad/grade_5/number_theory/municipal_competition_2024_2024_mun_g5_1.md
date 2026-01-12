@@ -1,26 +1,24 @@
 ---
-grade: 5
-field: number_theory
 difficulty: 2
-problem_type: calculation
-source: "Municipal_Competition_2024"
-problem_id: 2024_mun_g5_1
+field: number_theory
+grade: 5
 language_original: mk
-translated: false
-
-# --- SKILL MAPPING ---
-primary_skill: counting
-related_skills:
-  - logic
 prerequisites:
-  - place_value
-
-# --- TOPICS ---
+- place_value
+primary_skill: counting
+problem_id: 2024_mun_g5_1
+problem_type: calculation
+related_skills:
+- logic
+related_theorems:
+- combinatorics
+source: Municipal_Competition_2024
 tags:
-  - counting
-  - digits
-  - combinatorics
-  - olympiad
+- counting
+- digits
+- combinatorics
+- olympiad
+translated: false
 ---
 
 [⬅️ Назад кон Индексот](../../README.md) | [🧰 Skill: counting](../../../skill_guides/counting.md)

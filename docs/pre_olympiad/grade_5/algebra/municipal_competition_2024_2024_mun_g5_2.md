@@ -1,26 +1,24 @@
 ---
-grade: 5
-field: algebra
 difficulty: 3
-problem_type: word_problem
-source: "Municipal_Competition_2024"
-problem_id: 2024_mun_g5_2
+field: algebra
+grade: 5
 language_original: mk
-translated: false
-
-# --- SKILL MAPPING ---
-primary_skill: working_backwards
-related_skills:
-  - logic
 prerequisites:
-  - fractions
-
-# --- TOPICS ---
+- fractions
+primary_skill: working_backwards
+problem_id: 2024_mun_g5_2
+problem_type: word_problem
+related_skills:
+- logic
+related_theorems:
+- working_backwards
+source: Municipal_Competition_2024
 tags:
-  - working_backwards
-  - fractions
-  - word_problem
-  - olympiad
+- working_backwards
+- fractions
+- word_problem
+- olympiad
+translated: false
 ---
 
 [⬅️ Назад кон Индексот](../../README.md) | [🧰 Skill: working_backwards](../../../skill_guides/working_backwards.md)

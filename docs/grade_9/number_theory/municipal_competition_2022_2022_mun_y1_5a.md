@@ -1,26 +1,24 @@
 ---
-grade: 9
-field: number_theory
 difficulty: 3
-problem_type: logic_puzzle
-source: "Municipal_Competition_2022"
-problem_id: 2022_mun_y1_5a
+field: number_theory
+grade: 9
 language_original: mk
-translated: false
-
-# --- SKILL MAPPING ---
-primary_skill: logical_deduction
-related_skills:
-  - logic
 prerequisites:
-  - place_value
-
-# --- TOPICS ---
+- place_value
+primary_skill: logical_deduction
+problem_id: 2022_mun_y1_5a
+problem_type: logic_puzzle
+related_skills:
+- logic
+related_theorems:
+- invariants
+source: Municipal_Competition_2022
 tags:
-  - digits
-  - summation
-  - logic
-  - olympiad
+- digits
+- summation
+- logic
+- olympiad
+translated: false
 ---
 
 [⬅️ Назад кон Индексот](../README.md) | [🧰 Skill: logical_deduction](../../skill_guides/logical_deduction.md)

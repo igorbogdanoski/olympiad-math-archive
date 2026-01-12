@@ -1,30 +1,27 @@
 ---
-grade: 9
-field: geometry
 difficulty: 4
-problem_type: logic_puzzle
-source: "Municipal_Competition_2023"
-problem_id: 2023_mun_g9_3
-language_original: <mk | en | sr | hr | ...>
-translated: false
-
-# --- GEOMETRY SKILLS ---
+field: geometry
 geometry_style: analytic
-primary_skill: pattern_recognition
-related_skills:
-  - logic
+grade: 9
+language_original: <mk | en | sr | hr | ...>
 prerequisites:
-  - arithmetic_progression_sum
-
-# --- VISUALIZATION ---
-visual_prompt: "No visual prompt provided."
-
+- arithmetic_progression_sum
+primary_skill: pattern_recognition
+problem_id: 2023_mun_g9_3
+problem_type: logic_puzzle
+related_skills:
+- logic
+related_theorems:
+- parity
+source: Municipal_Competition_2023
 tags:
-  - geometry
-  - olympiad
-  - coordinates
-  - sequences
-  - arithmetic_progression
+- geometry
+- olympiad
+- coordinates
+- sequences
+- arithmetic_progression
+translated: false
+visual_prompt: No visual prompt provided.
 ---
 
 [⬅️ Назад кон Индексот](../README.md) | [🧰 Skill: pattern_recognition](../../skill_guides/pattern_recognition.md)

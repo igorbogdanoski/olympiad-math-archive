@@ -5,6 +5,9 @@ primary_skill: logical_reasoning
 problem_id: sigma_138_school_1
 related_skills:
 - algebraic_modeling
+related_theorems:
+- invariants
+- parity
 source: Сигма 138, Задачи од училницата (Прва година)
 tags:
 - logic

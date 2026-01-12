@@ -1,26 +1,24 @@
 ---
-grade: 12
-field: number_theory
 difficulty: 3
-problem_type: calculation
-source: "Municipal_Competition_2024"
-problem_id: 2024_mun_y4_2b
+field: number_theory
+grade: 12
 language_original: mk
-translated: false
-
-# --- SKILL MAPPING ---
-primary_skill: counting
-related_skills:
-  - logic
 prerequisites:
-  - legendre_formula
-
-# --- TOPICS ---
+- legendre_formula
+primary_skill: counting
+problem_id: 2024_mun_y4_2b
+problem_type: calculation
+related_skills:
+- logic
+related_theorems:
+- floor_function
+source: Municipal_Competition_2024
 tags:
-  - legendre_formula
-  - factorials
-  - divisibility
-  - olympiad
+- legendre_formula
+- factorials
+- divisibility
+- olympiad
+translated: false
 ---
 
 [⬅️ Назад кон Индексот](../README.md) | [🧰 Skill: counting](../../skill_guides/counting.md)

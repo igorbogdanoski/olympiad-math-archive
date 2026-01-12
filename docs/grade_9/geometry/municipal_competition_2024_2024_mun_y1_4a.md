@@ -1,31 +1,28 @@
 ---
-grade: 9
-field: geometry
 difficulty: 4
-problem_type: calculation
-source: "Municipal_Competition_2024"
-problem_id: 2024_mun_y1_4a
-language_original: <mk | en | sr | hr | ...>
-translated: false
-
-# --- GEOMETRY SKILLS ---
+field: geometry
 geometry_style: synthetic
-primary_skill: pythagorean_theorem
-related_skills:
-  - logic
+grade: 9
+language_original: <mk | en | sr | hr | ...>
 prerequisites:
-  - medians_properties
-
-# --- VISUALIZATION ---
-visual_prompt: "No visual prompt provided."
-
+- medians_properties
+primary_skill: pythagorean_theorem
+problem_id: 2024_mun_y1_4a
+problem_type: calculation
+related_skills:
+- logic
+related_theorems:
+- pythagorean_theorem
+source: Municipal_Competition_2024
 tags:
-  - geometry
-  - olympiad
-  - triangle
-  - medians
-  - right_angle
-  - pythagoras
+- geometry
+- olympiad
+- triangle
+- medians
+- right_angle
+- pythagoras
+translated: false
+visual_prompt: No visual prompt provided.
 ---
 
 [⬅️ Назад кон Индексот](../README.md) | [🧰 Skill: pythagorean_theorem](../../skill_guides/pythagorean_theorem.md)

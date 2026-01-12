@@ -6,6 +6,8 @@ problem_id: regional_2025_4_4a
 related_skills:
 - matematicka_indukcija
 - sredna_vrednost_teorema
+related_theorems:
+- integrals
 source: Сигма 139 (Регионален натпревар 2024/25)
 tags:
 - celi_delovi

@@ -1,29 +1,26 @@
 ---
-grade: 11
-field: geometry
 difficulty: 4
-problem_type: calculation
-source: "Municipal_Competition_2022"
-problem_id: 2022_mun_y3_4b
-language_original: <mk | en | sr | hr | ...>
-translated: false
-
-# --- GEOMETRY SKILLS ---
+field: geometry
 geometry_style: analytic
-primary_skill: vieta_formulas
-related_skills:
-  - logic
+grade: 11
+language_original: <mk | en | sr | hr | ...>
 prerequisites:
-  - quadratic_equation
-
-# --- VISUALIZATION ---
-visual_prompt: "No visual prompt provided."
-
+- quadratic_equation
+primary_skill: vieta_formulas
+problem_id: 2022_mun_y3_4b
+problem_type: calculation
+related_skills:
+- logic
+related_theorems:
+- vieta_formulas
+source: Municipal_Competition_2022
 tags:
-  - geometry
-  - olympiad
-  - quadratic_function
-  - roots
+- geometry
+- olympiad
+- quadratic_function
+- roots
+translated: false
+visual_prompt: No visual prompt provided.
 ---
 
 [⬅️ Назад кон Индексот](../README.md) | [🧰 Skill: vieta_formulas](../../skill_guides/vieta_formulas.md)

@@ -1,30 +1,28 @@
 ---
-grade: 10
-field: geometry
 difficulty: 2
-problem_type: calculation
-source: "Municipal_Competition_2022"
-problem_id: 2022_mun_y2_11a
-language_original: <mk | en | sr | hr | ...>
-translated: false
-
-# --- GEOMETRY SKILLS ---
+field: geometry
 geometry_style: synthetic
-primary_skill: trigonometry
-related_skills:
-  - logic
+grade: 10
+language_original: <mk | en | sr | hr | ...>
 prerequisites:
-  - pythagorean_theorem
-  - trig_definitions
-
-# --- VISUALIZATION ---
-visual_prompt: "Draw a right-angled triangle ABC with C=90 degrees. AC is the base, length 2. BC is the height. Angle A is alpha. Label AC=2 and tan(alpha)=3/4."
-
+- pythagorean_theorem
+- trig_definitions
+primary_skill: trigonometry
+problem_id: 2022_mun_y2_11a
+problem_type: calculation
+related_skills:
+- logic
+related_theorems:
+- pythagorean_theorem
+source: Municipal_Competition_2022
 tags:
-  - geometry
-  - olympiad
-  - right_triangle
-  - trigonometry
+- geometry
+- olympiad
+- right_triangle
+- trigonometry
+translated: false
+visual_prompt: Draw a right-angled triangle ABC with C=90 degrees. AC is the base,
+  length 2. BC is the height. Angle A is alpha. Label AC=2 and tan(alpha)=3/4.
 ---
 
 [⬅️ Назад кон Индексот](../README.md) | [🧰 Skill: trigonometry](../../skill_guides/trigonometry.md)

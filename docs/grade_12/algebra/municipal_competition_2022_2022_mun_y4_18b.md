@@ -1,10 +1,12 @@
 ---
-grade: 12
 difficulty: 6
+grade: 12
+related_theorems:
+- probability
 tags:
-  - inequalities
-  - algebraic_manipulation
-  - olympiad
+- inequalities
+- algebraic_manipulation
+- olympiad
 ---
 
 # Циклично неравенство

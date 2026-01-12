@@ -1,31 +1,28 @@
 ---
-grade: 8
-field: geometry
 difficulty: 4
-problem_type: calculation
-source: "Municipal_Competition_2023"
-problem_id: 2023_mun_g8_3
-language_original: <mk | en | sr | hr | ...>
-translated: false
-
-# --- GEOMETRY SKILLS ---
+field: geometry
 geometry_style: synthetic
-primary_skill: factorization
-related_skills:
-  - logic
+grade: 8
+language_original: <mk | en | sr | hr | ...>
 prerequisites:
-  - volume_formula
-
-# --- VISUALIZATION ---
-visual_prompt: "No visual prompt provided."
-
+- volume_formula
+primary_skill: factorization
+problem_id: 2023_mun_g8_3
+problem_type: calculation
+related_skills:
+- logic
+related_theorems:
+- number_theory
+source: Municipal_Competition_2023
 tags:
-  - geometry
-  - olympiad
-  - cuboid
-  - volume
-  - surface_area
-  - optimization
+- geometry
+- olympiad
+- cuboid
+- volume
+- surface_area
+- optimization
+translated: false
+visual_prompt: No visual prompt provided.
 ---
 
 [⬅️ Назад кон Индексот](../README.md) | [🧰 Skill: factorization](../../skill_guides/factorization.md)

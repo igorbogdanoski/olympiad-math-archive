@@ -1,15 +1,18 @@
 ---
-grade: 8
-field: algebra
 difficulty: 6
-source: Sigma Magazine
-problem_id: 1814
+field: algebra
+grade: 8
 language_original: mk
-translated: false
+problem_id: 1814
+related_theorems:
+- symmetry
+- quadratic_equations
+source: Sigma Magazine
 tags:
-  - geometric_progression
-  - structural_thinking
-  - symmetry
+- geometric_progression
+- structural_thinking
+- symmetry
+translated: false
 ---
 
 # Геометриска прогресија и услови

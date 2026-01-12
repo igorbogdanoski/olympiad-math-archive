@@ -1,27 +1,20 @@
 ---
-grade: 9
-field: number_theory
 difficulty: 5
-source: "Sigma 2025"
-problem_id: sigma_10
+field: number_theory
+grade: 9
 language_original: mk
+primary_skill: factorization
+problem_id: sigma_10
+related_skills:
+- primes
+related_theorems:
+- number_theory
+source: Sigma 2025
+tags:
+- <topic_1>
+- <topic_2>
+- olympiad
 translated: false
-
-# 
-tags:
-  - number_theory
-  - prime_numbers
-related_skills:
-  - prime_numbers--- SKILL MAPPING (New Standard) ---
-primary_skill: factorization # e.g., symmetry, invariants, telescoping
-related_skills:
-  - primes
-
-# --- TOPICS ---
-tags:
-  - <topic_1> # e.g., percentages
-  - <topic_2> # e.g., linear_equations
-  - olympiad
 ---
 
 # Равенка со прости броеви

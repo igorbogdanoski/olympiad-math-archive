@@ -1,30 +1,27 @@
 ---
-grade: 6
-field: geometry
 difficulty: 3
-problem_type: calculation
-source: "Municipal_Competition_2022"
-problem_id: 2022_mun_g6_2
-language_original: <mk | en | sr | hr | ...>
-translated: false
-
-# --- GEOMETRY SKILLS ---
+field: geometry
 geometry_style: synthetic
-primary_skill: counting
-related_skills:
-  - logic
+grade: 6
+language_original: <mk | en | sr | hr | ...>
 prerequisites:
-  - basic_geometry
-
-# --- VISUALIZATION ---
-visual_prompt: "No visual prompt provided."
-
+- basic_geometry
+primary_skill: counting
+problem_id: 2022_mun_g6_2
+problem_type: calculation
+related_skills:
+- logic
+related_theorems:
+- combinatorics
+source: Municipal_Competition_2022
 tags:
-  - geometry
-  - olympiad
-  - counting
-  - segments
-  - combinatorics
+- geometry
+- olympiad
+- counting
+- segments
+- combinatorics
+translated: false
+visual_prompt: No visual prompt provided.
 ---
 
 [⬅️ Назад кон Индексот](../README.md) | [🧰 Skill: counting](../../skill_guides/counting.md)

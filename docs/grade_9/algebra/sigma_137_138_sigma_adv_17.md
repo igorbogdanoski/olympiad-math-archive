@@ -1,28 +1,21 @@
 ---
-grade: 9
-field: algebra
 difficulty: 5
-source: "Sigma 137/138"
-problem_id: sigma_adv_17
+field: algebra
+grade: 9
 language_original: mk
+primary_skill: functional_equation
+problem_id: sigma_adv_17
+related_skills:
+- summation
+- symmetry
+related_theorems:
+- symmetry
+source: Sigma 137/138
+tags:
+- <topic_1>
+- <topic_2>
+- olympiad
 translated: false
-
-# 
-tags:
-  - functions
-  - analysis
-related_skills:
-  - functions--- SKILL MAPPING (New Standard) ---
-primary_skill: functional_equation # e.g., symmetry, invariants, telescoping
-related_skills:
-  - summation
-  - symmetry
-
-# --- TOPICS ---
-tags:
-  - <topic_1> # e.g., percentages
-  - <topic_2> # e.g., linear_equations
-  - olympiad
 ---
 
 # Пресметка на сума со функција

@@ -1,23 +1,21 @@
 ---
-grade: 9
-field: algebra
 difficulty: 7
-source: "Sigma 137/138 (Reconstructed)"
-problem_id: sigma_adv_18
+field: algebra
+grade: 9
 language_original: mk
-translated: false
-
-# --- SKILL MAPPING (New Standard) ---
-primary_skill: algebraic_identities # e.g., symmetry, invariants, telescoping
+primary_skill: algebraic_identities
+problem_id: sigma_adv_18
 related_skills:
-  - inequalities_am_gm
-  - substitution
-
-# --- TOPICS ---
+- inequalities_am_gm
+- substitution
+related_theorems:
+- am_gm_inequality
+source: Sigma 137/138 (Reconstructed)
 tags:
-  - <topic_1> # e.g., percentages
-  - <topic_2> # e.g., linear_equations
-  - olympiad
+- <topic_1>
+- <topic_2>
+- olympiad
+translated: false
 ---
 
 # Неравенство со реципрочен услов

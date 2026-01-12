@@ -1,30 +1,27 @@
 ---
-grade: 7
-field: geometry
 difficulty: 5
-problem_type: calculation
-source: "Municipal_Competition_2024"
-problem_id: 2024_mun_g7_4
-language_original: <mk | en | sr | hr | ...>
-translated: false
-
-# --- GEOMETRY SKILLS ---
+field: geometry
 geometry_style: synthetic
-primary_skill: inequalities
-related_skills:
-  - logic
+grade: 7
+language_original: <mk | en | sr | hr | ...>
 prerequisites:
-  - triangle_inequality
-
-# --- VISUALIZATION ---
-visual_prompt: "No visual prompt provided."
-
+- triangle_inequality
+primary_skill: inequalities
+problem_id: 2024_mun_g7_4
+problem_type: calculation
+related_skills:
+- logic
+related_theorems:
+- parity
+source: Municipal_Competition_2024
 tags:
-  - geometry
-  - olympiad
-  - triangle_inequality
-  - combinatorics
-  - isosceles_triangle
+- geometry
+- olympiad
+- triangle_inequality
+- combinatorics
+- isosceles_triangle
+translated: false
+visual_prompt: No visual prompt provided.
 ---
 
 [⬅️ Назад кон Индексот](../README.md) | [🧰 Skill: inequalities](../../skill_guides/inequalities.md)

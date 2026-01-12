@@ -1,28 +1,21 @@
 ---
-grade: 4
-field: combinatorics
 difficulty: 5
-source: "Numerus"
-problem_id: 4354
+field: combinatorics
+grade: 4
 language_original: mk
+primary_skill: systematic_listing
+problem_id: 4354
+related_skills:
+- parity
+- place_value
+related_theorems:
+- parity
+source: Numerus
+tags:
+- <topic_1>
+- <topic_2>
+- olympiad
 translated: false
-
-# 
-tags:
-  - algebra
-  - system_of_equations
-related_skills:
-  - system_of_equations--- SKILL MAPPING (New Standard) ---
-primary_skill: systematic_listing # e.g., symmetry, invariants, telescoping
-related_skills:
-  - parity
-  - place_value
-
-# --- TOPICS ---
-tags:
-  - <topic_1> # e.g., percentages
-  - <topic_2> # e.g., linear_equations
-  - olympiad
 ---
 
 # Непарни четирицифрени броеви

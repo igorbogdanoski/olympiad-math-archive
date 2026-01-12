@@ -6,6 +6,10 @@ problem_id: sigma_137_y2_p1
 related_skills:
 - комплексни_броеви_интуиција
 - биномен_развој
+related_theorems:
+- symmetry
+- complex_numbers
+- modular_arithmetic
 source: Сигма 137
 tags:
 - полиномни_идентитети

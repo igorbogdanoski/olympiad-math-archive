@@ -1,26 +1,25 @@
 ---
-grade: 12
-field: algebra
 difficulty: 5
-problem_type: calculation
-source: "Municipal_Competition_2022"
-problem_id: 2022_mun_y4_20a
+field: algebra
+grade: 12
 language_original: mk
-translated: false
-
-# --- SKILL MAPPING ---
-primary_skill: vieta_formulas
-related_skills:
-  - logic
 prerequisites:
-  - cubic_equation
-
-# --- TOPICS ---
+- cubic_equation
+primary_skill: vieta_formulas
+problem_id: 2022_mun_y4_20a
+problem_type: calculation
+related_skills:
+- logic
+related_theorems:
+- vieta_formulas
+- number_theory
+source: Municipal_Competition_2022
 tags:
-  - polynomials
-  - vieta_formulas
-  - arithmetic_progression
-  - olympiad
+- polynomials
+- vieta_formulas
+- arithmetic_progression
+- olympiad
+translated: false
 ---
 
 [⬅️ Назад кон Индексот](../README.md) | [🧰 Skill: vieta_formulas](../../skill_guides/vieta_formulas.md)

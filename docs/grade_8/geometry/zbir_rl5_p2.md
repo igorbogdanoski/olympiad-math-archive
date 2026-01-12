@@ -6,6 +6,8 @@ problem_id: zbir_rl5_p2
 related_skills:
 - збир_на_агли_во_четириаголник
 - накрсни_агли
+related_theorems:
+- probability
 source: Едукативен центар Збир - Работен лист
 tags:
 - ортоцентар

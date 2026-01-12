@@ -1,26 +1,24 @@
 ---
-grade: 9
-field: number_theory
 difficulty: 3
-problem_type: calculation
-source: "Municipal_Competition_2022"
-problem_id: 2022_mun_y1_11a
+field: number_theory
+grade: 9
 language_original: mk
-translated: false
-
-# --- SKILL MAPPING ---
-primary_skill: divisors
-related_skills:
-  - logic
 prerequisites:
-  - prime_factorization
-
-# --- TOPICS ---
+- prime_factorization
+primary_skill: divisors
+problem_id: 2022_mun_y1_11a
+problem_type: calculation
+related_skills:
+- logic
+related_theorems:
+- number_theory
+source: Municipal_Competition_2022
 tags:
-  - divisors
-  - primes
-  - squares
-  - olympiad
+- divisors
+- primes
+- squares
+- olympiad
+translated: false
 ---
 
 [⬅️ Назад кон Индексот](../README.md) | [🧰 Skill: divisors](../../skill_guides/divisors.md)

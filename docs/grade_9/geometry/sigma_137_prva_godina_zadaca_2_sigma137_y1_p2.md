@@ -1,13 +1,15 @@
 ---
-grade: 9
 difficulty: 4
 geometry_style: synthetic
+grade: 9
+related_theorems:
+- symmetry
 tags:
-  - geometry
-  - olympiad
-  - triangle
-  - incenter
-  - angle_bisector
+- geometry
+- olympiad
+- triangle
+- incenter
+- angle_bisector
 ---
 
 # Аголот во триаголникот и впишаната кружница

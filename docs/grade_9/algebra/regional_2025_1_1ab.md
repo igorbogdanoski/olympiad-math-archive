@@ -6,6 +6,8 @@ problem_id: regional_2025_1_1ab
 related_skills:
 - faktorizacija
 - racionalni_izrazi
+related_theorems:
+- symmetry
 source: Регионален натпревар по математика за средно образование 2025 (15.02.2025)
 tags:
 - algebarski_izrazi

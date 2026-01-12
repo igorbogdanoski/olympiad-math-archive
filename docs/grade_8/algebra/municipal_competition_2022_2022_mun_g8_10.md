@@ -1,26 +1,24 @@
 ---
-grade: 8
-field: algebra
 difficulty: 4
-problem_type: calculation
-source: "Municipal_Competition_2022"
-problem_id: 2022_mun_g8_10
+field: algebra
+grade: 8
 language_original: mk
-translated: false
-
-# --- SKILL MAPPING ---
-primary_skill: working_backwards
-related_skills:
-  - logic
 prerequisites:
-  - square_roots
-
-# --- TOPICS ---
+- square_roots
+primary_skill: working_backwards
+problem_id: 2022_mun_g8_10
+problem_type: calculation
+related_skills:
+- logic
+related_theorems:
+- probability
+source: Municipal_Competition_2022
 tags:
-  - radicals
-  - nested_roots
-  - working_backwards
-  - olympiad
+- radicals
+- nested_roots
+- working_backwards
+- olympiad
+translated: false
 ---
 
 [⬅️ Назад кон Индексот](../README.md) | [🧰 Skill: working_backwards](../../skill_guides/working_backwards.md)

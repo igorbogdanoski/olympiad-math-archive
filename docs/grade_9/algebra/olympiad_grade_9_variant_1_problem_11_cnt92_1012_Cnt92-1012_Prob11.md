@@ -1,32 +1,25 @@
 ---
-grade: 9
-field: <algebra | number_theory | combinatorics | logic>
 difficulty: 2
-problem_type: calculation
-source: "Olympiad Grade 9, Variant 1, Problem 11 (Cnt92-1012)"
-problem_id: Cnt92-1012_Prob11
+field: <algebra | number_theory | combinatorics | logic>
+grade: 9
 language_original: ru
-translated: false
-
-# 
-tags:
-  - functions
-  - analysis
-related_skills:
-  - functions--- SKILL MAPPING ---
-primary_skill: functions
-related_skills:
-  - domain
-  - radicals
 prerequisites:
-  - basic_math
-
-# --- TOPICS ---
+- basic_math
+primary_skill: functions
+problem_id: Cnt92-1012_Prob11
+problem_type: calculation
+related_skills:
+- domain
+- radicals
+related_theorems:
+- parity
+source: Olympiad Grade 9, Variant 1, Problem 11 (Cnt92-1012)
 tags:
-  - domain
-  - square_root
-  - cube_root
-  - olympiad
+- domain
+- square_root
+- cube_root
+- olympiad
+translated: false
 ---
 
 # Дефинициона област на функција

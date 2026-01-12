@@ -1,11 +1,14 @@
 ---
-grade: 12
 difficulty: 5
+grade: 12
+related_theorems:
+- vieta_formulas
+- number_theory
 tags:
-  - polynomials
-  - vieta_formulas
-  - arithmetic_progression
-  - olympiad
+- polynomials
+- vieta_formulas
+- arithmetic_progression
+- olympiad
 ---
 
 # Кубна равенка и аритметичка прогресија

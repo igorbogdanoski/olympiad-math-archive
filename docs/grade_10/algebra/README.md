@@ -1,3 +1,8 @@
+---
+related_theorems:
+- vieta_formulas
+---
+
 # 📂 Algebra
 
 [⬅️ Назад кон прегледот](../README.md)

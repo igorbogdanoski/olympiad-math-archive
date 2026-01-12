@@ -1,26 +1,24 @@
 ---
-grade: 9
-field: algebra
 difficulty: 2
-problem_type: calculation
-source: "Cnt92_Olympiad_Var2"
-problem_id: cnt92_v2_10
+field: algebra
+grade: 9
 language_original: mk
-translated: false
-
-# --- SKILL MAPPING ---
-primary_skill: logic
-related_skills:
-  - logic
 prerequisites:
-  - basic_math
-
-# --- TOPICS ---
+- basic_math
+primary_skill: logic
+problem_id: cnt92_v2_10
+problem_type: calculation
+related_skills:
+- logic
+related_theorems:
+- optimization
+source: Cnt92_Olympiad_Var2
 tags:
-  - inequalities
-  - intervals
-  - fractions
-  - olympiad
+- inequalities
+- intervals
+- fractions
+- olympiad
+translated: false
 ---
 
 [⬅️ Назад кон Индексот](../README.md) | [🧰 Skill: logic](../../skill_guides/logic.md)

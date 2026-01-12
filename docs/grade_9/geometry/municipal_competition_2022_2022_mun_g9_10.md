@@ -1,30 +1,27 @@
 ---
-grade: 9
-field: geometry
 difficulty: 3
-problem_type: calculation
-source: "Municipal_Competition_2022"
-problem_id: 2022_mun_g9_10
-language_original: <mk | en | sr | hr | ...>
-translated: false
-
-# --- GEOMETRY SKILLS ---
+field: geometry
 geometry_style: synthetic
-primary_skill: pythagorean_theorem
-related_skills:
-  - logic
+grade: 9
+language_original: <mk | en | sr | hr | ...>
 prerequisites:
-  - pythagorean_theorem
-
-# --- VISUALIZATION ---
-visual_prompt: "No visual prompt provided."
-
+- pythagorean_theorem
+primary_skill: pythagorean_theorem
+problem_id: 2022_mun_g9_10
+problem_type: calculation
+related_skills:
+- logic
+related_theorems:
+- pythagorean_theorem
+source: Municipal_Competition_2022
 tags:
-  - geometry
-  - olympiad
-  - circle
-  - chords
-  - pythagoras
+- geometry
+- olympiad
+- circle
+- chords
+- pythagoras
+translated: false
+visual_prompt: No visual prompt provided.
 ---
 
 [⬅️ Назад кон Индексот](../README.md) | [🧰 Skill: pythagorean_theorem](../../skill_guides/pythagorean_theorem.md)

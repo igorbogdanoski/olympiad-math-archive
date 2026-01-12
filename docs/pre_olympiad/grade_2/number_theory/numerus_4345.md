@@ -1,23 +1,21 @@
 ---
-grade: 2
-field: number_theory
 difficulty: 2
-source: "Numerus"
-problem_id: 4345
+field: number_theory
+grade: 2
 language_original: mk
-translated: false
-
-# --- SKILL MAPPING (New Standard) ---
-primary_skill: parity # e.g., symmetry, invariants, telescoping
+primary_skill: parity
+problem_id: 4345
 related_skills:
-  - inequalities
-  - addition
-
-# --- TOPICS ---
+- inequalities
+- addition
+related_theorems:
+- parity
+source: Numerus
 tags:
-  - <topic_1> # e.g., percentages
-  - <topic_2> # e.g., linear_equations
-  - olympiad
+- <topic_1>
+- <topic_2>
+- olympiad
+translated: false
 ---
 
 # Непарни броеви во првата десетка

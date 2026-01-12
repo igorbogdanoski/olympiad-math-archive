@@ -1,44 +1,29 @@
 ---
-grade: 9
-field: geometry
-difficulty: 2
-source: "<натпревар / списание / година>"
-problem_id: Cnt92-1012_Prob8
-language_original: <mk | en | sr | hr | ...>
-translated: false
-
-# 
-tags:
-  - circle_geometry
-  - vectors
-  - angle_chasing
-  - geometry
-  - complex_numbers
-  - algebra
-  - similarity
-related_skills:
-  - circle_geometry
-  - vectors
-  - angle_chasing
-  - complex_numbers
-  - similarity--- GEOMETRY SKILLS ---
-geometry_style: synthetic # synthetic | analytic | mixed
-primary_skill: <main_tool> # e.g., angle_chasing, similarity, cyclic_quads
-related_skills:
-  - pythagorean_theorem
-  - circle_geometry
-
 allowed_tools:
-  - classical_euclidean
-  - similarity
-  - symmetry
+- classical_euclidean
+- similarity
+- symmetry
+difficulty: 2
+field: geometry
 forbidden_tools:
-  - coordinate_geometry
-  - vectors
-  - complex_numbers
+- coordinate_geometry
+- vectors
+- complex_numbers
+geometry_style: synthetic
+grade: 9
+language_original: <mk | en | sr | hr | ...>
+primary_skill: <main_tool>
+problem_id: Cnt92-1012_Prob8
+related_skills:
+- pythagorean_theorem
+- circle_geometry
+related_theorems:
+- pythagorean_theorem
+source: <натпревар / списание / година>
 tags:
-  - geometry
-  - olympiad
+- geometry
+- olympiad
+translated: false
 ---
 
 # Медијана кон хипотенуза во правоаголен триаголник

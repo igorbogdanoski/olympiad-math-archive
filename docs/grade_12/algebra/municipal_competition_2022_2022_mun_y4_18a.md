@@ -1,25 +1,23 @@
 ---
-grade: 12
-field: algebra
 difficulty: 6
-problem_type: proof
-source: "Municipal_Competition_2022"
-problem_id: 2022_mun_y4_18a
+field: algebra
+grade: 12
 language_original: mk
-translated: false
-
-# --- SKILL MAPPING ---
-primary_skill: inequalities
-related_skills:
-  - logic
 prerequisites:
-  - am_gm
-
-# --- TOPICS ---
+- am_gm
+primary_skill: inequalities
+problem_id: 2022_mun_y4_18a
+problem_type: proof
+related_skills:
+- logic
+related_theorems:
+- probability
+source: Municipal_Competition_2022
 tags:
-  - inequalities
-  - algebraic_manipulation
-  - olympiad
+- inequalities
+- algebraic_manipulation
+- olympiad
+translated: false
 ---
 
 [⬅️ Назад кон Индексот](../README.md) | [🧰 Skill: inequalities](../../skill_guides/inequalities.md)

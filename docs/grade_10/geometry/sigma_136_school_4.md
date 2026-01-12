@@ -6,6 +6,8 @@ problem_id: sigma_136_school_4
 related_skills:
 - sine_theorem
 - angle_chasing
+related_theorems:
+- symmetry
 source: Сигма 136, Задачи од училницата (Втора година)
 tags:
 - synthetic_geometry

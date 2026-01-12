@@ -2,6 +2,8 @@
 difficulty: 5
 grade: 11
 problem_id: sigma137_p1855_algebra_log_inequality
+related_theorems:
+- quadratic_equations
 source: Сигма 137
 tags:
 - algebra

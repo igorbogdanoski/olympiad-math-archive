@@ -6,6 +6,10 @@ problem_id: algebra_func_sum_1884
 related_skills:
 - exponents
 - algebraic_manipulation
+related_theorems:
+- symmetry
+- parity
+- functions
 source: Zbirka_Alg_1884
 tags:
 - functional_equation

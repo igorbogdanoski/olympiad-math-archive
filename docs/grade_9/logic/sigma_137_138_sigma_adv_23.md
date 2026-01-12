@@ -1,28 +1,21 @@
 ---
-grade: 9
-field: logic
 difficulty: 6
-source: "Sigma 137/138"
-problem_id: sigma_adv_23
+field: logic
+grade: 9
 language_original: mk
+primary_skill: invariants
+problem_id: sigma_adv_23
+related_skills:
+- transformations
+- divisibility
+related_theorems:
+- invariants
+source: Sigma 137/138
+tags:
+- <topic_1>
+- <topic_2>
+- olympiad
 translated: false
-
-# 
-tags:
-  - number_theory
-  - divisibility
-related_skills:
-  - divisibility--- SKILL MAPPING (New Standard) ---
-primary_skill: invariants # e.g., symmetry, invariants, telescoping
-related_skills:
-  - transformations
-  - divisibility
-
-# --- TOPICS ---
-tags:
-  - <topic_1> # e.g., percentages
-  - <topic_2> # e.g., linear_equations
-  - olympiad
 ---
 
 # Компјутерски трансформации

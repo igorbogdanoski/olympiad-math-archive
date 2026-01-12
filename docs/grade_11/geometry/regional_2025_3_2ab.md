@@ -6,6 +6,8 @@ problem_id: regional_2025_3_2ab
 related_skills:
 - pitagorina_teorema
 - proekcii_vo_ramnina
+related_theorems:
+- pythagorean_theorem
 source: Сигма 139 (Регионален натпревар 2025)
 tags:
 - stereometrija

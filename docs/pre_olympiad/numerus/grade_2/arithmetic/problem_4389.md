@@ -1,15 +1,18 @@
 ---
-grade: 2
-field: arithmetic
 difficulty: 3
-source: "Numerus 51-2 (2025/2026)"
+field: arithmetic
+grade: 2
 language_original: mk
+related_theorems:
+- symmetry
+- structural_thinking
+source: Numerus 51-2 (2025/2026)
 tags:
-  - counting
-  - parity
-  - grouping
-  - comparison
-  - structural_thinking
+- counting
+- parity
+- grouping
+- comparison
+- structural_thinking
 ---
 
 # Задача 4389 — Збир на десетки

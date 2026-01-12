@@ -1,31 +1,24 @@
 ---
-grade: 12
-field: combinatorics
 difficulty: 3
-problem_type: calculation
-source: "Municipal_Competition_2025"
-problem_id: 2025_mun_y4_2b
+field: combinatorics
+grade: 12
 language_original: mk
-translated: false
-
-# 
-tags:
-  - permutations
-  - combinatorics
-related_skills:
-  - permutations--- SKILL MAPPING ---
-primary_skill: logic
-related_skills:
-  - logic
 prerequisites:
-  - basic_math
-
-# --- TOPICS ---
+- basic_math
+primary_skill: logic
+problem_id: 2025_mun_y4_2b
+problem_type: calculation
+related_skills:
+- logic
+related_theorems:
+- combinatorics
+source: Municipal_Competition_2025
 tags:
-  - counting
-  - chess_problems
-  - permutations
-  - olympiad
+- counting
+- chess_problems
+- permutations
+- olympiad
+translated: false
 ---
 
 [⬅️ Назад кон Индексот](../README.md) | [🧰 Skill: logic](../../skill_guides/logic.md)

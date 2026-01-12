@@ -1,11 +1,14 @@
 ---
-grade: 10
 difficulty: 5
+grade: 10
+related_theorems:
+- parity
+- modular_arithmetic
 tags:
-  - primes
-  - squares
-  - parity
-  - olympiad
+- primes
+- squares
+- parity
+- olympiad
 ---
 
 # Прости броеви и квадрати

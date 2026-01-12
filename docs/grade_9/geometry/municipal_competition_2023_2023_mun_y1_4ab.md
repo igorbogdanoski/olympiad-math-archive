@@ -1,30 +1,27 @@
 ---
-grade: 9
-field: geometry
 difficulty: 3
-problem_type: calculation
-source: "Municipal_Competition_2023"
-problem_id: 2023_mun_y1_4ab
-language_original: <mk | en | sr | hr | ...>
-translated: false
-
-# --- GEOMETRY SKILLS ---
+field: geometry
 geometry_style: synthetic
-primary_skill: similarity
-related_skills:
-  - logic
+grade: 9
+language_original: <mk | en | sr | hr | ...>
 prerequisites:
-  - trapezoid_properties
-
-# --- VISUALIZATION ---
-visual_prompt: "No visual prompt provided."
-
+- trapezoid_properties
+primary_skill: similarity
+problem_id: 2023_mun_y1_4ab
+problem_type: calculation
+related_skills:
+- logic
+related_theorems:
+- similarity
+source: Municipal_Competition_2023
 tags:
-  - geometry
-  - olympiad
-  - trapezoid
-  - parallel_lines
-  - thales_theorem
+- geometry
+- olympiad
+- trapezoid
+- parallel_lines
+- thales_theorem
+translated: false
+visual_prompt: No visual prompt provided.
 ---
 
 [⬅️ Назад кон Индексот](../README.md) | [🧰 Skill: similarity](../../skill_guides/similarity.md)

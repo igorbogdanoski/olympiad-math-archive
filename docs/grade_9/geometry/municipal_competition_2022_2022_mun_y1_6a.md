@@ -1,30 +1,30 @@
 ---
-grade: 9
-field: geometry
 difficulty: 3
-problem_type: calculation
-source: "Municipal_Competition_2022"
-problem_id: 2022_mun_y1_6a
-language_original: <mk | en | sr | hr | ...>
-translated: false
-
-# --- GEOMETRY SKILLS ---
+field: geometry
 geometry_style: analytic
-primary_skill: similarity
-related_skills:
-  - linear_functions
-  - slope
+grade: 9
+language_original: <mk | en | sr | hr | ...>
 prerequisites:
-  - basic_math
-
-# --- VISUALIZATION ---
-visual_prompt: "Draw three squares placed side-by-side on a horizontal line. The first square is the largest (height x), the second is medium (height 6), the third is smallest (height 4). Draw a straight line passing through their top-left corners X, Y, Z. Label the side lengths."
-
+- basic_math
+primary_skill: similarity
+problem_id: 2022_mun_y1_6a
+problem_type: calculation
+related_skills:
+- linear_functions
+- slope
+related_theorems:
+- similarity
+source: Municipal_Competition_2022
 tags:
-  - geometry
-  - olympiad
-  - squares
-  - collinearity
+- geometry
+- olympiad
+- squares
+- collinearity
+translated: false
+visual_prompt: Draw three squares placed side-by-side on a horizontal line. The first
+  square is the largest (height x), the second is medium (height 6), the third is
+  smallest (height 4). Draw a straight line passing through their top-left corners
+  X, Y, Z. Label the side lengths.
 ---
 
 [⬅️ Назад кон Индексот](../README.md) | [🧰 Skill: similarity](../../skill_guides/similarity.md)

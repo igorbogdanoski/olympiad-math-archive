@@ -1,26 +1,25 @@
 ---
-grade: 12
-field: algebra
 difficulty: 3
-problem_type: proof
-source: "Municipal_Competition_2025"
-problem_id: 2025_mun_y4_1b
+field: algebra
+grade: 12
 language_original: mk
-translated: false
-
-# --- SKILL MAPPING ---
-primary_skill: logic
-related_skills:
-  - logic
 prerequisites:
-  - basic_math
-
-# --- TOPICS ---
+- basic_math
+primary_skill: logic
+problem_id: 2025_mun_y4_1b
+problem_type: proof
+related_skills:
+- logic
+related_theorems:
+- vectors
+- cauchy_schwarz_inequality
+source: Municipal_Competition_2025
 tags:
-  - geometric_progression
-  - algebraic_identities
-  - cauchy_schwarz
-  - olympiad
+- geometric_progression
+- algebraic_identities
+- cauchy_schwarz
+- olympiad
+translated: false
 ---
 
 [⬅️ Назад кон Индексот](../README.md) | [🧰 Skill: logic](../../skill_guides/logic.md)

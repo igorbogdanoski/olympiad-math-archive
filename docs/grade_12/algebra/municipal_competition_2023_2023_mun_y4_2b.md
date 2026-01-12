@@ -1,26 +1,24 @@
 ---
-grade: 12
-field: algebra
 difficulty: 5
-problem_type: proof
-source: "Municipal_Competition_2023"
-problem_id: 2023_mun_y4_2b
+field: algebra
+grade: 12
 language_original: mk
-translated: false
-
-# --- SKILL MAPPING ---
-primary_skill: discriminant
-related_skills:
-  - logic
 prerequisites:
-  - quadratic_inequalities
-
-# --- TOPICS ---
+- quadratic_inequalities
+primary_skill: discriminant
+problem_id: 2023_mun_y4_2b
+problem_type: proof
+related_skills:
+- logic
+related_theorems:
+- optimization
+source: Municipal_Competition_2023
 tags:
-  - inequalities
-  - discriminant
-  - polynomials
-  - olympiad
+- inequalities
+- discriminant
+- polynomials
+- olympiad
+translated: false
 ---
 
 [⬅️ Назад кон Индексот](../README.md) | [🧰 Skill: discriminant](../../skill_guides/discriminant.md)

@@ -1,29 +1,27 @@
 ---
-grade: 9
-field: geometry
 difficulty: 2
-problem_type: calculation
-source: "Municipal_Competition_2022"
-problem_id: 2022_mun_y1_3a
-language_original: <mk | en | sr | hr | ...>
-translated: false
-
-# --- GEOMETRY SKILLS ---
+field: geometry
 geometry_style: synthetic
-primary_skill: angle_chasing
-related_skills:
-  - logic
+grade: 9
+language_original: <mk | en | sr | hr | ...>
 prerequisites:
-  - triangle_sum
-
-# --- VISUALIZATION ---
-visual_prompt: "No visual prompt provided."
-
+- triangle_sum
+primary_skill: angle_chasing
+problem_id: 2022_mun_y1_3a
+problem_type: calculation
+related_skills:
+- logic
+related_theorems:
+- probability
+- geometry_construction
+source: Municipal_Competition_2022
 tags:
-  - geometry
-  - olympiad
-  - angles
-  - polygons
+- geometry
+- olympiad
+- angles
+- polygons
+translated: false
+visual_prompt: No visual prompt provided.
 ---
 
 [⬅️ Назад кон Индексот](../README.md) | [🧰 Skill: angle_chasing](../../skill_guides/angle_chasing.md)
