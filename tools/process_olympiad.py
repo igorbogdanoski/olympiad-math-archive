@@ -153,12 +153,8 @@ class PlatinumProcessor:
         with open(self.manim_temp_script, 'w', encoding='utf-8') as f:
             f.write(manim_code)
 
-        # Папка за специфичниот проблем
-        problem_assets_dir = self.assets_dir / problem_id
-        problem_assets_dir.mkdir(parents=True, exist_ok=True)
-        
         # Конечна патека каде ја очекуваме сликата
-        final_image_path = problem_assets_dir / f"{problem_id}.png"
+        final_image_path = self.assets_dir / f"{problem_id}.png"
 
         # Команда за Manim
         # -qh = Quality High (1080p)
@@ -211,7 +207,7 @@ class PlatinumProcessor:
             shutil.move(str(source_img), str(final_image_path))
             print(f"OK: Slika e kreirana: {final_image_path.name}")
             # Correct relative path for the web (assuming /assets/images is public)
-            return f"/assets/images/{problem_id}/{problem_id}.png"
+            return f"/assets/images/{problem_id}.png"
         
         return None
 
