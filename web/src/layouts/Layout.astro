@@ -114,12 +114,11 @@ const { title } = Astro.props;
 				<div class="flex justify-between h-16 items-center">
 					<div class="flex items-center gap-3">
 						<a href="/" class="flex items-center gap-2 group">
-							<div class="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center text-white shadow-lg shadow-blue-500/20 group-hover:scale-105 transition-transform">
-								<span class="text-xl font-bold">∑</span>
-							</div>
+							<img src="/logo.svg" alt="GeoMentor Logo" class="w-10 h-10 group-hover:scale-105 transition-transform">
 							<div class="flex flex-col">
 								<span class="font-extrabold text-lg leading-none tracking-tight">МатАрхива</span>
-								<span class="text-[10px] text-slate-500 dark:text-slate-400 font-bold uppercase tracking-widest">Geo-Mentor</span>
+								<span class="text-[10px] text-slate-500 dark:text-slate-400 font-bold uppercase tracking-widest">GeoMentor</span>
+								<span class="text-[9px] text-slate-400 dark:text-slate-300 font-medium">Игор Богдановски</span>
 							</div>
 						</a>
 					</div>
@@ -168,16 +167,19 @@ const { title } = Astro.props;
 					<div>
 						<h3 class="font-bold mb-4">Контакт</h3>
 						<p class="text-sm text-slate-500 dark:text-slate-400">
-							Имате предлог или задача? Контактирајте го тимот на Geo-Mentor преку нашето репозиториум на GitHub.
+							Имате предлог или задача? Контактирајте го Игор Богдановски преку нашето репозиториум на GitHub.
 						</p>
 					</div>
 				</div>
 				<div class="mt-12 pt-8 border-t border-slate-100 dark:border-slate-900 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-slate-400 uppercase tracking-widest font-bold">
-					<span>&copy; {new Date().getFullYear()} Geo-Mentor Project</span>
+					<div class="flex flex-col items-center md:items-start gap-1">
+						<span>&copy; {new Date().getFullYear()} GeoMentor</span>
+						<span class="text-[8px] normal-case font-normal">Игор Богдановски</span>
+					</div>
 					<div class="flex gap-6">
 						<a href="#" class="hover:text-slate-600">Privacy</a>
 						<a href="#" class="hover:text-slate-600">Terms</a>
-						<a href="https://github.com" class="hover:text-slate-600">GitHub</a>
+						<a href="https://github.com/igorbogdanoski/olympiad-math-archive" class="hover:text-slate-600">GitHub</a>
 					</div>
 				</div>
 			</div>
