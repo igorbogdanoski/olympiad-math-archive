@@ -1,0 +1,84 @@
+<!DOCTYPE html><html lang="mk" class="scroll-smooth"> <head><meta charset="UTF-8"><meta name="description" content="Олимписка Математика: Архива на задачи со визуелизации и педагошки објаснувања."><meta name="viewport" content="width=device-width"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="generator" content="Astro v4.16.19"><title>За Наставници - Генерирај Тест</title><!-- OpenGraph / Social --><meta property="og:type" content="website"><meta property="og:title" content="За Наставници - Генерирај Тест"><meta property="og:description" content="Олимписка Математика: Архива на задачи со визуелизации и педагошки објаснувања."><meta property="og:image" content="/assets/images/og-image.png"><!-- KaTeX CSS --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous"><!-- Google Fonts --><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet"><script>
+			const theme = (() => {
+				if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
+					return localStorage.getItem('theme');
+				}
+				if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+					return 'dark';
+				}
+				return 'light';
+			})();
+		
+			if (theme === 'light') {
+				document.documentElement.classList.remove('dark');
+			} else {
+				document.documentElement.classList.add('dark');
+			}
+			window.localStorage.setItem('theme', theme);
+		</script><link rel="stylesheet" href="/_astro/index.DSK_wgM8.css"><script type="module">const r=document.getElementById("generate-preview"),i=document.getElementById("test-content"),d=document.getElementById("print-test");r?.addEventListener("click",async()=>{const t=document.getElementById("test-grade").value,e=document.getElementById("test-cat").value,n=parseInt(document.getElementById("test-count").value);r.innerText="Генерирам...";try{const o=await(await fetch("/api/generate-test",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({grade:t?parseInt(t):null,field:e||null,count:n,difficulty:"medium"})})).json();if(o.error){i.innerHTML=`<p class="text-center text-red-500">Грешка: ${o.error}</p>`;return}i.innerHTML=o.studentHtml,d?.classList.remove("hidden")}catch(s){console.error("Error generating test:",s),i.innerHTML='<p class="text-center text-red-500">Грешка при генерирање на тестот.</p>'}finally{r.innerText="Генерирај преглед"}});d?.addEventListener("click",()=>{const t=document.getElementById("test-content");if(t){const e=window.open("","_blank");if(e){const n=t.innerHTML;e.document.write(`
+					<!DOCTYPE html>
+					<html>
+					<head>
+						<title>Математички Тест</title>
+						<meta charset="UTF-8">
+						<style>
+							body {
+								font-family: 'Times New Roman', serif;
+								margin: 0;
+								padding: 20px;
+								font-size: 12pt;
+								line-height: 1.4;
+							}
+							.no-print { display: none !important; }
+							.problem-card {
+								page-break-inside: avoid;
+								margin-bottom: 20px;
+							}
+							@media print {
+								body { margin: 0; padding: 15mm; }
+							}
+						</style>
+					</head>
+					<body>
+						${n}
+					</body>
+					</html>
+				`),e.document.close(),e.focus(),e.print()}}});
+</script></head> <body class="bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 font-sans transition-colors duration-300 antialiased"> <nav class="bg-white/80 dark:bg-slate-950/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 sticky top-0 z-50 no-print"> <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"> <div class="flex justify-between h-16 items-center"> <div class="flex items-center gap-3"> <a href="/" class="flex items-center gap-2 group"> <div class="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center text-white shadow-lg shadow-blue-500/20 group-hover:scale-105 transition-transform"> <span class="text-xl font-bold">∑</span> </div> <div class="flex flex-col"> <span class="font-extrabold text-lg leading-none tracking-tight">МатАрхива</span> <span class="text-[10px] text-slate-500 dark:text-slate-400 font-bold uppercase tracking-widest">Geo-Mentor</span> </div> </a> </div> <div class="hidden md:flex items-center gap-1"> <a href="/" class="px-4 py-2 rounded-xl text-sm font-bold hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">Архива</a> <a href="/skills" class="px-4 py-2 rounded-xl text-sm font-bold hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">Вештини</a> <a href="/theorems" class="px-4 py-2 rounded-xl text-sm font-bold hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">Теореми</a> <a href="/teachers" class="px-4 py-2 rounded-xl text-sm font-bold bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400">Наставници</a> <div class="w-px h-6 bg-slate-200 dark:bg-slate-800 mx-2"></div> <button id="theme-toggle" class="p-2 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" aria-label="Toggle dark mode"> <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg> <svg id="theme-toggle-light-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 110 2 1 1 0 010-2zm-7-4a1 1 0 110-2h1a1 1 0 110 2H3zm.464-4.95a1 1 0 111.414-1.414l.707.707a1 1 0 01-1.414 1.414l-.707-.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 100 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg> </button> </div> </div> </div> </nav> <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 min-h-[calc(100vh-160px)]">  <div class="max-w-5xl mx-auto"> <div class="mb-10 no-print"> <h1 class="text-4xl font-black mb-4">Алатки за Наставници</h1> <p class="text-slate-500 dark:text-slate-400 text-lg">
+Креирајте персонализирани тестови и работни листови за вашите ученици во неколку секунди.
+</p> </div> <div class="grid grid-cols-1 lg:grid-cols-3 gap-8"> <div class="lg:col-span-1 space-y-6 no-print"> <div class="bg-white dark:bg-slate-900 p-8 rounded-[2.5rem] border border-slate-200 dark:border-slate-800 shadow-sm"> <h3 class="font-bold text-lg mb-6 flex items-center gap-3"> <span class="p-2 bg-blue-600 text-white rounded-lg text-sm"> <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path><circle cx="12" cy="12" r="3"></circle></svg> </span>
+Параметри на тест
+</h3> <div class="space-y-6"> <div> <label class="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-3">Одделение</label> <select id="test-grade" class="w-full bg-slate-50 dark:bg-slate-800 border-none rounded-xl px-4 py-3.5 text-sm font-bold focus:ring-2 focus:ring-blue-500 outline-none transition-all"> <option value="">Сите</option> <option value="1">1-то одделение</option><option value="10">10-то одделение</option><option value="11">11-то одделение</option><option value="12">12-то одделение</option><option value="2">2-то одделение</option><option value="3">3-то одделение</option><option value="4">4-то одделение</option><option value="5">5-то одделение</option><option value="6">6-то одделение</option><option value="7">7-то одделение</option><option value="8">8-то одделение</option><option value="9">9-то одделение</option><option value="transition">transition-то одделение</option> </select> </div> <div> <label class="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-3">Област</label> <select id="test-cat" class="w-full bg-slate-50 dark:bg-slate-800 border-none rounded-xl px-4 py-3.5 text-sm font-bold focus:ring-2 focus:ring-blue-500 outline-none transition-all"> <option value="">Сите области</option> <option value="algebra" class="capitalize">algebra</option><option value="analysis" class="capitalize">analysis</option><option value="arithmetic" class="capitalize">arithmetic</option><option value="combinatorics" class="capitalize">combinatorics</option><option value="geometry" class="capitalize">geometry</option><option value="logic" class="capitalize">logic</option><option value="logic_puzzle" class="capitalize">logic_puzzle</option><option value="number_theory" class="capitalize">number_theory</option><option value="stereometry" class="capitalize">stereometry</option><option value="trigonometry" class="capitalize">trigonometry</option> </select> </div> <div> <label class="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-3">Број на задачи</label> <input type="number" id="test-count" value="5" min="1" max="20" class="w-full bg-slate-50 dark:bg-slate-800 border-none rounded-xl px-4 py-3.5 text-sm font-bold focus:ring-2 focus:ring-blue-500 outline-none transition-all"> </div> <button id="generate-preview" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 rounded-2xl shadow-lg shadow-blue-500/20 transition-all active:scale-95 flex items-center justify-center gap-2"> <span>Генерирај преглед</span> </button> </div> </div> <div class="bg-indigo-50/50 dark:bg-indigo-900/10 p-6 rounded-3xl border border-indigo-100 dark:border-indigo-900/30"> <h4 class="font-bold text-indigo-900 dark:text-indigo-400 mb-2 italic text-sm">Про Совет:</h4> <p class="text-xs text-indigo-700 dark:text-indigo-500 leading-relaxed font-medium">
+Користете го копчето за печатење за автоматско форматирање на А4 лист. Сите наслови и менија ќе бидат автоматски сокриени.
+</p> </div> </div> <div class="lg:col-span-2"> <div class="bg-white dark:bg-slate-900 rounded-[2.5rem] border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden min-h-[600px] flex flex-col transition-all"> <div class="p-8 border-b border-slate-100 dark:border-slate-800 flex justify-between items-center bg-slate-50/50 dark:bg-slate-800/30 no-print"> <h3 class="font-black text-slate-900 dark:text-white uppercase tracking-tight">Преглед на тест</h3> <div class="flex gap-2"> <button id="print-test" class="hidden px-6 py-2.5 bg-blue-600 text-white rounded-xl text-xs font-black hover:bg-blue-700 transition-all shadow-lg shadow-blue-500/20 active:scale-95 uppercase tracking-widest">
+🖨️ Печати Тест
+</button> </div> </div> <div id="test-content" class="p-10 flex-grow overflow-y-auto"> <div class="print-only hidden text-center mb-10 border-b-2 border-black pb-6"> <h1 class="text-2xl font-black uppercase mb-2">Математички Тест</h1> <div class="flex justify-between mt-4 font-bold"> <span>Име и презиме: ______________________</span> <span>Дата: __________</span> </div> </div> <div class="flex flex-col items-center justify-center h-full text-slate-400 py-20 no-print"> <span class="text-7xl mb-6 opacity-20">📄</span> <p class="font-bold uppercase tracking-widest text-xs">Изберете параметри и кликнете на "Генерирај преглед"</p> </div> </div> </div> </div> </div> <!-- KaTeX Client Side for Preview --> <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script> <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script> </div>  </main> <footer class="bg-white dark:bg-slate-950 border-t border-slate-200 dark:border-slate-800 py-12 no-print"> <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"> <div class="grid grid-cols-1 md:grid-cols-3 gap-10"> <div> <div class="flex items-center gap-2 mb-4"> <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center text-white font-bold text-sm italic">M</div> <span class="font-bold text-lg italic">МатАрхива</span> </div> <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">
+Платформа за олимписка математика посветена на квалитетни визуелизации и детални решенија за сите ученици.
+</p> </div> <div> <h3 class="font-bold mb-4">Брзи линкови</h3> <ul class="space-y-2 text-sm text-slate-500 dark:text-slate-400"> <li><a href="/" class="hover:text-blue-600 transition-colors">Архива на задачи</a></li> <li><a href="/teachers" class="hover:text-blue-600 transition-colors">За наставници</a></li> <li><a href="#" class="hover:text-blue-600 transition-colors">Работни листови</a></li> </ul> </div> <div> <h3 class="font-bold mb-4">Контакт</h3> <p class="text-sm text-slate-500 dark:text-slate-400">
+Имате предлог или задача? Контактирајте го тимот на Geo-Mentor преку нашето репозиториум на GitHub.
+</p> </div> </div> <div class="mt-12 pt-8 border-t border-slate-100 dark:border-slate-900 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-slate-400 uppercase tracking-widest font-bold"> <span>&copy; 2026 Geo-Mentor Project</span> <div class="flex gap-6"> <a href="#" class="hover:text-slate-600">Privacy</a> <a href="#" class="hover:text-slate-600">Terms</a> <a href="https://github.com" class="hover:text-slate-600">GitHub</a> </div> </div> </div> </footer> <script>
+			const themeToggleBtn = document.getElementById('theme-toggle');
+			const darkIcon = document.getElementById('theme-toggle-dark-icon');
+			const lightIcon = document.getElementById('theme-toggle-light-icon');
+		
+			function updateIcons() {
+				const isDark = document.documentElement.classList.contains('dark');
+				if (isDark) {
+					darkIcon.classList.add('hidden');
+					lightIcon.classList.remove('hidden');
+				} else {
+					darkIcon.classList.remove('hidden');
+					lightIcon.classList.add('hidden');
+				}
+			}
+		
+			// Initial icon state
+			updateIcons();
+		
+			themeToggleBtn.addEventListener('click', () => {
+				document.documentElement.classList.toggle('dark');
+				const isDark = document.documentElement.classList.contains('dark');
+				localStorage.setItem('theme', isDark ? 'dark' : 'light');
+				updateIcons();
+			});
+		</script> </body> </html>
