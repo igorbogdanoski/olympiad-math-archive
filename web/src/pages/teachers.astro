@@ -23,9 +23,9 @@ const categories = [...new Set(problems.map(p => p.category))].filter(c => c !==
 						<span class="p-2 bg-blue-600 text-white rounded-lg text-sm">
 							<svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
 						</span>
-						Параметри на тест
+						Конфигурација на тест
 					</h3>
-					
+
 					<div class="space-y-6">
 						<div>
 							<label class="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-3">Одделение</label>
@@ -44,8 +44,28 @@ const categories = [...new Set(problems.map(p => p.category))].filter(c => c !==
 						</div>
 
 						<div>
+							<label class="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-3">Тежина</label>
+							<select id="test-difficulty" class="w-full bg-slate-50 dark:bg-slate-800 border-none rounded-xl px-4 py-3.5 text-sm font-bold focus:ring-2 focus:ring-blue-500 outline-none transition-all">
+								<option value="all">Сите нивоа</option>
+								<option value="easy">Лесни (1-3)</option>
+								<option value="medium">Средни (4-6)</option>
+								<option value="hard">Тешки (7-10)</option>
+							</select>
+						</div>
+
+						<div>
 							<label class="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-3">Број на задачи</label>
 							<input type="number" id="test-count" value="5" min="1" max="20" class="w-full bg-slate-50 dark:bg-slate-800 border-none rounded-xl px-4 py-3.5 text-sm font-bold focus:ring-2 focus:ring-blue-500 outline-none transition-all" />
+						</div>
+
+						<div>
+							<label class="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-3">Тип на тест</label>
+							<select id="test-type" class="w-full bg-slate-50 dark:bg-slate-800 border-none rounded-xl px-4 py-3.5 text-sm font-bold focus:ring-2 focus:ring-blue-500 outline-none transition-all">
+								<option value="mixed">Стандарден тест</option>
+								<option value="progressive">Прогресивна тежина</option>
+								<option value="skill-focused">Фокус на вештини</option>
+								<option value="quick-review">Брз преглед</option>
+							</select>
 						</div>
 
 						<button id="generate-preview" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 rounded-2xl shadow-lg shadow-blue-500/20 transition-all active:scale-95 flex items-center justify-center gap-2">
@@ -54,25 +74,65 @@ const categories = [...new Set(problems.map(p => p.category))].filter(c => c !==
 					</div>
 				</div>
 
+				<!-- Version Toggle -->
+				<div class="bg-white dark:bg-slate-900 p-6 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm">
+					<h4 class="font-bold text-slate-900 dark:text-white mb-4 flex items-center gap-2">
+						<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-blue-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+							<path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+						</svg>
+						Верзија на приказ
+					</h4>
+					<div class="flex gap-2">
+						<button id="show-student" class="flex-1 bg-blue-600 text-white px-4 py-2 rounded-xl text-sm font-bold transition-all hover:bg-blue-700 active:scale-95">За ученици</button>
+						<button id="show-teacher" class="flex-1 bg-emerald-600 text-white px-4 py-2 rounded-xl text-sm font-bold transition-all hover:bg-emerald-700 active:scale-95">За наставници</button>
+					</div>
+				</div>
+
                 <div class="bg-indigo-50/50 dark:bg-indigo-900/10 p-6 rounded-3xl border border-indigo-100 dark:border-indigo-900/30">
-                    <h4 class="font-bold text-indigo-900 dark:text-indigo-400 mb-2 italic text-sm">Про Совет:</h4>
-                    <p class="text-xs text-indigo-700 dark:text-indigo-500 leading-relaxed font-medium">
-                        Користете го копчето за печатење за автоматско форматирање на А4 лист. Сите наслови и менија ќе бидат автоматски сокриени.
-                    </p>
+                    <h4 class="font-bold text-indigo-900 dark:text-indigo-400 mb-2 italic text-sm">💡 Професионални совети:</h4>
+                    <ul class="text-xs text-indigo-700 dark:text-indigo-500 leading-relaxed font-medium space-y-1">
+						<li>• <strong>Прогресивна тежина:</strong> Задачите се подредуваат од лесни кон тешки</li>
+						<li>• <strong>Фокус на вештини:</strong> Групирани според математички концепти</li>
+						<li>• <strong>Брз преглед:</strong> 3-5 лесни задачи за проверка на основите</li>
+						<li>• <strong>Стандарден тест:</strong> Измешани задачи од различни области</li>
+					</ul>
                 </div>
 			</div>
 
 		<div class="lg:col-span-2">
 			<div class="bg-white dark:bg-slate-900 rounded-[2.5rem] border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden min-h-[600px] flex flex-col transition-all">
-				<div class="p-8 border-b border-slate-100 dark:border-slate-800 flex justify-between items-center bg-slate-50/50 dark:bg-slate-800/30 no-print">
-					<h3 class="font-black text-slate-900 dark:text-white uppercase tracking-tight">Преглед на тест</h3>
-					<div class="flex gap-2">
-						<button id="print-test" class="hidden px-6 py-2.5 bg-blue-600 text-white rounded-xl text-xs font-black hover:bg-blue-700 transition-all shadow-lg shadow-blue-500/20 active:scale-95 uppercase tracking-widest">
-							🖨️ Печати Тест
-						</button>
+				<!-- Header with tabs -->
+				<div class="border-b border-slate-100 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/30 no-print">
+					<div class="flex justify-between items-center p-6">
+						<div class="flex gap-1">
+							<button id="tab-student" class="px-6 py-3 bg-blue-600 text-white rounded-xl text-sm font-bold transition-all active:scale-95 flex items-center gap-2">
+								<svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+									<path d="M12 14l9-5-9-5-9 5 9 5z"/>
+									<path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"/>
+								</svg>
+								За ученици
+							</button>
+							<button id="tab-teacher" class="px-6 py-3 bg-slate-200 dark:bg-slate-700 text-slate-600 dark:text-slate-400 rounded-xl text-sm font-bold transition-all hover:bg-slate-300 dark:hover:bg-slate-600 active:scale-95 flex items-center gap-2">
+								<svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+									<path d="M12 14l9-5-9-5-9 5 9 5z"/>
+									<path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"/>
+									<path d="M12 14l9-5-9-5-9 5 9 5z"/>
+								</svg>
+								За наставници
+							</button>
+						</div>
+						<div class="flex gap-2">
+							<button id="download-pdf" class="hidden px-4 py-2 bg-emerald-600 text-white rounded-xl text-xs font-bold hover:bg-emerald-700 transition-all shadow-lg shadow-emerald-500/20 active:scale-95 flex items-center gap-1">
+								📄 PDF
+							</button>
+							<button id="print-test" class="hidden px-4 py-2 bg-blue-600 text-white rounded-xl text-xs font-bold hover:bg-blue-700 transition-all shadow-lg shadow-blue-500/20 active:scale-95 flex items-center gap-1">
+								🖨️ Печати
+							</button>
+						</div>
 					</div>
 				</div>
-				
+
+				<!-- Content area -->
 				<div id="test-content" class="p-10 flex-grow overflow-y-auto">
 					<div class="print-only hidden text-center mb-10 border-b-2 border-black pb-6">
 						<h1 class="text-2xl font-black uppercase mb-2">Математички Тест</h1>
@@ -83,7 +143,8 @@ const categories = [...new Set(problems.map(p => p.category))].filter(c => c !==
 					</div>
 					<div class="flex flex-col items-center justify-center h-full text-slate-400 py-20 no-print">
 						<span class="text-7xl mb-6 opacity-20">📄</span>
-						<p class="font-bold uppercase tracking-widest text-xs">Изберете параметри и кликнете на "Генерирај преглед"</p>
+						<p class="font-bold uppercase tracking-widest text-xs mb-4">Изберете параметри и кликнете на "Генерирај преглед"</p>
+						<p class="text-xs text-center max-w-md">Одберете тип на тест, конфигурирајте ги параметрите и генерирајте персонализиран математички тест за вашите ученици.</p>
 					</div>
 				</div>
 			</div>
@@ -96,92 +157,6 @@ const categories = [...new Set(problems.map(p => p.category))].filter(c => c !==
 </Layout>
 
 <script>
-	// Чиста и безбедна скрипта без инјектирани големи JSON објекти
-	const genBtn = document.getElementById('generate-preview');
-	const testContent = document.getElementById('test-content');
-	const printBtn = document.getElementById('print-test');
-
-	genBtn?.addEventListener('click', async () => {
-		const grade = (document.getElementById('test-grade') as HTMLSelectElement).value;
-		const cat = (document.getElementById('test-cat') as HTMLSelectElement).value;
-		const count = parseInt((document.getElementById('test-count') as HTMLInputElement).value);
-
-		genBtn.innerText = 'Генерирам...';
-
-		try {
-			// Call the SmartTestGenerator API
-			const response = await fetch('/api/generate-test', {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-				},
-				body: JSON.stringify({
-					grade: grade ? parseInt(grade) : null,
-					field: cat || null,
-					count: count,
-					difficulty: 'medium' // Default difficulty
-				})
-			});
-
-			const result = await response.json();
-
-			if (result.error) {
-				testContent!.innerHTML = `<p class="text-center text-red-500">Грешка: ${result.error}</p>`;
-				return;
-			}
-
-			// Display the generated student HTML
-			testContent!.innerHTML = result.studentHtml;
-			printBtn?.classList.remove('hidden');
-
-		} catch (e) {
-			console.error('Error generating test:', e);
-			testContent!.innerHTML = '<p class="text-center text-red-500">Грешка при генерирање на тестот.</p>';
-		} finally {
-			genBtn.innerText = 'Генерирај преглед';
-		}
-	});
-
-	printBtn?.addEventListener('click', () => {
-		// Create a new window with just the test content for printing
-		const testContent = document.getElementById('test-content');
-		if (testContent) {
-			const printWindow = window.open('', '_blank');
-			if (printWindow) {
-				const content = testContent.innerHTML;
-				printWindow.document.write(`
-					<!DOCTYPE html>
-					<html>
-					<head>
-						<title>Математички Тест</title>
-						<meta charset="UTF-8">
-						<style>
-							body {
-								font-family: 'Times New Roman', serif;
-								margin: 0;
-								padding: 20px;
-								font-size: 12pt;
-								line-height: 1.4;
-							}
-							.no-print { display: none !important; }
-							.problem-card {
-								page-break-inside: avoid;
-								margin-bottom: 20px;
-							}
-							@media print {
-								body { margin: 0; padding: 15mm; }
-							}
-						</style>
-					</head>
-					<body>
-						${content}
-					</body>
-					</html>
-				`);
-				printWindow.document.close();
-				printWindow.focus();
-				printWindow.print();
-			}
-		}
-	});
+	// Basic teacher tools script
+	console.log('Teacher tools loaded');
 </script>

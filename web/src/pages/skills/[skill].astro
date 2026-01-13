@@ -38,9 +38,66 @@ const getDifficultyColor = (diff: number) => {
       <h1 class="text-4xl font-black text-slate-900 dark:text-white mb-4 capitalize">
         Вештина: {skill.replace(/_/g, ' ')}
       </h1>
-      <p class="text-slate-500 dark:text-slate-400">
+      <p class="text-slate-500 dark:text-slate-400 mb-6">
         Пронајдени се {skillProblems.length} задачи кои ја користат оваа математичка стратегија.
       </p>
+
+      <!-- Enhanced pedagogical content for specific skills -->
+      {skill === 'inequalities' && (
+        <div class="bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 rounded-[2rem] p-8 mb-8">
+          <div class="prose prose-slate dark:prose-invert max-w-none">
+            <h2 class="text-2xl font-bold text-slate-900 dark:text-white mb-4">Што е оваа вештина?</h2>
+            <p class="text-slate-700 dark:text-slate-300 mb-6">
+              Нееднаквостите (inequalities) се вештина за <strong>споредување вредности</strong>
+              и за наоѓање <strong>максимум или минимум</strong> под дадени услови.
+              Наместо точна вредност, целта е: „Колку големо / мало МОЖЕ да биде?"
+            </p>
+
+            <h3 class="text-xl font-semibold text-slate-900 dark:text-white mb-3">Зошто е олимписка?</h3>
+            <p class="text-slate-700 dark:text-slate-300 mb-4">
+              Нееднаквостите се сржта на олимписката алгебра. Тие учат оптимизација,
+              развиваат чувство за екстреми и користат симетрија и граници.
+            </p>
+
+            <h3 class="text-xl font-semibold text-slate-900 dark:text-white mb-3">Основни техники</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div class="bg-white dark:bg-slate-800 rounded-xl p-4">
+                <h4 class="font-semibold text-blue-600 dark:text-blue-400 mb-2">🟢 Основни</h4>
+                <ul class="text-sm text-slate-600 dark:text-slate-400 space-y-1">
+                  <li>• AM-GM нееднаквост</li>
+                  <li>• Cauchy-Schwarz</li>
+                  <li>• Триаголна нееднаквост</li>
+                </ul>
+              </div>
+              <div class="bg-white dark:bg-slate-800 rounded-xl p-4">
+                <h4 class="font-semibold text-amber-600 dark:text-amber-400 mb-2">🟡 Средно напредни</h4>
+                <ul class="text-sm text-slate-600 dark:text-slate-400 space-y-1">
+                  <li>• Симетрично парирање</li>
+                  <li>• Параметарски нееднаквости</li>
+                  <li>• Две променливи</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {skill === 'symmetry_pairing' && (
+        <div class="bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 rounded-[2rem] p-8 mb-8">
+          <div class="prose prose-slate dark:prose-invert max-w-none">
+            <h2 class="text-2xl font-bold text-slate-900 dark:text-white mb-4">Што е оваа вештина?</h2>
+            <p class="text-slate-700 dark:text-slate-300 mb-6">
+              Симетричното парирање е техника за трансформирање на сложени суми во едноставни
+              пресметки со групирање на симетрични членови.
+            </p>
+            <h3 class="text-xl font-semibold text-slate-900 dark:text-white mb-3">Клучна идеја</h3>
+            <p class="text-slate-700 dark:text-slate-300">
+              Ако имате израз f(x) + f(1-x) = константа, тогаш сумата на парови
+              станува едноставна пресметка на бројот на парови.
+            </p>
+          </div>
+        </div>
+      )}
     </header>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">

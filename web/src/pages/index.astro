@@ -36,6 +36,26 @@ const getDifficultyColor = (diff: number) => {
 			<div class="absolute top-[-10%] right-[-10%] w-[50%] h-[50%] bg-blue-600 rounded-full blur-[120px]"></div>
 			<div class="absolute bottom-[-10%] left-[-10%] w-[40%] h-[40%] bg-indigo-600 rounded-full blur-[100px]"></div>
 		</div>
+
+		{/* Mathematical Illustration */}
+		<div class="absolute top-1/2 right-8 transform -translate-y-1/2 opacity-90 pointer-events-none z-10">
+			<svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" class="math-animation">
+				<circle cx="100" cy="100" r="80" stroke="url(#gradient)" stroke-width="2" fill="none" class="outer-circle"/>
+				<circle cx="100" cy="100" r="60" stroke="url(#gradient)" stroke-width="1" fill="none" class="middle-circle"/>
+				<circle cx="100" cy="100" r="40" stroke="url(#gradient)" stroke-width="1" fill="none" class="inner-circle"/>
+				<circle cx="100" cy="100" r="20" stroke="url(#gradient)" stroke-width="1" fill="none" class="center-circle"/>
+				<path d="M100 20 L100 180 M20 100 L180 100" stroke="url(#gradient)" stroke-width="1" class="axes"/>
+				<path d="M65 65 L135 135 M135 65 L65 135" stroke="url(#gradient)" stroke-width="1" class="diagonals"/>
+				<text x="95" y="110" font-family="serif" font-size="16" fill="url(#gradient)" text-anchor="middle" class="pi-symbol">π</text>
+				<text x="110" y="95" font-family="serif" font-size="12" fill="url(#gradient)" class="pi-exp">2</text>
+				<defs>
+					<linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+						<stop offset="0%" style="stop-color:#3b82f6;stop-opacity:1" />
+						<stop offset="100%" style="stop-color:#8b5cf6;stop-opacity:1" />
+					</linearGradient>
+				</defs>
+			</svg>
+		</div>
 		
 		<div class="relative z-10 max-w-3xl">
 			<div class="flex items-center gap-3 mb-8">
@@ -80,9 +100,67 @@ const getDifficultyColor = (diff: number) => {
 		</div>
 	</div>
 
-	<!-- Inspirational Quote -->
-	<div class="max-w-4xl mx-auto mb-16">
-		<MathQuote category="olympiad" />
+	{/* Daily Features */}
+	<div class="max-w-6xl mx-auto mb-16 grid grid-cols-1 lg:grid-cols-2 gap-8">
+		{/* Problem of the Day */}
+		<div class="bg-gradient-to-br from-emerald-50 via-blue-50/50 to-indigo-50 dark:from-emerald-900/20 dark:via-blue-900/10 dark:to-indigo-900/10 rounded-3xl p-8 border border-emerald-200/50 dark:border-emerald-800/30 shadow-lg">
+			<div class="flex items-center gap-3 mb-6">
+				<div class="w-12 h-12 bg-emerald-100 dark:bg-emerald-900/30 rounded-full flex items-center justify-center">
+					<span class="text-emerald-600 dark:text-emerald-400 text-2xl">🎯</span>
+				</div>
+				<div>
+					<h2 class="text-2xl font-bold text-emerald-900 dark:text-emerald-100">Задача на денот</h2>
+					<p class="text-emerald-600 dark:text-emerald-400 text-sm">Нова задача секој ден</p>
+				</div>
+			</div>
+
+			<div class="space-y-4 mb-6">
+				<div class="bg-white dark:bg-slate-800 rounded-xl p-4 border border-slate-200 dark:border-slate-700">
+					<div class="flex items-center justify-between mb-2">
+						<span class="text-xs font-black uppercase tracking-widest px-2 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded-full">
+							Одделение 9
+						</span>
+						<span class="text-xs font-black uppercase tracking-widest px-2 py-1 bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-300 rounded-full">
+							Геометрија
+						</span>
+					</div>
+					<p class="text-sm text-slate-700 dark:text-slate-300 font-medium leading-relaxed">
+						Во екранот на компјутер е нацртан квадрат со страни 10 cm. Најди ја плоштината на најголемиот круг...
+					</p>
+				</div>
+			</div>
+
+			<a href="/tasks/problem-of-the-day" class="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-6 rounded-xl transition-all">
+				<span>Реши ја задачата</span>
+				<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+				</svg>
+			</a>
+		</div>
+
+		{/* Daily Quote */}
+		<div class="bg-gradient-to-br from-purple-50 via-pink-50/50 to-rose-50 dark:from-purple-900/20 dark:via-pink-900/10 dark:to-rose-900/10 rounded-3xl p-8 border border-purple-200/50 dark:border-purple-800/30 shadow-lg">
+			<div class="flex items-center gap-3 mb-6">
+				<div class="w-12 h-12 bg-purple-100 dark:bg-purple-900/30 rounded-full flex items-center justify-center">
+					<span class="text-purple-600 dark:text-purple-400 text-2xl">💭</span>
+				</div>
+				<div>
+					<h2 class="text-2xl font-bold text-purple-900 dark:text-purple-100">Цитат на денот</h2>
+					<p class="text-purple-600 dark:text-purple-400 text-sm">Математичка инспирација</p>
+				</div>
+			</div>
+
+			<MathQuote category="general" compact={false} />
+
+			<div class="mt-6 flex items-center justify-between text-xs text-purple-600 dark:text-purple-400">
+				<span>Промени секој ден</span>
+				<button class="hover:text-purple-800 dark:hover:text-purple-200 transition-colors">
+					<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0V9a8 8 0 1115.356 2m-15.356 2H4"/>
+					</svg>
+				</button>
+			</div>
+		</div>
 	</div>
 
 	<div class="flex flex-col lg:flex-row gap-12">
@@ -129,6 +207,53 @@ const getDifficultyColor = (diff: number) => {
 								))}
 							</div>
 						</div>
+
+						<div>
+							<label class="block text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-5">Тешкотија</label>
+							<div class="grid grid-cols-3 gap-2" id="diff-filters">
+								{[1,2,3,4,5,6,7,8,9,10].map(d => (
+									<label class="cursor-pointer group">
+										<input type="checkbox" value={d} class="hidden peer">
+										<span class={`w-full text-center px-2 py-3 rounded-xl border border-slate-100 dark:border-slate-800 text-xs font-bold bg-slate-50 dark:bg-slate-800 peer-checked:bg-blue-600 peer-checked:text-white peer-checked:border-blue-600 peer-checked:shadow-lg peer-checked:shadow-blue-500/30 transition-all inline-block group-hover:border-blue-200 dark:group-hover:border-slate-600 ${getDifficultyColor(d)}`}>
+											{d}
+										</span>
+									</label>
+								))}
+							</div>
+						</div>
+
+						<div>
+							<label class="block text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-5">Подредување</label>
+							<select id="sort-select" class="w-full px-3 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-600 rounded-lg text-sm font-medium text-slate-900 dark:text-slate-100 focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500 outline-none">
+								<option value="default">Стандардно</option>
+								<option value="title-asc">Наслов (А-З)</option>
+								<option value="title-desc">Наслов (З-А)</option>
+								<option value="difficulty-asc">Тешкотија (лесно прво)</option>
+								<option value="difficulty-desc">Тешкотија (тешко прво)</option>
+								<option value="grade-asc">Одделение (1-9)</option>
+								<option value="grade-desc">Одделение (9-1)</option>
+								<option value="category-asc">Област (А-З)</option>
+								<option value="category-desc">Област (З-А)</option>
+							</select>
+						</div>
+
+						<div>
+							<label class="block text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-5">Брзи Филтри</label>
+							<div class="grid grid-cols-2 gap-2">
+								<button id="filter-recent" class="px-3 py-2 bg-emerald-50 dark:bg-emerald-900/20 text-emerald-700 dark:text-emerald-300 rounded-lg text-xs font-bold hover:bg-emerald-100 dark:hover:bg-emerald-900/30 transition-colors border border-emerald-200 dark:border-emerald-800">
+									📅 Скорешни
+								</button>
+								<button id="filter-olympiad" class="px-3 py-2 bg-purple-50 dark:bg-purple-900/20 text-purple-700 dark:text-purple-300 rounded-lg text-xs font-bold hover:bg-purple-100 dark:hover:bg-purple-900/30 transition-colors border border-purple-200 dark:border-purple-800">
+									🏆 Олимписки
+								</button>
+								<button id="filter-geometry" class="px-3 py-2 bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300 rounded-lg text-xs font-bold hover:bg-blue-100 dark:hover:bg-blue-900/30 transition-colors border border-blue-200 dark:border-blue-800">
+									📐 Геометрија
+								</button>
+								<button id="filter-algebra" class="px-3 py-2 bg-orange-50 dark:bg-orange-900/20 text-orange-700 dark:text-orange-300 rounded-lg text-xs font-bold hover:bg-orange-100 dark:hover:bg-orange-900/30 transition-colors border border-orange-200 dark:border-orange-800">
+									🧮 Алгебра
+								</button>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -143,18 +268,43 @@ const getDifficultyColor = (diff: number) => {
 				</h2>
 				
 				<div class="flex items-center gap-2">
-					<button class="p-2 text-slate-400 hover:text-blue-600 transition-colors" title="Grid View">
+					<button id="grid-view" class="p-2 text-blue-600 bg-blue-50 dark:bg-blue-900/20 rounded-lg" title="Grid View">
 						<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+					</button>
+					<button id="list-view" class="p-2 text-slate-400 hover:text-blue-600 transition-colors rounded-lg" title="List View">
+						<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
 					</button>
 				</div>
 			</div>
 
-			<div class="grid grid-cols-1 md:grid-cols-2 gap-8" id="problems-grid">
+			<!-- Skeleton Loader -->
+			<div id="skeleton-loader" class="grid grid-cols-1 md:grid-cols-2 gap-8">
+				{Array.from({ length: 8 }, (_, i) => (
+					<div class="bg-white dark:bg-slate-900 rounded-[2.5rem] shadow-sm border border-slate-100 dark:border-slate-800 overflow-hidden animate-pulse">
+						<div class="aspect-[16/10] bg-slate-200 dark:bg-slate-800"></div>
+						<div class="p-8 space-y-4">
+							<div class="flex gap-2 mb-4">
+								<div class="h-5 bg-slate-200 dark:bg-slate-800 rounded-lg w-12"></div>
+								<div class="h-5 bg-slate-200 dark:bg-slate-800 rounded-lg w-16"></div>
+							</div>
+							<div class="h-6 bg-slate-200 dark:bg-slate-800 rounded-lg w-3/4"></div>
+							<div class="space-y-2">
+								<div class="h-4 bg-slate-200 dark:bg-slate-800 rounded w-full"></div>
+								<div class="h-4 bg-slate-200 dark:bg-slate-800 rounded w-5/6"></div>
+								<div class="h-4 bg-slate-200 dark:bg-slate-800 rounded w-4/6"></div>
+							</div>
+						</div>
+					</div>
+				))}
+			</div>
+
+			<div class="grid grid-cols-1 md:grid-cols-2 gap-8" id="problems-grid" style="display: none;">
 				{problems.map((prob) => (
-					<div 
-						class="problem-card group bg-white dark:bg-slate-900 rounded-[2.5rem] shadow-sm border border-slate-100 dark:border-slate-800 overflow-hidden hover:shadow-2xl hover:shadow-blue-500/10 hover:-translate-y-2 transition-all duration-500"
+					<div
+						class="problem-card group bg-white dark:bg-slate-900 rounded-[2.5rem] shadow-sm border border-slate-100 dark:border-slate-800 overflow-hidden hover:shadow-2xl hover:shadow-blue-500/10 hover:-translate-y-2 transition-all duration-500 grid-view"
 						data-grade={prob.grade}
 						data-category={prob.category}
+						data-difficulty={prob.difficulty}
 						data-title={prob.filename.toLowerCase().replace(/_/g, ' ')}
 						data-search={cleanBody(prob.body).toLowerCase()}
 					>
@@ -216,14 +366,32 @@ const getDifficultyColor = (diff: number) => {
 <script>
 	import Fuse from 'fuse.js';
 
-	const searchInput = document.getElementById('search') as HTMLInputElement;
-	const cards = document.querySelectorAll('.problem-card') as NodeListOf<HTMLElement>;
+	const searchInput = document.getElementById('search');
+	const cards = document.querySelectorAll('.problem-card');
 	const countEl = document.getElementById('count');
 	const noResults = document.getElementById('no-results');
-	const gradeFilters = document.querySelectorAll('#grade-filters input') as NodeListOf<HTMLInputElement>;
-	const catFilters = document.querySelectorAll('#cat-filters input') as NodeListOf<HTMLInputElement>;
+	const gradeFilters = document.querySelectorAll('#grade-filters input');
+	const catFilters = document.querySelectorAll('#cat-filters input');
+	const diffFilters = document.querySelectorAll('#diff-filters input');
+	const sortSelect = document.getElementById('sort-select');
+	const gridViewBtn = document.getElementById('grid-view');
+	const listViewBtn = document.getElementById('list-view');
+	const problemsGrid = document.getElementById('problems-grid');
 	const resetBtn = document.getElementById('reset-filters');
 	const resetBtnTop = document.getElementById('reset-filters-top');
+	const filterRecentBtn = document.getElementById('filter-recent');
+	const filterOlympiadBtn = document.getElementById('filter-olympiad');
+	const filterGeometryBtn = document.getElementById('filter-geometry');
+	const filterAlgebraBtn = document.getElementById('filter-algebra');
+
+	// Debounced search
+	let searchTimeout;
+	const debounceSearch = (func, delay) => {
+		return (...args) => {
+			clearTimeout(searchTimeout);
+			searchTimeout = setTimeout(() => func.apply(this, args), delay);
+		};
+	};
 
 	// Подготовка на податоци за Fuse.js
 	const searchData = Array.from(cards).map(card => ({
@@ -239,31 +407,70 @@ const getDifficultyColor = (diff: number) => {
 		distance: 100
 	});
 
-	function filter() {
+	function filterAndSort() {
 		const query = searchInput.value.toLowerCase();
 		const selectedGrades = Array.from(gradeFilters).filter(i => i.checked).map(i => i.value);
 		const selectedCats = Array.from(catFilters).filter(i => i.checked).map(i => i.value);
+		const selectedDiffs = Array.from(diffFilters).filter(i => i.checked).map(i => i.value);
+		const sortOption = sortSelect.value;
 
-		let visibleCount = 0;
-		
 		// Резултати од Fuzzy Search
 		const fuseResults = query ? fuse.search(query).map(r => r.item.element) : null;
 
-		cards.forEach(card => {
+		// Collect visible cards
+		let visibleCards = Array.from(cards).filter(card => {
 			const grade = card.dataset.grade || '';
 			const cat = card.dataset.category || '';
+			const diff = card.dataset.difficulty || '';
 
 			const matchesSearch = !fuseResults || fuseResults.includes(card);
 			const matchesGrade = selectedGrades.length === 0 || selectedGrades.includes(grade);
 			const matchesCat = selectedCats.length === 0 || selectedCats.includes(cat);
+			const matchesDiff = selectedDiffs.length === 0 || selectedDiffs.includes(diff);
 
-			if (matchesSearch && matchesGrade && matchesCat) {
-				card.style.display = 'block';
-				visibleCount++;
-			} else {
-				card.style.display = 'none';
+			return matchesSearch && matchesGrade && matchesCat && matchesDiff;
+		});
+
+		// Sort visible cards
+		visibleCards.sort((a, b) => {
+			const titleA = a.dataset.title || '';
+			const titleB = b.dataset.title || '';
+			const diffA = parseInt(a.dataset.difficulty || '0');
+			const diffB = parseInt(b.dataset.difficulty || '0');
+			const gradeA = parseInt(a.dataset.grade || '0');
+			const gradeB = parseInt(b.dataset.grade || '0');
+			const catA = a.dataset.category || '';
+			const catB = b.dataset.category || '';
+
+			switch (sortOption) {
+				case 'title-asc':
+					return titleA.localeCompare(titleB);
+				case 'title-desc':
+					return titleB.localeCompare(titleA);
+				case 'difficulty-asc':
+					return diffA - diffB;
+				case 'difficulty-desc':
+					return diffB - diffA;
+				case 'grade-asc':
+					return gradeA - gradeB;
+				case 'grade-desc':
+					return gradeB - gradeA;
+				case 'category-asc':
+					return catA.localeCompare(catB);
+				case 'category-desc':
+					return catB.localeCompare(catA);
+				default:
+					return 0; // default order
 			}
 		});
+
+		// Hide all cards first
+		cards.forEach(card => card.style.display = 'none');
+
+		// Show sorted visible cards
+		visibleCards.forEach(card => card.style.display = 'block');
+
+		const visibleCount = visibleCards.length;
 
 		// Ажурирај го бројачот со правилна множина
 		if (countEl) {
@@ -273,17 +480,299 @@ const getDifficultyColor = (diff: number) => {
 		if (noResults) noResults.style.display = visibleCount === 0 ? 'block' : 'none';
 	}
 
-	searchInput?.addEventListener('input', filter);
-	gradeFilters.forEach(i => i.addEventListener('change', filter));
-	catFilters.forEach(i => i.addEventListener('change', filter));
-	
+	searchInput?.addEventListener('input', debounceSearch(filterAndSort, 300));
+	gradeFilters.forEach(i => i.addEventListener('change', filterAndSort));
+	catFilters.forEach(i => i.addEventListener('change', filterAndSort));
+	diffFilters.forEach(i => i.addEventListener('change', filterAndSort));
+	sortSelect?.addEventListener('change', filterAndSort);
+
+	// View mode toggles
+	gridViewBtn?.addEventListener('click', () => {
+		problemsGrid.classList.remove('grid-cols-1');
+		problemsGrid.classList.add('grid-cols-1', 'md:grid-cols-2');
+		cards.forEach(card => {
+			card.classList.remove('list-view');
+			card.classList.add('grid-view');
+		});
+		gridViewBtn.classList.add('text-blue-600', 'bg-blue-50', 'dark:bg-blue-900/20');
+		gridViewBtn.classList.remove('text-slate-400');
+		listViewBtn.classList.remove('text-blue-600', 'bg-blue-50', 'dark:bg-blue-900/20');
+		listViewBtn.classList.add('text-slate-400');
+	});
+
+	listViewBtn?.addEventListener('click', () => {
+		problemsGrid.classList.remove('md:grid-cols-2');
+		problemsGrid.classList.add('grid-cols-1');
+		cards.forEach(card => {
+			card.classList.remove('grid-view');
+			card.classList.add('list-view');
+		});
+		listViewBtn.classList.add('text-blue-600', 'bg-blue-50', 'dark:bg-blue-900/20');
+		listViewBtn.classList.remove('text-slate-400');
+		gridViewBtn.classList.remove('text-blue-600', 'bg-blue-50', 'dark:bg-blue-900/20');
+		gridViewBtn.classList.add('text-slate-400');
+	});
+
 	const resetAll = () => {
 		gradeFilters.forEach(i => i.checked = false);
 		catFilters.forEach(i => i.checked = false);
+		diffFilters.forEach(i => i.checked = false);
 		searchInput.value = '';
-		filter();
+		sortSelect.value = 'default';
+		filterAndSort();
 	};
 
 	resetBtn?.addEventListener('click', resetAll);
 	resetBtnTop?.addEventListener('click', resetAll);
+
+	// Quick filter buttons
+	filterRecentBtn?.addEventListener('click', () => {
+		resetAll();
+		// Apply recent filter (grades 8-9)
+		document.querySelectorAll('#grade-filters input').forEach(input => {
+			if (['8', '9'].includes(input.value)) {
+				input.checked = true;
+			}
+		});
+		filterAndSort();
+	});
+
+	filterOlympiadBtn?.addEventListener('click', () => {
+		resetAll();
+		// Apply olympiad filter (difficulty 7-10)
+		document.querySelectorAll('#diff-filters input').forEach(input => {
+			if (['7', '8', '9', '10'].includes(input.value)) {
+				input.checked = true;
+			}
+		});
+		filterAndSort();
+	});
+
+	filterGeometryBtn?.addEventListener('click', () => {
+		resetAll();
+		// Apply geometry filter
+		document.querySelectorAll('#cat-filters input').forEach(input => {
+			if (input.value.toLowerCase().includes('геометри')) {
+				input.checked = true;
+			}
+		});
+		filterAndSort();
+	});
+
+	filterAlgebraBtn?.addEventListener('click', () => {
+		resetAll();
+		// Apply algebra filter
+		document.querySelectorAll('#cat-filters input').forEach(input => {
+			if (input.value.toLowerCase().includes('алгебр')) {
+				input.checked = true;
+			}
+		});
+		filterAndSort();
+	});
+
+	// Hide skeleton loader and show content on page load
+	document.addEventListener('DOMContentLoaded', () => {
+		const skeletonLoader = document.getElementById('skeleton-loader');
+		const problemsGrid = document.getElementById('problems-grid');
+		if (skeletonLoader && problemsGrid) {
+			setTimeout(() => {
+				skeletonLoader.style.display = 'none';
+				problemsGrid.style.display = 'grid';
+			}, 500); // Small delay for smooth transition
+		}
+	});
 </script>
+
+<style>
+	.list-view {
+		flex-direction: row;
+		padding: 1rem;
+	}
+	.list-view .aspect-video {
+		width: 120px;
+		height: 120px;
+		flex-shrink: 0;
+	}
+	.list-view .aspect-video img {
+		max-width: 100%;
+		max-height: 100%;
+	}
+	.list-view > div:last-child {
+		flex: 1;
+		margin-left: 1rem;
+	}
+	.list-view .line-clamp-2 {
+		display: -webkit-box;
+		-webkit-line-clamp: 3;
+		-webkit-box-orient: vertical;
+		overflow: hidden;
+	}
+
+	/* Mathematical Animation */
+	.math-animation {
+		animation: gentle-float 6s ease-in-out infinite;
+	}
+
+	@keyframes gentle-float {
+		0%, 100% { transform: translateY(0px); }
+		50% { transform: translateY(-5px); }
+	}
+
+	.outer-circle {
+		animation: circle-pulse 4s ease-in-out infinite;
+	}
+
+	.middle-circle {
+		animation: circle-pulse 4s ease-in-out infinite 0.5s;
+	}
+
+	.inner-circle {
+		animation: circle-pulse 4s ease-in-out infinite 1s;
+	}
+
+	.center-circle {
+		animation: circle-pulse 4s ease-in-out infinite 1.5s;
+	}
+
+	@keyframes circle-pulse {
+		0%, 100% { opacity: 0.7; }
+		50% { opacity: 1; }
+	}
+
+	.axes {
+		animation: axis-rotate 8s linear infinite;
+	}
+
+	@keyframes axis-rotate {
+		0% { transform: rotate(0deg); }
+		100% { transform: rotate(360deg); }
+	}
+
+	.diagonals {
+		animation: diagonal-fade 3s ease-in-out infinite;
+	}
+
+	@keyframes diagonal-fade {
+		0%, 100% { opacity: 0.8; }
+		50% { opacity: 0.3; }
+	}
+
+	.pi-symbol {
+		animation: pi-glow 2s ease-in-out infinite;
+	}
+
+	@keyframes pi-glow {
+		0%, 100% { fill-opacity: 0.9; }
+		50% { fill-opacity: 1; }
+	}
+
+	/* Print Styles - Enhanced for Teachers */
+	@media print {
+		.no-print {
+			display: none !important;
+		}
+
+		/* Show print-specific content */
+		.print-only {
+			display: block !important;
+		}
+
+		/* Reset layout for printing */
+		body {
+			font-family: 'Times New Roman', serif;
+			font-size: 12pt;
+			line-height: 1.4;
+			color: #000;
+			background: white !important;
+		}
+
+		/* Problem cards for printing */
+		.problem-card {
+			break-inside: avoid;
+			page-break-inside: avoid;
+			border: 1px solid #000 !important;
+			box-shadow: none !important;
+			margin-bottom: 20pt;
+			background: white !important;
+		}
+
+		.problem-card img {
+			max-width: 200px !important;
+			max-height: 150px !important;
+		}
+
+		.problem-card h3 {
+			font-size: 14pt !important;
+			font-weight: bold !important;
+			color: #000 !important;
+		}
+
+		.problem-card p {
+			font-size: 11pt !important;
+			color: #333 !important;
+		}
+
+		/* Filters - hide in print */
+		aside {
+			display: none !important;
+		}
+
+		/* Hero section - hide in print */
+		.mb-16.p-12.md\\:p-20.rounded-\\[3rem\\].bg-slate-950 {
+			display: none !important;
+		}
+
+		/* Print header */
+		@page {
+			margin: 1in;
+			size: A4;
+		}
+
+		/* Print footer with page numbers */
+		@page :first {
+			@bottom-center {
+				content: "МатАрхива - Олимписки Задачи";
+			}
+		}
+
+		@page :left {
+			@bottom-center {
+				content: counter(page);
+			}
+		}
+
+		@page :right {
+			@bottom-center {
+				content: counter(page);
+			}
+		}
+	}
+
+	/* Print preview button styles */
+	.print-button {
+		background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+		border: none;
+		color: white;
+		padding: 12px 24px;
+		border-radius: 8px;
+		font-weight: 600;
+		cursor: pointer;
+		transition: all 0.3s ease;
+		box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+	}
+
+	.print-button:hover {
+		transform: translateY(-2px);
+		box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+	}
+
+	/* Teacher mode toggle */
+	.teacher-mode {
+		background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+	}
+
+	.teacher-mode:hover {
+		background: linear-gradient(135deg, #e887f0 0%, #e84c62 100%);
+		box-shadow: 0 6px 20px rgba(240, 147, 251, 0.4);
+	}
+</style>

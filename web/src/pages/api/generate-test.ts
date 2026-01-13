@@ -5,7 +5,7 @@ import { join } from 'node:path';
 
 export const POST: APIRoute = async ({ request }) => {
   try {
-    const { grade, field, count, difficulty } = await request.json();
+    const { grade, field, count, difficulty, testType } = await request.json();
 
     // Validate input
     if (!grade || !count) {
@@ -26,10 +26,11 @@ export const POST: APIRoute = async ({ request }) => {
       grade.toString(),
       field || 'all',
       count.toString(),
-      difficulty || 'medium'
+      difficulty || 'all',
+      testType || 'mixed'
     ];
 
-    const command = `python "${scriptPath}" -g ${args[0]} -f ${args[1]} -c ${args[2]} -d ${args[3]}`;
+    const command = `python "${scriptPath}" -g ${args[0]} -f ${args[1]} -c ${args[2]} -d ${args[3]} -t ${args[4]}`;
 
     console.log('Executing command:', command);
 

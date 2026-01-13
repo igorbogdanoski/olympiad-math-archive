@@ -423,6 +423,88 @@ class SmartTestGenerator:
         score += 5 if len(meta.get('title', '')) > 5 else 0  # Has good title
         return score
 
+    def _select_problems_by_type(self, problems: List[Dict], count: int, test_type: str) -> List[Dict]:
+        """Select problems based on test type strategy"""
+        if len(problems) < count:
+            print(f"[WARNING] Најдов само {len(problems)} валидни задачи. Ги вклучувам сите.")
+            return problems
+
+        if test_type == 'progressive':
+            # Sort by difficulty and select progressively
+            problems.sort(key=lambda x: int(x['meta'].get('difficulty', 5)))
+            # Try to create a progression: easy -> medium -> hard
+            selected = []
+            easy_problems = [p for p in problems if int(p['meta'].get('difficulty', 5)) <= 3]
+            medium_problems = [p for p in problems if 4 <= int(p['meta'].get('difficulty', 5)) <= 6]
+            hard_problems = [p for p in problems if int(p['meta'].get('difficulty', 5)) >= 7]
+
+            # Distribute proportionally
+            easy_count = max(1, count // 3)
+            medium_count = max(1, count // 3)
+            hard_count = count - easy_count - medium_count
+
+            selected.extend(random.sample(easy_problems, min(easy_count, len(easy_problems))))
+            selected.extend(random.sample(medium_problems, min(medium_count, len(medium_problems))))
+            selected.extend(random.sample(hard_problems, min(hard_count, len(hard_problems))))
+
+            # Fill remaining slots randomly
+            remaining = count - len(selected)
+            if remaining > 0:
+                available = [p for p in problems if p not in selected]
+                selected.extend(random.sample(available, min(remaining, len(available))))
+
+        elif test_type == 'skill-focused':
+            # Group by skills/concepts and select from different skill groups
+            skill_groups = defaultdict(list)
+            for problem in problems:
+                # Extract skills from tags or content
+                tags = problem['meta'].get('tags', [])
+                if not tags:
+                    # Try to infer from content
+                    content = problem['body'].lower()
+                    if any(word in content for word in ['триаголник', 'агол', 'страна']):
+                        tags = ['geometry']
+                    elif any(word in content for word in ['x', '=', 'y']):
+                        tags = ['algebra']
+                    elif any(word in content for word in ['број', 'делител']):
+                        tags = ['number_theory']
+                    else:
+                        tags = ['mixed']
+
+                # Use first tag as skill group
+                skill = tags[0] if tags else 'mixed'
+                skill_groups[skill].append(problem)
+
+            # Select from different skill groups
+            selected = []
+            skills = list(skill_groups.keys())
+            problems_per_skill = max(1, count // len(skills))
+
+            for skill in skills:
+                skill_problems = skill_groups[skill]
+                if skill_problems:
+                    selected.extend(random.sample(skill_problems, min(problems_per_skill, len(skill_problems))))
+
+            # Fill remaining
+            if len(selected) < count:
+                remaining = count - len(selected)
+                available = [p for p in problems if p not in selected]
+                selected.extend(random.sample(available, min(remaining, len(available))))
+
+        elif test_type == 'quick-review':
+            # Select only easy problems for quick review
+            easy_problems = [p for p in problems if int(p['meta'].get('difficulty', 5)) <= 4]
+            if len(easy_problems) >= count:
+                selected = random.sample(easy_problems, count)
+            else:
+                selected = easy_problems + random.sample([p for p in problems if p not in easy_problems], count - len(easy_problems))
+
+        else:  # 'mixed' or default
+            # Random selection
+            selected = random.sample(problems, count)
+
+        return selected
+
     def format_problem_html(self, problem: Dict, index: int, is_teacher: bool = False) -> str:
         """Format problem as modern HTML"""
         meta = problem['meta']
@@ -513,9 +595,9 @@ class SmartTestGenerator:
             </div>
         </div>"""
 
-    def generate_test(self, grade: int, field: str, count: int, difficulty: str) -> None:
+    def generate_test(self, grade: int, field: str, count: int, difficulty: str, test_type: str = 'mixed') -> None:
         """Generate complete test with validation"""
-        print(f"[INFO] Генерирам паметен тест: Одд: {grade} | Област: {field} | Тежина: {difficulty}...")
+        print(f"[INFO] Генерирам паметен тест: Одд: {grade} | Област: {field} | Тежина: {difficulty} | Тип: {test_type}...")
 
         diff_map = {'easy': (1, 3), 'medium': (4, 6), 'hard': (7, 10), 'all': (1, 10)}
         diff_range = diff_map.get(difficulty, (1, 10))
@@ -526,11 +608,8 @@ class SmartTestGenerator:
             print("[ERROR] Не најдов валидни задачи со овие критериуми.")
             return
 
-        if len(problems) < count:
-            print(f"[WARNING] Најдов само {len(problems)} валидни задачи. Ги вклучувам сите.")
-            selected = problems
-        else:
-            selected = random.sample(problems, count)
+        # Apply test type logic
+        selected = self._select_problems_by_type(problems, count, test_type)
 
         field_name = field.capitalize() if field else "Општ тест"
 
@@ -607,6 +686,9 @@ def main():
     parser.add_argument("-f", "--field", type=str, help="Област (algebra/geometry/numbers)")
     parser.add_argument("-c", "--count", type=int, default=8, help="Број на задачи")
     parser.add_argument("-d", "--difficulty", type=str, default="all", choices=['easy', 'medium', 'hard', 'all'])
+    parser.add_argument("-t", "--test-type", type=str, default="mixed",
+                       choices=['mixed', 'progressive', 'skill-focused', 'quick-review'],
+                       help="Тип на тест")
 
     args = parser.parse_args()
 
@@ -619,11 +701,12 @@ def main():
             if f in ['all', '']: f = None
             c = int(input("Број на задачи (3-15): ") or "8")
             d = input("Тежина (easy/medium/hard/all): ").strip() or "all"
-            generator.generate_test(g, f, c, d)
+            t = input("Тип на тест (mixed/progressive/skill-focused/quick-review): ").strip() or "mixed"
+            generator.generate_test(g, f, c, d, t)
         except ValueError as e:
             print(f"[ERROR] Грешен внес: {e}")
     else:
-        generator.generate_test(args.grade, args.field, args.count, args.difficulty)
+        generator.generate_test(args.grade, args.field, args.count, args.difficulty, args.test_type)
 
 if __name__ == "__main__":
     main()

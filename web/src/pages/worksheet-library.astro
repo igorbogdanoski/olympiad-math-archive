@@ -1,0 +1,272 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+// Mock library data - in real implementation, this would come from a database
+const libraryTests = [
+	{
+		id: 'weekly_math_8a_2024',
+		title: 'Неделен математички тест - 8А',
+		grade: 8,
+		category: 'mixed',
+		difficulty: 'medium',
+		problemCount: 6,
+		downloadCount: 23,
+		rating: 4.5,
+		tags: ['алгебра', 'геометрија', 'брзи пресметки'],
+		dateCreated: '2024-01-15',
+		author: 'Марија Стојановска'
+	},
+	{
+		id: 'geometry_focus_7_2024',
+		title: 'Геометриски фокус - 7 одделение',
+		grade: 7,
+		category: 'geometry',
+		difficulty: 'medium',
+		problemCount: 8,
+		downloadCount: 45,
+		rating: 4.8,
+		tags: ['триаголници', 'агли', 'сличности'],
+		dateCreated: '2024-01-10',
+		author: 'Димитар Поповски'
+	},
+	{
+		id: 'algebra_basics_9_2024',
+		title: 'Основи на алгебра - 9 одделение',
+		grade: 9,
+		category: 'algebra',
+		difficulty: 'easy',
+		problemCount: 5,
+		downloadCount: 31,
+		rating: 4.2,
+		tags: ['равенки', 'нееднаквости', 'функции'],
+		dateCreated: '2024-01-08',
+		author: 'Ана Петровска'
+	},
+	{
+		id: 'olympiad_prep_10_2024',
+		title: 'Подготовка за математичка олимпијада',
+		grade: 10,
+		category: 'mixed',
+		difficulty: 'hard',
+		problemCount: 12,
+		downloadCount: 67,
+		rating: 4.9,
+		tags: ['олимпијада', 'напредни техники', 'докази'],
+		dateCreated: '2024-01-05',
+		author: 'Игор Богданоски'
+	},
+	{
+		id: 'number_theory_intro_6_2024',
+		title: 'Вовед во теорија на броеви',
+		grade: 6,
+		category: 'numbers',
+		difficulty: 'medium',
+		problemCount: 7,
+		downloadCount: 19,
+		rating: 4.3,
+		tags: ['делители', 'прост број', 'парност'],
+		dateCreated: '2024-01-12',
+		author: 'Владимир Трајковски'
+	},
+	{
+		id: 'statistics_basics_8_2024',
+		title: 'Основи на статистика',
+		grade: 8,
+		category: 'statistics',
+		difficulty: 'easy',
+		problemCount: 6,
+		downloadCount: 28,
+		rating: 4.4,
+		tags: ['просек', 'медијана', 'графици'],
+		dateCreated: '2024-01-18',
+		author: 'Симона Димитрова'
+	}
+];
+
+const categories = [...new Set(libraryTests.map(t => t.category))];
+const grades = [...new Set(libraryTests.map(t => t.grade))].sort();
+---
+
+<Layout title="Библиотека на тестови">
+	<div class="max-w-6xl mx-auto">
+		<div class="mb-10">
+			<h1 class="text-4xl font-black mb-4 flex items-center gap-4">
+				<span class="text-5xl">📚</span>
+				Библиотека на тестови
+			</h1>
+			<p class="text-slate-500 dark:text-slate-400 text-lg max-w-3xl">
+				Прегледајте и преземете готови тестови креирани од искусни наставници.
+				Филтрирајте по одделение, област и тежина за да најдете совршениот тест за вашите ученици.
+			</p>
+		</div>
+
+		<!-- Filters -->
+		<div class="bg-white dark:bg-slate-900 p-6 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm mb-8">
+			<div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+				<div>
+					<label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">Одделение</label>
+					<select id="filter-grade" class="w-full bg-slate-50 dark:bg-slate-800 border-none rounded-xl px-4 py-3 text-sm font-bold focus:ring-2 focus:ring-blue-500">
+						<option value="">Сите одделенија</option>
+						{grades.map(g => <option value={g}>{g}-то одделение</option>)}
+					</select>
+				</div>
+				<div>
+					<label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">Област</label>
+					<select id="filter-category" class="w-full bg-slate-50 dark:bg-slate-800 border-none rounded-xl px-4 py-3 text-sm font-bold focus:ring-2 focus:ring-blue-500">
+						<option value="">Сите области</option>
+						{categories.map(c => <option value={c} class="capitalize">{c}</option>)}
+					</select>
+				</div>
+				<div>
+					<label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">Тежина</label>
+					<select id="filter-difficulty" class="w-full bg-slate-50 dark:bg-slate-800 border-none rounded-xl px-4 py-3 text-sm font-bold focus:ring-2 focus:ring-blue-500">
+						<option value="">Сите нивоа</option>
+						<option value="easy">Лесни</option>
+						<option value="medium">Средни</option>
+						<option value="hard">Тешки</option>
+					</select>
+				</div>
+				<div>
+					<label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">Пребарување</label>
+					<input type="text" id="filter-search" placeholder="Пребарај наслов..."
+						   class="w-full bg-slate-50 dark:bg-slate-800 border-none rounded-xl px-4 py-3 text-sm font-bold focus:ring-2 focus:ring-blue-500" />
+				</div>
+			</div>
+		</div>
+
+		<!-- Test Library Grid -->
+		<div id="test-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+			{libraryTests.map(test => (
+				<div class="bg-white dark:bg-slate-900 p-6 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-lg transition-all group">
+					<div class="flex justify-between items-start mb-4">
+						<div class="flex-1">
+							<h3 class="font-bold text-lg mb-2 leading-tight group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+								{test.title}
+							</h3>
+							<div class="flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400 mb-2">
+								<span class="font-medium">{test.author}</span>
+								<span>•</span>
+								<span>{new Date(test.dateCreated).toLocaleDateString('mk-MK')}</span>
+							</div>
+						</div>
+						<div class="flex flex-col items-end gap-2">
+							<div class="flex items-center gap-1">
+								<span class="text-yellow-500">⭐</span>
+								<span class="text-sm font-bold">{test.rating}</span>
+							</div>
+							<span class="text-xs text-slate-400">{test.downloadCount} преземања</span>
+						</div>
+					</div>
+
+					<div class="flex flex-wrap gap-2 mb-4">
+						<span class="px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded-full text-xs font-medium">
+							{test.grade}-то одделение
+						</span>
+						<span class="px-3 py-1 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 rounded-full text-xs font-medium capitalize">
+							{test.category}
+						</span>
+						<span class="px-3 py-1 bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-300 rounded-full text-xs font-medium">
+							{test.difficulty === 'easy' ? 'лесно' : test.difficulty === 'medium' ? 'средно' : 'тешко'}
+						</span>
+						<span class="px-3 py-1 bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 rounded-full text-xs font-medium">
+							{test.problemCount} задачи
+						</span>
+					</div>
+
+					<div class="flex flex-wrap gap-1 mb-4">
+						{test.tags.map(tag => (
+							<span class="px-2 py-1 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 rounded-md text-xs">
+								{tag}
+							</span>
+						))}
+					</div>
+
+					<div class="flex gap-2">
+						<button onclick={`downloadTest('${test.id}')`}
+								class="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-xl text-sm transition-all flex items-center justify-center gap-2">
+							<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+							</svg>
+							Преземи
+						</button>
+						<button onclick={`previewTest('${test.id}')`}
+								class="px-4 py-3 bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-300 rounded-xl text-sm font-bold transition-all">
+							👁️
+						</button>
+					</div>
+				</div>
+			))}
+		</div>
+
+		<!-- Upload Section -->
+		<div class="mt-12 bg-gradient-to-r from-emerald-50 to-green-50 dark:from-emerald-900/20 dark:to-green-900/20 p-8 rounded-3xl border border-emerald-200 dark:border-emerald-800">
+			<h2 class="text-2xl font-bold mb-4 flex items-center gap-3">
+				<span class="text-3xl">📤</span>
+				Споделете ваш тест
+			</h2>
+			<p class="text-slate-600 dark:text-slate-400 mb-6">
+				Дали креиравте одличен тест? Споделете го со заедницата на наставници
+				за да помогнете на други колеги во нивната работа.
+			</p>
+			<button class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-6 rounded-xl transition-all flex items-center gap-2">
+				<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
+				</svg>
+				Прикачи и сподели тест
+			</button>
+		</div>
+	</div>
+</Layout>
+
+<script>
+	// Filter functionality
+	const filterGrade = document.getElementById('filter-grade');
+	const filterCategory = document.getElementById('filter-category');
+	const filterDifficulty = document.getElementById('filter-difficulty');
+	const filterSearch = document.getElementById('filter-search');
+	const testGrid = document.getElementById('test-grid');
+
+	function filterTests() {
+		const grade = filterGrade.value;
+		const category = filterCategory.value;
+		const difficulty = filterDifficulty.value;
+		const search = filterSearch.value.toLowerCase();
+
+		const testCards = testGrid.children;
+
+		for (let card of testCards) {
+			const cardGrade = card.querySelector('[data-grade]')?.dataset.grade || '';
+			const cardCategory = card.querySelector('[data-category]')?.dataset.category || '';
+			const cardDifficulty = card.querySelector('[data-difficulty]')?.dataset.difficulty || '';
+			const cardTitle = card.querySelector('h3').textContent.toLowerCase();
+
+			const gradeMatch = !grade || cardGrade === grade;
+			const categoryMatch = !category || cardCategory === category;
+			const difficultyMatch = !difficulty || cardDifficulty === difficulty;
+			const searchMatch = !search || cardTitle.includes(search);
+
+			if (gradeMatch && categoryMatch && difficultyMatch && searchMatch) {
+				card.style.display = 'block';
+			} else {
+				card.style.display = 'none';
+			}
+		}
+	}
+
+	// Add event listeners
+	filterGrade?.addEventListener('change', filterTests);
+	filterCategory?.addEventListener('change', filterTests);
+	filterDifficulty?.addEventListener('change', filterTests);
+	filterSearch?.addEventListener('input', filterTests);
+
+	// Test actions
+	function downloadTest(testId) {
+		// In real implementation, this would download the actual test file
+		alert(`Преземање на тест: ${testId}\n\nНаскоро ќе биде имплементирано преземањето на вистинските датотеки.`);
+	}
+
+	function previewTest(testId) {
+		// In real implementation, this would open a preview modal
+		alert(`Преглед на тест: ${testId}\n\nНаскоро ќе биде додаден преглед во модален прозорец.`);
+	}
+</script>
