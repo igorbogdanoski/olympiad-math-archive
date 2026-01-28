@@ -1,0 +1,9 @@
+app.mismath.net {
+    reverse_proxy frontend:4321 {
+        header_up Host localhost
+    }
+}
+
+api.mismath.net {
+    reverse_proxy api:8000
+}
