@@ -55,7 +55,33 @@ import CurriculumViewer from '../components/CurriculumViewer.svelte';
 				</div>
 
 				{/* Feature Cards Grid */}
-				<div class="mt-6 grid md:grid-cols-2 gap-6">
+				<div class="mt-6 grid md:grid-cols-3 gap-6">
+					{/* Worksheet Builder - NEW! */}
+					<a href="/teachers/worksheet-builder" class="block bg-gradient-to-r from-purple-500/20 to-pink-500/20 backdrop-blur-sm rounded-xl p-6 border border-purple-300/30 hover:border-purple-400/50 transition-all group">
+						<div class="flex items-center justify-between mb-4">
+							<div class="flex items-center gap-4">
+								<div class="w-12 h-12 bg-gradient-to-br from-purple-400 to-pink-400 rounded-xl flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">
+									📄
+								</div>
+								<div>
+									<h3 class="text-lg font-bold text-white">Worksheet Builder</h3>
+									<p class="text-purple-100 text-sm">Креирај работен лист за 5 минути</p>
+								</div>
+							</div>
+							<div class="text-purple-200 group-hover:text-white transition-colors">
+								→
+							</div>
+						</div>
+						<div class="flex gap-3">
+							<span class="px-3 py-1 bg-purple-400/20 text-purple-100 text-xs font-medium rounded-full">
+								⚡ 15+ templates
+							</span>
+							<span class="px-3 py-1 bg-pink-400/20 text-pink-100 text-xs font-medium rounded-full">
+								📥 PDF експорт
+							</span>
+						</div>
+					</a>
+
 					{/* GeoGebra Matcher */}
 					<a href="/teachers/geogebra-review" class="block bg-gradient-to-r from-emerald-500/20 to-teal-500/20 backdrop-blur-sm rounded-xl p-6 border border-emerald-300/30 hover:border-emerald-400/50 transition-all group">
 						<div class="flex items-center justify-between mb-4">
