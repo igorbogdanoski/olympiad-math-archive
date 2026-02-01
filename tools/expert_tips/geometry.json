@@ -1,0 +1,431 @@
+{
+  "category": "geometry",
+  "total_tips": 25,
+  "tips": [
+    {
+      "tip_id": "geo_triangle_001",
+      "subcategory": "triangles",
+      "title_mk": "Питагорова теорема - Препознавање",
+      "title_en": "Pythagorean Theorem - Recognition",
+      "content_mk": "Кога видиш правоаголен триаголник, СЕКОГАШ провери дали а² + б² = ц². Ова е најчестиот начин да се најде непозната страна. Хипотенузата (ц) е најдолгата страна, спротивна на правиот агол.",
+      "content_en": "When you see a right triangle, ALWAYS check if a² + b² = c². This is the most common way to find an unknown side. The hypotenuse (c) is the longest side, opposite the right angle.",
+      "grade_range": [7, 9],
+      "difficulty": "easy",
+      "bro_standards": ["МАТ.7.Г.3", "МАТ.8.Г.2"],
+      "tags": ["pythagorean", "right-triangle", "geometry-basics"],
+      "common_mistakes": [
+        "Заборавање дека теоремата важи САМО за правоаголни триаголници",
+        "Мешање на катети и хипотенуза (хипотенуза е секогаш најдолга)"
+      ],
+      "pro_tip": "Питагорови тројки (3,4,5), (5,12,13), (8,15,17) - запомни ги! Секоја нивна мултипла исто важи (6,8,10)."
+    },
+    {
+      "tip_id": "geo_triangle_002",
+      "subcategory": "triangles",
+      "title_mk": "Сума на агли во триаголник",
+      "title_en": "Sum of Angles in Triangle",
+      "content_mk": "Во СЕКОЈ триаголник, α + β + γ = 180°. Ако знаеш два агли, третиот е 180° - α - β. Ова е една од најкористените теореми во геометријата.",
+      "content_en": "In EVERY triangle, α + β + γ = 180°. If you know two angles, the third is 180° - α - β. This is one of the most used theorems in geometry.",
+      "grade_range": [6, 8],
+      "difficulty": "easy",
+      "bro_standards": ["МАТ.6.Г.1", "МАТ.7.Г.1"],
+      "tags": ["angles", "triangles", "geometry-basics"],
+      "common_mistakes": [
+        "Заборавање дека важи за СИТЕ триаголници (не само правоаголни)",
+        "Мешање со надворешен агол"
+      ],
+      "pro_tip": "Надворешен агол е еднаков на сумата на двата спротивни внатрешни агли."
+    },
+    {
+      "tip_id": "geo_triangle_003",
+      "subcategory": "triangles",
+      "title_mk": "Еднакокраки триаголник - Својства",
+      "title_en": "Isosceles Triangle - Properties",
+      "content_mk": "Ако два страни се еднакви (АБ = АЦ), тогаш аглите спротивни на нив се исто еднакви (∠Б = ∠Ц). Висината од врвот А ја дели основата наполовина и е симетрала.",
+      "content_en": "If two sides are equal (AB = AC), then the angles opposite them are also equal (∠B = ∠C). The height from vertex A bisects the base and is an axis of symmetry.",
+      "grade_range": [7, 9],
+      "difficulty": "medium",
+      "bro_standards": ["МАТ.7.Г.2"],
+      "tags": ["isosceles", "triangles", "symmetry"],
+      "common_mistakes": [
+        "Претпоставување дека сите триаголници се еднакокраки",
+        "Заборавање дека висината може да биде НАДВОР од триаголникот"
+      ],
+      "pro_tip": "Еднакостран триаголник е специјален случај каде што сите три страни се еднакви (секој агол е 60°)."
+    },
+    {
+      "tip_id": "geo_circle_001",
+      "subcategory": "circles",
+      "title_mk": "Кружница - Основни формули",
+      "title_en": "Circle - Basic Formulas",
+      "content_mk": "Запомни ги добро: Обиколка О = 2πр = πд (д е дијаметар). Плоштина П = πр². Ако р = 5 см, тогаш О = 10π см ≈ 31.4 см, П = 25π см² ≈ 78.5 см².",
+      "content_en": "Remember well: Circumference C = 2πr = πd (d is diameter). Area A = πr². If r = 5 cm, then C = 10π cm ≈ 31.4 cm, A = 25π cm² ≈ 78.5 cm².",
+      "grade_range": [7, 9],
+      "difficulty": "easy",
+      "bro_standards": ["МАТ.7.Г.5", "МАТ.8.Г.4"],
+      "tags": ["circles", "area", "circumference", "formulas"],
+      "common_mistakes": [
+        "Мешање на формули за обиколка и плоштина",
+        "Заборавање на π во одговорот"
+      ],
+      "pro_tip": "Оставај одговор со π (точно) освен ако не е барано приближно пресметување (користи π ≈ 3.14)."
+    },
+    {
+      "tip_id": "geo_circle_002",
+      "subcategory": "circles",
+      "title_mk": "Тетива и централен агол",
+      "title_en": "Chord and Central Angle",
+      "content_mk": "Ако централниот агол е α°, тогаш периферниот агол кој гледа на истата лачна е α°/2. Пример: Ако централен агол е 80°, периферен е 40°.",
+      "content_en": "If the central angle is α°, then the inscribed angle subtending the same arc is α°/2. Example: If central angle is 80°, inscribed angle is 40°.",
+      "grade_range": [8, 10],
+      "difficulty": "medium",
+      "bro_standards": ["МАТ.8.Г.5", "МАТ.9.Г.3"],
+      "tags": ["circles", "angles", "chords"],
+      "common_mistakes": [
+        "Мешање на централен и периферен агол",
+        "Заборавање на релацијата α и α/2"
+      ],
+      "pro_tip": "Ако периферен агол е 90°, тогаш централниот е 180° - значи тетивата е дијаметар!"
+    },
+    {
+      "tip_id": "geo_area_001",
+      "subcategory": "areas",
+      "title_mk": "Плоштина на триаголник - 3 начина",
+      "title_en": "Triangle Area - 3 Methods",
+      "content_mk": "1) П = (а · х) / 2 (основа · висина / 2). 2) Херонова формула: П = √[с(с-а)(с-б)(с-ц)] каде с = (а+б+ц)/2. 3) За правоаголен: П = (а · б) / 2 (катети).",
+      "content_en": "1) A = (base · height) / 2. 2) Heron's formula: A = √[s(s-a)(s-b)(s-c)] where s = (a+b+c)/2. 3) For right triangle: A = (a · b) / 2 (legs).",
+      "grade_range": [7, 10],
+      "difficulty": "medium",
+      "bro_standards": ["МАТ.7.Г.4", "МАТ.8.Г.3"],
+      "tags": ["area", "triangles", "heron"],
+      "common_mistakes": [
+        "Заборавање да се подели со 2",
+        "Користење на страна наместо висина"
+      ],
+      "pro_tip": "Ако се дадени сите три страни, користи Херонова формула. Ако има правоаголен триаголник, најлесно е катети."
+    },
+    {
+      "tip_id": "geo_parallel_001",
+      "subcategory": "parallel-lines",
+      "title_mk": "Паралелни прави - Агли",
+      "title_en": "Parallel Lines - Angles",
+      "content_mk": "Ако две прави се паралелни (а || б) и се сечат со трета (трансверзала), тогаш: 1) Наизменични агли се еднакви. 2) Сооднесни агли се еднакви. 3) Внатрешни едностраните се дополнителни (сума 180°).",
+      "content_en": "If two lines are parallel (a || b) and cut by a transversal, then: 1) Alternate angles are equal. 2) Corresponding angles are equal. 3) Co-interior angles are supplementary (sum 180°).",
+      "grade_range": [6, 8],
+      "difficulty": "medium",
+      "bro_standards": ["МАТ.6.Г.3", "МАТ.7.Г.6"],
+      "tags": ["parallel-lines", "angles", "transversal"],
+      "common_mistakes": [
+        "Мешање на наизменични и сооднесни агли",
+        "Претпоставување дека правите се паралелни без доказ"
+      ],
+      "pro_tip": "Цртај Z (наизменични) или F (сооднесни) за да ги запамтиш релациите."
+    },
+    {
+      "tip_id": "geo_similar_001",
+      "subcategory": "similarity",
+      "title_mk": "Сл ични триаголници - Препознавање",
+      "title_en": "Similar Triangles - Recognition",
+      "content_mk": "Два триаголници се слични ако: 1) Три агли се еднакви (АА критериум). 2) Три страни се пропорционални (ССС). 3) Два страни пропорционални и меѓуаголот еднаков (САС). Слични → Пропорционални страни и еднакви агли.",
+      "content_en": "Two triangles are similar if: 1) Three angles are equal (AA criterion). 2) Three sides are proportional (SSS). 3) Two sides proportional and included angle equal (SAS). Similar → Proportional sides and equal angles.",
+      "grade_range": [8, 10],
+      "difficulty": "medium",
+      "bro_standards": ["МАТ.8.Г.7", "МАТ.9.Г.2"],
+      "tags": ["similarity", "triangles", "proportions"],
+      "common_mistakes": [
+        "Мешање на сличност и конгруентност",
+        "Заборавање дека само ДВА еднакви агли се доволни за сличност"
+      ],
+      "pro_tip": "Ако има паралелни прави во триаголник, речиси секогаш има слични триаголници!"
+    },
+    {
+      "tip_id": "geo_quad_001",
+      "subcategory": "quadrilaterals",
+      "title_mk": "Плоштина на правоаголник и квадрат",
+      "title_en": "Rectangle and Square Area",
+      "content_mk": "Правоаголник: П = а · б (должина · ширина). Квадрат: П = а² (страна на квадрат). Обиколка правоаголник: О = 2(а + б). Обиколка квадрат: О = 4а.",
+      "content_en": "Rectangle: A = a · b (length · width). Square: A = a² (side squared). Perimeter rectangle: P = 2(a + b). Perimeter square: P = 4a.",
+      "grade_range": [6, 7],
+      "difficulty": "easy",
+      "bro_standards": ["МАТ.6.Г.4", "МАТ.7.Г.7"],
+      "tags": ["quadrilaterals", "area", "rectangle", "square"],
+      "common_mistakes": [
+        "Мешање на плоштина и обиколка",
+        "Заборавање да се помножи со 2 обиколката"
+      ],
+      "pro_tip": "Дијагонала на квадрат е а√2 (ако страна е а)."
+    },
+    {
+      "tip_id": "geo_quad_002",
+      "subcategory": "quadrilaterals",
+      "title_mk": "Паралелограм - Својства",
+      "title_en": "Parallelogram - Properties",
+      "content_mk": "Паралелограм има: 1) Спротивни страни паралелни и еднакви. 2) Спротивни агли еднакви. 3) Дијагонали се сечат наполовина. 4) Плоштина П = а · х (основа · висина).",
+      "content_en": "Parallelogram has: 1) Opposite sides parallel and equal. 2) Opposite angles equal. 3) Diagonals bisect each other. 4) Area A = base · height.",
+      "grade_range": [7, 9],
+      "difficulty": "medium",
+      "bro_standards": ["МАТ.7.Г.8", "МАТ.8.Г.6"],
+      "tags": ["parallelogram", "quadrilaterals", "area"],
+      "common_mistakes": [
+        "Мешање на страна и висина во формулата за плоштина",
+        "Претпоставување дека сите агли се прави"
+      ],
+      "pro_tip": "Правоаголник, ромб и квадрат се специјални случаи на паралелограм."
+    },
+    {
+      "tip_id": "geo_construction_001",
+      "subcategory": "constructions",
+      "title_mk": "Симетрала на агол - Конструкција",
+      "title_en": "Angle Bisector - Construction",
+      "content_mk": "За да конструираш симетрала на агол: 1) Отвори шестар и означи две точки на кракови на еднаково растојание. 2) Од двете точки цртај лачни со ист радиус кои се сечат. 3) Поврзи врв со точката на сечење. Тоа е симетралата!",
+      "content_en": "To construct an angle bisector: 1) Open compass and mark two points on the angle's arms at equal distance. 2) From both points draw arcs with same radius that intersect. 3) Connect vertex to intersection point. That's the bisector!",
+      "grade_range": [7, 8],
+      "difficulty": "medium",
+      "bro_standards": ["МАТ.7.Г.9"],
+      "tags": ["constructions", "angle-bisector", "compass"],
+      "common_mistakes": [
+        "Различна отвореност на шестар при втората конструкција",
+        "Поврзување погрешни точки"
+      ],
+      "pro_tip": "Симетрала на агол е множество точки кои се на еднаква оддалеченост од двата крака."
+    },
+    {
+      "tip_id": "geo_construction_002",
+      "subcategory": "constructions",
+      "title_mk": "Нормала - Конструкција",
+      "title_en": "Perpendicular - Construction",
+      "content_mk": "За да конструираш нормала од точка на права: 1) Отвори шестар и означи две точки на правата лево и десно. 2) Од двете точки цртај лачни со поголем радиус. 3) Поврзи точката со сечење на лачните. Тоа е нормала (90°)!",
+      "content_en": "To construct a perpendicular from a point on a line: 1) Open compass and mark two points on the line left and right. 2) From both points draw arcs with larger radius. 3) Connect the point to arc intersection. That's perpendicular (90°)!",
+      "grade_range": [7, 8],
+      "difficulty": "medium",
+      "bro_standards": ["МАТ.7.Г.10"],
+      "tags": ["constructions", "perpendicular", "compass"],
+      "common_mistakes": [
+        "Преблиску цртање на првите две точки",
+        "Премал радиус кај лачните (нема сечење)"
+      ],
+      "pro_tip": "Нормала секогаш прави 90° со правата. Користи ја за конструкција на правоаголник."
+    },
+    {
+      "tip_id": "geo_distance_001",
+      "subcategory": "coordinates",
+      "title_mk": "Растојание помеѓу две точки",
+      "title_en": "Distance Between Two Points",
+      "content_mk": "За точки А(x₁, y₁) и Б(x₂, y₂), растојанието d = √[(x₂-x₁)² + (y₂-y₁)²]. Ова е Питагорова теорема применета на координатен систем!",
+      "content_en": "For points A(x₁, y₁) and B(x₂, y₂), distance d = √[(x₂-x₁)² + (y₂-y₁)²]. This is Pythagorean theorem applied to coordinate system!",
+      "grade_range": [8, 10],
+      "difficulty": "medium",
+      "bro_standards": ["МАТ.8.Г.8", "МАТ.9.Г.4"],
+      "tags": ["coordinates", "distance", "pythagorean"],
+      "common_mistakes": [
+        "Заборавање на квадратен корен",
+        "Мешање на x и y координати"
+      ],
+      "pro_tip": "Ако точките се на иста хоризонтала (иста y), формулата се сведува на d = |x₂ - x₁|."
+    },
+    {
+      "tip_id": "geo_midpoint_001",
+      "subcategory": "coordinates",
+      "title_mk": "Средна точка на отсечка",
+      "title_en": "Midpoint of Segment",
+      "content_mk": "За отсечка АБ со А(x₁, y₁) и Б(x₂, y₂), средната точка М е: М((x₁+x₂)/2, (y₁+y₂)/2). Едноставно просек на координати!",
+      "content_en": "For segment AB with A(x₁, y₁) and B(x₂, y₂), midpoint M is: M((x₁+x₂)/2, (y₁+y₂)/2). Simply average of coordinates!",
+      "grade_range": [8, 10],
+      "difficulty": "easy",
+      "bro_standards": ["МАТ.8.Г.8", "МАТ.9.Г.4"],
+      "tags": ["coordinates", "midpoint", "segment"],
+      "common_mistakes": [
+        "Собирање наместо просек (заборавање на /2)",
+        "Мешање на координати"
+      ],
+      "pro_tip": "Ако знаеш средна точка М и една крајна А, другата Б е: Б(2xₘ - xₐ, 2yₘ - yₐ)."
+    },
+    {
+      "tip_id": "geo_perimeter_001",
+      "subcategory": "measurements",
+      "title_mk": "Обиколка на многуаголник",
+      "title_en": "Perimeter of Polygon",
+      "content_mk": "Обиколка е сума на сите страни. Пример: Триаголник со а=3, б=4, ц=5 → О = 3+4+5 = 12. Ако има n еднакви страни (правилен многуаголник), О = n · а.",
+      "content_en": "Perimeter is sum of all sides. Example: Triangle with a=3, b=4, c=5 → P = 3+4+5 = 12. If there are n equal sides (regular polygon), P = n · a.",
+      "grade_range": [6, 8],
+      "difficulty": "easy",
+      "bro_standards": ["МАТ.6.Г.2", "МАТ.7.Г.11"],
+      "tags": ["perimeter", "polygon", "measurements"],
+      "common_mistakes": [
+        "Мешање на обиколка и плоштина",
+        "Заборавање на некоја страна"
+      ],
+      "pro_tip": "Обиколка се мери во единици (см, м), плоштина во единици на квадрат (см², м²)."
+    },
+    {
+      "tip_id": "geo_symmetry_001",
+      "subcategory": "symmetry",
+      "title_mk": "Осна симетрија - Својства",
+      "title_en": "Reflection Symmetry - Properties",
+      "content_mk": "Ако фигура има оса на симетрија, тогаш секоја точка на едната страна има соодветна точка на другата на еднакво растојание. Примери: Квадрат (4 оси), правоаголник (2 оси), кружница (бесконечно многу).",
+      "content_en": "If a figure has an axis of symmetry, then every point on one side has a corresponding point on the other at equal distance. Examples: Square (4 axes), rectangle (2 axes), circle (infinitely many).",
+      "grade_range": [6, 8],
+      "difficulty": "medium",
+      "bro_standards": ["МАТ.6.Г.5", "МАТ.7.Г.12"],
+      "tags": ["symmetry", "reflection", "geometric-transformations"],
+      "common_mistakes": [
+        "Мешање на осна и централна симетрија",
+        "Претпоставување дека секоја фигура има симетрија"
+      ],
+      "pro_tip": "Правоаголен триаголник нема оска на симетрија, освен ако не е еднакокрак правоаголен (45-45-90)."
+    },
+    {
+      "tip_id": "geo_volume_001",
+      "subcategory": "3d-geometry",
+      "title_mk": "Волумен на коцка и квадар",
+      "title_en": "Volume of Cube and Cuboid",
+      "content_mk": "Коцка: В = а³ (страна на куб). Квадар: В = а · б · ц (должина · ширина · височина). Површина коцка: П = 6а². Површина квадар: П = 2(аб + бц + ац).",
+      "content_en": "Cube: V = a³ (side cubed). Cuboid: V = a · b · c (length · width · height). Surface cube: A = 6a². Surface cuboid: A = 2(ab + bc + ac).",
+      "grade_range": [7, 9],
+      "difficulty": "medium",
+      "bro_standards": ["МАТ.7.Г.13", "МАТ.8.Г.9"],
+      "tags": ["3d-geometry", "volume", "cube", "cuboid"],
+      "common_mistakes": [
+        "Мешање на волумен и површина",
+        "Заборавање на множителот 2 кај површината на квадар"
+      ],
+      "pro_tip": "Волумен се мери во единици на куб (см³, м³), површина во единици на квадрат (см², м²)."
+    },
+    {
+      "tip_id": "geo_thales_001",
+      "subcategory": "theorems",
+      "title_mk": "Талесова теорема",
+      "title_en": "Thales' Theorem",
+      "content_mk": "Ако права е паралелна на една страна на триаголник и ги сече другите две, тогаш ги дели пропорционално. Пример: Ако АД/ДБ = АЕ/ЕЦ, тогаш ДЕ || БЦ.",
+      "content_en": "If a line is parallel to one side of a triangle and cuts the other two, it divides them proportionally. Example: If AD/DB = AE/EC, then DE || BC.",
+      "grade_range": [8, 10],
+      "difficulty": "hard",
+      "bro_standards": ["МАТ.8.Г.10", "МАТ.9.Г.5"],
+      "tags": ["thales", "proportions", "parallel-lines", "theorems"],
+      "common_mistakes": [
+        "Заборавање на условот за паралелност",
+        "Погрешно поставување на пропорциите"
+      ],
+      "pro_tip": "Талесова теорема е клучна за докажување сличност на триаголници!"
+    },
+    {
+      "tip_id": "geo_pythagorean_001",
+      "subcategory": "theorems",
+      "title_mk": "Обратна Питагорова теорема",
+      "title_en": "Converse Pythagorean Theorem",
+      "content_mk": "Ако три страни задоволуваат а² + б² = ц², тогаш триаголникот е ПРАВОАГОЛЕН. Ова е начин да ДОКАЖЕШ дека триаголник е правоаголен без да мериш агол!",
+      "content_en": "If three sides satisfy a² + b² = c², then the triangle is RIGHT-ANGLED. This is a way to PROVE that a triangle is right-angled without measuring an angle!",
+      "grade_range": [8, 10],
+      "difficulty": "medium",
+      "bro_standards": ["МАТ.8.Г.11", "МАТ.9.Г.6"],
+      "tags": ["pythagorean", "converse", "right-triangle", "proof"],
+      "common_mistakes": [
+        "Мешање на права и обратна теорема",
+        "Заборавање дека ц мора да биде најдолга страна"
+      ],
+      "pro_tip": "Ако а² + б² > ц², триаголникот е остроаголен. Ако а² + б² < ц², е тапоаголен."
+    },
+    {
+      "tip_id": "geo_tangent_001",
+      "subcategory": "circles",
+      "title_mk": "Тангента на кружница",
+      "title_en": "Tangent to Circle",
+      "content_mk": "Тангента е нормална (перпендикуларна) на радиусот во точката на допир. Ако ОА е радиус и АБ е тангента, тогаш ОА ⊥ АБ (прави агол 90°).",
+      "content_en": "Tangent is perpendicular to the radius at the point of contact. If OA is radius and AB is tangent, then OA ⊥ AB (right angle 90°).",
+      "grade_range": [8, 10],
+      "difficulty": "medium",
+      "bro_standards": ["МАТ.8.Г.12", "МАТ.9.Г.7"],
+      "tags": ["circles", "tangent", "perpendicular"],
+      "common_mistakes": [
+        "Претпоставување дека тангента минува низ центарот",
+        "Заборавање дека тангента допира кружница во ТОЧНО ЕДНА точка"
+      ],
+      "pro_tip": "Од надворешна точка можат да се конструираат ДВЕ тангенти на кружница, и тие се еднакви по должина."
+    },
+    {
+      "tip_id": "geo_sector_001",
+      "subcategory": "circles",
+      "title_mk": "Плоштина на кружен исечок",
+      "title_en": "Area of Circular Sector",
+      "content_mk": "Ако централен агол е α° (во степени), тогаш плоштина на исечок П = (α/360) · πр². Лачна должина л = (α/360) · 2πр = (α/360) · πд.",
+      "content_en": "If central angle is α° (in degrees), then sector area A = (α/360) · πr². Arc length l = (α/360) · 2πr = (α/360) · πd.",
+      "grade_range": [8, 10],
+      "difficulty": "medium",
+      "bro_standards": ["МАТ.8.Г.13", "МАТ.9.Г.8"],
+      "tags": ["circles", "sector", "arc", "area"],
+      "common_mistakes": [
+        "Заборавање на множител α/360",
+        "Мешање на лачна должина и плоштина"
+      ],
+      "pro_tip": "Ако α = 90°, исечокот е четвртина од кружница. П = (90/360)πр² = πр²/4."
+    },
+    {
+      "tip_id": "geo_trapezoid_001",
+      "subcategory": "quadrilaterals",
+      "title_mk": "Плоштина на трапез",
+      "title_en": "Trapezoid Area",
+      "content_mk": "Трапез има две паралелни страни (основи). Плоштина П = [(а + б)/2] · х, каде а и б се основите, х е височината (растојание помеѓу нив). Мисли: просек на основи · височина.",
+      "content_en": "Trapezoid has two parallel sides (bases). Area A = [(a + b)/2] · h, where a and b are bases, h is height (distance between them). Think: average of bases · height.",
+      "grade_range": [7, 9],
+      "difficulty": "medium",
+      "bro_standards": ["МАТ.7.Г.14", "МАТ.8.Г.14"],
+      "tags": ["trapezoid", "quadrilaterals", "area"],
+      "common_mistakes": [
+        "Користење на крака наместо на основи",
+        "Заборавање да се подели сума на основи со 2"
+      ],
+      "pro_tip": "Ако трапез е еднакокрак, дијагоналите се еднакви."
+    },
+    {
+      "tip_id": "geo_rhombus_001",
+      "subcategory": "quadrilaterals",
+      "title_mk": "Плоштина на ромб",
+      "title_en": "Rhombus Area",
+      "content_mk": "Ромб има сите четири страни еднакви. Плоштина П = (д₁ · д₂) / 2, каде д₁ и д₂ се дијагонали. Алтернативно: П = а · х (страна · височина).",
+      "content_en": "Rhombus has all four sides equal. Area A = (d₁ · d₂) / 2, where d₁ and d₂ are diagonals. Alternatively: A = side · height.",
+      "grade_range": [7, 9],
+      "difficulty": "medium",
+      "bro_standards": ["МАТ.7.Г.15", "МАТ.8.Г.15"],
+      "tags": ["rhombus", "quadrilaterals", "area", "diagonals"],
+      "common_mistakes": [
+        "Заборавање да се подели производот на дијагонали со 2",
+        "Мешање на дијагонали со страни"
+      ],
+      "pro_tip": "Дијагоналите на ромб се нормални една на друга (сечат се под 90°) и се делат наполовина."
+    },
+    {
+      "tip_id": "geo_median_001",
+      "subcategory": "triangles",
+      "title_mk": "Медијана на триаголник",
+      "title_en": "Triangle Median",
+      "content_mk": "Медијана е отсечка од врв до средина на спротивната страна. Секој триаголник има ТРИ медијани кои се сечат во една точка (тежиште, центроид). Тежиштето ја дели секоја медијана во однос 2:1 од врвот.",
+      "content_en": "Median is a segment from vertex to midpoint of opposite side. Every triangle has THREE medians that intersect at one point (centroid). Centroid divides each median in ratio 2:1 from vertex.",
+      "grade_range": [8, 10],
+      "difficulty": "medium",
+      "bro_standards": ["МАТ.8.Г.16", "МАТ.9.Г.9"],
+      "tags": ["triangles", "median", "centroid"],
+      "common_mistakes": [
+        "Мешање на медијана со симетрала на агол",
+        "Мешање на медијана со висина"
+      ],
+      "pro_tip": "Три медијани го делат триаголникот на 6 помали триаголници со ЕДНАКВА плоштина!"
+    },
+    {
+      "tip_id": "geo_altitude_001",
+      "subcategory": "triangles",
+      "title_mk": "Висина на триаголник",
+      "title_en": "Triangle Altitude",
+      "content_mk": "Висина е отсечка од врв нормална на спротивната страна (или нејзино продолжение). Секој триаголник има ТРИ висини кои се сечат во една точка (ортоцентар). Во правоаголен триаголник, катетите се висини!",
+      "content_en": "Altitude is a segment from vertex perpendicular to opposite side (or its extension). Every triangle has THREE altitudes that intersect at one point (orthocenter). In right triangle, legs are altitudes!",
+      "grade_range": [7, 9],
+      "difficulty": "medium",
+      "bro_standards": ["МАТ.7.Г.16", "МАТ.8.Г.17"],
+      "tags": ["triangles", "altitude", "orthocenter"],
+      "common_mistakes": [
+        "Мешање на висина со медијана",
+        "Заборавање дека висината може да биде НАДВОР од триаголникот (кај тапоаголен)"
+      ],
+      "pro_tip": "Во еднакостран триаголник, висина, медијана и симетрала на агол се ИСТА отсечка!"
+    }
+  ]
+}

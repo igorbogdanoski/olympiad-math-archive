@@ -1,0 +1,414 @@
+{
+  "category": "algebra",
+  "total_tips": 25,
+  "tips": [
+    {
+      "tip_id": "alg_linear_001",
+      "subcategory": "linear-equations",
+      "title_mk": "Решавање линеарна равенка",
+      "title_en": "Solving Linear Equation",
+      "content_mk": "За ax + b = c: 1) Изолирај x на едната страна. 2) Пребаци сè друго на другата. 3) Подели со коефициентот на x. Пример: 3x + 5 = 14 → 3x = 9 → x = 3. СЕКОГАШ провери со замена!",
+      "content_en": "For ax + b = c: 1) Isolate x on one side. 2) Move everything else to the other. 3) Divide by coefficient of x. Example: 3x + 5 = 14 → 3x = 9 → x = 3. ALWAYS check by substitution!",
+      "grade_range": [7, 8],
+      "difficulty": "easy",
+      "bro_standards": ["МАТ.7.А.1", "МАТ.8.А.1"],
+      "tags": ["linear-equations", "algebra-basics", "solving"],
+      "common_mistakes": [
+        "Промена на знак кога се пребацува член",
+        "Заборавање да се подели сè со коефициентот"
+      ],
+      "pro_tip": "Секогаш провери решение со замена: 3·3 + 5 = 14 ✓"
+    },
+    {
+      "tip_id": "alg_system_001",
+      "subcategory": "systems",
+      "title_mk": "Систем од две равенки - Замена",
+      "title_en": "System of Two Equations - Substitution",
+      "content_mk": "Метод на замена: 1) Изрази една непозната од првата равенка (x = ...). 2) Замени во втората равенка. 3) Реши за другата непозната. 4) Најди првата со замена назад. Пример: x + y = 5, x = 2y → 2y + y = 5 → y = 5/3.",
+      "content_en": "Substitution method: 1) Express one variable from first equation (x = ...). 2) Substitute into second equation. 3) Solve for other variable. 4) Find first by substituting back. Example: x + y = 5, x = 2y → 2y + y = 5 → y = 5/3.",
+      "grade_range": [8, 9],
+      "difficulty": "medium",
+      "bro_standards": ["МАТ.8.А.2", "МАТ.9.А.1"],
+      "tags": ["systems", "substitution", "two-variables"],
+      "common_mistakes": [
+        "Заборавање да се замени во ДВЕТЕ места",
+        "Грешка во знак кога се изразува"
+      ],
+      "pro_tip": "Замена е најдобра кога една равенка веќе има изолирана непозната (x = ..., y = ...)."
+    },
+    {
+      "tip_id": "alg_system_002",
+      "subcategory": "systems",
+      "title_mk": "Систем од две равенки - Собирање",
+      "title_en": "System of Two Equations - Elimination",
+      "content_mk": "Метод на собирање: 1) Направи коефициентите на една непозната да бидат еднакви (множи равенки ако треба). 2) Собери/одземи равенките за да ја елиминираш. 3) Реши за останатата. 4) Замени назад. Пример: x + y = 5, x - y = 1 → Собери: 2x = 6 → x = 3.",
+      "content_en": "Elimination method: 1) Make coefficients of one variable equal (multiply equations if needed). 2) Add/subtract equations to eliminate it. 3) Solve for remaining variable. 4) Substitute back. Example: x + y = 5, x - y = 1 → Add: 2x = 6 → x = 3.",
+      "grade_range": [8, 9],
+      "difficulty": "medium",
+      "bro_standards": ["МАТ.8.А.3", "МАТ.9.А.2"],
+      "tags": ["systems", "elimination", "two-variables"],
+      "common_mistakes": [
+        "Собирање кога треба одземање (и обратно)",
+        "Грешка во знак при множење на цела равенка"
+      ],
+      "pro_tip": "Собирање е најдобро кога коефициентите се веќе блиску (1x и -1x, 2x и 3x)."
+    },
+    {
+      "tip_id": "alg_quadratic_001",
+      "subcategory": "quadratic",
+      "title_mk": "Решавање квадратна равенка - Факторизација",
+      "title_en": "Solving Quadratic Equation - Factoring",
+      "content_mk": "За x² + бx + ц = 0: Барај два броја кои се собираат до б и множат до ц. Пример: x² + 5x + 6 = 0 → (x + 2)(x + 3) = 0 → x = -2 или x = -3. Најбрз метод кога функционира!",
+      "content_en": "For x² + bx + c = 0: Find two numbers that add to b and multiply to c. Example: x² + 5x + 6 = 0 → (x + 2)(x + 3) = 0 → x = -2 or x = -3. Fastest method when it works!",
+      "grade_range": [8, 9],
+      "difficulty": "medium",
+      "bro_standards": ["МАТ.8.А.4", "МАТ.9.А.3"],
+      "tags": ["quadratic", "factoring", "solving"],
+      "common_mistakes": [
+        "Грешка во знаци на броевите",
+        "Заборавање дека има ДВЕ решенија"
+      ],
+      "pro_tip": "Ако не можеш да факторизираш за 30 секунди, користи дискриминанта!"
+    },
+    {
+      "tip_id": "alg_quadratic_002",
+      "subcategory": "quadratic",
+      "title_mk": "Решавање квадратна равенка - Дискриминанта",
+      "title_en": "Solving Quadratic Equation - Discriminant",
+      "content_mk": "За ax² + бx + ц = 0: Пресметај Δ = б² - 4ац. Тогаш x = (-б ± √Δ) / 2а. Ако Δ < 0, нема реални решенија. Ако Δ = 0, едно решение (двојно). Ако Δ > 0, две решенија.",
+      "content_en": "For ax² + bx + c = 0: Calculate Δ = b² - 4ac. Then x = (-b ± √Δ) / 2a. If Δ < 0, no real solutions. If Δ = 0, one solution (double). If Δ > 0, two solutions.",
+      "grade_range": [8, 9],
+      "difficulty": "medium",
+      "bro_standards": ["МАТ.8.А.5", "МАТ.9.А.4"],
+      "tags": ["quadratic", "discriminant", "formula"],
+      "common_mistakes": [
+        "Заборавање на ± (пропуштање на второто решение)",
+        "Грешка во знак на б (важно -б не б)"
+      ],
+      "pro_tip": "Запомни: Δ > 0 → две решенија, Δ = 0 → едно решение, Δ < 0 → нема реални."
+    },
+    {
+      "tip_id": "alg_inequality_001",
+      "subcategory": "inequalities",
+      "title_mk": "Решавање неравенка - Основни правила",
+      "title_en": "Solving Inequality - Basic Rules",
+      "content_mk": "Исто како равенка, НО: Ако множиш/делиш со НЕГАТИВЕН број, промени го знакот! Пример: -2x < 6 → x > -3 (знакот се промени од < во >). Ова е најчеста грешка!",
+      "content_en": "Same as equation, BUT: If multiplying/dividing by NEGATIVE number, flip the sign! Example: -2x < 6 → x > -3 (sign changed from < to >). This is most common mistake!",
+      "grade_range": [8, 9],
+      "difficulty": "medium",
+      "bro_standards": ["МАТ.8.А.6", "МАТ.9.А.5"],
+      "tags": ["inequalities", "solving", "algebra-basics"],
+      "common_mistakes": [
+        "Заборавање да се промени знак кога се дели со негативен број",
+        "Мешање на < и ≤"
+      ],
+      "pro_tip": "Секогаш провери решение со пробна вредност: Ако x > -3, пробај x = 0."
+    },
+    {
+      "tip_id": "alg_function_001",
+      "subcategory": "functions",
+      "title_mk": "Линеарна функција - График",
+      "title_en": "Linear Function - Graph",
+      "content_mk": "Функција y = kx + н: к е нагиб (колку брзо расте), н е пресек со y-оска. Ако к > 0, функција расте. Ако к < 0, опаѓа. Ако к = 0, хоризонтална линија.",
+      "content_en": "Function y = kx + n: k is slope (how fast it grows), n is y-intercept. If k > 0, function increases. If k < 0, decreases. If k = 0, horizontal line.",
+      "grade_range": [8, 9],
+      "difficulty": "medium",
+      "bro_standards": ["МАТ.8.А.7", "МАТ.9.А.6"],
+      "tags": ["functions", "linear", "graph"],
+      "common_mistakes": [
+        "Мешање на к (нагиб) и н (пресек)",
+        "Претпоставување дека секоја функција е линеарна"
+      ],
+      "pro_tip": "Нагиб к = (y₂ - y₁) / (x₂ - x₁) за две точки (x₁, y₁) и (x₂, y₂)."
+    },
+    {
+      "tip_id": "alg_exponent_001",
+      "subcategory": "exponents",
+      "title_mk": "Степени - Основни правила",
+      "title_en": "Exponents - Basic Rules",
+      "content_mk": "aⁿ · aᵐ = aⁿ⁺ᵐ (исти основи → собери експоненти). aⁿ / aᵐ = aⁿ⁻ᵐ. (aⁿ)ᵐ = aⁿˣᵐ. a⁰ = 1 (секогаш!). a⁻ⁿ = 1/aⁿ.",
+      "content_en": "aⁿ · aᵐ = aⁿ⁺ᵐ (same bases → add exponents). aⁿ / aᵐ = aⁿ⁻ᵐ. (aⁿ)ᵐ = aⁿˣᵐ. a⁰ = 1 (always!). a⁻ⁿ = 1/aⁿ.",
+      "grade_range": [8, 9],
+      "difficulty": "medium",
+      "bro_standards": ["МАТ.8.А.8", "МАТ.9.А.7"],
+      "tags": ["exponents", "powers", "algebra-rules"],
+      "common_mistakes": [
+        "Множење експоненти наместо собирање (aⁿ · aᵐ ≠ aⁿˣᵐ)",
+        "Заборавање дека a⁰ = 1"
+      ],
+      "pro_tip": "2⁻³ = 1/2³ = 1/8. Негативен експонент значи реципрочна вредност."
+    },
+    {
+      "tip_id": "alg_percent_001",
+      "subcategory": "percentages",
+      "title_mk": "Процент - Основни пресметки",
+      "title_en": "Percentage - Basic Calculations",
+      "content_mk": "x% од N = (x/100) · N. Пример: 15% од 80 = (15/100) · 80 = 12. Зголемување за x%: N · (1 + x/100). Намалување за x%: N · (1 - x/100).",
+      "content_en": "x% of N = (x/100) · N. Example: 15% of 80 = (15/100) · 80 = 12. Increase by x%: N · (1 + x/100). Decrease by x%: N · (1 - x/100).",
+      "grade_range": [7, 8],
+      "difficulty": "easy",
+      "bro_standards": ["МАТ.7.А.2", "МАТ.8.А.9"],
+      "tags": ["percentages", "ratios", "arithmetic"],
+      "common_mistakes": [
+        "Мешање на зголемување и намалување",
+        "Заборавање да се подели со 100"
+      ],
+      "pro_tip": "50% = 1/2, 25% = 1/4, 75% = 3/4, 10% = 1/10. Користи ги за брзи пресметки!"
+    },
+    {
+      "tip_id": "alg_fraction_001",
+      "subcategory": "fractions",
+      "title_mk": "Собирање и одземање разломци",
+      "title_en": "Adding and Subtracting Fractions",
+      "content_mk": "За а/б + ц/д: 1) Најди НЗС на б и д. 2) Направи ги разломците со ист именител. 3) Собери броители. Пример: 1/3 + 1/4 = 4/12 + 3/12 = 7/12.",
+      "content_en": "For a/b + c/d: 1) Find LCM of b and d. 2) Make fractions with same denominator. 3) Add numerators. Example: 1/3 + 1/4 = 4/12 + 3/12 = 7/12.",
+      "grade_range": [6, 7],
+      "difficulty": "easy",
+      "bro_standards": ["МАТ.6.А.1", "МАТ.7.А.3"],
+      "tags": ["fractions", "arithmetic", "algebra-basics"],
+      "common_mistakes": [
+        "Собирање броители И именители (1/3 + 1/4 ≠ 2/7)",
+        "Заборавање да се намали резултат"
+      ],
+      "pro_tip": "Секогаш намали разломок на најмала форма: 6/12 = 1/2."
+    },
+    {
+      "tip_id": "alg_fraction_002",
+      "subcategory": "fractions",
+      "title_mk": "Множење и делење разломци",
+      "title_en": "Multiplying and Dividing Fractions",
+      "content_mk": "Множење: (а/б) · (ц/д) = (а·ц)/(б·д). Делење: (а/б) ÷ (ц/д) = (а/б) · (д/ц) (преврти го вториот!). Пример: 1/2 ÷ 1/3 = 1/2 · 3/1 = 3/2.",
+      "content_en": "Multiplication: (a/b) · (c/d) = (a·c)/(b·d). Division: (a/b) ÷ (c/d) = (a/b) · (d/c) (flip the second!). Example: 1/2 ÷ 1/3 = 1/2 · 3/1 = 3/2.",
+      "grade_range": [6, 7],
+      "difficulty": "easy",
+      "bro_standards": ["МАТ.6.А.2", "МАТ.7.А.4"],
+      "tags": ["fractions", "multiplication", "division"],
+      "common_mistakes": [
+        "Заборавање да се преврти вториот разломок при делење",
+        "Преврт ување на првиот наместо на вториот"
+      ],
+      "pro_tip": "Кратење пред множење: 2/3 · 3/4 = (2·3)/(3·4) → краток 3/3 = 2/4 = 1/2."
+    },
+    {
+      "tip_id": "alg_ratio_001",
+      "subcategory": "ratios",
+      "title_mk": "Пропорции - Решавање",
+      "title_en": "Proportions - Solving",
+      "content_mk": "За а/б = ц/д: Вкрстено множи → а·д = б·ц. Пример: x/5 = 3/15 → x·15 = 5·3 → 15x = 15 → x = 1. Ова е 'правило на три'.",
+      "content_en": "For a/b = c/d: Cross multiply → a·d = b·c. Example: x/5 = 3/15 → x·15 = 5·3 → 15x = 15 → x = 1. This is 'rule of three'.",
+      "grade_range": [7, 8],
+      "difficulty": "easy",
+      "bro_standards": ["МАТ.7.А.5", "МАТ.8.А.10"],
+      "tags": ["ratios", "proportions", "cross-multiply"],
+      "common_mistakes": [
+        "Погрешно вкрстено множење (а·б = ц·д е ГРЕШКА)",
+        "Заборавање да се реши за непознатата"
+      ],
+      "pro_tip": "Провери со замена: 1/5 = 3/15 → 0.2 = 0.2 ✓"
+    },
+    {
+      "tip_id": "alg_expand_001",
+      "subcategory": "polynomials",
+      "title_mk": "Множење заграда - Дистрибутивност",
+      "title_en": "Expanding Brackets - Distributivity",
+      "content_mk": "а(б + ц) = аб + ац. Пример: 3(x + 5) = 3x + 15. (а + б)(ц + д) = ац + ад + бц + бд (FOIL метод). Пример: (x + 2)(x + 3) = x² + 3x + 2x + 6 = x² + 5x + 6.",
+      "content_en": "a(b + c) = ab + ac. Example: 3(x + 5) = 3x + 15. (a + b)(c + d) = ac + ad + bc + bd (FOIL method). Example: (x + 2)(x + 3) = x² + 3x + 2x + 6 = x² + 5x + 6.",
+      "grade_range": [7, 8],
+      "difficulty": "medium",
+      "bro_standards": ["МАТ.7.А.6", "МАТ.8.А.11"],
+      "tags": ["polynomials", "expanding", "distributivity"],
+      "common_mistakes": [
+        "Заборавање на некој член (пропушт од FOIL)",
+        "Грешка во знак при негативни броеви"
+      ],
+      "pro_tip": "FOIL = First, Outer, Inner, Last. (x + 2)(x + 3): x·x, x·3, 2·x, 2·3."
+    },
+    {
+      "tip_id": "alg_factor_001",
+      "subcategory": "polynomials",
+      "title_mk": "Факторизација - Заеднички фактор",
+      "title_en": "Factoring - Common Factor",
+      "content_mk": "Извади заеднички фактор: 3x + 6 = 3(x + 2). ax + ay = a(x + y). Пример: 2x² + 4x = 2x(x + 2). Секогаш провери дали има заеднички фактор ПРВО!",
+      "content_en": "Extract common factor: 3x + 6 = 3(x + 2). ax + ay = a(x + y). Example: 2x² + 4x = 2x(x + 2). Always check for common factor FIRST!",
+      "grade_range": [8, 9],
+      "difficulty": "medium",
+      "bro_standards": ["МАТ.8.А.12", "МАТ.9.А.8"],
+      "tags": ["polynomials", "factoring", "common-factor"],
+      "common_mistakes": [
+        "Пропуштање на заеднички фактор",
+        "Извадување на само дел од факторот (2x² + 4x → 2(x² + 2x) е ГРЕШКА)"
+      ],
+      "pro_tip": "Провери: Множи назад за да видиш дали добиваш оригинален израз."
+    },
+    {
+      "tip_id": "alg_difference_squares_001",
+      "subcategory": "polynomials",
+      "title_mk": "Разлика на квадрати",
+      "title_en": "Difference of Squares",
+      "content_mk": "а² - б² = (а + б)(а - б). Пример: x² - 9 = (x + 3)(x - 3). 4x² - 25 = (2x + 5)(2x - 5). Ова е МНОГУ честа формула!",
+      "content_en": "a² - b² = (a + b)(a - b). Example: x² - 9 = (x + 3)(x - 3). 4x² - 25 = (2x + 5)(2x - 5). This is VERY common formula!",
+      "grade_range": [8, 9],
+      "difficulty": "medium",
+      "bro_standards": ["МАТ.8.А.13", "МАТ.9.А.9"],
+      "tags": ["polynomials", "factoring", "difference-of-squares"],
+      "common_mistakes": [
+        "Не препознавање на разлика на квадрати",
+        "Мешање со сума на квадрати (а² + б² НЕ се факторизира лесно)"
+      ],
+      "pro_tip": "Сума на квадрати а² + б² НЕ се факторизира (со реални броеви). Само РАЗЛИКА!"
+    },
+    {
+      "tip_id": "alg_perfect_square_001",
+      "subcategory": "polynomials",
+      "title_mk": "Полн квадрат на бином",
+      "title_en": "Perfect Square of Binomial",
+      "content_mk": "(а ± б)² = а² ± 2аб + б². Пример: (x + 3)² = x² + 6x + 9. (x - 5)² = x² - 10x + 25. Среден член е секогаш 2аб!",
+      "content_en": "(a ± b)² = a² ± 2ab + b². Example: (x + 3)² = x² + 6x + 9. (x - 5)² = x² - 10x + 25. Middle term is always 2ab!",
+      "grade_range": [8, 9],
+      "difficulty": "medium",
+      "bro_standards": ["МАТ.8.А.14", "МАТ.9.А.10"],
+      "tags": ["polynomials", "perfect-square", "binomial"],
+      "common_mistakes": [
+        "Заборавање на среден член 2аб (x + 3)² ≠ x² + 9",
+        "Погрешен знак на среден член"
+      ],
+      "pro_tip": "Препознај полн квадрат: Ако среден член е 2√(први·трет), тоа е полн квадрат!"
+    },
+    {
+      "tip_id": "alg_absolute_001",
+      "subcategory": "absolute-value",
+      "title_mk": "Апсолутна вредност - Дефиниција",
+      "title_en": "Absolute Value - Definition",
+      "content_mk": "|x| = x ако x ≥ 0, и |x| = -x ако x < 0. Пример: |5| = 5, |-5| = 5, |0| = 0. Апсолутна вредност е секогаш ПОЗИТИВНА или нула!",
+      "content_en": "|x| = x if x ≥ 0, and |x| = -x if x < 0. Example: |5| = 5, |-5| = 5, |0| = 0. Absolute value is always POSITIVE or zero!",
+      "grade_range": [7, 8],
+      "difficulty": "easy",
+      "bro_standards": ["МАТ.7.А.7", "МАТ.8.А.15"],
+      "tags": ["absolute-value", "algebra-basics"],
+      "common_mistakes": [
+        "Мислење дека |-5| = -5",
+        "Заборавање на двете случаи при решавање |x| = а"
+      ],
+      "pro_tip": "За |x| = 5, има ДВЕ решенија: x = 5 или x = -5."
+    },
+    {
+      "tip_id": "alg_vieta_001",
+      "subcategory": "quadratic",
+      "title_mk": "Виетови формули",
+      "title_en": "Vieta's Formulas",
+      "content_mk": "За x² + бx + ц = 0 со корени x₁ и x₂: x₁ + x₂ = -б (сума на корени). x₁ · x₂ = ц (производ на корени). Пример: x² - 5x + 6 = 0 → x₁ + x₂ = 5, x₁ · x₂ = 6 → корени 2 и 3.",
+      "content_en": "For x² + bx + c = 0 with roots x₁ and x₂: x₁ + x₂ = -b (sum of roots). x₁ · x₂ = c (product of roots). Example: x² - 5x + 6 = 0 → x₁ + x₂ = 5, x₁ · x₂ = 6 → roots 2 and 3.",
+      "grade_range": [9, 10],
+      "difficulty": "hard",
+      "bro_standards": ["МАТ.9.А.11"],
+      "tags": ["quadratic", "vieta", "roots"],
+      "common_mistakes": [
+        "Заборавање на минус при сума (x₁ + x₂ = -б не б)",
+        "Мешање на сума и производ"
+      ],
+      "pro_tip": "Виетови формули се брз начин да провериш решенија без да решаваш равенка!"
+    },
+    {
+      "tip_id": "alg_amgm_001",
+      "subcategory": "inequalities",
+      "title_mk": "AM-GM неравенка",
+      "title_en": "AM-GM Inequality",
+      "content_mk": "За позитивни броеви а и б: (а + б)/2 ≥ √(аб). Еднаквост кога а = б. Пример: (4 + 9)/2 = 6.5 ≥ √36 = 6. Ова е моќна алатка за олимпијадски проблеми!",
+      "content_en": "For positive numbers a and b: (a + b)/2 ≥ √(ab). Equality when a = b. Example: (4 + 9)/2 = 6.5 ≥ √36 = 6. This is powerful tool for olympiad problems!",
+      "grade_range": [9, 12],
+      "difficulty": "hard",
+      "bro_standards": ["МАТ.9.А.12"],
+      "tags": ["inequalities", "am-gm", "olympiad"],
+      "common_mistakes": [
+        "Користење на негативни броеви (важи само за позитивни)",
+        "Заборавање на услов за еднаквост"
+      ],
+      "pro_tip": "Генерализација: (а₁ + а₂ + ... + аₙ)/n ≥ ⁿ√(а₁·а₂·...·аₙ) за n позитивни броеви."
+    },
+    {
+      "tip_id": "alg_binomial_001",
+      "subcategory": "polynomials",
+      "title_mk": "Биномна формула (Њутнов бином)",
+      "title_en": "Binomial Formula (Newton's Binomial)",
+      "content_mk": "(а + б)² = а² + 2аб + б². (а + б)³ = а³ + 3а²б + 3аб² + б³. (а + б)ⁿ се развива со биномни коефициенти (Паскалов триаголник).",
+      "content_en": "(a + b)² = a² + 2ab + b². (a + b)³ = a³ + 3a²b + 3ab² + b³. (a + b)ⁿ expands with binomial coefficients (Pascal's triangle).",
+      "grade_range": [9, 11],
+      "difficulty": "hard",
+      "bro_standards": ["МАТ.9.А.13"],
+      "tags": ["polynomials", "binomial", "pascal"],
+      "common_mistakes": [
+        "Пропуштање на средни членови",
+        "Погрешни коефициенти"
+      ],
+      "pro_tip": "Паскалов триаголник: секој број е сума на двата над него. Ред 3: 1, 3, 3, 1."
+    },
+    {
+      "tip_id": "alg_rational_001",
+      "subcategory": "rational-expressions",
+      "title_mk": "Алгебарски разломци - Намалување",
+      "title_en": "Algebraic Fractions - Simplification",
+      "content_mk": "Факторизирај броител и именител, потоа краток заеднички фактори. Пример: (x² - 4)/(x - 2) = [(x + 2)(x - 2)]/(x - 2) = x + 2 (за x ≠ 2). ВАЖНО: Условот x ≠ 2!",
+      "content_en": "Factor numerator and denominator, then cancel common factors. Example: (x² - 4)/(x - 2) = [(x + 2)(x - 2)]/(x - 2) = x + 2 (for x ≠ 2). IMPORTANT: Condition x ≠ 2!",
+      "grade_range": [9, 10],
+      "difficulty": "hard",
+      "bro_standards": ["МАТ.9.А.14"],
+      "tags": ["rational-expressions", "simplification", "factoring"],
+      "common_mistakes": [
+        "Кратење на членови наместо фактори",
+        "Заборавање на услов за именител ≠ 0"
+      ],
+      "pro_tip": "Секогаш провери: Што не може да биде x за да именител не е нула?"
+    },
+    {
+      "tip_id": "alg_arithmetic_001",
+      "subcategory": "sequences",
+      "title_mk": "Аритметичка низа - Формули",
+      "title_en": "Arithmetic Sequence - Formulas",
+      "content_mk": "Аритметичка низа има константна разлика д. n-ти член: аₙ = а₁ + (n-1)д. Сума првих n: Sₙ = n(а₁ + аₙ)/2 = n[2а₁ + (n-1)д]/2. Пример: 2, 5, 8, 11, ... → д = 3.",
+      "content_en": "Arithmetic sequence has constant difference d. n-th term: aₙ = a₁ + (n-1)d. Sum of first n: Sₙ = n(a₁ + aₙ)/2 = n[2a₁ + (n-1)d]/2. Example: 2, 5, 8, 11, ... → d = 3.",
+      "grade_range": [9, 10],
+      "difficulty": "medium",
+      "bro_standards": ["МАТ.9.А.15"],
+      "tags": ["sequences", "arithmetic", "series"],
+      "common_mistakes": [
+        "Заборавање на (n-1) наместо n",
+        "Мешање на формули за аₙ и Sₙ"
+      ],
+      "pro_tip": "Сума на аритметичка низа = (прв член + последен член) · број чле нови / 2."
+    },
+    {
+      "tip_id": "alg_geometric_001",
+      "subcategory": "sequences",
+      "title_mk": "Геометриска низа - Формули",
+      "title_en": "Geometric Sequence - Formulas",
+      "content_mk": "Геометриска низа има константна пропорција q. n-ти член: аₙ = а₁ · qⁿ⁻¹. Сума првих n: Sₙ = а₁(qⁿ - 1)/(q - 1) (за q ≠ 1). Пример: 2, 6, 18, 54, ... → q = 3.",
+      "content_en": "Geometric sequence has constant ratio q. n-th term: aₙ = a₁ · qⁿ⁻¹. Sum of first n: Sₙ = a₁(qⁿ - 1)/(q - 1) (for q ≠ 1). Example: 2, 6, 18, 54, ... → q = 3.",
+      "grade_range": [9, 10],
+      "difficulty": "hard",
+      "bro_standards": ["МАТ.9.А.16"],
+      "tags": ["sequences", "geometric", "series"],
+      "common_mistakes": [
+        "Мешање на аритметичка и геометриска низа",
+        "Заборавање на услов q ≠ 1"
+      ],
+      "pro_tip": "Ако |q| < 1, бесконечна сума S∞ = а₁/(1 - q). Пример: 1 + 1/2 + 1/4 + 1/8 + ... = 2."
+    },
+    {
+      "tip_id": "alg_domain_001",
+      "subcategory": "functions",
+      "title_mk": "Домена на функција",
+      "title_en": "Function Domain",
+      "content_mk": "Домена е множество на сите дозволени x вредности. Ограничувања: 1) Именител ≠ 0. 2) Под √ мора ≥ 0. 3) ln(x) барa x > 0. Пример: f(x) = √(x-2) → x ≥ 2.",
+      "content_en": "Domain is set of all allowed x values. Restrictions: 1) Denominator ≠ 0. 2) Under √ must be ≥ 0. 3) ln(x) requires x > 0. Example: f(x) = √(x-2) → x ≥ 2.",
+      "grade_range": [9, 10],
+      "difficulty": "medium",
+      "bro_standards": ["МАТ.9.А.17"],
+      "tags": ["functions", "domain", "restrictions"],
+      "common_mistakes": [
+        "Заборавање на ограничувања за √",
+        "Дозволување именител = 0"
+      ],
+      "pro_tip": "Секогаш провери ВСЕ ограничувања: именители, корени, логаритми."
+    }
+  ]
+}

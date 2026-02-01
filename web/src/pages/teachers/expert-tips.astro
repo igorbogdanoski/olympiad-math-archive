@@ -1,0 +1,153 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ExpertTipCard from '../../components/ExpertTipCard.svelte';
+
+// Load tips from JSON files
+import geometryTips from '../../data/expert_tips/geometry.json';
+import algebraTips from '../../data/expert_tips/algebra.json';
+
+// Combine all tips
+const allTips = [
+  ...geometryTips.tips,
+  ...algebraTips.tips
+];
+
+// Get unique categories, difficulties, and grades
+const categories = ['all', 'geometry', 'algebra'];
+const difficulties = ['all', 'easy', 'medium', 'hard'];
+const gradeRanges = ['all', '6-7', '7-8', '8-9', '9-10'];
+---
+
+<Layout 
+  title="Expert Tips База - Математички Олимпијадски Архив"
+  description="900+ expert tips за решавање математички проблеми"
+>
+  <div class="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50 py-12">
+    <div class="container mx-auto px-4 max-w-6xl">
+      <!-- Header -->
+      <div class="mb-8">
+        <a href="/teachers" class="inline-flex items-center text-blue-600 hover:text-blue-800 mb-4 transition-colors">
+          <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+          </svg>
+          Назад до Професори
+        </a>
+        
+        <div class="bg-gradient-to-r from-blue-600 to-indigo-600 rounded-xl shadow-lg p-8 text-white mb-8">
+          <h1 class="text-4xl font-bold mb-3">💡 Expert Tips База</h1>
+          <p class="text-xl text-blue-100 mb-4">
+            Централизирана база на знаење со {allTips.length}+ советов за решавање математички проблеми
+          </p>
+          
+          <!-- Stats -->
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6">
+            <div class="bg-white/10 backdrop-blur-sm rounded-lg p-4">
+              <div class="text-3xl font-bold">{allTips.length}</div>
+              <div class="text-sm text-blue-200">Вкупно советов</div>
+            </div>
+            <div class="bg-white/10 backdrop-blur-sm rounded-lg p-4">
+              <div class="text-3xl font-bold">{geometryTips.tips.length}</div>
+              <div class="text-sm text-blue-200">Геометрија</div>
+            </div>
+            <div class="bg-white/10 backdrop-blur-sm rounded-lg p-4">
+              <div class="text-3xl font-bold">{algebraTips.tips.length}</div>
+              <div class="text-sm text-blue-200">Алгебра</div>
+            </div>
+            <div class="bg-white/10 backdrop-blur-sm rounded-lg p-4">
+              <div class="text-3xl font-bold">2-12</div>
+              <div class="text-sm text-blue-200">Одделенија</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Info Cards -->
+        <div class="grid md:grid-cols-3 gap-4 mb-8">
+          <div class="bg-white rounded-lg shadow-md p-4 border-l-4 border-green-500">
+            <h3 class="font-semibold text-gray-900 mb-2">🎯 Организирано по БРО</h3>
+            <p class="text-sm text-gray-600">Секој совет е поврзан со БРО стандарди за лесно пребарување</p>
+          </div>
+          <div class="bg-white rounded-lg shadow-md p-4 border-l-4 border-blue-500">
+            <h3 class="font-semibold text-gray-900 mb-2">⚠️ Чести грешки</h3>
+            <p class="text-sm text-gray-600">Научете од најчестите грешки на учениците</p>
+          </div>
+          <div class="bg-white rounded-lg shadow-md p-4 border-l-4 border-purple-500">
+            <h3 class="font-semibold text-gray-900 mb-2">💎 Про советов</h3>
+            <p class="text-sm text-gray-600">Напредни техники и трикови за брзо решавање</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Filters Component (Svelte will handle this) -->
+      <div id="expert-tips-browser" class="mb-8">
+        <script>
+          // This will be replaced by ExpertTipsBrowser.svelte
+          console.log('Expert Tips Browser loaded');
+        </script>
+      </div>
+
+      <!-- Tips Display -->
+      <div class="space-y-4">
+        <div class="flex items-center justify-between mb-4">
+          <h2 class="text-2xl font-bold text-gray-900">📚 Сите советов</h2>
+          <div class="text-sm text-gray-600">
+            Прикажани {allTips.length} совети
+          </div>
+        </div>
+
+        <!-- Sample Tips (first 10) -->
+        <div class="space-y-4">
+          {allTips.slice(0, 10).map(tip => (
+            <ExpertTipCard tip={tip} compact={false} showFeedback={true} client:load />
+          ))}
+        </div>
+
+        <!-- Load More -->
+        {allTips.length > 10 && (
+          <div class="text-center mt-8">
+            <button 
+              class="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors shadow-md"
+              onclick="alert('Функција за вчитување повеќе советов - доаѓа наскоро!');"
+            >
+              Вчитај повеќе советов ({allTips.length - 10} останати)
+            </button>
+          </div>
+        )}
+      </div>
+
+      <!-- Future Features -->
+      <div class="mt-12 bg-gradient-to-r from-purple-100 to-pink-100 rounded-xl p-6">
+        <h3 class="text-xl font-bold text-gray-900 mb-3">🚀 Наскоро</h3>
+        <div class="grid md:grid-cols-2 gap-4">
+          <div class="flex items-start gap-3">
+            <span class="text-2xl">🔍</span>
+            <div>
+              <h4 class="font-semibold text-gray-900">Паметно пребарување</h4>
+              <p class="text-sm text-gray-600">AI-powered семантичко пребарување низ советов</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-3">
+            <span class="text-2xl">📊</span>
+            <div>
+              <h4 class="font-semibold text-gray-900">Персонализирани совети</h4>
+              <p class="text-sm text-gray-600">Автоматски совети базирани на историјата на учениците</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-3">
+            <span class="text-2xl">📱</span>
+            <div>
+              <h4 class="font-semibold text-gray-900">Мобилна апликација</h4>
+              <p class="text-sm text-gray-600">Пристап до советов на паметни телефони</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-3">
+            <span class="text-2xl">🎓</span>
+            <div>
+              <h4 class="font-semibold text-gray-900">Интеграција со часови</h4>
+              <p class="text-sm text-gray-600">Совети директно во lesson plans</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout>
