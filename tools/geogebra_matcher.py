@@ -18,7 +18,7 @@ class GeoGebraAutoMatcher:
             raise ValueError("GEMINI_API_KEY environment variable not set")
         
         genai.configure(api_key=self.api_key)
-        self.model = genai.GenerativeModel('gemini-1.5-pro')
+        self.model = genai.GenerativeModel('gemini-flash-latest')  # Using alias
         
         # Load GeoGebra library
         self.library = self._load_library()
@@ -131,49 +131,23 @@ ID: {mat['id']}
         # Extract topics from text
         detected_topics = self._extract_topics_from_text(problem_text)
         
-        # Build AI prompt
-        prompt = f"""Ти си експерт за GeoGebra и македонска математичка едукација.
+        # Build AI prompt (simple English to avoid safety issues)
+        prompt = f"""You are a GeoGebra expert. Match this math problem to the best applet.
 
-## ЗАДАЧА ЗА МАПИРАЊЕ:
-Текст: {problem_text[:500]}...  # First 500 chars
-Одделение: {metadata.get('grade', 'Непознато')}
-Тема: {metadata.get('topic', 'Непознато')}
-Тежина: {metadata.get('difficulty', 'Непознато')}
-БРО Стандард: {metadata.get('bro_standard', 'Непознато')}
+Problem: {problem_text[:300]}
+Grade: {metadata.get('grade', 'Unknown')}
+Topics: {', '.join(detected_topics) if detected_topics else 'Unknown'}
 
-## ДЕТЕКТИРАНИ ТЕМИ:
-{', '.join(detected_topics) if detected_topics else 'Непознато'}
-
-## ДОСТАПНИ GEOGEBRA МАТЕРИЈАЛИ:
+Available GeoGebra materials:
 {self._format_library_for_prompt(detected_topics)}
 
-## ТВОЈА ЗАДАЧА:
-Најди го НАЈДОБРИОТ GeoGebra аплет за оваа задача.
-
-Критериуми:
-1. Совпаѓање на тема (геометрија, алгебра, итн.)
-2. Соодветност за одделение
-3. Ниво на интерактивност
-4. Поддршка за македонски јазик
-5. Alignment со БРО стандарди
-
-Врати JSON одговор во следниов формат:
+Return ONLY JSON:
 {{
-  "material_id": "ID од погоре" или null,
+  "material_id": "ID or null",
   "confidence": 0.0-1.0,
-  "reason": "Зошто е ова добар избор (на македонски)",
-  "alternatives": ["id1", "id2"] # Алтернативни опции
+  "reason": "Short explanation",
+  "alternatives": ["id1", "id2"]
 }}
-
-Ако НЕМА добар match, врати:
-{{
-  "material_id": null,
-  "confidence": 0.0,
-  "reason": "Зошто нема добар match",
-  "custom_suggestion": "Што треба да содржи custom аплет"
-}}
-
-ВАЖНО: Врати САМО JSON, без дополнителен текст.
 """
         
         try:
@@ -181,10 +155,8 @@ ID: {mat['id']}
             response = self.model.generate_content(
                 prompt,
                 generation_config=genai.types.GenerationConfig(
-                    temperature=0.3,
-                    top_p=0.8,
-                    top_k=40,
-                    max_output_tokens=1024,
+                    temperature=0.1,
+                    max_output_tokens=256
                 )
             )
             
@@ -193,7 +165,12 @@ ID: {mat['id']}
             
             # Remove markdown code blocks if present
             if response_text.startswith('```'):
-                response_text = re.sub(r'```json\n?|```\n?', '', response_text)
+                response_text = re.sub(r'```(?:json)?\n?|```\n?', '', response_text).strip()
+            
+            # Try to extract JSON if there's extra text
+            json_match = re.search(r'\{.*\}', response_text, re.DOTALL)
+            if json_match:
+                response_text = json_match.group(0)
             
             result = json.loads(response_text)
             
