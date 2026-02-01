@@ -10,6 +10,7 @@ env/
 **/__pycache__/
 *.pyc
 *.pyo
+*.log
 
 # Node.js dependencies
 node_modules/
@@ -46,6 +47,11 @@ build/
 
 # Astro build output (should be generated fresh on deployment)
 web/dist/
+web/.astro/
+
+# Test files
+test_*.mjs
+test_*.py
 
 # Infrastructure directory with large binaries
 infrastructure/prod/.terraform/
