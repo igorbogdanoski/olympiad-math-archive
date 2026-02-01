@@ -1,0 +1,47 @@
+groups:
+  - name: cdc_sync_alerts
+    rules:
+      - alert: KafkaConnectConnectorFailed
+        expr: kafka_connect_connector_task_failed_total > 0
+        for: 5m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Kafka Connect connector task failed"
+          description: "Connector {{ $labels.connector }} task {{ $labels.task }} has failed."
+
+      - alert: KafkaConnectConnectorRunning
+        expr: kafka_connect_connector_running_total == 0
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Kafka Connect connector not running"
+          description: "Connector {{ $labels.connector }} is not running."
+
+      - alert: SyncLatencyHigh
+        expr: rate(kafka_connect_sink_task_records_sent_total[5m]) < 10
+        for: 10m
+        labels:
+          severity: warning
+        annotations:
+          summary: "CDC sync latency high"
+          description: "Records sent rate is low for connector {{ $labels.connector }} task {{ $labels.task }}."
+
+      - alert: DatabaseConnectionDown
+        expr: up{job="postgres-exporter"} == 0 or up{job="mongodb-exporter"} == 0
+        for: 5m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Database exporter down"
+          description: "Database exporter {{ $labels.instance }} is down."
+
+      - alert: KafkaBrokersDown
+        expr: up{job="kafka-exporter"} == 0
+        for: 5m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Kafka brokers down"
+          description: "Kafka exporter is down, brokers may be unreachable."

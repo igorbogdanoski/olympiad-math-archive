@@ -1,0 +1,100 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: mongo-init
+  namespace: mongodb-cluster
+spec:
+  template:
+    spec:
+      restartPolicy: OnFailure
+      containers:
+      - name: mongo-init
+        image: mongo:6.0
+        command:
+        - /bin/bash
+        - -c
+        - |
+          sleep 60
+          # Initialize config replica set
+          mongosh --host mongo-config-0.mongo-config.mongodb-cluster.svc.cluster.local:27019 --eval '
+          rs.initiate({
+            _id: "configReplSet",
+            configsvr: true,
+            members: [
+              { _id: 0, host: "mongo-config-0.mongo-config.mongodb-cluster.svc.cluster.local:27019" },
+              { _id: 1, host: "mongo-config-1.mongo-config.mongodb-cluster.svc.cluster.local:27019" },
+              { _id: 2, host: "mongo-config-2.mongo-config.mongodb-cluster.svc.cluster.local:27019" }
+            ]
+          });
+          while (!rs.isMaster().ismaster) { sleep(1000); }
+          '
+
+          # Initialize shard replica sets
+          mongosh --host mongo-shard1-0.mongo-shard1.mongodb-cluster.svc.cluster.local:27018 --eval '
+          rs.initiate({
+            _id: "shard1ReplSet",
+            members: [
+              { _id: 0, host: "mongo-shard1-0.mongo-shard1.mongodb-cluster.svc.cluster.local:27018" },
+              { _id: 1, host: "mongo-shard1-1.mongo-shard1.mongodb-cluster.svc.cluster.local:27018" },
+              { _id: 2, host: "mongo-shard1-2.mongo-shard1.mongodb-cluster.svc.cluster.local:27018" }
+            ]
+          });
+          while (!rs.isMaster().ismaster) { sleep(1000); }
+          '
+
+          mongosh --host mongo-shard2-0.mongo-shard2.mongodb-cluster.svc.cluster.local:27018 --eval '
+          rs.initiate({
+            _id: "shard2ReplSet",
+            members: [
+              { _id: 0, host: "mongo-shard2-0.mongo-shard2.mongodb-cluster.svc.cluster.local:27018" },
+              { _id: 1, host: "mongo-shard2-1.mongo-shard2.mongodb-cluster.svc.cluster.local:27018" },
+              { _id: 2, host: "mongo-shard2-2.mongo-shard2.mongodb-cluster.svc.cluster.local:27018" }
+            ]
+          });
+          while (!rs.isMaster().ismaster) { sleep(1000); }
+          '
+
+          mongosh --host mongo-shard3-0.mongo-shard3.mongodb-cluster.svc.cluster.local:27018 --eval '
+          rs.initiate({
+            _id: "shard3ReplSet",
+            members: [
+              { _id: 0, host: "mongo-shard3-0.mongo-shard3.mongodb-cluster.svc.cluster.local:27018" },
+              { _id: 1, host: "mongo-shard3-1.mongo-shard3.mongodb-cluster.svc.cluster.local:27018" },
+              { _id: 2, host: "mongo-shard3-2.mongo-shard3.mongodb-cluster.svc.cluster.local:27018" }
+            ]
+          });
+          while (!rs.isMaster().ismaster) { sleep(1000); }
+          '
+
+          sleep 15
+
+          # Initialize cluster via mongos
+          mongosh --host mongo-mongos1.mongodb-cluster.svc.cluster.local:27017 --eval '
+          // Add shards
+          sh.addShard("shard1ReplSet/mongo-shard1-0.mongo-shard1.mongodb-cluster.svc.cluster.local:27018,mongo-shard1-1.mongo-shard1.mongodb-cluster.svc.cluster.local:27018,mongo-shard1-2.mongo-shard1.mongodb-cluster.svc.cluster.local:27018");
+          sh.addShard("shard2ReplSet/mongo-shard2-0.mongo-shard2.mongodb-cluster.svc.cluster.local:27018,mongo-shard2-1.mongo-shard2.mongodb-cluster.svc.cluster.local:27018,mongo-shard2-2.mongo-shard2.mongodb-cluster.svc.cluster.local:27018");
+          sh.addShard("shard3ReplSet/mongo-shard3-0.mongo-shard3.mongodb-cluster.svc.cluster.local:27018,mongo-shard3-1.mongo-shard3.mongodb-cluster.svc.cluster.local:27018,mongo-shard3-2.mongo-shard3.mongodb-cluster.svc.cluster.local:27018");
+
+          // Enable sharding on database
+          sh.enableSharding("olympiad_db");
+
+          // Shard collections
+          db.adminCommand({shardCollection: "olympiad_db.generated_content", key: {school_id: 1, content_type: 1}});
+          db.adminCommand({shardCollection: "olympiad_db.rendered_content", key: {school_id: 1, content_type: 1}});
+          db.adminCommand({shardCollection: "olympiad_db.localization", key: {school_id: 1, content_type: 1}});
+          db.adminCommand({shardCollection: "olympiad_db.accessibility_metadata", key: {school_id: 1, content_type: 1}});
+
+          // Create indexes
+          db = db.getSiblingDB("olympiad_db");
+          db.generated_content.createIndex({school_id: 1, content_type: 1});
+          db.rendered_content.createIndex({school_id: 1, content_type: 1});
+          db.localization.createIndex({school_id: 1, content_type: 1});
+          db.accessibility_metadata.createIndex({school_id: 1, content_type: 1});
+
+          // Create admin user
+          db.getSiblingDB("admin").createUser({
+            user: "admin",
+            pwd: "securepassword123",
+            roles: ["root"]
+          });
+          '

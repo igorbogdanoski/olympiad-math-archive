@@ -1,0 +1,86 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: citus-coordinator
+spec:
+  serviceName: citus-coordinator
+  replicas: 1
+  selector:
+    matchLabels:
+      app: citus-coordinator
+  template:
+    metadata:
+      labels:
+        app: citus-coordinator
+    spec:
+      containers:
+      - name: citus
+        image: citusdata/citus:12.1
+        env:
+        - name: POSTGRES_DB
+          value: olympiad_core
+        - name: POSTGRES_USER
+          value: postgres
+        - name: POSTGRES_PASSWORD
+          value: mypassword
+        - name: PATRONI_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+        - name: PATRONI_SCOPE
+          value: citus-cluster
+        - name: PATRONI_RESTAPI_CONNECT_ADDRESS
+          value: $(PATRONI_NAME).citus-coordinator:8008
+        - name: PATRONI_RESTAPI_LISTEN
+          value: 0.0.0.0:8008
+        - name: PATRONI_POSTGRESQL_CONNECT_ADDRESS
+          value: $(PATRONI_NAME).citus-coordinator:5432
+        - name: PATRONI_POSTGRESQL_LISTEN
+          value: 0.0.0.0:5432
+        - name: PATRONI_POSTGRESQL_DATA_DIR
+          value: /var/lib/postgresql/data
+        - name: PATRONI_REPLICATION_USERNAME
+          value: replicator
+        - name: PATRONI_REPLICATION_PASSWORD
+          value: replpassword
+        - name: PATRONI_SUPERUSER_USERNAME
+          value: postgres
+        - name: PATRONI_SUPERUSER_PASSWORD
+          value: mypassword
+        - name: PATRONI_ADMIN_USERNAME
+          value: admin
+        - name: PATRONI_ADMIN_PASSWORD
+          value: adminpassword
+        - name: PATRONI_ETCD3_HOSTS
+          value: etcd:2379
+        - name: PATRONI_POSTGRESQL_CONFIG_OVERRIDES
+          value: |
+            shared_preload_libraries: 'citus'
+        ports:
+        - containerPort: 5432
+        - containerPort: 8008
+        volumeMounts:
+        - name: data
+          mountPath: /var/lib/postgresql/data
+  volumeClaimTemplates:
+  - metadata:
+      name: data
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 10Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: citus-coordinator
+spec:
+  selector:
+    app: citus-coordinator
+  ports:
+  - port: 5432
+    targetPort: 5432
+  - port: 8008
+    targetPort: 8008
+  clusterIP: None

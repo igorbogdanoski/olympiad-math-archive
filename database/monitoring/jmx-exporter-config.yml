@@ -1,0 +1,7 @@
+rules:
+  - pattern: "kafka.connect<type=connect-worker-metrics>(.*)"
+  - pattern: "kafka.connect<type=connect-node-metrics>(.*)"
+  - pattern: "kafka.connect<type=connector-metrics, connector=\"(.+)\"><>(.*)"
+  - pattern: "kafka.connect<type=connector-task-metrics, connector=\"(.+)\", task=\"(.+)\"><>(.*)"
+  - pattern: "kafka.connect<type=sink-task-metrics, connector=\"(.+)\", task=\"(.+)\"><>(.*)"
+  - pattern: "kafka.connect<type=source-task-metrics, connector=\"(.+)\", task=\"(.+)\"><>(.*)"

@@ -1,0 +1,69 @@
+---
+import Layout from '../layouts/Layout.astro';
+import TeacherDashboard from '../components/TeacherDashboard.astro';
+import CurriculumViewer from '../components/CurriculumViewer.svelte';
+---
+
+<Layout title="Наставничка Конзола | МатАрхива">
+	<div class="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50/30 to-indigo-50 dark:from-slate-900 dark:via-blue-900/10 dark:to-indigo-900/10">
+		{/* Header */}
+		<div class="bg-gradient-to-r from-blue-600 to-indigo-600 text-white">
+			<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+				<div class="flex items-center gap-4 mb-4">
+					<div class="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center">
+						<span class="text-2xl">👨‍🏫</span>
+					</div>
+					<div>
+						<h1 class="text-3xl font-black">Наставничка Конзола</h1>
+						<p class="text-blue-100 font-medium">Креирајте интерактивни образовни материјали</p>
+					</div>
+				</div>
+
+				<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+					<div class="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
+						<div class="flex items-center gap-3 mb-4">
+							<div class="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center">
+								<span class="text-xl">🎬</span>
+							</div>
+							<h3 class="text-lg font-bold">Анимации</h3>
+						</div>
+						<p class="text-blue-100 text-sm">Креирајте Manim анимации за математички концепти</p>
+						<div class="mt-4 text-xs text-white/70">✓ Интерактивен едитор · ✓ Преглед · ✓ Експорт</div>
+					</div>
+
+					<div class="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
+						<div class="flex items-center gap-3 mb-4">
+							<div class="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center">
+								<span class="text-xl">📝</span>
+							</div>
+							<h3 class="text-lg font-bold">Тестови</h3>
+						</div>
+						<p class="text-blue-100 text-sm">Генерирајте интелигентни тестови и задачи</p>
+						<div class="mt-4 text-xs text-white/70">✓ Автоматско генерирање · ✓ Прилагодување · ✓ Анализа</div>
+					</div>
+
+					<div class="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
+						<div class="flex items-center gap-3 mb-4">
+							<div class="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center">
+								<span class="text-xl">📊</span>
+							</div>
+							<h3 class="text-lg font-bold">Анализи</h3>
+						</div>
+						<p class="text-blue-100 text-sm">Следете успехот на учениците и напредокот</p>
+						<div class="mt-4 text-xs text-white/70">✓ Детални извештаи · ✓ Статистики · ✓ Препораки</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		{/* Main Content */}
+		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+			<TeacherDashboard />
+
+			<div class="mt-16 mb-16 max-w-6xl mx-auto">
+				<h2 class="text-3xl font-black mb-8 text-center">📚 Наставна Програма и Видео Лекции</h2>
+				<CurriculumViewer client:load />
+			</div>
+		</div>
+	</div>
+</Layout>

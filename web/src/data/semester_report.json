@@ -1,0 +1,37 @@
+{
+  "attendance_summary": [
+    { "grade": "I-1", "m": 11, "f": 8, "total": 19, "absences": { "excused": 39, "unexcused": 0 }, "behavior": "примерно", "nationality": { "mk": 19, "al": 0, "tr": 0, "other": 0 } },
+    { "grade": "I-2", "m": 11, "f": 8, "total": 19, "absences": { "excused": 163, "unexcused": 0 }, "behavior": "примерно", "nationality": { "mk": 19, "al": 0, "tr": 0, "other": 0 } },
+    { "grade": "VII-1", "m": 9, "f": 11, "total": 20, "absences": { "excused": 150, "unexcused": 12 }, "behavior": "примерно", "nationality": { "mk": 20, "al": 0, "tr": 0, "other": 0 } }
+  ],
+  "grade_success": [
+    {
+      "class": "VII-1",
+      "students": 20,
+      "grades": { "5": 9, "4": 6, "3": 2, "2": 0, "1": 1 },
+      "stats": { "passed": 17, "negative": 1, "avg": 4.18 }
+    },
+    {
+      "class": "VIII-1",
+      "students": 22,
+      "grades": { "5": 7, "4": 9, "3": 2, "2": 0, "1": 2 },
+      "stats": { "passed": 18, "negative": 5, "avg": 4.30 }
+    }
+  ],
+  "subject_performance": [
+    {
+      "subject": "Македонски јазик",
+      "grades": [
+        { "class": "IV-1", "5": 15, "4": 3, "3": 0, "2": 1, "1": 0 },
+        { "class": "VI-1", "5": 12, "4": 10, "3": 2, "2": 3, "1": 0 }
+      ]
+    },
+    {
+      "subject": "Математика",
+      "grades": [
+        { "class": "IV-1", "5": 12, "4": 6, "3": 1, "2": 0, "1": 0 },
+        { "class": "VII-1", "5": 8, "4": 4, "3": 2, "2": 4, "1": 2 }
+      ]
+    }
+  ]
+}

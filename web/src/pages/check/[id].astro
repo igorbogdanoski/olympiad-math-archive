@@ -1,0 +1,135 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { API_BASE_URL } from '../../utils/config';
+
+export function getStaticPaths() {
+  return []; // We will use SSR or Client-side fetching
+}
+
+const { id } = Astro.params;
+---
+
+<Layout title="Клуч за одговори | MathQuest">
+  <div class="max-w-md mx-auto py-6" id="solution-container">
+    <div class="bg-blue-600 rounded-2xl p-6 text-white text-center shadow-xl mb-6">
+      <h1 class="text-2xl font-bold mb-1">Клуч за Одговори</h1>
+      <p class="text-blue-100 text-sm font-mono tracking-wider opacity-80" id="test-id-display">Вчитување...</p>
+    </div>
+
+    <div id="loading-state" class="space-y-4">
+      <div class="animate-pulse bg-slate-100 dark:bg-slate-800 h-20 rounded-xl"></div>
+      <div class="animate-pulse bg-slate-100 dark:bg-slate-800 h-40 rounded-xl"></div>
+      <div class="animate-pulse bg-slate-100 dark:bg-slate-800 h-40 rounded-xl"></div>
+    </div>
+
+    <div id="error-state" class="hidden bg-red-50 dark:bg-red-900/20 border-l-4 border-red-500 p-4 rounded-xl">
+      <div class="flex">
+        <div class="text-red-500 mr-3 text-xl">⚠️</div>
+        <div>
+          <p class="text-sm text-red-700 dark:text-red-400 font-bold">Грешка</p>
+          <p class="text-sm text-red-600 dark:text-red-300" id="error-message"></p>
+        </div>
+      </div>
+    </div>
+
+    <div id="content-state" class="hidden">
+        <div class="mb-6 px-2">
+            <h2 class="text-slate-500 text-[10px] uppercase tracking-widest font-bold mb-1">Инфо за тестот</h2>
+            <p class="text-xl font-extrabold text-slate-900 dark:text-white" id="test-topic"></p>
+            <div class="flex items-center gap-2 mt-2">
+                <span id="test-grade" class="bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 text-[10px] font-black px-2 py-0.5 rounded-full uppercase"></span>
+                <span id="test-date" class="text-xs text-slate-400 font-medium"></span>
+            </div>
+        </div>
+
+        <div id="solutions-list" class="space-y-4">
+            <!-- Solutions will be injected here -->
+        </div>
+
+        <div class="mt-10 text-center no-print">
+            <button onclick="window.print()" class="text-slate-400 hover:text-blue-600 text-xs font-bold uppercase tracking-widest transition-colors flex items-center justify-center gap-2 mx-auto">
+                <span>🖨️ Испечати го овој клуч</span>
+            </button>
+        </div>
+    </div>
+  </div>
+
+  <script is:inline define:vars={{ id, API_BASE_URL }}>
+    async function fetchTestData() {
+      const loading = document.getElementById('loading-state');
+      const errorState = document.getElementById('error-state');
+      const content = document.getElementById('content-state');
+      const errorMsg = document.getElementById('error-message');
+      
+      try {
+        // Correcting the API URL - in production this would be relative or from config
+        const response = await fetch(`${API_BASE_URL}/api/tests/${id}`);
+        
+        if (!response.ok) {
+            throw new Error("Тестот не е пронајден или серверот е недостапен.");
+        }
+        
+        const data = await response.json();
+        renderData(data);
+        
+        loading.classList.add('hidden');
+        content.classList.remove('hidden');
+        document.getElementById('test-id-display').textContent = `ID: ${id}`;
+        
+      } catch (err) {
+        loading.classList.add('hidden');
+        errorState.classList.remove('hidden');
+        errorMsg.textContent = err.message;
+      }
+    }
+
+    function renderData(data) {
+        document.getElementById('test-topic').textContent = data.topic;
+        document.getElementById('test-grade').textContent = `${data.grade}`;
+        document.getElementById('test-date').textContent = new Date(data.created_at).toLocaleDateString('mk-MK');
+        
+        const list = document.getElementById('solutions-list');
+        list.innerHTML = '';
+        
+        data.solutions.forEach(sol => {
+            const card = document.createElement('div');
+            card.className = 'bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 shadow-sm hover:shadow-md transition-shadow';
+            
+            const isMath = sol.correct_answer.includes('$') || sol.correct_answer.includes('\\');
+            
+            card.innerHTML = `
+                <div class="flex items-start gap-4">
+                    <div class="flex-shrink-0 w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center font-black text-sm shadow-lg shadow-blue-500/30">
+                        ${sol.problem_index}
+                    </div>
+                    <div class="flex-grow pt-0.5">
+                        <div class="text-slate-900 dark:text-white font-bold text-lg leading-tight mb-2 solution-content">
+                            ${isMath ? `<span>${sol.correct_answer}</span>` : sol.correct_answer}
+                        </div>
+                        <p class="text-[10px] text-slate-400 font-medium leading-relaxed italic">
+                            ${sol.content_snippet}
+                        </p>
+                    </div>
+                </div>
+            `;
+            list.appendChild(card);
+        });
+        
+        // Trigger MathJax re-render if it exists
+        if (window.MathJax && window.MathJax.typesetPromise) {
+            window.MathJax.typesetPromise();
+        }
+    }
+
+    fetchTestData();
+  </script>
+</Layout>
+
+<style>
+    @media print {
+        .rounded-2xl { border-radius: 0 !important; }
+        .shadow-xl, .shadow-sm, .shadow-md { shadow: none !important; }
+        .bg-blue-600 { background: white !important; color: black !important; border: 2px solid black !important; }
+        .text-blue-100 { color: #666 !important; }
+    }
+</style>

@@ -1,0 +1,389 @@
+---
+// Astro component for Manim Template Editor
+---
+
+<div id="manim-editor" class="max-w-6xl mx-auto p-6">
+  <h1 class="text-3xl font-bold mb-6 text-center">
+    Manim Template Editor <span aria-hidden="true">🎬</span>
+  </h1>
+
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+    <!-- Template Selection -->
+    <div class="lg:col-span-1">
+      <h2 class="text-xl font-semibold mb-4">Select Template</h2>
+      <div id="template-list" class="space-y-2 max-h-96 overflow-y-auto">
+        <div class="text-center text-gray-500 py-8">
+          <div class="text-2xl mb-2" aria-hidden="true">⏳</div>
+          Loading templates...
+        </div>
+      </div>
+    </div>
+
+    <!-- Editor -->
+    <div class="lg:col-span-2">
+      <div id="editor-section" class="hidden">
+        <div class="mb-4 flex justify-between items-center">
+          <h2 id="editor-title" class="text-xl font-semibold">
+            Editing Template
+          </h2>
+          <div class="flex gap-2">
+            <label for="quality-select" class="sr-only">Select render quality</label>
+            <select id="quality-select" class="border rounded px-2 py-1 text-sm">
+              <option value="low">Low Quality</option>
+              <option value="medium">Medium Quality</option>
+              <option value="high">High Quality</option>
+              <option value="ultra">Ultra Quality</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="mb-4 flex gap-2 flex-wrap">
+          <button id="save-btn" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 disabled:opacity-50">
+            Save Template
+          </button>
+          <button id="validate-btn" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 disabled:opacity-50">
+            Validate
+          </button>
+          <button id="render-btn" class="bg-purple-500 text-white px-4 py-2 rounded hover:bg-purple-600 disabled:opacity-50">
+            Render Video
+          </button>
+        </div>
+
+        <!-- Message Display -->
+        <div id="message" class="mb-4 p-3 rounded hidden" aria-live="polite" role="status"></div>
+
+        <!-- Code Editor -->
+        <div class="mb-4">
+          <textarea
+            id="code-editor"
+            class="w-full h-96 font-mono text-sm border rounded p-3"
+            placeholder="Template content will appear here..."
+            spellcheck="false"
+          ></textarea>
+        </div>
+
+        <!-- Video Preview -->
+        <div id="video-section" class="mt-6 hidden">
+          <h3 class="text-lg font-semibold mb-2">Rendered Video Preview</h3>
+          <video id="video-preview" controls class="w-full max-w-2xl border rounded">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+      </div>
+
+      <!-- No selection message -->
+      <div id="no-selection" class="text-center text-gray-500 mt-12">
+        <div class="text-6xl mb-4" aria-hidden="true">🎬</div>
+        <div class="text-xl">Select a template to start editing</div>
+        <div class="text-sm mt-2" id="template-count">
+          Loading available templates...
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Instructions -->
+  <div class="mt-8 bg-blue-50 p-4 rounded">
+    <h3 class="font-semibold mb-2">How to Use:</h3>
+    <ol class="list-decimal list-inside space-y-1 text-sm">
+      <li>Select a template from the list on the left</li>
+      <li>Edit the Python code in the text area</li>
+      <li>Click "Validate" to check for issues</li>
+      <li>Click "Save Template" to save your changes</li>
+      <li>Click "Render Video" to generate the animation</li>
+      <li>Watch the video preview below when complete</li>
+    </ol>
+  </div>
+</div>
+
+<script>
+  interface Template {
+    id: string;
+    title: string;
+    grade: string;
+    category: string;
+    score: number;
+    description: string;
+  }
+
+  class ManimEditor {
+    private templates: Template[] = [];
+    private selectedTemplate: Template | null = null;
+    private templateContent = '';
+    private isLoading = false;
+
+    constructor() {
+      this.init();
+    }
+
+    private async init() {
+      await this.loadTemplates();
+      this.setupEventListeners();
+    }
+
+    private async loadTemplates() {
+      try {
+        const response = await fetch('/api/manim-editor?action=list-templates');
+        const data = await response.json();
+
+        this.templates = data.templates;
+        this.renderTemplateList();
+        this.updateTemplateCount();
+      } catch (error) {
+        console.error('Failed to load templates:', error);
+        this.showMessage('Failed to load templates', 'error');
+      }
+    }
+
+    private renderTemplateList() {
+      const listElement = document.getElementById('template-list');
+      if (!listElement) return;
+
+      listElement.innerHTML = this.templates.map(template => `
+        <div class="template-item p-3 border rounded cursor-pointer hover:bg-gray-50 border-gray-200"
+             data-id="${template.id}">
+          <div class="font-medium">${template.title}</div>
+          <div class="text-sm text-gray-600">
+            Grade ${template.grade} • ${template.category} • Score: ${template.score}
+          </div>
+          <div class="text-sm text-gray-500 mt-1">
+            ${template.description.length > 60
+              ? template.description.substring(0, 60) + '...'
+              : template.description}
+          </div>
+        </div>
+      `).join('');
+
+      // Add click listeners
+      document.querySelectorAll('.template-item').forEach(item => {
+        item.addEventListener('click', (e) => {
+          const target = e.currentTarget as HTMLElement;
+          const templateId = target.dataset.id;
+          if (templateId) {
+            this.selectTemplate(templateId);
+          }
+        });
+      });
+    }
+
+    private async selectTemplate(templateId: string) {
+      const template = this.templates.find(t => t.id === templateId);
+      if (!template) return;
+
+      this.selectedTemplate = template;
+
+      // Update UI
+      document.querySelectorAll('.template-item').forEach(item => {
+        item.classList.remove('border-blue-500', 'bg-blue-50');
+        item.classList.add('border-gray-200');
+      });
+
+      const selectedItem = document.querySelector(`[data-id="${templateId}"]`);
+      if (selectedItem) {
+        selectedItem.classList.remove('border-gray-200');
+        selectedItem.classList.add('border-blue-500', 'bg-blue-50');
+      }
+
+      // Show editor
+      document.getElementById('no-selection')!.classList.add('hidden');
+      document.getElementById('editor-section')!.classList.remove('hidden');
+
+      // Update title
+      const titleElement = document.getElementById('editor-title')!;
+      titleElement.textContent = `Editing: ${template.title}`;
+
+      // Load template content
+      await this.loadTemplate(templateId);
+    }
+
+    private async loadTemplate(problemId: string) {
+      try {
+        this.setLoading(true);
+        const response = await fetch(`/api/manim-editor?action=get-template&id=${problemId}`);
+        const data = await response.json();
+
+        this.templateContent = data.content;
+        const editor = document.getElementById('code-editor') as HTMLTextAreaElement;
+        editor.value = this.templateContent;
+
+        this.showMessage('', '');
+      } catch (error) {
+        console.error('Failed to load template:', error);
+        this.showMessage('Failed to load template', 'error');
+      } finally {
+        this.setLoading(false);
+      }
+    }
+
+    private async saveTemplate() {
+      if (!this.selectedTemplate) return;
+
+      try {
+        this.setLoading(true);
+        const editor = document.getElementById('code-editor') as HTMLTextAreaElement;
+        const content = editor.value;
+
+        const response = await fetch('/api/manim-editor', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            action: 'save-template',
+            problemId: this.selectedTemplate.id,
+            content: content
+          })
+        });
+
+        const data = await response.json();
+        if (data.success) {
+          this.showMessage('Template saved successfully!', 'success');
+        } else {
+          this.showMessage('Failed to save template', 'error');
+        }
+      } catch (error) {
+        console.error('Failed to save template:', error);
+        this.showMessage('Failed to save template', 'error');
+      } finally {
+        this.setLoading(false);
+      }
+    }
+
+    private async renderTemplate() {
+      if (!this.selectedTemplate) return;
+
+      try {
+        this.setLoading(true);
+        this.showMessage('Rendering video... This may take a few minutes.', 'info');
+
+        const qualitySelect = document.getElementById('quality-select') as HTMLSelectElement;
+        const quality = qualitySelect.value;
+
+        const response = await fetch('/api/manim-editor', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            action: 'render-template',
+            problemId: this.selectedTemplate.id,
+            quality: quality
+          })
+        });
+
+        const data = await response.json();
+        if (data.success) {
+          this.showVideo(data.videoPath);
+          this.showMessage('Video rendered successfully!', 'success');
+        } else {
+          this.showMessage(`Render failed: ${data.error || 'Unknown error'}`, 'error');
+        }
+      } catch (error) {
+        console.error('Failed to render template:', error);
+        this.showMessage('Failed to render template', 'error');
+      } finally {
+        this.setLoading(false);
+      }
+    }
+
+    private async validateTemplate() {
+      if (!this.selectedTemplate) return;
+
+      try {
+        const response = await fetch('/api/manim-editor', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            action: 'validate-template',
+            problemId: this.selectedTemplate.id
+          })
+        });
+
+        const data = await response.json();
+        if (data.valid) {
+          this.showMessage('Template validation passed!', 'success');
+        } else {
+          this.showMessage(`Validation issues: ${data.issues.join(', ')}`, 'warning');
+        }
+      } catch (error) {
+        console.error('Failed to validate template:', error);
+        this.showMessage('Failed to validate template', 'error');
+      }
+    }
+
+    private showVideo(videoPath: string) {
+      const videoSection = document.getElementById('video-section')!;
+      const videoElement = document.getElementById('video-preview') as HTMLVideoElement;
+
+      videoElement.src = videoPath;
+      videoSection.classList.remove('hidden');
+    }
+
+    private showMessage(text: string, type: string) {
+      const messageElement = document.getElementById('message')!;
+
+      if (!text) {
+        messageElement.classList.add('hidden');
+        return;
+      }
+
+      messageElement.classList.remove('hidden');
+      messageElement.className = 'mb-4 p-3 rounded';
+
+      if (type === 'success') {
+        messageElement.classList.add('bg-green-100', 'text-green-800');
+      } else if (type === 'error') {
+        messageElement.classList.add('bg-red-100', 'text-red-800');
+      } else if (type === 'warning') {
+        messageElement.classList.add('bg-yellow-100', 'text-yellow-800');
+      } else {
+        messageElement.classList.add('bg-blue-100', 'text-blue-800');
+      }
+
+      messageElement.textContent = text;
+    }
+
+    private setLoading(loading: boolean) {
+      this.isLoading = loading;
+
+      const buttons = ['save-btn', 'validate-btn', 'render-btn'];
+      buttons.forEach(btnId => {
+        const button = document.getElementById(btnId) as HTMLButtonElement;
+        if (button) {
+          button.disabled = loading;
+          if (loading) {
+            button.textContent = 'Processing...';
+          } else {
+            const originalText = btnId === 'save-btn' ? 'Save Template' :
+                               btnId === 'validate-btn' ? 'Validate' : 'Render Video';
+            button.textContent = originalText;
+          }
+        }
+      });
+    }
+
+    private updateTemplateCount() {
+      const countElement = document.getElementById('template-count')!;
+      countElement.textContent = `Choose from ${this.templates.length} available templates`;
+    }
+
+    private setupEventListeners() {
+      // Save button
+      document.getElementById('save-btn')?.addEventListener('click', () => {
+        this.saveTemplate();
+      });
+
+      // Validate button
+      document.getElementById('validate-btn')?.addEventListener('click', () => {
+        this.validateTemplate();
+      });
+
+      // Render button
+      document.getElementById('render-btn')?.addEventListener('click', () => {
+        this.renderTemplate();
+      });
+    }
+  }
+
+  // Initialize when DOM is loaded
+  document.addEventListener('DOMContentLoaded', () => {
+    new ManimEditor();
+  });
+</script>

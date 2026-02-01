@@ -1,0 +1,12 @@
+{
+  "mathematics_standards": {
+    "cross_curricular_competences": {
+      "critical_thinking": {
+        "indicators": ["анализира", "критички", "споредува"]
+      },
+      "communication": {
+        "indicators": ["комуницира", "објаснува", "дискутира"]
+      }
+    }
+  }
+}

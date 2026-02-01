@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mongo-shard2
+  namespace: mongodb-cluster
+spec:
+  serviceName: mongo-shard2
+  replicas: 3
+  selector:
+    matchLabels:
+      app: mongo-shard2
+  template:
+    metadata:
+      labels:
+        app: mongo-shard2
+    spec:
+      containers:
+      - name: mongo
+        image: mongo:6.0
+        command:
+        - mongod
+        - --shardsvr
+        - --replSet
+        - shard2ReplSet
+        - --bind_ip_all
+        - --port
+        - "27018"
+        ports:
+        - containerPort: 27018
+          name: mongo
+        volumeMounts:
+        - name: mongo-shard2-data
+          mountPath: /data/db
+  volumeClaimTemplates:
+  - metadata:
+    name: mongo-shard2-data
+    namespace: mongodb-cluster
+  spec:
+    accessModes: [ "ReadWriteOnce" ]
+    resources:
+      requests:
+        storage: 50Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongo-shard2
+  namespace: mongodb-cluster
+  labels:
+    app: mongo-shard2
+spec:
+  ports:
+  - port: 27018
+    targetPort: 27018
+  clusterIP: None
+  selector:
+    app: mongo-shard2

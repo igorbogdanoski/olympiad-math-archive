@@ -1,0 +1,196 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const pageTitle = "МатАрхива | Родителска Поддршка";
+const pageDescription = "Помош за родители при домашни задачи, следење на прогрес и разбирање на наставни планови.";
+---
+
+<Layout title={pageTitle}>
+	<meta name="description" content={pageDescription} />
+
+	{/* Parent Hero Section */}
+	<div class="relative mb-16 p-12 md:p-20 rounded-[3rem] bg-gradient-to-br from-purple-50 via-pink-50/50 to-violet-50 dark:from-purple-900/20 dark:via-pink-900/10 dark:to-violet-900/10 overflow-hidden shadow-2xl border border-purple-200/50 dark:border-purple-800/30">
+		<div class="absolute top-0 right-0 w-full h-full opacity-20 pointer-events-none">
+			<div class="absolute top-[-10%] right-[-10%] w-[50%] h-[50%] bg-purple-600 rounded-full blur-[120px]"></div>
+			<div class="absolute bottom-[-10%] left-[-10%] w-[40%] h-[40%] bg-pink-600 rounded-full blur-[100px]"></div>
+		</div>
+
+		<div class="relative z-10 max-w-4xl">
+			<div class="flex items-center gap-3 mb-8">
+				<span class="inline-block px-4 py-1.5 rounded-full bg-purple-500/10 text-purple-400 text-xs font-black uppercase tracking-[0.2em] border border-purple-500/20 backdrop-blur-md">
+					👨‍👩‍👧‍👦 Родителска Поддршка
+				</span>
+			</div>
+
+			<h1 class="text-5xl md:text-7xl font-black text-slate-900 dark:text-white mb-8 leading-[1.1] tracking-tight">
+				Помогни на <span class="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400">детето</span> со математика
+			</h1>
+
+			<p class="text-slate-600 dark:text-slate-400 text-xl mb-10 leading-relaxed max-w-2xl font-medium">
+				Ресурси, водичи и алатки за разбирање на наставните планови и помош со домашни задачи.
+			</p>
+
+			<div class="flex flex-col sm:flex-row gap-4 max-w-2xl">
+				<div class="relative flex-grow">
+					<input
+						type="text"
+						id="search"
+						placeholder="Пребарај теми, одделенија или проблеми..."
+						class="w-full pl-14 pr-4 py-5 bg-white/5 border border-white/10 rounded-2xl text-slate-900 dark:text-white placeholder-slate-500 focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500/50 outline-none backdrop-blur-xl transition-all shadow-2xl"
+					/>
+					<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-slate-500 absolute left-5 top-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+					</svg>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	{/* Quick Help Categories */}
+	<div class="max-w-6xl mx-auto mb-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+		<a href="/parents/homework-help" class="group bg-gradient-to-br from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/10 rounded-3xl p-8 border border-purple-200/50 dark:border-purple-800/30 shadow-lg hover:shadow-2xl hover:shadow-purple-500/10 hover:-translate-y-2 transition-all duration-300">
+			<div class="w-16 h-16 bg-purple-100 dark:bg-purple-900/30 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+				<span class="text-purple-600 dark:text-purple-400 text-3xl">🏠</span>
+			</div>
+			<h3 class="text-xl font-bold text-purple-900 dark:text-purple-100 mb-3">Помош со Домашни</h3>
+			<p class="text-purple-600 dark:text-purple-400 text-sm leading-relaxed">Водичи и решенија за најчести домашни задачи по одделенија.</p>
+		</a>
+
+		<a href="/parents/progress-tracking" class="group bg-gradient-to-br from-pink-50 to-rose-50 dark:from-pink-900/20 dark:to-rose-900/10 rounded-3xl p-8 border border-pink-200/50 dark:border-pink-800/30 shadow-lg hover:shadow-2xl hover:shadow-pink-500/10 hover:-translate-y-2 transition-all duration-300">
+			<div class="w-16 h-16 bg-pink-100 dark:bg-pink-900/30 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+				<span class="text-pink-600 dark:text-pink-400 text-3xl">📊</span>
+			</div>
+			<h3 class="text-xl font-bold text-pink-900 dark:text-pink-100 mb-3">Следење на Прогрес</h3>
+			<p class="text-pink-600 dark:text-pink-400 text-sm leading-relaxed">Види како напредува твоето дете и каде треба дополнителна помош.</p>
+		</a>
+
+		<a href="/parents/curriculum-guide" class="group bg-gradient-to-br from-violet-50 to-purple-50 dark:from-violet-900/20 dark:to-purple-900/10 rounded-3xl p-8 border border-violet-200/50 dark:border-violet-800/30 shadow-lg hover:shadow-2xl hover:shadow-violet-500/10 hover:-translate-y-2 transition-all duration-300">
+			<div class="w-16 h-16 bg-violet-100 dark:bg-violet-900/30 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+				<span class="text-violet-600 dark:text-violet-400 text-3xl">📚</span>
+			</div>
+			<h3 class="text-xl font-bold text-violet-900 dark:text-violet-100 mb-3">Наставни Планови</h3>
+			<p class="text-violet-600 dark:text-violet-400 text-sm leading-relaxed">Разберете што се учи во секое одделение и како да помогнете.</p>
+		</a>
+	</div>
+
+	{/* Grade-specific Resources */}
+	<div class="max-w-6xl mx-auto mb-16">
+		<div class="text-center mb-12">
+			<h2 class="text-3xl font-black text-slate-900 dark:text-white mb-4">Ресурси по Одделение</h2>
+			<p class="text-slate-500 dark:text-slate-400 text-lg max-w-2xl mx-auto">Прилагодени материјали за секое одделение.</p>
+		</div>
+
+		<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+			{[5, 6, 7, 8].map(grade => (
+				<div class="bg-white dark:bg-slate-900 rounded-2xl p-6 border border-slate-100 dark:border-slate-800 shadow-lg">
+					<div class="text-center mb-6">
+						<div class="text-3xl font-black text-slate-900 dark:text-white mb-2">{grade}.</div>
+						<div class="text-sm font-medium text-slate-500 dark:text-slate-400">одделение</div>
+					</div>
+
+					<div class="space-y-3 mb-6">
+						<div class="flex items-center gap-2 text-sm">
+							<span class="text-green-600">✓</span>
+							<span class="text-slate-600 dark:text-slate-300">Водичи за родители</span>
+						</div>
+						<div class="flex items-center gap-2 text-sm">
+							<span class="text-green-600">✓</span>
+							<span class="text-slate-600 dark:text-slate-300">Решенија за проблеми</span>
+						</div>
+						<div class="flex items-center gap-2 text-sm">
+							<span class="text-green-600">✓</span>
+							<span class="text-slate-600 dark:text-slate-300">Прогрес извештаи</span>
+						</div>
+					</div>
+
+					<a href={`/parents/grade/${grade}`} class="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-xl transition-colors block text-center">
+						Види Ресурси
+					</a>
+				</div>
+			))}
+		</div>
+	</div>
+
+	{/* Parent Community */}
+	<div class="max-w-6xl mx-auto mb-16">
+		<div class="text-center mb-12">
+			<h2 class="text-3xl font-black text-slate-900 dark:text-white mb-4">Родителска Заедница</h2>
+			<p class="text-slate-500 dark:text-slate-400 text-lg max-w-2xl mx-auto">Поврзи се со други родители и сподели искуства.</p>
+		</div>
+
+		<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+			<div class="bg-white dark:bg-slate-900 rounded-[2rem] p-8 border border-slate-100 dark:border-slate-800 shadow-lg">
+				<div class="flex items-center gap-3 mb-6">
+					<div class="w-12 h-12 bg-purple-100 dark:bg-purple-900/30 rounded-full flex items-center justify-center">
+						<span class="text-purple-600 dark:text-purple-400 text-xl">💬</span>
+					</div>
+					<div>
+						<h3 class="font-bold text-slate-900 dark:text-white">Форум за Родители</h3>
+						<p class="text-sm text-slate-500 dark:text-slate-400">Прашања и совети</p>
+					</div>
+				</div>
+				<p class="text-slate-600 dark:text-slate-300 text-sm mb-6 leading-relaxed">Разговарај со други родители за домашни задачи, стратегии за учење и најдобри практики.</p>
+				<div class="flex items-center justify-between text-xs text-slate-500 mb-4">
+					<span>142 активни родители</span>
+					<span>Последна активност: 2 мин</span>
+				</div>
+				<button class="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-xl transition-colors">
+					Придружи се на Разговорот
+				</button>
+			</div>
+
+			<div class="bg-white dark:bg-slate-900 rounded-[2rem] p-8 border border-slate-100 dark:border-slate-800 shadow-lg">
+				<div class="flex items-center gap-3 mb-6">
+					<div class="w-12 h-12 bg-pink-100 dark:bg-pink-900/30 rounded-full flex items-center justify-center">
+						<span class="text-pink-600 dark:text-pink-400 text-xl">📖</span>
+					</div>
+					<div>
+						<h3 class="font-bold text-slate-900 dark:text-white">Водичи за Родители</h3>
+						<p class="text-sm text-slate-500 dark:text-slate-400">Како да помогнете</p>
+					</div>
+				</div>
+				<p class="text-slate-600 dark:text-slate-300 text-sm mb-6 leading-relaxed">Експертски совети за поддршка на детското математичко учење дома.</p>
+				<div class="space-y-2 mb-4">
+					<div class="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-300">
+						<span class="w-2 h-2 bg-green-500 rounded-full"></span>
+						<span>Како да објасниме разломци</span>
+					</div>
+					<div class="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-300">
+						<span class="w-2 h-2 bg-blue-500 rounded-full"></span>
+						<span>Мотивација за математика</span>
+					</div>
+					<div class="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-300">
+						<span class="w-2 h-2 bg-purple-500 rounded-full"></span>
+						<span>Кога да побараме професионална помош</span>
+					</div>
+				</div>
+				<button class="w-full bg-pink-600 hover:bg-pink-700 text-white font-bold py-3 px-6 rounded-xl transition-colors">
+					Читај Водичи
+				</button>
+			</div>
+		</div>
+	</div>
+
+	{/* Call to Action */}
+	<div class="bg-gradient-to-r from-purple-600 to-pink-600 rounded-[3rem] p-12 md:p-16 text-white">
+		<div class="max-w-4xl mx-auto text-center">
+			<h2 class="text-3xl md:text-4xl font-black mb-6">Биди Информиран Родител</h2>
+			<p class="text-purple-100 text-xl mb-10 leading-relaxed">
+				Прими известувања за нови ресурси, совети и можности да помогнеш на твоето дете да успее во математика.
+			</p>
+
+			<div class="flex flex-col sm:flex-row gap-4 justify-center max-w-lg mx-auto">
+				<input
+					type="email"
+					placeholder="Внеси email адреса"
+					class="flex-grow px-6 py-4 bg-white/10 border border-white/20 rounded-xl text-white placeholder-purple-200 focus:ring-2 focus:ring-white/50 focus:border-white/50 outline-none backdrop-blur-sm"
+				/>
+				<button class="bg-white text-purple-600 font-bold py-4 px-8 rounded-xl hover:bg-purple-50 transition-all">
+					Пријави се за Новости
+				</button>
+			</div>
+
+			<p class="text-purple-200 text-sm mt-6">Без спам • Лесно да се откажеш • Само корисни информации</p>
+		</div>
+	</div>
+</Layout>

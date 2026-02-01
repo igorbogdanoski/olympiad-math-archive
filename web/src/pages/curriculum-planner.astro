@@ -1,0 +1,1905 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { API_BASE_URL, AI_API_BASE_URL } from '../utils/config';
+import MathFormulaEditorEnhanced from '../components/MathFormulaEditorEnhanced.astro';
+import curriculumData from '../data/curriculum_standards_processed.json';
+import nationalStandards from '../data/national_standards.json';
+import standardsMapping from '../data/standards_mapping.json';
+---
+
+<Layout title="Планирање на Настава">
+  <main class="max-w-7xl mx-auto px-4 py-8">
+    <header class="mb-12 text-center">
+      <h1 class="text-4xl font-bold text-gray-900 mb-4">Планирање на Настава со Олимписки Задачи</h1>
+      <p class="text-lg text-gray-600">Создавајте настава според официјалната наставна програма и олимписките задачи, градејќи математичко мајсторство низ годините</p>
+
+      <div class="mt-6 max-w-2xl mx-auto bg-blue-50 border border-blue-200 rounded-lg p-4">
+        <div class="flex items-center mb-2">
+          <svg class="w-5 h-5 text-blue-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+          <span class="font-semibold text-blue-800">Официјални Наставни Програми</span>
+        </div>
+        <p class="text-sm text-blue-700">
+          Податоците се преземени директно од веб-страницата на Министерството за образование и наука на Република Македонија
+          (<a href="https://bro.gov.mk" class="underline hover:text-blue-900" target="_blank">bro.gov.mk</a>)
+        </p>
+      </div>
+
+      <!-- Enhanced Search and Grade Selection -->
+      <div class="mt-8 space-y-6">
+        <!-- Semantic Search Bar -->
+        <div class="max-w-2xl mx-auto">
+          <div class="relative">
+            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+              <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+              </svg>
+            </div>
+            <input type="text" id="semanticSearch" class="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 focus:outline-none transition-all duration-200" placeholder="Пребарај стандарди, проблеми или теми... (пр. 'прости броеви', 'триаголник', 'квадратни равенки')">
+            <div class="absolute inset-y-0 right-0 pr-3 flex items-center">
+              <button id="clearSearch" class="text-gray-400 hover:text-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 rounded p-1 hidden" aria-label="Исчисти пребарување">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+              </button>
+            </div>
+          </div>
+          <div id="searchSuggestions" class="mt-2 hidden">
+            <div class="bg-white border border-gray-200 rounded-lg shadow-lg p-3">
+              <div class="text-sm text-gray-600 mb-2">Предлог за пребарување:</div>
+              <div class="flex flex-wrap gap-2" id="suggestionTags">
+                <!-- Search suggestions will be populated here -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Grade Selection and Create Button -->
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <select id="gradeSelect" class="px-6 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 focus:outline-none transition-all duration-200 hover:border-indigo-400" aria-label="Изберете одделение" role="combobox">
+            <option value="">Изберете одделение</option>
+          </select>
+          <button id="createLessonBtn" class="px-8 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition-all duration-200 hover:scale-105 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100" aria-describedby="createLessonHelp">
+            <span class="flex items-center">
+              <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+              </svg>
+              Создај Настава
+            </span>
+          </button>
+        </div>
+
+        <!-- Personalized Recommendations -->
+        <div id="recommendationsSection" class="max-w-4xl mx-auto hidden">
+          <div class="bg-gradient-to-r from-indigo-50 to-purple-50 border border-indigo-200 rounded-lg p-6">
+            <div class="flex items-center mb-4">
+              <svg class="w-6 h-6 text-indigo-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+              </svg>
+              <h3 class="text-lg font-semibold text-indigo-800">Персонализирани препораки</h3>
+            </div>
+            <div id="recommendationsContent" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              <!-- Recommendations will be populated here -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="createLessonHelp" class="sr-only">Изберете одделение за да креирате настава според официјалната програма</div>
+    </header>
+
+    <!-- Curriculum Standards Display -->
+    <section id="curriculumSection" class="mb-16 hidden">
+      <h2 class="text-2xl font-bold mb-6 flex items-center">
+        <span class="bg-green-600 text-white w-8 h-8 rounded-full flex items-center justify-center mr-3 text-sm">📚</span>
+        Наставна Програма
+      </h2>
+
+      <div id="curriculumContainer">
+        <!-- Curriculum module will be loaded here -->
+      </div>
+    </section>
+
+    <!-- National Standards Section -->
+    <section id="standardsSection" class="mb-16 hidden">
+      <h2 class="text-2xl font-bold mb-6 flex items-center">
+        <span class="bg-blue-600 text-white w-8 h-8 rounded-full flex items-center justify-center mr-3 text-sm">📋</span>
+        Национални Стандарди за Математика
+      </h2>
+
+      <div id="standardsContainer">
+        <!-- National standards will be loaded here -->
+      </div>
+    </section>
+
+    <!-- Lesson Planning Form -->
+    <section id="lessonFormSection" class="mb-16 hidden">
+      <h2 class="text-2xl font-bold mb-6 flex items-center">
+        <span class="bg-blue-600 text-white w-8 h-8 rounded-full flex items-center justify-center mr-3 text-sm">📝</span>
+        Планирање на Настава
+      </h2>
+
+      <div class="bg-white p-8 rounded-xl border shadow-sm">
+        <form id="lessonForm" class="space-y-6">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-2">Тема на настава</label>
+              <input type="text" id="lessonTopic" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" placeholder="пр. Множење на двоцифрени броеви">
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-2">Продолжителност</label>
+              <select id="lessonDuration" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                <option value="45">45 минути</option>
+                <option value="90">90 минути</option>
+                <option value="135">135 минути</option>
+              </select>
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">Цели на учење</label>
+            <textarea id="learningObjectives" rows="3" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" placeholder="Што треба да научат учениците..."></textarea>
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">Планирана содржина</label>
+            <textarea id="lessonContent" rows="4" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" placeholder="Опишете ја содржината на настава..."></textarea>
+          </div>
+
+           <div>
+             <label class="block text-sm font-medium text-gray-700 mb-2">Математички формули (опционално)</label>
+             <div class="mb-2">
+               <MathFormulaEditorEnhanced
+                 placeholder="Внесете LaTeX формули за настава"
+                 className="w-full"
+                 standardsIntegration={true}
+                 olympiadContext="Наставен план"
+               />
+             </div>
+             <p class="text-xs text-gray-500">
+               Користите LaTeX за креирање на убави математички формули. Поддржани се MathJax и MathML стандарди.
+             </p>
+           </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">Домашна задача (опционално)</label>
+            <textarea id="homework" rows="3" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" placeholder="Опишете домашна задача..."></textarea>
+          </div>
+
+          <div class="flex gap-4 flex-wrap">
+            <button type="button" id="generateAILessonBtn" class="px-6 py-3 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors flex items-center">
+              <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+              </svg>
+              AI Генерирај Настава
+            </button>
+            <button type="button" id="generateAnimationBtn" class="px-6 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors flex items-center">
+              <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+              </svg>
+              Создај Анимација
+            </button>
+            <button type="button" id="generateVideoBtn" class="px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors flex items-center">
+              <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h1.586a1 1 0 01.707.293l.707.707A1 1 0 0112.414 11H15m-3 7.5A9.5 9.5 0 1121.5 12 9.5 9.5 0 0112 2.5z"></path>
+              </svg>
+              Генерирај Видео
+            </button>
+            <button type="button" id="generateHomeworkBtn" class="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors flex items-center">
+              <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+              </svg>
+              Генерирај Задачи
+            </button>
+            <button type="submit" class="px-6 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors">
+              Зачувај Настава
+            </button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- Generated Content Display -->
+    <section id="generatedContentSection" class="mb-16 hidden">
+      <h2 class="text-2xl font-bold mb-6 flex items-center">
+        <span class="bg-purple-600 text-white w-8 h-8 rounded-full flex items-center justify-center mr-3 text-sm">🎬</span>
+        Генерирани Ресурси
+      </h2>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div id="videoContainer" class="bg-white p-6 rounded-xl border shadow-sm">
+          <h3 class="text-lg font-semibold mb-4">Образовни Видеа</h3>
+          <div id="videoList" class="space-y-3">
+            <!-- Videos will be populated here -->
+          </div>
+        </div>
+
+        <div id="homeworkContainer" class="bg-white p-6 rounded-xl border shadow-sm">
+          <h3 class="text-lg font-semibold mb-4">Домашни Задачи</h3>
+          <div id="homeworkList" class="space-y-3">
+            <!-- Homework will be populated here -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Оценување на учениците -->
+    <section id="assessmentSection" class="mb-16 hidden">
+      <h2 class="text-2xl font-bold mb-6 flex items-center">
+        <span class="bg-green-600 text-white w-8 h-8 rounded-full flex items-center justify-center mr-3 text-sm">📊</span>
+        Оценување на учениците
+      </h2>
+
+      <div class="p-6 bg-blue-50 border border-blue-200 rounded-lg text-center">
+        <p class="text-blue-800">Функционалноста за оценување на учениците е оптимизирана и ќе биде достапна во следната верзија.</p>
+      </div>
+    </section>
+
+     <!-- Assessment Dashboard Section -->
+     <section id="dashboardSection" class="mb-16 hidden">
+       <div class="p-6 bg-blue-50 border border-blue-200 rounded-lg text-center">
+         <p class="text-blue-800">Dashboard функционалноста ќе биде достапна наскоро.</p>
+       </div>
+     </section>
+     <!-- Manim Template Suggestions Modal -->
+    <div id="manimModal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50">
+      <div class="flex items-center justify-center min-h-screen p-4">
+        <div class="bg-white rounded-xl max-w-4xl w-full max-h-96 overflow-hidden">
+          <div class="p-6 border-b">
+            <div class="flex justify-between items-center">
+              <h3 class="text-xl font-semibold">Предложени Manim Анимации</h3>
+              <button id="closeManimModal" class="text-gray-500 hover:text-gray-700">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+              </button>
+            </div>
+          </div>
+          <div id="manimTemplatesList" class="p-6 max-h-80 overflow-y-auto">
+            <!-- Templates will be loaded here -->
+          </div>
+          <div class="p-6 border-t bg-gray-50">
+            <div class="flex justify-between">
+              <button id="openManimEditor" class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700">
+                Отвори Manim Editor
+              </button>
+              <button id="cancelManimModal" class="px-4 py-2 bg-gray-300 text-gray-700 rounded hover:bg-gray-400">
+                Откажи
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Standard Details Modal -->
+    <div id="standardModal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50" role="dialog" aria-modal="true" aria-labelledby="standardModalTitle">
+      <div class="flex items-center justify-center min-h-screen p-4">
+        <div class="bg-white rounded-xl max-w-4xl w-full max-h-96 overflow-hidden shadow-2xl transition-all duration-300 ease-out transform scale-95 opacity-0" id="modalContent">
+          <div class="p-6 border-b">
+            <div class="flex justify-between items-center">
+              <h3 id="standardModalTitle" class="text-xl font-semibold">Детали за Стандард</h3>
+              <button id="closeStandardModal" class="text-gray-500 hover:text-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 rounded p-1 transition-colors duration-200" aria-label="Затвори модал">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+              </button>
+            </div>
+          </div>
+          <div id="standardModalContent" class="p-6 max-h-80 overflow-y-auto" role="document">
+            <!-- Content will be loaded here -->
+          </div>
+          <div class="p-6 border-t bg-gray-50">
+            <button id="closeStandardModalBottom" class="px-4 py-2 bg-gray-300 text-gray-700 rounded hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition-all duration-200 hover:scale-105 active:scale-95">
+              Затвори
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script is:inline define:vars={{ API_BASE_URL, AI_API_BASE_URL }}>
+    window.API_BASE_URL = API_BASE_URL;
+    window.AI_API_BASE_URL = AI_API_BASE_URL;
+  </script>
+
+  <script define:vars={{ API_BASE_URL, AI_API_BASE_URL }}>
+    // Curriculum data - passed from server
+    let curriculaData = {};
+    let selectedSubject = '';
+    let curriculumData = {};
+
+    // API URLs
+    const API_URL = API_BASE_URL;
+    const AI_API_URL = AI_API_BASE_URL; // AI services endpoint
+
+    // Initialize when DOM is ready
+    function initApp() {
+      // DOM elements
+      const subjectSelect = document.getElementById('subjectSelect');
+      const gradeSelect = document.getElementById('gradeSelect');
+      const createLessonBtn = document.getElementById('createLessonBtn');
+      const curriculumSection = document.getElementById('curriculumSection');
+      const lessonFormSection = document.getElementById('lessonFormSection');
+      const generatedContentSection = document.getElementById('generatedContentSection');
+      const curriculumContainer = document.getElementById('curriculumContainer');
+
+      let grades = [];
+
+      // Fetch grades from backend
+      fetch(`${API_URL}/grades`)
+        .then(response => response.json())
+        .then(data => {
+          grades = data.grades || [];
+          populateGradeSelect();
+        })
+        .catch(error => {
+          console.error('Failed to load grades:', error);
+          // Fallback to hardcoded grades
+          grades = ["grade_1","grade_2","grade_3","grade_4","grade_5","grade_6","grade_7","grade_8","grade_9","grade_10","grade_11","grade_12"];
+          populateGradeSelect();
+        });
+
+      function populateGradeSelect() {
+        gradeSelect.innerHTML = '<option value="">Изберете одделение</option>';
+
+        // Elementary school (1-9): Basic education
+        const elementaryGrades = grades.filter(g => {
+          const num = parseInt(g.replace('grade_', ''));
+          return num >= 1 && num <= 9;
+        });
+
+        // High school (10-12): Gymnasium
+        const highSchoolGrades = grades.filter(g => {
+          const num = parseInt(g.replace('grade_', ''));
+          return num >= 10 && num <= 12;
+        });
+
+        // Add elementary grades with Roman numerals
+        elementaryGrades.forEach(grade => {
+          const num = parseInt(grade.replace('grade_', ''));
+          const romanNumerals = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX'];
+          const roman = romanNumerals[num - 1] || num.toString();
+
+          const option = document.createElement('option');
+          option.value = grade;
+          option.textContent = `${roman} одделение`;
+          gradeSelect.appendChild(option);
+        });
+
+        // Add high school grades with year names
+        highSchoolGrades.forEach(grade => {
+          const num = parseInt(grade.replace('grade_', ''));
+          const yearNames = ['Прва', 'Втора', 'Трета'];
+          const yearName = yearNames[num - 10] || `${num - 9}.`;
+
+          const option = document.createElement('option');
+          option.value = grade;
+          option.textContent = `${yearName} година гимназија`;
+          gradeSelect.appendChild(option);
+        });
+      }
+
+      // Handle subject selection
+      if (subjectSelect) {
+      subjectSelect.addEventListener('change', (e) => {
+      const subject = e.target.value;
+      selectedSubject = subject;
+      curriculumData = curriculaData[subject] || {};
+
+      // Reset grade selection
+      gradeSelect.innerHTML = '<option value="">Изберете одделение</option>';
+      gradeSelect.disabled = !subject;
+
+      if (subject && curriculumData.elementary) {
+        const elementaryOptgroup = document.createElement('optgroup');
+        elementaryOptgroup.label = 'Основно образование';
+
+        Object.keys(curriculumData.elementary).forEach(grade => {
+          const option = document.createElement('option');
+          option.value = grade;
+          option.textContent = `Одделение ${grade.replace('grade_', '')}`;
+          elementaryOptgroup.appendChild(option);
+        });
+
+        gradeSelect.appendChild(elementaryOptgroup);
+      }
+
+      if (subject && curriculumData.gymnasium) {
+        const gymnasiumOptgroup = document.createElement('optgroup');
+        gymnasiumOptgroup.label = 'Средно образование';
+
+        Object.keys(curriculumData.gymnasium).forEach(grade => {
+          const option = document.createElement('option');
+          option.value = grade;
+          option.textContent = `Гимназија ${grade.replace('grade_', '')}. година`;
+          gymnasiumOptgroup.appendChild(option);
+        });
+
+        gradeSelect.appendChild(gymnasiumOptgroup);
+      }
+
+      // Hide sections when subject changes
+      curriculumSection.classList.add('hidden');
+      lessonFormSection.classList.add('hidden');
+      createLessonBtn.disabled = true;
+      });
+    }
+
+    // Load curriculum for selected grade
+    if (gradeSelect) {
+      gradeSelect.addEventListener('change', (e) => {
+      const grade = e.target.value;
+
+      if (grade) {
+        fetch(`${API_URL}/curriculum/${grade}`)
+          .then(response => response.json())
+          .then(data => {
+            displayCurriculum(grade, data);
+            curriculumSection.classList.remove('hidden');
+
+            // Display national standards for the selected grade
+            const gradeNum = parseInt(grade.replace('grade_', ''));
+            displayNationalStandards(gradeNum);
+            document.getElementById('standardsSection').classList.remove('hidden');
+
+            createLessonBtn.disabled = false;
+          })
+          .catch(error => {
+            console.error('Failed to load curriculum:', error);
+            curriculumSection.classList.add('hidden');
+            createLessonBtn.disabled = true;
+          });
+      } else {
+        curriculumSection.classList.add('hidden');
+        createLessonBtn.disabled = true;
+      }
+      });
+    }
+
+    function displayCurriculum(grade, gradeData) {
+      // Store globally for highlighting
+      window.currentGradeData = gradeData;
+
+      const topics = (gradeData.themes || []).map((theme, index) => ({
+        name: theme.name || theme.title,
+        code: theme.code || `MAT-G${grade.split('_')[1]}-T${index+1}`,
+        objectives: theme.objectives || [],
+        standards: theme.standards_with_codes || theme.standards || [],
+        activities: theme.activities || [],
+        hours: theme.hours || ''
+      }));
+
+      // Clear existing content
+      curriculumContainer.innerHTML = '';
+
+      // Determine display name
+      const num = parseInt(grade.replace('grade_', ''));
+      let displayName;
+      if (num >= 1 && num <= 9) {
+        const romanNumerals = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX'];
+        displayName = `${romanNumerals[num - 1]} одделение`;
+      } else if (num >= 10 && num <= 12) {
+        const yearNames = ['Прва', 'Втора', 'Трета'];
+        displayName = `${yearNames[num - 10]} година гимназија`;
+      } else {
+        displayName = `Одделение ${num}`;
+      }
+
+      // Create modular curriculum display
+      const curriculumHTML = `
+        <div class="curriculum-module bg-white rounded-xl border shadow-sm p-6">
+          <div class="mb-6">
+            <h2 class="text-2xl font-bold text-gray-800 mb-2">Математика - ${displayName}</h2>
+          </div>
+
+          <div class="space-y-4">
+            <h3 class="text-lg font-semibold text-gray-700 mb-4">
+              Наставни единици (${topics.length})
+            </h3>
+
+            ${topics.map((topic, index) => `
+              <div class="topic-card border border-gray-200 rounded-lg overflow-hidden hover:shadow-md transition-shadow">
+                <div class="topic-header bg-gray-50 px-4 py-3 cursor-pointer flex items-center justify-between"
+                     onclick="toggleTopicDetails('${topic.name}')">
+                  <div class="flex items-center">
+                    <span class="mr-2 text-xs font-bold text-indigo-600 bg-indigo-50 px-2 py-1 rounded">${topic.code}</span>
+                    <h4 class="font-medium text-gray-800">${topic.name}</h4>
+                    ${topic.hours ? `<span class="ml-2 text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">${topic.hours}ч</span>` : ''}
+                  </div>
+                  <div class="flex items-center">
+                    <button class="mr-3 px-3 py-1 bg-indigo-100 text-indigo-700 rounded hover:bg-indigo-200 transition-colors text-sm"
+                            onclick="event.stopPropagation(); selectTopic('${JSON.stringify(topic).replace(/'/g, "&apos;")}')">
+                      Избери
+                    </button>
+                    <svg class="w-5 h-5 text-gray-500 transform transition-transform topic-chevron-${index}"
+                         fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                  </div>
+                </div>
+
+                <div id="topic-details-${topic.name}" class="hidden p-4 border-t border-gray-100 space-y-4">
+                  <div>
+                    <h5 class="text-sm font-semibold text-gray-700 mb-2">Активности</h5>
+                    <div class="space-y-2">
+                      ${topic.activities.map(activity => `
+                        <div class="flex items-center justify-between p-2 bg-blue-50 rounded border border-blue-100 group">
+                          <span class="text-sm text-blue-800">${activity}</span>
+                          <button 
+                            onclick="sendToEditor('${activity.replace(/'/g, "\\'")}', '${topic.name}')"
+                            class="opacity-0 group-hover:opacity-100 bg-indigo-600 text-white px-2 py-1 rounded text-xs transition-opacity"
+                          >
+                            Во едитор
+                          </button>
+                        </div>
+                      `).join('')}
+                    </div>
+                  </div>
+                </div>
+
+                <div class="topic-details-${index} p-4 bg-white border-t border-gray-200 hidden">
+                  <div class="mb-4">
+                    <h5 class="font-medium text-gray-700 mb-2 flex items-center">
+                      <svg class="w-4 h-4 mr-2 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                      </svg>
+                      Цели на учење
+                    </h5>
+                    <ul class="list-disc list-inside text-sm text-gray-600 space-y-1">
+                      ${topic.objectives.map(obj => `<li>${obj}</li>`).join('')}
+                    </ul>
+                  </div>
+
+                  <div>
+                    <h5 class="font-medium text-gray-700 mb-2 flex items-center">
+                      <svg class="w-4 h-4 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                      </svg>
+                      Стандарди
+                    </h5>
+                    <ul class="list-disc list-inside text-sm text-gray-600 space-y-1">
+                      ${topic.standards.map(std => `<li>${std}</li>`).join('')}
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      `;
+
+      curriculumContainer.innerHTML = curriculumHTML;
+
+      // Add event listeners for topic toggling
+      gradeData.themes.forEach((theme, index) => {
+        const chevron = document.querySelector('.topic-chevron-' + index);
+        const details = document.querySelector('.topic-details-' + index);
+
+        if (chevron && details) {
+          chevron.addEventListener('click', () => {
+            const isHidden = details.classList.contains('hidden');
+            if (isHidden) {
+              details.classList.remove('hidden');
+              chevron.style.transform = 'rotate(180deg)';
+            } else {
+              details.classList.add('hidden');
+              chevron.style.transform = 'rotate(0deg)';
+            }
+          });
+        }
+      });
+    }
+
+    // Global functions for topic interaction
+    function toggleTopicDetails(topicName) {
+      // This function is called from onclick attributes in the HTML
+    }
+
+    function selectTopic(topicJson) {
+      const topic = JSON.parse(topicJson);
+      selectTopicForLesson(topic);
+    }
+
+    // Make functions globally available
+    window.toggleTopicDetails = toggleTopicDetails;
+    window.selectTopic = selectTopic;
+
+    function selectTopicForLesson(topic) {
+      // Pre-fill lesson form with topic data
+      document.getElementById('lessonTopic').value = topic.name;
+      document.getElementById('learningObjectives').value = topic.objectives.join('\n');
+      document.getElementById('lessonContent').value = topic.standards.join('\n');
+
+      lessonFormSection.classList.remove('hidden');
+      lessonFormSection.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // Show lesson form
+    if (createLessonBtn) {
+      createLessonBtn.addEventListener('click', () => {
+      lessonFormSection.classList.remove('hidden');
+      lessonFormSection.scrollIntoView({ behavior: 'smooth' });
+      });
+    }
+
+    // Form submission
+    const lessonForm = document.getElementById('lessonForm');
+    if (lessonForm) {
+      lessonForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const formData = {
+        subject: selectedSubject,
+        topic: document.getElementById('lessonTopic').value,
+        duration: document.getElementById('lessonDuration').value,
+        objectives: document.getElementById('learningObjectives').value,
+        content: document.getElementById('lessonContent').value,
+        homework: document.getElementById('homework').value,
+        grade: gradeSelect.value,
+        timestamp: new Date().toISOString()
+      };
+
+      console.log('Saving lesson plan:', formData);
+      alert('Наставата е зачувана успешно!');
+
+      // Here you would typically send to API
+      // fetch('/api/lesson-plans', { method: 'POST', body: JSON.stringify(formData) })
+      });
+    }
+
+    // AI lesson generation functionality
+    const generateAILessonBtn = document.getElementById('generateAILessonBtn');
+    if (generateAILessonBtn) {
+      generateAILessonBtn.addEventListener('click', async () => {
+      const topic = document.getElementById('lessonTopic').value;
+      const grade = gradeSelect.value;
+      const duration = document.getElementById('lessonDuration').value;
+
+      if (!topic || !grade || !duration) {
+        alert('Ве молиме пополнете тема, одделение и времетраење пред да генерирате AI настава.');
+        return;
+      }
+
+      // Show loading state
+      const btn = document.getElementById('generateAILessonBtn');
+      const originalText = btn.innerHTML;
+      btn.innerHTML = '<div class="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>AI Генерира...';
+      btn.disabled = true;
+
+      try {
+        const response = await fetch('/api/ai-lesson-generator', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            subject: selectedSubject,
+            topic: topic,
+            grade: grade,
+            duration: parseInt(duration),
+            studentLevel: 'intermediate', // Default, could be made configurable
+            learningObjectives: [topic], // Basic objective, could be expanded
+            specialNeeds: [],
+            previousKnowledge: [],
+            availableResources: ['interactive_whiteboard', 'manipulatives', 'worksheets']
+          })
+        });
+
+        const data = await response.json();
+
+        if (data.success) {
+          // Populate the form with AI-generated content
+          populateFormWithAILesson(data.lessonPlan);
+          alert('AI настава е успешно генерирана! Формата е пополнета со персонализирани содржини.');
+        } else {
+          alert('Грешка при генерирање на AI настава: ' + data.error);
+        }
+      } catch (error) {
+        console.error('AI Lesson generation error:', error);
+        alert('Грешка при поврзување со AI сервисот.');
+      } finally {
+        btn.innerHTML = originalText;
+        btn.disabled = false;
+      }
+      });
+    }
+
+    // Generate animation functionality
+    const generateAnimationBtn = document.getElementById('generateAnimationBtn');
+    if (generateAnimationBtn) {
+      generateAnimationBtn.addEventListener('click', async () => {
+      const topic = document.getElementById('lessonTopic').value;
+      const grade = gradeSelect.value;
+
+      if (!topic || !grade) {
+        alert('Ве молиме изберете одделение и тема пред да создадете анимација.');
+        return;
+      }
+
+      // Show modal with suggested templates
+      await showManimSuggestions(topic, grade);
+      });
+    }
+
+    // Manim modal functionality
+    async function showManimSuggestions(topic, grade) {
+      const modal = document.getElementById('manimModal');
+      const templatesList = document.getElementById('manimTemplatesList');
+
+      modal.classList.remove('hidden');
+      templatesList.innerHTML = '<div class="text-center py-8"><div class="animate-spin rounded-full h-8 w-8 border-b-2 border-red-600 mx-auto mb-2"></div>Барање на предлози...</div>';
+
+      try {
+        const response = await fetch(`/api/manim-suggestions?topic=${encodeURIComponent(topic)}&grade=${encodeURIComponent(grade)}`);
+        const data = await response.json();
+
+        if (data.success && data.templates.length > 0) {
+          templatesList.innerHTML = data.templates.map(template => `
+            <div class="template-suggestion p-4 border border-gray-200 rounded-lg mb-3 hover:border-red-300 cursor-pointer"
+                 onclick="selectManimTemplate('${template.id}')">
+              <div class="flex justify-between items-start mb-2">
+                <h4 class="font-medium text-gray-800">${template.title}</h4>
+                <div class="flex items-center gap-2">
+                  <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">Grade ${template.grade}</span>
+                  <span class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded">${template.category}</span>
+                </div>
+              </div>
+              <p class="text-sm text-gray-600 mb-2">${template.description}</p>
+              <div class="flex justify-between items-center text-xs text-gray-500">
+                <span>Score: ${template.score}</span>
+                <span>Keywords: ${template.keywords.slice(0, 3).join(', ')}</span>
+              </div>
+            </div>
+          `).join('');
+        } else {
+          templatesList.innerHTML = `
+            <div class="text-center py-8 text-gray-500">
+              <div class="text-4xl mb-2">🎬</div>
+              <div>Не се најдени специфични предлози за оваа тема.</div>
+              <div class="text-sm mt-2">Можете директно да отворите Manim Editor за да создадете нова анимација.</div>
+            </div>
+          `;
+        }
+      } catch (error) {
+        console.error('Failed to fetch Manim suggestions:', error);
+        templatesList.innerHTML = `
+          <div class="text-center py-8 text-red-500">
+            <div class="text-4xl mb-2">❌</div>
+            <div>Грешка при вчитување на предлози.</div>
+          </div>
+        `;
+      }
+    }
+
+    // Global function for selecting Manim template
+    function selectManimTemplate(templateId) {
+      const manimUrl = `/manim-editor?id=${templateId}`;
+      window.open(manimUrl, '_blank');
+      document.getElementById('manimModal').classList.add('hidden');
+    }
+
+    // Populate form with AI-generated lesson
+    function populateFormWithAILesson(lessonPlan) {
+      // Update title
+      const titleElement = document.querySelector('h1');
+      if (titleElement) {
+        titleElement.textContent = lessonPlan.title;
+      }
+
+      // Populate learning objectives
+      const objectivesTextarea = document.getElementById('learningObjectives');
+      if (objectivesTextarea && lessonPlan.learningObjectives) {
+        objectivesTextarea.value = lessonPlan.learningObjectives.join('\n');
+      }
+
+      // Populate lesson content with structured activities
+      const contentTextarea = document.getElementById('lessonContent');
+      if (contentTextarea && lessonPlan.lessonStructure) {
+        const structure = lessonPlan.lessonStructure;
+        let content = '';
+
+        if (structure.introduction) {
+          content += `ВОВЕД (${structure.introduction.duration} мин):\n`;
+          content += structure.introduction.activities.map(act => `• ${act}`).join('\n');
+          content += '\n\n';
+        }
+
+        if (structure.mainActivities) {
+          content += `ГЛАВНИ АКТИВНОСТИ (${structure.mainActivities.duration} мин):\n`;
+          content += structure.mainActivities.activities.map(act => `• ${act}`).join('\n');
+          if (structure.mainActivities.assessment) {
+            content += '\nОЦЕНУВАЊЕ:\n';
+            content += structure.mainActivities.assessment.map(assess => `• ${assess}`).join('\n');
+          }
+          content += '\n\n';
+        }
+
+        if (structure.conclusion) {
+          content += `ЗАКЛУЧОК (${structure.conclusion.duration} мин):\n`;
+          content += structure.conclusion.activities.map(act => `• ${act}`).join('\n');
+          if (structure.conclusion.reflection) {
+            content += '\nРЕФЛЕКСИЈА:\n';
+            content += structure.conclusion.reflection.map(ref => `• ${ref}`).join('\n');
+          }
+        }
+
+        contentTextarea.value = content;
+      }
+
+      // Populate homework
+      const homeworkTextarea = document.getElementById('homework');
+      if (homeworkTextarea && lessonPlan.homework) {
+        let homework = '';
+
+        if (lessonPlan.homework.assignments) {
+          homework += 'ДОМАШНА ЗАДАЧА:\n';
+          homework += lessonPlan.homework.assignments.map(hw => `• ${hw}`).join('\n');
+        }
+
+        if (lessonPlan.homework.extensions) {
+          homework += '\n\nПРОШИРУВАЊА ЗА НАПРЕДНИ:\n';
+          homework += lessonPlan.homework.extensions.map(ext => `• ${ext}`).join('\n');
+        }
+
+        homeworkTextarea.value = homework;
+      }
+
+      // Show lesson form if not visible
+      const lessonFormSection = document.getElementById('lessonFormSection');
+      if (lessonFormSection && lessonFormSection.classList.contains('hidden')) {
+        lessonFormSection.classList.remove('hidden');
+        lessonFormSection.scrollIntoView({ behavior: 'smooth' });
+      }
+
+      // Log AI generation metadata
+      console.log('AI Lesson Plan Generated:', {
+        title: lessonPlan.title,
+        pedagogical_approach: (lessonPlan.metadata && lessonPlan.metadata.pedagogical_approach),
+        differentiation_level: (lessonPlan.metadata && lessonPlan.metadata.differentiation_level),
+        manim_animations: (lessonPlan.manimAnimations && lessonPlan.manimAnimations.recommended && lessonPlan.manimAnimations.recommended.length) || 0
+      });
+    }
+
+    // Display national standards for selected grade
+    function displayNationalStandards(gradeNum) {
+      const standardsContainer = document.getElementById('standardsContainer');
+      if (!standardsContainer) return;
+
+      let relevantStandards = [];
+      let educationLevel = '';
+
+      // Determine education level and get relevant standards
+      if (gradeNum >= 1 && gradeNum <= 3) {
+        educationLevel = 'Основно образование (1-3 одд)';
+        relevantStandards = standardsMapping.основно_образование.одделение_1_3;
+      } else if (gradeNum >= 4 && gradeNum <= 6) {
+        educationLevel = 'Основно образование (4-6 одд)';
+        relevantStandards = standardsMapping.основно_образование.одделение_4_6;
+      } else if (gradeNum >= 7 && gradeNum <= 9) {
+        educationLevel = 'Основно образование (7-9 одд)';
+        relevantStandards = standardsMapping.основно_образование.одделение_7_9;
+      } else if (gradeNum >= 10 && gradeNum <= 12) {
+        educationLevel = 'Средно образование (10-12 одд)';
+        relevantStandards = standardsMapping.средно_образование.одделение_10_12;
+      }
+
+      // Clear previous content
+      standardsContainer.innerHTML = '';
+
+      if (relevantStandards.length === 0) {
+        standardsContainer.innerHTML = '<p class="text-gray-500">Нема достапни стандарди за ова одделение.</p>';
+        return;
+      }
+
+      // Create standards display
+      const standardsHTML = `
+        <div class="mb-4">
+          <h3 class="text-lg font-semibold text-gray-800 mb-3">${educationLevel}</h3>
+        </div>
+        <div class="space-y-3">
+          ${relevantStandards.map(code => {
+            const standard = nationalStandards.национални_стандарди[0].знаења_и_вештини.find(s => s.шифра === code);
+            if (!standard) return '';
+            return `
+              <div class="border border-gray-200 rounded-lg p-4 hover:border-blue-300 transition-colors cursor-pointer" onclick="openStandardModal('${code}', '${standard.опис.replace(/'/g, '\\\'')}')">
+                <div class="flex items-start gap-3">
+                  <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-sm font-mono">${code}</span>
+                  <div class="flex-1">
+                    <p class="text-gray-800 text-sm leading-relaxed">${standard.опис}</p>
+                  </div>
+                </div>
+              </div>
+            `;
+          }).join('')}
+        </div>
+      `;
+
+      standardsContainer.innerHTML = standardsHTML;
+    }
+
+    // Make function globally available
+    window.selectManimTemplate = selectManimTemplate;
+
+    // Modal close handlers
+    const closeManimModal = document.getElementById('closeManimModal');
+    if (closeManimModal) {
+      closeManimModal.addEventListener('click', () => {
+      document.getElementById('manimModal').classList.add('hidden');
+      });
+    }
+
+    const cancelManimModal = document.getElementById('cancelManimModal');
+    if (cancelManimModal) {
+      cancelManimModal.addEventListener('click', () => {
+      document.getElementById('manimModal').classList.add('hidden');
+      });
+    }
+
+    const openManimEditor = document.getElementById('openManimEditor');
+    if (openManimEditor) {
+      openManimEditor.addEventListener('click', () => {
+      const topic = document.getElementById('lessonTopic').value;
+      const grade = gradeSelect.value;
+      const manimUrl = `/manim-editor?topic=${encodeURIComponent(topic)}&grade=${encodeURIComponent(grade)}`;
+      window.open(manimUrl, '_blank');
+      document.getElementById('manimModal').classList.add('hidden');
+      });
+    }
+
+    // Generate video functionality
+    const generateVideoBtn = document.getElementById('generateVideoBtn');
+    if (generateVideoBtn) {
+      generateVideoBtn.addEventListener('click', () => {
+      const topic = document.getElementById('lessonTopic').value;
+      const content = document.getElementById('lessonContent').value;
+
+      if (!topic || !content) {
+        alert('Ве молиме пополнете тема и содржина пред да генерирате видео.');
+        return;
+      }
+
+      // Show loading state
+      const btn = document.getElementById('generateVideoBtn');
+      const originalText = btn.innerHTML;
+      btn.innerHTML = '<div class="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>Генерирање...';
+      btn.disabled = true;
+
+      // Simulate API call
+      setTimeout(() => {
+        btn.innerHTML = originalText;
+        btn.disabled = false;
+
+        displayGeneratedVideo(topic);
+        generatedContentSection.classList.remove('hidden');
+      }, 3000);
+      });
+    }
+
+    // Generate homework functionality
+    const generateHomeworkBtn = document.getElementById('generateHomeworkBtn');
+    if (generateHomeworkBtn) {
+      generateHomeworkBtn.addEventListener('click', () => {
+      const topic = document.getElementById('lessonTopic').value;
+      const grade = gradeSelect.value;
+
+      if (!topic || !grade) {
+        alert('Ве молиме изберете одделение и тема пред да генерирате задачи.');
+        return;
+      }
+
+      // Show loading state
+      const btn = document.getElementById('generateHomeworkBtn');
+      const originalText = btn.innerHTML;
+      btn.innerHTML = '<div class="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>Генерирање...';
+      btn.disabled = true;
+
+      // Simulate API call
+      setTimeout(() => {
+        btn.innerHTML = originalText;
+        btn.disabled = false;
+
+        displayGeneratedHomework(topic, grade);
+        generatedContentSection.classList.remove('hidden');
+      }, 2000);
+      });
+    }
+
+    function displayGeneratedVideo(topic) {
+      const videoList = document.getElementById('videoList');
+      const videoCard = document.createElement('div');
+      videoCard.className = 'p-4 border rounded-lg bg-gray-50';
+      videoCard.innerHTML = `
+        <div class="flex items-center justify-between mb-2">
+          <h4 class="font-medium text-gray-800">${topic}</h4>
+          <span class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded">Генерирано</span>
+        </div>
+        <p class="text-sm text-gray-600 mb-3">Видео објаснување на концептот со визуелизации</p>
+        <div class="aspect-video bg-gray-200 rounded flex items-center justify-center mb-3">
+          <div class="text-center">
+            <svg class="w-12 h-12 text-gray-400 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h6m6 0a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            <p class="text-xs text-gray-500">Видео ќе се вчита...</p>
+          </div>
+        </div>
+        <button class="w-full px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700 transition-colors text-sm">
+          Пушти видео
+        </button>
+      `;
+
+      videoList.appendChild(videoCard);
+    }
+
+    function displayGeneratedHomework(topic, grade) {
+      const homeworkList = document.getElementById('homeworkList');
+      const gradeNum = grade.replace('grade_', '');
+
+      const homeworkCard = document.createElement('div');
+      homeworkCard.className = 'p-4 border rounded-lg bg-gray-50';
+      homeworkCard.innerHTML = `
+        <div class="flex items-center justify-between mb-2">
+          <h4 class="font-medium text-gray-800">Задачи за ${topic}</h4>
+          <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">Одделение ${gradeNum}</span>
+        </div>
+        <div class="space-y-2 text-sm text-gray-600 mb-3">
+          <p><strong>Задача 1:</strong> Реши ги следниве равенки: 2x + 3 = 11</p>
+          <p><strong>Задача 2:</strong> Пресметај: 15 × 7 - 23 ÷ 2</p>
+          <p><strong>Задача 3:</strong> Нацртај правоаголник со страни 8cm и 5cm</p>
+        </div>
+        <div class="flex gap-2">
+          <button class="flex-1 px-3 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition-colors text-sm">
+            Преземи PDF
+          </button>
+          <button class="flex-1 px-3 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors text-sm">
+            Испрати на ученици
+          </button>
+        </div>
+      `;
+
+      homeworkList.appendChild(homeworkCard);
+    }
+
+    // Highlight topics with selected standard
+    function highlightTopicsWithStandard(standardCode) {
+      // Remove previous highlights
+      document.querySelectorAll('.topic-card').forEach(card => {
+        card.classList.remove('ring-2', 'ring-blue-500', 'bg-blue-50');
+      });
+
+      // Find topics with this standard
+      if (window.currentGradeData && window.currentGradeData.themes) {
+        window.currentGradeData.themes.forEach((theme, index) => {
+          if (theme.standards && theme.standards.includes(standardCode)) {
+            const topicCard = document.querySelector(`.topic-card:nth-child(${index + 1})`);
+            if (topicCard) {
+              topicCard.classList.add('ring-2', 'ring-blue-500', 'bg-blue-50');
+              topicCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+          }
+        });
+      }
+    }
+
+    // Make it globally available
+    window.highlightTopicsWithStandard = highlightTopicsWithStandard;
+
+    // Show olympiad problems for standard
+    function showOlympiadProblemsForStandard(code, description) {
+      // Extract keywords from description
+      const keywords = description.toLowerCase().split(' ').filter(word => word.length > 3);
+      let relatedProblems = [];
+
+      // Simple mapping of keywords to problems (can be expanded)
+      const keywordToProblems = {
+        'прости': ['sigma137_p1871'], // primes
+        'броеви': ['sigma137_p1871'],
+        'квадрати': ['sigma137_p1871'],
+        'равенки': ['sigma137_p1871'],
+        'линеарни': ['example_linear'],
+        'систем': ['example_system']
+      };
+
+      keywords.forEach(keyword => {
+        if (keywordToProblems[keyword]) {
+          relatedProblems = relatedProblems.concat(keywordToProblems[keyword]);
+        }
+      });
+
+      // Remove duplicates
+      relatedProblems = [...new Set(relatedProblems)];
+
+      if (relatedProblems.length > 0) {
+        const problemsList = relatedProblems.map(id => `- ${id}`).join('\n');
+        alert(`Поврзани олимписки задачи за стандард ${code}:\n${problemsList}`);
+      } else {
+        alert(`Не се најдени поврзани олимписки задачи за стандард ${code}.`);
+      }
+    }
+
+    // Make globally available
+    window.showOlympiadProblemsForStandard = showOlympiadProblemsForStandard;
+
+    // Open standard modal with details
+    function openStandardModal(code, description) {
+      const modal = document.getElementById('standardModal');
+      const title = document.getElementById('standardModalTitle');
+      const content = document.getElementById('standardModalContent');
+
+      title.textContent = `Стандард ${code}`;
+
+      // Teaching strategies with Bloom's taxonomy levels
+      const strategies = [
+        {strategy: 'Проблем-базирано учење: Користење на олимписки задачи за развивање на критичко мислење', level: 'Анализирање (Analyze)'},
+        {strategy: 'Колаборативни проекти: Групни решенија на комплексни математички проблеми', level: 'Креирање (Create)'},
+        {strategy: 'Диференцирана инструкција: Прилагодување на задачи според ниво на учениците', level: 'Разбирање (Understand)'},
+        {strategy: 'Визуелизации и модели: Користење на Manim анимации за разбирање концепти', level: 'Примена (Apply)'},
+        {strategy: 'Повратна информација и рефлексија: Анализирање на решенијата и подобрување', level: 'Евалуација (Evaluate)'}
+      ];
+
+      // Olympiad problems
+      const keywords = description.toLowerCase().split(' ').filter(word => word.length > 3);
+      let relatedProblems = [];
+      const keywordToProblems = {
+        'прости': [{id: 'sigma137_p1871', title: 'Прости броеви и квадрати'}],
+        'броеви': [{id: 'sigma137_p1871', title: 'Прости броеви и квадрати'}],
+        'квадрати': [{id: 'sigma137_p1871', title: 'Прости броеви и квадрати'}],
+        'равенки': [{id: 'sigma137_p1871', title: 'Прости броеви и квадрати'}],
+        'линеарни': [{id: 'example_linear', title: 'Линеарни равенки'}],
+        'систем': [{id: 'example_system', title: 'Системи равенки'}]
+      };
+
+      keywords.forEach(keyword => {
+        if (keywordToProblems[keyword]) {
+          relatedProblems = relatedProblems.concat(keywordToProblems[keyword]);
+        }
+      });
+      relatedProblems = relatedProblems.filter((problem, index, self) => 
+        index === self.findIndex(p => p.id === problem.id)
+      );
+
+      let html = `
+        <div class="mb-6 flex gap-4">
+          <button id="generateWorksheetBtn" class="flex-1 px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors flex items-center justify-center font-bold">
+            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+            </svg>
+            Прегледај Наставен Лист
+          </button>
+          <button id="sendToEditorBtn" class="flex-1 px-6 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors flex items-center justify-center font-bold">
+             <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+            </svg>
+            Испрати во Едитор
+          </button>
+        </div>
+
+        <div class="mb-6">
+          <h4 class="text-lg font-semibold mb-2">Опис на стандардот</h4>
+          <p class="text-gray-700">${description}</p>
+        </div>
+
+        <div class="mb-6">
+          <h4 class="text-lg font-semibold mb-2">Предложени наставни стратегии (Bloom's Taxonomy)</h4>
+          <ul class="list-disc list-inside text-gray-700 space-y-1">
+            ${strategies.map(s => `<li><strong>${s.level}:</strong> ${s.strategy}</li>`).join('')}
+          </ul>
+        </div>
+
+        <div class="mb-6">
+          <h4 class="text-lg font-semibold mb-2">Поврзани олимписки задачи</h4>
+          ${relatedProblems.length > 0 ?
+            `<ul class="space-y-2">
+              ${relatedProblems.map(problem =>
+                `<li>
+                  <a href="/problems/${problem.id}" class="text-blue-600 hover:text-blue-800 underline" target="_blank">
+                    ${problem.title} (${problem.id})
+                  </a>
+                </li>`
+              ).join('')}
+            </ul>` :
+            '<p class="text-gray-500">Нема најдени поврзани задачи.</p>'
+          }
+        </div>
+
+        <div class="mb-6">
+          <h4 class="text-lg font-semibold mb-2">Проверка на усогласеност со програмата</h4>
+          <div class="bg-gray-50 p-4 rounded-lg">
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-sm font-medium">Статус на усогласеност:</span>
+              <span class="px-3 py-1 rounded-full text-xs font-semibold bg-green-100 text-green-800">
+                Усогласен
+              </span>
+            </div>
+            <div class="space-y-2">
+              <div class="flex items-start space-x-2">
+                <div class="flex-shrink-0 w-2 h-2 bg-green-400 rounded-full mt-1.5"></div>
+                <p class="text-sm text-gray-700">Стандардот е усогласен со најновата наставна програма од 2024 година</p>
+              </div>
+              <div class="flex items-start space-x-2">
+                <div class="flex-shrink-0 w-2 h-2 bg-green-400 rounded-full mt-1.5"></div>
+                <p class="text-sm text-gray-700">Олимписки задачи се поврзани со стандардот според насоките за развивање математичко мајсторство</p>
+              </div>
+              <div class="flex items-start space-x-2">
+                <div class="flex-shrink-0 w-2 h-2 bg-blue-400 rounded-full mt-1.5"></div>
+                <p class="text-sm text-gray-700">Препорачано користење на Bloom's таксономија за диференцирана инструкција</p>
+              </div>
+            </div>
+            <div class="mt-3 text-xs text-gray-500">
+              Последна проверка: ${new Date().toLocaleDateString('mk-MK')}
+            </div>
+          </div>
+        </div>
+      `;
+
+      content.innerHTML = html;
+      modal.classList.remove('hidden');
+
+      // Add event listeners for new buttons
+      document.getElementById('generateWorksheetBtn')?.addEventListener('click', () => {
+        window.open(`/worksheets/Worksheet_${code}.html`, '_blank');
+      });
+
+      document.getElementById('sendToEditorBtn')?.addEventListener('click', () => {
+        window.sendToEditor(description, code);
+        closeStandardModal();
+      });
+
+      // Highlight related topics
+      highlightTopicsWithStandard(code);
+    }
+
+    // Modal close handlers with animations
+    function closeStandardModal() {
+      const modal = document.getElementById('standardModal');
+      const modalContent = document.getElementById('modalContent');
+
+      if (modalContent) {
+        // Start exit animation
+        modalContent.style.transform = 'scale(0.95)';
+        modalContent.style.opacity = '0';
+
+        setTimeout(() => {
+          modal.classList.add('hidden');
+          // Reset for next opening
+          modalContent.style.transform = 'scale(0.95)';
+          modalContent.style.opacity = '0';
+        }, 300);
+      } else {
+        modal.classList.add('hidden');
+      }
+    }
+
+    document.getElementById('closeStandardModal')?.addEventListener('click', closeStandardModal);
+    document.getElementById('closeStandardModalBottom')?.addEventListener('click', closeStandardModal);
+
+    // Enhanced modal opening with animation
+    function openStandardModalEnhanced(code, description) {
+      openStandardModal(code, description);
+
+      // Trigger entrance animation
+      const modalContent = document.getElementById('modalContent');
+      if (modalContent) {
+        // Force reflow to ensure animation starts
+        modalContent.offsetHeight;
+        modalContent.style.transform = 'scale(1)';
+        modalContent.style.opacity = '1';
+      }
+    }
+
+    // Make globally available
+    window.openStandardModal = openStandardModalEnhanced;
+
+    window.sendToEditor = function(text, context) {
+      const editorInput = document.getElementById('latex-editor-input');
+      if (editorInput) {
+        const newValue = editorInput.value + (editorInput.value ? '\n\n' : '') + `% Активност за ${context}:\n${text}`;
+        editorInput.value = newValue;
+        
+        // Trigger preview
+        editorInput.dispatchEvent(new Event('input', { bubbles: true }));
+        
+        // Scroll to editor
+        document.getElementById('lessonFormSection').scrollIntoView({ behavior: 'smooth' });
+        
+        // Visual feedback
+        const notification = document.createElement('div');
+        notification.className = 'fixed bottom-4 right-4 bg-green-600 text-white px-4 py-2 rounded-lg shadow-lg z-50 animate-bounce';
+        notification.textContent = 'Додадено во едиторот!';
+        document.body.appendChild(notification);
+        setTimeout(() => notification.remove(), 2000);
+      }
+    };
+
+    // Add micro-interactions for standards
+    function addStandardInteractions() {
+      // Add hover effects and click feedback
+      document.querySelectorAll('.border.border-gray-200.rounded-lg.p-4.hover\\:border-blue-300').forEach(standard => {
+        standard.addEventListener('mousedown', () => {
+          standard.style.transform = 'scale(0.98)';
+        });
+
+        standard.addEventListener('mouseup', () => {
+          standard.style.transform = 'scale(1)';
+        });
+
+        standard.addEventListener('mouseleave', () => {
+          standard.style.transform = 'scale(1)';
+        });
+      });
+    }
+
+    // Call when curriculum is displayed
+    const originalDisplayCurriculum = displayCurriculum;
+    window.displayCurriculum = function(grade, data) {
+      originalDisplayCurriculum(grade, data);
+      // Add interactions after curriculum is loaded
+      setTimeout(addStandardInteractions, 100);
+    };
+
+    // Phase 1: AI-Enhanced Semantic Search Implementation
+    class AISemanticSearchEngine {
+      constructor() {
+        this.searchIndex = {};
+        this.synonyms = {
+          'прости': ['прости броеви', 'prime', 'прост'],
+          'квадрати': ['квадратни', 'квадрат', 'square', 'квадратичен'],
+          'триаголник': ['триаголник', 'triangle', 'триаголници'],
+          'равенки': ['равенка', 'equation', 'equations'],
+          'линеарни': ['линеарен', 'linear', 'linearen'],
+          'системи': ['систем', 'system', 'системи равенки'],
+          'геометрија': ['геометриски', 'geometry', 'геом'],
+          'алгебра': ['алгебарски', 'algebra', 'алг'],
+          'броеви': ['број', 'number', 'цифри'],
+          'проценти': ['процент', 'percent', 'проценти'],
+          'функции': ['функција', 'function', 'functions']
+        };
+        this.macedonianCorpus = this.loadMacedonianCorpus();
+        this.buildSearchIndex();
+      }
+
+      // Load Macedonian mathematical corpus (Phase 1 data foundation)
+      loadMacedonianCorpus() {
+        return {
+          standards: nationalStandards.национални_стандарди[0].знаења_и_вештини,
+          curriculum: {
+            algebra: ['линеарни равенки', 'квадратни равенки', 'системи равенки', 'функции'],
+            geometry: ['триаголник', 'квадрат', 'правоаголник', 'круг', 'паралелограм'],
+            arithmetic: ['прости броеви', 'делители', 'множители', 'проценти', 'размери'],
+            olympiad: ['комбинаторика', 'теорија на броеви', 'нееднакости', 'геометриски трансформации']
+          },
+          teachingStrategies: {
+            problemBased: 'Проблем-базирано учење со олимписки задачи',
+            collaborative: 'Групна работа на комплексни проблеми',
+            differentiated: 'Диференцирана инструкција според ниво'
+          }
+        };
+      }
+
+      // Build search index from curriculum and standards data
+      buildSearchIndex() {
+        // Index standards
+        Object.values(nationalStandards.национални_стандарди[0].знаења_и_вештини).forEach(standard => {
+          const text = `${standard.шифра} ${standard.опис}`.toLowerCase();
+          this.addToIndex(text, { type: 'standard', id: standard.шифра, title: standard.опис });
+        });
+
+        // Index curriculum topics (would be populated from curriculum data)
+        this.searchIndex['математика'] = { type: 'subject', title: 'Математика' };
+        this.searchIndex['геометрија'] = { type: 'topic', title: 'Геометрија' };
+        this.searchIndex['алгебра'] = { type: 'topic', title: 'Алгебра' };
+      }
+
+      addToIndex(text, item) {
+        const words = text.split(/\s+/);
+        words.forEach(word => {
+          if (word.length > 2) {
+            if (!this.searchIndex[word]) {
+              this.searchIndex[word] = [];
+            }
+            this.searchIndex[word].push(item);
+          }
+        });
+      }
+
+      // Enhanced semantic search with Macedonian language processing
+      search(query) {
+        const queryLower = query.toLowerCase().trim();
+        if (!queryLower) return { results: [], suggestions: [] };
+
+        const queryWords = queryLower.split(/\s+/);
+        const expandedWords = this.expandWithSynonyms(queryWords);
+        const allWords = [...new Set([...queryWords, ...expandedWords])];
+
+        let results = [];
+        let scores = {};
+
+        // Search through index
+        allWords.forEach(word => {
+          if (this.searchIndex[word]) {
+            this.searchIndex[word].forEach(item => {
+              const key = `${item.type}_${item.id || item.title}`;
+              if (!scores[key]) {
+                scores[key] = { item, score: 0, matches: [] };
+              }
+              scores[key].score += this.calculateRelevance(word, queryWords);
+              scores[key].matches.push(word);
+            });
+          }
+        });
+
+        // Convert to results array
+        Object.values(scores).forEach(({ item, score, matches }) => {
+          results.push({
+            ...item,
+            relevanceScore: score,
+            matchedTerms: matches,
+            highlight: this.generateHighlight(item.title || item.опис, matches)
+          });
+        });
+
+        // Sort by relevance
+        results.sort((a, b) => b.relevanceScore - a.relevanceScore);
+
+        // Generate suggestions
+        const suggestions = this.generateSuggestions(queryWords);
+
+        return {
+          results: results.slice(0, 10),
+          suggestions: suggestions
+        };
+      }
+
+      expandWithSynonyms(words) {
+        let expanded = [];
+        words.forEach(word => {
+          if (this.synonyms[word]) {
+            expanded.push(...this.synonyms[word]);
+          }
+          // Add stem variations for Macedonian
+          expanded.push(...this.generateStems(word));
+        });
+        return expanded;
+      }
+
+      generateStems(word) {
+        const stems = [];
+        // Basic Macedonian stemming
+        if (word.endsWith('и')) stems.push(word.slice(0, -1));
+        if (word.endsWith('а')) stems.push(word.slice(0, -1));
+        if (word.endsWith('е')) stems.push(word.slice(0, -1));
+        if (word.endsWith('ов')) stems.push(word.slice(0, -2));
+        return stems;
+      }
+
+      calculateRelevance(word, queryWords) {
+        let score = 1;
+        if (queryWords.includes(word)) score += 3; // Exact match
+        if (word.length > 5) score += 1; // Longer words more specific
+        return score;
+      }
+
+      generateHighlight(text, matches) {
+        let highlighted = text;
+        matches.forEach(match => {
+          const regex = new RegExp(`(${match})`, 'gi');
+          highlighted = highlighted.replace(regex, '<mark class="bg-yellow-200">$1</mark>');
+        });
+        return highlighted;
+      }
+
+      generateSuggestions(queryWords) {
+        const suggestions = [];
+        const commonTerms = [
+          'прости броеви', 'квадратни равенки', 'триаголник', 'геометрија',
+          'алгебра', 'проценти', 'функции', 'систем равенки'
+        ];
+
+        queryWords.forEach(word => {
+          commonTerms.forEach(term => {
+            if (term.includes(word) && term !== word) {
+              suggestions.push(term);
+            }
+          });
+        });
+
+        return [...new Set(suggestions)].slice(0, 5);
+      }
+    }
+
+    // Recommendation Engine
+    class RecommendationEngine {
+      constructor() {
+        this.userHistory = [];
+        this.contentSimilarities = {};
+      }
+
+      // Build content similarity matrix
+      buildSimilarityMatrix() {
+        const standards = nationalStandards.национални_стандарди[0].знаења_и_вештини;
+        const standardKeys = Object.keys(standards);
+
+        standardKeys.forEach(key1 => {
+          standardKeys.forEach(key2 => {
+            if (key1 !== key2) {
+              const similarity = this.calculateContentSimilarity(
+                standards[key1].опис,
+                standards[key2].опис
+              );
+              if (similarity > 0.3) { // Similarity threshold
+                this.contentSimilarities[`${key1}_${key2}`] = similarity;
+              }
+            }
+          });
+        });
+      }
+
+      calculateContentSimilarity(text1, text2) {
+        const words1 = new Set(text1.toLowerCase().split(/\s+/));
+        const words2 = new Set(text2.toLowerCase().split(/\s+/));
+
+        const intersection = new Set([...words1].filter(x => words2.has(x)));
+        const union = new Set([...words1, ...words2]);
+
+        return intersection.size / union.size;
+      }
+
+      // Generate recommendations based on selected items
+      generateRecommendations(selectedItems, grade) {
+        const recommendations = [];
+        const gradeMappings = standardsMapping.основно_образование;
+
+        // Find similar standards
+        selectedItems.forEach(item => {
+          Object.keys(this.contentSimilarities).forEach(key => {
+            if (key.includes(item)) {
+              const [std1, std2] = key.split('_');
+              const similarStandard = std1 === item ? std2 : std1;
+
+              if (!selectedItems.includes(similarStandard)) {
+                const standard = nationalStandards.национални_стандарди[0].знаења_и_вештини[similarStandard];
+                if (standard) {
+                  recommendations.push({
+                    type: 'standard',
+                    id: similarStandard,
+                    title: standard.опис.substring(0, 100) + '...',
+                    reason: 'Сличен концепт',
+                    similarity: Math.round(this.contentSimilarities[key] * 100)
+                  });
+                }
+              }
+            }
+          });
+        });
+
+        // Add grade-appropriate Olympiad problems
+        const gradeProblems = [
+          { grade: 'grade_7', problems: ['sigma137_p1871', 'geom_triangles_01'] },
+          { grade: 'grade_8', problems: ['sigma138_1873', 'algebra_quad_01'] },
+          { grade: 'grade_9', problems: ['geometry_9_angles', 'algebra_systems_01'] }
+        ];
+
+        const gradeData = gradeProblems.find(g => g.grade === grade);
+        if (gradeData) {
+          gradeData.problems.forEach(problemId => {
+            recommendations.push({
+              type: 'olympiad',
+              id: problemId,
+              title: `Олимписки проблем ${problemId}`,
+              reason: 'Применливо за овој одделение',
+              difficulty: grade
+            });
+          });
+        }
+
+        return recommendations.slice(0, 6); // Limit to 6 recommendations
+      }
+
+      trackUserInteraction(itemId, action) {
+        this.userHistory.push({
+          itemId,
+          action,
+          timestamp: Date.now()
+        });
+      }
+    }
+
+    // Phase 1: Initialize AI-enhanced search and recommendation engines
+    const searchEngine = new AISemanticSearchEngine();
+    const recommendationEngine = new RecommendationEngine();
+    recommendationEngine.buildSimilarityMatrix();
+
+    // Search functionality
+    const searchInput = document.getElementById('semanticSearch');
+    const clearSearchBtn = document.getElementById('clearSearch');
+    const searchSuggestions = document.getElementById('searchSuggestions');
+    const suggestionTags = document.getElementById('suggestionTags');
+
+    let searchTimeout;
+
+    searchInput.addEventListener('input', (e) => {
+      const query = e.target.value.trim();
+
+      if (query.length > 1) {
+        clearTimeout(searchTimeout);
+        searchTimeout = setTimeout(() => {
+          performSearch(query);
+        }, 300);
+      } else {
+        hideSearchSuggestions();
+      }
+
+      // Show/hide clear button
+      clearSearchBtn.classList.toggle('hidden', query.length === 0);
+    });
+
+    // Phase 1: AI-powered search using transformer models
+    async function performSearch(query) {
+      try {
+        // Show loading state
+        searchInput.style.opacity = '0.7';
+
+        const response = await fetch(`${AI_API_URL}/ai-search`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            query: query,
+            context: {
+              grade: gradeSelect.value,
+              language: 'mk'
+            }
+          })
+        });
+
+        if (!response.ok) {
+          throw new Error('AI search failed');
+        }
+
+        const aiResults = await response.json();
+
+        // Show suggestions from AI
+        if (aiResults.suggestions && aiResults.suggestions.length > 0) {
+          showSearchSuggestions(aiResults.suggestions);
+        } else {
+          hideSearchSuggestions();
+        }
+
+        // Highlight matching standards/topics from AI results
+        highlightSearchResults(aiResults.results || []);
+
+        // Log AI performance
+        console.log('AI Search completed:', {
+          query,
+          resultsCount: aiResults.results?.length || 0,
+          processingTime: aiResults.processingTime,
+          modelVersion: aiResults.modelVersion
+        });
+
+      } catch (error) {
+        console.error('AI Search error:', error);
+        // Fallback to local search engine
+        const fallbackResults = searchEngine.search(query);
+
+        if (fallbackResults.suggestions.length > 0) {
+          showSearchSuggestions(fallbackResults.suggestions);
+        } else {
+          hideSearchSuggestions();
+        }
+
+        highlightSearchResults(fallbackResults.results);
+      } finally {
+        searchInput.style.opacity = '1';
+      }
+    }
+
+    function showSearchSuggestions(suggestions) {
+      suggestionTags.innerHTML = suggestions.map(suggestion =>
+        `<button class="px-3 py-1 bg-indigo-100 text-indigo-700 rounded-full text-sm hover:bg-indigo-200 transition-colors" onclick="applySuggestion('${suggestion}')">${suggestion}</button>`
+      ).join('');
+      searchSuggestions.classList.remove('hidden');
+    }
+
+    function hideSearchSuggestions() {
+      searchSuggestions.classList.add('hidden');
+    }
+
+    function applySuggestion(suggestion) {
+      searchInput.value = suggestion;
+      hideSearchSuggestions();
+      performSearch(suggestion);
+    }
+
+    clearSearchBtn.addEventListener('click', () => {
+      searchInput.value = '';
+      clearSearchBtn.classList.add('hidden');
+      hideSearchSuggestions();
+      clearSearchHighlights();
+    });
+
+    function highlightSearchResults(results) {
+      // Remove previous highlights
+      document.querySelectorAll('.search-highlight').forEach(el => {
+        el.classList.remove('search-highlight', 'ring-2', 'ring-yellow-400');
+      });
+
+      // Highlight matching standards
+      results.forEach(result => {
+        if (result.type === 'standard') {
+          const standardElement = document.querySelector(`[onclick*="${result.id}"]`);
+          if (standardElement) {
+            standardElement.classList.add('search-highlight', 'ring-2', 'ring-yellow-400');
+            standardElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }
+        }
+      });
+    }
+
+    function clearSearchHighlights() {
+      document.querySelectorAll('.search-highlight').forEach(el => {
+        el.classList.remove('search-highlight', 'ring-2', 'ring-yellow-400');
+      });
+    }
+
+    // Phase 1: AI-powered recommendations using collaborative filtering
+    async function showRecommendations(selectedItems, grade) {
+      try {
+        // Show loading state
+        const recommendationsSection = document.getElementById('recommendationsSection');
+        recommendationsSection.style.opacity = '0.7';
+
+        const response = await fetch(`${AI_API_URL}/ai-recommend`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            selectedItems: selectedItems,
+            context: {
+              grade: grade,
+              subject: 'matematika'
+            },
+            userId: 'teacher_demo', // Would be actual user ID in production
+            preferences: {
+              focus: 'mixed'
+            }
+          })
+        });
+
+        if (!response.ok) {
+          throw new Error('AI recommendation failed');
+        }
+
+        const aiResponse = await response.json();
+        const recommendations = aiResponse.recommendations || [];
+
+        if (recommendations.length > 0) {
+          const recommendationsContent = document.getElementById('recommendationsContent');
+          recommendationsContent.innerHTML = recommendations.map(rec => `
+            <div class="bg-white p-4 rounded-lg border border-gray-200 hover:shadow-md transition-all duration-200 cursor-pointer hover:scale-102" onclick="handleRecommendationClick('${rec.type}', '${rec.id}')">
+              <div class="flex items-start justify-between mb-2">
+                <div class="flex items-center">
+                  <div class="w-2 h-2 rounded-full ${rec.type === 'standard' ? 'bg-blue-400' : rec.type === 'olympiad' ? 'bg-green-400' : 'bg-purple-400'} mr-2"></div>
+                  <span class="text-xs font-medium ${rec.type === 'standard' ? 'text-blue-600' : rec.type === 'olympiad' ? 'text-green-600' : 'text-purple-600'}">
+                    ${rec.type === 'standard' ? 'Стандард' : rec.type === 'olympiad' ? 'Олимписки проблем' : 'Наставна стратегија'}
+                  </span>
+                </div>
+                <div class="flex items-center gap-1">
+                  ${rec.confidence ? `<span class="text-xs bg-green-100 text-green-700 px-2 py-1 rounded">${Math.round(rec.confidence * 100)}% сигурност</span>` : ''}
+                  ${rec.metadata?.similarity ? `<span class="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded">${rec.metadata.similarity}% сличност</span>` : ''}
+                </div>
+              </div>
+              <h4 class="font-medium text-gray-800 text-sm mb-1">${rec.title}</h4>
+              <p class="text-xs text-gray-600">${rec.reason}</p>
+              ${rec.metadata?.grade ? `<p class="text-xs text-gray-500 mt-1">Одделение: ${rec.metadata.grade.replace('grade_', '')}</p>` : ''}
+            </div>
+          `).join('');
+
+          recommendationsSection.classList.remove('hidden');
+
+          // Show personalized insights if available
+          if (aiResponse.personalizedInsights && aiResponse.personalizedInsights.length > 0) {
+            const insightsHtml = aiResponse.personalizedInsights.map(insight =>
+              `<div class="bg-blue-50 border-l-4 border-blue-400 p-3 mb-2">
+                <p class="text-sm text-blue-700">${insight}</p>
+              </div>`
+            ).join('');
+
+            recommendationsContent.insertAdjacentHTML('afterbegin', insightsHtml);
+          }
+        }
+
+        // Log AI performance
+        console.log('AI Recommendations completed:', {
+          selectedItems: selectedItems.length,
+          recommendationsCount: recommendations.length,
+          processingTime: aiResponse.processingTime,
+          modelVersion: aiResponse.modelVersion
+        });
+
+      } catch (error) {
+        console.error('AI Recommendation error:', error);
+        // Fallback to local recommendation engine
+        const recommendations = recommendationEngine.generateRecommendations(selectedItems, grade);
+
+        if (recommendations.length > 0) {
+          const recommendationsContent = document.getElementById('recommendationsContent');
+          recommendationsContent.innerHTML = recommendations.map(rec => `
+            <div class="bg-white p-4 rounded-lg border border-gray-200 hover:shadow-md transition-shadow cursor-pointer" onclick="handleRecommendationClick('${rec.type}', '${rec.id}')">
+              <div class="flex items-start justify-between mb-2">
+                <div class="flex items-center">
+                  <div class="w-2 h-2 rounded-full ${rec.type === 'standard' ? 'bg-blue-400' : 'bg-green-400'} mr-2"></div>
+                  <span class="text-xs font-medium ${rec.type === 'standard' ? 'text-blue-600' : 'text-green-600'}">
+                    ${rec.type === 'standard' ? 'Стандард' : 'Олимписки проблем'}
+                  </span>
+                </div>
+                ${rec.similarity ? `<span class="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded">${rec.similarity}% сличност</span>` : ''}
+              </div>
+              <h4 class="font-medium text-gray-800 text-sm mb-1">${rec.title}</h4>
+              <p class="text-xs text-gray-600">${rec.reason}</p>
+            </div>
+          `).join('');
+
+          document.getElementById('recommendationsSection').classList.remove('hidden');
+        }
+      } finally {
+        const recommendationsSection = document.getElementById('recommendationsSection');
+        recommendationsSection.style.opacity = '1';
+      }
+    }
+
+    function handleRecommendationClick(type, id) {
+      if (type === 'standard') {
+        // Find and click the corresponding standard
+        const standardElement = document.querySelector(`[onclick*="${id}"]`);
+        if (standardElement) {
+          standardElement.click();
+        }
+      } else if (type === 'olympiad') {
+        // Open Olympiad problem (would need implementation)
+        console.log('Open Olympiad problem:', id);
+      }
+
+      // Track user interaction
+      recommendationEngine.trackUserInteraction(id, 'clicked');
+    }
+
+    // Make functions globally available
+    window.applySuggestion = applySuggestion;
+    window.handleRecommendationClick = handleRecommendationClick;
+
+    // Enhanced topic selection to show recommendations
+    const originalSelectTopicForLesson = window.selectTopicForLesson;
+    window.selectTopicForLesson = function(topic) {
+      if (originalSelectTopicForLesson) {
+        originalSelectTopicForLesson(topic);
+      }
+
+      // Show recommendations based on selected topic
+      const selectedStandards = topic.standards || [];
+      const currentGrade = gradeSelect.value;
+
+      if (selectedStandards.length > 0) {
+        setTimeout(() => {
+          showRecommendations(selectedStandards, currentGrade);
+        }, 100);
+      }
+    };
+
+    // Add keyboard navigation for modal
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !document.getElementById('standardModal').classList.contains('hidden')) {
+        closeStandardModal();
+      }
+
+      // Close search suggestions with Escape
+      if (e.key === 'Escape' && !searchSuggestions.classList.contains('hidden')) {
+        hideSearchSuggestions();
+      }
+    });
+    }
+
+    // Call initApp when DOM is ready
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initApp);
+    } else {
+      initApp();
+    }
+  </script>
+</Layout>

@@ -1,0 +1,141 @@
+<!DOCTYPE html><html lang="mk" class="scroll-smooth"> <head><meta charset="UTF-8"><meta name="description" content="Олимписка Математика: Архива на задачи со визуелизации и педагошки објаснувања."><meta name="viewport" content="width=device-width"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="generator" content="Astro v4.16.19"><title>📜 Fermat&#39;s Last Theorem (Голема Теорема на Ферма) | Теореми | МатАрхива</title><!-- PWA Meta Tags --><meta name="theme-color" content="#4f46e5"><link rel="manifest" href="/manifest.json"><link rel="apple-touch-icon" href="/icons/icon-192x192.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="apple-mobile-web-app-title" content="Олимпијска Мат."><!-- OpenGraph / Social --><meta property="og:type" content="website"><meta property="og:title" content="📜 Fermat's Last Theorem (Голема Теорема на Ферма) | Теореми | МатАрхива"><meta property="og:description" content="Олимписка Математика: Архива на задачи со визуелизации и педагошки објаснувања."><meta property="og:image" content="/assets/images/og-image.png"><!-- Mathematical Rendering Libraries --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous"><!-- MathJax Configuration for LaTeX and MathML support --><script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><!-- Google Fonts --><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet"><script>
+			const theme = (() => {
+				if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
+					return localStorage.getItem('theme');
+				}
+				if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+					return 'dark';
+				}
+				return 'light';
+			})();
+
+			const accessibilityTheme = (() => {
+				if (typeof localStorage !== 'undefined' && localStorage.getItem('accessibilityTheme')) {
+					return localStorage.getItem('accessibilityTheme');
+				}
+				return '';
+			})();
+
+			// Apply themes
+			document.documentElement.classList.toggle('dark', theme === 'dark');
+			if (accessibilityTheme) {
+				document.documentElement.classList.add(accessibilityTheme);
+			}
+			window.localStorage.setItem('theme', theme);
+			if (accessibilityTheme) {
+				window.localStorage.setItem('accessibilityTheme', accessibilityTheme);
+			}
+		</script><link rel="stylesheet" href="/_astro/ai-grader.e5e0TFzq.css">
+<style>.content-math .katex-display{margin-top:2rem;margin-bottom:2rem;overflow-x:auto;overflow-y:hidden;border-radius:1rem;--tw-bg-opacity: 1;background-color:rgb(248 250 252 / var(--tw-bg-opacity, 1));padding-top:1rem;padding-bottom:1rem}@media (prefers-color-scheme: dark){.content-math .katex-display{background-color:#1e293b80}}
+</style><script type="module" src="/_astro/hoisted.I-lyrLDE.js"></script></head> <body class="bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 font-sans transition-colors duration-300 antialiased" data-pwa-enabled> <!-- PWA Manager Script --> <!-- PWA UI Elements --><div id="pwa-ui" class="fixed bottom-4 right-4 z-40" data-astro-cid-sfrvlhpz> <!-- Install Button (hidden by default) --> <button id="install-pwa-btn" class="hidden inline-flex items-center gap-2 px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors shadow-lg" style="display: none;" data-astro-cid-sfrvlhpz> <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" data-astro-cid-sfrvlhpz> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" data-astro-cid-sfrvlhpz></path> </svg>
+Инсталирај апликација
+</button> <!-- Online Status Indicator --> <div id="online-status" class="inline-flex items-center gap-1 px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full ml-2" data-astro-cid-sfrvlhpz> <span class="w-2 h-2 bg-green-500 rounded-full" data-astro-cid-sfrvlhpz></span>
+Online
+</div> </div>  <!-- Skip Links --> <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-blue-600 text-white px-4 py-2 rounded z-50">Skip to main content</a> <nav class="bg-white/80 dark:bg-slate-950/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 sticky top-0 z-50 no-print"> <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"> <div class="flex justify-between h-16 items-center"> <div class="flex items-center gap-3"> <a href="/" class="flex items-center gap-2 group"> <img src="/logo.svg" alt="GeoMentor Logo" class="w-10 h-10 group-hover:scale-105 transition-transform"> <div class="flex flex-col"> <span class="font-extrabold text-lg leading-none tracking-tight">МатАрхива</span> <span class="text-[10px] text-slate-500 dark:text-slate-400 font-bold uppercase tracking-widest">GeoMentor</span> <span class="text-[9px] text-slate-400 dark:text-slate-300 font-medium">Игор Богданоски</span> </div> </a> </div> <button id="mobile-menu-toggle" class="md:hidden p-2 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" aria-label="Toggle navigation menu" aria-expanded="false"> <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path> </svg> </button> <div id="nav-menu" class="hidden md:flex items-center gap-1 absolute md:relative top-full md:top-auto left-0 md:left-auto right-0 md:right-auto bg-white dark:bg-slate-950 md:bg-transparent border-t md:border-t-0 border-slate-200 dark:border-slate-800 md:border-none p-4 md:p-0 shadow-lg md:shadow-none"> <a href="/" class="px-4 py-2 rounded-xl text-sm font-bold hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">Архива</a> <a href="/skills" class="px-4 py-2 rounded-xl text-sm font-bold hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">Вештини</a> <a href="/theorems" class="px-4 py-2 rounded-xl text-sm font-bold hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">Теореми</a> <a href="/author" class="px-4 py-2 rounded-xl text-sm font-bold hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">Автор</a> <a href="/teachers" class="px-4 py-2 rounded-xl text-sm font-bold bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400">Наставници</a> <div class="w-px h-6 bg-slate-200 dark:bg-slate-800 mx-2"></div> <button id="theme-toggle" class="p-2 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" aria-label="Toggle dark mode"> <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg> <svg id="theme-toggle-light-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 110 2 1 1 0 010-2zm-7-4a1 1 0 110-2h1a1 1 0 110 2H3zm.464-4.95a1 1 0 111.414-1.414l.707.707a1 1 0 01-1.414 1.414l-.707-.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 100 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg> </button> <select id="accessibility-theme-select" class="ml-2 p-1 text-sm rounded border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100" aria-label="Select accessibility theme"> <option value="">Standard</option> <option value="theme-high-contrast">High Contrast</option> <option value="theme-colorblind-rg">Colorblind RG</option> <option value="theme-colorblind-by">Colorblind BY</option> </select> </div> </div> </div> </nav> <main id="main-content" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 min-h-[calc(100vh-160px)]">  <div class="max-w-4xl mx-auto px-4 py-8"> <nav class="flex mb-8 text-sm font-medium text-slate-500 gap-2 items-center"> <a href="/" class="hover:text-blue-600 transition-colors">Архива</a> <span>/</span> <a href="/theorems" class="hover:text-blue-600 transition-colors">Теореми</a> <span>/</span> <span class="text-slate-900 dark:text-slate-100">📜 Fermat&#39;s Last Theorem (Голема Теорема на Ферма)</span> </nav> <article class="bg-white dark:bg-slate-900 rounded-[3rem] border border-slate-100 dark:border-slate-800 shadow-xl overflow-hidden"> <div class="p-10 border-b border-slate-50 dark:border-slate-800 bg-gradient-to-br from-white to-slate-50/50 dark:from-slate-900 dark:to-slate-800/50"> <h1 class="text-4xl font-black text-slate-900 dark:text-white leading-tight"> 📜 Fermat&#39;s Last Theorem (Голема Теорема на Ферма) </h1> </div> <!-- Enhanced pedagogical content for specific theorems -->    <div class="p-10 prose prose-slate dark:prose-invert prose-lg max-w-none content-math"># 📜 Fermat's Last Theorem (Голема Теорема на Ферма)
+
+## 💡 Дефиниција
+Не постојат три **позитивни цели броеви** <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi><mo separator="true">,</mo><mi>b</mi><mo separator="true">,</mo><mi>c</mi></mrow><annotation encoding="application/x-tex">a, b, c</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord mathnormal">a</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">b</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">c</span></span></span></span> кои ја задоволуваат равенката:
+
+<span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msup><mi>a</mi><mi>n</mi></msup><mo>+</mo><msup><mi>b</mi><mi>n</mi></msup><mo>=</mo><msup><mi>c</mi><mi>n</mi></msup></mrow><annotation encoding="application/x-tex">a^n + b^n = c^n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7977em;vertical-align:-0.0833em;"></span><span class="mord"><span class="mord mathnormal">a</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7144em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">n</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.7144em;"></span><span class="mord"><span class="mord mathnormal">b</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7144em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">n</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.7144em;"></span><span class="mord"><span class="mord mathnormal">c</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7144em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">n</span></span></span></span></span></span></span></span></span></span></span></span>
+
+за било кој цел број <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>&gt;</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">n &gt; 2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.5782em;vertical-align:-0.0391em;"></span><span class="mord mathnormal">n</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">&gt;</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">2</span></span></span></span>.
+
+---
+
+## 🧠 Историја и Интуиција
+*   За <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>=</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">n=2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">n</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">2</span></span></span></span>, ова е Питагоровата теорема (<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>a</mi><mn>2</mn></msup><mo>+</mo><msup><mi>b</mi><mn>2</mn></msup><mo>=</mo><msup><mi>c</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">a^2+b^2=c^2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8974em;vertical-align:-0.0833em;"></span><span class="mord"><span class="mord mathnormal">a</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord mathnormal">b</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord mathnormal">c</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span>), која има бесконечно многу решенија (Питагорови тројки: 3,4,5; 5,12,13...).
+*   Ферма во 1637 напишал на маргината на книга: *"Открив навистина прекрасен доказ за ова, но маргината е претесна за да го собере."*
+*   Ова останало недокажано 358 години!
+*   Докажана е конечно во 1994 од **Andrew Wiles**, користејќи модерна математика (елиптички криви и модуларни форми) која не постоела во времето на Ферма.
+
+---
+
+## 📝 Зошто е ова важно?
+Иако самата теорема кажува што **не може** да се направи, обидите да се докаже доведоа до развој на цели нови гранки во математиката:
+1.  **Алгебарска теорија на броеви:** Идеали, прстени.
+2.  **Теорија на групи и Галоа теорија.**
+3.  **Модуларност на елиптички криви.**
+
+---
+
+## 🛠 Каде се користи (во Олимпијади)?
+На натпревари, **не се бара да ја докажувате**. Се користи како факт.
+*   Ако видите равенка од типот <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>x</mi><mi>n</mi></msup><mo>+</mo><msup><mi>y</mi><mi>n</mi></msup><mo>=</mo><msup><mi>z</mi><mi>n</mi></msup></mrow><annotation encoding="application/x-tex">x^n + y^n = z^n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7477em;vertical-align:-0.0833em;"></span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.6644em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">n</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8588em;vertical-align:-0.1944em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">y</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.6644em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">n</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6644em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.04398em;">z</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.6644em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">n</span></span></span></span></span></span></span></span></span></span></span> каде <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>≥</mo><mn>3</mn></mrow><annotation encoding="application/x-tex">n \ge 3</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7719em;vertical-align:-0.136em;"></span><span class="mord mathnormal">n</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">≥</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">3</span></span></span></span>, веднаш знаете дека нема решенија во природни броеви.
+*   Често се користи за докажување дека некои Диофантови равенки немаат решение.
+*   **Специјален случај <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>=</mo><mn>4</mn></mrow><annotation encoding="application/x-tex">n=4</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">n</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">4</span></span></span></span>:** Често се докажува елементарно со методот на "бесконечно спуштање" (Infinite Descent), кој го измислил самиот Ферма.
+</div> <!-- Related problems section -->  </article> </div>  </main> <footer class="bg-white dark:bg-slate-950 border-t border-slate-200 dark:border-slate-800 py-12 no-print"> <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"> <div class="grid grid-cols-1 md:grid-cols-3 gap-10"> <div> <div class="flex items-center gap-2 mb-4"> <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center text-white font-bold text-sm italic">M</div> <span class="font-bold text-lg italic">МатАрхива</span> </div> <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">
+Платформа за олимписка математика посветена на квалитетни визуелизации и детални решенија за сите ученици.
+</p> </div> <div> <h3 class="font-bold mb-4">Брзи линкови</h3> <ul class="space-y-2 text-sm text-slate-500 dark:text-slate-400"> <li><a href="/" class="hover:text-blue-600 transition-colors">Архива на задачи</a></li> <li><a href="/teachers" class="hover:text-blue-600 transition-colors">За наставници</a></li> <li><a href="/teachers/lesson-planner" class="hover:text-blue-600 transition-colors">Сценарија за час (AI)</a></li> <li><a href="/worksheet-library" class="hover:text-blue-600 transition-colors">Работни листови</a></li> </ul> </div> <div> <h3 class="font-bold mb-4">Контакт</h3> <p class="text-sm text-slate-500 dark:text-slate-400">
+Имате предлог или задача? Контактирајте го Игор Богданоски преку нашето репозиториум на GitHub.
+</p> </div> </div> <div class="mt-12 pt-8 border-t border-slate-100 dark:border-slate-900 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-slate-400 uppercase tracking-widest font-bold"> <div class="flex flex-col items-center md:items-start gap-1"> <span>&copy; 2026 GeoMentor</span> <span class="text-[8px] normal-case font-normal">Игор Богданоски</span> </div> <div class="flex gap-6"> <a href="#" class="hover:text-slate-600">Privacy</a> <a href="#" class="hover:text-slate-600">Terms</a> <a href="https://github.com/igorbogdanoski/olympiad-math-archive" class="hover:text-slate-600">GitHub</a> </div> </div> </div> </footer> <script>
+			const themeToggleBtn = document.getElementById('theme-toggle');
+			const darkIcon = document.getElementById('theme-toggle-dark-icon');
+			const lightIcon = document.getElementById('theme-toggle-light-icon');
+			const accessibilitySelect = document.getElementById('accessibility-theme-select');
+
+			function updateIcons() {
+				const isDark = document.documentElement.classList.contains('dark');
+				if (isDark) {
+					darkIcon.classList.add('hidden');
+					lightIcon.classList.remove('hidden');
+				} else {
+					darkIcon.classList.remove('hidden');
+					lightIcon.classList.add('hidden');
+				}
+			}
+
+			function applyAccessibilityTheme(themeClass) {
+				// Remove previous accessibility themes
+				document.documentElement.classList.remove('theme-high-contrast', 'theme-colorblind-rg', 'theme-colorblind-by');
+				if (themeClass) {
+					document.documentElement.classList.add(themeClass);
+				}
+			}
+
+			// Initial states
+			updateIcons();
+			if (accessibilitySelect) {
+				accessibilitySelect.value = localStorage.getItem('accessibilityTheme') || '';
+			}
+
+			themeToggleBtn.addEventListener('click', () => {
+				document.documentElement.classList.toggle('dark');
+				const isDark = document.documentElement.classList.contains('dark');
+				localStorage.setItem('theme', isDark ? 'dark' : 'light');
+				updateIcons();
+			});
+
+			if (accessibilitySelect) {
+				accessibilitySelect.addEventListener('change', (e) => {
+					const selectedTheme = e.target.value;
+					applyAccessibilityTheme(selectedTheme);
+					localStorage.setItem('accessibilityTheme', selectedTheme);
+				});
+			}
+
+			// Mobile menu toggle
+			const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+			const navMenu = document.getElementById('nav-menu');
+			if (mobileMenuToggle && navMenu) {
+				mobileMenuToggle.addEventListener('click', () => {
+					const isExpanded = navMenu.classList.toggle('hidden');
+					mobileMenuToggle.setAttribute('aria-expanded', !isExpanded);
+				});
+
+				// Close on outside click or escape
+				document.addEventListener('click', (e) => {
+					if (!navMenu.contains(e.target) && !mobileMenuToggle.contains(e.target)) {
+						navMenu.classList.add('hidden');
+						mobileMenuToggle.setAttribute('aria-expanded', 'false');
+					}
+				});
+
+				document.addEventListener('keydown', (e) => {
+					if (e.key === 'Escape' && !navMenu.classList.contains('hidden')) {
+						navMenu.classList.add('hidden');
+						mobileMenuToggle.setAttribute('aria-expanded', 'false');
+						mobileMenuToggle.focus();
+					}
+				});
+			}
+		</script> </body> </html> 

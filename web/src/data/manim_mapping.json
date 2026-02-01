@@ -1,0 +1,516 @@
+{
+  "grade_6": [
+    {
+      "filename": "manim_2022_mun_g6_3.py",
+      "title": "2022 Mun G6 3",
+      "topic": "general"
+    }
+  ],
+  "grade_8": [
+    {
+      "filename": "manim_2022_mun_g8_12.py",
+      "title": "2022 Mun G8 12",
+      "topic": "general"
+    },
+    {
+      "filename": "manim_geom_8_2015_square.py",
+      "title": "Geom 8 2015 Square",
+      "topic": "geometry"
+    },
+    {
+      "filename": "manim_geom_8_2018_centroid_diag.py",
+      "title": "Geom 8 2018 Centroid Diag",
+      "topic": "geometry"
+    },
+    {
+      "filename": "manim_geom_8_2018_para_line.py",
+      "title": "Geom 8 2018 Para Line",
+      "topic": "geometry"
+    },
+    {
+      "filename": "manim_geom_8_2018_rect.py",
+      "title": "Geom 8 2018 Rect",
+      "topic": "geometry"
+    },
+    {
+      "filename": "manim_geom_8_2018_trap.py",
+      "title": "Geom 8 2018 Trap",
+      "topic": "geometry"
+    },
+    {
+      "filename": "manim_geom_8_viviani_proof.py",
+      "title": "Geom 8 Viviani Proof",
+      "topic": "geometry"
+    }
+  ],
+  "grade_9": [
+    {
+      "filename": "manim_2022_mun_g9_10.py",
+      "title": "2022 Mun G9 10",
+      "topic": "general"
+    },
+    {
+      "filename": "manim_2022_mun_g9_12.py",
+      "title": "2022 Mun G9 12",
+      "topic": "general"
+    },
+    {
+      "filename": "manim_2022_mun_g9_14.py",
+      "title": "2022 Mun G9 14",
+      "topic": "general"
+    },
+    {
+      "filename": "manim_2022_mun_g9_3.py",
+      "title": "2022 Mun G9 3",
+      "topic": "general"
+    },
+    {
+      "filename": "manim_2022_mun_g9_5.py",
+      "title": "2022 Mun G9 5",
+      "topic": "general"
+    },
+    {
+      "filename": "manim_2022_mun_g9_6.py",
+      "title": "2022 Mun G9 6",
+      "topic": "general"
+    },
+    {
+      "filename": "manim_2022_mun_g9_8.py",
+      "title": "2022 Mun G9 8",
+      "topic": "general"
+    },
+    {
+      "filename": "manim_2023_mun_g9_2.py",
+      "title": "2023 Mun G9 2",
+      "topic": "general"
+    },
+    {
+      "filename": "manim_2023_mun_g9_4.py",
+      "title": "2023 Mun G9 4",
+      "topic": "general"
+    },
+    {
+      "filename": "manim_geom_9_2015_iso_angle.py",
+      "title": "Geom 9 2015 Iso Angle",
+      "topic": "geometry"
+    },
+    {
+      "filename": "manim_geom_9_2018_cm.py",
+      "title": "Geom 9 2018 Cm",
+      "topic": "geometry"
+    },
+    {
+      "filename": "manim_geom_9_area_height.py",
+      "title": "Geom 9 Area Height",
+      "topic": "geometry"
+    },
+    {
+      "filename": "manim_geom_9_centroid_plane_dist.py",
+      "title": "Geom 9 Centroid Plane Dist",
+      "topic": "geometry"
+    },
+    {
+      "filename": "manim_geom_9_construct_perp_axcy.py",
+      "title": "Geom 9 Construct Perp Axcy",
+      "topic": "geometry"
+    },
+    {
+      "filename": "manim_geom_9_contact_tri_sides.py",
+      "title": "Geom 9 Contact Tri Sides",
+      "topic": "geometry"
+    },
+    {
+      "filename": "manim_geom_9_hypot_ratio_mid_circle.py",
+      "title": "Geom 9 Hypot Ratio Mid Circle",
+      "topic": "geometry"
+    },
+    {
+      "filename": "manim_geom_9_incenter_intersect.py",
+      "title": "Geom 9 Incenter Intersect",
+      "topic": "geometry"
+    },
+    {
+      "filename": "manim_geom_9_k1_k2_incenter_proof.py",
+      "title": "Geom 9 K1 K2 Incenter Proof",
+      "topic": "geometry"
+    },
+    {
+      "filename": "manim_geom_9_leg_ratio_circles.py",
+      "title": "Geom 9 Leg Ratio Circles",
+      "topic": "geometry"
+    },
+    {
+      "filename": "manim_geom_9_midpoints_parallelogram.py",
+      "title": "Geom 9 Midpoints Parallelogram",
+      "topic": "geometry"
+    },
+    {
+      "filename": "manim_geom_9_midpoint_tangent.py",
+      "title": "Geom 9 Midpoint Tangent",
+      "topic": "geometry"
+    },
+    {
+      "filename": "manim_geom_9_para_area_ratio.py",
+      "title": "Geom 9 Para Area Ratio",
+      "topic": "geometry"
+    },
+    {
+      "filename": "manim_geom_9_pentagon_incenter.py",
+      "title": "Geom 9 Pentagon Incenter",
+      "topic": "geometry"
+    },
+    {
+      "filename": "manim_geom_9_quad_diag_equal_angles.py",
+      "title": "Geom 9 Quad Diag Equal Angles",
+      "topic": "geometry"
+    },
+    {
+      "filename": "manim_geom_9_quad_parallel_proof.py",
+      "title": "Geom 9 Quad Parallel Proof",
+      "topic": "geometry"
+    },
+    {
+      "filename": "manim_geom_9_rect_proj_diff.py",
+      "title": "Geom 9 Rect Proj Diff",
+      "topic": "geometry"
+    },
+    {
+      "filename": "manim_geom_9_right_tri_perimeter.py",
+      "title": "Geom 9 Right Tri Perimeter",
+      "topic": "geometry"
+    },
+    {
+      "filename": "manim_geom_9_sum_altitudes.py",
+      "title": "Geom 9 Sum Altitudes",
+      "topic": "geometry"
+    },
+    {
+      "filename": "manim_geom_9_symm_point_circumcircle.py",
+      "title": "Geom 9 Symm Point Circumcircle",
+      "topic": "geometry"
+    },
+    {
+      "filename": "manim_geom_9_touching_circles_tangent.py",
+      "title": "Geom 9 Touching Circles Tangent",
+      "topic": "geometry"
+    },
+    {
+      "filename": "manim_geom_9_trap_perp_diag.py",
+      "title": "Geom 9 Trap Perp Diag",
+      "topic": "geometry"
+    },
+    {
+      "filename": "manim_geom_9_tri_ab_mc_proof.py",
+      "title": "Geom 9 Tri Ab Mc Proof",
+      "topic": "geometry"
+    },
+    {
+      "filename": "manim_geom_9_tri_angle_45_60.py",
+      "title": "Geom 9 Tri Angle 45 60",
+      "topic": "geometry"
+    }
+  ],
+  "grade_10": [
+    {
+      "filename": "manim_2022_mun_y1_10b.py",
+      "title": "2022 Mun Y1 10B",
+      "topic": "general"
+    },
+    {
+      "filename": "manim_2022_mun_y1_11b.py",
+      "title": "2022 Mun Y1 11B",
+      "topic": "general"
+    },
+    {
+      "filename": "manim_2022_mun_y1_12a.py",
+      "title": "2022 Mun Y1 12A",
+      "topic": "general"
+    },
+    {
+      "filename": "manim_2022_mun_y1_15a.py",
+      "title": "2022 Mun Y1 15A",
+      "topic": "general"
+    },
+    {
+      "filename": "manim_2022_mun_y1_17a.py",
+      "title": "2022 Mun Y1 17A",
+      "topic": "general"
+    },
+    {
+      "filename": "manim_2022_mun_y1_18b.py",
+      "title": "2022 Mun Y1 18B",
+      "topic": "general"
+    },
+    {
+      "filename": "manim_2022_mun_y1_19a.py",
+      "title": "2022 Mun Y1 19A",
+      "topic": "general"
+    },
+    {
+      "filename": "manim_2022_mun_y1_19b.py",
+      "title": "2022 Mun Y1 19B",
+      "topic": "general"
+    },
+    {
+      "filename": "manim_2022_mun_y1_20b.py",
+      "title": "2022 Mun Y1 20B",
+      "topic": "general"
+    },
+    {
+      "filename": "manim_2022_mun_y1_3a.py",
+      "title": "2022 Mun Y1 3A",
+      "topic": "general"
+    },
+    {
+      "filename": "manim_2022_mun_y1_3b.py",
+      "title": "2022 Mun Y1 3B",
+      "topic": "general"
+    },
+    {
+      "filename": "manim_2022_mun_y1_6a.py",
+      "title": "2022 Mun Y1 6A",
+      "topic": "general"
+    },
+    {
+      "filename": "manim_sigma139_y1_p1.py",
+      "title": "Sigma139 Y1 P1",
+      "topic": "general"
+    },
+    {
+      "filename": "manim_sigma139_y1_p2.py",
+      "title": "Sigma139 Y1 P2",
+      "topic": "general"
+    },
+    {
+      "filename": "manim_sigma139_y1_p3.py",
+      "title": "Sigma139 Y1 P3",
+      "topic": "general"
+    },
+    {
+      "filename": "manim_sigma139_y1_p4.py",
+      "title": "Sigma139 Y1 P4",
+      "topic": "general"
+    }
+  ],
+  "grade_11": [
+    {
+      "filename": "manim_2022_mun_y2_19b.py",
+      "title": "2022 Mun Y2 19B",
+      "topic": "general"
+    },
+    {
+      "filename": "manim_sigma139_y2_p1.py",
+      "title": "Sigma139 Y2 P1",
+      "topic": "general"
+    }
+  ],
+  "unassigned": [
+    {
+      "filename": "manim_classic_theorem_centroid_proof.py",
+      "title": "Classic Theorem Centroid Proof",
+      "topic": "geometry"
+    },
+    {
+      "filename": "manim_cnt92_olympiad_14.py",
+      "title": "Cnt92 Olympiad 14",
+      "topic": "general"
+    },
+    {
+      "filename": "manim_cnt92_olympiad_24.py",
+      "title": "Cnt92 Olympiad 24",
+      "topic": "general"
+    },
+    {
+      "filename": "manim_cnt92_v2_08.py",
+      "title": "Cnt92 V2 08",
+      "topic": "general"
+    },
+    {
+      "filename": "manim_cnt92_v2_24.py",
+      "title": "Cnt92 V2 24",
+      "topic": "general"
+    },
+    {
+      "filename": "manim_copernicus_cat2_01.py",
+      "title": "Copernicus Cat2 01",
+      "topic": "general"
+    },
+    {
+      "filename": "manim_fix_1864.py",
+      "title": "Fix 1864",
+      "topic": "general"
+    },
+    {
+      "filename": "manim_fix_1867.py",
+      "title": "Fix 1867",
+      "topic": "general"
+    },
+    {
+      "filename": "manim_fix_1868.py",
+      "title": "Fix 1868",
+      "topic": "general"
+    },
+    {
+      "filename": "manim_geom_angle_hybrid_04.py",
+      "title": "Geom Angle Hybrid 04",
+      "topic": "geometry"
+    },
+    {
+      "filename": "manim_geom_angle_incenter_01.py",
+      "title": "Geom Angle Incenter 01",
+      "topic": "geometry"
+    },
+    {
+      "filename": "manim_geom_angle_orthocenter_02.py",
+      "title": "Geom Angle Orthocenter 02",
+      "topic": "geometry"
+    },
+    {
+      "filename": "manim_geom_quad_symmetry_05.py",
+      "title": "Geom Quad Symmetry 05",
+      "topic": "geometry"
+    },
+    {
+      "filename": "manim_geom_tri_bisector_diff_11.py",
+      "title": "Geom Tri Bisector Diff 11",
+      "topic": "geometry"
+    },
+    {
+      "filename": "manim_geo_quad_bisectors.py",
+      "title": "Geo Quad Bisectors",
+      "topic": "geometry"
+    },
+    {
+      "filename": "manim_geo_right_triangle_radii.py",
+      "title": "Geo Right Triangle Radii",
+      "topic": "geometry"
+    },
+    {
+      "filename": "manim_geo_test_01.py",
+      "title": "Geo Test 01",
+      "topic": "general"
+    },
+    {
+      "filename": "manim_geo_two_circles_incenter.py",
+      "title": "Geo Two Circles Incenter",
+      "topic": "geometry"
+    },
+    {
+      "filename": "manim_gpu_pipeline.py",
+      "title": "Gpu Pipeline",
+      "topic": "general"
+    },
+    {
+      "filename": "manim_numerus_4287.py",
+      "title": "Numerus 4287",
+      "topic": "number_theory"
+    },
+    {
+      "filename": "manim_numerus_4331.py",
+      "title": "Numerus 4331",
+      "topic": "number_theory"
+    },
+    {
+      "filename": "manim_numerus_4332.py",
+      "title": "Numerus 4332",
+      "topic": "number_theory"
+    },
+    {
+      "filename": "manim_numerus_4367.py",
+      "title": "Numerus 4367",
+      "topic": "number_theory"
+    },
+    {
+      "filename": "manim_numerus_4375.py",
+      "title": "Numerus 4375",
+      "topic": "number_theory"
+    },
+    {
+      "filename": "manim_numerus_4412.py",
+      "title": "Numerus 4412",
+      "topic": "number_theory"
+    },
+    {
+      "filename": "manim_numerus_4416.py",
+      "title": "Numerus 4416",
+      "topic": "number_theory"
+    },
+    {
+      "filename": "manim_numerus_4419.py",
+      "title": "Numerus 4419",
+      "topic": "number_theory"
+    },
+    {
+      "filename": "manim_numerus_4420.py",
+      "title": "Numerus 4420",
+      "topic": "number_theory"
+    },
+    {
+      "filename": "manim_numerus_4421.py",
+      "title": "Numerus 4421",
+      "topic": "number_theory"
+    },
+    {
+      "filename": "manim_numerus_l1_2025_07.py",
+      "title": "Numerus L1 2025 07",
+      "topic": "number_theory"
+    },
+    {
+      "filename": "manim_numerus_l2_2025_01.py",
+      "title": "Numerus L2 2025 01",
+      "topic": "number_theory"
+    },
+    {
+      "filename": "manim_para_diag_centroid_07.py",
+      "title": "Para Diag Centroid 07",
+      "topic": "geometry"
+    },
+    {
+      "filename": "manim_para_normals_sum_06.py",
+      "title": "Para Normals Sum 06",
+      "topic": "general"
+    },
+    {
+      "filename": "manim_regional_2022_geo_01.py",
+      "title": "Regional 2022 Geo 01",
+      "topic": "general"
+    },
+    {
+      "filename": "manim_right_tri_angles_10.py",
+      "title": "Right Tri Angles 10",
+      "topic": "geometry"
+    },
+    {
+      "filename": "manim_sigma137_p1854.py",
+      "title": "Sigma137 P1854",
+      "topic": "general"
+    },
+    {
+      "filename": "manim_sigma_adv_04.py",
+      "title": "Sigma Adv 04",
+      "topic": "general"
+    },
+    {
+      "filename": "manim_templates.py",
+      "title": "Templates",
+      "topic": "general"
+    },
+    {
+      "filename": "manim_tri_altitudes_perimeter_09.py",
+      "title": "Tri Altitudes Perimeter 09",
+      "topic": "geometry"
+    },
+    {
+      "filename": "manim_utils.py",
+      "title": "Utils",
+      "topic": "general"
+    }
+  ],
+  "grade_7": [
+    {
+      "filename": "manim_reg_2015_7_2.py",
+      "title": "Reg 2015 7 2",
+      "topic": "general"
+    }
+  ]
+}

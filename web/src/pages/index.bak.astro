@@ -1,0 +1,1084 @@
+---
+import Layout from '../layouts/Layout.astro';
+import MathQuote from '../components/MathQuote.astro';
+import RoleSelector from '../components/RoleSelector.astro';
+import CurriculumViewer from '../components/CurriculumViewer.svelte';
+import problems from '../data/problems.json';
+
+// Екстракција на уникатни вредности за филтри
+const grades = [...new Set(problems.map(p => p.grade))]
+  .filter(g => g && g !== 'N/A')
+  .sort((a, b) => parseInt(a) - parseInt(b));
+const categories = [...new Set(problems.map(p => p.category))]
+  .filter(c => c && c !== 'N/A')
+  .sort();
+
+const cleanBody = (text: string) => {
+  if (!text) return "";
+  return text
+    .split('##')[0] // Земи го само текстот пред првиот поднаслов
+    .replace(/\[.*?\]\(.*?\)/g, '') // Избриши ги сите Markdown линкови
+    .replace(/[\$\#\*\_]/g, '') // Избриши ги специјалните Markdown знаци
+    .replace(/\n/g, ' ') // Претвори ги новите редови во празно место
+    .trim()
+    .slice(0, 120) + '...';
+};
+
+const getDifficultyColor = (diff: number) => {
+  if (diff <= 3) return 'bg-emerald-500';
+  if (diff <= 7) return 'bg-amber-500';
+  return 'bg-rose-500';
+};
+---
+
+<Layout title="МатАрхива | Дигитална библиотека за олимпијци">
+	<!-- Hero Section -->
+	<div class="relative mb-16 p-12 md:p-20 rounded-[3rem] bg-slate-950 overflow-hidden shadow-2xl border border-white/10 no-print">
+		<div class="absolute top-0 right-0 w-full h-full opacity-20 pointer-events-none">
+			<div class="absolute top-[-10%] right-[-10%] w-[50%] h-[50%] bg-blue-600 rounded-full blur-[120px]"></div>
+			<div class="absolute bottom-[-10%] left-[-10%] w-[40%] h-[40%] bg-indigo-600 rounded-full blur-[100px]"></div>
+		</div>
+
+		<!-- Mathematical Illustration -->
+		<div class="absolute top-1/2 right-8 transform -translate-y-1/2 opacity-90 pointer-events-none z-10">
+			<svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" class="math-animation">
+				<circle cx="100" cy="100" r="80" stroke="url(#gradient)" stroke-width="2" fill="none" class="outer-circle"/>
+				<circle cx="100" cy="100" r="60" stroke="url(#gradient)" stroke-width="1" fill="none" class="middle-circle"/>
+				<circle cx="100" cy="100" r="40" stroke="url(#gradient)" stroke-width="1" fill="none" class="inner-circle"/>
+				<circle cx="100" cy="100" r="20" stroke="url(#gradient)" stroke-width="1" fill="none" class="center-circle"/>
+				<path d="M100 20 L100 180 M20 100 L180 100" stroke="url(#gradient)" stroke-width="1" class="axes"/>
+				<path d="M65 65 L135 135 M135 65 L65 135" stroke="url(#gradient)" stroke-width="1" class="diagonals"/>
+				<text x="95" y="110" font-family="serif" font-size="16" fill="url(#gradient)" text-anchor="middle" class="pi-symbol">π</text>
+				<text x="110" y="95" font-family="serif" font-size="12" fill="url(#gradient)" class="pi-exp">2</text>
+				<defs>
+					<linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+						<stop offset="0%" style="stop-color:#3b82f6;stop-opacity:1" />
+						<stop offset="100%" style="stop-color:#8b5cf6;stop-opacity:1" />
+					</linearGradient>
+				</defs>
+			</svg>
+		</div>
+		
+		<div class="relative z-10 max-w-5xl mx-auto text-center">
+			<div class="flex justify-center items-center gap-3 mb-8">
+				<span class="inline-block px-4 py-1.5 rounded-full bg-blue-500/10 text-blue-400 text-xs font-black uppercase tracking-[0.2em] border border-blue-500/20 backdrop-blur-md">
+					🚀 Дигитален мост: Курикулум → Олимпијада
+				</span>
+			</div>
+
+			<h1 class="text-5xl md:text-7xl font-black text-white mb-8 leading-[1.1] tracking-tight">
+				Твоето патување до <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-400">математичко мајсторство</span>
+			</h1>
+
+			<p class="text-slate-400 text-xl mb-12 leading-relaxed max-w-3xl mx-auto font-medium">
+				Единствена платформа која ги поврзува лекциите од училиште со предизвиците од олимпијадите преку <span class="text-white">AI анимации</span> и <span class="text-white">интелигентни ресурси</span>.
+			</p>
+
+			<!-- Curriculum Quick Access -->
+			<div class="mb-16">
+				<div class="text-[10px] font-black text-slate-500 uppercase tracking-[0.3em] mb-6">Избери твој степен</div>
+				<div class="flex flex-wrap justify-center gap-3">
+					{[
+						{ label: "1-3 одд", icon: "🌱", color: "from-emerald-500/20 to-emerald-600/20", border: "border-emerald-500/30", text: "text-emerald-400", grades: ["I", "II", "III"] },
+						{ label: "4-6 одд", icon: "🌿", color: "from-blue-500/20 to-blue-600/20", border: "border-blue-500/30", text: "text-blue-400", grades: ["IV", "V", "VI"] },
+						{ label: "7-9 одд", icon: "🌳", color: "from-indigo-500/20 to-indigo-600/20", border: "border-indigo-500/30", text: "text-indigo-400", grades: ["VII", "VIII", "IX"] },
+						{ label: "Средно", icon: "🏔️", color: "from-purple-500/20 to-purple-600/20", border: "border-purple-500/30", text: "text-purple-400", grades: ["HighSchool_1", "HighSchool_2", "HighSchool_3", "HighSchool_4"] }
+					].map(stage => (
+						<button class="stage-filter group flex items-center gap-3 px-6 py-4 rounded-2xl bg-gradient-to-br border backdrop-blur-xl transition-all hover:scale-105 active:scale-95" 
+								class:list={[stage.color, stage.border]}
+								data-grades={JSON.stringify(stage.grades)}>
+							<span class="text-xl">{stage.icon}</span>
+							<span class={`font-bold ${stage.text}`}>{stage.label}</span>
+						</button>
+					))}
+				</div>
+			</div>
+			
+			<!-- Role Entry Points -->
+			<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
+				<a href="/students" class="group p-8 rounded-3xl bg-white/5 border border-white/10 backdrop-blur-xl hover:bg-blue-600/10 hover:border-blue-500/30 transition-all text-left relative overflow-hidden">
+					<div class="absolute top-0 right-0 w-24 h-24 bg-blue-600/10 rounded-full blur-3xl -mr-12 -mt-12 transition-all group-hover:bg-blue-600/20"></div>
+					<div class="w-12 h-12 bg-blue-500/20 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform border border-blue-500/20">
+						<span class="text-2xl">👩‍🎓</span>
+					</div>
+					<h3 class="text-xl font-bold text-white mb-2">Интерактивно Учење</h3>
+					<p class="text-slate-400 text-sm leading-relaxed">Истражувај го светот на математиката низ визуелни докази и чекор-по-чекор објаснувања.</p>
+				</a>
+
+				<a href="/teachers" class="group p-8 rounded-3xl bg-white/5 border border-white/10 backdrop-blur-xl hover:bg-indigo-600/10 hover:border-indigo-500/30 transition-all text-left relative overflow-hidden">
+					<div class="absolute top-0 right-0 w-24 h-24 bg-indigo-600/10 rounded-full blur-3xl -mr-12 -mt-12 transition-all group-hover:bg-indigo-600/20"></div>
+					<div class="w-12 h-12 bg-indigo-500/20 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform border border-indigo-500/20">
+						<span class="text-2xl">👨‍🏫</span>
+					</div>
+					<h3 class="text-xl font-bold text-white mb-2">Наставни Ресурси</h3>
+					<p class="text-slate-400 text-sm leading-relaxed">Генерирај персонализирани наставни листови и AI анимации за твоите предавања.</p>
+				</a>
+
+				<a href="/curriculum-planner" class="group p-8 rounded-3xl bg-white/5 border border-white/10 backdrop-blur-xl hover:bg-emerald-600/10 hover:border-emerald-500/30 transition-all text-left relative overflow-hidden">
+					<div class="absolute top-0 right-0 w-24 h-24 bg-emerald-600/10 rounded-full blur-3xl -mr-12 -mt-12 transition-all group-hover:bg-emerald-600/20"></div>
+					<div class="w-12 h-12 bg-emerald-500/20 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform border border-emerald-500/20">
+						<span class="text-2xl">📋</span>
+					</div>
+					<h3 class="text-xl font-bold text-white mb-2">Програма 1-12</h3>
+					<p class="text-slate-400 text-sm leading-relaxed">Целосно мапирана национална програма со директни линкови до олимписки задачи.</p>
+				</a>
+			</div>
+
+			<div class="flex flex-col sm:flex-row gap-4 max-w-2xl mx-auto">
+				<div class="relative flex-grow">
+					<input 
+						type="text" 
+						id="search" 
+						placeholder="Пребарај тема, поим или задача..." 
+						class="w-full pl-14 pr-4 py-5 bg-white/5 border border-white/10 rounded-2xl text-white placeholder-slate-500 focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 outline-none backdrop-blur-xl transition-all shadow-2xl text-center font-medium"
+					/>
+					<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-slate-500 absolute left-5 top-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+					</svg>
+				</div>
+			</div>
+			
+			<div class="mt-10 flex flex-wrap gap-8 justify-center items-center text-slate-500">
+				<div class="flex items-center gap-2">
+					<div class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></div>
+					<span class="text-xs font-bold uppercase tracking-[0.2em]">{problems.length} задачи во архивата</span>
+				</div>
+				<div class="flex items-center gap-2">
+					<div class="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse"></div>
+					<span class="text-xs font-bold uppercase tracking-[0.2em]">391 наставни стандарди</span>
+				</div>
+				<div class="flex items-center gap-2">
+					<div class="w-1.5 h-1.5 rounded-full bg-purple-500 animate-pulse"></div>
+					<span class="text-xs font-bold uppercase tracking-[0.2em]">100+ AI анимации</span>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Daily Features -->
+	<div class="max-w-6xl mx-auto mb-16 grid grid-cols-1 lg:grid-cols-2 gap-8">
+		<!-- Problem of the Day -->
+		<div class="bg-gradient-to-br from-emerald-50 via-blue-50/50 to-indigo-50 dark:from-emerald-900/20 dark:via-blue-900/10 dark:to-indigo-900/10 rounded-3xl p-8 border border-emerald-200/50 dark:border-emerald-800/30 shadow-lg">
+			<div class="flex items-center gap-3 mb-6">
+				<div class="w-12 h-12 bg-emerald-100 dark:bg-emerald-900/30 rounded-full flex items-center justify-center">
+					<span class="text-emerald-600 dark:text-emerald-400 text-2xl">🎯</span>
+				</div>
+				<div>
+					<h2 class="text-2xl font-bold text-emerald-900 dark:text-emerald-100">Задача на денот</h2>
+					<p class="text-emerald-600 dark:text-emerald-400 text-sm">Нова задача секој ден</p>
+				</div>
+			</div>
+
+			<div class="space-y-4 mb-6">
+				<div class="bg-white dark:bg-slate-800 rounded-xl p-4 border border-slate-200 dark:border-slate-700">
+					<div class="flex items-center justify-between mb-2">
+						<span class="text-xs font-black uppercase tracking-widest px-2 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded-full">
+							Одделение 9
+						</span>
+						<span class="text-xs font-black uppercase tracking-widest px-2 py-1 bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-300 rounded-full">
+							Геометрија
+						</span>
+					</div>
+					<p class="text-sm text-slate-700 dark:text-slate-300 font-medium leading-relaxed">
+						Во екранот на компјутер е нацртан квадрат со страни 10 cm. Најди ја плоштината на најголемиот круг...
+					</p>
+				</div>
+			</div>
+
+			<a href="/tasks/problem-of-the-day" class="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-6 rounded-xl transition-all">
+				<span>Реши ја задачата</span>
+				<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+				</svg>
+			</a>
+		</div>
+
+		<!-- Daily Quote -->
+		<div class="bg-gradient-to-br from-purple-50 via-pink-50/50 to-rose-50 dark:from-purple-900/20 dark:via-pink-900/10 dark:to-rose-900/10 rounded-3xl p-8 border border-purple-200/50 dark:border-purple-800/30 shadow-lg">
+			<div class="flex items-center gap-3 mb-6">
+				<div class="w-12 h-12 bg-purple-100 dark:bg-purple-900/30 rounded-full flex items-center justify-center">
+					<span class="text-purple-600 dark:text-purple-400 text-2xl">💭</span>
+				</div>
+				<div>
+					<h2 class="text-2xl font-bold text-purple-900 dark:text-purple-100">Цитат на денот</h2>
+					<p class="text-purple-600 dark:text-purple-400 text-sm">Математичка инспирација</p>
+				</div>
+			</div>
+
+			<MathQuote category="general" compact={false} />
+
+			<div class="mt-6 flex items-center justify-between text-xs text-purple-600 dark:text-purple-400">
+				<span>Промени секој ден</span>
+				<button class="hover:text-purple-800 dark:hover:text-purple-200 transition-colors">
+					<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0V9a8 8 0 1115.356 2m-15.356 2H4"/>
+					</svg>
+				</button>
+			</div>
+		</div>
+	</div>
+
+	<!-- Visual Learning Hub - Manim Showcase -->
+	<div class="max-w-6xl mx-auto mb-24">
+		<div class="flex flex-col md:flex-row items-end justify-between mb-12 gap-6">
+			<div>
+				<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 text-blue-500 text-[10px] font-black uppercase tracking-widest mb-4 border border-blue-500/20">
+					<span class="relative flex h-2 w-2">
+						<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+						<span class="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
+					</span>
+					Визуелно Објаснување
+				</div>
+				<h2 class="text-4xl font-black mb-4">🎬 Визуелно Мајсторство</h2>
+				<p class="text-slate-500 font-medium max-w-2xl text-lg">
+					Комплексните математички концепти стануваат очигледни преку прецизни Manim анимации. Од основни теореми до олимписки докази.
+				</p>
+			</div>
+			<a href="/curriculum-planner" class="group px-8 py-4 rounded-2xl bg-slate-900 text-white text-sm font-bold hover:bg-blue-600 transition-all flex items-center gap-3">
+				Истражи ја библиотеката
+				<span class="group-hover:translate-x-1 transition-transform">→</span>
+			</a>
+		</div>
+
+		<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+			{[
+				{ title: "Вивијаниева Теорема", grade: "VIII", category: "Геометрија", id: "manim_geom_8_viviani_proof", icon: "📐", desc: "Визуелен доказ за збирот на растојанијата во рамностран триаголник." },
+				{ title: "Питагорова Теорема", grade: "VIII", category: "Геометрија", id: "pythagorean_theorem", icon: "📐", desc: "Класичен доказ преку прередување на површини." },
+				{ title: "Агли во триаголник", grade: "VI", category: "Геометрија", id: "manim_geom_9_tri_angle_45_60", icon: "📐", desc: "Зошто збирот на внатрешните агли е секогаш 180 степени?" },
+				{ title: "Линеарни равенки", grade: "VII", category: "Алгебра", id: "manim_sigma139_y1_p1", icon: "🧮", desc: "Визуелизација на балансот кај равенките." },
+				{ title: "Бројни својства", grade: "V", category: "Броеви", id: "manim_numerus_4412", icon: "🔢", desc: "Длабоко навлегување во светот на природните броеви." },
+				{ title: "Олимписки предизвик", grade: "IX", category: "Олимпијада", id: "manim_geom_9_centroid_plane_dist", icon: "🏆", desc: "Напредна геометриска анимација за олимпијци." }
+			].map(video => (
+				<a href={`/curriculum-planner?animation=${video.id}`} class="group bg-white dark:bg-slate-900 rounded-[2.5rem] border border-slate-100 dark:border-slate-800 overflow-hidden shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 flex flex-col h-full">
+					<div class="aspect-video bg-slate-100 dark:bg-slate-950 relative flex items-center justify-center overflow-hidden">
+						<div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/20 to-transparent z-10 opacity-60 group-hover:opacity-40 transition-opacity"></div>
+						<div class="text-5xl group-hover:scale-125 transition-transform z-20 drop-shadow-2xl">🎥</div>
+						
+						<div class="absolute top-4 left-4 z-20">
+							<span class="px-3 py-1 bg-white/10 backdrop-blur-md border border-white/20 text-white text-[10px] font-black rounded-lg">
+								{video.grade} ОДД
+							</span>
+						</div>
+
+						<div class="absolute bottom-4 left-4 right-4 z-20 flex justify-between items-center translate-y-2 group-hover:translate-y-0 transition-transform">
+							<span class="text-[10px] font-black uppercase tracking-widest text-blue-400">{video.category}</span>
+							<div class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center text-white shadow-lg shadow-blue-600/40 opacity-0 group-hover:opacity-100 transition-opacity">
+								<svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+							</div>
+						</div>
+					</div>
+					<div class="p-8 flex-grow flex flex-col">
+						<div class="flex items-center gap-2 mb-3">
+							<span class="text-xl">{video.icon}</span>
+							<h3 class="text-xl font-bold text-slate-900 dark:text-white group-hover:text-blue-600 transition-colors">{video.title}</h3>
+						</div>
+						<p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed line-clamp-2">{video.desc}</p>
+					</div>
+				</a>
+			))}
+		</div>
+	</div>
+
+	<div class="mt-16 mb-16 max-w-6xl mx-auto">
+		<h2 class="text-3xl font-black mb-8 text-center">📚 Наставна Програма и Видео Лекции</h2>
+		<CurriculumViewer client:load />
+	</div>
+
+	<!-- National Standards Integration Section - The Bridge -->
+	<div class="max-w-6xl mx-auto mb-24 relative overflow-hidden bg-slate-900 rounded-[4rem] p-12 md:p-20 border border-white/10 shadow-2xl">
+		<div class="absolute top-0 right-0 w-full h-full opacity-10 pointer-events-none">
+			<div class="absolute top-0 right-0 w-[50%] h-[50%] bg-blue-500 rounded-full blur-[120px]"></div>
+			<div class="absolute bottom-0 left-0 w-[30%] h-[30%] bg-indigo-500 rounded-full blur-[100px]"></div>
+		</div>
+
+		<div class="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+			<div>
+				<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/20 text-blue-400 text-[10px] font-black uppercase tracking-widest mb-8 border border-blue-500/20">
+					💎 Моќта на Конекцијата
+				</div>
+				<h2 class="text-4xl md:text-6xl font-black text-white mb-8 leading-tight">
+					Од стандард до <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-400">олимписки медал</span>
+				</h2>
+				<p class="text-slate-400 text-lg mb-10 leading-relaxed font-medium">
+					Ние веруваме дека олимпискиот шампион се раѓа во училишната клупа. Затоа, секој наставен стандард е поврзан со соодветни напредни предизвици.
+				</p>
+				
+				<div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-12">
+					{[
+						{ icon: "⚡", title: "391 Стандарди", desc: "Целосно покриена програма 1-9 одд." },
+						{ icon: "🧩", title: "Директно Мапирање", desc: "Врска училница-олимпијада." },
+						{ icon: "🤖", title: "AI Помош", desc: "Инстант генерирање материјали." },
+						{ icon: "📈", title: "Следење напредок", desc: "Визуелен приказ на успехот." }
+					].map(item => (
+						<div class="flex items-start gap-4 p-4 rounded-2xl bg-white/5 border border-white/5 hover:bg-white/10 transition-colors">
+							<div class="w-12 h-12 bg-white/5 rounded-xl flex items-center justify-center flex-shrink-0 border border-white/10 text-xl">{item.icon}</div>
+							<div>
+								<h4 class="font-bold text-white text-sm mb-1">{item.title}</h4>
+								<p class="text-slate-500 text-xs leading-relaxed">{item.desc}</p>
+							</div>
+						</div>
+					))}
+				</div>
+
+				<div class="flex flex-wrap gap-4">
+					<a href="/curriculum-planner" class="px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-2xl font-black transition-all shadow-xl shadow-blue-600/20 hover:-translate-y-1">
+						Отвори Курикулум Планер
+					</a>
+					<a href="/worksheet-library" class="px-8 py-4 bg-white/5 hover:bg-white/10 text-white rounded-2xl font-black border border-white/10 transition-all backdrop-blur-xl">
+						Библиотека на листови
+					</a>
+				</div>
+			</div>
+
+			<div class="relative">
+				<!-- Example Connection Card -->
+				<div class="bg-white/5 rounded-[3rem] p-10 border border-white/10 backdrop-blur-md relative z-20">
+					<div class="flex items-center justify-between mb-10">
+						<h3 class="text-white font-bold flex items-center gap-3">
+							<span class="w-3 h-3 rounded-full bg-emerald-500 animate-pulse"></span>
+							Пример за Конекција
+						</h3>
+						<span class="text-[10px] font-black text-slate-500 uppercase tracking-widest">Ниво: Одделение VIII</span>
+					</div>
+
+					<div class="space-y-8">
+						<div class="p-6 rounded-2xl bg-blue-500/10 border border-blue-500/20">
+							<div class="text-[10px] font-black text-blue-400 uppercase tracking-widest mb-2">Наставен Стандард</div>
+							<p class="text-white font-bold leading-snug">Примена на Питагорова теорема во правоаголен триаголник.</p>
+						</div>
+
+						<div class="flex justify-center py-2">
+							<div class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center border border-white/10">
+								<svg class="w-6 h-6 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M19 14l-7 7m0 0l-7-7m7 7V3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+							</div>
+						</div>
+
+						<div class="p-6 rounded-2xl bg-purple-500/10 border border-purple-500/20">
+							<div class="text-[10px] font-black text-purple-400 uppercase tracking-widest mb-2">Олимписки Предизвик</div>
+							<p class="text-white font-bold leading-snug mb-4">Најди го најкраткиот пат по површината на коцка...</p>
+							<div class="flex items-center justify-between">
+								<span class="text-[10px] text-slate-500 font-bold">Тешкотија: 7/10</span>
+								<a href="/tasks/regional_2022_g8_1" class="text-xs font-black text-purple-400 hover:text-purple-300">Реши ја задачата →</a>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Decorative Elements -->
+				<div class="absolute -top-10 -right-10 w-40 h-40 bg-blue-600/20 rounded-full blur-3xl -z-10 animate-pulse"></div>
+				<div class="absolute -bottom-10 -left-10 w-40 h-40 bg-purple-600/20 rounded-full blur-3xl -z-10 animate-pulse" style="animation-delay: 1s"></div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Teacher's Suite - AI Tools for the Classroom -->
+	<div class="max-w-6xl mx-auto mb-24">
+		<div class="bg-gradient-to-br from-indigo-600 to-blue-700 rounded-[3rem] p-12 md:p-16 shadow-2xl relative overflow-hidden">
+			<div class="absolute top-0 right-0 w-full h-full opacity-10 pointer-events-none">
+				<svg class="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+					<path d="M0 100 C 20 0 50 0 100 100 Z" fill="white" />
+				</svg>
+			</div>
+
+			<div class="relative z-10 flex flex-col lg:flex-row items-center gap-16">
+				<div class="lg:w-1/2">
+					<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 text-white text-[10px] font-black uppercase tracking-widest mb-6 border border-white/10">
+						👩‍🏫 Дигитален Асистент
+					</div>
+					<h2 class="text-4xl md:text-5xl font-black text-white mb-6 leading-tight">
+						Алатки за <span class="underline decoration-blue-300 underline-offset-8">наставници</span>
+					</h2>
+					<p class="text-blue-100 text-lg mb-10 leading-relaxed font-medium">
+						Автоматизирајте ја подготовката за час. Генерирајте наставни листови за неколку секунди и користете AI анимации за визуелизација на тешките концепти.
+					</p>
+					
+					<div class="space-y-6 mb-10">
+						{[
+							{ icon: "📝", title: "Автоматски Наставни Листови", desc: "Генерирај PDF вежби според конкретен наставен стандард." },
+							{ icon: "🎨", title: "Manim Интеграција", desc: "Креирај или пушти анимации директно во училницата." },
+							{ icon: "🤖", title: "AI Ментор", desc: "Добиј идеи за активности и олимписки задачи за секоја тема." }
+						].map(item => (
+							<div class="flex items-center gap-4">
+								<div class="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center text-xl shadow-inner">{item.icon}</div>
+								<div>
+									<h4 class="font-bold text-white text-base">{item.title}</h4>
+									<p class="text-blue-100/70 text-xs">{item.desc}</p>
+								</div>
+							</div>
+						))}
+					</div>
+
+					<a href="/teachers" class="inline-flex items-center gap-3 px-10 py-5 bg-white text-blue-700 rounded-2xl font-black transition-all hover:scale-105 shadow-2xl hover:shadow-white/20">
+						Влези во Наставничкиот Панел
+						<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M13 7l5 5m0 0l-5 5m5-5H6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+					</a>
+				</div>
+
+				<div class="lg:w-1/2 grid grid-cols-2 gap-4">
+					<div class="space-y-4">
+						<div class="aspect-square bg-white/10 rounded-3xl border border-white/10 backdrop-blur-md p-6 flex flex-col justify-between hover:bg-white/15 transition-colors">
+							<span class="text-4xl">📄</span>
+							<div>
+								<h4 class="text-white font-bold text-sm mb-1">391+</h4>
+								<p class="text-blue-200 text-[10px] uppercase font-black tracking-widest">Наставни Листови</p>
+							</div>
+						</div>
+						<div class="aspect-[4/3] bg-white/10 rounded-3xl border border-white/10 backdrop-blur-md p-6 flex flex-col justify-between hover:bg-white/15 transition-colors">
+							<span class="text-4xl">🎬</span>
+							<div>
+								<h4 class="text-white font-bold text-sm mb-1">100+</h4>
+								<p class="text-blue-200 text-[10px] uppercase font-black tracking-widest">Видео Лекции</p>
+							</div>
+						</div>
+					</div>
+					<div class="space-y-4 pt-8">
+						<div class="aspect-[4/5] bg-white/10 rounded-3xl border border-white/10 backdrop-blur-md p-6 flex flex-col justify-between hover:bg-white/15 transition-colors">
+							<span class="text-4xl">✨</span>
+							<div>
+								<h4 class="text-white font-bold text-sm mb-1">AI</h4>
+								<p class="text-blue-200 text-[10px] uppercase font-black tracking-widest">Генератор на идеи</p>
+							</div>
+						</div>
+						<div class="aspect-square bg-white/10 rounded-3xl border border-white/10 backdrop-blur-md p-6 flex flex-col justify-between hover:bg-white/15 transition-colors">
+							<span class="text-4xl">🏆</span>
+							<div>
+								<h4 class="text-white font-bold text-sm mb-1">450+</h4>
+								<p class="text-blue-200 text-[10px] uppercase font-black tracking-widest">Олимписки Задачи</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="flex flex-col lg:flex-row gap-12">
+		<!-- Sidebar Filters -->
+		<aside class="w-full lg:w-80 flex-shrink-0 space-y-8 no-print">
+			<div class="lg:sticky lg:top-24 lg:max-h-[calc(100vh-120px)] lg:overflow-y-auto lg:scrollbar-thin lg:scrollbar-thumb-slate-300 lg:dark:scrollbar-thumb-slate-600 lg:scrollbar-track-transparent">
+				<div class="bg-white dark:bg-slate-900 p-8 rounded-[2.5rem] border border-slate-100 dark:border-slate-800 shadow-xl shadow-slate-200/50 dark:shadow-none transition-all hover:shadow-2xl">
+					<div class="flex items-center justify-between mb-8">
+						<h2 class="text-xl font-black flex items-center gap-3">
+							<div class="w-2 h-6 bg-blue-600 rounded-full shadow-lg shadow-blue-500/50"></div>
+							Филтрирај
+						</h2>
+						<button id="reset-filters-top" class="text-[10px] font-black uppercase tracking-widest text-blue-600 hover:text-blue-700">Исчисти</button>
+					</div>
+					
+					<div class="space-y-12">
+						<div>
+							<label class="block text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-5">Одделение</label>
+							<div class="grid grid-cols-3 gap-2" id="grade-filters">
+								{grades.map(g => (
+									<label class="cursor-pointer group">
+										<input type="checkbox" value={g} class="hidden peer">
+										<span class="w-full text-center px-2 py-3 rounded-xl border border-slate-100 dark:border-slate-800 text-xs font-bold bg-slate-50 dark:bg-slate-800 peer-checked:bg-blue-600 peer-checked:text-white peer-checked:border-blue-600 peer-checked:shadow-lg peer-checked:shadow-blue-500/30 transition-all inline-block group-hover:border-blue-200 dark:group-hover:border-slate-600">
+											{g === 'N/A' ? '???' : g}
+										</span>
+									</label>
+								))}
+							</div>
+						</div>
+
+						<div>
+							<label class="block text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-5">Категорија</label>
+							<div class="space-y-4" id="cat-filters">
+								{categories.map(c => (
+									<label class="flex items-center gap-4 cursor-pointer group">
+										<input type="checkbox" value={c} class="hidden peer">
+										<div class="w-6 h-6 rounded-lg border-2 border-slate-200 dark:border-slate-800 peer-checked:bg-blue-600 peer-checked:border-blue-600 transition-all flex items-center justify-center group-hover:border-blue-400">
+											<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-white scale-0 peer-checked:scale-100 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="4" d="M5 13l4 4L19 7" />
+											</svg>
+										</div>
+										<span class="text-sm font-bold text-slate-600 dark:text-slate-400 group-hover:text-slate-900 dark:group-hover:text-white capitalize transition-colors">{c}</span>
+									</label>
+								))}
+							</div>
+						</div>
+
+						<div>
+							<label class="block text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-5">Тешкотија</label>
+							<div class="grid grid-cols-3 gap-2" id="diff-filters">
+								{[1,2,3,4,5,6,7,8,9,10].map(d => (
+									<label class="cursor-pointer group">
+										<input type="checkbox" value={d} class="hidden peer">
+										<span class={`w-full text-center px-2 py-3 rounded-xl border border-slate-100 dark:border-slate-800 text-xs font-bold bg-slate-50 dark:bg-slate-800 peer-checked:bg-blue-600 peer-checked:text-white peer-checked:border-blue-600 peer-checked:shadow-lg peer-checked:shadow-blue-500/30 transition-all inline-block group-hover:border-blue-200 dark:group-hover:border-slate-600 ${getDifficultyColor(d)}`}>
+											{d}
+										</span>
+									</label>
+								))}
+							</div>
+						</div>
+
+						<div>
+							<label class="block text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-5">Подредување</label>
+							<select id="sort-select" class="w-full px-3 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-600 rounded-lg text-sm font-medium text-slate-900 dark:text-slate-100 focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500 outline-none">
+								<option value="default">Стандардно</option>
+								<option value="title-asc">Наслов (А-З)</option>
+								<option value="title-desc">Наслов (З-А)</option>
+								<option value="difficulty-asc">Тешкотија (лесно прво)</option>
+								<option value="difficulty-desc">Тешкотија (тешко прво)</option>
+								<option value="grade-asc">Одделение (1-9)</option>
+								<option value="grade-desc">Одделение (9-1)</option>
+								<option value="category-asc">Област (А-З)</option>
+								<option value="category-desc">Област (З-А)</option>
+							</select>
+						</div>
+
+						<div>
+							<label class="block text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-5">Брзи Филтри</label>
+							<div class="grid grid-cols-2 gap-2">
+								<button id="filter-recent" class="px-3 py-2 bg-emerald-50 dark:bg-emerald-900/20 text-emerald-700 dark:text-emerald-300 rounded-lg text-xs font-bold hover:bg-emerald-100 dark:hover:bg-emerald-900/30 transition-colors border border-emerald-200 dark:border-emerald-800">
+									📅 Скорешни
+								</button>
+								<button id="filter-olympiad" class="px-3 py-2 bg-purple-50 dark:bg-purple-900/20 text-purple-700 dark:text-purple-300 rounded-lg text-xs font-bold hover:bg-purple-100 dark:hover:bg-purple-900/30 transition-colors border border-purple-200 dark:border-purple-800">
+									🏆 Олимписки
+								</button>
+								<button id="filter-geometry" class="px-3 py-2 bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300 rounded-lg text-xs font-bold hover:bg-blue-100 dark:hover:bg-blue-900/30 transition-colors border border-blue-200 dark:border-blue-800">
+									📐 Геометрија
+								</button>
+								<button id="filter-algebra" class="px-3 py-2 bg-orange-50 dark:bg-orange-900/20 text-orange-700 dark:text-orange-300 rounded-lg text-xs font-bold hover:bg-orange-100 dark:hover:bg-orange-900/30 transition-colors border border-orange-200 dark:border-orange-800">
+									🧮 Алгебра
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</aside>
+
+		<!-- Grid -->
+		<div class="flex-grow">
+			<div class="mb-10 flex items-center justify-between no-print">
+				<h2 class="text-2xl font-black text-slate-900 dark:text-white flex items-baseline gap-3">
+					Олимпијадни проблеми
+					<span class="px-3 py-1 bg-slate-100 dark:bg-slate-800 text-slate-500 text-xs font-black rounded-full" id="count">{problems.length} задачa</span>
+				</h2>
+				
+				<div class="flex items-center gap-2">
+					<button id="grid-view" class="p-2 text-blue-600 bg-blue-50 dark:bg-blue-900/20 rounded-lg" title="Grid View">
+						<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+					</button>
+					<button id="list-view" class="p-2 text-slate-400 hover:text-blue-600 transition-colors rounded-lg" title="List View">
+						<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+					</button>
+				</div>
+			</div>
+
+			<!-- Skeleton Loader -->
+			<div id="skeleton-loader" class="grid grid-cols-1 md:grid-cols-2 gap-8">
+				{Array.from({ length: 8 }, (_, i) => (
+					<div class="bg-white dark:bg-slate-900 rounded-[2.5rem] shadow-sm border border-slate-100 dark:border-slate-800 overflow-hidden animate-pulse">
+						<div class="aspect-[16/10] bg-slate-200 dark:bg-slate-800"></div>
+						<div class="p-8 space-y-4">
+							<div class="flex gap-2 mb-4">
+								<div class="h-5 bg-slate-200 dark:bg-slate-800 rounded-lg w-12"></div>
+								<div class="h-5 bg-slate-200 dark:bg-slate-800 rounded-lg w-16"></div>
+							</div>
+							<div class="h-6 bg-slate-200 dark:bg-slate-800 rounded-lg w-3/4"></div>
+							<div class="space-y-2">
+								<div class="h-4 bg-slate-200 dark:bg-slate-800 rounded w-full"></div>
+								<div class="h-4 bg-slate-200 dark:bg-slate-800 rounded w-5/6"></div>
+								<div class="h-4 bg-slate-200 dark:bg-slate-800 rounded w-4/6"></div>
+							</div>
+						</div>
+					</div>
+				))}
+			</div>
+
+			<div class="grid grid-cols-1 md:grid-cols-2 gap-8" id="problems-grid" style="display: none;">
+				{problems.map((prob) => (
+					<div
+						class="problem-card group bg-white dark:bg-slate-900 rounded-[3rem] shadow-sm border border-slate-100 dark:border-slate-800 overflow-hidden hover:shadow-2xl hover:shadow-blue-500/10 hover:-translate-y-2 transition-all duration-500 grid-view"
+						data-grade={prob.grade}
+						data-category={prob.category}
+						data-difficulty={prob.difficulty}
+						data-title={prob.filename.toLowerCase().replace(/_/g, ' ')}
+						data-search={cleanBody(prob.body).toLowerCase()}
+					>
+						<a href={`/tasks/${prob.meta.problem_id || prob.filename.replace('.md', '')}`} class="block h-full">
+							<div class="aspect-[16/10] bg-slate-50 dark:bg-slate-950 flex items-center justify-center p-8 relative overflow-hidden">
+								<div class="absolute inset-0 bg-gradient-to-br from-blue-600 to-indigo-600 opacity-0 group-hover:opacity-10 transition-opacity duration-500"></div>
+								<img 
+									src={`/assets/images/${prob.meta.problem_id || prob.filename.replace('.md', '')}/${prob.meta.problem_id || prob.filename.replace('.md', '')}.png`} 
+									alt={prob.filename}
+									class="max-w-full max-h-full object-contain relative z-10 transition-transform duration-700 group-hover:scale-110 drop-shadow-2xl"
+									onerror="this.src='https://via.placeholder.com/400x250?text=Geo-Mentor+Математика'"
+								/>
+								<div class="absolute top-6 left-6 z-20">
+									<div class="flex items-center gap-2">
+										<span class={`w-3 h-3 rounded-full ${getDifficultyColor(prob.difficulty)} shadow-lg`}></span>
+										<span class="text-[10px] font-black text-slate-500 dark:text-slate-400 bg-white/80 dark:bg-slate-900/80 px-2 py-1 rounded-md backdrop-blur-sm uppercase tracking-widest">Ниво {prob.difficulty}</span>
+									</div>
+								</div>
+							</div>
+							<div class="p-10">
+								<div class="flex items-center gap-3 mb-6">
+									<span class="text-[10px] font-black uppercase tracking-widest px-3 py-1.5 bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded-xl border border-blue-100 dark:border-blue-900/50">
+										{prob.grade} Одд
+									</span>
+									<span class="text-[10px] font-black uppercase tracking-widest px-3 py-1.5 bg-slate-50 dark:bg-slate-800 text-slate-500 rounded-xl border border-slate-100 dark:border-slate-800 capitalize">
+										{prob.category}
+									</span>
+								</div>
+								<h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-4 leading-tight group-hover:text-blue-600 transition-colors line-clamp-2">
+									{prob.filename.replace('.md', '').replace(/_/g, ' ')}
+								</h3>
+								<p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed mb-8 line-clamp-3 font-medium">
+									{cleanBody(prob.body)}
+								</p>
+								<div class="flex items-center justify-between pt-6 border-t border-slate-50 dark:border-slate-800">
+									<div class="text-[10px] font-black uppercase tracking-[0.2em] text-blue-600 flex items-center gap-2 group-hover:gap-4 transition-all">
+										Истражи задача <span>→</span>
+									</div>
+									<div class="flex -space-x-2">
+										<div class="w-8 h-8 rounded-full bg-emerald-500/10 border-2 border-white dark:border-slate-900 flex items-center justify-center text-[10px]">✨</div>
+										<div class="w-8 h-8 rounded-full bg-blue-500/10 border-2 border-white dark:border-slate-900 flex items-center justify-center text-[10px]">🎬</div>
+									</div>
+								</div>
+							</div>
+						</a>
+					</div>
+				))}
+
+	<div id="no-results" class="hidden py-40 text-center bg-white dark:bg-slate-900 rounded-[3rem] border border-dashed border-slate-200 dark:border-slate-800">
+		<div class="text-8xl mb-6 grayscale opacity-20">🔍</div>
+		<h3 class="text-2xl font-black text-slate-900 dark:text-white mb-2">Нема резултати</h3>
+		<p class="text-slate-500">Пробајте со поинакви филтри или пребарување.</p>
+	</div>
+</div>
+</div>
+</Layout>
+
+<script>
+	import Fuse from 'fuse.js';
+
+	const searchInput = document.getElementById('search');
+	const cards = document.querySelectorAll('.problem-card');
+	const countEl = document.getElementById('count');
+	const noResults = document.getElementById('no-results');
+	const gradeFilters = document.querySelectorAll('#grade-filters input');
+	const catFilters = document.querySelectorAll('#cat-filters input');
+	const diffFilters = document.querySelectorAll('#diff-filters input');
+	const sortSelect = document.getElementById('sort-select');
+	const gridViewBtn = document.getElementById('grid-view');
+	const listViewBtn = document.getElementById('list-view');
+	const problemsGrid = document.getElementById('problems-grid');
+	const resetBtn = document.getElementById('reset-filters');
+	const resetBtnTop = document.getElementById('reset-filters-top');
+	const filterRecentBtn = document.getElementById('filter-recent');
+	const filterOlympiadBtn = document.getElementById('filter-olympiad');
+	const filterGeometryBtn = document.getElementById('filter-geometry');
+	const filterAlgebraBtn = document.getElementById('filter-algebra');
+	const stageFilters = document.querySelectorAll('.stage-filter');
+
+	// Debounced search
+	let searchTimeout;
+	const debounceSearch = (func, delay) => {
+		return (...args) => {
+			clearTimeout(searchTimeout);
+			searchTimeout = setTimeout(() => func.apply(this, args), delay);
+		};
+	};
+
+	// Подготовка на податоци за Fuse.js
+	const searchData = Array.from(cards).map(card => ({
+		id: card.dataset.title,
+		title: card.dataset.title,
+		body: card.dataset.search,
+		element: card
+	}));
+
+	const fuse = new Fuse(searchData, {
+		keys: ['title', 'body'],
+		threshold: 0.3,
+		distance: 100
+	});
+
+	function filterAndSort(filterGrades = null) {
+		const query = searchInput.value.toLowerCase();
+		let selectedGrades = filterGrades || Array.from(gradeFilters).filter(i => i.checked).map(i => i.value);
+		const selectedCats = Array.from(catFilters).filter(i => i.checked).map(i => i.value);
+		const selectedDiffs = Array.from(diffFilters).filter(i => i.checked).map(i => i.value);
+		const sortOption = sortSelect.value;
+
+		// Резултати од Fuzzy Search
+		const fuseResults = query ? fuse.search(query).map(r => r.item.element) : null;
+
+		// Collect visible cards
+		let visibleCards = Array.from(cards).filter(card => {
+			const grade = card.dataset.grade || '';
+			const cat = card.dataset.category || '';
+			const diff = card.dataset.difficulty || '';
+
+			const matchesSearch = !fuseResults || fuseResults.includes(card);
+			const matchesGrade = selectedGrades.length === 0 || selectedGrades.includes(grade);
+			const matchesCat = selectedCats.length === 0 || selectedCats.includes(cat);
+			const matchesDiff = selectedDiffs.length === 0 || selectedDiffs.includes(diff);
+
+			return matchesSearch && matchesGrade && matchesCat && matchesDiff;
+		});
+
+		// Sort visible cards
+		visibleCards.sort((a, b) => {
+			const titleA = a.dataset.title || '';
+			const titleB = b.dataset.title || '';
+			const diffA = parseInt(a.dataset.difficulty || '0');
+			const diffB = parseInt(b.dataset.difficulty || '0');
+			const gradeA = parseInt(a.dataset.grade || '0');
+			const gradeB = parseInt(b.dataset.grade || '0');
+			const catA = a.dataset.category || '';
+			const catB = b.dataset.category || '';
+
+			switch (sortOption) {
+				case 'title-asc':
+					return titleA.localeCompare(titleB);
+				case 'title-desc':
+					return titleB.localeCompare(titleA);
+				case 'difficulty-asc':
+					return diffA - diffB;
+				case 'difficulty-desc':
+					return diffB - diffA;
+				case 'grade-asc':
+					return gradeA - gradeB;
+				case 'grade-desc':
+					return gradeB - gradeA;
+				case 'category-asc':
+					return catA.localeCompare(catB);
+				case 'category-desc':
+					return catB.localeCompare(catA);
+				default:
+					return 0; // default order
+			}
+		});
+
+		// Hide all cards first
+		cards.forEach(card => card.style.display = 'none');
+
+		// Show sorted visible cards
+		visibleCards.forEach(card => card.style.display = 'block');
+
+		const visibleCount = visibleCards.length;
+
+		// Ажурирај го бројачот со правилна множина
+		if (countEl) {
+			const text = visibleCount === 1 ? 'задача' : 'задачи';
+			countEl.textContent = `${visibleCount} ${text}`;
+		}
+		if (noResults) noResults.style.display = visibleCount === 0 ? 'block' : 'none';
+	}
+
+	searchInput?.addEventListener('input', debounceSearch(filterAndSort, 300));
+	gradeFilters.forEach(i => i.addEventListener('change', filterAndSort));
+	catFilters.forEach(i => i.addEventListener('change', filterAndSort));
+	diffFilters.forEach(i => i.addEventListener('change', filterAndSort));
+	sortSelect?.addEventListener('change', filterAndSort);
+
+	// View mode toggles
+	gridViewBtn?.addEventListener('click', () => {
+		problemsGrid.classList.remove('grid-cols-1');
+		problemsGrid.classList.add('grid-cols-1', 'md:grid-cols-2');
+		cards.forEach(card => {
+			card.classList.remove('list-view');
+			card.classList.add('grid-view');
+		});
+		gridViewBtn.classList.add('text-blue-600', 'bg-blue-50', 'dark:bg-blue-900/20');
+		gridViewBtn.classList.remove('text-slate-400');
+		listViewBtn.classList.remove('text-blue-600', 'bg-blue-50', 'dark:bg-blue-900/20');
+		listViewBtn.classList.add('text-slate-400');
+	});
+
+	listViewBtn?.addEventListener('click', () => {
+		problemsGrid.classList.remove('md:grid-cols-2');
+		problemsGrid.classList.add('grid-cols-1');
+		cards.forEach(card => {
+			card.classList.remove('grid-view');
+			card.classList.add('list-view');
+		});
+		listViewBtn.classList.add('text-blue-600', 'bg-blue-50', 'dark:bg-blue-900/20');
+		listViewBtn.classList.remove('text-slate-400');
+		gridViewBtn.classList.remove('text-blue-600', 'bg-blue-50', 'dark:bg-blue-900/20');
+		gridViewBtn.classList.add('text-slate-400');
+	});
+
+	const resetAll = () => {
+		gradeFilters.forEach(i => i.checked = false);
+		catFilters.forEach(i => i.checked = false);
+		diffFilters.forEach(i => i.checked = false);
+		searchInput.value = '';
+		sortSelect.value = 'default';
+		filterAndSort();
+	};
+
+	resetBtn?.addEventListener('click', resetAll);
+	resetBtnTop?.addEventListener('click', resetAll);
+
+	// Quick filter buttons
+	filterRecentBtn?.addEventListener('click', () => {
+		resetAll();
+		// Apply recent filter (grades 8-9)
+		document.querySelectorAll('#grade-filters input').forEach(input => {
+			if (['8', '9'].includes(input.value)) {
+				input.checked = true;
+			}
+		});
+		filterAndSort();
+	});
+
+	filterOlympiadBtn?.addEventListener('click', () => {
+		resetAll();
+		// Apply olympiad filter (difficulty 7-10)
+		document.querySelectorAll('#diff-filters input').forEach(input => {
+			if (['7', '8', '9', '10'].includes(input.value)) {
+				input.checked = true;
+			}
+		});
+		filterAndSort();
+	});
+
+	filterGeometryBtn?.addEventListener('click', () => {
+		resetAll();
+		// Apply geometry filter
+		document.querySelectorAll('#cat-filters input').forEach(input => {
+			if (input.value.toLowerCase().includes('геометри')) {
+				input.checked = true;
+			}
+		});
+		filterAndSort();
+	});
+
+	filterAlgebraBtn?.addEventListener('click', () => {
+		resetAll();
+		// Apply algebra filter
+		document.querySelectorAll('#cat-filters input').forEach(input => {
+			if (input.value.toLowerCase().includes('алгебр')) {
+				input.checked = true;
+			}
+		});
+		filterAndSort();
+	});
+
+	// Stage filter buttons in Hero
+	stageFilters.forEach(btn => {
+		btn.addEventListener('click', () => {
+			const grades = JSON.parse(btn.dataset.grades);
+			resetAll();
+			// Check the corresponding checkboxes in the sidebar
+			document.querySelectorAll('#grade-filters input').forEach(input => {
+				if (grades.includes(input.value)) {
+					input.checked = true;
+				}
+			});
+			filterAndSort();
+			// Scroll to problems
+			document.getElementById('problems-grid')?.scrollIntoView({ behavior: 'smooth' });
+		});
+	});
+
+	// Hide skeleton loader and show content on page load
+	document.addEventListener('DOMContentLoaded', () => {
+		const skeletonLoader = document.getElementById('skeleton-loader');
+		const problemsGrid = document.getElementById('problems-grid');
+		if (skeletonLoader && problemsGrid) {
+			setTimeout(() => {
+				skeletonLoader.style.display = 'none';
+				problemsGrid.style.display = 'grid';
+			}, 500); // Small delay for smooth transition
+		}
+	});
+</script>
+
+<style>
+	.list-view {
+		flex-direction: row;
+		padding: 1rem;
+	}
+	.list-view .aspect-video {
+		width: 120px;
+		height: 120px;
+		flex-shrink: 0;
+	}
+	.list-view .aspect-video img {
+		max-width: 100%;
+		max-height: 100%;
+	}
+	.list-view > div:last-child {
+		flex: 1;
+		margin-left: 1rem;
+	}
+	.list-view .line-clamp-2 {
+		display: -webkit-box;
+		-webkit-line-clamp: 3;
+		-webkit-box-orient: vertical;
+		overflow: hidden;
+	}
+
+	/* Mathematical Animation */
+	.math-animation {
+		animation: gentle-float 6s ease-in-out infinite;
+	}
+
+	@keyframes gentle-float {
+		0%, 100% { transform: translateY(0px); }
+		50% { transform: translateY(-5px); }
+	}
+
+	.outer-circle {
+		animation: circle-pulse 4s ease-in-out infinite;
+	}
+
+	.middle-circle {
+		animation: circle-pulse 4s ease-in-out infinite 0.5s;
+	}
+
+	.inner-circle {
+		animation: circle-pulse 4s ease-in-out infinite 1s;
+	}
+
+	.center-circle {
+		animation: circle-pulse 4s ease-in-out infinite 1.5s;
+	}
+
+	@keyframes circle-pulse {
+		0%, 100% { opacity: 0.7; }
+		50% { opacity: 1; }
+	}
+
+	.axes {
+		animation: axis-rotate 8s linear infinite;
+	}
+
+	@keyframes axis-rotate {
+		0% { transform: rotate(0deg); }
+		100% { transform: rotate(360deg); }
+	}
+
+	.diagonals {
+		animation: diagonal-fade 3s ease-in-out infinite;
+	}
+
+	@keyframes diagonal-fade {
+		0%, 100% { opacity: 0.8; }
+		50% { opacity: 0.3; }
+	}
+
+	.pi-symbol {
+		animation: pi-glow 2s ease-in-out infinite;
+	}
+
+	@keyframes pi-glow {
+		0%, 100% { fill-opacity: 0.9; }
+		50% { fill-opacity: 1; }
+	}
+
+	/* Print Styles - Enhanced for Teachers */
+	@media print {
+		.no-print {
+			display: none !important;
+		}
+
+		/* Show print-specific content */
+		.print-only {
+			display: block !important;
+		}
+
+		/* Reset layout for printing */
+		body {
+			font-family: 'Times New Roman', serif;
+			font-size: 12pt;
+			line-height: 1.4;
+			color: #000;
+			background: white !important;
+		}
+
+		/* Problem cards for printing */
+		.problem-card {
+			break-inside: avoid;
+			page-break-inside: avoid;
+			border: 1px solid #000 !important;
+			box-shadow: none !important;
+			margin-bottom: 20pt;
+			background: white !important;
+		}
+
+		.problem-card img {
+			max-width: 200px !important;
+			max-height: 150px !important;
+		}
+
+		.problem-card h3 {
+			font-size: 14pt !important;
+			font-weight: bold !important;
+			color: #000 !important;
+		}
+
+		.problem-card p {
+			font-size: 11pt !important;
+			color: #333 !important;
+		}
+
+		/* Filters - hide in print */
+		aside {
+			display: none !important;
+		}
+
+		/* Hero section - hide in print */
+		.mb-16.p-12.md\\:p-20.rounded-\\[3rem\\].bg-slate-950 {
+			display: none !important;
+		}
+
+		/* Print header */
+		@page {
+			margin: 1in;
+			size: A4;
+		}
+
+		/* Print footer with page numbers */
+		@page :first {
+			@bottom-center {
+				content: "МатАрхива - Олимписки Задачи";
+			}
+		}
+
+		@page :left {
+			@bottom-center {
+				content: counter(page);
+			}
+		}
+
+		@page :right {
+			@bottom-center {
+				content: counter(page);
+			}
+		}
+	}
+
+	/* Print preview button styles */
+	.print-button {
+		background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+		border: none;
+		color: white;
+		padding: 12px 24px;
+		border-radius: 8px;
+		font-weight: 600;
+		cursor: pointer;
+		transition: all 0.3s ease;
+		box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+	}
+
+	.print-button:hover {
+		transform: translateY(-2px);
+		box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+	}
+
+	/* Teacher mode toggle */
+	.teacher-mode {
+		background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+	}
+
+	.teacher-mode:hover {
+		background: linear-gradient(135deg, #e887f0 0%, #e84c62 100%);
+		box-shadow: 0 6px 20px rgba(240, 147, 251, 0.4);
+	}
+</style>

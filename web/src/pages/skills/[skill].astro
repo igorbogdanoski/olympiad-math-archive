@@ -1,0 +1,126 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import problems from '../../data/problems.json';
+
+export async function getStaticPaths() {
+  const allSkills = [...new Set(problems.flatMap(p => p.meta.related_skills || []))];
+  return allSkills.map(skill => ({
+    params: { skill },
+    props: { skill }
+  }));
+}
+
+const { skill } = Astro.props;
+const skillProblems = problems.filter(p => p.meta.related_skills?.includes(skill));
+
+const cleanBody = (text: string) => {
+  return text.split('##')[0].replace(/[\$\#\*]/g, '').slice(0, 100) + '...';
+};
+
+const getDifficultyColor = (diff: number) => {
+  if (diff <= 3) return 'bg-emerald-500';
+  if (diff <= 7) return 'bg-amber-500';
+  return 'bg-rose-500';
+};
+---
+
+<Layout title={`Задачи со вештина: ${skill.replace(/_/g, ' ')} | МатАрхива`}>
+  <div class="max-w-6xl mx-auto px-4 py-8">
+    <nav class="flex mb-8 text-sm font-medium text-slate-500 gap-2 items-center">
+      <a href="/" class="hover:text-blue-600 transition-colors">Архива</a>
+      <span>/</span>
+      <a href="/skills" class="hover:text-blue-600 transition-colors">Вештини</a>
+      <span>/</span>
+      <span class="text-slate-900 dark:text-slate-100 capitalize">{skill.replace(/_/g, ' ')}</span>
+    </nav>
+
+    <header class="mb-12">
+      <h1 class="text-4xl font-black text-slate-900 dark:text-white mb-4 capitalize">
+        Вештина: {skill.replace(/_/g, ' ')}
+      </h1>
+      <p class="text-slate-500 dark:text-slate-400 mb-6">
+        Пронајдени се {skillProblems.length} задачи кои ја користат оваа математичка стратегија.
+      </p>
+
+      <!-- Enhanced pedagogical content for specific skills -->
+      {skill === 'inequalities' && (
+        <div class="bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 rounded-[2rem] p-8 mb-8">
+          <div class="prose prose-slate dark:prose-invert max-w-none">
+            <h2 class="text-2xl font-bold text-slate-900 dark:text-white mb-4">Што е оваа вештина?</h2>
+            <p class="text-slate-700 dark:text-slate-300 mb-6">
+              Нееднаквостите (inequalities) се вештина за <strong>споредување вредности</strong>
+              и за наоѓање <strong>максимум или минимум</strong> под дадени услови.
+              Наместо точна вредност, целта е: „Колку големо / мало МОЖЕ да биде?"
+            </p>
+
+            <h3 class="text-xl font-semibold text-slate-900 dark:text-white mb-3">Зошто е олимписка?</h3>
+            <p class="text-slate-700 dark:text-slate-300 mb-4">
+              Нееднаквостите се сржта на олимписката алгебра. Тие учат оптимизација,
+              развиваат чувство за екстреми и користат симетрија и граници.
+            </p>
+
+            <h3 class="text-xl font-semibold text-slate-900 dark:text-white mb-3">Основни техники</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div class="bg-white dark:bg-slate-800 rounded-xl p-4">
+                <h4 class="font-semibold text-blue-600 dark:text-blue-400 mb-2">🟢 Основни</h4>
+                <ul class="text-sm text-slate-600 dark:text-slate-400 space-y-1">
+                  <li>• AM-GM нееднаквост</li>
+                  <li>• Cauchy-Schwarz</li>
+                  <li>• Триаголна нееднаквост</li>
+                </ul>
+              </div>
+              <div class="bg-white dark:bg-slate-800 rounded-xl p-4">
+                <h4 class="font-semibold text-amber-600 dark:text-amber-400 mb-2">🟡 Средно напредни</h4>
+                <ul class="text-sm text-slate-600 dark:text-slate-400 space-y-1">
+                  <li>• Симетрично парирање</li>
+                  <li>• Параметарски нееднаквости</li>
+                  <li>• Две променливи</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {skill === 'symmetry_pairing' && (
+        <div class="bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 rounded-[2rem] p-8 mb-8">
+          <div class="prose prose-slate dark:prose-invert max-w-none">
+            <h2 class="text-2xl font-bold text-slate-900 dark:text-white mb-4">Што е оваа вештина?</h2>
+            <p class="text-slate-700 dark:text-slate-300 mb-6">
+              Симетричното парирање е техника за трансформирање на сложени суми во едноставни
+              пресметки со групирање на симетрични членови.
+            </p>
+            <h3 class="text-xl font-semibold text-slate-900 dark:text-white mb-3">Клучна идеја</h3>
+            <p class="text-slate-700 dark:text-slate-300">
+              Ако имате израз f(x) + f(1-x) = константа, тогаш сумата на парови
+              станува едноставна пресметка на бројот на парови.
+            </p>
+          </div>
+        </div>
+      )}
+    </header>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      {skillProblems.map((prob) => (
+        <div class="problem-card group bg-white dark:bg-slate-900 rounded-[2.5rem] shadow-sm border border-slate-100 dark:border-slate-800 overflow-hidden hover:shadow-2xl hover:-translate-y-2 transition-all duration-500">
+          <a href={`/tasks/${prob.meta.problem_id || prob.filename.replace('.md', '')}`} class="block h-full">
+            <div class="p-8">
+              <div class="flex gap-2 mb-4">
+                <span class="text-[9px] font-black uppercase tracking-widest px-3 py-1 bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded-lg border border-blue-100 dark:border-blue-900/50">
+                  {prob.grade} Одд
+                </span>
+                <div class={`w-2 h-2 rounded-full mt-1.5 ${getDifficultyColor(prob.difficulty)}`}></div>
+              </div>
+              <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-4 leading-tight group-hover:text-blue-600 transition-colors">
+                {prob.filename.replace('.md', '').replace(/_/g, ' ')}
+              </h3>
+              <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">
+                {cleanBody(prob.body)}
+              </p>
+            </div>
+          </a>
+        </div>
+      ))}
+    </div>
+  </div>
+</Layout>

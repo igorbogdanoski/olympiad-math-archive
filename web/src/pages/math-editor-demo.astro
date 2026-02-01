@@ -1,0 +1,284 @@
+---
+import Layout from '../layouts/Layout.astro';
+import MathFormulaEditorEnhanced from '../components/MathFormulaEditorEnhanced.astro';
+import { t } from '../utils/i18n';
+
+const title = "Демо на Математички Едитор - Македонска Олимпиада по Математика";
+const description = "Напреден математички едитор со multimodal функции за македонското образование";
+---
+
+<Layout title={title} description={description}>
+  <main class="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 py-12">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Header -->
+      <div class="text-center mb-12">
+        <h1 class="text-4xl font-bold text-gray-900 mb-4">
+          🎯 Напреден Математички Едитор
+        </h1>
+        <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+          Современо решение за креирање математички формули со multimodal функции,
+          специјално развиено за македонското математичко образование и олимпијадите.
+        </p>
+        <div class="mt-6 p-4 bg-blue-50 rounded-lg border border-blue-200">
+          <h3 class="font-semibold text-blue-900 mb-2">🎯 Интеграција со националните стандарди</h3>
+          <p class="text-blue-700 text-sm">
+            Овој едитор сега може да се интегрира во постоечките страници со автоматско препознавање
+            на образовните стандарди и олимписките проблеми.
+          </p>
+        </div>
+      </div>
+
+      <!-- Features Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+        <div class="bg-white rounded-lg shadow-md p-6">
+          <div class="text-3xl mb-4">📚</div>
+          <h3 class="text-lg font-semibold text-gray-900 mb-2">Категоризирани Симболи</h3>
+          <p class="text-gray-600">Организирани симболи по предметни области: основни, геометрија, алгебра, калкулус, логика, шаблони.</p>
+        </div>
+
+        <div class="bg-white rounded-lg shadow-md p-6">
+          <div class="text-3xl mb-4">⚡</div>
+          <h3 class="text-lg font-semibold text-gray-900 mb-2">Валидација во реално време</h3>
+          <p class="text-gray-600">Автоматска проверка на LaTeX синтакса со кориснички пријателски пораки за грешки.</p>
+        </div>
+
+        <div class="bg-white rounded-lg shadow-md p-6">
+          <div class="text-3xl mb-4">📤</div>
+          <h3 class="text-lg font-semibold text-gray-900 mb-2">Експорт опции</h3>
+          <p class="text-gray-600">Експортирај формули како PNG слики, SVG векторски графики или LaTeX код за различни употреби.</p>
+        </div>
+
+        <div class="bg-white rounded-lg shadow-md p-6">
+          <div class="text-3xl mb-4">🕒</div>
+          <h3 class="text-lg font-semibold text-gray-900 mb-2">Историја на формули</h3>
+          <p class="text-gray-600">Зачувани формули со можност за брзо повторно користење и локално складирање.</p>
+        </div>
+
+        <div class="bg-white rounded-lg shadow-md p-6">
+          <div class="text-3xl mb-4">🎨</div>
+          <h3 class="text-lg font-semibold text-gray-900 mb-2">Шаблони</h3>
+          <p class="text-gray-600">Готови шаблони за најчесто користени математички формули: пропорции, квадратни равенки, Питагора, итн.</p>
+        </div>
+
+        <div class="bg-white rounded-lg shadow-md p-6">
+          <div class="text-3xl mb-4">♿</div>
+          <h3 class="text-lg font-semibold text-gray-900 mb-2">Пристапност</h3>
+          <p class="text-gray-600">WCAG 2.1 AA компатибилност со screen reader поддршка и семантички HTML елементи.</p>
+        </div>
+      </div>
+
+      <!-- Editor Demo -->
+      <div class="bg-white rounded-xl shadow-lg p-8 mb-12">
+        <h2 class="text-2xl font-bold text-gray-900 mb-6 text-center">
+          Исprobajte го едиторот - Со интеграција на националните стандарди
+        </h2>
+
+        <div class="space-y-6">
+          <!-- Standards Integration Example -->
+          <div data-standards-integration="true" data-olympiad-context="Муниципално 2025">
+            <h3 class="text-lg font-semibold text-gray-800 mb-3 flex items-center gap-2">
+              🏆 Муниципално натпреварување 2025 - Квадратни равенки
+            </h3>
+            <MathFormulaEditorEnhanced
+              initialValue="x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}"
+              placeholder="Внесете формула поврзана со стандардите..."
+              standardsIntegration={true}
+              olympiadContext="Муниципално 2025"
+            />
+          </div>
+
+          <!-- Olympiad Problem Example -->
+          <div data-standards-integration="true" data-olympiad-context="Олимпиада 2025">
+            <h3 class="text-lg font-semibold text-gray-800 mb-3 flex items-center gap-2">
+              🏆 Македонска математичка олимпиада 2025 - Геометриски проблеми
+            </h3>
+            <MathFormulaEditorEnhanced
+              initialValue="a^2 + b^2 = c^2"
+              placeholder="Олимпијаден геометриски проблем..."
+              standardsIntegration={true}
+              olympiadContext="Олимпиада 2025"
+            />
+          </div>
+
+          <!-- Curriculum Integration Example -->
+          <div data-standards-integration="true" data-olympiad-context="Настава 9. клас">
+            <h3 class="text-lg font-semibold text-gray-800 mb-3 flex items-center gap-2">
+              📚 Наставен план - 9. клас - Калкулус
+            </h3>
+            <MathFormulaEditorEnhanced
+              initialValue="\int_{0}^{\pi} \sin(x) \, dx = 2"
+              placeholder="Формула од наставниот план..."
+              standardsIntegration={true}
+              olympiadContext="Настава 9. клас"
+            />
+          </div>
+        </div>
+      </div>
+
+      <!-- Usage Instructions -->
+      <div class="bg-white rounded-xl shadow-lg p-8 mb-12">
+        <h2 class="text-2xl font-bold text-gray-900 mb-6 text-center">
+          Како да го користите едиторот
+        </h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div>
+            <h3 class="text-lg font-semibold text-blue-600 mb-4">🚀 Основни функции</h3>
+            <ul class="space-y-2 text-gray-700">
+              <li class="flex items-start">
+                <span class="text-green-500 mr-2">✓</span>
+                <span>Кликнете на tabs за различни категории симболи</span>
+              </li>
+              <li class="flex items-start">
+                <span class="text-green-500 mr-2">✓</span>
+                <span>Користете "Преглед" за да видите рендерирана формула</span>
+              </li>
+              <li class="flex items-start">
+                <span class="text-green-500 mr-2">✓</span>
+                <span>Копирајте LaTeX код со еден клик</span>
+              </li>
+              <li class="flex items-start">
+                <span class="text-green-500 mr-2">✓</span>
+                <span>Шаблони за брзо вметнување на формули</span>
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 class="text-lg font-semibold text-purple-600 mb-4">⚙️ Напредни функции</h3>
+            <ul class="space-y-2 text-gray-700">
+              <li class="flex items-start">
+                <span class="text-purple-500 mr-2">★</span>
+                <span>Валидирајте синтакса со "Валидирај" копчето</span>
+              </li>
+              <li class="flex items-start">
+                <span class="text-purple-500 mr-2">★</span>
+                <span>Пристапете историја на формули</span>
+              </li>
+              <li class="flex items-start">
+                <span class="text-purple-500 mr-2">★</span>
+                <span>Експортирајте како PNG/SVG слики</span>
+              </li>
+              <li class="flex items-start">
+                <span class="text-purple-500 mr-2">★</span>
+                <span>Автоматско зачувување во localStorage</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Integration Guide -->
+      <div class="bg-green-50 rounded-xl p-8 mb-12">
+        <h2 class="text-2xl font-bold text-gray-900 mb-6 text-center">
+          🚀 Интеграција во постоечките страници
+        </h2>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <div class="bg-white rounded-lg p-6">
+            <h3 class="text-lg font-semibold text-green-700 mb-4">Како да го интегрирате едиторот</h3>
+            <div class="space-y-4">
+              <div>
+                <h4 class="font-medium text-gray-900 mb-2">1. Во Curriculum Dashboard</h4>
+                <pre class="bg-gray-100 p-3 rounded text-sm overflow-x-auto"><code>&lt;!-- curriculum-alignment.astro --&gt;
+&lt;div data-standards-integration="true"
+     data-olympiad-context="Национални стандарди"&gt;
+  &lt;MathFormulaEditorEnhanced
+    standardsIntegration={true}
+    olympiadContext="Национални стандарди"
+    initialValue="формула од стандардите"
+  /&gt;
+&lt;/div&gt;</code></pre>
+              </div>
+
+              <div>
+                <h4 class="font-medium text-gray-900 mb-2">2. Во Olympiad Problems</h4>
+                <pre class="bg-gray-100 p-3 rounded text-sm overflow-x-auto"><code>&lt;!-- problem-page.astro --&gt;
+&lt;MathFormulaEditorEnhanced
+  standardsIntegration={true}
+  olympiadContext="Олимпиада 2025"
+  initialValue="решение на проблем"
+/&gt;</code></pre>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-lg p-6">
+            <h3 class="text-lg font-semibold text-blue-700 mb-4">Автоматско препознавање</h3>
+            <div class="space-y-4">
+              <div class="p-3 bg-blue-50 rounded">
+                <h4 class="font-medium text-blue-900 mb-2">Стандарди препознавање</h4>
+                <p class="text-sm text-blue-700">
+                  Едиторот автоматски препознава контекстот и сугерира
+                  соодветни симболи базирани на тековниот стандард.
+                </p>
+              </div>
+
+              <div class="p-3 bg-purple-50 rounded">
+                <h4 class="font-medium text-purple-900 mb-2">Олимпијаден контекст</h4>
+                <p class="text-sm text-purple-700">
+                  Кога е во олимпијаден режим, едиторот прикажува
+                  🏆 икона и се оптимизира за напредни проблеми.
+                </p>
+              </div>
+
+              <div class="p-3 bg-orange-50 rounded">
+                <h4 class="font-medium text-orange-900 mb-2">Наставна интеграција</h4>
+                <p class="text-sm text-orange-700">
+                  Поврзува формули со наставниот план и овозможува
+                  следење на напредокот на учениците.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Technical Details -->
+      <div class="bg-gray-50 rounded-xl p-8">
+        <h2 class="text-2xl font-bold text-gray-900 mb-6 text-center">
+          Технички детали
+        </h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="bg-white rounded-lg p-6">
+            <h3 class="text-lg font-semibold text-gray-900 mb-3">Технологии</h3>
+            <ul class="text-sm text-gray-600 space-y-1">
+              <li>• MathJax 3 за рендерирање</li>
+              <li>• Astro + TypeScript</li>
+              <li>• Tailwind CSS за стилови</li>
+              <li>• Web APIs (Clipboard, File)</li>
+              <li>• LocalStorage за перзистенција</li>
+              <li>• Macedonian национални стандарди</li>
+            </ul>
+          </div>
+
+          <div class="bg-white rounded-lg p-6">
+            <h3 class="text-lg font-semibold text-gray-900 mb-3">Компатибилност</h3>
+            <ul class="text-sm text-gray-600 space-y-1">
+              <li>• Современи веб прелистувачи</li>
+              <li>• Mobile-responsive дизайн</li>
+              <li>• Screen reader поддршка</li>
+              <li>• Keyboard navigation</li>
+              <li>• Macedonian јазик</li>
+              <li>• WCAG 2.1 AA стандарди</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</Layout>
+
+<style>
+  /* Custom styles for the demo page */
+  .math-formula-editor-enhanced {
+    margin-bottom: 2rem;
+  }
+
+  @media (max-width: 768px) {
+    .grid-cols-2 {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

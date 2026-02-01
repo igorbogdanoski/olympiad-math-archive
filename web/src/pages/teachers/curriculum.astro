@@ -1,0 +1,215 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import curriculumData from '../../data/curriculum_standards_processed.json';
+
+const pageTitle = "МатАрхива | Наставни Програми";
+const pageDescription = "Преглед на сите наставни програми по одделение според БРО - Буро за развој на образованието";
+
+// Organize curriculum by grade
+const gradeMap: Record<string, any> = {};
+const gradeOrder = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+
+// Extract all grades from curriculum data
+for (const cycleKey in curriculumData.cycles) {
+	const cycle = curriculumData.cycles[cycleKey];
+	for (const gradeKey of cycle.grades) {
+		if (curriculumData[gradeKey]) {
+			const gradeNum = parseInt(gradeKey.replace('grade_', ''));
+			gradeMap[gradeNum] = {
+				...curriculumData[gradeKey],
+				gradeKey: gradeKey,
+				cycleTitle: cycle.title
+			};
+		}
+	}
+}
+---
+
+<Layout title={pageTitle}>
+	<meta name="description" content={pageDescription} />
+
+	{/* Hero Section */}
+	<div class="relative mb-16 p-12 md:p-16 rounded-[3rem] bg-gradient-to-br from-indigo-50 via-purple-50/50 to-pink-50 dark:from-indigo-900/20 dark:via-purple-900/10 dark:to-pink-900/10 overflow-hidden shadow-2xl border border-indigo-200/50 dark:border-indigo-800/30">
+		<div class="absolute top-0 right-0 w-full h-full opacity-20 pointer-events-none">
+			<div class="absolute top-[-10%] right-[-10%] w-[50%] h-[50%] bg-indigo-600 rounded-full blur-[120px]"></div>
+			<div class="absolute bottom-[-10%] left-[-10%] w-[40%] h-[40%] bg-purple-600 rounded-full blur-[100px]"></div>
+		</div>
+
+		<div class="relative z-10 max-w-4xl">
+			<div class="flex items-center gap-3 mb-8">
+				<span class="inline-block px-4 py-1.5 rounded-full bg-indigo-500/10 text-indigo-400 text-xs font-black uppercase tracking-[0.2em] border border-indigo-500/20 backdrop-blur-md">
+					📚 БРО Наставни Програми
+				</span>
+			</div>
+
+			<h1 class="text-5xl md:text-7xl font-black text-white mb-8 leading-[1.1] tracking-tight">
+				Наставни <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-purple-400">Програми</span>
+			</h1>
+
+			<p class="text-slate-400 text-xl mb-10 leading-relaxed max-w-2xl font-medium">
+				Комплетен преглед на наставните програми за математика од I до XII одделение според БРО.
+			</p>
+
+			<div class="flex flex-wrap gap-4 items-center text-slate-300">
+				<div class="flex items-center gap-2">
+					<svg class="w-5 h-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+					</svg>
+					<span class="text-sm font-medium">391 Стандарди</span>
+				</div>
+				<div class="flex items-center gap-2">
+					<svg class="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+					</svg>
+					<span class="text-sm font-medium">12 Одделенија</span>
+				</div>
+				<div class="flex items-center gap-2">
+					<svg class="w-5 h-5 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+					</svg>
+					<span class="text-sm font-medium">БРО Усогласено</span>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	{/* Navigation Tabs */}
+	<div class="max-w-6xl mx-auto mb-12">
+		<div class="flex flex-wrap gap-2 justify-center">
+			{gradeOrder.map((grade) => (
+				<a href={`#grade-${grade}`} class="px-5 py-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 font-semibold hover:bg-indigo-50 dark:hover:bg-indigo-900/30 hover:border-indigo-300 dark:hover:border-indigo-700 transition-all">
+					{grade === 1 ? 'I' : grade === 2 ? 'II' : grade === 3 ? 'III' : grade === 4 ? 'IV' : grade === 5 ? 'V' : grade === 6 ? 'VI' : grade === 7 ? 'VII' : grade === 8 ? 'VIII' : grade === 9 ? 'IX' : grade === 10 ? 'X' : grade === 11 ? 'XI' : 'XII'} одд
+				</a>
+			))}
+		</div>
+	</div>
+
+	{/* Curriculum by Grade */}
+	<div class="max-w-6xl mx-auto space-y-16">
+		{gradeOrder.map((gradeNum) => {
+			const gradeData = gradeMap[gradeNum];
+			if (!gradeData) return null;
+
+			const romanNumeral = gradeNum === 1 ? 'I' : gradeNum === 2 ? 'II' : gradeNum === 3 ? 'III' : gradeNum === 4 ? 'IV' : gradeNum === 5 ? 'V' : gradeNum === 6 ? 'VI' : gradeNum === 7 ? 'VII' : gradeNum === 8 ? 'VIII' : gradeNum === 9 ? 'IX' : gradeNum === 10 ? 'X' : gradeNum === 11 ? 'XI' : 'XII';
+
+			return (
+				<div id={`grade-${gradeNum}`} class="scroll-mt-8">
+					{/* Grade Header */}
+					<div class="mb-8">
+						<div class="flex items-center gap-4 mb-3">
+							<div class="w-14 h-14 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-2xl flex items-center justify-center shadow-lg">
+								<span class="text-white font-black text-2xl">{romanNumeral}</span>
+							</div>
+							<div>
+								<h2 class="text-3xl font-black text-slate-900 dark:text-white">
+									{romanNumeral} Одделение
+								</h2>
+								<p class="text-slate-500 dark:text-slate-400 text-sm">{gradeData.cycleTitle}</p>
+							</div>
+						</div>
+					</div>
+
+					{/* Themes */}
+					<div class="space-y-8">
+						{gradeData.themes && gradeData.themes.map((theme: any, themeIndex: number) => (
+							<div class="bg-white dark:bg-slate-900 rounded-[2rem] p-8 border border-slate-100 dark:border-slate-800 shadow-lg">
+								<div class="mb-6">
+									<div class="flex items-start justify-between mb-3">
+										<h3 class="text-2xl font-bold text-slate-900 dark:text-white flex items-center gap-3">
+											<span class="w-8 h-8 bg-indigo-100 dark:bg-indigo-900/30 rounded-lg flex items-center justify-center text-indigo-600 dark:text-indigo-400 font-black text-sm">
+												{themeIndex + 1}
+											</span>
+											{theme.theme}
+										</h3>
+									</div>
+									{theme.description && (
+										<p class="text-slate-600 dark:text-slate-300 ml-11">{theme.description}</p>
+									)}
+								</div>
+
+								{/* Standards */}
+								{theme.standards && theme.standards.length > 0 && (
+									<div class="ml-11 space-y-6">
+										{theme.standards.map((standard: any, stdIndex: number) => (
+											<div class="border-l-4 border-indigo-200 dark:border-indigo-800 pl-6">
+												<div class="mb-3">
+													<div class="flex items-center gap-2 mb-2">
+														<span class="text-xs font-mono font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-900/20 px-2 py-1 rounded">
+															{standard.standard_code}
+														</span>
+													</div>
+													<h4 class="font-bold text-slate-900 dark:text-white text-lg">
+														{standard.standard}
+													</h4>
+												</div>
+
+												{/* Learning Objectives */}
+												{standard.learning_objectives && standard.learning_objectives.length > 0 && (
+													<div class="mb-4">
+														<h5 class="text-sm font-bold text-slate-700 dark:text-slate-300 mb-2 flex items-center gap-2">
+															<svg class="w-4 h-4 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+																<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+															</svg>
+															Цели на учење:
+														</h5>
+														<ul class="space-y-1.5">
+															{standard.learning_objectives.map((objective: string) => (
+																<li class="text-sm text-slate-600 dark:text-slate-400 flex items-start gap-2">
+																	<span class="text-blue-400 mt-1">•</span>
+																	<span>{objective}</span>
+																</li>
+															))}
+														</ul>
+													</div>
+												)}
+
+												{/* Activities */}
+												{standard.suggested_theme_activities && standard.suggested_theme_activities.length > 0 && (
+													<div>
+														<h5 class="text-sm font-bold text-slate-700 dark:text-slate-300 mb-2 flex items-center gap-2">
+															<svg class="w-4 h-4 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+																<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+															</svg>
+															Предложени активности:
+														</h5>
+														<ul class="space-y-1.5">
+															{standard.suggested_theme_activities.map((activity: string) => (
+																<li class="text-sm text-slate-600 dark:text-slate-400 flex items-start gap-2">
+																	<span class="text-purple-400 mt-1">→</span>
+																	<span>{activity}</span>
+																</li>
+															))}
+														</ul>
+													</div>
+												)}
+											</div>
+										))}
+									</div>
+								)}
+							</div>
+						))}
+					</div>
+				</div>
+			);
+		})}
+	</div>
+
+	{/* Back to Top Button */}
+	<div class="max-w-6xl mx-auto mt-16 text-center">
+		<a href="#top" class="inline-flex items-center gap-2 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-bold py-4 px-8 rounded-xl transition-all shadow-lg">
+			<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+				<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"/>
+			</svg>
+			<span>Назад на врв</span>
+		</a>
+	</div>
+
+	<div class="h-16"></div>
+
+</Layout>
+
+<style>
+	.scroll-mt-8 {
+		scroll-margin-top: 2rem;
+	}
+</style>

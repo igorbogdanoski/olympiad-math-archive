@@ -1,0 +1,164 @@
+---
+import { t } from '../utils/i18n';
+---
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+	<!-- Quick Actions -->
+	<div class="bg-white dark:bg-slate-900 rounded-3xl p-8 border border-slate-100 dark:border-slate-800 shadow-xl">
+		<div class="flex items-center gap-3 mb-6">
+			<div class="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-xl flex items-center justify-center">
+				<span class="text-blue-600 dark:text-blue-400 text-xl">⚡</span>
+			</div>
+			<div>
+				<h3 class="text-xl font-bold text-slate-900 dark:text-white">Брзи Активности</h3>
+				<p class="text-slate-500 dark:text-slate-400 text-sm">Почнете со основни алатки</p>
+			</div>
+		</div>
+
+		<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+			<a href="/manim-editor" class="group p-6 bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 rounded-2xl border border-blue-100 dark:border-blue-800 hover:shadow-lg transition-all">
+				<div class="flex items-center gap-3 mb-3">
+					<div class="w-8 h-8 bg-blue-500 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
+						<span class="text-white text-sm">🎬</span>
+					</div>
+					<h4 class="font-bold text-slate-900 dark:text-white">Manim Едитор</h4>
+				</div>
+				<p class="text-slate-600 dark:text-slate-400 text-sm">Креирајте математички анимации</p>
+			</a>
+
+			<a href="/test-generator" class="group p-6 bg-gradient-to-br from-emerald-50 to-green-50 dark:from-emerald-900/20 dark:to-green-900/20 rounded-2xl border border-emerald-100 dark:border-emerald-800 hover:shadow-lg transition-all">
+				<div class="flex items-center gap-3 mb-3">
+					<div class="w-8 h-8 bg-emerald-500 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
+						<span class="text-white text-sm">📝</span>
+					</div>
+					<h4 class="font-bold text-slate-900 dark:text-white">Генератор на Тестови</h4>
+				</div>
+				<p class="text-slate-600 dark:text-slate-400 text-sm">Автоматски генерирајте тестови</p>
+			</a>
+
+			<a href="/worksheet-creator" class="group p-6 bg-gradient-to-br from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20 rounded-2xl border border-purple-100 dark:border-purple-800 hover:shadow-lg transition-all">
+				<div class="flex items-center gap-3 mb-3">
+					<div class="w-8 h-8 bg-purple-500 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
+						<span class="text-white text-sm">📄</span>
+					</div>
+					<h4 class="font-bold text-slate-900 dark:text-white">Работни Листови</h4>
+				</div>
+				<p class="text-slate-600 dark:text-slate-400 text-sm">Креирајте интерактивни листови</p>
+			</a>
+
+			<a href="/progress-reports" class="group p-6 bg-gradient-to-br from-orange-50 to-red-50 dark:from-orange-900/20 dark:to-red-900/20 rounded-2xl border border-orange-100 dark:border-orange-800 hover:shadow-lg transition-all">
+				<div class="flex items-center gap-3 mb-3">
+					<div class="w-8 h-8 bg-orange-500 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
+						<span class="text-white text-sm">📊</span>
+					</div>
+					<h4 class="font-bold text-slate-900 dark:text-white">Извештаи за Напредок</h4>
+				</div>
+				<p class="text-slate-600 dark:text-slate-400 text-sm">Следете успехот на учениците</p>
+			</a>
+		</div>
+	</div>
+
+	<!-- Recent Activity -->
+	<div class="bg-white dark:bg-slate-900 rounded-3xl p-8 border border-slate-100 dark:border-slate-800 shadow-xl">
+		<div class="flex items-center gap-3 mb-6">
+			<div class="w-12 h-12 bg-emerald-100 dark:bg-emerald-900/30 rounded-xl flex items-center justify-center">
+				<span class="text-emerald-600 dark:text-emerald-400 text-xl">📈</span>
+			</div>
+			<div>
+				<h3 class="text-xl font-bold text-slate-900 dark:text-white">Скорешни Активности</h3>
+				<p class="text-slate-500 dark:text-slate-400 text-sm">Вашите последни креирани материјали</p>
+			</div>
+		</div>
+
+		<div class="space-y-4">
+			<div class="flex items-center gap-4 p-4 bg-slate-50 dark:bg-slate-800 rounded-xl">
+				<div class="w-10 h-10 bg-blue-500 rounded-lg flex items-center justify-center">
+					<span class="text-white text-sm">🎬</span>
+				</div>
+				<div class="flex-1">
+					<h4 class="font-bold text-slate-900 dark:text-white">Питоагоровата теорема</h4>
+					<p class="text-slate-600 dark:text-slate-400 text-sm">Анимација креирана пред 2 часа</p>
+				</div>
+				<span class="px-3 py-1 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 rounded-full text-xs font-medium">Завршено</span>
+			</div>
+
+			<div class="flex items-center gap-4 p-4 bg-slate-50 dark:bg-slate-800 rounded-xl">
+				<div class="w-10 h-10 bg-purple-500 rounded-lg flex items-center justify-center">
+					<span class="text-white text-sm">📝</span>
+				</div>
+				<div class="flex-1">
+					<h4 class="font-bold text-slate-900 dark:text-white">Тест за геометрија 8 одд.</h4>
+					<p class="text-slate-600 dark:text-slate-400 text-sm">Генерирано пред 1 ден</p>
+				</div>
+				<span class="px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded-full text-xs font-medium">Во употреба</span>
+			</div>
+
+			<div class="flex items-center gap-4 p-4 bg-slate-50 dark:bg-slate-800 rounded-xl">
+				<div class="w-10 h-10 bg-orange-500 rounded-lg flex items-center justify-center">
+					<span class="text-white text-sm">📊</span>
+				</div>
+				<div class="flex-1">
+					<h4 class="font-bold text-slate-900 dark:text-white">Извештај за класата</h4>
+					<p class="text-slate-600 dark:text-slate-400 text-sm">Генерирано пред 3 дена</p>
+				</div>
+				<span class="px-3 py-1 bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 rounded-full text-xs font-medium">Архивирано</span>
+			</div>
+		</div>
+
+		<div class="mt-6 pt-6 border-t border-slate-200 dark:border-slate-700">
+			<a href="/activity-history" class="text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 font-medium text-sm">
+				Види сите активности →
+			</a>
+		</div>
+	</div>
+</div>
+
+<!-- Learning Resources -->
+<div class="bg-gradient-to-r from-indigo-50 to-purple-50 dark:from-indigo-900/20 dark:to-purple-900/20 rounded-3xl p-8 border border-indigo-100 dark:border-indigo-800">
+	<div class="flex items-center gap-3 mb-6">
+		<div class="w-12 h-12 bg-indigo-100 dark:bg-indigo-900/30 rounded-xl flex items-center justify-center">
+			<span class="text-indigo-600 dark:text-indigo-400 text-xl">🎓</span>
+		</div>
+		<div>
+			<h3 class="text-xl font-bold text-slate-900 dark:text-white">Наставни Ресурси</h3>
+			<p class="text-slate-500 dark:text-slate-400 text-sm">Додатни алатки и водичи за подобро учење</p>
+		</div>
+	</div>
+
+	<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+		<div class="bg-white dark:bg-slate-800 rounded-2xl p-6 border border-slate-100 dark:border-slate-700 hover:shadow-lg transition-all">
+			<div class="w-12 h-12 bg-blue-500 rounded-xl flex items-center justify-center mb-4">
+				<span class="text-white text-lg">📚</span>
+			</div>
+			<h4 class="font-bold text-slate-900 dark:text-white mb-2">Методички Насоки</h4>
+			<p class="text-slate-600 dark:text-slate-400 text-sm mb-4">Детални упатства за ефективно учење</p>
+			<a href="/guides" class="text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 font-medium text-sm">Дознај повеќе →</a>
+		</div>
+
+		<div class="bg-white dark:bg-slate-800 rounded-2xl p-6 border border-slate-100 dark:border-slate-700 hover:shadow-lg transition-all">
+			<div class="w-12 h-12 bg-emerald-500 rounded-xl flex items-center justify-center mb-4">
+				<span class="text-white text-lg">🔧</span>
+			</div>
+			<h4 class="font-bold text-slate-900 dark:text-white mb-2">Алатки и Templates</h4>
+			<p class="text-slate-600 dark:text-slate-400 text-sm mb-4">Готови шаблони за брзо креирање</p>
+			<a href="/templates" class="text-emerald-600 hover:text-emerald-700 dark:text-emerald-400 dark:hover:text-emerald-300 font-medium text-sm">Истражи →</a>
+		</div>
+
+		<div class="bg-white dark:bg-slate-800 rounded-2xl p-6 border border-slate-100 dark:border-slate-700 hover:shadow-lg transition-all">
+			<div class="w-12 h-12 bg-purple-500 rounded-xl flex items-center justify-center mb-4">
+				<span class="text-white text-lg">👥</span>
+			</div>
+			<h4 class="font-bold text-slate-900 dark:text-white mb-2">Заедница</h4>
+			<p class="text-slate-600 dark:text-slate-400 text-sm mb-4">Размена на искуства со колеги</p>
+			<a href="/community" class="text-purple-600 hover:text-purple-700 dark:text-purple-400 dark:hover:text-purple-300 font-medium text-sm">Приклучи се →</a>
+		</div>
+
+		<div class="bg-white dark:bg-slate-800 rounded-2xl p-6 border border-slate-100 dark:border-slate-700 hover:shadow-lg transition-all">
+			<div class="w-12 h-12 bg-orange-500 rounded-xl flex items-center justify-center mb-4">
+				<span class="text-white text-lg">📞</span>
+			</div>
+			<h4 class="font-bold text-slate-900 dark:text-white mb-2">Поддршка</h4>
+			<p class="text-slate-600 dark:text-slate-400 text-sm mb-4">Помош и техничка поддршка</p>
+			<a href="/support" class="text-orange-600 hover:text-orange-700 dark:text-orange-400 dark:hover:text-orange-300 font-medium text-sm">Контакт →</a>
+		</div>
+	</div>
+</div>

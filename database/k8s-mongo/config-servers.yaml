@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mongo-config
+  namespace: mongodb-cluster
+spec:
+  serviceName: mongo-config
+  replicas: 3
+  selector:
+    matchLabels:
+      app: mongo-config
+  template:
+    metadata:
+      labels:
+        app: mongo-config
+    spec:
+      containers:
+      - name: mongo
+        image: mongo:6.0
+        command:
+        - mongod
+        - --configsvr
+        - --replSet
+        - configReplSet
+        - --bind_ip_all
+        - --port
+        - "27019"
+        ports:
+        - containerPort: 27019
+          name: mongo
+        volumeMounts:
+        - name: mongo-config-data
+          mountPath: /data/db
+  volumeClaimTemplates:
+  - metadata:
+    name: mongo-config-data
+    namespace: mongodb-cluster
+  spec:
+    accessModes: [ "ReadWriteOnce" ]
+    resources:
+      requests:
+        storage: 10Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongo-config
+  namespace: mongodb-cluster
+  labels:
+    app: mongo-config
+spec:
+  ports:
+  - port: 27019
+    targetPort: 27019
+  clusterIP: None
+  selector:
+    app: mongo-config

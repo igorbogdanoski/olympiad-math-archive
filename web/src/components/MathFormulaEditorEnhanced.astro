@@ -1,0 +1,1242 @@
+---
+import { t } from '../utils/i18n';
+
+export interface Props {
+  initialValue?: string;
+  placeholder?: string;
+  className?: string;
+  locale?: 'mk';
+  standardsIntegration?: boolean;
+  olympiadContext?: string;
+}
+
+const {
+  initialValue = '',
+  placeholder = t('math.latex_placeholder'),
+  className = '',
+  locale = 'mk',
+  standardsIntegration = false,
+  olympiadContext = ''
+} = Astro.props;
+---
+
+<div class:list={["math-formula-editor-enhanced border border-gray-300 rounded-lg overflow-hidden bg-white", className]}>
+  <div class="flex items-center justify-between p-3 bg-gray-50 border-b border-gray-200">
+    <div class="flex items-center gap-2">
+      <h3 class="text-sm font-medium text-gray-700" id="math-editor-title">{t('math.formula_editor')}</h3>
+      <span class="text-xs text-gray-500 bg-gray-200 px-2 py-1 rounded">LaTeX</span>
+      {standardsIntegration && olympiadContext && (
+        <span class="text-xs text-blue-600 bg-blue-100 px-2 py-1 rounded">🏆 {olympiadContext}</span>
+      )}
+    </div>
+    <div class="flex items-center gap-2">
+      <button class="validate-btn text-xs px-2 py-1 bg-orange-100 text-orange-700 rounded hover:bg-orange-200" aria-label="Валидирај формула">
+        Валидирај
+      </button>
+      <button class="history-btn text-xs px-2 py-1 bg-indigo-100 text-indigo-700 rounded hover:bg-indigo-200" aria-label="Историја на формули">
+        Историја
+      </button>
+      <button class="export-btn text-xs px-2 py-1 bg-purple-100 text-purple-700 rounded hover:bg-purple-200" aria-label="Експортирај">
+        {t('common.export')}
+      </button>
+      <button class="copy-btn text-xs px-2 py-1 bg-green-100 text-green-700 rounded hover:bg-green-200" aria-label={t('common.copy')}>
+        {t('common.copy')}
+      </button>
+      <button class="preview-toggle text-xs px-2 py-1 bg-blue-100 text-blue-700 rounded hover:bg-blue-200" aria-pressed="false">
+        {t('common.preview')}
+      </button>
+      <button class="help-btn text-xs px-2 py-1 bg-gray-100 text-gray-700 rounded hover:bg-gray-200" aria-expanded="false" aria-controls="latex-help-guide">
+        {t('common.help')}
+      </button>
+      <button class="handwriting-toggle relative z-20 text-xs px-2 py-1 bg-yellow-100 text-yellow-700 rounded hover:bg-yellow-200 flex items-center gap-1" aria-label="Режим за цртање">
+        <span>✍️</span> Цртај
+      </button>
+    </div>
+  </div>
+
+  <div class="relative min-h-[14rem]">
+    <label for="latex-editor-input" class="sr-only">{t('math.formula_editor')}</label>
+
+    <textarea
+      id="latex-editor-input"
+      class="latex-input w-full h-48 p-3 font-mono text-sm border-0 resize-none focus:ring-0 focus:outline-none"
+      placeholder={placeholder}
+      spellcheck="false"
+      aria-describedby="math-editor-title"
+    >{initialValue}</textarea>
+
+    <div class="handwriting-container absolute inset-0 bg-white hidden flex-col z-10">
+        <canvas class="math-canvas w-full flex-grow border-b border-gray-200 cursor-crosshair touch-none"></canvas>
+
+        <div class="flex items-center justify-between p-2 bg-gray-50 border-t text-xs">
+            <span class="text-gray-500">Нацртај ја формулата...</span>
+            <div class="flex gap-2">
+                <button class="clear-canvas-btn px-2 py-1 bg-red-100 text-red-700 rounded hover:bg-red-200" aria-label="Избриши сè нацртано">
+                    Избриши сè
+                </button>
+                <button class="recognize-btn px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-700 font-medium flex items-center gap-1" aria-label="Препознај ракопис">
+                    <span class="recognize-icon">✨</span>
+                    <span class="recognize-text">Претвори во LaTeX</span>
+                </button>
+            </div>
+        </div>
+        <div class="canvas-loading absolute inset-0 bg-white/80 hidden items-center justify-center flex-col">
+            <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mb-2"></div>
+            <span class="text-xs text-blue-600 font-medium">AI Анализа...</span>
+        </div>
+    </div>
+
+    <div class="math-preview absolute inset-0 p-6 opacity-0 transition-opacity bg-gradient-to-br from-blue-50 to-indigo-50 hidden overflow-y-auto overflow-x-hidden border border-blue-200 rounded pointer-events-none">
+      <div class="preview-content text-xl leading-relaxed text-center py-8" aria-hidden="true"></div>
+    </div>
+  </div>
+
+  <div class="border-t border-gray-200 bg-gray-50">
+    <!-- Symbol Categories Tabs -->
+    <div class="flex border-b border-gray-200 bg-white px-2 overflow-x-auto">
+      <button class="tab-btn active px-3 py-2 text-xs font-medium border-b-2 border-blue-500 text-blue-600 whitespace-nowrap" data-tab="basic">Основни</button>
+      <button class="tab-btn px-3 py-2 text-xs font-medium text-gray-500 hover:text-gray-700 whitespace-nowrap" data-tab="geometry">Геометрија</button>
+      <button class="tab-btn px-3 py-2 text-xs font-medium text-gray-500 hover:text-gray-700 whitespace-nowrap" data-tab="algebra">Алгебра</button>
+      <button class="tab-btn px-3 py-2 text-xs font-medium text-gray-500 hover:text-gray-700 whitespace-nowrap" data-tab="calculus">Калкулус</button>
+      <button class="tab-btn px-3 py-2 text-xs font-medium text-gray-500 hover:text-gray-700 whitespace-nowrap" data-tab="logic">Логика</button>
+      <button class="tab-btn px-3 py-2 text-xs font-medium text-gray-500 hover:text-gray-700 whitespace-nowrap" data-tab="templates">Шаблони</button>
+    </div>
+
+    <!-- Basic Symbols -->
+    <div class="symbol-tab active p-2" id="basic-tab">
+      <div class="flex flex-wrap gap-1 text-xs" role="toolbar" aria-label="Основни математички симболи">
+        <button class="symbol-btn px-2 py-1 bg-white border border-gray-300 rounded hover:bg-blue-50" data-latex="+" aria-label="Плус"> + </button>
+        <button class="symbol-btn px-2 py-1 bg-white border border-gray-300 rounded hover:bg-blue-50" data-latex="-" aria-label="Минус"> - </button>
+        <button class="symbol-btn px-2 py-1 bg-white border border-gray-300 rounded hover:bg-blue-50" data-latex="\times" aria-label="Множење"> × </button>
+        <button class="symbol-btn px-2 py-1 bg-white border border-gray-300 rounded hover:bg-blue-50" data-latex="\div" aria-label="Делење"> ÷ </button>
+        <button class="symbol-btn px-2 py-1 bg-white border border-gray-300 rounded hover:bg-blue-50" data-latex="=" aria-label="Еднакво"> = </button>
+        <button class="symbol-btn px-2 py-1 bg-white border border-gray-300 rounded hover:bg-blue-50" data-latex="\neq" aria-label="Не е еднакво"> ≠ </button>
+        <button class="symbol-btn px-2 py-1 bg-white border border-gray-300 rounded hover:bg-blue-50" data-latex="\sqrt{}" data-cursor-offset="-1" aria-label="Корен"> √ </button>
+        <button class="symbol-btn px-2 py-1 bg-white border border-gray-300 rounded hover:bg-blue-50" data-latex="\frac{}{}" data-cursor-offset="-3" aria-label="Дропка"> Frac </button>
+        <button class="symbol-btn px-2 py-1 bg-white border border-gray-300 rounded hover:bg-blue-50" data-latex="^{}" data-cursor-offset="-1" aria-label="Степен"> xʸ </button>
+        <button class="symbol-btn px-2 py-1 bg-white border border-gray-300 rounded hover:bg-blue-50" data-latex="_{}" data-cursor-offset="-1" aria-label="Индекс"> xₙ </button>
+      </div>
+    </div>
+
+    <!-- Geometry Symbols -->
+    <div class="symbol-tab hidden p-2" id="geometry-tab">
+      <div class="flex flex-wrap gap-1 text-xs" role="toolbar" aria-label="Геометриски симболи">
+        <!-- Basic geometry -->
+        <button class="symbol-btn px-2 py-1 bg-white border border-gray-300 rounded hover:bg-blue-50" data-latex="\angle" aria-label="Агол"> ∠ </button>
+        <button class="symbol-btn px-2 py-1 bg-white border border-gray-300 rounded hover:bg-blue-50" data-latex="\Delta" aria-label="Триаголник"> Δ </button>
+        <button class="symbol-btn px-2 py-1 bg-white border border-gray-300 rounded hover:bg-blue-50" data-latex="\parallel" aria-label="Паралелно"> ∥ </button>
+        <button class="symbol-btn px-2 py-1 bg-white border border-gray-300 rounded hover:bg-blue-50" data-latex="\perp" aria-label="Перпендикуларно"> ⊥ </button>
+        <button class="symbol-btn px-2 py-1 bg-white border border-gray-300 rounded hover:bg-blue-50" data-latex="\cong" aria-label="Конгруентно"> ≅ </button>
+        <button class="symbol-btn px-2 py-1 bg-white border border-gray-300 rounded hover:bg-blue-50" data-latex="\sim" aria-label="Слично"> ∼ </button>
+
+        <!-- Circles and arcs -->
+        <button class="symbol-btn px-2 py-1 bg-white border border-gray-300 rounded hover:bg-blue-50" data-latex="\bigcirc" aria-label="Круг"> ○ </button>
+        <button class="symbol-btn px-2 py-1 bg-white border border-gray-300 rounded hover:bg-blue-50" data-latex="\odot" aria-label="Круг со центар"> ⊙ </button>
+        <button class="symbol-btn px-2 py-1 bg-white border border-gray-300 rounded hover:bg-blue-50" data-latex="\bigodot" aria-label="Голем круг"> ⨀ </button>
+        <button class="symbol-btn px-2 py-1 bg-white border border-gray-300 rounded hover:bg-blue-50" data-latex="\measuredangle" aria-label="Измерен агол"> ∡ </button>
+        <button class="symbol-btn px-2 py-1 bg-white border border-gray-300 rounded hover:bg-blue-50" data-latex="\sphericalangle" aria-label="Сферичен агол"> ∢ </button>
+
+        <!-- Lines and segments -->
+        <button class="symbol-btn px-2 py-1 bg-white border border-gray-300 rounded hover:bg-blue-50" data-latex="\overline{}" data-cursor-offset="-1" aria-label="Линија над"> AB </button>
+        <button class="symbol-btn px-2 py-1 bg-white border border-gray-300 rounded hover:bg-blue-50" data-latex="\overrightarrow{}" data-cursor-offset="-1" aria-label="Вектор"> → </button>
+        <button class="symbol-btn px-2 py-1 bg-white border border-gray-300 rounded hover:bg-blue-50" data-latex="\overleftrightarrow{}" data-cursor-offset="-1" aria-label="Линија"> ↔ </button>
+
+        <!-- Shapes -->
+        <button class="symbol-btn px-2 py-1 bg-white border border-gray-300 rounded hover:bg-blue-50" data-latex="\square" aria-label="Квадрат"> □ </button>
+        <button class="symbol-btn px-2 py-1 bg-white border border-gray-300 rounded hover:bg-blue-50" data-latex="\triangle" aria-label="Триаголник"> △ </button>
+        <button class="symbol-btn px-2 py-1 bg-white border border-gray-300 rounded hover:bg-blue-50" data-latex="\diamond" aria-label="Ромб"> ◇ </button>
+      </div>
+    </div>
+
+    <!-- Algebra Symbols -->
+    <div class="symbol-tab hidden p-2" id="algebra-tab">
+      <div class="flex flex-wrap gap-1 text-xs" role="toolbar" aria-label="Алгебарски симболи">
+        <!-- Variables and constants -->
+        <button class="symbol-btn px-2 py-1 bg-white border border-gray-300 rounded hover:bg-blue-50" data-latex="x" aria-label="x"> x </button>
+        <button class="symbol-btn px-2 py-1 bg-white border border-gray-300 rounded hover:bg-blue-50" data-latex="y" aria-label="y"> y </button>
+        <button class="symbol-btn px-2 py-1 bg-white border border-gray-300 rounded hover:bg-blue-50" data-latex="z" aria-label="z"> z </button>
+        <button class="symbol-btn px-2 py-1 bg-white border border-gray-300 rounded hover:bg-blue-50" data-latex="a" aria-label="a"> a </button>
+        <button class="symbol-btn px-2 py-1 bg-white border border-gray-300 rounded hover:bg-blue-50" data-latex="b" aria-label="b"> b </button>
+        <button class="symbol-btn px-2 py-1 bg-white border border-gray-300 rounded hover:bg-blue-50" data-latex="c" aria-label="c"> c </button>
+        <button class="symbol-btn px-2 py-1 bg-white border border-gray-300 rounded hover:bg-blue-50" data-latex="n" aria-label="n"> n </button>
+        <button class="symbol-btn px-2 py-1 bg-white border border-gray-300 rounded hover:bg-blue-50" data-latex="k" aria-label="k"> k </button>
+
+        <!-- Functions -->
+        <button class="symbol-btn px-2 py-1 bg-white border border-gray-300 rounded hover:bg-blue-50" data-latex="f(x)" aria-label="Функција"> f(x) </button>
+        <button class="symbol-btn px-2 py-1 bg-white border border-gray-300 rounded hover:bg-blue-50" data-latex="g(x)" aria-label="Функција g"> g(x) </button>
+        <button class="symbol-btn px-2 py-1 bg-white border border-gray-300 rounded hover:bg-blue-50" data-latex="\log{}" data-cursor-offset="-1" aria-label="Логаритам"> log </button>
+        <button class="symbol-btn px-2 py-1 bg-white border border-gray-300 rounded hover:bg-blue-50" data-latex="\ln{}" data-cursor-offset="-1" aria-label="Природен логаритам"> ln </button>
+        <button class="symbol-btn px-2 py-1 bg-white border border-gray-300 rounded hover:bg-blue-50" data-latex="\exp{}" data-cursor-offset="-1" aria-label="Експоненцијална"> exp </button>
+        <button class="symbol-btn px-2 py-1 bg-white border border-gray-300 rounded hover:bg-blue-50" data-latex="\sin{}" data-cursor-offset="-1" aria-label="Синус"> sin </button>
+        <button class="symbol-btn px-2 py-1 bg-white border border-gray-300 rounded hover:bg-blue-50" data-latex="\cos{}" data-cursor-offset="-1" aria-label="Косинус"> cos </button>
+        <button class="symbol-btn px-2 py-1 bg-white border border-gray-300 rounded hover:bg-blue-50" data-latex="\tan{}" data-cursor-offset="-1" aria-label="Тангенс"> tan </button>
+
+        <!-- Operations -->
+        <button class="symbol-btn px-2 py-1 bg-white border border-gray-300 rounded hover:bg-blue-50" data-latex="\sum" aria-label="Сума"> ∑ </button>
+        <button class="symbol-btn px-2 py-1 bg-white border border-gray-300 rounded hover:bg-blue-50" data-latex="\prod" aria-label="Производ"> ∏ </button>
+        <button class="symbol-btn px-2 py-1 bg-white border border-gray-300 rounded hover:bg-blue-50" data-latex="\bigcup" aria-label="Унија"> ∪ </button>
+        <button class="symbol-btn px-2 py-1 bg-white border border-gray-300 rounded hover:bg-blue-50" data-latex="\bigcap" aria-label="Пресек"> ∩ </button>
+        <button class="symbol-btn px-2 py-1 bg-white border border-gray-300 rounded hover:bg-blue-50" data-latex="\emptyset" aria-label="Празно множество"> ∅ </button>
+        <button class="symbol-btn px-2 py-1 bg-white border border-gray-300 rounded hover:bg-blue-50" data-latex="\in" aria-label="Припаѓа"> ∈ </button>
+        <button class="symbol-btn px-2 py-1 bg-white border border-gray-300 rounded hover:bg-blue-50" data-latex="\notin" aria-label="Не припаѓа"> ∉ </button>
+        <button class="symbol-btn px-2 py-1 bg-white border border-gray-300 rounded hover:bg-blue-50" data-latex="\subset" aria-label="Подмножество"> ⊂ </button>
+        <button class="symbol-btn px-2 py-1 bg-white border border-gray-300 rounded hover:bg-blue-50" data-latex="\subseteq" aria-label="Подмножество еднакво"> ⊆ </button>
+
+        <!-- Inequalities -->
+        <button class="symbol-btn px-2 py-1 bg-white border border-gray-300 rounded hover:bg-blue-50" data-latex="\approx" aria-label="Приближно"> ≈ </button>
+        <button class="symbol-btn px-2 py-1 bg-white border border-gray-300 rounded hover:bg-blue-50" data-latex="\equiv" aria-label="Еквивалентно"> ≡ </button>
+        <button class="symbol-btn px-2 py-1 bg-white border border-gray-300 rounded hover:bg-blue-50" data-latex="\propto" aria-label="Пропорционално"> ∝ </button>
+      </div>
+    </div>
+
+    <!-- Calculus Symbols -->
+    <div class="symbol-tab hidden p-2" id="calculus-tab">
+      <div class="flex flex-wrap gap-1 text-xs" role="toolbar" aria-label="Калкулус симболи">
+        <!-- Derivatives -->
+        <button class="symbol-btn px-2 py-1 bg-white border border-gray-300 rounded hover:bg-blue-50" data-latex="\frac{d}{dx}" aria-label="Дериват"> d/dx </button>
+        <button class="symbol-btn px-2 py-1 bg-white border border-gray-300 rounded hover:bg-blue-50" data-latex="\partial" aria-label="Парцијален"> ∂ </button>
+        <button class="symbol-btn px-2 py-1 bg-white border border-gray-300 rounded hover:bg-blue-50" data-latex="\nabla" aria-label="Набла"> ∇ </button>
+        <button class="symbol-btn px-2 py-1 bg-white border border-gray-300 rounded hover:bg-blue-50" data-latex="f'(x)" aria-label="Прва деривата"> f'(x) </button>
+        <button class="symbol-btn px-2 py-1 bg-white border border-gray-300 rounded hover:bg-blue-50" data-latex="f''(x)" aria-label="Втора деривата"> f''(x) </button>
+
+        <!-- Integrals -->
+        <button class="symbol-btn px-2 py-1 bg-white border border-gray-300 rounded hover:bg-blue-50" data-latex="\int" aria-label="Интеграл"> ∫ </button>
+        <button class="symbol-btn px-2 py-1 bg-white border border-gray-300 rounded hover:bg-blue-50" data-latex="\iint" aria-label="Двоен интеграл"> ∬ </button>
+        <button class="symbol-btn px-2 py-1 bg-white border border-gray-300 rounded hover:bg-blue-50" data-latex="\iiint" aria-label="Троен интеграл"> ∭ </button>
+        <button class="symbol-btn px-2 py-1 bg-white border border-gray-300 rounded hover:bg-blue-50" data-latex="\oint" aria-label="Затворен интеграл"> ∮ </button>
+        <button class="symbol-btn px-2 py-1 bg-white border border-gray-300 rounded hover:bg-blue-50" data-latex="\int_{}^{}" data-cursor-offset="-4" aria-label="Дефинитен интеграл"> ∫ab </button>
+
+        <!-- Limits -->
+        <button class="symbol-btn px-2 py-1 bg-white border border-gray-300 rounded hover:bg-blue-50" data-latex="\lim_{x \to }" data-cursor-offset="-1" aria-label="Лимес"> lim </button>
+        <button class="symbol-btn px-2 py-1 bg-white border border-gray-300 rounded hover:bg-blue-50" data-latex="\infty" aria-label="Бесконечност"> ∞ </button>
+        <button class="symbol-btn px-2 py-1 bg-white border border-gray-300 rounded hover:bg-blue-50" data-latex="\to" aria-label="Стреличка"> → </button>
+        <button class="symbol-btn px-2 py-1 bg-white border border-gray-300 rounded hover:bg-blue-50" data-latex="\Rightarrow" aria-label="Следува"> ⇒ </button>
+        <button class="symbol-btn px-2 py-1 bg-white border border-gray-300 rounded hover:bg-blue-50" data-latex="\Leftarrow" aria-label="Следува од"> ⇐ </button>
+        <button class="symbol-btn px-2 py-1 bg-white border border-gray-300 rounded hover:bg-blue-50" data-latex="\Leftrightarrow" aria-label="Еквивалентно"> ⇔ </button>
+      </div>
+    </div>
+
+    <!-- Logic Symbols -->
+    <div class="symbol-tab hidden p-2" id="logic-tab">
+      <div class="flex flex-wrap gap-1 text-xs" role="toolbar" aria-label="Логички симболи">
+        <!-- Logic operators -->
+        <button class="symbol-btn px-2 py-1 bg-white border border-gray-300 rounded hover:bg-blue-50" data-latex="\forall" aria-label="За секое"> ∀ </button>
+        <button class="symbol-btn px-2 py-1 bg-white border border-gray-300 rounded hover:bg-blue-50" data-latex="\exists" aria-label="Постоји"> ∃ </button>
+        <button class="symbol-btn px-2 py-1 bg-white border border-gray-300 rounded hover:bg-blue-50" data-latex="\neg" aria-label="Негација"> ¬ </button>
+        <button class="symbol-btn px-2 py-1 bg-white border border-gray-300 rounded hover:bg-blue-50" data-latex="\wedge" aria-label="И"> ∧ </button>
+        <button class="symbol-btn px-2 py-1 bg-white border border-gray-300 rounded hover:bg-blue-50" data-latex="\vee" aria-label="Или"> ∨ </button>
+        <button class="symbol-btn px-2 py-1 bg-white border border-gray-300 rounded hover:bg-blue-50" data-latex="\oplus" aria-label="Исклучно или"> ⊕ </button>
+        <button class="symbol-btn px-2 py-1 bg-white border border-gray-300 rounded hover:bg-blue-50" data-latex="\implies" aria-label="Следува"> ⟹ </button>
+        <button class="symbol-btn px-2 py-1 bg-white border border-gray-300 rounded hover:bg-blue-50" data-latex="\iff" aria-label="Еквивалентно"> ⟺ </button>
+
+        <!-- Sets -->
+        <button class="symbol-btn px-2 py-1 bg-white border border-gray-300 rounded hover:bg-blue-50" data-latex="\mathbb{N}" aria-label="Природни броеви"> ℕ </button>
+        <button class="symbol-btn px-2 py-1 bg-white border border-gray-300 rounded hover:bg-blue-50" data-latex="\mathbb{Z}" aria-label="Цели броеви"> ℤ </button>
+        <button class="symbol-btn px-2 py-1 bg-white border border-gray-300 rounded hover:bg-blue-50" data-latex="\mathbb{Q}" aria-label="Рационални броеви"> ℚ </button>
+        <button class="symbol-btn px-2 py-1 bg-white border border-gray-300 rounded hover:bg-blue-50" data-latex="\mathbb{R}" aria-label="Реални броеви"> ℝ </button>
+        <button class="symbol-btn px-2 py-1 bg-white border border-gray-300 rounded hover:bg-blue-50" data-latex="\mathbb{C}" aria-label="Комплексни броеви"> ℂ </button>
+        <button class="symbol-btn px-2 py-1 bg-white border border-gray-300 rounded hover:bg-blue-50" data-latex="\mathbb{P}" aria-label="Прим броеви"> ℙ </button>
+      </div>
+    </div>
+
+    <!-- Templates -->
+    <div class="symbol-tab hidden p-2" id="templates-tab">
+      <div class="grid grid-cols-1 gap-2 text-xs">
+        <!-- Algebraic equations -->
+        <button class="template-btn p-2 bg-white border border-gray-300 rounded hover:bg-blue-50 text-left" data-latex="x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}">
+          <div class="font-medium">Квадратна равенка</div>
+          <div class="text-gray-500 text-xs">Решение на ax² + bx + c = 0</div>
+        </button>
+        <button class="template-btn p-2 bg-white border border-gray-300 rounded hover:bg-blue-50 text-left" data-latex="a^2 + b^2 = c^2">
+          <div class="font-medium">Питагора</div>
+          <div class="text-gray-500 text-xs">a² + b² = c²</div>
+        </button>
+
+        <!-- Calculus -->
+        <button class="template-btn p-2 bg-white border border-gray-300 rounded hover:bg-blue-50 text-left" data-latex="\int_{a}^{b} f(x) \, dx = F(b) - F(a)">
+          <div class="font-medium">Фундаментална теорема на калкулусот</div>
+          <div class="text-gray-500 text-xs">∫f(x)dx = F(b) - F(a)</div>
+        </button>
+        <button class="template-btn p-2 bg-white border border-gray-300 rounded hover:bg-blue-50 text-left" data-latex="\frac{d}{dx}[f(x) \cdot g(x)] = f'(x) \cdot g(x) + f(x) \cdot g'(x)">
+          <div class="font-medium">Производно правило</div>
+          <div class="text-gray-500 text-xs">(fg)' = f'g + fg'</div>
+        </button>
+
+        <!-- Geometry -->
+        <button class="template-btn p-2 bg-white border border-gray-300 rounded hover:bg-blue-50 text-left" data-latex="\sin^2 \theta + \cos^2 \theta = 1">
+          <div class="font-medium">Основен тригонометриски идентитет</div>
+          <div class="text-gray-500 text-xs">sin²θ + cos²θ = 1</div>
+        </button>
+        <button class="template-btn p-2 bg-white border border-gray-300 rounded hover:bg-blue-50 text-left" data-latex="S = \frac{1}{2}ab \sin C">
+          <div class="font-medium">Плоштина на триаголник</div>
+          <div class="text-gray-500 text-xs">S = (1/2)ab sin C</div>
+        </button>
+
+        <!-- Complex numbers -->
+        <button class="template-btn p-2 bg-white border border-gray-300 rounded hover:bg-blue-50 text-left" data-latex="z = a + bi">
+          <div class="font-medium">Комплексен број</div>
+          <div class="text-gray-500 text-xs">z = a + bi</div>
+        </button>
+        <button class="template-btn p-2 bg-white border border-gray-300 rounded hover:bg-blue-50 text-left" data-latex="z_1 \cdot z_2 = (a_1a_2 - b_1b_2) + (a_1b_2 + a_2b_1)i">
+          <div class="font-medium">Множење на комплексни броеви</div>
+          <div class="text-gray-500 text-xs">(a+bi)(c+di) = (ac-bd) + (ad+bc)i</div>
+        </button>
+
+        <!-- Series and sequences -->
+        <button class="template-btn p-2 bg-white border border-gray-300 rounded hover:bg-blue-50 text-left" data-latex="S_n = \frac{n(n+1)}{2}">
+          <div class="font-medium">Сума на првите n природни броеви</div>
+          <div class="text-gray-500 text-xs">1 + 2 + ... + n = n(n+1)/2</div>
+        </button>
+        <button class="template-btn p-2 bg-white border border-gray-300 rounded hover:bg-blue-50 text-left" data-latex="S = \frac{a(r^n - 1)}{r - 1} \quad (r \neq 1)">
+          <div class="font-medium">Геометриска прогресија</div>
+          <div class="text-gray-500 text-xs">Сума на првите n члена</div>
+        </button>
+
+        <!-- Limits and analysis -->
+        <button class="template-btn p-2 bg-white border border-gray-300 rounded hover:bg-blue-50 text-left" data-latex="\lim_{x \to a} f(x) = L">
+          <div class="font-medium">Дефиниција на лимес</div>
+          <div class="text-gray-500 text-xs">lim (x→a) f(x) = L</div>
+        </button>
+
+        <!-- Linear algebra -->
+        <button class="template-btn p-2 bg-white border border-gray-300 rounded hover:bg-blue-50 text-left" data-latex="\det \begin{pmatrix} a & b \\ c & d \end{pmatrix} = ad - bc">
+          <div class="font-medium">Детерминанта 2x2</div>
+          <div class="text-gray-500 text-xs">|A| = ad - bc</div>
+        </button>
+        <button class="template-btn p-2 bg-white border border-gray-300 rounded hover:bg-blue-50 text-left" data-latex="\begin{cases} x + y = 10 \\ x - y = 2 \end{cases}">
+          <div class="font-medium">Систем равенки</div>
+          <div class="text-gray-500 text-xs">Систем од две линеарни равенки</div>
+        </button>
+        <button class="template-btn p-2 bg-white border border-gray-300 rounded hover:bg-blue-50 text-left" data-latex="\vec{v} = (v_1, v_2, v_3)">
+          <div class="font-medium">Вектор</div>
+          <div class="text-gray-500 text-xs">Дефиниција на вектор</div>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="latex-help-modal fixed inset-0 bg-black/50 hidden items-center justify-center z-50" id="latex-help-guide">
+    <div class="bg-white dark:bg-slate-900 rounded-2xl max-w-2xl w-full mx-4 max-h-[90vh] overflow-hidden">
+      <div class="flex items-center justify-between p-6 border-b border-gray-200 dark:border-slate-700">
+        <h2 class="text-xl font-bold text-gray-900 dark:text-white">LaTeX Водич за почетници</h2>
+        <button class="close-help-btn text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
+      </div>
+
+      <div class="overflow-y-auto p-6">
+        <div class="bg-slate-50 dark:bg-slate-800 rounded-xl p-6">
+          <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-4">⚡ LaTeX брз водич</h3>
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+            <div class="bg-white dark:bg-slate-700 p-3 rounded-lg">
+              <div class="font-mono text-blue-600 dark:text-blue-400 mb-1">\frac&#123;a&#125;&#123;b&#125;</div>
+              <div class="text-slate-600 dark:text-slate-400">Дропка</div>
+            </div>
+            <div class="bg-white dark:bg-slate-700 p-3 rounded-lg">
+              <div class="font-mono text-blue-600 dark:text-blue-400 mb-1">\sqrt&#123;x&#125;</div>
+              <div class="text-slate-600 dark:text-slate-400">Корен</div>
+            </div>
+            <div class="bg-white dark:bg-slate-700 p-3 rounded-lg">
+              <div class="font-mono text-blue-600 dark:text-blue-400 mb-1">x^&#123;2&#125;</div>
+              <div class="text-slate-600 dark:text-slate-400">Степен</div>
+            </div>
+            <div class="bg-white dark:bg-slate-700 p-3 rounded-lg">
+               <div class="font-mono text-blue-600 dark:text-blue-400 mb-1">\int f(x)dx</div>
+              <div class="text-slate-600 dark:text-slate-400">Интеграл</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-6 bg-blue-50 dark:bg-slate-800 rounded-xl p-6">
+          <h3 class="text-lg font-bold text-blue-900 dark:text-blue-100 mb-3">📚 Основни правила</h3>
+          <ul class="space-y-2 text-sm text-blue-800 dark:text-blue-200">
+            <li>• Користете <code class="bg-blue-100 dark:bg-blue-900 px-1 rounded">\</code> за специјални симболи</li>
+            <li>• За индекси користете <code class="bg-blue-100 dark:bg-blue-900 px-1 rounded">_</code>, за степени <code class="bg-blue-100 dark:bg-blue-900 px-1 rounded">^</code></li>
+            <li>• За групирање користете <code class="bg-blue-100 dark:bg-blue-900 px-1 rounded">&#123; &#125;</code></li>
+            <li>• Празни места се игнорираат - користете <code class="bg-blue-100 dark:bg-blue-900 px-1 rounded">\,</code> за мало растојание</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  class MathFormulaEditorEnhanced {
+    constructor(container) {
+      this.container = container;
+      this.textarea = container.querySelector('.latex-input');
+      this.previewToggle = container.querySelector('.preview-toggle');
+      this.copyBtn = container.querySelector('.copy-btn');
+      this.validateBtn = container.querySelector('.validate-btn');
+      this.historyBtn = container.querySelector('.history-btn');
+      this.exportBtn = container.querySelector('.export-btn');
+      this.helpBtn = container.querySelector('.help-btn');
+      this.handwritingToggle = container.querySelector('.handwriting-toggle');
+      this.handwritingContainer = container.querySelector('.handwriting-container');
+      this.canvas = container.querySelector('.math-canvas');
+      this.clearCanvasBtn = container.querySelector('.clear-canvas-btn');
+      this.recognizeBtn = container.querySelector('.recognize-btn');
+      this.canvasLoading = container.querySelector('.canvas-loading');
+      this.ctx = this.canvas ? this.canvas.getContext('2d') : null;
+      this.isDrawing = false;
+      this.lastX = 0;
+      this.lastY = 0;
+      this.preview = container.querySelector('.math-preview');
+      this.previewContent = container.querySelector('.preview-content');
+      this.symbolBtns = container.querySelectorAll('.symbol-btn');
+      this.templateBtns = container.querySelectorAll('.template-btn');
+      this.tabBtns = container.querySelectorAll('.tab-btn');
+
+      this.showPreview = false;
+      this.formulaHistory = JSON.parse(localStorage.getItem('mathFormulaHistory') || '[]');
+
+      // --- НОВО: Променливи за оптимизација на MathJax ---
+      this.debounceTimer = null;
+      this.isRendering = false;
+      this.pendingText = null;
+      this.checkMathJaxInterval = null;
+      // ----------------------------------------------------
+
+      this.init();
+    }
+
+    init() {
+      this.bindEvents();
+      this.loadHistory();
+      
+      // Додади listener за промена на големина на прозорецот за canvas-от
+      window.addEventListener('resize', () => {
+          if (!this.handwritingContainer.classList.contains('hidden')) {
+              this.resizeCanvas();
+          }
+      });
+    }
+
+    bindEvents() {
+      // Tab switching
+      this.tabBtns.forEach(btn => {
+        btn.addEventListener('click', () => this.switchTab(btn));
+      });
+
+      // Preview toggle
+      this.previewToggle?.addEventListener('click', () => this.togglePreview());
+
+      // Copy functionality
+      this.copyBtn?.addEventListener('click', () => this.copyFormula());
+
+      // Validation
+      this.validateBtn?.addEventListener('click', () => this.validateFormula());
+
+      // History
+      this.historyBtn?.addEventListener('click', () => this.showHistory());
+
+      // Export
+      this.exportBtn?.addEventListener('click', () => this.showExportMenu());
+
+      // Help
+      this.helpBtn?.addEventListener('click', () => this.showHelpModal());
+
+      // Handwriting
+      this.handwritingToggle?.addEventListener('click', () => this.toggleHandwritingMode());
+      this.clearCanvasBtn?.addEventListener('click', () => this.clearCanvas());
+      this.recognizeBtn?.addEventListener('click', () => this.recognizeHandwriting());
+      this.initCanvasEvents();
+
+      // Symbol buttons
+      this.symbolBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => this.insertSymbol(e, btn));
+      });
+
+      // Template buttons
+      this.templateBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => this.insertTemplate(e, btn));
+      });
+
+      // ОПТИМИЗИРАН INPUT EVENT
+      this.textarea?.addEventListener('input', () => {
+        this.autoSaveToHistory();
+        if (this.showPreview) {
+          this.debouncedPreviewUpdate();
+        }
+      });
+    }
+
+    switchTab(activeBtn) {
+      this.tabBtns.forEach(btn => {
+        btn.classList.remove('active', 'border-b-2', 'border-blue-500', 'text-blue-600');
+        btn.classList.add('text-gray-500');
+      });
+
+      activeBtn.classList.add('active', 'border-b-2', 'border-blue-500', 'text-blue-600');
+      activeBtn.classList.remove('text-gray-500');
+
+      const symbolTabs = this.container.querySelectorAll('.symbol-tab');
+      symbolTabs.forEach(tab => tab.classList.add('hidden'));
+
+      const tabId = activeBtn.getAttribute('data-tab') + '-tab';
+      const activeTab = this.container.querySelector('#' + tabId);
+      if (activeTab) {
+        activeTab.classList.remove('hidden');
+      }
+    }
+
+    togglePreview() {
+      this.showPreview = !this.showPreview;
+      this.textarea.classList.toggle('hidden', this.showPreview);
+      this.preview.classList.toggle('hidden', !this.showPreview);
+      this.preview.classList.toggle('opacity-0', !this.showPreview);
+      this.preview.classList.toggle('opacity-100', this.showPreview);
+      this.previewToggle.textContent = this.showPreview ? 'Уреди' : 'Преглед';
+      this.previewToggle.setAttribute('aria-pressed', this.showPreview);
+
+      if (this.showPreview && this.textarea.value) {
+        // Почекај малку за да се прикаже елементот пред да рендерираш
+        setTimeout(() => {
+          this.safeRender();
+        }, 100);
+      }
+    }
+
+    // --- НОВА ФУНКЦИЈА: DEBOUNCE LOGIC ---
+    debouncedPreviewUpdate() {
+      // Ако корисникот куца, ресетирај го тајмерот
+      if (this.debounceTimer) clearTimeout(this.debounceTimer);
+
+      // Почекај 300ms откако ќе престане да куца, па рендерирај
+      this.debounceTimer = setTimeout(() => {
+        this.safeRender();
+      }, 300);
+    }
+
+    // --- ПОПРАВЕНА ФУНКЦИЈА ЗА РЕНДЕРИРАЊЕ ---
+    async safeRender() {
+      let rawLatex = this.textarea.value.trim();
+
+      // 1. АКО нема текст, исчисти го прегледот и излези
+      if (!rawLatex) {
+         this.previewContent.innerHTML = '';
+         return;
+      }
+
+      // 2. ИТНО: Исчисти ги рачно внесените делимитери за да нема дуплирање
+      rawLatex = rawLatex
+          .replace(/^\\\[|\\\]$/g, '')
+          .replace(/^\\\(|\\\)$/g, '')
+          .replace(/^\$\$|\$\$/g, '')
+          .replace(/^\$|\$/g, '');
+
+      // 3. Проверка дали веќе се рендерира (Locking mechanism)
+      if (this.isRendering) {
+         this.pendingText = rawLatex;
+         return;
+      }
+
+      this.isRendering = true;
+
+      try {
+         // 4. Постави содржина со делимитери
+         // Ако веќе почнува со \begin{...}, не додавај \[ \]
+         const isEnvironment = /^\s*\\begin\{/.test(rawLatex);
+         this.previewContent.innerHTML = isEnvironment ? rawLatex : '\\[' + rawLatex + '\\]';
+
+         // 5. Провери дали MathJax е навистина вчитан и спремен
+         const isMathJaxReady = window.MathJax && (typeof window.MathJax.typesetPromise === 'function' || typeof window.MathJax.typeset === 'function');
+
+         if (isMathJaxReady) {
+            console.log('MathJax is ready, rendering...');
+
+            if (window.MathJax.tex && window.MathJax.tex.reset) {
+                window.MathJax.tex.reset();
+            }
+
+            if (typeof window.MathJax.typesetPromise === 'function') {
+                await window.MathJax.typesetPromise([this.previewContent]);
+            } else if (typeof window.MathJax.typeset === 'function') {
+                window.MathJax.typeset([this.previewContent]);
+            }
+         } else {
+            console.warn('MathJax is NOT ready yet');
+            this.fallbackRender();
+         }
+      } catch (err) {
+         console.warn('MathJax rendering error:', err);
+         this.fallbackRender();
+      } finally {
+         this.isRendering = false;
+
+         if (this.pendingText !== null) {
+            this.pendingText = null;
+            this.safeRender();
+         }
+      }
+    }
+
+    fallbackRender() {
+      const escapedValue = this.textarea.value
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+
+      const mj = window.MathJax;
+      const isMissing = !mj || (!mj.typesetPromise && !mj.typeset);
+      
+      const statusMessage = isMissing 
+        ? "Се вчитува MathJax рендерер..." 
+        : "Грешка при рендерирање. Проверете ја LaTeX синтаксата.";
+
+      this.previewContent.innerHTML = `
+        <div class="text-center p-4 bg-blue-50 border border-blue-200 rounded">
+          <div class="text-blue-800 font-semibold mb-2">📐 LaTeX Формула (Преглед)</div>
+          <div class="font-mono text-sm bg-white p-3 rounded border whitespace-pre-wrap">\\[${escapedValue}\\]</div>
+          <div class="text-xs text-blue-600 mt-2">${statusMessage}</div>
+        </div>
+      `;
+      
+      if (isMissing && !this.checkMathJaxInterval) {
+          this.checkMathJaxInterval = setInterval(() => {
+              const currentMj = window.MathJax;
+              if (currentMj && (currentMj.typesetPromise || currentMj.typeset)) {
+                  clearInterval(this.checkMathJaxInterval);
+                  this.checkMathJaxInterval = null;
+                  if (this.showPreview) this.safeRender();
+              }
+          }, 500);
+          
+          setTimeout(() => {
+              if (this.checkMathJaxInterval) {
+                  clearInterval(this.checkMathJaxInterval);
+                  this.checkMathJaxInterval = null;
+              }
+          }, 10000);
+      }
+    }
+
+    copyFormula() {
+      if (this.textarea.value) {
+        navigator.clipboard.writeText(this.textarea.value).then(() => {
+          const originalText = this.copyBtn.textContent;
+          this.copyBtn.textContent = 'Копирано!';
+          setTimeout(() => {
+            this.copyBtn.textContent = originalText;
+          }, 2000);
+        });
+      }
+    }
+
+    validateFormula() {
+      if (!this.textarea.value) return;
+
+      const latex = this.textarea.value.trim();
+      let isValid = true;
+      let errorMessage = '';
+
+      const openBraces = (latex.match(/\{/g) || []).length;
+      const closeBraces = (latex.match(/\}/g) || []).length;
+      if (openBraces !== closeBraces) {
+        isValid = false;
+        errorMessage = 'Небалансирани загради {}';
+      }
+
+      if (latex.includes('$$') && latex.split('$$').length % 2 === 0) {
+        isValid = false;
+        errorMessage = 'Невалидни $$ ознаки';
+      }
+
+      // Check for \begin and \end environments
+      const beginMatches = latex.match(/\\begin\{([^}]+)\}/g) || [];
+      const endMatches = latex.match(/\\end\{([^}]+)\}/g) || [];
+      
+      if (beginMatches.length !== endMatches.length) {
+        isValid = false;
+        errorMessage = 'Небалансирани \begin и \end';
+      } else if (beginMatches.length > 0) {
+        // Extract environment names and check if they match in order (LIFO)
+        const stack = [];
+        const envRegex = /\\(begin|end)\{([^}]+)\}/g;
+        let match;
+        while ((match = envRegex.exec(latex)) !== null) {
+          const [_, type, name] = match;
+          if (type === 'begin') {
+            stack.push(name);
+          } else {
+            const last = stack.pop();
+            if (last !== name) {
+              isValid = false;
+              errorMessage = `Грешка во околината: очекувано \end{${last}}, но најдено \end{${name}}`;
+              break;
+            }
+          }
+        }
+      }
+
+      if (isValid) {
+        this.validateBtn.textContent = '✓ Валидна';
+        this.validateBtn.classList.remove('bg-orange-100', 'text-orange-700');
+        this.validateBtn.classList.add('bg-green-100', 'text-green-700');
+        setTimeout(() => {
+          this.validateBtn.textContent = 'Валидирај';
+          this.validateBtn.classList.remove('bg-green-100', 'text-green-700');
+          this.validateBtn.classList.add('bg-orange-100', 'text-orange-700');
+        }, 3000);
+      } else {
+        this.validateBtn.textContent = '✗ ' + errorMessage;
+        this.validateBtn.classList.remove('bg-orange-100', 'text-orange-700');
+        this.validateBtn.classList.add('bg-red-100', 'text-red-700');
+        setTimeout(() => {
+          this.validateBtn.textContent = 'Валидирај';
+          this.validateBtn.classList.remove('bg-red-100', 'text-red-700');
+          this.validateBtn.classList.add('bg-orange-100', 'text-orange-700');
+        }, 5000);
+      }
+    }
+
+    showHelpModal() {
+      const modal = this.container.querySelector('.latex-help-modal');
+      if (modal) {
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+        modal.setAttribute('aria-hidden', 'false');
+
+        // Add event listeners for closing
+        const closeBtns = modal.querySelectorAll('.close-help-btn');
+        closeBtns.forEach(btn => {
+          btn.addEventListener('click', () => this.hideHelpModal());
+        });
+
+        // Close on background click
+        modal.addEventListener('click', (e) => {
+          if (e.target === modal) {
+            this.hideHelpModal();
+          }
+        });
+
+        // Close on Escape key
+        const handleEscape = (e) => {
+          if (e.key === 'Escape') {
+            this.hideHelpModal();
+            document.removeEventListener('keydown', handleEscape);
+          }
+        };
+        document.addEventListener('keydown', handleEscape);
+      }
+    }
+
+    hideHelpModal() {
+      const modal = this.container.querySelector('.latex-help-modal');
+      if (modal) {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+        modal.setAttribute('aria-hidden', 'true');
+      }
+    }
+
+    showHistory() {
+      if (this.formulaHistory.length === 0) {
+        alert('Нема зачувани формули во историјата.');
+        return;
+      }
+
+      const historyMenu = document.createElement('div');
+      historyMenu.className = 'absolute top-full right-0 mt-1 bg-white border border-gray-300 rounded shadow-lg z-10 max-h-64 overflow-y-auto';
+      historyMenu.style.width = '300px';
+
+      historyMenu.innerHTML = `
+        <div class="p-2 border-b border-gray-200">
+          <h4 class="text-sm font-medium text-gray-900">Историја на формули</h4>
+        </div>
+        ${this.formulaHistory.map((formula) => `
+          <button class="block w-full text-left px-3 py-2 text-sm hover:bg-gray-100 border-b border-gray-100 history-item" data-formula="${formula.replace(/"/g, '"')}">
+            <div class="truncate font-mono text-xs">${formula}</div>
+          </button>
+        `).join('')}
+        <div class="p-2 border-t border-gray-200">
+          <button class="text-xs text-red-600 hover:text-red-800 clear-history-btn">Исчисти историја</button>
+        </div>
+      `;
+
+      this.historyBtn.parentNode.appendChild(historyMenu);
+
+      historyMenu.querySelectorAll('.history-item').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const formula = btn.getAttribute('data-formula');
+          this.textarea.value = formula;
+          this.textarea.focus();
+          if (this.showPreview) {
+            this.safeRender();
+          }
+          historyMenu.remove();
+        });
+      });
+
+      historyMenu.querySelector('.clear-history-btn').addEventListener('click', () => {
+        if (confirm('Дали сте сигурни дека сакате да ја исчистите историјата?')) {
+          this.formulaHistory = [];
+          localStorage.removeItem('mathFormulaHistory');
+          historyMenu.remove();
+        }
+      });
+
+      const closeMenu = (e) => {
+        if (!historyMenu.contains(e.target) && e.target !== this.historyBtn) {
+          historyMenu.remove();
+          document.removeEventListener('click', closeMenu);
+        }
+      };
+      setTimeout(() => document.addEventListener('click', closeMenu), 0);
+    }
+
+    showExportMenu() {
+      if (!this.textarea.value) return;
+
+      const exportMenu = document.createElement('div');
+      exportMenu.className = 'absolute top-full right-0 mt-1 bg-white border border-gray-300 rounded shadow-lg z-10 p-2';
+      exportMenu.innerHTML = `
+        <button class="block w-full text-left px-3 py-2 text-sm hover:bg-gray-100 export-latex-btn">LaTeX код</button>
+        <button class="block w-full text-left px-3 py-2 text-sm hover:bg-gray-100 export-png-btn">PNG слика</button>
+        <button class="block w-full text-left px-3 py-2 text-sm hover:bg-gray-100 export-svg-btn">SVG слика</button>
+      `;
+
+      this.exportBtn.parentNode.appendChild(exportMenu);
+
+      exportMenu.querySelector('.export-latex-btn').addEventListener('click', () => {
+        this.exportAsLatex(this.textarea.value);
+        exportMenu.remove();
+      });
+
+      exportMenu.querySelector('.export-png-btn').addEventListener('click', () => {
+        this.exportAsPNG(this.textarea.value);
+        exportMenu.remove();
+      });
+
+      exportMenu.querySelector('.export-svg-btn').addEventListener('click', () => {
+        this.exportAsSVG(this.textarea.value);
+        exportMenu.remove();
+      });
+
+      const closeMenu = (e) => {
+        if (!exportMenu.contains(e.target) && e.target !== this.exportBtn) {
+          exportMenu.remove();
+          document.removeEventListener('click', closeMenu);
+        }
+      };
+      setTimeout(() => document.addEventListener('click', closeMenu), 0);
+    }
+
+    exportAsLatex(latex) {
+      const blob = new Blob([latex], { type: 'text/plain' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'math-formula.tex';
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+
+    exportAsPNG(latex) {
+      const tempDiv = document.createElement('div');
+      tempDiv.style.position = 'absolute';
+      tempDiv.style.left = '-9999px';
+      tempDiv.style.padding = '20px';
+      tempDiv.style.background = 'white';
+      tempDiv.style.fontSize = '24px'; // Make it larger for better quality
+      tempDiv.innerHTML = '\\[' + latex + '\\]';
+      document.body.appendChild(tempDiv);
+
+      if (window.MathJax && window.MathJax.typesetPromise) {
+        window.MathJax.typesetPromise([tempDiv]).then(() => {
+          const mjxElement = tempDiv.querySelector('mjx-container');
+          const svgElement = tempDiv.querySelector('svg');
+          
+          if (svgElement) {
+            // Get original dimensions
+            const bbox = svgElement.getBBox ? svgElement.getBBox() : { width: svgElement.clientWidth, height: svgElement.clientHeight };
+            const svgData = new XMLSerializer().serializeToString(svgElement);
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            const img = new Image();
+
+            img.onload = () => {
+              // Scale up for better resolution
+              const scale = 2;
+              canvas.width = img.width * scale;
+              canvas.height = img.height * scale;
+              ctx.fillStyle = 'white';
+              ctx.fillRect(0, 0, canvas.width, canvas.height);
+              ctx.scale(scale, scale);
+              ctx.drawImage(img, 0, 0);
+
+              canvas.toBlob((blob) => {
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `math-${Date.now()}.png`;
+                a.click();
+                URL.revokeObjectURL(url);
+              }, 'image/png');
+            };
+
+            img.src = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(svgData)));
+          }
+          document.body.removeChild(tempDiv);
+        });
+      }
+    }
+
+    exportAsSVG(latex) {
+      const tempDiv = document.createElement('div');
+      tempDiv.style.position = 'absolute';
+      tempDiv.style.left = '-9999px';
+      tempDiv.style.fontSize = '24px';
+      tempDiv.innerHTML = '\\[' + latex + '\\]';
+      document.body.appendChild(tempDiv);
+
+      if (window.MathJax && window.MathJax.typesetPromise) {
+        window.MathJax.typesetPromise([tempDiv]).then(() => {
+          const svgElement = tempDiv.querySelector('svg');
+          if (svgElement) {
+            // Add XML namespace if missing
+            if (!svgElement.getAttribute('xmlns')) {
+              svgElement.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+            }
+            const svgData = new XMLSerializer().serializeToString(svgElement);
+            const blob = new Blob(['<?xml version="1.0" encoding="UTF-8" standalone="no"?>\n' + svgData], { type: 'image/svg+xml' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `math-${Date.now()}.svg`;
+            a.click();
+            URL.revokeObjectURL(url);
+          }
+          document.body.removeChild(tempDiv);
+        });
+      }
+    }
+
+    insertSymbol(e, btn) {
+      e.preventDefault();
+
+      // 1. Земи ги податоците од копчето
+      const symbol = btn.getAttribute('data-latex');
+      // Ако нема offset атрибут, сметај го за 0
+      const offset = parseInt(btn.getAttribute('data-cursor-offset') || '0');
+
+      // 2. Земи ја моменталната позиција и селекција
+      const start = this.textarea.selectionStart;
+      const end = this.textarea.selectionEnd;
+      const selection = this.textarea.value.substring(start, end);
+      const fullText = this.textarea.value;
+
+      let textToInsert = symbol;
+      let newCursorPos = 0;
+
+      // --- ЕКСПЕРТСКА ЛОГИКА ЗА "WRAPPING" (Обвиткување) ---
+      // Ако има селектиран текст и симболот содржи {}, стави го текстот внатре
+      if (selection && symbol.includes('{}')) {
+          // На пример: ако симболот е \sqrt{} а селекцијата е "5", станува \sqrt{5}
+          // Replace го заменува само првото појавување на {}, што е точно тоа што ни треба
+          textToInsert = symbol.replace('{}', `{${selection}}`);
+
+          // Во овој случај, курсорот го ставаме на крајот од вметнатото
+          newCursorPos = start + textToInsert.length;
+      }
+      else {
+          // --- СТАНДАРДНА ЛОГИКА СО OFFSET ---
+          // Нема селекција, само вметни го симболот
+          textToInsert = symbol;
+
+          // Пресметај каде треба да биде курсорот
+          // start (почеток) + должина на симболот + offset (кој е негативен)
+          newCursorPos = start + symbol.length + offset;
+      }
+
+      // 3. Ажурирај го текстот во textarea
+      this.textarea.value =
+          fullText.substring(0, start) +
+          textToInsert +
+          fullText.substring(end);
+
+      // 4. Врати го фокусот и постави го курсорот на вистинското место
+      this.textarea.focus();
+      this.textarea.setSelectionRange(newCursorPos, newCursorPos);
+
+      // 5. Повикај ги функциите за зачувување и преглед (користејќи го новиот debounce од претходно)
+      this.autoSaveToHistory();
+      if (this.showPreview) {
+        this.debouncedPreviewUpdate(); // Ова е функцијата што ја додадовме во претходниот чекор
+      }
+    }
+
+    insertTemplate(e, btn) {
+      e.preventDefault();
+      const template = btn.getAttribute('data-latex');
+      this.textarea.value = template;
+      this.textarea.focus();
+
+      if (this.showPreview) {
+        this.safeRender();
+      }
+      this.autoSaveToHistory();
+    }
+
+    autoSaveToHistory() {
+      const currentValue = this.textarea.value;
+      if (currentValue && currentValue !== this.lastSavedValue && currentValue.length > 3) {
+        clearTimeout(this.saveTimeout);
+        this.saveTimeout = setTimeout(() => {
+          if (!this.formulaHistory.includes(currentValue)) {
+            this.formulaHistory.unshift(currentValue);
+            this.formulaHistory = this.formulaHistory.slice(0, 20);
+            localStorage.setItem('mathFormulaHistory', JSON.stringify(this.formulaHistory));
+            this.lastSavedValue = currentValue;
+          }
+        }, 1000);
+      }
+    }
+
+    loadHistory() {
+      this.lastSavedValue = this.textarea.value;
+    }
+
+    toggleHandwritingMode() {
+        const isHidden = this.handwritingContainer.classList.contains('hidden');
+
+        if (isHidden) {
+            // Вклучи режим за цртање
+            // Запомни дали прегледот бил вклучен пред да влеземе во handwriting
+            this.wasPreviewOpenBeforeHandwriting = this.showPreview;
+            
+            this.handwritingContainer.classList.remove('hidden');
+            this.handwritingContainer.classList.add('flex');
+            if (this.preview) {
+                this.preview.classList.add('hidden');
+                this.preview.classList.remove('opacity-100');
+                this.preview.classList.add('opacity-0');
+            }
+            if (this.textarea) this.textarea.classList.remove('hidden'); // Show textarea to see results
+            
+            // Важно: почекај да се појави елементот пред да сетираш резолуција
+            requestAnimationFrame(() => {
+                this.resizeCanvas();
+            });
+            
+            this.handwritingToggle.classList.add('bg-yellow-200', 'ring-2', 'ring-yellow-400');
+        } else {
+            // Исклучи режим за цртање
+            this.handwritingContainer.classList.add('hidden');
+            this.handwritingContainer.classList.remove('flex');
+            this.handwritingToggle.classList.remove('bg-yellow-200', 'ring-2', 'ring-yellow-400');
+            
+            // Врати ја состојбата на прегледот ако била претходно активна
+            if (this.wasPreviewOpenBeforeHandwriting && !this.showPreview) {
+                this.togglePreview();
+            } else if (this.showPreview) {
+                // Ако е веќе отворен прегледот (пр. после препознавање), осигурај се дека е видлив
+                this.preview.classList.remove('hidden');
+                this.preview.classList.remove('opacity-0');
+                this.preview.classList.add('opacity-100');
+                this.textarea.classList.add('hidden');
+            }
+        }
+    }
+
+    resizeCanvas() {
+        // Го прави канвасот остар (Retina support) и точна големина
+        const rect = this.canvas.parentElement.getBoundingClientRect();
+        const dpr = window.devicePixelRatio || 1;
+        
+        // Постави димензии на самиот елемент (backing store)
+        this.canvas.width = rect.width * dpr;
+        this.canvas.height = (rect.height - 40) * dpr;
+        
+        // Постави CSS димензии (display size)
+        this.canvas.style.width = `${rect.width}px`;
+        this.canvas.style.height = `${rect.height - 40}px`;
+
+        // Ресетирај го контекстот по промена на големина
+        this.ctx.scale(dpr, dpr);
+        this.ctx.lineWidth = 3;
+        this.ctx.lineCap = 'round';
+        this.ctx.lineJoin = 'round';
+        this.ctx.strokeStyle = '#2563eb'; // Модерна сина боја
+    }
+
+    initCanvasEvents() {
+        if (!this.canvas) return;
+
+        const startDrawing = (e) => {
+            this.isDrawing = true;
+            const { x, y } = this.getCoords(e);
+            this.lastX = x;
+            this.lastY = y;
+        };
+
+        const draw = (e) => {
+            if (!this.isDrawing) return;
+            e.preventDefault(); // Спречи скролање на мобилен додека црта
+            const { x, y } = this.getCoords(e);
+
+            this.ctx.beginPath();
+            this.ctx.moveTo(this.lastX, this.lastY);
+            this.ctx.lineTo(x, y);
+            this.ctx.stroke();
+
+            this.lastX = x;
+            this.lastY = y;
+        };
+
+        const stopDrawing = () => {
+            this.isDrawing = false;
+        };
+
+        // Mouse Events
+        this.canvas.addEventListener('mousedown', startDrawing);
+        this.canvas.addEventListener('mousemove', draw);
+        this.canvas.addEventListener('mouseup', stopDrawing);
+        this.canvas.addEventListener('mouseout', stopDrawing);
+
+        // Touch Events (за мобилен/таблет)
+        this.canvas.addEventListener('touchstart', startDrawing, { passive: false });
+        this.canvas.addEventListener('touchmove', draw, { passive: false });
+        this.canvas.addEventListener('touchend', stopDrawing);
+    }
+
+    getCoords(e) {
+        // Универзален метод за координати (Mouse & Touch)
+        const rect = this.canvas.getBoundingClientRect();
+        let clientX, clientY;
+        
+        if (e.touches && e.touches.length > 0) {
+            clientX = e.touches[0].clientX;
+            clientY = e.touches[0].clientY;
+        } else {
+            clientX = e.clientX;
+            clientY = e.clientY;
+        }
+        
+        // Враќаме координати релативни на CSS големината на канвасот
+        // Поради ctx.scale(dpr, dpr), овие координати ќе бидат точни
+        return {
+            x: clientX - rect.left,
+            y: clientY - rect.top
+        };
+    }
+
+    clearCanvas() {
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    }
+
+    // --- ГЛАВНАТА MAGIC ФУНКЦИЈА (СЕГА СО ВИСТИНСКО AI) ---
+    async recognizeHandwriting() {
+        // 1. Провери дали има нешто нацртано
+        const pixels = this.ctx.getImageData(0, 0, this.canvas.width, this.canvas.height).data;
+        const hasContent = pixels.some(p => p !== 0);
+        
+        if (!hasContent) {
+            alert('Ве молиме нацртајте нешто прво.');
+            return;
+        }
+
+        // 2. Земи ја сликата како Base64
+        const imageData = this.canvas.toDataURL('image/png');
+
+        // 3. Покажи loading
+        this.canvasLoading.classList.remove('hidden');
+        this.canvasLoading.classList.add('flex');
+        
+        const btnText = this.recognizeBtn.querySelector('.recognize-text');
+        const btnIcon = this.recognizeBtn.querySelector('.recognize-icon');
+        const originalText = btnText ? btnText.textContent : '';
+        if (btnText) btnText.textContent = 'Препознавање...';
+        if (btnIcon) btnIcon.classList.add('animate-pulse');
+        this.recognizeBtn.disabled = true;
+
+        try {
+            // ПОВИКУВАЊЕ НА ВИСТИНСКИОТ API ЕНДПОИНТ (Gemini 1.5 Flash)
+            const response = await fetch('/api/vision-latex', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ image: imageData })
+            });
+
+            if (!response.ok) {
+                throw new Error('API грешка');
+            }
+
+            const result = await response.json();
+            const latex = result.latex;
+
+            if (!latex) {
+                throw new Error('Не беше пронајдена формула');
+            }
+
+            // 4. Вметни го резултатот
+            this.textarea.value = latex;
+
+            // 5. Затвори го Canvas и покажи го резултатот
+            this.toggleHandwritingMode();
+            this.safeRender(); 
+            this.autoSaveToHistory();
+            this.clearCanvas(); // Исчисти по успешна операција
+
+        } catch (err) {
+            alert('Грешка при препознавање. Проверете ја интернет конекцијата или обидете се повторно.');
+            console.error('Handwriting Recognition Error:', err);
+        } finally {
+            this.canvasLoading.classList.add('hidden');
+            this.canvasLoading.classList.remove('flex');
+            
+            if (btnText) btnText.textContent = originalText;
+            if (btnIcon) btnIcon.classList.remove('animate-pulse');
+            this.recognizeBtn.disabled = false;
+        }
+    }
+  }
+
+  // Initialize editors safely
+  const initEditors = () => {
+    document.querySelectorAll('.math-formula-editor-enhanced:not([data-initialized])').forEach(container => {
+      container.setAttribute('data-initialized', 'true');
+      new MathFormulaEditorEnhanced(container);
+    });
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initEditors);
+  } else {
+    initEditors();
+  }
+</script>
+
+<style>
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+
+  /* Сокриј ги MathJax пораките за грешки (оние црвените) во preview */
+  .math-preview mjx-merror {
+    display: none !important;
+  }
+
+  /* Спречи прелевање на долги формули */
+  .preview-content {
+    overflow-x: auto;
+    overflow-y: hidden;
+    max-width: 100%;
+  }
+</style>

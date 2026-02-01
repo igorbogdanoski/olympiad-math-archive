@@ -1,0 +1,246 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const pageTitle = "МатАрхива | Учење со Визуелизации";
+const pageDescription = "Интерактивно учење на математика преку анимации, игри и персонализирани вежби за ученици од 1-12 одделение.";
+---
+
+<Layout title={pageTitle}>
+	<meta name="description" content={pageDescription} />
+
+	{/* Student Hero Section */}
+	<div class="relative mb-16 p-12 md:p-20 rounded-[3rem] bg-gradient-to-br from-emerald-50 via-green-50/50 to-teal-50 dark:from-emerald-900/20 dark:via-green-900/10 dark:to-teal-900/10 overflow-hidden shadow-2xl border border-emerald-200/50 dark:border-emerald-800/30">
+		<div class="absolute top-0 right-0 w-full h-full opacity-20 pointer-events-none">
+			<div class="absolute top-[-10%] right-[-10%] w-[50%] h-[50%] bg-emerald-600 rounded-full blur-[120px]"></div>
+			<div class="absolute bottom-[-10%] left-[-10%] w-[40%] h-[40%] bg-green-600 rounded-full blur-[100px]"></div>
+		</div>
+
+		<div class="relative z-10 max-w-4xl">
+			<div class="flex items-center gap-3 mb-8">
+				<span class="inline-block px-4 py-1.5 rounded-full bg-emerald-500/10 text-emerald-400 text-xs font-black uppercase tracking-[0.2em] border border-emerald-500/20 backdrop-blur-md">
+					👩‍🎓 Ученички Платформа
+				</span>
+			</div>
+
+			<h1 class="text-5xl md:text-7xl font-black text-slate-900 dark:text-white mb-8 leading-[1.1] tracking-tight">
+				Учи <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-green-400">математика</span> преку игри
+			</h1>
+
+			<p class="text-slate-600 dark:text-slate-400 text-xl mb-10 leading-relaxed max-w-2xl font-medium">
+				Интерактивни анимации, забавни игри и персонализирани вежби за разбирање на математичките концепти.
+			</p>
+
+			<div class="flex flex-col sm:flex-row gap-4 max-w-2xl">
+				<div class="relative flex-grow">
+					<input
+						type="text"
+						id="search"
+						placeholder="Пребарај теми, лекции или игри..."
+						class="w-full pl-14 pr-4 py-5 bg-white/5 border border-white/10 rounded-2xl text-slate-900 dark:text-white placeholder-slate-500 focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500/50 outline-none backdrop-blur-xl transition-all shadow-2xl"
+					/>
+					<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-slate-500 absolute left-5 top-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+					</svg>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	{/* Grade Selection */}
+	<div class="max-w-6xl mx-auto mb-16">
+		<div class="text-center mb-12">
+			<h2 class="text-3xl font-black text-slate-900 dark:text-white mb-4">Избери свое Одделение</h2>
+			<p class="text-slate-500 dark:text-slate-400 text-lg max-w-2xl mx-auto">Истражи лекции, вежби и игри прилагодени за твоето ниво.</p>
+		</div>
+
+		<div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 mb-12">
+			{Array.from({ length: 12 }, (_, i) => i + 1).map(grade => (
+				<a href={`/students/grade/${grade}`} class={`group bg-white dark:bg-slate-900 rounded-2xl p-6 border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-xl hover:shadow-emerald-500/10 hover:-translate-y-1 transition-all duration-300 text-center ${grade >= 6 && grade <= 9 ? 'ring-2 ring-emerald-500/50' : ''}`}>
+					<div class="text-3xl font-black text-slate-900 dark:text-white mb-2">{grade}.</div>
+					<div class="text-sm font-medium text-slate-500 dark:text-slate-400">одделение</div>
+					{grade >= 6 && grade <= 9 && (
+						<div class="mt-2 px-2 py-1 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 rounded-full text-xs font-medium">
+							Најпопуларно
+						</div>
+					)}
+				</a>
+			))}
+		</div>
+	</div>
+
+	{/* Learning Categories */}
+	<div class="max-w-6xl mx-auto mb-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+		<a href="/students/geometry" class="group bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/10 rounded-3xl p-8 border border-blue-200/50 dark:border-blue-800/30 shadow-lg hover:shadow-2xl hover:shadow-blue-500/10 hover:-translate-y-2 transition-all duration-300">
+			<div class="w-16 h-16 bg-blue-100 dark:bg-blue-900/30 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+				<span class="text-blue-600 dark:text-blue-400 text-3xl">📐</span>
+			</div>
+			<h3 class="text-xl font-bold text-blue-900 dark:text-blue-100 mb-3">Геометрија</h3>
+			<p class="text-blue-600 dark:text-blue-400 text-sm leading-relaxed">Троаголници, кругови, призми и други форми со интерактивни анимации.</p>
+		</a>
+
+		<a href="/students/algebra" class="group bg-gradient-to-br from-purple-50 to-violet-50 dark:from-purple-900/20 dark:to-violet-900/10 rounded-3xl p-8 border border-purple-200/50 dark:border-purple-800/30 shadow-lg hover:shadow-2xl hover:shadow-purple-500/10 hover:-translate-y-2 transition-all duration-300">
+			<div class="w-16 h-16 bg-purple-100 dark:bg-purple-900/30 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+				<span class="text-purple-600 dark:text-purple-400 text-3xl">🧮</span>
+			</div>
+			<h3 class="text-xl font-bold text-purple-900 dark:text-purple-100 mb-3">Алгебра</h3>
+			<p class="text-purple-600 dark:text-purple-400 text-sm leading-relaxed">Функции, равенки, нееднаквости и други алгебарски концепти.</p>
+		</a>
+
+		<a href="/students/arithmetic" class="group bg-gradient-to-br from-emerald-50 to-green-50 dark:from-emerald-900/20 dark:to-green-900/10 rounded-3xl p-8 border border-emerald-200/50 dark:border-emerald-800/30 shadow-lg hover:shadow-2xl hover:shadow-emerald-500/10 hover:-translate-y-2 transition-all duration-300">
+			<div class="w-16 h-16 bg-emerald-100 dark:bg-emerald-900/30 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+				<span class="text-emerald-600 dark:text-emerald-400 text-3xl">🔢</span>
+			</div>
+			<h3 class="text-xl font-bold text-emerald-900 dark:text-emerald-100 mb-3">Аритметика</h3>
+			<p class="text-emerald-600 dark:text-emerald-400 text-sm leading-relaxed">Собирање, одземање, множење и делење со визуелни објаснувања.</p>
+		</a>
+
+		<a href="/students/games" class="group bg-gradient-to-br from-orange-50 to-amber-50 dark:from-orange-900/20 dark:to-amber-900/10 rounded-3xl p-8 border border-orange-200/50 dark:border-orange-800/30 shadow-lg hover:shadow-2xl hover:shadow-orange-500/10 hover:-translate-y-2 transition-all duration-300">
+			<div class="w-16 h-16 bg-orange-100 dark:bg-orange-900/30 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+				<span class="text-orange-600 dark:text-orange-400 text-3xl">🎮</span>
+			</div>
+			<h3 class="text-xl font-bold text-orange-900 dark:text-orange-100 mb-3">Математички Игри</h3>
+			<p class="text-orange-600 dark:text-orange-400 text-sm leading-relaxed">Забавни игри за вежбање математички вештини и решавање проблеми.</p>
+		</a>
+	</div>
+
+	{/* Popular Content */}
+	<div class="max-w-6xl mx-auto mb-16">
+		<div class="text-center mb-12">
+			<h2 class="text-3xl font-black text-slate-900 dark:text-white mb-4">Најпопуларни Лекции</h2>
+			<p class="text-slate-500 dark:text-slate-400 text-lg max-w-2xl mx-auto">Што учат твоите врсници оваа недела.</p>
+		</div>
+
+		<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+			<div class="bg-white dark:bg-slate-900 rounded-[2rem] p-8 border border-slate-100 dark:border-slate-800 shadow-lg hover:shadow-xl transition-shadow">
+				<div class="flex items-center gap-3 mb-6">
+					<div class="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center">
+						<span class="text-blue-600 dark:text-blue-400 text-xl">📐</span>
+					</div>
+					<div>
+						<h3 class="font-bold text-slate-900 dark:text-white">Pitagorова Теорема</h3>
+						<p class="text-sm text-slate-500 dark:text-slate-400">8. одделение • Геометрија</p>
+					</div>
+				</div>
+				<p class="text-slate-600 dark:text-slate-300 text-sm mb-6 leading-relaxed">Интерактивна анимација на доказот со визуелни објаснувања.</p>
+				<div class="flex items-center justify-between text-xs text-slate-500 mb-4">
+					<span>⏱️ 15 мин</span>
+					<span>⭐ 4.9 (892 ученици)</span>
+				</div>
+				<button class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-6 rounded-xl transition-colors">
+					Започни Лекција
+				</button>
+			</div>
+
+			<div class="bg-white dark:bg-slate-900 rounded-[2rem] p-8 border border-slate-100 dark:border-slate-800 shadow-lg hover:shadow-xl transition-shadow">
+				<div class="flex items-center gap-3 mb-6">
+					<div class="w-12 h-12 bg-purple-100 dark:bg-purple-900/30 rounded-full flex items-center justify-center">
+						<span class="text-purple-600 dark:text-purple-400 text-xl">🧮</span>
+					</div>
+					<div>
+						<h3 class="font-bold text-slate-900 dark:text-white">Линеарни Равенки</h3>
+						<p class="text-sm text-slate-500 dark:text-slate-400">7. одделение • Алгебра</p>
+					</div>
+				</div>
+				<p class="text-slate-600 dark:text-slate-300 text-sm mb-6 leading-relaxed">Вежбај решавање равенки со визуелни помагала и чекори.</p>
+				<div class="flex items-center justify-between text-xs text-slate-500 mb-4">
+					<span>⏱️ 20 мин</span>
+					<span>⭐ 4.8 (654 ученици)</span>
+				</div>
+				<button class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-6 rounded-xl transition-colors">
+					Започни Вежба
+				</button>
+			</div>
+
+			<div class="bg-white dark:bg-slate-900 rounded-[2rem] p-8 border border-slate-100 dark:border-slate-800 shadow-lg hover:shadow-xl transition-shadow">
+				<div class="flex items-center gap-3 mb-6">
+					<div class="w-12 h-12 bg-orange-100 dark:bg-orange-900/30 rounded-full flex items-center justify-center">
+						<span class="text-orange-600 dark:text-orange-400 text-xl">🎮</span>
+					</div>
+					<div>
+						<h3 class="font-bold text-slate-900 dark:text-white">Математичка Игра</h3>
+						<p class="text-sm text-slate-500 dark:text-slate-400">5. одделение • Аритметика</p>
+					</div>
+				</div>
+				<p class="text-slate-600 dark:text-slate-300 text-sm mb-6 leading-relaxed">Забавна игра за вежбање таблички множење со поени.</p>
+				<div class="flex items-center justify-between text-xs text-slate-500 mb-4">
+					<span>⏱️ 10 мин</span>
+					<span>⭐ 4.7 (1203 ученици)</span>
+				</div>
+				<button class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-6 rounded-xl transition-colors">
+					Започни Игра
+				</button>
+			</div>
+		</div>
+	</div>
+
+	{/* Progress Dashboard */}
+	<div class="bg-gradient-to-r from-emerald-600 to-green-600 rounded-[3rem] p-12 md:p-16 text-white">
+		<div class="max-w-4xl mx-auto">
+			<div class="text-center mb-12">
+				<h2 class="text-3xl md:text-4xl font-black mb-6">Твој Математички Прогрес</h2>
+				<p class="text-emerald-100 text-xl leading-relaxed">
+					Следи свој развој и заработи значки за завршени лекции.
+				</p>
+			</div>
+
+			<div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+				<div class="bg-white/10 rounded-2xl p-6 backdrop-blur-sm border border-white/20">
+					<div class="flex items-center gap-4 mb-4">
+						<div class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center">
+							<span class="text-2xl">📚</span>
+						</div>
+						<div>
+							<h3 class="font-bold text-xl">Завршени Лекции</h3>
+							<p class="text-emerald-100">15 од 48</p>
+						</div>
+					</div>
+					<div class="w-full bg-white/20 rounded-full h-3 mb-2">
+						<div class="bg-white h-3 rounded-full" style="width: 31%"></div>
+					</div>
+					<p class="text-sm text-emerald-100">31% комплетирано</p>
+				</div>
+
+				<div class="bg-white/10 rounded-2xl p-6 backdrop-blur-sm border border-white/20">
+					<div class="flex items-center gap-4 mb-4">
+						<div class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center">
+							<span class="text-2xl">🏆</span>
+						</div>
+						<div>
+							<h3 class="font-bold text-xl">Заработени Значки</h3>
+							<p class="text-emerald-100">8 значки</p>
+						</div>
+					</div>
+					<div class="flex gap-2">
+						<span class="text-2xl">⭐</span>
+						<span class="text-2xl">🔥</span>
+						<span class="text-2xl">🎯</span>
+						<span class="text-2xl">🧠</span>
+						<span class="text-2xl">💯</span>
+					</div>
+				</div>
+
+				<div class="bg-white/10 rounded-2xl p-6 backdrop-blur-sm border border-white/20">
+					<div class="flex items-center gap-4 mb-4">
+						<div class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center">
+							<span class="text-2xl">📈</span>
+						</div>
+						<div>
+							<h3 class="font-bold text-xl">Време на Учење</h3>
+							<p class="text-emerald-100">12.5 часа</p>
+						</div>
+					</div>
+					<p class="text-sm text-emerald-100">Продолжи да учиш за повеќе награди!</p>
+				</div>
+			</div>
+
+			<div class="text-center">
+				<a href="/students/dashboard" class="inline-flex items-center justify-center gap-2 bg-white text-emerald-600 font-bold py-4 px-8 rounded-xl hover:bg-emerald-50 transition-all">
+					<span>Види Полн Прогрес</span>
+					<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+					</svg>
+				</a>
+			</div>
+		</div>
+	</div>
+</Layout>

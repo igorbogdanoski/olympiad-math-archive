@@ -1,0 +1,156 @@
+---
+import { t } from '../utils/i18n';
+// Role Selector Component for Landing Page
+---
+
+<div id="role-selector" class="fixed top-24 right-8 z-50 hidden lg:block" role="dialog" aria-labelledby="role-selector-title">
+	<div class="bg-white/90 dark:bg-slate-900/90 backdrop-blur-xl rounded-2xl p-6 border border-slate-200/50 dark:border-slate-700/50 shadow-2xl max-w-sm">
+		<div class="text-center mb-6">
+			<h3 id="role-selector-title" class="text-lg font-bold text-slate-900 dark:text-white mb-2">{t('roles.title')}</h3>
+			<p class="text-sm text-slate-600 dark:text-slate-400">{t('roles.subtitle')}</p>
+		</div>
+
+		<div class="space-y-3" role="listbox">
+			<a href="/teachers" role="option" class="role-option group flex items-center gap-4 p-4 rounded-xl border-2 border-transparent hover:border-blue-500/50 hover:bg-blue-50/50 dark:hover:bg-blue-900/20 transition-all" aria-label={t('roles.teacher.title')}>
+				<div class="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform" aria-hidden="true">
+					<span class="text-blue-600 dark:text-blue-400 text-xl">👨‍🏫</span>
+				</div>
+				<div class="flex-1">
+					<h4 class="font-bold text-slate-900 dark:text-white">{t('roles.teacher.title')}</h4>
+					<p class="text-sm text-slate-600 dark:text-slate-400">{t('roles.teacher.description')}</p>
+				</div>
+				<svg class="w-5 h-5 text-slate-400 group-hover:text-blue-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+				</svg>
+			</a>
+
+			<a href="/students" role="option" class="role-option group flex items-center gap-4 p-4 rounded-xl border-2 border-transparent hover:border-emerald-500/50 hover:bg-emerald-50/50 dark:hover:bg-emerald-900/20 transition-all" aria-label={t('roles.student.title')}>
+				<div class="w-12 h-12 bg-emerald-100 dark:bg-emerald-900/30 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform" aria-hidden="true">
+					<span class="text-emerald-600 dark:text-emerald-400 text-xl">👩‍🎓</span>
+				</div>
+				<div class="flex-1">
+					<h4 class="font-bold text-slate-900 dark:text-white">{t('roles.student.title')}</h4>
+					<p class="text-sm text-slate-600 dark:text-slate-400">{t('roles.student.description')}</p>
+				</div>
+				<svg class="w-5 h-5 text-slate-400 group-hover:text-emerald-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+				</svg>
+			</a>
+
+			<a href="/parents" role="option" class="role-option group flex items-center gap-4 p-4 rounded-xl border-2 border-transparent hover:border-purple-500/50 hover:bg-purple-50/50 dark:hover:bg-purple-900/20 transition-all" aria-label={t('roles.parent.title')}>
+				<div class="w-12 h-12 bg-purple-100 dark:bg-purple-900/30 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform" aria-hidden="true">
+					<span class="text-purple-600 dark:text-purple-400 text-xl">👨‍👩‍👧‍👦</span>
+				</div>
+				<div class="flex-1">
+					<h4 class="font-bold text-slate-900 dark:text-white">{t('roles.parent.title')}</h4>
+					<p class="text-sm text-slate-600 dark:text-slate-400">{t('roles.parent.description')}</p>
+				</div>
+				<svg class="w-5 h-5 text-slate-400 group-hover:text-purple-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+				</svg>
+			</a>
+
+			<a href="/schools" role="option" class="role-option group flex items-center gap-4 p-4 rounded-xl border-2 border-transparent hover:border-orange-500/50 hover:bg-orange-50/50 dark:hover:bg-orange-900/20 transition-all" aria-label={t('roles.school.title')}>
+				<div class="w-12 h-12 bg-orange-100 dark:bg-orange-900/30 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform" aria-hidden="true">
+					<span class="text-orange-600 dark:text-orange-400 text-xl">🏫</span>
+				</div>
+				<div class="flex-1">
+					<h4 class="font-bold text-slate-900 dark:text-white">{t('roles.school.title')}</h4>
+					<p class="text-sm text-slate-600 dark:text-slate-400">{t('roles.school.description')}</p>
+				</div>
+				<svg class="w-5 h-5 text-slate-400 group-hover:text-orange-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+				</svg>
+			</a>
+		</div>
+
+		<div class="mt-6 pt-6 border-t border-slate-200 dark:border-slate-700">
+			<p class="text-xs text-slate-500 dark:text-slate-400 text-center">
+				{t('roles.unknown')} <a href="#help" class="text-blue-600 hover:text-blue-700 transition-colors">{t('roles.get_help')}</a>
+			</p>
+		</div>
+	</div>
+
+	<!-- Floating Action Button to Show Selector -->
+	<button 
+		id="role-selector-toggle" 
+		class="fixed bottom-8 right-8 w-14 h-14 bg-blue-600 hover:bg-blue-700 text-white rounded-full shadow-2xl hover:shadow-blue-500/50 transition-all duration-300 lg:hidden z-50" 
+		aria-label={t('roles.title')}
+		aria-expanded="false"
+		aria-controls="role-selector"
+	>
+		<svg class="w-6 h-6 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+			<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+		</svg>
+	</button>
+</div>
+
+<script is:inline>
+	// Role selector functionality
+	document.addEventListener('DOMContentLoaded', () => {
+		const roleSelector = document.getElementById('role-selector');
+		const toggleBtn = document.getElementById('role-selector-toggle');
+
+		if (toggleBtn && roleSelector) {
+			toggleBtn.addEventListener('click', () => {
+				const isHidden = roleSelector.classList.toggle('hidden');
+				toggleBtn.setAttribute('aria-expanded', !isHidden);
+			});
+
+			// Close on outside click (mobile)
+			document.addEventListener('click', (e) => {
+				if (!roleSelector.contains(e.target) && !toggleBtn.contains(e.target)) {
+					roleSelector.classList.add('hidden');
+					toggleBtn.setAttribute('aria-expanded', 'false');
+				}
+			});
+		}
+
+		// Show selector after 3 seconds on desktop
+		setTimeout(() => {
+			if (roleSelector && window.innerWidth >= 1024) {
+				roleSelector.classList.remove('hidden');
+				if (toggleBtn) toggleBtn.setAttribute('aria-expanded', 'true');
+			}
+		}, 3000);
+	});
+</script>
+
+<style>
+	/* Custom animations for role selector */
+	@keyframes slideInRight {
+		from {
+			transform: translateX(100%);
+			opacity: 0;
+		}
+		to {
+			transform: translateX(0);
+			opacity: 1;
+		}
+	}
+
+	#role-selector:not(.hidden) {
+		animation: slideInRight 0.5s ease-out;
+	}
+
+	/* Smooth hover transitions */
+	.role-option {
+		transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+	}
+
+	.role-option:hover {
+		transform: translateX(4px);
+	}
+
+	/* Mobile responsive adjustments */
+	@media (max-width: 1024px) {
+		#role-selector {
+			position: fixed;
+			bottom: 80px;
+			right: 8px;
+			left: 8px;
+			max-width: none;
+			width: auto;
+		}
+	}
+</style>

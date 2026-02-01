@@ -1,0 +1,59 @@
+---
+import Layout from '../layouts/Layout.astro';
+import problems from '../data/problems.json';
+
+// Екстракција на сите уникатни вештини од задачите
+const allSkills = [...new Set(problems.flatMap(p => p.meta.related_skills || []))].sort();
+
+// Групирање на задачи по вештина
+const skillStats = allSkills.map(skill => {
+  const count = problems.filter(p => p.meta.related_skills?.includes(skill)).length;
+  return { name: skill, count };
+});
+---
+
+<Layout title="Математички Вештини | МатАрхива">
+	<div class="max-w-6xl mx-auto">
+		<header class="mb-16 text-center no-print">
+			<span class="inline-block px-4 py-1.5 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 text-[10px] font-black uppercase tracking-[0.2em] border border-emerald-500/20 mb-6">
+				Стратегии & Техники
+			</span>
+			<h1 class="text-5xl md:text-6xl font-black mb-8 text-slate-950 dark:text-white tracking-tight">
+				Мајсторство на <span class="text-blue-600">Методи</span>
+			</h1>
+			<p class="text-xl text-slate-500 dark:text-slate-400 max-w-2xl mx-auto italic font-medium leading-relaxed">
+				"Најмоќното оружје не е теоремата, туку начинот на кој ја применувате."
+			</p>
+		</header>
+
+		<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+			{skillStats.map(skill => (
+				<div class="group bg-white dark:bg-slate-900 rounded-[2.5rem] p-10 border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-2xl hover:shadow-blue-500/5 transition-all hover:-translate-y-2">
+					<div class="w-16 h-16 bg-blue-50 dark:bg-blue-900/20 rounded-2xl flex items-center justify-center text-3xl mb-8 group-hover:scale-110 transition-transform group-hover:rotate-6">
+						🧠
+					</div>
+					<h3 class="text-2xl font-bold mb-4 capitalize text-slate-900 dark:text-white group-hover:text-blue-600 transition-colors">
+						{skill.name.replace(/_/g, ' ')}
+					</h3>
+					<p class="text-slate-500 dark:text-slate-400 text-sm mb-8 line-clamp-2 leading-relaxed font-medium">
+						Научете како да ја примените оваа стратегија во натпреварувачки задачи преку конкретни примери.
+					</p>
+					<div class="pt-8 border-t border-slate-50 dark:border-slate-800 flex items-center justify-between">
+						<span class="px-3 py-1 bg-slate-50 dark:bg-slate-800 text-[10px] font-black uppercase tracking-widest text-blue-600 rounded-lg">
+							{skill.count} Задачи
+						</span>
+						<a href={`/skills/${skill.name}`} class="text-xs font-black uppercase tracking-widest flex items-center gap-2 group-hover:gap-4 transition-all text-slate-900 dark:text-slate-100">
+							Истражи <span class="text-blue-500">→</span>
+						</a>
+					</div>
+				</div>
+			))}
+		</div>
+
+		{allSkills.length === 0 && (
+			<div class="text-center py-20 bg-slate-50 rounded-[3rem] border border-dashed border-slate-200">
+				<p class="text-slate-400 font-medium italic">Секцијата се пополнува со додавање на тагови во задачите...</p>
+			</div>
+		)}
+	</div>
+</Layout>

@@ -1,0 +1,532 @@
+---
+import Layout from '../layouts/Layout.astro';
+import CurriculumAlignmentDashboard from '../components/CurriculumAlignmentDashboard.astro';
+
+// Static fallback data for development
+const fallbackData = {
+  attendance_summary: [
+    { "grade": "I-1", "m": 11, "f": 8, "total": 19, "absences": { "excused": 39, "unexcused": 0 }, "behavior": "примерно", "nationality": { "mk": 19, "al": 0, "tr": 0, "other": 0 } },
+    { "grade": "I-2", "m": 11, "f": 8, "total": 19, "absences": { "excused": 163, "unexcused": 0 }, "behavior": "примерно", "nationality": { "mk": 19, "al": 0, "tr": 0, "other": 0 } },
+    { "grade": "VII-1", "m": 9, "f": 11, "total": 20, "absences": { "excused": 150, "unexcused": 12 }, "behavior": "примерно", "nationality": { "mk": 20, "al": 0, "tr": 0, "other": 0 } }
+  ],
+  grade_success: [
+    {
+      "class": "VII-1",
+      "students": 20,
+      "grades": { "5": 9, "4": 6, "3": 2, "2": 0, "1": 1 },
+      "stats": { "passed": 17, "negative": 1, "avg": 4.18 }
+    },
+    {
+      "class": "VIII-1",
+      "students": 22,
+      "grades": { "5": 7, "4": 9, "3": 2, "2": 0, "1": 2 },
+      "stats": { "passed": 18, "negative": 5, "avg": 4.30 }
+    }
+  ],
+  subject_performance: [
+    {
+      "subject": "Македонски јазик",
+      "grades": [
+        { "class": "IV-1", "5": 15, "4": 3, "3": 0, "2": 1, "1": 0 },
+        { "class": "VI-1", "5": 12, "4": 10, "3": 2, "2": 3, "1": 0 }
+      ]
+    },
+    {
+      "subject": "Математика",
+      "grades": [
+        { "class": "IV-1", "5": 12, "4": 6, "3": 1, "2": 0, "1": 0 },
+        { "class": "VII-1", "5": 8, "4": 4, "3": 2, "2": 4, "1": 2 }
+      ]
+    }
+  ]
+};
+
+// Use fallback data for static generation
+const { attendance_summary, grade_success, subject_performance } = fallbackData;
+
+// Calculate totals
+const totalStudents = attendance_summary.reduce((sum, item) => sum + item.total, 0);
+const totalExcused = attendance_summary.reduce((sum, item) => sum + item.absences.excused, 0);
+const totalUnexcused = attendance_summary.reduce((sum, item) => sum + item.absences.unexcused, 0);
+const avgGrade = grade_success.reduce((sum, item) => sum + (item.stats.avg * item.students), 0) / grade_success.reduce((sum, item) => sum + item.students, 0);
+
+// Placeholder for curriculum alignment data (would come from API in real implementation)
+const curriculumAlignmentData = null; // This would be populated from the API response
+---
+
+<Layout title="Извештај за прво полугодие">
+  <main class="max-w-7xl mx-auto px-4 py-8">
+    <header class="mb-12 text-center">
+      <h1 class="text-4xl font-bold text-gray-900 mb-4">Интерактивен Извештај - Прво Полугодие</h1>
+      <p class="text-lg text-gray-600">Преглед на успех, изостаноци и поведение за учебната 2025/26 година</p>
+
+      <div class="mt-8 max-w-md mx-auto relative">
+        <input
+          type="text"
+          id="classSearch"
+          placeholder="Пребарај одделение (пр. VII-1)..."
+          class="w-full px-6 py-3 rounded-full border border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none shadow-sm transition-all"
+        />
+        <svg class="w-5 h-5 text-gray-400 absolute right-4 top-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+        </svg>
+      </div>
+
+      <!-- Quick Stats Cards -->
+      <div class="mt-8 grid grid-cols-1 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
+        <div class="bg-gradient-to-br from-blue-50 to-blue-100 p-4 rounded-xl border border-blue-200">
+          <div class="text-2xl font-bold text-blue-900">{totalStudents.toLocaleString()}</div>
+          <div class="text-sm text-blue-700">Вкупно ученици</div>
+        </div>
+        <div class="bg-gradient-to-br from-green-50 to-green-100 p-4 rounded-xl border border-green-200">
+          <div class="text-2xl font-bold text-green-900">{avgGrade.toFixed(2)}</div>
+          <div class="text-sm text-green-700">Просечен успех</div>
+        </div>
+        <div class="bg-gradient-to-br from-yellow-50 to-yellow-100 p-4 rounded-xl border border-yellow-200">
+          <div class="text-2xl font-bold text-yellow-900">{totalExcused.toLocaleString()}</div>
+          <div class="text-sm text-yellow-700">Оправдани изостаноци</div>
+        </div>
+        <div class="bg-gradient-to-br from-red-50 to-red-100 p-4 rounded-xl border border-red-200">
+          <div class="text-2xl font-bold text-red-900">{totalUnexcused.toLocaleString()}</div>
+          <div class="text-sm text-red-700">Неоправдани изостаноци</div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Advanced Analytics Section -->
+    <section class="mb-16">
+      <h2 class="text-2xl font-bold mb-6 flex items-center">
+        <span class="bg-purple-600 text-white w-8 h-8 rounded-full flex items-center justify-center mr-3 text-sm">📊</span>
+        Аналитички Преглед
+      </h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+        <div class="bg-gradient-to-br from-purple-50 to-purple-100 p-6 rounded-xl border border-purple-200">
+          <div class="flex items-center mb-2">
+            <div class="w-3 h-3 bg-purple-500 rounded-full mr-2"></div>
+            <h3 class="text-purple-800 font-semibold">Квалитет на образование</h3>
+          </div>
+          <p class="text-2xl font-bold text-purple-900">{(avgGrade >= 4.5 ? 'Одлично' : avgGrade >= 4.0 ? 'Многу добро' : avgGrade >= 3.5 ? 'Добро' : 'Потребно подобрување')}</p>
+          <p class="text-sm text-purple-600 mt-1">Базирано на просечниот успех</p>
+        </div>
+
+        <div class="bg-gradient-to-br from-orange-50 to-orange-100 p-6 rounded-xl border border-orange-200">
+          <div class="flex items-center mb-2">
+            <div class="w-3 h-3 bg-orange-500 rounded-full mr-2"></div>
+            <h3 class="text-orange-800 font-semibold">Присуство</h3>
+          </div>
+          <p class="text-2xl font-bold text-orange-900">{((totalExcused + totalUnexcused) / totalStudents / 180 * 100).toFixed(1)}%</p>
+          <p class="text-sm text-orange-600 mt-1">Просечни изостаноци по ученик</p>
+        </div>
+
+        <div class="bg-gradient-to-br from-teal-50 to-teal-100 p-6 rounded-xl border border-teal-200">
+          <div class="flex items-center mb-2">
+            <div class="w-3 h-3 bg-teal-500 rounded-full mr-2"></div>
+            <h3 class="text-teal-800 font-semibold">Одделениска распределба</h3>
+          </div>
+          <p class="text-2xl font-bold text-teal-900">{attendance_summary.length}</p>
+          <p class="text-sm text-teal-600 mt-1">Активни одделенија</p>
+        </div>
+
+        <div class="bg-gradient-to-br from-indigo-50 to-indigo-100 p-6 rounded-xl border border-indigo-200">
+          <div class="flex items-center mb-2">
+            <div class="w-3 h-3 bg-indigo-500 rounded-full mr-2"></div>
+            <h3 class="text-indigo-800 font-semibold">Студентски успех</h3>
+          </div>
+          <p class="text-2xl font-bold text-indigo-900">{(grade_success.reduce((sum, item) => sum + item.stats.passed, 0) / grade_success.reduce((sum, item) => sum + item.students, 0) * 100).toFixed(1)}%</p>
+          <p class="text-sm text-indigo-600 mt-1">Процент на положени предмети</p>
+        </div>
+      </div>
+
+      <!-- Charts Placeholder -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div class="bg-white p-6 rounded-xl border shadow-sm">
+          <h3 class="text-lg font-semibold mb-4 text-gray-800">Распределба на оценки</h3>
+          <div class="space-y-3">
+            {[5, 4, 3, 2, 1].map(grade => {
+              const total = grade_success.reduce((sum, item) => sum + item.grades[grade], 0);
+              const percentage = (total / grade_success.reduce((sum, item) => sum + item.students, 0) * 100).toFixed(1);
+              return (
+                <div class="flex items-center justify-between">
+                  <span class="text-sm font-medium text-gray-600">{grade}</span>
+                  <div class="flex-1 mx-4">
+                    <div class="w-full bg-gray-200 rounded-full h-2">
+                      <div class={`h-2 rounded-full ${grade === 5 ? 'bg-green-500' : grade === 4 ? 'bg-blue-500' : grade === 3 ? 'bg-yellow-500' : 'bg-red-500'}`} style={`width: ${percentage}%`}></div>
+                    </div>
+                  </div>
+                  <span class="text-sm font-semibold text-gray-800">{total} ({percentage}%)</span>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
+        <div class="bg-white p-6 rounded-xl border shadow-sm">
+          <h3 class="text-lg font-semibold mb-4 text-gray-800">Изостаноци по категории</h3>
+          <div class="space-y-4">
+            <div class="flex items-center justify-between p-3 bg-green-50 rounded-lg">
+              <span class="font-medium text-green-800">Оправдани</span>
+              <span class="text-xl font-bold text-green-900">{totalExcused.toLocaleString()}</span>
+            </div>
+            <div class="flex items-center justify-between p-3 bg-red-50 rounded-lg">
+              <span class="font-medium text-red-800">Неоправдани</span>
+              <span class="text-xl font-bold text-red-900">{totalUnexcused.toLocaleString()}</span>
+            </div>
+            <div class="pt-2 border-t">
+              <div class="flex items-center justify-between text-sm">
+                <span class="text-gray-600">Вкупно изостаноци</span>
+                <span class="font-semibold text-gray-900">{(totalExcused + totalUnexcused).toLocaleString()}</span>
+              </div>
+              <div class="flex items-center justify-between text-sm mt-1">
+                <span class="text-gray-600">Просек по ученик</span>
+                <span class="font-semibold text-gray-900">{((totalExcused + totalUnexcused) / totalStudents).toFixed(1)}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="mb-16">
+      <h2 class="text-2xl font-bold mb-6 flex items-center">
+        <span class="bg-indigo-600 text-white w-8 h-8 rounded-full flex items-center justify-center mr-3 text-sm">🎓</span>
+        Преглед по одделенија (Успех)
+      </h2>
+      <div class="overflow-x-auto bg-white rounded-xl shadow-sm border">
+        <table class="min-w-full divide-y divide-gray-200">
+          <thead class="bg-gray-50">
+            <tr>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Одделение</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Број ученици</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Одлични (5)</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Многу добри (4)</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Добри (3)</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Доволни (2)</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Недоволни (1)</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Негативни</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Ср. Успех</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Успешност</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-200">
+            {grade_success.map((item) => (
+              <tr class="hover:bg-gray-50 transition-colors">
+                <td class="px-6 py-4 whitespace-nowrap font-semibold text-gray-900">{item.class}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-gray-600">{item.students}</td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <span class="px-2 py-1 bg-green-100 text-green-800 rounded-md text-sm font-medium">{item.grades["5"]}</span>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <span class="px-2 py-1 bg-blue-100 text-blue-800 rounded-md text-sm font-medium">{item.grades["4"]}</span>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <span class="px-2 py-1 bg-yellow-100 text-yellow-800 rounded-md text-sm font-medium">{item.grades["3"]}</span>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <span class="px-2 py-1 bg-orange-100 text-orange-800 rounded-md text-sm font-medium">{item.grades["2"]}</span>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <span class="px-2 py-1 bg-red-100 text-red-800 rounded-md text-sm font-medium">{item.grades["1"]}</span>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <span class={`px-2 py-1 rounded-md text-sm font-medium ${item.stats.negative > 0 ? 'bg-red-100 text-red-800' : 'bg-gray-100 text-gray-600'}`}>
+                    {item.stats.negative}
+                  </span>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap font-medium text-indigo-600 text-lg">{item.stats.avg.toFixed(2)}</td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <div class="flex items-center">
+                    <div class="w-16 bg-gray-200 rounded-full h-2 mr-3">
+                      <div class="bg-indigo-600 h-2 rounded-full" style={`width: ${(item.stats.passed / item.students * 100)}%`}></div>
+                    </div>
+                    <span class="text-sm font-medium text-gray-900">{(item.stats.passed / item.students * 100).toFixed(0)}%</span>
+                  </div>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Subject Performance Section -->
+    <section class="mb-16">
+      <h2 class="text-2xl font-bold mb-6 flex items-center">
+        <span class="bg-green-600 text-white w-8 h-8 rounded-full flex items-center justify-center mr-3 text-sm">📚</span>
+        Успех по предмети
+      </h2>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {subject_performance.map((subject) => {
+          const allGrades = subject.grades.flatMap(classData => [5, 4, 3, 2, 1].map(grade => classData[grade] || 0));
+          const totalStudents = allGrades.reduce((sum, count) => sum + count, 0);
+          const avgGrade = subject.grades.reduce((sum, classData) => {
+            return sum + [5, 4, 3, 2, 1].reduce((classSum, grade) => classSum + (grade * (classData[grade] || 0)), 0);
+          }, 0) / totalStudents;
+
+          return (
+            <div class="bg-white p-6 rounded-xl border shadow-sm">
+              <div class="flex items-center justify-between mb-4">
+                <h3 class="text-lg font-semibold text-gray-800">{subject.subject}</h3>
+                <span class="px-3 py-1 bg-indigo-100 text-indigo-800 rounded-full text-sm font-medium">
+                  Ø {avgGrade.toFixed(2)}
+                </span>
+              </div>
+
+              <div class="space-y-3">
+                {subject.grades.map((classData) => {
+                  const classTotal = [5, 4, 3, 2, 1].reduce((sum, grade) => sum + (classData[grade] || 0), 0);
+                  const classAvg = [5, 4, 3, 2, 1].reduce((sum, grade) => sum + (grade * (classData[grade] || 0)), 0) / classTotal;
+
+                  return (
+                    <div class="border rounded-lg p-3">
+                      <div class="flex items-center justify-between mb-2">
+                        <span class="font-medium text-gray-700">{classData.class}</span>
+                        <span class="text-sm text-gray-500">Ø {classAvg.toFixed(2)}</span>
+                      </div>
+                      <div class="grid grid-cols-5 gap-2 text-xs">
+                        {[5, 4, 3, 2, 1].map(grade => (
+                          <div class="text-center">
+                            <div class={`px-2 py-1 rounded text-white font-medium ${
+                              grade === 5 ? 'bg-green-500' :
+                              grade === 4 ? 'bg-blue-500' :
+                              grade === 3 ? 'bg-yellow-500' :
+                              grade === 2 ? 'bg-orange-500' : 'bg-red-500'
+                            }`}>
+                              {classData[grade] || 0}
+                            </div>
+                            <div class="text-gray-500 mt-1">{grade}</div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </section>
+
+    <section class="mb-16">
+      <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-6">
+        <h2 class="text-2xl font-bold flex items-center">
+          <span class="bg-indigo-600 text-white w-8 h-8 rounded-full flex items-center justify-center mr-3 text-sm">📋</span>
+          Изостаноци и Поведение
+        </h2>
+
+        <!-- Export and Filter Controls -->
+        <div class="flex flex-col sm:flex-row gap-3 mt-4 md:mt-0">
+          <div class="flex gap-2">
+            <button id="exportPDF" class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors flex items-center text-sm">
+              <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+              </svg>
+              PDF Извештај
+            </button>
+            <button id="exportExcel" class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors flex items-center text-sm">
+              <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+              </svg>
+              Excel
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Attendance Summary Cards -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+        {attendance_summary.map((item) => {
+          const totalAbsences = item.absences.excused + item.absences.unexcused;
+          const absenceRate = (totalAbsences / (item.total * 90) * 100).toFixed(1); // Assuming 90 school days per semester
+          const excusedRate = (item.absences.excused / totalAbsences * 100).toFixed(0);
+
+          return (
+            <div class="bg-white p-6 rounded-xl border hover:shadow-lg transition-all duration-200 transform hover:-translate-y-1">
+              <div class="flex justify-between items-start mb-4">
+                <div>
+                  <h3 class="text-xl font-bold text-gray-800">{item.grade}</h3>
+                  <p class="text-sm text-gray-500">{item.total} ученици</p>
+                </div>
+                <span class={`text-xs font-bold uppercase px-3 py-1 rounded-full ${
+                  item.behavior === 'примерно' ? 'bg-green-100 text-green-800' :
+                  item.behavior === 'добро' ? 'bg-blue-100 text-blue-800' :
+                  'bg-yellow-100 text-yellow-800'
+                }`}>
+                  {item.behavior}
+                </span>
+              </div>
+
+              <div class="space-y-3 mb-4">
+                <div class="flex justify-between items-center">
+                  <span class="text-sm text-gray-600">Оправдани:</span>
+                  <span class="font-bold text-green-600">{item.absences.excused}</span>
+                </div>
+                <div class="flex justify-between items-center">
+                  <span class="text-sm text-gray-600">Неоправдани:</span>
+                  <span class="font-bold text-red-600">{item.absences.unexcused}</span>
+                </div>
+                <div class="flex justify-between items-center pt-2 border-t">
+                  <span class="text-sm font-medium text-gray-700">Вкупно:</span>
+                  <span class="font-bold text-gray-900">{totalAbsences}</span>
+                </div>
+              </div>
+
+              <!-- Progress bars -->
+              <div class="space-y-2 mb-4">
+                <div class="flex justify-between text-xs text-gray-500">
+                  <span>Изостанци</span>
+                  <span>{absenceRate}% од деновите</span>
+                </div>
+                <div class="w-full bg-gray-200 rounded-full h-2">
+                  <div class="bg-indigo-600 h-2 rounded-full transition-all duration-500" style={`width: ${Math.min(absenceRate * 10, 100)}%`}></div>
+                </div>
+              </div>
+
+              <div class="pt-3 border-t space-y-2">
+                <div class="flex justify-between items-center text-sm">
+                  <span class="text-gray-500">М/Ж распределба:</span>
+                  <span class="font-medium">{item.m}М / {item.f}Ж</span>
+                </div>
+                <div class="flex justify-between items-center text-sm">
+                  <span class="text-gray-500">Оправдани %:</span>
+                  <span class="font-medium text-green-600">{excusedRate}%</span>
+                </div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
+      <!-- Attendance Trends Chart -->
+      <div class="bg-white p-6 rounded-xl border shadow-sm">
+        <h3 class="text-lg font-semibold mb-4 text-gray-800">Трендови на изостаноци</h3>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+          {[
+            { label: 'Најдобро присуство', value: attendance_summary.reduce((prev, current) => (prev.absences.unexcused < current.absences.unexcused) ? prev : current).grade, color: 'text-green-600' },
+            { label: 'Најмногу оправдани', value: attendance_summary.reduce((prev, current) => (prev.absences.excused > current.absences.excused) ? prev : current).grade, color: 'text-blue-600' },
+            { label: 'Најмногу неоправдани', value: attendance_summary.reduce((prev, current) => (prev.absences.unexcused > current.absences.unexcused) ? prev : current).grade, color: 'text-red-600' },
+            { label: 'Најдобро однесување', value: attendance_summary.find(item => item.behavior === 'примерно')?.grade || 'Нема', color: 'text-purple-600' }
+          ].map((stat) => (
+            <div class="text-center p-3 bg-gray-50 rounded-lg">
+              <div class="text-2xl font-bold {stat.color}">{stat.value}</div>
+              <div class="text-xs text-gray-500 mt-1">{stat.label}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Curriculum Alignment Dashboard -->
+    <section class="mb-16">
+      <CurriculumAlignmentDashboard alignmentData={curriculumAlignmentData} />
+    </section>
+  </main>
+
+  <script>
+    // Enhanced search functionality
+    const searchInput = document.getElementById('classSearch');
+    const tableRows = document.querySelectorAll('tbody tr');
+    const attendanceCards = document.querySelectorAll('section:nth-of-type(3) div.bg-white');
+    const subjectCards = document.querySelectorAll('section:nth-of-type(2) div.bg-white');
+
+    searchInput?.addEventListener('input', (e) => {
+      const searchTerm = (e.target as HTMLInputElement).value.toLowerCase().trim();
+
+      // Filter grade success table
+      tableRows.forEach(row => {
+        const className = row.querySelector('td:first-child')?.textContent?.toLowerCase() || '';
+        (row as HTMLElement).style.display = className.includes(searchTerm) ? '' : 'none';
+      });
+
+      // Filter attendance cards
+      attendanceCards.forEach(card => {
+        const className = card.querySelector('h3')?.textContent?.toLowerCase() || '';
+        (card as HTMLElement).style.display = className.includes(searchTerm) ? '' : 'none';
+      });
+
+      // Filter subject performance cards (if applicable)
+      subjectCards.forEach(card => {
+        const subjectName = card.querySelector('h3')?.textContent?.toLowerCase() || '';
+        (card as HTMLElement).style.display = className.includes(searchTerm) || subjectName.includes(searchTerm) ? '' : 'none';
+      });
+    });
+
+    // Export functionality
+    const exportPDFBtn = document.getElementById('exportPDF');
+    const exportExcelBtn = document.getElementById('exportExcel');
+
+    exportPDFBtn?.addEventListener('click', () => {
+      // Simple PDF export simulation - in real implementation, use libraries like jsPDF
+      alert('PDF извештај ќе се генерира и преземе...');
+      // TODO: Implement actual PDF generation
+      console.log('Exporting to PDF...');
+    });
+
+    exportExcelBtn?.addEventListener('click', () => {
+      // Simple Excel export simulation - in real implementation, use libraries like SheetJS
+      alert('Excel датотека ќе се генерира и преземе...');
+      // TODO: Implement actual Excel generation
+      console.log('Exporting to Excel...');
+    });
+
+    // Add click handlers for grade visualization
+    const gradeBars = document.querySelectorAll('.bg-gray-200 .bg-green-500, .bg-gray-200 .bg-blue-500, .bg-gray-200 .bg-yellow-500, .bg-gray-200 .bg-red-500');
+    gradeBars.forEach(bar => {
+      bar.addEventListener('mouseenter', (e) => {
+        const percentage = (e.target as HTMLElement).style.width;
+        (e.target as HTMLElement).title = `Процент: ${percentage}`;
+      });
+    });
+
+    // Add smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector((this as HTMLAnchorElement).getAttribute('href')!);
+        target?.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+      });
+    });
+
+    // Add loading states for export buttons
+    [exportPDFBtn, exportExcelBtn].forEach(btn => {
+      btn?.addEventListener('click', function() {
+        const originalText = this.innerHTML;
+        this.innerHTML = '<div class="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>Генерирање...';
+        this.disabled = true;
+
+        setTimeout(() => {
+          this.innerHTML = originalText;
+          (this as HTMLButtonElement).disabled = false;
+        }, 2000);
+      });
+    });
+
+    // Animate numbers on page load
+    function animateNumbers() {
+      const numberElements = document.querySelectorAll('[data-animate-number]');
+      numberElements.forEach(el => {
+        const target = parseInt((el as HTMLElement).dataset.animateNumber || '0');
+        let current = 0;
+        const increment = target / 50;
+        const timer = setInterval(() => {
+          current += increment;
+          if (current >= target) {
+            current = target;
+            clearInterval(timer);
+          }
+          (el as HTMLElement).textContent = Math.floor(current).toLocaleString();
+        }, 30);
+      });
+    }
+
+    // Initialize animations
+    document.addEventListener('DOMContentLoaded', () => {
+      animateNumbers();
+    });
+  </script>
+</Layout>

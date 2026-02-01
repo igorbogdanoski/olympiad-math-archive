@@ -1,0 +1,154 @@
+---
+import Layout from '../layouts/Layout.astro';
+import problems from '../data/problems.json';
+
+// Extract metadata
+const grades = [...new Set(problems.map(p => p.grade))].filter(g => g !== 'N/A').sort();
+const categories = [...new Set(problems.map(p => p.category))].filter(c => c !== 'N/A').sort();
+
+// Predefined templates
+const templates = [
+	{
+		id: 'weekly-review',
+		name: 'Неделен преглед',
+		description: '5 лесни задачи за брз преглед на основните концепти',
+		icon: '📅',
+		defaults: { grade: null, count: 5, difficulty: 'easy', testType: 'quick-review' }
+	},
+	{
+		id: 'skill-building',
+		name: 'Градење вештини',
+		description: '8 задачи фокусирани на специфични математички вештини',
+		icon: '🎯',
+		defaults: { grade: null, count: 8, difficulty: 'medium', testType: 'skill-focused' }
+	},
+	{
+		id: 'progressive-test',
+		name: 'Прогресивен тест',
+		description: '10 задачи со прогресивна тежина од лесни до тешки',
+		icon: '📈',
+		defaults: { grade: null, count: 10, difficulty: 'all', testType: 'progressive' }
+	},
+	{
+		id: 'olympiad-prep',
+		name: 'Подготовка за олимпијада',
+		description: '12 тешки задачи од различни области',
+		icon: '🏆',
+		defaults: { grade: null, count: 12, difficulty: 'hard', testType: 'mixed' }
+	},
+	{
+		id: 'geometry-focus',
+		name: 'Фокус на геометрија',
+		description: '8 геометриски задачи со различна тежина',
+		icon: '📐',
+		defaults: { grade: null, count: 8, difficulty: 'all', testType: 'mixed', field: 'geometry' }
+	},
+	{
+		id: 'algebra-practice',
+		name: 'Алгебарски вежби',
+		description: '10 алгебарски задачи за практична работа',
+		icon: '🔢',
+		defaults: { grade: null, count: 10, difficulty: 'medium', testType: 'mixed', field: 'algebra' }
+	}
+];
+---
+
+<Layout title="Шаблони за работни листови">
+	<div class="max-w-6xl mx-auto">
+		<div class="mb-10">
+			<h1 class="text-4xl font-black mb-4 flex items-center gap-4">
+				<span class="text-5xl">📋</span>
+				Шаблони за работни листови
+			</h1>
+			<p class="text-slate-500 dark:text-slate-400 text-lg max-w-3xl">
+				Изберете од проверени шаблони дизајнирани од искусни наставници. Секој шаблон е оптимизиран
+				за различни цели на учење и типови на часови.
+			</p>
+		</div>
+
+		<!-- Templates Grid -->
+		<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+			{templates.map(template => (
+				<div class="bg-white dark:bg-slate-900 p-6 rounded-[2.5rem] border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-lg transition-all cursor-pointer group"
+				   data-template-id={template.id}
+				   onclick={`selectTemplate('${template.id}')`}>
+					<div class="text-4xl mb-4 group-hover:scale-110 transition-transform">{template.icon}</div>
+					<h3 class="font-bold text-xl mb-3 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+						{template.name}
+					</h3>
+					<p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-4">
+						{template.description}
+					</p>
+					<div class="flex flex-wrap gap-2">
+						<span class="px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded-full text-xs font-medium">
+							{template.defaults.count} задачи
+						</span>
+						<span class="px-3 py-1 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 rounded-full text-xs font-medium capitalize">
+							{template.defaults.difficulty === 'all' ? 'сите нивоа' : template.defaults.difficulty}
+						</span>
+						<span class="px-3 py-1 bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 rounded-full text-xs font-medium">
+							{template.defaults.testType === 'mixed' ? 'измешани' :
+							 template.defaults.testType === 'progressive' ? 'прогресивни' :
+							 template.defaults.testType === 'skill-focused' ? 'по вештини' :
+							 template.defaults.testType === 'quick-review' ? 'брз преглед' : template.defaults.testType}
+						</span>
+					</div>
+				</div>
+			))}
+		</div>
+
+		<!-- Quick Actions -->
+		<div class="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 p-8 rounded-3xl border border-blue-200 dark:border-blue-800">
+			<h2 class="text-2xl font-bold mb-6 flex items-center gap-3">
+				<span class="text-3xl">⚡</span>
+				Брзи акции
+			</h2>
+			<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+				<a href="/teachers"
+				   class="bg-white dark:bg-slate-900 p-6 rounded-2xl shadow-sm hover:shadow-md transition-all group">
+					<div class="text-2xl mb-3 group-hover:scale-110 transition-transform">🎨</div>
+					<h3 class="font-bold mb-2 group-hover:text-blue-600">Напредна конфигурација</h3>
+					<p class="text-slate-600 dark:text-slate-400 text-sm">Креирајте потполно прилагодени тестови</p>
+				</a>
+
+				<a href="/worksheet-library"
+				   class="bg-white dark:bg-slate-900 p-6 rounded-2xl shadow-sm hover:shadow-md transition-all group">
+					<div class="text-2xl mb-3 group-hover:scale-110 transition-transform">📚</div>
+					<h3 class="font-bold mb-2 group-hover:text-blue-600">Библиотека тестови</h3>
+					<p class="text-slate-600 dark:text-slate-400 text-sm">Преземете готови тестови</p>
+				</a>
+
+				<a href="/skills"
+				   class="bg-white dark:bg-slate-900 p-6 rounded-2xl shadow-sm hover:shadow-md transition-all group">
+					<div class="text-2xl mb-3 group-hover:scale-110 transition-transform">🎯</div>
+					<h3 class="font-bold mb-2 group-hover:text-blue-600">Целни вештини</h3>
+					<p class="text-slate-600 dark:text-slate-400 text-sm">Фокусирајте се на специфични концепти</p>
+				</a>
+			</div>
+		</div>
+	</div>
+</Layout>
+
+<script>
+	const templates = {
+		"weekly-review": { grade: null, count: 5, difficulty: 'easy', testType: 'quick-review' },
+		"skill-building": { grade: null, count: 8, difficulty: 'medium', testType: 'skill-focused' },
+		"progressive-test": { grade: null, count: 10, difficulty: 'all', testType: 'progressive' },
+		"olympiad-prep": { grade: null, count: 12, difficulty: 'hard', testType: 'mixed' },
+		"geometry-focus": { grade: null, count: 8, difficulty: 'all', testType: 'mixed', field: 'geometry' },
+		"algebra-practice": { grade: null, count: 10, difficulty: 'medium', testType: 'mixed', field: 'algebra' }
+	};
+
+	function selectTemplate(templateId) {
+		const templateData = templates[templateId];
+		if (!templateData) return;
+
+		// Store template selection and redirect to teachers page
+		localStorage.setItem('selectedTemplate', JSON.stringify({
+			id: templateId,
+			...templateData
+		}));
+
+		window.location.href = '/teachers';
+	}
+</script>

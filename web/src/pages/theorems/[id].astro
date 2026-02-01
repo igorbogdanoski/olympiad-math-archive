@@ -1,0 +1,258 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import fs from 'node:fs';
+import path from 'node:path';
+import katex from 'katex';
+import problems from '../../data/problems.json';
+
+export async function getStaticPaths() {
+  const theoremsDir = path.resolve('src/data/theorems');
+  const files = fs.readdirSync(theoremsDir).filter(f => f.endsWith('.md') && !f.startsWith('_'));
+
+  return files.map(file => ({
+    params: { id: file.replace('.md', '') },
+    props: { filename: file }
+  }));
+}
+
+const { id } = Astro.params;
+const { filename } = Astro.props;
+const theoremsDir = path.resolve('src/data/theorems');
+const filePath = path.join(theoremsDir, filename);
+const rawContent = fs.readFileSync(filePath, 'utf-8');
+
+const theoremProblems = problems.filter(p => p.meta.related_theorems?.includes(id));
+
+const cleanBody = (text: string) => {
+  return text.split('##')[0].replace(/[\$\#\*]/g, '').slice(0, 100) + '...';
+};
+
+const getDifficultyColor = (diff: number) => {
+  if (diff <= 3) return 'bg-emerald-500';
+  if (diff <= 7) return 'bg-amber-500';
+  return 'bg-rose-500';
+};
+
+const getGradeText = (grade: string) => {
+  const num = parseInt(grade);
+  return `${num}. одделение`;
+};
+
+// Серверско рендерирање на LaTeX
+const renderMath = (text: string) => {
+  if (!text) return "";
+  let processed = text;
+  
+  processed = processed.replace(/\$\$(.*?)\$\$/gs, (_, math) => {
+    try {
+      return katex.renderToString(math.trim(), { displayMode: true, throwOnError: false });
+    } catch (e) { return math; }
+  });
+
+  processed = processed.replace(/\$(.*?)\$/g, (_, math) => {
+    try {
+      return katex.renderToString(math.trim(), { displayMode: false, throwOnError: false });
+    } catch (e) { return math; }
+  });
+
+  return processed;
+};
+
+// Исчисти го содржината
+let content = rawContent.replace(/^---\s*\n[\s\S]*?\n---\s*/, '').replace(/^#\s+.*\n/, '');
+content = renderMath(content);
+const titleMatch = rawContent.match(/^#\s+(.*)/m) || rawContent.match(/title:\s*(.*)/);
+const title = titleMatch ? titleMatch[1] : id.replace(/_/g, ' ');
+---
+
+<Layout title={`${title} | Теореми | МатАрхива`}>
+  <div class="max-w-4xl mx-auto px-4 py-8">
+    <nav class="flex mb-8 text-sm font-medium text-slate-500 gap-2 items-center">
+      <a href="/" class="hover:text-blue-600 transition-colors">Архива</a>
+      <span>/</span>
+      <a href="/theorems" class="hover:text-blue-600 transition-colors">Теореми</a>
+      <span>/</span>
+      <span class="text-slate-900 dark:text-slate-100">{title}</span>
+    </nav>
+
+    <article class="bg-white dark:bg-slate-900 rounded-[3rem] border border-slate-100 dark:border-slate-800 shadow-xl overflow-hidden">
+      <div class="p-10 border-b border-slate-50 dark:border-slate-800 bg-gradient-to-br from-white to-slate-50/50 dark:from-slate-900 dark:to-slate-800/50">
+        <h1 class="text-4xl font-black text-slate-900 dark:text-white leading-tight">
+          {title}
+        </h1>
+      </div>
+
+      <!-- Enhanced pedagogical content for specific theorems -->
+      {id === 'cevas_theorem' && (
+        <div class="p-10 border-b border-slate-50 dark:border-slate-800 bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20">
+          <div class="prose prose-slate dark:prose-invert max-w-none">
+            <h2 class="text-2xl font-bold text-slate-900 dark:text-white mb-4">Зошто е олимписка оваа теорема?</h2>
+            <p class="text-slate-700 dark:text-slate-300 mb-6">
+              Чевата теорема е една од фундаменталните алатки во олимписката геометрија. Таа претставува
+              <strong>математичка рамнотежа</strong> - производот на односите треба да биде точно 1 за линиите да се сечат во една точка.
+            </p>
+
+            <h3 class="text-xl font-semibold text-slate-900 dark:text-white mb-3">Нивото на примена</h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+              <div class="bg-white dark:bg-slate-800 rounded-xl p-4">
+                <h4 class="font-semibold text-green-600 dark:text-green-400 mb-2">🟢 Почетничко</h4>
+                <ul class="text-sm text-slate-600 dark:text-slate-400 space-y-1">
+                  <li>• Тежишни линии</li>
+                  <li>• Медијани</li>
+                  <li>• Симетрални</li>
+                </ul>
+              </div>
+              <div class="bg-white dark:bg-slate-800 rounded-xl p-4">
+                <h4 class="font-semibold text-amber-600 dark:text-amber-400 mb-2">🟡 Средно</h4>
+                <ul class="text-sm text-slate-600 dark:text-slate-400 space-y-1">
+                  <li>• Висини</li>
+                  <li>• Бисектриси</li>
+                  <li>• Рамномерни односи</li>
+                </ul>
+              </div>
+              <div class="bg-white dark:bg-slate-800 rounded-xl p-4">
+                <h4 class="font-semibold text-red-600 dark:text-red-400 mb-2">🔴 Напредно</h4>
+                <ul class="text-sm text-slate-600 dark:text-slate-400 space-y-1">
+                  <li>• Комплексни фигури</li>
+                  <li>• Динамични точки</li>
+                  <li>• Докази со нееднаквост</li>
+                </ul>
+              </div>
+            </div>
+
+            <h3 class="text-xl font-semibold text-slate-900 dark:text-white mb-3">Клучни ситуации за примена</h3>
+            <p class="text-slate-700 dark:text-slate-300">
+              Кога ќе видите <strong>три линија</strong> кои треба да се сечат во една точка, или треба да докажете дека имаат
+              <strong>заедничка точка на пресек</strong>, Чева е вашиот прв избор. Особено кога работите со односи на сегменти.
+            </p>
+          </div>
+        </div>
+      )}
+
+      {id === 'am_gm_inequality' && (
+        <div class="p-10 border-b border-slate-50 dark:border-slate-800 bg-gradient-to-br from-emerald-50 to-green-50 dark:from-emerald-900/20 dark:to-green-900/20">
+          <div class="prose prose-slate dark:prose-invert max-w-none">
+            <h2 class="text-2xl font-bold text-slate-900 dark:text-white mb-4">АМ-ГМ во олимписката алгебра</h2>
+            <p class="text-slate-700 dark:text-slate-300 mb-6">
+              АМ-ГМ е <strong>фундаменталната нееднаквост</strong> во математиката. Таа покажува дека аритметичката средина
+              секогаш е поголема или еднаква на геометриската средина, со еднаквост само кога броевите се исти.
+            </p>
+
+            <h3 class="text-xl font-semibold text-slate-900 dark:text-white mb-3">Кога да го користите?</h3>
+            <div class="bg-white dark:bg-slate-800 rounded-xl p-4 mb-4">
+              <ul class="text-sm text-slate-600 dark:text-slate-400 space-y-2">
+                <li>• <strong>Оптимизација:</strong> Максимум/минимум на изрази со производи или збирови</li>
+                <li>• <strong>Нееднаквости:</strong> Кога имате збир и треба да го споредувате со геометриска средина</li>
+                <li>• <strong>Докази:</strong> За покажување дека некој израз е минимален или максимален</li>
+                <li>• <strong>Геометриска интерпретација:</strong> Во проблеми со правоаголници и квадрати</li>
+              </ul>
+            </div>
+
+            <h3 class="text-xl font-semibold text-slate-900 dark:text-white mb-3">Олимписко значење</h3>
+            <p class="text-slate-700 dark:text-slate-300">
+              Оваа нееднаквост е основа за многу други. Во олимписките проблеми, често се користи за
+              <strong>трансформација</strong> од сложени изрази во едноставни форми кои можат да се оптимизираат.
+            </p>
+          </div>
+        </div>
+      )}
+
+      {id === 'vieta_formulas' && (
+        <div class="p-10 border-b border-slate-50 dark:border-slate-800 bg-gradient-to-br from-purple-50 to-violet-50 dark:from-purple-900/20 dark:to-violet-900/20">
+          <div class="prose prose-slate dark:prose-invert max-w-none">
+            <h2 class="text-2xl font-bold text-slate-900 dark:text-white mb-4">Виета: Мост помеѓу коефициенти и решенија</h2>
+            <p class="text-slate-700 dark:text-slate-300 mb-6">
+              Виетовите формули се <strong>магичен мост</strong> - тие поврзуваат бројните коефициенти од равенката
+              со симетричните суми на нејзините решенија. Ова е една од најмоќните алатки за работа со полиноми.
+            </p>
+
+            <h3 class="text-xl font-semibold text-slate-900 dark:text-white mb-3">Практични ситуации</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+              <div class="bg-white dark:bg-slate-800 rounded-xl p-4">
+                <h4 class="font-semibold text-blue-600 dark:text-blue-400 mb-2">🔍 Дијагностика</h4>
+                <ul class="text-sm text-slate-600 dark:text-slate-400 space-y-1">
+                  <li>• Решенијата имаат збир S?</li>
+                  <li>• Нивниот производ е P?</li>
+                  <li>• Сумата на квадрати?</li>
+                </ul>
+              </div>
+              <div class="bg-white dark:bg-slate-800 rounded-xl p-4">
+                <h4 class="font-semibold text-orange-600 dark:text-orange-400 mb-2">🏗️ Конструкција</h4>
+                <ul class="text-sm text-slate-600 dark:text-slate-400 space-y-1">
+                  <li>• Направи равенка со даден збир/производ</li>
+                  <li>• Конструирај полином со посакувани својства</li>
+                  <li>• Претвори симетрични суми</li>
+                </ul>
+              </div>
+            </div>
+
+            <h3 class="text-xl font-semibold text-slate-900 dark:text-white mb-3">Олимписко генијалство</h3>
+            <p class="text-slate-700 dark:text-slate-300">
+              Виета ви овозможува да работите со <strong>решенијата без да ги знаете</strong>. Ова е идеално за
+              оптимизација проблеми каде точните вредности не се важни - само нивните односи.
+            </p>
+          </div>
+        </div>
+      )}
+
+      <div class="p-10 prose prose-slate dark:prose-invert prose-lg max-w-none content-math" set:html={content}>
+      </div>
+
+      <!-- Related problems section -->
+      {theoremProblems.length > 0 && (
+        <div class="p-10 border-t border-slate-50 dark:border-slate-800">
+          <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-6">Поврзани задачи ({theoremProblems.length})</h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {theoremProblems.slice(0, 12).map(problem => (
+              <div class="bg-slate-50 dark:bg-slate-800 rounded-xl p-6 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors">
+                <div class="flex items-start justify-between mb-4">
+                  <span class="px-2 py-1 bg-slate-200 dark:bg-slate-600 text-slate-700 dark:text-slate-300 text-xs font-medium rounded">
+                    {problem.meta.grade}
+                  </span>
+                  <span class={`px-2 py-1 text-xs font-medium rounded ${
+                    problem.meta.difficulty <= 3 ? 'bg-emerald-100 text-emerald-800 dark:bg-emerald-900 dark:text-emerald-200' :
+                    problem.meta.difficulty <= 7 ? 'bg-amber-100 text-amber-800 dark:bg-amber-900 dark:text-amber-200' :
+                    'bg-rose-100 text-rose-800 dark:bg-rose-900 dark:text-rose-200'
+                  }`}>
+                    {problem.meta.difficulty}
+                  </span>
+                </div>
+                <h4 class="font-semibold text-slate-900 dark:text-white mb-2 line-clamp-2">
+                  {problem.meta.name}
+                </h4>
+                <p class="text-sm text-slate-600 dark:text-slate-400 mb-4 line-clamp-3">
+                  {cleanBody(problem.meta.description || '')}
+                </p>
+                <a href={`/problems/${problem.id}`} class="inline-flex items-center text-blue-600 dark:text-blue-400 font-medium hover:text-blue-700 dark:hover:text-blue-300 transition-colors">
+                  Види задача
+                  <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                  </svg>
+                </a>
+              </div>
+            ))}
+          </div>
+          {theoremProblems.length > 12 && (
+            <div class="text-center mt-8">
+              <p class="text-slate-600 dark:text-slate-400 mb-4">
+                И уште {theoremProblems.length - 12} задачи...
+              </p>
+              <a href="/search" class="inline-flex items-center px-6 py-3 bg-slate-900 dark:bg-slate-700 text-white rounded-xl font-medium hover:bg-slate-800 dark:hover:bg-slate-600 transition-colors">
+                Пребарај сите задачи
+                <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                </svg>
+              </a>
+            </div>
+          )}
+        </div>
+      )}
+    </article>
+  </div>
+</Layout>
+
+<style is:global>
+  .content-math .katex-display {
+    @apply my-8 overflow-x-auto overflow-y-hidden py-4 bg-slate-50 dark:bg-slate-800/50 rounded-2xl;
+  }
+</style>

@@ -1,0 +1,89 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import LessonPlannerContainer from '../../components/LessonPlannerContainer.svelte';
+import curriculumData from '../../data/curriculum_standards_processed.json';
+
+const pageTitle = "AI Ко-пилот за Наставници | МатАрхива";
+const pageDescription = "Генерирајте професионални наставни сценарија усогласени со македонската наставна програма и олимписки стандарди.";
+---
+
+<Layout title={pageTitle}>
+	<meta name="description" content={pageDescription} />
+
+	<div class="max-w-6xl mx-auto px-4 py-12">
+		<!-- Hero Section -->
+		<div class="text-center mb-16 space-y-4">
+			<div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-500/10 text-blue-600 dark:text-blue-400 text-xs font-black uppercase tracking-widest border border-blue-500/20 backdrop-blur-md">
+				<span class="relative flex h-2 w-2">
+					<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+					<span class="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
+				</span>
+				AI Teacher's Co-pilot
+			</div>
+			
+			<h1 class="text-4xl md:text-6xl font-black text-slate-900 dark:text-white leading-tight">
+				Вашиот Дигитален <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">Асистент</span> за Настава
+			</h1>
+			
+			<p class="text-slate-500 dark:text-slate-400 text-xl max-w-3xl mx-auto font-medium">
+				Изберете тема од официјалната наставна програма и дозволете AI асистентот да подготви комплетно структурирано сценарио за вашиот час.
+			</p>
+		</div>
+
+		<!-- Main Tool Container -->
+		<LessonPlannerContainer curriculumData={curriculumData} client:load />
+
+		<!-- Features Grid -->
+		<div class="mt-24 grid grid-cols-1 md:grid-cols-3 gap-8">
+			<div class="p-8 rounded-[2.5rem] bg-slate-50 dark:bg-slate-900/50 border border-slate-100 dark:border-slate-800">
+				<div class="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-2xl flex items-center justify-center text-2xl mb-6">
+					📋
+				</div>
+				<h3 class="text-xl font-bold text-slate-900 dark:text-white mb-3">Целосна Структура</h3>
+				<p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">
+					Од воведен дел и мотивација, до главна активност, олимписки мост и евалуација. Сè што ви е потребно за еден час.
+				</p>
+			</div>
+
+			<div class="p-8 rounded-[2.5rem] bg-slate-50 dark:bg-slate-900/50 border border-slate-100 dark:border-slate-800">
+				<div class="w-12 h-12 bg-purple-100 dark:bg-purple-900/30 rounded-2xl flex items-center justify-center text-2xl mb-6">
+					🌉
+				</div>
+				<h3 class="text-xl font-bold text-slate-900 dark:text-white mb-3">Олимписки Мост</h3>
+				<p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">
+					Автоматско поврзување на училишните теми со напредни математички концепти и олимписки проблеми за талентирани ученици.
+				</p>
+			</div>
+
+			<div class="p-8 rounded-[2.5rem] bg-slate-50 dark:bg-slate-900/50 border border-slate-100 dark:border-slate-800">
+				<div class="w-12 h-12 bg-emerald-100 dark:bg-emerald-900/30 rounded-2xl flex items-center justify-center text-2xl mb-6">
+					🎬
+				</div>
+				<h3 class="text-xl font-bold text-slate-900 dark:text-white mb-3">Manim Фокус</h3>
+				<p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">
+					Препораки за визуелизации кои можете да ги генерирате директно во нашиот едитор за подобро разбирање на концептот.
+				</p>
+			</div>
+		</div>
+
+		<!-- Footer Note -->
+		<div class="mt-24 text-center p-12 rounded-[3rem] bg-gradient-to-br from-blue-600 to-indigo-700 text-white">
+			<h2 class="text-3xl font-black mb-6">Подготвени за следниот час?</h2>
+			<p class="text-blue-100 text-lg mb-8 max-w-2xl mx-auto">
+				Користете ги овие сценарија како основа и прилагодете ги според потребите на вашите ученици. Нашата цел е да ви заштедиме време за подготовка.
+			</p>
+			<div class="flex flex-wrap justify-center gap-4">
+				<a href="/teachers" class="bg-white text-blue-600 font-bold py-4 px-8 rounded-2xl hover:bg-blue-50 transition-all shadow-xl">
+					Сите Наставнички Алати
+				</a>
+			</div>
+		</div>
+	</div>
+</Layout>
+
+<style>
+	/* Custom styles for the lesson planner page */
+	:global(.animate-in) {
+		animation-fill-mode: both;
+	}
+</style>

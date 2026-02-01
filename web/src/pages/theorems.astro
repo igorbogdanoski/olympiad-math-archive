@@ -1,0 +1,128 @@
+---
+import Layout from '../layouts/Layout.astro';
+import fs from 'node:fs';
+import path from 'node:path';
+
+// Динамичко читање на сите теореми од src/data/theorems
+const theoremsDir = path.resolve('src/data/theorems');
+const files = fs.readdirSync(theoremsDir).filter(f => f.endsWith('.md') && !f.startsWith('_'));
+
+const theorems = files.map(file => {
+  const content = fs.readFileSync(path.join(theoremsDir, file), 'utf-8');
+  // Едноставно парсирање на насловот од првиот ред ако нема YAML
+  const titleMatch = content.match(/^#\s+(.*)/m);
+  const id = file.replace('.md', '');
+  
+  return {
+    id,
+    name: titleMatch ? titleMatch[1] : id.replace(/_/g, ' '),
+    category: 'Теорија', // Ова може да се подобри со појако парсирање
+    difficulty: 'Различно'
+  };
+});
+---
+
+<Layout title="Библиотека на Теореми | МатАрхива">
+	<div class="max-w-6xl mx-auto">
+		<header class="mb-16">
+			<span class="text-blue-600 font-black uppercase tracking-widest text-xs mb-4 block">Знаење</span>
+			<h1 class="text-5xl font-black mb-6 text-slate-900 dark:text-white">
+				Библиотека на Теореми
+			</h1>
+			<p class="text-xl text-slate-500 max-w-3xl leading-relaxed mb-8">
+				Колекција на клучни математички принципи, докажани визуелно и објаснети за натпреварувачи.
+			</p>
+
+			<!-- Pedagogical overview -->
+			<div class="bg-gradient-to-br from-slate-50 to-blue-50 dark:from-slate-800 dark:to-blue-900/20 rounded-[3rem] p-8 max-w-5xl">
+				<h2 class="text-2xl font-bold text-slate-900 dark:text-white mb-6">Теореми во олимписката математика</h2>
+				<p class="text-slate-700 dark:text-slate-300 mb-6 leading-relaxed">
+					Теоремите се <strong>моќните алатки</strong> кои ви овозможуваат да трансформирате тешки проблеми во едноставни.
+					Нивната вистинска сила лежи во разбирањето <em>кога и како</em> да ги примените - не механички, туку интуитивно.
+				</p>
+
+				<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+					<div class="bg-white dark:bg-slate-800 rounded-2xl p-6">
+						<h3 class="text-lg font-semibold text-slate-900 dark:text-white mb-3 flex items-center">
+							<span class="text-2xl mr-2">🎯</span> Геометрија
+						</h3>
+						<p class="text-slate-600 dark:text-slate-400 text-sm">
+							Чева, Менелаус, тригонометрија, трансформации. Геометриските теореми се мост помеѓу
+							визуелната интуиција и точните пресметки.
+						</p>
+					</div>
+					<div class="bg-white dark:bg-slate-800 rounded-2xl p-6">
+						<h3 class="text-lg font-semibold text-slate-900 dark:text-white mb-3 flex items-center">
+							<span class="text-2xl mr-2">🧮</span> Алгебра
+						</h3>
+						<p class="text-slate-600 dark:text-slate-400 text-sm">
+							Виета, АМ-ГМ, Коши-Шварц. Алгебарските нееднаквости и формули се основата за
+							оптимизација и трансформација на изрази.
+						</p>
+					</div>
+					<div class="bg-white dark:bg-slate-800 rounded-2xl p-6">
+						<h3 class="text-lg font-semibold text-slate-900 dark:text-white mb-3 flex items-center">
+							<span class="text-2xl mr-2">🔢</span> Теорија на броеви
+						</h3>
+						<p class="text-slate-600 dark:text-slate-400 text-sm">
+							Ферма, Ојлер, модуларна аритметика. Броевите имаат тајни кои се откриваат со
+							правилните теореми.
+						</p>
+					</div>
+				</div>
+
+				<div class="mt-8 p-6 bg-blue-50 dark:bg-blue-900/20 rounded-2xl">
+					<h3 class="text-lg font-semibold text-slate-900 dark:text-white mb-3">🎓 Како да учите теореми?</h3>
+					<div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+						<div>
+							<p class="text-slate-700 dark:text-slate-300 mb-2"><strong>1. Разберете интуицијата:</strong> Не само "што", туку "зошто" важи.</p>
+							<p class="text-slate-700 dark:text-slate-300 mb-2"><strong>2. Видете примената:</strong> Кои проблеми се решаваат со оваа теорема?</p>
+						</div>
+						<div>
+							<p class="text-slate-700 dark:text-slate-300 mb-2"><strong>3. Сврзете со други:</strong> Каде се вклопува во големата слика?</p>
+							<p class="text-slate-700 dark:text-slate-300"><strong>4. Практикувајте примена:</strong> Решавајте проблеми без да гледате во доказот.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</header>
+
+		<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+			{theorems.map(t => (
+				<div class="bg-white dark:bg-slate-900 p-8 rounded-[2rem] border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-xl group hover:border-blue-200 dark:hover:border-blue-600 transition-all duration-300 hover:scale-[1.02]">
+					<div class="flex items-start justify-between mb-4">
+						<div class="flex gap-2">
+							<span class="px-2 py-1 bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 text-[9px] font-bold uppercase tracking-wider rounded-md">
+								{t.category}
+							</span>
+							<span class="px-2 py-1 bg-amber-50 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400 text-[9px] font-bold uppercase tracking-wider rounded-md">
+								{t.difficulty}
+							</span>
+						</div>
+						<div class="text-blue-500 dark:text-blue-400 opacity-0 group-hover:opacity-100 transition-opacity">
+							<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+							</svg>
+						</div>
+					</div>
+
+					<div class="mb-6">
+						<h3 class="text-xl font-black text-slate-900 dark:text-white mb-3 leading-tight group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+							{t.name}
+						</h3>
+						<p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+							Клучна теорема во {t.category.toLowerCase()} со {t.difficulty.toLowerCase()} ниво на сложеност.
+						</p>
+					</div>
+
+					<a href={`/theorems/${t.id}`} class="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-slate-900 to-slate-800 dark:from-blue-600 dark:to-blue-500 text-white rounded-xl font-bold hover:from-slate-800 hover:to-slate-700 dark:hover:from-blue-500 dark:hover:to-blue-400 transition-all duration-200 text-sm">
+						Види Доказ
+						<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+						</svg>
+					</a>
+				</div>
+			))}
+		</div>
+	</div>
+</Layout>
