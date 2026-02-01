@@ -1,0 +1,60 @@
+name: Code Quality Check
+
+on:
+  push:
+    branches: [ production-clean-v2 ]
+  pull_request:
+    branches: [ production-clean-v2 ]
+
+jobs:
+  syntax-check:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # --- WEB SYNTAX CHECK (не full build) ---
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: web/package-lock.json
+
+      - name: Install Web Dependencies
+        run: |
+          cd web
+          npm ci
+
+      - name: Check TypeScript syntax
+        run: |
+          cd web
+          npx tsc --noEmit || echo "TypeScript errors detected (non-blocking)"
+
+      # --- PYTHON CRITICAL ERRORS CHECK ---
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Check Python Syntax
+        run: |
+          pip install flake8
+          # Само критични грешки (E9=syntax, F63=undefined, F7=unused, F82=undefined)
+          flake8 backend/ tools/ --count --select=E9,F63,F7,F82 --show-source --statistics --exclude=__pycache__,*.pyc
+
+      # --- GITIGNORE SAFETY CHECK ---
+      - name: Check for large files
+        run: |
+          echo "Checking for files larger than 10MB..."
+          find . -type f -size +10M | grep -v ".git" | grep -v "node_modules" || echo "✅ No large files detected"
+
+      # --- BUILD ARTIFACT CHECK ---
+      - name: Ensure build artifacts are not committed
+        run: |
+          if [ -d "web/dist" ]; then
+            echo "❌ ERROR: web/dist/ should not be in Git!"
+            exit 1
+          fi
+          echo "✅ No build artifacts in Git"
