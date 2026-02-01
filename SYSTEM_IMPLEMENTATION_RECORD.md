@@ -1,5 +1,78 @@
 # Евиденција на Системска Имплементација и Тракинг
-*Последно ажурирање: 1 февруари 2026*
+*Последно ажурирање: 2 февруари 2026 (Git Crisis Resolved)*
+
+---
+
+## 🚨 2026-02-02: Git Infrastructure Crisis - RESOLVED
+
+### Проблем
+- GitHub push rejected: `terraform-provider-aws_v6.28.0_x5.exe` (787MB) exceeds 100MB limit
+- Фајлот е во стариот Git history (commits `3d8aa150`, `92cc5873`)
+- 38 локални commits на ризик (вклучувајќи Teachers Portal Curriculum Browser)
+- Обични pushes беа одбиени - голем ризик од губење на работа
+
+### Решение: Orphan Branch Strategy
+**Имплементација: 2026-02-02 01:15 AM**
+
+```bash
+# Step 1: Create orphan branch (no parent history)
+git checkout --orphan production-clean-v2
+
+# Step 2: Copy essential source files from main
+git checkout main -- web/ backend/ database/ problems/
+git checkout main -- .gitignore SYSTEM_IMPLEMENTATION_RECORD.md
+
+# Step 3: Remove build artifacts and sensitive files
+git rm -r --cached "web/dist"
+git reset backend/.env backend/*.log
+git reset HEAD web/node_modules/ backend/__pycache__/
+
+# Step 4: Commit and push clean branch
+git commit -m "feat: Clean production branch with Teachers Portal curriculum browser"
+git push -u origin production-clean-v2
+```
+
+### Резултат: ✅ SUCCESS
+- **Push successful**: 14,513 objects, 55.81 MB, 14.71 MB/s
+- **No 787MB file** in new branch history (orphan branch = fresh start)
+- **All source code preserved**: 
+  - ✅ Teachers Portal with Curriculum Browser (391 BRO standards)
+  - ✅ 1100+ problems (complete database)
+  - ✅ Backend, frontend, all core functionality
+- **Branch URL**: `https://github.com/igorbogdanoski/olympiad-math-archive/tree/production-clean-v2`
+
+### Што е исклучено (правилно):
+- ❌ `web/dist/` (1300+ generated HTML files)
+- ❌ `web/node_modules/` (dependencies, regenerate with `npm install`)
+- ❌ `backend/.env` (secrets, never in Git)
+- ❌ `*.log` files (runtime logs)
+- ❌ `.terraform/` (Terraform cache, cause of original issue)
+
+### Следни чекори:
+1. **Testing Phase** (2-4 часа):
+   - Verify build: `cd web && npm install && npm run build`
+   - Test all features on production-clean-v2 branch
+   - Check Teachers Portal: `/teachers/curriculum`
+
+2. **Production Migration** (кога е готово):
+   ```bash
+   # On GitHub, change default branch from 'main' to 'production-clean-v2'
+   # Settings → Branches → Default branch → Switch
+   ```
+
+3. **Legacy Cleanup** (опционално):
+   - Стариот `main` branch може да остане како archive
+   - Или да се избрише кога `production-clean-v2` е потврден стабилен
+
+### Превенција за иднина:
+- ✅ Updated `.gitignore`: Excludes `web/dist/`, `.terraform/`, `*.log`, `.env`
+- ⚠️ Pre-commit hook препорака: Блокирај фајлови > 10MB
+- 📝 Team policy: Never commit build artifacts or large binaries
+
+---
+
+# Евиденција на Системска Имплементација и Тракинг
+*Последно ажурирање: 2 февруари 2026*
 
 ## 1. Локација на Скрипти и Податоци (Сервер)
 Сите скрипти поврзани со наставните програми, цели и активности се наоѓаат во фолдерот `tools/` на главниот сервер.
