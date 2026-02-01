@@ -1,0 +1,112 @@
+[
+  {
+    "id": "mp67pxtz",
+    "title": "Triangle Altitudes Interactive",
+    "title_mk": "Интерактивни височини во триаголник",
+    "topics": ["geometry", "triangles", "altitudes"],
+    "grade_range": [7, 9],
+    "description": "Interactive visualization of triangle altitudes with draggable vertices",
+    "language": "mk",
+    "difficulty": "medium",
+    "bro_codes": ["МАТ.7.Г.3", "МАТ.8.Г.2"]
+  },
+  {
+    "id": "rjqh8u9a",
+    "title": "Pythagorean Theorem Proof",
+    "title_mk": "Доказ на Питагорова теорема",
+    "topics": ["geometry", "pythagorean", "right-triangle"],
+    "grade_range": [7, 8],
+    "description": "Visual proof of Pythagorean theorem with draggable squares",
+    "language": "mk",
+    "difficulty": "medium",
+    "bro_codes": ["МАТ.7.Г.5", "МАТ.8.Г.1"]
+  },
+  {
+    "id": "k3mp5x2n",
+    "title": "Circle and Tangent Lines",
+    "title_mk": "Круг и тангенти",
+    "topics": ["geometry", "circle", "tangent"],
+    "grade_range": [8, 9],
+    "description": "Interactive circle with tangent lines and radius perpendicular property",
+    "language": "mk",
+    "difficulty": "medium",
+    "bro_codes": ["МАТ.8.Г.4", "МАТ.9.Г.2"]
+  },
+  {
+    "id": "w7nb2pqf",
+    "title": "Linear Function Graphing",
+    "title_mk": "Графикон на линеарна функција",
+    "topics": ["algebra", "functions", "linear"],
+    "grade_range": [7, 8],
+    "description": "Interactive linear function y = mx + b with adjustable slope and intercept",
+    "language": "mk",
+    "difficulty": "easy",
+    "bro_codes": ["МАТ.7.А.4", "МАТ.8.А.2"]
+  },
+  {
+    "id": "d8kv4xtm",
+    "title": "Quadratic Function Parabola",
+    "title_mk": "Парабола на квадратна функција",
+    "topics": ["algebra", "functions", "quadratic"],
+    "grade_range": [8, 9],
+    "description": "Interactive parabola y = ax² + bx + c with vertex and roots",
+    "language": "mk",
+    "difficulty": "medium",
+    "bro_codes": ["МАТ.8.А.5", "МАТ.9.А.3"]
+  },
+  {
+    "id": "f2hp9vwq",
+    "title": "Similar Triangles",
+    "title_mk": "Слични триаголници",
+    "topics": ["geometry", "triangles", "similarity"],
+    "grade_range": [8, 9],
+    "description": "Interactive demonstration of triangle similarity criteria (AA, SAS, SSS)",
+    "language": "mk",
+    "difficulty": "medium",
+    "bro_codes": ["МАТ.8.Г.3", "МАТ.9.Г.1"]
+  },
+  {
+    "id": "n5zj6ryk",
+    "title": "Angle Bisector Theorem",
+    "title_mk": "Теорема за биссектриса на агол",
+    "topics": ["geometry", "triangles", "bisector"],
+    "grade_range": [8, 9],
+    "description": "Visual proof of angle bisector theorem with proportions",
+    "language": "mk",
+    "difficulty": "hard",
+    "bro_codes": ["МАТ.8.Г.2", "МАТ.9.Г.3"]
+  },
+  {
+    "id": "q9vm3cxa",
+    "title": "Inscribed and Central Angles",
+    "title_mk": "Вписан и централен агол",
+    "topics": ["geometry", "circle", "angles"],
+    "grade_range": [8, 9],
+    "description": "Interactive circle showing relationship between inscribed and central angles",
+    "language": "mk",
+    "difficulty": "medium",
+    "bro_codes": ["МАТ.8.Г.4", "МАТ.9.Г.2"]
+  },
+  {
+    "id": "u4bt7plw",
+    "title": "Parallelogram Properties",
+    "title_mk": "Својства на паралелограм",
+    "topics": ["geometry", "quadrilaterals", "parallelogram"],
+    "grade_range": [7, 8],
+    "description": "Interactive parallelogram showing diagonals bisecting each other",
+    "language": "mk",
+    "difficulty": "easy",
+    "bro_codes": ["МАТ.7.Г.2", "МАТ.8.Г.1"]
+  },
+  {
+    "id": "x6dn2mzs",
+    "title": "System of Linear Equations",
+    "title_mk": "Систем на линеарни равенки",
+    "topics": ["algebra", "equations", "systems"],
+    "grade_range": [8, 9],
+    "description": "Graphical solution of 2x2 linear system with intersection point",
+    "language": "mk",
+    "difficulty": "medium",
+    "bro_codes": ["МАТ.8.А.3", "МАТ.9.А.1"]
+  }
+]
