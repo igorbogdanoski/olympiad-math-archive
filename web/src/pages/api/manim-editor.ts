@@ -3,6 +3,12 @@ import { readFileSync, writeFileSync, existsSync, readdirSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { execSync } from 'node:child_process';
 import { t } from '../../utils/i18n';
+import Queue from 'bull';
+import { progressServer } from '../../lib/websocket-server';
+
+// Initialize Manim render queue
+const REDIS_URL = process.env.REDIS_URL || 'redis://localhost:6379';
+const manimQueue = new Queue('manim-renders', REDIS_URL);
 
 // Available templates
 interface TemplateInfo {
@@ -184,39 +190,59 @@ export const POST: APIRoute = async ({ request }) => {
       };
       const qualityFlag = qualityFlags[quality] || '-ql';
 
-      const command = `manim ${qualityFlag} "${templatePath}" ${className}`;
+      // Read template content for caching
+      const templateContent = readFileSync(templatePath, 'utf8');
 
-      console.log('Executing Manim command:', command);
-
-      // Execute render
-      const output = execSync(command, {
-        cwd: join(process.cwd(), '../tools/manim_templates/top_50'),
-        encoding: 'utf8',
-        timeout: 300000, // 5 minutes timeout
-        maxBuffer: 1024 * 1024 * 50 // 50MB buffer
+      // Add job to queue (non-blocking)
+      const job = await manimQueue.add({
+        problemId,
+        quality,
+        templatePath,
+        className,
+        templateContent
       });
 
-      console.log('Manim output:', output);
+      console.log(`[API] Queued render job ${job.id} for problem: ${problemId}`);
 
-      // Find generated video
-      const videoDir = join(process.cwd(), '../tools/manim_templates/top_50/media/videos', `manim_${problemId}`, `${quality}p15`);
-      let videoFiles: string[] = [];
-      try {
-        const allFiles = readdirSync(videoDir);
-        videoFiles = allFiles.filter(file => file.endsWith('.mp4'));
-      } catch (error) {
-        videoFiles = [];
-      }
-
-      if (videoFiles.length === 0) {
-        return new Response(JSON.stringify({
-          error: 'Video generation failed - no output file found',
-          output: output
-        }), {
-          status: 500,
-          headers: { 'Content-Type': 'application/json' }
+      // Setup progress monitoring
+      job.on('progress', (progress: number) => {
+        progressServer.broadcast(job.id!.toString(), {
+          jobId: job.id!.toString(),
+          progress,
+          status: 'active',
+          message: `Rendering... ${progress}%`
         });
-      }
+      });
+
+      job.on('completed', (result: any) => {
+        progressServer.broadcast(job.id!.toString(), {
+          jobId: job.id!.toString(),
+          progress: 100,
+          status: 'completed',
+          message: 'Render complete',
+          result
+        });
+      });
+
+      job.on('failed', (error: Error) => {
+        progressServer.broadcast(job.id!.toString(), {
+          jobId: job.id!.toString(),
+          progress: 0,
+          status: 'failed',
+          message: error.message
+        });
+      });
+
+      // Return job ID immediately (non-blocking response)
+      return new Response(JSON.stringify({
+        jobId: job.id,
+        status: 'queued',
+        message: 'Render job queued successfully. Use /api/manim-status?jobId=' + job.id + ' to check progress.',
+        wsUrl: '/ws/manim-progress'
+      }), {
+        status: 202, // Accepted
+        headers: { 'Content-Type': 'application/json' }
+      });
 
       const videoPath = join(videoDir, videoFiles[0]);
       const relativeVideoPath = `/manim_templates/top_50/media/videos/manim_${problemId}/${quality}p15/${videoFiles[0]}`;

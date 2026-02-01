@@ -7,20 +7,24 @@
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "worker:manim": "tsx src/workers/manim-queue-worker.ts"
   },
   "dependencies": {
     "@astrojs/svelte": "^5.4.0",
     "@astrojs/tailwind": "^5.1.0",
     "@google/generative-ai": "^0.24.1",
     "astro": "^4.0.0",
+    "bull": "^4.12.0",
     "fuse.js": "^7.0.0",
+    "ioredis": "^5.3.2",
     "katex": "^0.16.27",
     "mathlive": "^0.108.2",
     "react": "^19.2.3",
     "svelte": "^4.0.0",
     "svelte-dnd-action": "^0.9.69",
-    "tailwindcss": "^3.4.0"
+    "tailwindcss": "^3.4.0",
+    "ws": "^8.16.0"
   },
   "devDependencies": {
     "@playwright/test": "^1.57.0",
