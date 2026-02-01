@@ -2,6 +2,7 @@ import type { APIRoute } from 'astro';
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import fs from 'fs';
 import path from 'path';
+import { generateLearningPath, getNode } from '../../utils/knowledgeGraph';
 
 // Иницијализација на Gemini API
 const genAI = new GoogleGenerativeAI(import.meta.env.GEMINI_API_KEY || "");
@@ -49,10 +50,33 @@ export const POST: APIRoute = async ({ request }) => {
     const jsonMatch = responseText.match(/\{[\s\S]*\}/);
     const cleanedJson = jsonMatch ? jsonMatch[0] : responseText;
 
-    return new Response(cleanedJson, {
-      status: 200,
-      headers: { "Content-Type": "application/json" }
-    });
+    // Post-process: Enrich response with adaptive learning path
+    try {
+      const aiResponse = JSON.parse(cleanedJson);
+      
+      // If AI detected a knowledge gap, enhance it with prerequisite recommendations
+      if (aiResponse.knowledgeGap && aiResponse.knowledgeGap.standard) {
+        const standardId = aiResponse.knowledgeGap.standard;
+        const adaptivePath = generateLearningPath(standardId);
+        
+        // Merge AI recommendations with knowledge graph insights
+        aiResponse.learningPath = aiResponse.learningPath || {};
+        aiResponse.learningPath.adaptiveRecommendation = adaptivePath;
+        aiResponse.learningPath.knowledgeGraphEnhanced = true;
+      }
+      
+      return new Response(JSON.stringify(aiResponse, null, 2), {
+        status: 200,
+        headers: { "Content-Type": "application/json" }
+      });
+    } catch (parseError) {
+      // Fallback: return raw response if JSON parsing fails
+      console.warn("Failed to enhance response with knowledge graph:", parseError);
+      return new Response(cleanedJson, {
+        status: 200,
+        headers: { "Content-Type": "application/json" }
+      });
+    }
 
   } catch (error) {
     console.error("Vision AI Error:", error);
