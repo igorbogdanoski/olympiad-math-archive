@@ -70,6 +70,180 @@ git push -u origin production-clean-v2
 
 ---
 
+## 📅 2026-02-02: Post-Crisis Stabilization & Knowledge Graph Integration
+
+### Phase 1: Stabilization & Production Readiness (Завршено: 20:00)
+**Статус**: ✅ COMPLETED
+
+**Извршени активности:**
+1. **Local Git Cleanup** (5 мин):
+   - Switched local branch: `main` → `production-clean-v2`
+   - Confirmed sync with remote: `origin/production-clean-v2`
+   - Working directory clean (only expected untracked files)
+
+2. **Build Verification** (12 мин):
+   - Command: `npm run build`
+   - Result: **1315 pages** generated in **12.34 seconds** ✅
+   - Output size: ~60 MB (dist/)
+   - No critical errors (minor CSS warning ignored)
+   - All routes verified: index, tasks, teachers, curriculum, theorems
+
+3. **Preview Server Activation** (2 мин):
+   - Local URL: `http://localhost:4321/` ✅
+   - Network URL: `http://192.168.1.139:4321/` ✅
+   - Accessible from mobile devices for PWA testing
+   - Server stable, no crashes
+
+**Резултат**: Платформата е **production-ready**. Build процесот е стабилен, сите 1315 страници се генерираат без грешки, и preview серверот е достапен на мрежата.
+
+---
+
+### Phase 2: Knowledge Graph Integration & Adaptive Learning (Завршено: 22:00)
+**Статус**: ✅ COMPLETED  
+**Commit**: `f65a2d82` - "feat: Phase 2 - Knowledge Graph Integration with Adaptive Learning"
+
+**Новa Имплементација:**
+
+#### 1. Knowledge Graph Utility (`web/src/utils/knowledgeGraph.ts`) - NEW
+**Функционалност:**
+- `getAllNodes()` - Враќа сите 395 curriculum standards од БРО
+- `getNode(id)` - Пронаоѓа конкретен стандард по ID (пр. MAT-O-G7-T1-S3)
+- `getPrerequisites(id)` - **Инференција на prerequisites** базирана на:
+  - Претходни стандарди од истиот клас (last 3)
+  - Слични теми од претходен клас (last 2)
+- `generateLearningPath(standardId)` - **Генерира adaptive learning path**:
+  - Детектира prerequisites за даден стандард
+  - Креира текстуална препорака за повторување
+  - Форматиран излез со конкретни чекори
+- `getStandardsByGrade(grade)` - Филтер по одделение
+- `getStandardsByTheme(theme)` - Филтер по тема
+- `getNextStandard(currentId)` - Прогресивно учење (следен логичен стандард)
+
+**Пример на работа:**
+```typescript
+const prereqs = getPrerequisites("MAT-O-G7-T1-S3"); 
+// Враќа: [MAT-O-G6-T2-S1, MAT-O-G6-T2-S2, MAT-O-G7-T1-S1]
+
+const path = generateLearningPath("MAT-O-G7-T1-S3");
+// Враќа: "Препорака: Повтори MAT-O-G6-T2-S1 (Основни операции со цели броеви)..."
+```
+
+#### 2. Vision AI API Enhancement (`web/src/pages/api/vision-grade.ts`) - MODIFIED
+**Унапредувања:**
+- Импортиран `generateLearningPath` од Knowledge Graph utility
+- **Post-processing логика**: По AI response, системот:
+  1. Парсира JSON одговор
+  2. Детектира `knowledgeGap.standard` поле
+  3. Автоматски генерира adaptive learning path
+  4. Обогатува response со `learningPath.adaptiveRecommendation`
+  5. Додава флаг `knowledgeGraphEnhanced: true`
+- **Fallback механизам**: Ако парсирањето фејлира, враќа raw AI response
+
+**Before vs After:**
+```json
+// BEFORE (стар response):
+{
+  "verdict": "incorrect",
+  "feedback": "Грешка во чекор 3..."
+}
+
+// AFTER (нов response со Knowledge Graph):
+{
+  "verdict": "incorrect",
+  "knowledgeGap": {
+    "standard": "MAT-O-G7-T1-S3",
+    "description": "Решавање линеарни равенки"
+  },
+  "learningPath": {
+    "adaptiveRecommendation": "Препорака: Повтори MAT-O-G6-T2-S1...",
+    "knowledgeGraphEnhanced": true
+  }
+}
+```
+
+#### 3. AI Grading Prompt (`ai/vision_grading_prompt.md`) - NEW
+**Comprehensive prompt** за Vision AI со:
+
+**Структура:**
+- Роля: "Експертен наставник по математика од Македонија"
+- 5 клучни одговорности: Анализа, Детекција, Класификација, Knowledge Gap, Adaptive Path
+- Македонски контекст: БРО терминологија, емпатичен тон
+
+**JSON Output Schema:**
+```json
+{
+  "verdict": "correct|incorrect|partial",
+  "score": 0-100,
+  "errorLocation": "Конкретна локација на грешка",
+  "errorType": "conceptual|procedural|computational",
+  "knowledgeGap": {
+    "standard": "MAT-O-G7-T1-S3",
+    "description": "Опис на концептот",
+    "missingConcept": "Што точно не разбира"
+  },
+  "learningPath": {
+    "prerequisites": [...],
+    "recommendation": "Конкретни чекори"
+  },
+  "feedback": "Детален текст",
+  "hints": ["Hint 1", "Hint 2"]
+}
+```
+
+**БРО Standards Reference:**
+- Основно образование (1-9 одд): MAT-O-G1-T1-S4 до MAT-O-G9-T5-S1
+- Средно образование (10-12 одд): MAT-S-G10-T2-S3 до MAT-S-G12-T3-S2
+- Примери за секој концепт (Собирање до 10, Линеарни равенки, Калкулус, итн.)
+
+**Adaptive Learning Strategy:**
+1. Детектирај стандард каде ученикот се соблазни
+2. Провери prerequisites (сè + earlier, prev grade + similar)
+3. Препорачи конкретен пат: "Повтори X, вежбај 5 задачи, врати се на оригиналната"
+
+**Empathy Guidelines:**
+- ✅ "Одличен обид! Логиката е точна до чекор 3..."
+- ❌ "Неточно. Пробај повторно."
+
+---
+
+### Технички Резиме: Phase 1 + Phase 2
+
+**Имплементирани компоненти:**
+```
+web/src/utils/knowledgeGraph.ts       (NEW, 143 lines)
+├─ getAllNodes()
+├─ getNode(id)
+├─ getPrerequisites(id)              ← Core logic
+├─ generateLearningPath(id)          ← Adaptive engine
+├─ getStandardsByGrade()
+├─ getStandardsByTheme()
+└─ getNextStandard()
+
+web/src/pages/api/vision-grade.ts    (MODIFIED)
+└─ Post-processing with Knowledge Graph
+
+ai/vision_grading_prompt.md           (NEW, 120 lines)
+└─ Comprehensive AI prompt with БРО standards
+```
+
+**Commits:**
+1. `328ae150` - "docs: Document successful default branch migration"
+2. `f65a2d82` - "feat: Phase 2 - Knowledge Graph Integration with Adaptive Learning"
+
+**Production Status:**
+- ✅ Build: 1315 pages in 12.34s
+- ✅ Preview: Running on http://192.168.1.139:4321/
+- ✅ Knowledge Graph: 395 nodes active
+- ✅ Vision AI: Enhanced with adaptive learning
+- ✅ Git: Synced with origin/production-clean-v2
+
+**Следни чекори (опционални):**
+- Phase 3: Content Enhancement (Missing Visuals, Matplotlib Pipeline)
+- PWA Mobile Testing (реален телефон)
+- Vision AI Stress Test (3 consecutive images)
+
+---
+
 # Евиденција на Системска Имплементација и Тракинг
 *Последно ажурирање: 2 февруари 2026*
 
