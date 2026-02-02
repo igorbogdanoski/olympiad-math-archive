@@ -9,7 +9,7 @@
 ## 1️⃣ МАТЕМАТИЧКИ ЕДИТОР 🎯
 
 ### Локација:
-- **URL**: http://localhost:4322/math-editor-demo
+- **URL**: http://localhost:4321/math-editor-demo
 - **Фајл**: `web/src/pages/math-editor-demo.astro`
 - **Компонента**: `web/src/components/MathFormulaEditorEnhanced.astro`
 
@@ -26,8 +26,8 @@
 
 ### Како да го видиш:
 ```
-1. Отвори dev server: http://localhost:4322/
-2. Оди на: http://localhost:4322/math-editor-demo
+1. Отвори dev server: http://localhost:4321/
+2. Оди на: http://localhost:4321/math-editor-demo
 3. Експериментирај со математички формули
 ```
 
@@ -36,7 +36,7 @@
 ## 2️⃣ НАСТАВНИ ПРОГРАМИ (БРО СТАНДАРДИ) 📖
 
 ### Локација:
-- **URL**: http://localhost:4322/curriculum-planner
+- **URL**: http://localhost:4321/curriculum-planner
 - **API**: `web/src/pages/api/curriculum.ts`
 - **Податоци**: `web/src/data/curriculum_standards_processed.json`
 
@@ -96,7 +96,7 @@
 ### Како да ги видиш:
 
 ```
-1. Отвори: http://localhost:4322/curriculum-planner
+1. Отвори: http://localhost:4321/curriculum-planner
 2. Избери одделение (1-12)
 3. Разгледај теми, стандарди, цели и активности
 4. Филтрирај по теми (броеви, геометрија, мерки, итн)
@@ -107,7 +107,7 @@
 ## 3️⃣ МАТЕМАТИЧКИ ВЕШТИНИ (SKILLS) 🧠
 
 ### Локација:
-- **URL**: http://localhost:4322/skills
+- **URL**: http://localhost:4321/skills
 - **Фајл**: `web/src/pages/skills.astro`
 
 ### Што содржи:
@@ -127,7 +127,7 @@
 
 ### Како да ги видиш:
 ```
-1. Отвори: http://localhost:4322/skills
+1. Отвори: http://localhost:4321/skills
 2. Разгледај карти со вештини
 3. Кликни на вештина за да видиш задачи
 ```
@@ -137,7 +137,7 @@
 ## 4️⃣ ЗАДАЧИ (PROBLEMS DATABASE) 📐
 
 ### Локација:
-- **URL**: http://localhost:4322/ (Homepage)
+- **URL**: http://localhost:4321/ (Homepage)
 - **Податоци**: `web/src/data/problems.json`
 
 ### Содржина:
@@ -197,7 +197,7 @@
 ## 5️⃣ ЕКСПЕРТ СОВЕТИ (EXPERT TIPS) 💡
 
 ### Локација:
-- **URL**: http://localhost:4322/teachers/expert-tips
+- **URL**: http://localhost:4321/teachers/expert-tips
 - **Фајл**: `web/src/pages/teachers/expert-tips.astro`
 
 ### Содржина:
@@ -253,7 +253,7 @@
 ## 6️⃣ WORKSHEET GENERATOR (ВО РАЗВОЈ) 📄
 
 ### Локација:
-- **URL**: http://localhost:4322/teachers/worksheet-builder
+- **URL**: http://localhost:4321/teachers/worksheet-builder
 - **Фајл**: `web/src/pages/teachers/worksheet-builder.astro`
 
 ### Статус: **60% комплетно** (Day 1 завршен, Day 2 во тек)
@@ -302,7 +302,7 @@
 ## 7️⃣ GEOGEBRA AUTO-MATCHER 🎨
 
 ### Локација:
-- **URL**: http://localhost:4322/teachers/geogebra-review
+- **URL**: http://localhost:4321/teachers/geogebra-review
 - **Фајл**: `web/src/pages/teachers/geogebra-review.astro`
 
 ### Статус: **85% комплетно** (блокирано со API квота)
@@ -328,7 +328,7 @@
 ## 8️⃣ ТЕОРЕМИ (THEOREMS LIBRARY) 📚
 
 ### Локација:
-- **URL**: http://localhost:4322/theorems
+- **URL**: http://localhost:4321/theorems
 - **Фајлови**: `web/src/data/theorems/*.md`
 
 ### Содржина:
@@ -365,7 +365,7 @@
 ## 9️⃣ TEACHERS CONSOLE 👨‍🏫
 
 ### Локација:
-- **URL**: http://localhost:4322/teachers
+- **URL**: http://localhost:4321/teachers
 - **Фајл**: `web/src/pages/teachers.astro`
 
 ### Што содржи:
@@ -468,22 +468,22 @@ npm run dev
 
 ### 2. Отвори во browser:
 
-**Dev Server URL**: http://localhost:4322/
+**Dev Server URL**: http://localhost:4321/
 
 ### 3. Навигација:
 
 | Страница | URL |
 |----------|-----|
-| **Homepage** | http://localhost:4322/ |
-| **Математички Едитор** | http://localhost:4322/math-editor-demo |
-| **Curriculum Planner** | http://localhost:4322/curriculum-planner |
-| **Вештини** | http://localhost:4322/skills |
-| **Задачи** | http://localhost:4322/tasks |
-| **Теореми** | http://localhost:4322/theorems |
-| **Teachers Console** | http://localhost:4322/teachers |
-| **Expert Tips** | http://localhost:4322/teachers/expert-tips |
-| **Worksheet Builder** | http://localhost:4322/teachers/worksheet-builder |
-| **GeoGebra Review** | http://localhost:4322/teachers/geogebra-review |
+| **Homepage** | http://localhost:4321/ |
+| **Математички Едитор** | http://localhost:4321/math-editor-demo |
+| **Curriculum Planner** | http://localhost:4321/curriculum-planner |
+| **Вештини** | http://localhost:4321/skills |
+| **Задачи** | http://localhost:4321/tasks |
+| **Теореми** | http://localhost:4321/theorems |
+| **Teachers Console** | http://localhost:4321/teachers |
+| **Expert Tips** | http://localhost:4321/teachers/expert-tips |
+| **Worksheet Builder** | http://localhost:4321/teachers/worksheet-builder |
+| **GeoGebra Review** | http://localhost:4321/teachers/geogebra-review |
 
 ---
 
@@ -560,7 +560,7 @@ olympiad-math-archive/
 
 **Сè е на една локација, организирано и достапно!**
 
-**Dev Server**: http://localhost:4322/  
+**Dev Server**: http://localhost:4321/  
 **Документација**: Овој фајл
 
 ---
