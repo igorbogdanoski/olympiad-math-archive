@@ -129,10 +129,10 @@ import { API_BASE_URL } from '../utils/config';
 	<script is:inline>
 		async function loadDashboard() {
 			try {
-                // Динамичко одредување на API URL за да работи и на локална мрежа
+                // Use Nginx proxy path - works both locally and in production
                 const apiBase = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
                     ? 'http://localhost:8000'
-                    : `http://${window.location.hostname}:8000`;
+                    : '';
 
 				const response = await fetch(`${apiBase}/api/dashboard/stats`);
 				if (!response.ok) throw new Error('Failed to fetch');
@@ -195,7 +195,7 @@ import { API_BASE_URL } from '../utils/config';
         async function checkRecommendation() {
 			const apiBase = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
 				? 'http://localhost:8000'
-				: `http://${window.location.hostname}:8000`;
+				: '';
 
             try {
                 const res = await fetch(`${apiBase}/api/dashboard/recommendation`);
@@ -217,7 +217,7 @@ import { API_BASE_URL } from '../utils/config';
             
 			const apiBase = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
 				? 'http://localhost:8000'
-				: `http://${window.location.hostname}:8000`;
+				: '';
 
             const btn = document.getElementById('fix-gap-btn');
             const originalText = btn.innerHTML;
