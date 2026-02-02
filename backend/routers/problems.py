@@ -12,18 +12,19 @@ router = APIRouter()
 @router.get("/problems")
 async def get_problems(
     ids: Optional[str] = Query(None, description="Comma-separated problem IDs"),
-    grade: Optional[int] = Query(None, description="Filter by grade (2-9)"),
-    subject: Optional[str] = Query(None, description="Filter by subject"),
-    difficulty: Optional[str] = Query(None, description="Filter by difficulty"),
+    grade: Optional[str] = Query(None, description="Filter by grade (4-9, or 10-12)"),
+    topic: Optional[str] = Query(None, description="Filter by topic (algebra, geometry, etc.)"),
+    min_difficulty: Optional[int] = Query(None, description="Minimum difficulty (1-10)"),
+    max_difficulty: Optional[int] = Query(None, description="Maximum difficulty (1-10)"),
     limit: Optional[int] = Query(100, description="Maximum number of problems to return")
 ):
     """
     Get problems by IDs or filters
     
     Examples:
-    - /api/problems?ids=1,2,3
-    - /api/problems?grade=5&subject=algebra
-    - /api/problems?difficulty=medium&limit=20
+    - /api/problems?ids=sigma_138_1874,sigma_137_1871
+    - /api/problems?grade=5&topic=algebra
+    - /api/problems?topic=geometry&min_difficulty=1&max_difficulty=5&limit=50
     """
     db = get_database()
     if db is None:
@@ -34,19 +35,21 @@ async def get_problems(
     
     # Filter by IDs if provided
     if ids:
-        try:
-            problem_ids = [int(id.strip()) for id in ids.split(",")]
-            query["id"] = {"$in": problem_ids}
-        except ValueError:
-            raise HTTPException(status_code=400, detail="Invalid problem IDs format")
+        # IDs are strings like 'sigma_138_1874'
+        problem_ids = [id.strip() for id in ids.split(",")]
+        query["problem_id"] = {"$in": problem_ids}
     
     # Add other filters
     if grade:
         query["grade"] = grade
-    if subject:
-        query["subject"] = subject
-    if difficulty:
-        query["difficulty"] = difficulty
+    if topic:
+        query["topic"] = topic
+    if min_difficulty is not None or max_difficulty is not None:
+        query["difficulty"] = {}
+        if min_difficulty is not None:
+            query["difficulty"]["$gte"] = min_difficulty
+        if max_difficulty is not None:
+            query["difficulty"]["$lte"] = max_difficulty
     
     # Execute query
     try:
@@ -66,18 +69,18 @@ async def get_problems(
 
 
 @router.get("/problems/{problem_id}")
-async def get_problem_by_id(problem_id: int):
+async def get_problem_by_id(problem_id: str):
     """
     Get a single problem by ID
     
-    Example: /api/problems/123
+    Example: /api/problems/sigma_138_1874
     """
     db = get_database()
     if db is None:
         raise HTTPException(status_code=503, detail="Базата не е достапна")
     
     try:
-        problem = db["problems"].find_one({"id": problem_id})
+        problem = db["problems"].find_one({"problem_id": problem_id})
         
         if not problem:
             raise HTTPException(status_code=404, detail=f"Problem {problem_id} not found")
