@@ -22,7 +22,7 @@ from celery.result import AsyncResult
 from celery_worker import celery_app, generate_pdf_task, generate_video_task
 from models.test_instance import TestInstance
 from tools.qr_generator import create_qr_code
-from routers import dashboard
+from routers import dashboard, problems
 from database import get_database
 from dotenv import load_dotenv
 
@@ -57,7 +57,9 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# Include routers
 app.include_router(dashboard.router, prefix="/api")
+app.include_router(problems.router, prefix="/api")
 
 # MongoDB Connection
 db = get_database()

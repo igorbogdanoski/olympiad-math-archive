@@ -19,6 +19,19 @@ const totalProblems = problems.length;
   title="Креирај работен лист | Olympiad Math Archive"
   description="Креирај персонализиран работен лист за твојот час"
 >
+  <!-- KaTeX CSS for math rendering -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" />
+  
+  <!-- Problem Renderer Script -->
+  <script is:inline src="/src/scripts/worksheet-problem-renderer.js"></script>
+  
+  <!-- KaTeX Scripts -->
+  <script defer is:inline src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script defer is:inline src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+  
+  <!-- Sortable.js for drag-and-drop -->
+  <script is:inline src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
+
   <div class="worksheet-builder">
     <!-- Hero Section -->
     <section class="hero">
@@ -651,6 +664,86 @@ const totalProblems = problems.length;
     .btn-primary:hover:not(:disabled) { opacity: 0.9; }
     .btn-success:hover { background: #229954; }
     .btn-refresh:hover { background: #2980b9; }
+    
+    /* Problem Cards */
+    .problem-card-mini {
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      padding: 1rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      background: white;
+    }
+
+    .problem-card-mini:hover {
+      border-color: #667eea;
+      transform: translateY(-2px);
+      box-shadow: 0 2px 8px rgba(102, 126, 234, 0.2);
+    }
+
+    .problem-card-mini.selected {
+      border-color: #27ae60;
+      background: #27ae6010;
+    }
+
+    .problem-header {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .badge {
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+
+    .badge-easy { background: #27ae60; color: white; }
+    .badge-medium { background: #f39c12; color: white; }
+    .badge-hard { background: #e74c3c; color: white; }
+    .badge-grade { background: #3498db; color: white; }
+
+    .problem-title {
+      font-size: 0.9rem;
+      color: #2c3e50;
+      margin-bottom: 0.5rem;
+      line-height: 1.3;
+    }
+
+    .problem-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.75rem;
+      color: #7f8c8d;
+    }
+
+    .bro-tag,
+    .points-tag {
+      padding: 0.2rem 0.4rem;
+      background: #ecf0f1;
+      border-radius: 3px;
+    }
+
+    /* Problem Card (Full - for selected problems) */
+    .problem-card {
+      /* Styles handled by renderer */
+    }
+
+    .drag-handle {
+      cursor: move !important;
+    }
+
+    .math-inline {
+      display: inline-block;
+    }
+
+    .math-display {
+      display: block;
+      text-align: center;
+      margin: 1rem 0;
+    }
   </style>
 
   <script>
@@ -659,14 +752,39 @@ const totalProblems = problems.length;
     let selectedProblems = [];
     let allProblems = [];
     let filteredProblems = [];
+    let problemRenderer = null;
 
-    // Load problems data
-    fetch('/data/problems.json')
-      .then(res => res.json())
-      .then(data => {
-        allProblems = data.problems || [];
-        filteredProblems = [...allProblems];
-      });
+    // Initialize problem renderer
+    document.addEventListener('DOMContentLoaded', () => {
+      const apiBase = window.location.hostname === 'localhost' 
+        ? 'http://localhost:8000'
+        : ''; // Use nginx proxy in production
+      
+      problemRenderer = new WorksheetProblemRenderer(apiBase);
+      
+      // Load problems data (fallback to JSON if API not available)
+      loadProblems();
+    });
+
+    async function loadProblems() {
+      try {
+        // Try to fetch from API first
+        if (problemRenderer) {
+          const response = await problemRenderer.fetchProblems([]);
+          allProblems = response;
+          filteredProblems = [...allProblems];
+        }
+      } catch (error) {
+        console.warn('API not available, loading from JSON fallback');
+        // Fallback to JSON file
+        fetch('/data/problems.json')
+          .then(res => res.json())
+          .then(data => {
+            allProblems = data.problems || [];
+            filteredProblems = [...allProblems];
+          });
+      }
+    }
 
     // Step 1: Template Selection
     function selectTemplate(element) {
@@ -726,9 +844,125 @@ const totalProblems = problems.length;
       const grid = document.getElementById('problems-grid');
       document.getElementById('available-count').textContent = filteredProblems.length;
       
-      // Placeholder for now - will be implemented fully
-      grid.innerHTML = '<p style="padding: 2rem; text-align: center; color: #95a5a6;">Problem rendering coming next...</p>';
+      if (!problemRenderer || filteredProblems.length === 0) {
+        grid.innerHTML = '<p style="padding: 2rem; text-align: center; color: #95a5a6;">Нема достапни задачи...</p>';
+        return;
+      }
+      
+      // Render problem cards (simplified version for selection)
+      grid.innerHTML = filteredProblems.slice(0, 50).map(problem => `
+        <div class="problem-card-mini" onclick="addProblem(${problem.id})">
+          <div class="problem-header">
+            <span class="badge badge-${problem.difficulty}">${problem.difficulty || 'medium'}</span>
+            <span class="badge badge-grade">Одд. ${problem.grade || 'N/A'}</span>
+          </div>
+          <div class="problem-title">${problem.title || problem.content?.substring(0, 60) + '...' || 'Задача #' + problem.id}</div>
+          <div class="problem-meta">
+            ${problem.primary_skill ? `<span class="bro-tag">${problem.primary_skill.substring(0, 8)}</span>` : ''}
+            <span class="points-tag">${problem.points || 3} поени</span>
+          </div>
+        </div>
+      `).join('');
+      
+      // Highlight already selected problems
+      selectedProblems.forEach(p => {
+        const card = grid.querySelector(`[onclick="addProblem(${p.id})"]`);
+        if (card) card.classList.add('selected');
+      });
     }
+
+    function addProblem(problemId) {
+      const problem = filteredProblems.find(p => p.id === problemId);
+      if (!problem) return;
+      
+      // Check if already added
+      if (selectedProblems.find(p => p.id === problemId)) {
+        removeProblem(problemId);
+        return;
+      }
+      
+      selectedProblems.push(problem);
+      updateSelectedProblems();
+      renderProblems(); // Re-render to update selection state
+    }
+
+    function removeProblem(problemId) {
+      selectedProblems = selectedProblems.filter(p => p.id !== problemId);
+      updateSelectedProblems();
+      renderProblems();
+    }
+
+    function updateSelectedProblems() {
+      const container = document.getElementById('selected-problems-list');
+      const countSpan = document.getElementById('selected-problems-count');
+      const selectedCountSpan = document.getElementById('selected-count');
+      
+      countSpan.textContent = selectedProblems.length;
+      selectedCountSpan.textContent = selectedProblems.length;
+      
+      if (selectedProblems.length === 0) {
+        container.innerHTML = '<p class="empty-state">Избери задачи од листата погоре...</p>';
+        document.getElementById('btn-preview').disabled = true;
+        return;
+      }
+      
+      // Render selected problems using renderer
+      if (problemRenderer) {
+        problemRenderer.renderProblems('selected-problems-list', selectedProblems);
+        
+        // Initialize drag-and-drop
+        initializeSortable();
+        
+        // Update statistics
+        updateStatistics();
+      }
+      
+      document.getElementById('btn-preview').disabled = false;
+    }
+
+    function initializeSortable() {
+      const container = document.getElementById('selected-problems-list');
+      if (container && typeof Sortable !== 'undefined') {
+        Sortable.create(container, {
+          animation: 150,
+          handle: '.drag-handle',
+          onEnd: function(evt) {
+            // Reorder problems array
+            const movedProblem = selectedProblems[evt.oldIndex];
+            selectedProblems.splice(evt.oldIndex, 1);
+            selectedProblems.splice(evt.newIndex, 0, movedProblem);
+            
+            // Re-render with new order
+            updateSelectedProblems();
+          }
+        });
+      }
+    }
+
+    function updateStatistics() {
+      if (!problemRenderer) return;
+      
+      const stats = problemRenderer.calculateStats(selectedProblems);
+      
+      // Update points
+      document.getElementById('total-points').textContent = stats.totalPoints;
+      
+      // Update difficulty balance
+      const total = stats.count;
+      const easyPercent = (stats.difficulty.easy / total * 100) || 0;
+      const mediumPercent = (stats.difficulty.medium / total * 100) || 0;
+      const hardPercent = (stats.difficulty.hard / total * 100) || 0;
+      
+      const difficultyBar = document.getElementById('difficulty-balance');
+      difficultyBar.innerHTML = `
+        <div class="diff-easy" style="width: ${easyPercent}%">${stats.difficulty.easy}</div>
+        <div class="diff-medium" style="width: ${mediumPercent}%">${stats.difficulty.medium}</div>
+        <div class="diff-hard" style="width: ${hardPercent}%">${stats.difficulty.hard}</div>
+      `;
+    }
+
+    // Make removeProblem globally accessible
+    window.removeProblem = removeProblem;
 
     function goBackToTemplates() {
       document.getElementById('problem-selection').style.display = 'none';
