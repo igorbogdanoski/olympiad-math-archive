@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from routers import dashboard, problems
+from routers import dashboard, problems, worksheets
 from database import get_database
 
 app = FastAPI()
@@ -17,6 +17,7 @@ app.add_middleware(
 # Include routers
 app.include_router(dashboard.router, prefix="/api")
 app.include_router(problems.router, prefix="/api")
+app.include_router(worksheets.router, prefix="/api")
 
 @app.get("/")
 def read_root():

@@ -23,7 +23,7 @@ const totalProblems = problems.length;
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" />
   
   <!-- Problem Renderer Script -->
-  <script is:inline src="/src/scripts/worksheet-problem-renderer.js"></script>
+  <script is:inline src="/scripts/worksheet-problem-renderer.js"></script>
   
   <!-- KaTeX Scripts -->
   <script defer is:inline src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
@@ -164,7 +164,14 @@ const totalProblems = problems.length;
 
       <!-- Available Problems Grid -->
       <div class="problems-container">
-        <h3>Достапни задачи (<span id="available-count">{totalProblems}</span>)</h3>
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+          <h3>Достапни задачи (<span class="problem-count" id="available-count">0</span>)</h3>
+          <div style="display: flex; gap: 0.5rem;">
+            <button class="btn-secondary" onclick="selectRandomProblems(10)" style="font-size: 0.85rem; padding: 0.5rem 0.75rem;">🎲 10 random</button>
+            <button class="btn-secondary" onclick="selectAllVisible()" style="font-size: 0.85rem; padding: 0.5rem 0.75rem;">✅ Избери сите</button>
+            <button class="btn-secondary" onclick="deselectAll()" style="font-size: 0.85rem; padding: 0.5rem 0.75rem;">❌ Откажи сите</button>
+          </div>
+        </div>
         <div class="problems-grid" id="problems-grid">
           <!-- Problems will be populated by JavaScript -->
         </div>
@@ -746,13 +753,21 @@ const totalProblems = problems.length;
     }
   </style>
 
-  <script>
+  <!-- Pass templates to inline script via window object -->
+  <script define:vars={{ templates: WORKSHEET_TEMPLATES }}>
+    window.WORKSHEET_TEMPLATES = templates;
+  </script>
+
+  <script is:inline>
     // Global state
     let selectedTemplate = null;
     let selectedProblems = [];
     let allProblems = [];
     let filteredProblems = [];
     let problemRenderer = null;
+    
+    // Templates data (loaded from window)
+    const WORKSHEET_TEMPLATES = window.WORKSHEET_TEMPLATES;
 
     // Initialize problem renderer
     document.addEventListener('DOMContentLoaded', () => {
@@ -767,23 +782,49 @@ const totalProblems = problems.length;
     });
 
     async function loadProblems() {
+      console.log('[loadProblems] Starting to load problems...');
       try {
-        // Try to fetch from API first
+        // Fetch all problems with filters
         if (problemRenderer) {
-          const response = await problemRenderer.fetchProblems([]);
+          console.log('[loadProblems] Fetching from API...');
+          const response = await problemRenderer.fetchProblems([], {
+            limit: 1000,  // Get up to 1000 problems
+            min_difficulty: 1,
+            max_difficulty: 10
+          });
+          console.log('[loadProblems] API response:', response);
           allProblems = response;
           filteredProblems = [...allProblems];
+          
+          console.log(`[loadProblems] ✅ Loaded ${allProblems.length} problems from API`);
+          updateProblemCount();
+        } else {
+          console.error('[loadProblems] ❌ problemRenderer is null!');
         }
       } catch (error) {
-        console.warn('API not available, loading from JSON fallback');
+        console.warn('[loadProblems] ⚠️ API not available, loading from JSON fallback', error);
         // Fallback to JSON file
-        fetch('/data/problems.json')
-          .then(res => res.json())
-          .then(data => {
-            allProblems = data.problems || [];
-            filteredProblems = [...allProblems];
-          });
+        try {
+          const res = await fetch('/data/problems.json');
+          const data = await res.json();
+          allProblems = data.problems || [];
+          filteredProblems = [...allProblems];
+          console.log(`[loadProblems] ✅ Loaded ${allProblems.length} problems from JSON fallback`);
+          updateProblemCount();
+        } catch (fallbackError) {
+          console.error('[loadProblems] ❌ Failed to load problems from fallback:', fallbackError);
+          allProblems = [];
+          filteredProblems = [];
+        }
       }
+    }
+
+    function updateProblemCount() {
+      const countElement = document.querySelector('.problem-count');
+      if (countElement) {
+        countElement.textContent = filteredProblems.length;
+      }
+      console.log(`[updateProblemCount] Updated count to ${filteredProblems.length}`);
     }
 
     // Step 1: Template Selection
@@ -821,10 +862,11 @@ const totalProblems = problems.length;
       const bro = document.getElementById('filter-bro').value.toLowerCase();
 
       filteredProblems = allProblems.filter(problem => {
-        if (subject && problem.subject !== subject) return false;
-        if (grade && !problem.grade_range?.includes(parseInt(grade))) return false;
-        if (difficulty && problem.difficulty !== difficulty) return false;
-        if (bro && !problem.bro_standards?.some(s => s.toLowerCase().includes(bro))) return false;
+        // Use 'topic' field from DB (not 'subject')
+        if (subject && problem.topic !== subject) return false;
+        if (grade && problem.grade !== grade) return false;
+        if (difficulty && problem.difficulty !== parseInt(difficulty)) return false;
+        if (bro && !problem.curriculum_codes?.some(s => s.toLowerCase().includes(bro))) return false;
         return true;
       });
 
@@ -850,19 +892,34 @@ const totalProblems = problems.length;
       }
       
       // Render problem cards (simplified version for selection)
-      grid.innerHTML = filteredProblems.slice(0, 50).map(problem => `
-        <div class="problem-card-mini" onclick="addProblem(${problem.id})">
+      grid.innerHTML = filteredProblems.slice(0, 50).map(problem => {
+        // Fix Untitled Problem - try multiple fields
+        let displayTitle = problem.title || '';
+        
+        // If title has encoding issues (contains ???? or is very short)
+        if (!displayTitle || displayTitle.includes('????') || (displayTitle.includes('?') && displayTitle.length > 10)) {
+          displayTitle = problem.problem_id || `Задача ${problem.id || 'N/A'}`;
+        }
+        
+        // If still empty, use content preview
+        if (!displayTitle || displayTitle === 'Untitled Problem') {
+          const content = problem.content_markdown || problem.content || '';
+          displayTitle = content.substring(0, 60).replace(/[#*]/g, '').trim() || `Задача ${problem.id}`;
+        }
+        
+        return `
+        <div class="problem-card-mini" onclick="addProblem(${problem.id})" data-problem-id="${problem.id}">
           <div class="problem-header">
             <span class="badge badge-${problem.difficulty}">${problem.difficulty || 'medium'}</span>
             <span class="badge badge-grade">Одд. ${problem.grade || 'N/A'}</span>
           </div>
-          <div class="problem-title">${problem.title || problem.content?.substring(0, 60) + '...' || 'Задача #' + problem.id}</div>
+          <div class="problem-title">${displayTitle}</div>
           <div class="problem-meta">
-            ${problem.primary_skill ? `<span class="bro-tag">${problem.primary_skill.substring(0, 8)}</span>` : ''}
+            ${problem.primary_skill ? `<span class="bro-tag" title="${problem.primary_skill}">${problem.primary_skill.substring(0, 15)}...</span>` : ''}
             <span class="points-tag">${problem.points || 3} поени</span>
           </div>
         </div>
-      `).join('');
+      `}).join('');
       
       // Highlight already selected problems
       selectedProblems.forEach(p => {
@@ -982,15 +1039,233 @@ const totalProblems = problems.length;
 
     function refreshPreview() {
       const previewContent = document.getElementById('preview-content');
-      previewContent.innerHTML = '<p style="text-align: center; color: #95a5a6; padding: 3rem;">Preview rendering coming next...</p>';
+      
+      if (selectedProblems.length === 0) {
+        previewContent.innerHTML = '<p style="text-align: center; color: #95a5a6; padding: 3rem;">Изберете проблеми за preview...</p>';
+        return;
+      }
+
+      // Get worksheet metadata
+      const title = document.getElementById('worksheet-title')?.value || 'Работен Лист';
+      const schoolName = document.getElementById('school-name')?.value || '';
+      const className = document.getElementById('class-name')?.value || '';
+      const date = document.getElementById('worksheet-date')?.value || '';
+      const duration = document.getElementById('duration')?.value || '';
+      const totalPoints = document.getElementById('total-points')?.textContent || '0';
+      
+      // Build preview HTML
+      let html = `
+        <div style="max-width: 800px; margin: 0 auto; padding: 2rem; background: white;">
+          <!-- Header -->
+          <div style="text-align: center; margin-bottom: 2rem; border-bottom: 2px solid #333; padding-bottom: 1rem;">
+            <h1 style="margin: 0 0 0.5rem 0; font-size: 1.8rem;">${title}</h1>
+            ${schoolName ? `<p style="margin: 0.25rem 0;">${schoolName}</p>` : ''}
+            <div style="display: flex; justify-content: space-between; margin-top: 1rem; font-size: 0.9rem;">
+              <span>Име: _____________</span>
+              ${className ? `<span>Одделение: ${className}</span>` : '<span>Одделение: ____</span>'}
+              ${date ? `<span>Датум: ${date}</span>` : '<span>Датум: ________</span>'}
+            </div>
+            <div style="margin-top: 0.5rem; font-size: 0.9rem;">
+              ${duration ? `<span>Време: ${duration} минути</span>` : ''}
+              <span style="margin-left: 1rem;">Вкупно: ${totalPoints} поени</span>
+            </div>
+          </div>
+          
+          <!-- Problems -->
+          <div style="margin-bottom: 2rem;">
+      `;
+      
+      selectedProblems.forEach((problem, index) => {
+        const problemNumber = index + 1;
+        const points = problem.points || 5;
+        const difficulty = problem.difficulty || 5;
+        const difficultyLabel = difficulty <= 3 ? 'Лесно' : difficulty <= 7 ? 'Средно' : 'Тешко';
+        
+        // Fix cyrillic encoding if title is garbled
+        let title = problem.title || 'Untitled Problem';
+        if (title.includes('?') && title.length > 20) {
+          title = problem.problem_id || 'Задача ' + problemNumber;
+        }
+        
+        // Get content (try content_markdown first, then content)
+        let content = problem.content_markdown || problem.content || 'Содржина на проблемот...';
+        
+        // Strip markdown headers and get first paragraph
+        content = content
+          .replace(/^#.*$/gm, '')  // Remove headers
+          .replace(/\*\*/g, '')     // Remove bold
+          .replace(/\*/g, '')       // Remove italic
+          .trim()
+          .split('\n\n')[0]        // Get first paragraph
+          .substring(0, 300);      // Limit length
+        
+        if (content.includes('?') && content.length > 100) {
+          content = '[Содржина со специјални карактери - ќе се прикаже правилно во PDF]';
+        }
+        
+        html += `
+          <div style="margin-bottom: 2rem; padding: 1rem; border: 1px solid #e0e0e0; border-radius: 8px; page-break-inside: avoid;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+              <strong style="font-size: 1.1rem;">Задача ${problemNumber}</strong>
+              <span style="background: #e3f2fd; padding: 0.25rem 0.75rem; border-radius: 4px; font-size: 0.85rem;">
+                ${points} ${points === 1 ? 'поен' : 'поени'} • ${difficultyLabel}
+              </span>
+            </div>
+            <p style="margin: 0.5rem 0; color: #666; font-size: 0.9rem;">${title}</p>
+            <p style="margin: 0.5rem 0; line-height: 1.6;">${content}${content.length >= 300 ? '...' : ''}</p>
+            <div style="margin-top: 1rem; padding-top: 0.5rem; border-top: 1px dashed #ddd;">
+              <em style="color: #999; font-size: 0.85rem;">Одговор: _________________________</em>
+            </div>
+          </div>
+        `;
+      });
+      
+      html += `
+          </div>
+          
+          <!-- Footer Note -->
+          <div style="margin-top: 2rem; padding: 1rem; background: #f5f5f5; border-radius: 8px; font-size: 0.85rem; color: #666;">
+            <p style="margin: 0;"><strong>Забелешка:</strong> Preview е симплифициран. Финалниот PDF ќе содржи:</p>
+            <ul style="margin: 0.5rem 0; padding-left: 1.5rem;">
+              <li>Точно форматирани математички формули (KaTeX)</li>
+              <li>Дијаграми и слики</li>
+              <li>Одговорен лист на крајот</li>
+              <li>Професионален layout</li>
+            </ul>
+          </div>
+        </div>
+      `;
+      
+      previewContent.innerHTML = html;
+      
+      // Render any math formulas that might exist
+      if (window.renderMathInElement) {
+        try {
+          renderMathInElement(previewContent);
+        } catch (e) {
+          console.log('[Preview] KaTeX not available');
+        }
+      }
     }
 
-    function generatePDF() {
-      alert('PDF generation coming next! 🎉');
+    function selectAllVisible() {
+      const visibleProblems = filteredProblems.slice(0, 50);
+      visibleProblems.forEach(problem => {
+        if (!selectedProblems.find(p => p.id === problem.id)) {
+          selectedProblems.push(problem);
+        }
+      });
+      updateSelectedProblems();
+      alert(`✅ Избрани ${visibleProblems.length} проблеми!`);
+    }
+
+    function deselectAll() {
+      selectedProblems = [];
+      updateSelectedProblems();
+      alert('❌ Сите проблеми се откажани.');
+    }
+
+    function selectRandomProblems(count) {
+      const available = filteredProblems.filter(p => !selectedProblems.find(sp => sp.id === p.id));
+      if (available.length === 0) {
+        alert('Сите проблеми се веќе избрани!');
+        return;
+      }
+      
+      const toSelect = Math.min(count, available.length);
+      const shuffled = available.sort(() => Math.random() - 0.5);
+      const randomSelection = shuffled.slice(0, toSelect);
+      
+      randomSelection.forEach(p => selectedProblems.push(p));
+      updateSelectedProblems();
+      alert(`🎲 Избрани ${toSelect} random проблеми!`);
+    }
+
+    async function generatePDF() {
+      if (selectedProblems.length === 0) {
+        alert('⚠️ Изберете барем еден проблем пред да генерирате PDF!');
+        return;
+      }
+
+      // Show loading indicator
+      const btn = event.target;
+      const originalText = btn.innerHTML;
+      btn.disabled = true;
+      btn.innerHTML = '⏳ Генерирам PDF...';
+
+      try {
+        // Get worksheet metadata
+        const title = document.getElementById('worksheet-title')?.value || 'Работен Лист';
+        const description = document.getElementById('worksheet-description')?.value || '';
+        const includeSolutions = document.getElementById('include-solutions')?.checked ?? true;
+        
+        // Prepare API request
+        const apiBase = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+          ? 'http://localhost:8000'
+          : '';
+        
+        const requestBody = {
+          title: title,
+          description: description,
+          problems: selectedProblems.map(p => ({
+            id: p.id || p._id || 'unknown',
+            problem_id: p.problem_id,
+            content: p.content || p.problem_text || 'Нема содржина',
+            solution: p.solution || p.answer || null,
+            difficulty: p.difficulty,
+            grade: p.grade,
+            topic: p.topic || p.subject
+          })),
+          include_solutions: includeSolutions,
+          school_name: null,
+          teacher_name: null,
+          grade: currentTemplate?.grade || null
+        };
+
+        // Call PDF generation API
+        const response = await fetch(`${apiBase}/api/worksheet/generate-pdf`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(requestBody)
+        });
+
+        if (!response.ok) {
+          const error = await response.json();
+          throw new Error(error.detail || 'PDF generation failed');
+        }
+
+        // Download PDF
+        const blob = await response.blob();
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `worksheet_${title.replace(/\s+/g, '_')}_${new Date().toISOString().split('T')[0]}.pdf`;
+        document.body.appendChild(a);
+        a.click();
+        window.URL.revokeObjectURL(url);
+        document.body.removeChild(a);
+
+        alert('✅ PDF успешно генериран и преземен!');
+
+      } catch (error) {
+        console.error('PDF Generation Error:', error);
+        alert(`❌ Грешка при генерирање на PDF:\n${error.message}\n\nПробајте повторно или контактирајте поддршка.`);
+      } finally {
+        // Restore button
+        btn.disabled = false;
+        btn.innerHTML = originalText;
+      }
     }
 
     function saveWorksheet() {
-      alert('Worksheet save functionality coming next! 💾');
+      if (selectedProblems.length === 0) {
+        alert('⚠️ Изберете барем еден проблем пред да зачувате!');
+        return;
+      }
+      const title = document.getElementById('worksheet-title')?.value || 'Без наслов';
+      alert(`Worksheet save functionality coming next! 💾\n\nНаслов: ${title}\nПроблеми: ${selectedProblems.length}`);
     }
   </script>
 </Layout>
