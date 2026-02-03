@@ -4,6 +4,7 @@
 // Purpose: Teacher interface for creating custom worksheets
 import Layout from '../../layouts/Layout.astro';
 import { WORKSHEET_TEMPLATES } from '../../data/worksheet_templates';
+import FilterSidebar from '../../components/worksheet/FilterSidebar.astro';
 import ProblemList from '../../components/worksheet/ProblemList.astro';
 import ExportModal from '../../components/worksheet/ExportModal.astro';
 
@@ -152,8 +153,16 @@ const totalProblems = problems.length;
         </div>
       </div>
 
-      <!-- New ProblemList Component with Drag & Drop -->
-      <ProblemList />
+      <!-- Filter Sidebar + Problem List Layout -->
+      <div class="builder-layout">
+        <div class="sidebar-col">
+          <FilterSidebar />
+        </div>
+        
+        <div class="content-col">
+          <ProblemList />
+        </div>
+      </div>
 
       <!-- Action Buttons -->
       <div class="action-buttons">
@@ -831,6 +840,30 @@ const totalProblems = problems.length;
       text-align: center;
       margin: 1rem 0;
     }
+
+    /* ===== FILTER SIDEBAR + CONTENT GRID LAYOUT ===== */
+    .builder-layout {
+      display: grid;
+      grid-template-columns: 300px 1fr; /* Sidebar width + remaining space */
+      gap: 2rem;
+      margin-top: 2rem;
+      align-items: start;
+    }
+
+    .sidebar-col {
+      /* Sticky sidebar handled by component */
+    }
+
+    .content-col {
+      min-width: 0; /* Prevent grid overflow */
+    }
+
+    /* Responsive: On mobile, filters go on top */
+    @media (max-width: 968px) {
+      .builder-layout {
+        grid-template-columns: 1fr;
+      }
+    }
   </style>
 
   <!-- Pass templates to inline script via window object -->
@@ -855,6 +888,195 @@ const totalProblems = problems.length;
     let problemRenderer = null;
     window.sortableInstance = null;
     window.lastTotal = null; // For Perfect 100 Easter Egg
+
+    // --- FILTER INTEGRATION LOGIC ---
+    
+    // Collect all active filter values
+    window.getFilters = () => {
+      const gradeEl = document.getElementById('filter-grade');
+      const topicEl = document.getElementById('filter-topic');
+      const searchEl = document.getElementById('filter-search');
+      const broEl = document.getElementById('filter-bro');
+      const diffCheckboxes = document.querySelectorAll('.diff-chk:checked');
+      
+      return {
+        grade: gradeEl ? parseInt(gradeEl.value) : null,
+        topic: topicEl ? topicEl.value : '',
+        search: searchEl ? searchEl.value.toLowerCase().trim() : '',
+        bro_code: broEl ? broEl.value.trim() : '',
+        difficulties: Array.from(diffCheckboxes).map(cb => parseInt(cb.value))
+      };
+    };
+
+    // Apply filters to problem list (client-side filtering)
+    window.applyFilters = (problems) => {
+      const filters = window.getFilters();
+      let filtered = [...problems];
+      
+      // Filter by grade
+      if (filters.grade) {
+        filtered = filtered.filter(p => {
+          const pGrade = p.grade || p.target_grade || 7; // Default to 7
+          return pGrade === filters.grade;
+        });
+      }
+      
+      // Filter by topic
+      if (filters.topic) {
+        filtered = filtered.filter(p => {
+          const pTopic = (p.topic || p.subject || '').toLowerCase();
+          return pTopic.includes(filters.topic.toLowerCase());
+        });
+      }
+      
+      // Filter by search keyword (text content)
+      if (filters.search) {
+        filtered = filtered.filter(p => {
+          const text = (p.text || p.content || '').toLowerCase();
+          return text.includes(filters.search);
+        });
+      }
+      
+      // Filter by БРО code
+      if (filters.bro_code) {
+        filtered = filtered.filter(p => {
+          const pBro = (p.bro_standard || p.bro || '').toUpperCase();
+          return pBro.includes(filters.bro_code.toUpperCase());
+        });
+      }
+      
+      // Filter by difficulty
+      if (filters.difficulties.length > 0 && filters.difficulties.length < 3) {
+        filtered = filtered.filter(p => {
+          const pDiff = p.difficulty || 2; // Default to medium
+          return filters.difficulties.includes(pDiff);
+        });
+      }
+      
+      // Update filter summary
+      updateFilterSummary(filtered.length, problems.length);
+      
+      return filtered;
+    };
+
+    // Update filter summary text
+    function updateFilterSummary(filteredCount, totalCount) {
+      const summaryEl = document.getElementById('filter-summary');
+      if (!summaryEl) return;
+      
+      const summaryText = summaryEl.querySelector('.summary-text');
+      if (!summaryText) return;
+      
+      if (filteredCount === totalCount) {
+        summaryText.textContent = 'Се прикажуваат сите задачи';
+      } else {
+        summaryText.textContent = `Прикажани ${filteredCount} од ${totalCount} задачи`;
+      }
+    }
+
+    // Debounced filter update (for search input)
+    let filterTimeout;
+    window.debounceFilterUpdate = () => {
+      clearTimeout(filterTimeout);
+      filterTimeout = setTimeout(() => {
+        window.triggerFilterUpdate();
+      }, 500); // Wait 500ms after typing stops
+    };
+
+    // Trigger filter update (immediate)
+    window.triggerFilterUpdate = () => {
+      console.log('[Filter] Triggering filter update');
+      
+      // If we have allProblems loaded, re-filter and render
+      if (allProblems && allProblems.length > 0) {
+        const filtered = window.applyFilters(allProblems);
+        window.renderProblemList(filtered);
+      }
+      
+      // If we have a template selected, re-run template selection with new filters
+      if (selectedTemplate) {
+        selectProblemsByTemplate(selectedTemplate);
+      }
+    };
+
+    // Reset all filters to default
+    window.resetFilters = () => {
+      // Reset grade to 7
+      const gradeInput = document.getElementById('filter-grade');
+      if (gradeInput) gradeInput.value = '7';
+      document.querySelectorAll('.grade-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.val === '7');
+      });
+      
+      // Reset topic
+      const topicEl = document.getElementById('filter-topic');
+      if (topicEl) topicEl.value = '';
+      
+      // Reset search
+      const searchEl = document.getElementById('filter-search');
+      if (searchEl) searchEl.value = '';
+      
+      // Reset БРО
+      const broEl = document.getElementById('filter-bro');
+      if (broEl) broEl.value = '';
+      
+      // Check all difficulty checkboxes
+      document.querySelectorAll('.diff-chk').forEach(chk => {
+        chk.checked = true;
+      });
+      
+      // Trigger update
+      window.triggerFilterUpdate();
+      
+      console.log('[Filter] Reset all filters');
+    };
+
+    // --- TEMPLATE-BASED PROBLEM SELECTION WITH FILTERS ---
+    
+    // Select problems based on template + active filters
+    function selectProblemsByTemplate(templateId) {
+      const template = worksheetTemplates[templateId];
+      if (!template) {
+        console.error('[selectProblemsByTemplate] Template not found:', templateId);
+        return;
+      }
+      
+      console.log('[selectProblemsByTemplate] Selecting for template:', templateId, template);
+      
+      // Apply filters first
+      const filteredPool = window.applyFilters(allProblems);
+      
+      if (filteredPool.length === 0) {
+        alert('⚠️ Нема задачи кои одговараат на филтрите. Обидете се со помалку филтри.');
+        return;
+      }
+      
+      // Calculate counts per difficulty
+      const targetCount = template.problems;
+      const easyCount = Math.floor(targetCount * template.difficulty.easy);
+      const mediumCount = Math.floor(targetCount * template.difficulty.medium);
+      const hardCount = targetCount - easyCount - mediumCount;
+      
+      // Categorize problems by difficulty
+      const easy = filteredPool.filter(p => (p.difficulty || 2) <= 1);
+      const medium = filteredPool.filter(p => (p.difficulty || 2) === 2);
+      const hard = filteredPool.filter(p => (p.difficulty || 2) >= 3);
+      
+      // Shuffle and select
+      const shuffle = arr => arr.sort(() => Math.random() - 0.5);
+      
+      const selectedEasy = shuffle([...easy]).slice(0, Math.min(easyCount, easy.length));
+      const selectedMedium = shuffle([...medium]).slice(0, Math.min(mediumCount, medium.length));
+      const selectedHard = shuffle([...hard]).slice(0, Math.min(hardCount, hard.length));
+      
+      // Combine and shuffle final list
+      const selected = shuffle([...selectedEasy, ...selectedMedium, ...selectedHard]);
+      
+      console.log(`[selectProblemsByTemplate] Selected ${selected.length} problems (E:${selectedEasy.length} M:${selectedMedium.length} H:${selectedHard.length})`);
+      
+      // Render the problem list
+      window.renderProblemList(selected);
+    }
 
     // --- 1. PROBLEM LIST RENDERING WITH DRAG & DROP ---
     window.renderProblemList = (problems) => {

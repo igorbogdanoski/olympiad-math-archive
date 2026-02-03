@@ -1,0 +1,362 @@
+---
+// FilterSidebar.astro - Advanced problem filtering UI
+// Task 1.4: Search, Grade, Topic, Difficulty, БРО Code filters
+---
+
+<aside class="filters-sidebar">
+  <div class="filter-header">
+    <h3>🔍 Филтри</h3>
+    <button class="reset-link" onclick="window.resetFilters()">Исчисти</button>
+  </div>
+
+  <!-- Search by keyword -->
+  <div class="filter-group">
+    <label>Пребарај по клучен збор</label>
+    <div class="input-wrapper">
+      <span class="search-icon">🔎</span>
+      <input 
+        type="text" 
+        id="filter-search" 
+        placeholder="пр. плоштина, триаголник..."
+        autocomplete="off"
+      >
+    </div>
+  </div>
+
+  <!-- Grade selector -->
+  <div class="filter-group">
+    <label>Одделение</label>
+    <div class="grade-toggles">
+      <button class="grade-btn" data-val="6">6</button>
+      <button class="grade-btn active" data-val="7">7</button>
+      <button class="grade-btn" data-val="8">8</button>
+      <button class="grade-btn" data-val="9">9</button>
+    </div>
+    <input type="hidden" id="filter-grade" value="7">
+  </div>
+
+  <!-- Topic dropdown -->
+  <div class="filter-group">
+    <label>Тема</label>
+    <select id="filter-topic">
+      <option value="">📚 Сите теми</option>
+      <option value="geometry">📐 Геометрија</option>
+      <option value="algebra">✖️ Алгебра</option>
+      <option value="numbers">🔢 Броеви</option>
+      <option value="combinatorics">🎲 Комбинаторика</option>
+      <option value="data">📊 Податоци</option>
+      <option value="measurements">📏 Мерење</option>
+    </select>
+  </div>
+
+  <!-- Difficulty checkboxes -->
+  <div class="filter-group">
+    <label>Тежина</label>
+    <div class="checkbox-group">
+      <label class="checkbox-label">
+        <input type="checkbox" class="diff-chk" value="1" checked>
+        <span class="tag easy">Лесно</span>
+      </label>
+      <label class="checkbox-label">
+        <input type="checkbox" class="diff-chk" value="2" checked>
+        <span class="tag medium">Средно</span>
+      </label>
+      <label class="checkbox-label">
+        <input type="checkbox" class="diff-chk" value="3" checked>
+        <span class="tag hard">Тешко</span>
+      </label>
+    </div>
+  </div>
+
+  <!-- БРО Code filter (optional) -->
+  <div class="filter-group">
+    <label>БРО Код <span class="optional-label">(Optional)</span></label>
+    <input 
+      type="text" 
+      id="filter-bro" 
+      placeholder="пр. МАТ.7.Г.3"
+      autocomplete="off"
+    >
+  </div>
+
+  <!-- Filter summary -->
+  <div class="filter-summary" id="filter-summary">
+    <span class="summary-text">Се прикажуваат сите задачи</span>
+  </div>
+</aside>
+
+<style>
+  .filters-sidebar {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    height: fit-content;
+    position: sticky;
+    top: 20px;
+  }
+
+  .filter-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid #f1f5f9;
+  }
+
+  .filter-header h3 {
+    margin: 0;
+    font-size: 1.1rem;
+    color: #1e293b;
+  }
+
+  .reset-link {
+    background: none;
+    border: none;
+    color: #3b82f6;
+    font-size: 0.85rem;
+    cursor: pointer;
+    text-decoration: underline;
+    padding: 0;
+    font-weight: 500;
+  }
+
+  .reset-link:hover {
+    color: #2563eb;
+  }
+
+  .filter-group {
+    margin-bottom: 1.5rem;
+  }
+
+  .filter-group:last-of-type {
+    margin-bottom: 1rem;
+  }
+  
+  .filter-group label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #475569;
+    margin-bottom: 0.5rem;
+  }
+
+  .optional-label {
+    font-weight: 400;
+    color: #94a3b8;
+    font-size: 0.75rem;
+  }
+
+  /* Input styles */
+  input[type="text"], select {
+    width: 100%;
+    padding: 0.65rem 0.75rem;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    transition: all 0.2s;
+    background: #f8fafc;
+  }
+
+  input[type="text"]:focus, select:focus {
+    outline: none;
+    border-color: #3b82f6;
+    background: white;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+  }
+
+  select {
+    cursor: pointer;
+  }
+
+  /* Grade Toggles */
+  .grade-toggles {
+    display: flex;
+    gap: 0.5rem;
+  }
+  
+  .grade-btn {
+    flex: 1;
+    padding: 0.6rem;
+    border: 2px solid #cbd5e1;
+    background: white;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    color: #64748b;
+    font-size: 1rem;
+    transition: all 0.2s;
+  }
+
+  .grade-btn:hover {
+    border-color: #94a3b8;
+    background: #f8fafc;
+  }
+
+  .grade-btn.active {
+    background: #3b82f6;
+    color: white;
+    border-color: #3b82f6;
+    box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
+  }
+
+  /* Search Icon Wrapper */
+  .input-wrapper {
+    position: relative;
+  }
+  
+  .search-icon {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 0.9rem;
+    opacity: 0.5;
+    pointer-events: none;
+  }
+  
+  .input-wrapper input {
+    padding-left: 2.5rem;
+  }
+
+  /* Checkbox group */
+  .checkbox-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    padding: 0.4rem 0;
+    margin: 0;
+  }
+
+  .checkbox-label input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    accent-color: #3b82f6;
+  }
+
+  .checkbox-label .tag {
+    font-size: 0.8rem;
+    padding: 0.25rem 0.6rem;
+    border-radius: 6px;
+    font-weight: 500;
+  }
+
+  /* Difficulty badges (reuse from ProblemList) */
+  .tag.easy {
+    background: #dbeafe;
+    color: #1e40af;
+  }
+
+  .tag.medium {
+    background: #fef3c7;
+    color: #92400e;
+  }
+
+  .tag.hard {
+    background: #fee2e2;
+    color: #991b1b;
+  }
+
+  /* Filter summary */
+  .filter-summary {
+    margin-top: 1.5rem;
+    padding: 0.75rem;
+    background: #f1f5f9;
+    border-radius: 8px;
+    border-left: 4px solid #3b82f6;
+  }
+
+  .summary-text {
+    font-size: 0.8rem;
+    color: #475569;
+    font-weight: 500;
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .filters-sidebar {
+      position: static;
+      margin-bottom: 1.5rem;
+    }
+
+    .grade-toggles {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+</style>
+
+<script is:inline>
+  // Grade Toggle UI Logic
+  function initGradeToggles() {
+    document.querySelectorAll('.grade-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        // Remove active from all
+        document.querySelectorAll('.grade-btn').forEach(b => b.classList.remove('active'));
+        // Add to clicked
+        e.target.classList.add('active');
+        // Update hidden input
+        document.getElementById('filter-grade').value = e.target.dataset.val;
+        
+        // Trigger filter update
+        if (window.triggerFilterUpdate) {
+          window.triggerFilterUpdate();
+        }
+      });
+    });
+  }
+
+  // Attach input listeners
+  function initFilterListeners() {
+    // Topic and БРО: instant update
+    ['filter-topic', 'filter-bro'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) {
+        el.addEventListener('change', () => {
+          if (window.triggerFilterUpdate) {
+            window.triggerFilterUpdate();
+          }
+        });
+      }
+    });
+    
+    // Search: debounced update (wait 500ms after typing stops)
+    const searchInput = document.getElementById('filter-search');
+    if (searchInput) {
+      searchInput.addEventListener('input', () => {
+        if (window.debounceFilterUpdate) {
+          window.debounceFilterUpdate();
+        }
+      });
+    }
+    
+    // Difficulty checkboxes: instant update
+    document.querySelectorAll('.diff-chk').forEach(chk => {
+      chk.addEventListener('change', () => {
+        if (window.triggerFilterUpdate) {
+          window.triggerFilterUpdate();
+        }
+      });
+    });
+  }
+
+  // Initialize on load
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+      initGradeToggles();
+      initFilterListeners();
+    });
+  } else {
+    initGradeToggles();
+    initFilterListeners();
+  }
+</script>
