@@ -1,0 +1,14 @@
+{
+  "title": "Test Worksheet",
+  "school_name": "School",  
+  "teacher_name": "Teacher",
+  "grade": 7,
+  "problems": [
+    {
+      "id": "1",
+      "content": "Calculate: 2+2",
+      "solution": "2+2=4"
+    }
+  ],
+  "include_solutions": true
+}

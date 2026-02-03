@@ -25,7 +25,7 @@
 			if (accessibilityTheme) {
 				window.localStorage.setItem('accessibilityTheme', accessibilityTheme);
 			}
-		</script><link rel="stylesheet" href="/_astro/ai-grader.8WXwaRTs.css">
+		</script><link rel="stylesheet" href="/_astro/ai-grader.BUeu0zD-.css">
 <style>.counter[data-astro-cid-j7pv25f6]{font-variant-numeric:tabular-nums}
 </style><script type="module" src="/_astro/hoisted.BNQTG4Pu.js"></script></head> <body class="bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 font-sans transition-colors duration-300 antialiased" data-pwa-enabled> <!-- PWA Manager Script --> <!-- PWA UI Elements --><div id="pwa-ui" class="fixed bottom-4 right-4 z-40" data-astro-cid-sfrvlhpz> <!-- Install Button (hidden by default) --> <button id="install-pwa-btn" class="hidden inline-flex items-center gap-2 px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors shadow-lg" style="display: none;" data-astro-cid-sfrvlhpz> <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" data-astro-cid-sfrvlhpz> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" data-astro-cid-sfrvlhpz></path> </svg>
 Инсталирај апликација
@@ -43,10 +43,10 @@ AI Curriculum Doctor
 </button> <div class="absolute -right-10 -top-10 w-32 h-32 bg-blue-500/10 rounded-full blur-2xl" data-astro-cid-j7pv25f6></div> </div> <div class="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 p-8 shadow-sm" data-astro-cid-j7pv25f6> <h3 class="text-slate-400 text-[10px] font-black uppercase tracking-[0.2em] mb-6" data-astro-cid-j7pv25f6>Брзи Алатки</h3> <div class="space-y-4" data-astro-cid-j7pv25f6> <a href="/curriculum-planner" class="flex items-center gap-4 p-4 rounded-2xl hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors group" data-astro-cid-j7pv25f6> <div class="w-10 h-10 bg-yellow-100 dark:bg-yellow-900/30 text-yellow-600 dark:text-yellow-400 rounded-xl flex items-center justify-center font-black group-hover:scale-110 transition-transform" data-astro-cid-j7pv25f6>AI</div> <div data-astro-cid-j7pv25f6> <p class="font-bold text-slate-900 dark:text-white text-sm" data-astro-cid-j7pv25f6>Генерирај Задачи</p> <p class="text-xs text-slate-500" data-astro-cid-j7pv25f6>Со помош на Gemini AI</p> </div> </a> <a href="/teachers" class="flex items-center gap-4 p-4 rounded-2xl hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors group" data-astro-cid-j7pv25f6> <div class="w-10 h-10 bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 rounded-xl flex items-center justify-center font-black group-hover:scale-110 transition-transform" data-astro-cid-j7pv25f6>QR</div> <div data-astro-cid-j7pv25f6> <p class="font-bold text-slate-900 dark:text-white text-sm" data-astro-cid-j7pv25f6>Скенирај Тест</p> <p class="text-xs text-slate-500" data-astro-cid-j7pv25f6>Дигитални решенија</p> </div> </a> </div> </div> </div> </div> </div> <script>
 		async function loadDashboard() {
 			try {
-                // Динамичко одредување на API URL за да работи и на локална мрежа
+                // Use Nginx proxy path - works both locally and in production
                 const apiBase = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
                     ? 'http://localhost:8000'
-                    : `http://${window.location.hostname}:8000`;
+                    : '';
 
 				const response = await fetch(`${apiBase}/api/dashboard/stats`);
 				if (!response.ok) throw new Error('Failed to fetch');
@@ -109,7 +109,7 @@ AI Curriculum Doctor
         async function checkRecommendation() {
 			const apiBase = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
 				? 'http://localhost:8000'
-				: `http://${window.location.hostname}:8000`;
+				: '';
 
             try {
                 const res = await fetch(`${apiBase}/api/dashboard/recommendation`);
@@ -131,7 +131,7 @@ AI Curriculum Doctor
             
 			const apiBase = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
 				? 'http://localhost:8000'
-				: `http://${window.location.hostname}:8000`;
+				: '';
 
             const btn = document.getElementById('fix-gap-btn');
             const originalText = btn.innerHTML;

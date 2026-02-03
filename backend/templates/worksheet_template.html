@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="mk">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 2cm;
+            @bottom-center {
+                content: "{{ footer_text }}";
+                font-size: 8pt;
+                color: #666;
+            }
+        }
+        
+        body {
+            font-family: 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif;
+            font-size: 11pt;
+            line-height: 1.6;
+            color: #333;
+        }
+        
+        .title {
+            font-size: 18pt;
+            font-weight: bold;
+            text-align: center;
+            color: #2C3E50;
+            margin-bottom: 20px;
+        }
+        
+        .metadata {
+            font-size: 10pt;
+            color: #666;
+            margin-bottom: 15px;
+        }
+        
+        .metadata-row {
+            margin-bottom: 5px;
+        }
+        
+        .metadata-label {
+            font-weight: bold;
+        }
+        
+        .problem {
+            margin-bottom: 25px;
+            page-break-inside: avoid;
+        }
+        
+        .problem-header {
+            font-size: 12pt;
+            font-weight: bold;
+            color: #4CAF50;
+            margin-bottom: 10px;
+        }
+        
+        .problem-content {
+            margin-left: 0;
+            margin-bottom: 15px;
+        }
+        
+        .solutions-section {
+            page-break-before: always;
+            margin-top: 30px;
+        }
+        
+        .solutions-header {
+            font-size: 16pt;
+            font-weight: bold;
+            color: #2C3E50;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #4CAF50;
+            padding-bottom: 5px;
+        }
+        
+        .solution {
+            margin-bottom: 20px;
+            page-break-inside: avoid;
+        }
+        
+        .solution-header {
+            font-size: 11pt;
+            font-weight: bold;
+            color: #2E7D32;
+            margin-bottom: 8px;
+        }
+        
+        .solution-content {
+            margin-left: 20px;
+            font-size: 10pt;
+            color: #555;
+        }
+        
+        .footer {
+            text-align: center;
+            font-size: 8pt;
+            color: #999;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+    <div class="title">{{ title }}</div>
+    
+    {% if metadata %}
+    <div class="metadata">
+        {% if metadata.school %}
+        <div class="metadata-row">
+            <span class="metadata-label">{{ labels.school }}</span> {{ metadata.school }}
+        </div>
+        {% endif %}
+        
+        {% if metadata.teacher %}
+        <div class="metadata-row">
+            <span class="metadata-label">{{ labels.teacher }}</span> {{ metadata.teacher }}
+        </div>
+        {% endif %}
+        
+        {% if metadata.grade %}
+        <div class="metadata-row">
+            <span class="metadata-label">{{ labels.grade }}</span> {{ metadata.grade }}
+        </div>
+        {% endif %}
+        
+        {% if metadata.student %}
+        <div class="metadata-row">
+            <span class="metadata-label">{{ labels.student }}</span> _________________________
+        </div>
+        {% endif %}
+        
+        {% if metadata.date %}
+        <div class="metadata-row">
+            <span class="metadata-label">{{ labels.date }}</span> _________________________
+        </div>
+        {% endif %}
+        
+        {% if metadata.problem_count %}
+        <div class="metadata-row">
+            <span class="metadata-label">{{ labels.problem_count }}</span> {{ problems|length }}
+        </div>
+        {% endif %}
+        
+        {% if metadata.description %}
+        <div class="metadata-row">
+            <span class="metadata-label">{{ labels.description }}</span> {{ metadata.description }}
+        </div>
+        {% endif %}
+    </div>
+    {% endif %}
+    
+    <div class="problems-section">
+        {% for problem in problems %}
+        <div class="problem">
+            <div class="problem-header">
+                {{ labels.problem }} {{ loop.index }}
+            </div>
+            <div class="problem-content">
+                {{ problem.content | safe }}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    
+    {% if include_solutions %}
+    <div class="solutions-section">
+        <div class="solutions-header">{{ labels.solutions }}</div>
+        
+        {% for problem in problems %}
+        {% if problem.solution %}
+        <div class="solution">
+            <div class="solution-header">
+                {{ labels.solution }} {{ loop.index }}
+            </div>
+            <div class="solution-content">
+                {{ problem.solution | safe }}
+            </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+    </div>
+    {% endif %}
+    
+    <div class="footer">
+        {{ footer_text }}
+    </div>
+</body>
+</html>

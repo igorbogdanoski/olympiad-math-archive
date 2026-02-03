@@ -25,6 +25,9 @@ const totalProblems = problems.length;
   <!-- Problem Renderer Script -->
   <script is:inline src="/scripts/worksheet-problem-renderer.js"></script>
   
+  <!-- Template Manager Script -->
+  <script is:inline src="/scripts/worksheet-template-manager.js"></script>
+  
   <!-- KaTeX Scripts -->
   <script defer is:inline src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
   <script defer is:inline src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
@@ -46,42 +49,12 @@ const totalProblems = problems.length;
         <h2>Избери template</h2>
       </div>
       
-      <div class="template-grid">
-        {WORKSHEET_TEMPLATES.map((template) => (
-          <div 
-            class="template-card" 
-            data-template-id={template.id}
-            onclick="selectTemplate(this)"
-          >
-            <div class="template-icon">
-              {template.id === 'test' && '📝'}
-              {template.id === 'quiz' && '❓'}
-              {template.id === 'homework' && '📚'}
-              {template.id === 'practice' && '✏️'}
-              {template.id === 'warm_up' && '🔥'}
-              {template.id === 'review' && '🔄'}
-              {template.id === 'challenge' && '🏆'}
-              {template.id === 'exam' && '📋'}
-              {template.id === 'diagnostic' && '🔍'}
-              {template.id === 'formative' && '📊'}
-              {template.id === 'summative' && '✅'}
-              {template.id === 'project' && '🎯'}
-              {template.id === 'investigation' && '🔬'}
-              {template.id === 'exploration' && '🗺️'}
-              {template.id === 'mixed' && '🎲'}
-            </div>
-            <h3>{template.name_mk}</h3>
-            <p class="template-desc">{template.description_mk}</p>
-            <div class="template-meta">
-              <span class="meta-item">
-                <strong>{template.recommended_problems}</strong> задачи
-              </span>
-              <span class="meta-item">
-                <strong>{template.recommended_time_minutes}</strong> мин
-              </span>
-            </div>
-          </div>
-        ))}
+      <div class="template-grid" id="template-grid">
+        <!-- Templates will be loaded dynamically from API -->
+        <div class="loading-state">
+          <div class="spinner"></div>
+          <p>Вчитување на templates...</p>
+        </div>
       </div>
     </section>
 
@@ -408,6 +381,100 @@ const totalProblems = problems.length;
     .meta-item {
       font-size: 0.85rem;
       color: #34495e;
+    }
+
+    /* Template Difficulty Visualization */
+    .template-difficulty {
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid #e0e0e0;
+    }
+
+    .difficulty-bar {
+      display: flex;
+      height: 24px;
+      border-radius: 6px;
+      overflow: hidden;
+      margin-bottom: 0.5rem;
+    }
+
+    .bar-segment {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 0.75rem;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .bar-easy {
+      background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+    }
+
+    .bar-medium {
+      background: linear-gradient(135deg, #f39c12 0%, #f1c40f 100%);
+    }
+
+    .bar-hard {
+      background: linear-gradient(135deg, #c0392b 0%, #e74c3c 100%);
+    }
+
+    .difficulty-labels {
+      display: flex;
+      justify-content: space-between;
+      gap: 0.5rem;
+      font-size: 0.7rem;
+      color: #7f8c8d;
+    }
+
+    .difficulty-labels small {
+      flex: 1;
+      text-align: center;
+    }
+
+    /* Loading State */
+    .loading-state {
+      text-align: center;
+      padding: 3rem;
+      color: #7f8c8d;
+    }
+
+    .spinner {
+      border: 4px solid #f3f3f3;
+      border-top: 4px solid #667eea;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 1rem;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .error-state {
+      text-align: center;
+      padding: 3rem;
+      color: #e74c3c;
+    }
+
+    .btn-retry {
+      margin-top: 1rem;
+      padding: 0.75rem 1.5rem;
+      background: #667eea;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 1rem;
+    }
+
+    .btn-retry:hover {
+      background: #5568d3;
     }
 
     /* Filters Panel */
@@ -765,11 +832,9 @@ const totalProblems = problems.length;
     let allProblems = [];
     let filteredProblems = [];
     let problemRenderer = null;
+    let worksheetTemplates = []; // Will be loaded from API
     
-    // Templates data (loaded from window)
-    const WORKSHEET_TEMPLATES = window.WORKSHEET_TEMPLATES;
-
-    // Initialize problem renderer
+    // Initialize problem renderer and load templates
     document.addEventListener('DOMContentLoaded', () => {
       const apiBase = window.location.hostname === 'localhost' 
         ? 'http://localhost:8000'
@@ -777,9 +842,71 @@ const totalProblems = problems.length;
       
       problemRenderer = new WorksheetProblemRenderer(apiBase);
       
+      // Load templates from API
+      loadTemplates();
+      
       // Load problems data (fallback to JSON if API not available)
       loadProblems();
     });
+
+    async function loadTemplates() {
+      console.log('[loadTemplates] Loading templates from API...');
+      try {
+        const response = await fetchTemplates();
+        worksheetTemplates = response.templates;
+        console.log(`[loadTemplates] ✅ Loaded ${response.count} templates`, worksheetTemplates);
+        renderTemplates();
+      } catch (error) {
+        console.error('[loadTemplates] ❌ Failed to load templates:', error);
+        document.getElementById('template-grid').innerHTML = `
+          <div class="error-state">
+            <p>❌ Грешка при вчитување на templates</p>
+            <button onclick="loadTemplates()" class="btn-retry">🔄 Обиди се повторно</button>
+          </div>
+        `;
+      }
+    }
+
+    function renderTemplates() {
+      const grid = document.getElementById('template-grid');
+      const templateEntries = Object.entries(worksheetTemplates);
+      
+      grid.innerHTML = templateEntries.map(([id, template]) => `
+        <div 
+          class="template-card" 
+          data-template-id="${id}"
+          onclick="selectTemplate('${id}', this)"
+        >
+          <div class="template-icon">${template.icon}</div>
+          <h3>${template.name}</h3>
+          <p class="template-desc">${template.description}</p>
+          <div class="template-meta">
+            <span class="meta-item">
+              <strong>${template.problems}</strong> задачи
+            </span>
+            ${template.time_limit ? `
+            <span class="meta-item">
+              <strong>${template.time_limit}</strong> мин
+            </span>
+            ` : ''}
+          </div>
+          <div class="template-difficulty">
+            <div class="difficulty-bar">
+              <div class="bar-segment bar-easy" style="width: ${template.difficulty.easy * 100}%"></div>
+              <div class="bar-segment bar-medium" style="width: ${template.difficulty.medium * 100}%"></div>
+              <div class="bar-segment bar-hard" style="width: ${template.difficulty.hard * 100}%"></div>
+            </div>
+            <div class="difficulty-labels">
+              <small>${Math.round(template.difficulty.easy * 100)}% Лесно</small>
+              <small>${Math.round(template.difficulty.medium * 100)}% Средно</small>
+              <small>${Math.round(template.difficulty.hard * 100)}% Тешко</small>
+            </div>
+          </div>
+        </div>
+      `).join('');
+      
+      console.log('[renderTemplates] ✅ Rendered', templateEntries.length, 'templates');
+    }
 
     async function loadProblems() {
       console.log('[loadProblems] Starting to load problems...');
@@ -828,7 +955,7 @@ const totalProblems = problems.length;
     }
 
     // Step 1: Template Selection
-    function selectTemplate(element) {
+    function selectTemplate(templateId, element) {
       // Remove previous selection
       document.querySelectorAll('.template-card').forEach(card => {
         card.classList.remove('selected');
@@ -836,7 +963,11 @@ const totalProblems = problems.length;
       
       // Select new template
       element.classList.add('selected');
-      selectedTemplate = element.dataset.templateId;
+      selectedTemplate = templateId;
+      
+      // Get template details
+      const template = worksheetTemplates[templateId];
+      console.log('[selectTemplate] Selected template:', templateId, template);
       
       // Show problem selection after short delay
       setTimeout(() => {
@@ -844,9 +975,8 @@ const totalProblems = problems.length;
         document.getElementById('problem-selection').scrollIntoView({ behavior: 'smooth' });
         
         // Update recommended count
-        const template = WORKSHEET_TEMPLATES.find(t => t.id === selectedTemplate);
         if (template) {
-          document.getElementById('recommended-count').textContent = template.recommended_problems;
+          document.getElementById('recommended-count').textContent = template.problems;
         }
         
         // Load problems

@@ -1,0 +1,41 @@
+{
+  "title": "Геометрија - Триаголници",
+  "description": "Работен лист за 7 одделение",
+  "problems": [
+    {
+      "id": "1",
+      "problem_id": "sigma_138_1874",
+      "content": "Најдете ја површината на триаголникот со страни a=5, b=12, c=13.",
+      "solution": "Користиме Херонова формула: s = (a+b+c)/2 = 15, P = √(15·10·3·2) = 30",
+      "difficulty": 3,
+      "grade": 7,
+      "topic": "geometry"
+    },
+    {
+      "id": "2",
+      "problem_id": "sigma_137_1871",
+      "content": "Пресметајте го периметарот на правоаголник со должина 8 см и ширина 5 см.",
+      "solution": "P = 2(a + b) = 2(8 + 5) = 26 см",
+      "difficulty": 2,
+      "grade": 7,
+      "topic": "geometry"
+    }
+  ],
+  "include_solutions": true,
+  "school_name": "ОУ Кирил и Методиј",
+  "teacher_name": "Марија Петровска",
+  "grade": 7,
+  "labels": {
+    "school": "Училиште:",
+    "teacher": "Наставник:",
+    "grade": "Одделение:",
+    "student": "Ученик:",
+    "date": "Датум:",
+    "problem_count": "Број на задачи:",
+    "description": "Опис:",
+    "problem": "Задача",
+    "solutions": "Решенија",
+    "solution": "Решение",
+    "generated_via": "Генерирано преку"
+  }
+}

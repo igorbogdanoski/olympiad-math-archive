@@ -6,7 +6,7 @@ Purpose: Generate PDF worksheets from selected problems
 Updated: February 3, 2026 - Migrated from ReportLab to WeasyPrint for native Cyrillic support
 """
 from fastapi import APIRouter, HTTPException, Request
-from fastapi.responses import Response
+from fastapi.responses import Response, JSONResponse
 from pydantic import BaseModel
 from typing import List, Optional
 from io import BytesIO
@@ -15,6 +15,11 @@ from weasyprint import HTML
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 import os
 import json
+import sys
+
+# Add parent directory to path for config imports
+sys.path.append(os.path.dirname(os.path.dirname(__file__)))
+from config.worksheet_templates import TEMPLATES, get_template, calculate_problem_counts
 
 router = APIRouter()
 
@@ -47,6 +52,8 @@ class WorksheetRequest(BaseModel):
     teacher_name: Optional[str] = None
     grade: Optional[int] = None
     labels: Optional[dict] = None  # Macedonian labels from frontend (Approach 3)
+    template_id: Optional[str] = None  # Template identifier (e.g., "standard_test")
+    export_options: Optional[dict] = None  # Export options (answer key, QR code, etc.)
 
 
 def clean_text_for_html(text: str) -> str:
@@ -242,3 +249,89 @@ async def preview_worksheet_html(data: WorksheetRequest):
         }
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Preview failed: {str(e)}")
+
+
+@router.get("/worksheet/templates")
+async def get_worksheet_templates():
+    """
+    Get all available worksheet templates
+    
+    Returns: JSON with template list
+    """
+    try:
+        return {
+            "templates": TEMPLATES,
+            "count": len(TEMPLATES)
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to get templates: {str(e)}")
+
+
+@router.get("/worksheet/templates/{template_id}")
+async def get_template_details(template_id: str):
+    """
+    Get details for a specific template
+    
+    Returns: JSON with template configuration
+    """
+    try:
+        template = get_template(template_id)
+        if not template:
+            raise HTTPException(status_code=404, detail=f"Template '{template_id}' not found")
+        
+        # Calculate problem counts
+        problem_counts = calculate_problem_counts(template_id)
+        
+        return {
+            "template": template,
+            "problem_counts": problem_counts
+        }
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to get template: {str(e)}")
+
+
+class TemplateSelectionRequest(BaseModel):
+    """Request model for template-based problem selection"""
+    template_id: str
+    topic: Optional[str] = None  # Filter by topic (geometry, algebra, etc.)
+    grade: Optional[int] = None  # Filter by grade level
+    bro_standards: Optional[List[str]] = None  # Filter by БРО standards
+
+
+@router.post("/worksheet/select-problems")
+async def select_problems_from_template(data: TemplateSelectionRequest):
+    """
+    Auto-select problems based on template configuration
+    
+    This is a placeholder - actual implementation would query MongoDB
+    For now, returns mock data structure
+    
+    Returns: JSON with selected problems
+    """
+    try:
+        template = get_template(data.template_id)
+        if not template:
+            raise HTTPException(status_code=404, detail=f"Template '{data.template_id}' not found")
+        
+        problem_counts = calculate_problem_counts(data.template_id)
+        
+        # TODO: Implement actual database query
+        # For now, return structure that frontend expects
+        return {
+            "template_id": data.template_id,
+            "template_name": template["name"],
+            "problem_counts": problem_counts,
+            "filters": {
+                "topic": data.topic,
+                "grade": data.grade,
+                "bro_standards": data.bro_standards
+            },
+            "message": "Problem selection endpoint ready. Database integration needed.",
+            "next_step": "Integrate with MongoDB problems collection"
+        }
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Problem selection failed: {str(e)}")
