@@ -1,0 +1,14 @@
+{
+  "title": "Test Worksheet",
+  "problems": [
+    {
+      "id": "1",
+      "content": "Problem 1"
+    }
+  ],
+  "include_solutions": false,
+  "labels": {
+    "school": "School:",
+    "teacher": "Teacher:"
+  }
+}

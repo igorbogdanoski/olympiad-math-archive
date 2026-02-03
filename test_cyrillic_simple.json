@@ -1,0 +1,16 @@
+{
+  "title": "Тест Работен Лист",
+  "problems": [
+    {
+      "id": "1",
+      "content": "Проблем 1"
+    }
+  ],
+  "include_solutions": false,
+  "labels": {
+    "school": "Училиште:",
+    "teacher": "Наставник:",
+    "grade": "Одделение:",
+    "problem": "Задача"
+  }
+}
