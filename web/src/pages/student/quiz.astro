@@ -584,10 +584,98 @@ button {
 }
 
 .hidden { display: none !important; }
+
+/* TOAST NOTIFICATIONS */
+.toast {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 12px 24px;
+    border-radius: 50px;
+    color: white;
+    font-weight: bold;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    z-index: 1000;
+    animation: slideUp 0.3s ease-out;
+    width: max-content;
+    max-width: 90%;
+    text-align: center;
+}
+
+.toast.success { background: #10b981; }
+.toast.warning { background: #f59e0b; color: #fff; }
+.toast.error { background: #ef4444; }
+
+@keyframes slideUp {
+    from { transform: translate(-50%, 100%); opacity: 0; }
+    to { transform: translate(-50%, 0); opacity: 1; }
+}
 </style>
 
 <script is:inline>
 const API_BASE = window.location.origin;
+
+// ====================
+// OFFLINE MANAGER - THE BULLETPROOF LOGIC 🛡️
+// ====================
+const OfflineManager = {
+    QUEUE_KEY: 'quiz_submission_queue',
+
+    // 1. Зачувај во ред за чекање
+    enqueue(payload) {
+        localStorage.setItem(this.QUEUE_KEY, JSON.stringify(payload));
+        console.log('📦 Submission queued for offline retry');
+        this.startRetryLoop();
+    },
+
+    // 2. Исчисти го редот (успешно пратено)
+    clear() {
+        localStorage.removeItem(this.QUEUE_KEY);
+        console.log('✅ Queue cleared');
+    },
+
+    // 3. Провери дали има нешто за праќање
+    hasPending() {
+        return !!localStorage.getItem(this.QUEUE_KEY);
+    },
+
+    // 4. Главната јамка за повторен обид
+    startRetryLoop() {
+        if (window.retryInterval) return; // Веќе работи
+
+        window.retryInterval = setInterval(async () => {
+            const pendingData = localStorage.getItem(this.QUEUE_KEY);
+            
+            if (!pendingData) {
+                clearInterval(window.retryInterval);
+                window.retryInterval = null;
+                return;
+            }
+
+            // Имаме податоци, пробај да ги пратиш
+            if (navigator.onLine) {
+                console.log("🔄 Retry attempt...");
+                try {
+                    const payload = JSON.parse(pendingData);
+                    const result = await quizApp.sendSubmission(payload);
+                    
+                    // АКО УСПЕЕ:
+                    this.clear();
+                    clearInterval(window.retryInterval);
+                    window.retryInterval = null;
+                    
+                    // UI Update: Смени од жолто во зелено
+                    quizApp.showToast("✅ Успешно синхронизирано!", "success");
+                    quizApp.handleSuccess(result);
+                    
+                } catch (e) {
+                    console.log("❌ Still offline or server error...");
+                }
+            }
+        }, 5000); // Пробувај на секои 5 секунди
+    }
+};
 
 const quizApp = {
     data: {
@@ -732,45 +820,96 @@ const quizApp = {
         }
     },
 
+    // НОВА функција само за мрежниот повик
+    async sendSubmission(payload) {
+        const res = await fetch(`${API_BASE}/api/quiz-generator/live/submit`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+        });
+        
+        if (!res.ok) throw new Error("Server error");
+        return await res.json();
+    },
+
+    // АЖУРИРАНА submitQuiz функција со Offline Retry
     async submitQuiz() {
         if (!confirm("Дали си сигурен дека сакаш да предадеш?")) return;
 
         clearInterval(this.data.timerInterval);
 
-        const answers = this.data.quiz.questions.map(q => ({
-            problem_id: q.id,
-            selected_option: this.data.answers[q.id] || "",
-            time_spent: 0
-        }));
+        // Prepare Payload
+        const payload = {
+            access_code: this.data.accessCode,
+            student_name: this.data.studentName,
+            answers: this.data.quiz.questions.map(q => ({
+                problem_id: q.id,
+                selected_option: this.data.answers[q.id] || "",
+                time_spent: 0
+            }))
+        };
+
+        // UI: Show Processing State
+        const btn = document.getElementById('btn-submit');
+        if (btn) {
+            btn.innerHTML = '⏳ Се праќа...';
+            btn.disabled = true;
+        }
 
         try {
-            const res = await fetch(`${API_BASE}/api/quiz-generator/live/submit`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    access_code: this.data.accessCode,
-                    student_name: this.data.studentName,
-                    answers: answers
-                })
-            });
+            // Обид 1: Директно праќање
+            const result = await this.sendSubmission(payload);
+            this.handleSuccess(result);
 
-            const result = await res.json();
-
-            document.getElementById('final-score').textContent = result.score;
-            document.getElementById('final-max').textContent = result.max_score;
-            document.getElementById('stat-correct').textContent = `${result.correct_count}/${result.total_questions}`;
-            document.getElementById('stat-percentage').textContent = result.percentage + '%';
-            document.getElementById('result-feedback').textContent = result.feedback;
-
-            this.switchView('view-results');
-
-            // Confetti
-            if (typeof confetti !== 'undefined') {
-                confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
-            }
         } catch (e) {
-            alert("Грешка при испраќање. Провери интернет.");
+            // 🚨 ГРЕШКА! НЕМА ИНТЕРНЕТ!
+            console.warn("Offline detected! Queuing submission.", e);
+            
+            // 1. Стави во Offline Queue
+            OfflineManager.enqueue(payload);
+            
+            // 2. Покажи "Offline Success" екран
+            this.switchView('view-results');
+            
+            // 3. Покажи специфична порака
+            document.getElementById('final-score').textContent = "?";
+            document.getElementById('final-max').textContent = "?";
+            document.getElementById('stat-correct').textContent = "?/?";
+            document.getElementById('stat-percentage').textContent = "?%";
+            document.getElementById('result-feedback').innerHTML = 
+                `⚠️ <b>Нема интернет конекција.</b><br><br>
+                 Твојот тест е зачуван на телефонот.<br>
+                 <b>Не го затворај прозорецот</b>, ќе се прати автоматски.`;
+            
+            this.showToast("📡 Нема интернет. Ќе се прати автоматски.", "warning");
         }
+    },
+
+    handleSuccess(result) {
+        // Стандардниот код за приказ на резултати
+        document.getElementById('final-score').textContent = result.score;
+        document.getElementById('final-max').textContent = result.max_score;
+        document.getElementById('stat-correct').textContent = `${result.correct_count}/${result.total_questions}`;
+        document.getElementById('stat-percentage').textContent = result.percentage + '%';
+        document.getElementById('result-feedback').textContent = result.feedback;
+        
+        this.switchView('view-results');
+        
+        // Confetti
+        if (typeof confetti !== 'undefined') {
+            confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
+        }
+        
+        // Исчисти queue за секој случај
+        OfflineManager.clear();
+    },
+
+    showToast(msg, type = 'info') {
+        const toast = document.createElement('div');
+        toast.className = `toast ${type}`;
+        toast.textContent = msg;
+        document.body.appendChild(toast);
+        setTimeout(() => toast.remove(), 4000);
     },
 
     switchView(id) {
@@ -795,6 +934,14 @@ const quizApp = {
         }, 1000);
     }
 };
+
+// Проверка при вчитување на страната: Дали има заостанат submission?
+window.addEventListener('load', () => {
+    if (OfflineManager.hasPending()) {
+        quizApp.showToast("🔄 Пронајден неиспратен тест. Се обидувам да пратам...", "warning");
+        OfflineManager.startRetryLoop();
+    }
+});
 
 window.quizApp = quizApp;
 </script>
