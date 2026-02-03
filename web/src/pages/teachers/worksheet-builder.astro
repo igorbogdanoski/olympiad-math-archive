@@ -1219,7 +1219,21 @@ const totalProblems = problems.length;
           include_solutions: includeSolutions,
           school_name: null,
           teacher_name: null,
-          grade: currentTemplate?.grade || null
+          grade: currentTemplate?.grade || null,
+          // Approach 3 (Hybrid): Send Macedonian labels to backend
+          labels: {
+            school: "Училиште:",
+            teacher: "Наставник:",
+            grade: "Одделение:",
+            student: "Ученик:",
+            date: "Датум:",
+            problem_count: "Број на задачи:",
+            description: "Опис:",
+            problem: "Задача",
+            solutions: "Решенија",
+            solution: "Решение",
+            generated_via: "Генерирано преку"
+          }
         };
 
         // Call PDF generation API

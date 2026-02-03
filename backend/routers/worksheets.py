@@ -18,6 +18,7 @@ from reportlab.lib.enums import TA_CENTER, TA_LEFT
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
 import os
+import html
 
 router = APIRouter()
 
@@ -33,6 +34,7 @@ font_registered = False
 for font_path in font_paths:
     if os.path.exists(font_path):
         try:
+            # Register font for Cyrillic support (TrueType fonts support Unicode by default)
             pdfmetrics.registerFont(TTFont('CustomFont', font_path))
             pdfmetrics.registerFont(TTFont('CustomFont-Bold', font_path))  # Reuse for bold
             font_registered = True
@@ -43,6 +45,28 @@ for font_path in font_paths:
 
 # If no font found, we'll use built-in fonts (limited Cyrillic support)
 DEFAULT_FONT = 'CustomFont' if font_registered else 'Helvetica'
+
+
+def encode_for_reportlab(text: str) -> str:
+    """Encode Unicode (Cyrillic) characters as numeric HTML entities for ReportLab"""
+    if not text:
+        return ""
+    result = []
+    for char in text:
+        # ASCII characters pass through (except special HTML chars)
+        if ord(char) < 128:
+            if char == '&':
+                result.append('&amp;')
+            elif char == '<':
+                result.append('&lt;')
+            elif char == '>':
+                result.append('&gt;')
+            else:
+                result.append(char)
+        else:
+            # Non-ASCII (Cyrillic, Greek, etc.) as numeric entities
+            result.append(f'&#{ord(char)};')
+    return ''.join(result)
 
 
 class Problem(BaseModel):
@@ -65,12 +89,18 @@ class WorksheetRequest(BaseModel):
     school_name: Optional[str] = None
     teacher_name: Optional[str] = None
     grade: Optional[int] = None
+    labels: Optional[dict] = None  # Macedonian labels from frontend (Approach 3)
 
 
 def clean_text_for_pdf(text: str) -> str:
-    """Clean text for PDF rendering - remove LaTeX delimiters and escape HTML"""
+    """Clean text for PDF rendering - remove LaTeX delimiters and encode for ReportLab"""
     if not text:
         return ""
+    
+    # Ensure text is properly decoded/encoded as UTF-8
+    if isinstance(text, bytes):
+        text = text.decode('utf-8')
+    
     # Remove LaTeX math delimiters (we'll render them as plain text for now)
     text = text.replace('\\(', '').replace('\\)', '')
     text = text.replace('\\[', '\n').replace('\\]', '\n')
@@ -90,16 +120,37 @@ def clean_text_for_pdf(text: str) -> str:
     text = text.replace('\\times', '×')
     text = text.replace('\\div', '÷')
     
-    # Escape HTML special characters for ReportLab
-    text = text.replace('&', '&amp;')
-    text = text.replace('<', '&lt;')
-    text = text.replace('>', '&gt;')
+    # Encode Cyrillic and other Unicode as numeric HTML entities for ReportLab
+    text = encode_for_reportlab(text)
     
     return text
 
 
 def generate_worksheet_pdf(data: WorksheetRequest) -> BytesIO:
     """Generate PDF worksheet using ReportLab"""
+    # Approach 3 (Hybrid): Default labels (English fallback)
+    default_labels = {
+        "school": "School:",
+        "teacher": "Teacher:",
+        "grade": "Grade:",
+        "student": "Student:",
+        "date": "Date:",
+        "problem_count": "Number of Problems:",
+        "description": "Description:",
+        "problem": "Problem",
+        "solutions": "Solutions",
+        "solution": "Solution",
+        "generated_via": "Generated via"
+    }
+    
+    # Use labels from frontend or fallback to English
+    raw_labels = data.labels if data.labels else default_labels
+    
+    # Encode all label values for ReportLab (handles Cyrillic)
+    labels = {}
+    for key, value in raw_labels.items():
+        labels[key] = encode_for_reportlab(value) if value else ""
+    
     buffer = BytesIO()
     
     # Create PDF document
@@ -169,27 +220,27 @@ def generate_worksheet_pdf(data: WorksheetRequest) -> BytesIO:
         fontName=DEFAULT_FONT
     )
     
-    # Clean all labels too
+    # Use dynamic labels from request (Approach 3)
     if data.school_name:
-        label = clean_text_for_pdf("Училиште:")
+        label = clean_text_for_pdf(labels.get('school', 'School:'))
         value = clean_text_for_pdf(data.school_name)
         story.append(Paragraph(f"<b>{label}</b> {value}", meta_style))
     if data.teacher_name:
-        label = clean_text_for_pdf("Наставник:")
+        label = clean_text_for_pdf(labels.get('teacher', 'Teacher:'))
         value = clean_text_for_pdf(data.teacher_name)
         story.append(Paragraph(f"<b>{label}</b> {value}", meta_style))
     if data.grade:
-        label = clean_text_for_pdf("Одделение:")
+        label = clean_text_for_pdf(labels.get('grade', 'Grade:'))
         story.append(Paragraph(f"<b>{label}</b> {data.grade}", meta_style))
     if data.description:
-        label = clean_text_for_pdf("Опис:")
+        label = clean_text_for_pdf(labels.get('description', 'Description:'))
         value = clean_text_for_pdf(data.description)
         story.append(Paragraph(f"<b>{label}</b> {value}", meta_style))
     
-    date_label = clean_text_for_pdf("Датум:")
+    date_label = clean_text_for_pdf(labels.get('date', 'Date:'))
     story.append(Paragraph(f"<b>{date_label}</b> {datetime.now().strftime('%d.%m.%Y')}", meta_style))
     
-    count_label = clean_text_for_pdf("Број на задачи:")
+    count_label = clean_text_for_pdf(labels.get('problem_count', 'Number of Problems:'))
     story.append(Paragraph(f"<b>{count_label}</b> {len(data.problems)}", meta_style))
     story.append(Spacer(1, 0.8*cm))
     
@@ -199,7 +250,8 @@ def generate_worksheet_pdf(data: WorksheetRequest) -> BytesIO:
         if problem.problem_id:
             problem_title = clean_text_for_pdf(problem.problem_id)
         else:
-            problem_title = f"Problem {i}"  # U+0417 U+0430 U+0434 U+0430 U+0447 U+0430 {i}
+            problem_label = labels.get('problem', 'Problem')
+            problem_title = f"{problem_label} {i}"
         
         # Problem header
         story.append(Paragraph(
@@ -215,7 +267,7 @@ def generate_worksheet_pdf(data: WorksheetRequest) -> BytesIO:
     # Solutions section
     if data.include_solutions:
         story.append(PageBreak())
-        solutions_title = "Solutions"  # U+1F4D6 U+0420 U+0435 U+0448 U+0435 U+043D U+0438 U+0458 U+0430
+        solutions_title = clean_text_for_pdf(labels.get('solutions', 'Solutions'))
         story.append(Paragraph(solutions_title, title_style))
         story.append(Spacer(1, 0.5*cm))
         
@@ -224,8 +276,9 @@ def generate_worksheet_pdf(data: WorksheetRequest) -> BytesIO:
                 if problem.problem_id:
                     problem_title = clean_text_for_pdf(problem.problem_id)
                 else:
-                    problem_title = f"Problem {i}"  # U+0417 U+0430 U+0434 U+0430 U+0447 U+0430 {i}
-                solution_label = "Solution"  # U+0420 U+0435 U+0448 U+0435 U+043D U+0438 U+0435
+                    problem_label = labels.get('problem', 'Problem')
+                    problem_title = f"{problem_label} {i}"
+                solution_label = clean_text_for_pdf(labels.get('solution', 'Solution'))
                 story.append(Paragraph(
                     f"<b>{i}. {problem_title} - {solution_label}</b>",
                     heading_style
@@ -236,7 +289,8 @@ def generate_worksheet_pdf(data: WorksheetRequest) -> BytesIO:
     
     # Footer
     story.append(Spacer(1, 1*cm))
-    footer_text = f"Generated via Olympiad Math Archive | app.mismath.net | {datetime.now().strftime('%d.%m.%Y %H:%M')}"  # U+0413 U+0435 U+043D U+0435 U+0440 U+0438 U+0440 U+0430 U+043D U+043E U+043F U+0440 U+0435 U+043A U+0443...
+    generated_label = clean_text_for_pdf(labels.get('generated_via', 'Generated via'))
+    footer_text = f"{generated_label} Olympiad Math Archive | app.mismath.net | {datetime.now().strftime('%d.%m.%Y %H:%M')}"
     story.append(Paragraph(footer_text, ParagraphStyle(
         'Footer',
         parent=styles['Normal'],
