@@ -1,178 +1,92 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import QuizGeneratorContainer from '../../components/QuizGeneratorContainer.svelte';
+import curriculumData from '../../data/curriculum_standards_processed.json';
+
+const pageTitle = "Генератор на Квизови | МатАрхива";
+const pageDescription = "Создавајте професионални квизови со повеќе формати, автоматско балансирање на тежина и решенија.";
 ---
 
-<Layout title="Генератор на Квизови и Тестови | TeacherOS">
-    <main class="max-w-4xl mx-auto py-12 px-4">
-        <div class="mb-12 text-center">
-            <h1 class="text-4xl font-black text-slate-900 dark:text-white mb-4">📝 Паметен Генератор на Тестови</h1>
-            <p class="text-slate-500 dark:text-slate-400">Креирајте професионални тестови со Група А и Група Б базирани на официјалните стандарди.</p>
-        </div>
+<Layout title={pageTitle}>
+	<meta name="description" content={pageDescription} />
 
-        <div class="bg-white dark:bg-slate-900 rounded-[2.5rem] shadow-2xl p-8 md:p-12 border border-slate-100 dark:border-slate-800">
-            <form id="generator-form" class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div class="space-y-2">
-                    <label class="block text-sm font-black uppercase tracking-widest text-slate-400">Одделение</label>
-                    <select name="grade" class="w-full bg-slate-50 dark:bg-slate-800 border-none rounded-2xl p-4 font-bold focus:ring-2 focus:ring-blue-500 transition-all">
-                        <option value="6">6. одделение</option>
-                        <option value="7">7. одделение</option>
-                        <option value="8">8. одделение</option>
-                        <option value="9" selected>9. одделение</option>
-                        <option value="10">10. одделение</option>
-                        <option value="11">11. одделение</option>
-                        <option value="12">12. одделение</option>
-                    </select>
-                </div>
+	<div class="max-w-6xl mx-auto px-4 py-12">
+		<!-- Hero Section -->
+		<div class="text-center mb-16 space-y-4">
+			<div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-purple-500/10 text-purple-600 dark:text-purple-400 text-xs font-black uppercase tracking-widest border border-purple-500/20 backdrop-blur-md">
+				<span class="relative flex h-2 w-2">
+					<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-purple-400 opacity-75"></span>
+					<span class="relative inline-flex rounded-full h-2 w-2 bg-purple-500"></span>
+				</span>
+				Quiz Generator Pro
+			</div>
+			
+			<h1 class="text-4xl md:text-6xl font-black text-slate-900 dark:text-white leading-tight">
+				Креирајте <span class="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600">Квизови</span> за Секунди
+			</h1>
+			
+			<p class="text-slate-500 dark:text-slate-400 text-xl max-w-3xl mx-auto font-medium">
+				Повеќекратен избор, Точно/Неточно, Кратки одговори и Есеј формати. Автоматско балансирање на тежина и решенија.
+			</p>
+		</div>
 
-                <div class="space-y-2">
-                    <label class="block text-sm font-black uppercase tracking-widest text-slate-400">Област / Тема</label>
-                    <select name="field" class="w-full bg-slate-50 dark:bg-slate-800 border-none rounded-2xl p-4 font-bold focus:ring-2 focus:ring-blue-500 transition-all">
-                        <option value="all">Сите области</option>
-                        <option value="algebra">Алгебра</option>
-                        <option value="geometry">Геометрија</option>
-                        <option value="number_theory">Теорија на броеви</option>
-                        <option value="combinatorics">Комбинаторика</option>
-                    </select>
-                </div>
+		<!-- Main Tool Container -->
+		<QuizGeneratorContainer curriculumData={curriculumData} client:load />
 
-                <div class="space-y-2">
-                    <label class="block text-sm font-black uppercase tracking-widest text-slate-400">Број на задачи</label>
-                    <input type="number" name="count" value="5" min="1" max="20" class="w-full bg-slate-50 dark:bg-slate-800 border-none rounded-2xl p-4 font-bold focus:ring-2 focus:ring-blue-500 transition-all" />
-                </div>
+		<!-- Features Grid -->
+		<div class="mt-24 grid grid-cols-1 md:grid-cols-4 gap-6">
+			<div class="p-6 rounded-2xl bg-slate-50 dark:bg-slate-900/50 border border-slate-100 dark:border-slate-800">
+				<div class="w-10 h-10 bg-purple-100 dark:bg-purple-900/30 rounded-xl flex items-center justify-center text-xl mb-4">
+					🔘
+				</div>
+				<h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2">Повеќе Формати</h3>
+				<p class="text-slate-500 dark:text-slate-400 text-sm">
+					MC, T/F, Short Answer, Essay
+				</p>
+			</div>
 
-                <div class="space-y-2">
-                    <label class="block text-sm font-black uppercase tracking-widest text-slate-400">Тежина</label>
-                    <select name="difficulty" class="w-full bg-slate-50 dark:bg-slate-800 border-none rounded-2xl p-4 font-bold focus:ring-2 focus:ring-blue-500 transition-all">
-                        <option value="easy">Почетно</option>
-                        <option value="medium" selected>Средно</option>
-                        <option value="hard">Олимписко</option>
-                    </select>
-                </div>
+			<div class="p-6 rounded-2xl bg-slate-50 dark:bg-slate-900/50 border border-slate-100 dark:border-slate-800">
+				<div class="w-10 h-10 bg-blue-100 dark:bg-blue-900/30 rounded-xl flex items-center justify-center text-xl mb-4">
+					⚖️
+				</div>
+				<h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2">Auto Баланс</h3>
+				<p class="text-slate-500 dark:text-slate-400 text-sm">
+					Тежина автоматски
+				</p>
+			</div>
 
-                <button type="submit" class="md:col-span-2 bg-blue-600 hover:bg-blue-700 text-white font-black py-5 rounded-2xl shadow-xl shadow-blue-500/20 transition-all transform hover:scale-[1.02] flex items-center justify-center gap-3 text-lg">
-                    <span id="btn-icon">⚡</span>
-                    <span id="btn-text">ГЕНЕРИРАЈ ТЕСТ</span>
-                </button>
-            </form>
+			<div class="p-6 rounded-2xl bg-slate-50 dark:bg-slate-900/50 border border-slate-100 dark:border-slate-800">
+				<div class="w-10 h-10 bg-green-100 dark:bg-green-900/30 rounded-xl flex items-center justify-center text-xl mb-4">
+					✅
+				</div>
+				<h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2">Решенија</h3>
+				<p class="text-slate-500 dark:text-slate-400 text-sm">
+					Автоматски клуч за поени
+				</p>
+			</div>
 
-            <div id="loading" class="hidden mt-12 text-center py-10">
-                <div class="animate-spin w-12 h-12 border-4 border-blue-600 border-t-transparent rounded-full mx-auto mb-4"></div>
-                <p class="font-bold text-slate-600 dark:text-slate-400">Се подготвуваат документите...</p>
-            </div>
+			<div class="p-6 rounded-2xl bg-slate-50 dark:bg-slate-900/50 border border-slate-100 dark:border-slate-800">
+				<div class="w-10 h-10 bg-orange-100 dark:bg-orange-900/30 rounded-xl flex items-center justify-center text-xl mb-4">
+					📄
+				</div>
+				<h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2">PDF Export</h3>
+				<p class="text-slate-500 dark:text-slate-400 text-sm">
+					Принт-ready формат
+				</p>
+			</div>
+		</div>
 
-            <div id="results" class="hidden mt-12 space-y-6">
-                <h3 class="text-xl font-black text-slate-900 dark:text-white mb-6 flex items-center gap-2">
-                    <span class="text-emerald-500">✅</span> Тестот е подготвен!
-                </h3>
-                
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <button id="view-student" class="flex items-center justify-between p-6 bg-slate-50 dark:bg-slate-800 rounded-2xl hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-all group">
-                        <div class="flex items-center gap-4">
-                            <span class="text-3xl">👨‍🎓</span>
-                            <div class="text-left">
-                                <p class="font-black text-slate-900 dark:text-white">Работен лист за ученици</p>
-                                <p class="text-xs text-slate-400 font-bold uppercase tracking-widest">Подготвен за печатење</p>
-                            </div>
-                        </div>
-                        <span class="opacity-0 group-hover:opacity-100 transition-opacity">👁️</span>
-                    </button>
-
-                    <button id="view-teacher" class="flex items-center justify-between p-6 bg-slate-50 dark:bg-slate-800 rounded-2xl hover:bg-rose-50 dark:hover:bg-rose-900/20 transition-all group">
-                        <div class="flex items-center gap-4">
-                            <span class="text-3xl">🔑</span>
-                            <div class="text-left">
-                                <p class="font-black text-slate-900 dark:text-white">Клуч со решенија</p>
-                                <p class="text-xs text-slate-400 font-bold uppercase tracking-widest">Само за наставници</p>
-                            </div>
-                        </div>
-                        <span class="opacity-0 group-hover:opacity-100 transition-opacity">👁️</span>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </main>
-
-    <div id="preview-modal" class="fixed inset-0 z-50 hidden bg-slate-950/80 backdrop-blur-sm p-4 md:p-10 flex flex-col">
-        <div class="flex justify-between items-center mb-4 text-white">
-            <h2 id="modal-title" class="text-2xl font-black">Преглед на документ</h2>
-            <button id="close-modal" class="p-2 hover:bg-white/10 rounded-full text-3xl">&times;</button>
-        </div>
-        <div class="bg-white rounded-2xl flex-1 overflow-hidden shadow-2xl relative">
-            <iframe id="preview-iframe" class="w-full h-full border-none"></iframe>
-            <div id="iframe-loading" class="absolute inset-0 flex items-center justify-center bg-white">
-                <div class="animate-spin w-8 h-8 border-4 border-blue-600 border-t-transparent rounded-full"></div>
-            </div>
-        </div>
-    </div>
+		<!-- Footer Note -->
+		<div class="mt-24 text-center p-12 rounded-[3rem] bg-gradient-to-br from-purple-600 to-pink-700 text-white">
+			<h2 class="text-3xl font-black mb-6">Заштедете Време, Зголемете Квалитет</h2>
+			<p class="text-purple-100 text-lg mb-8 max-w-2xl mx-auto">
+				Автоматски генерирајте професионални квизови во неколку кликови. Фокусирајте се на подучување, не на администрација.
+			</p>
+			<div class="flex flex-wrap justify-center gap-4">
+				<a href="/teachers" class="bg-white text-purple-600 font-bold py-4 px-8 rounded-2xl hover:bg-purple-50 transition-all shadow-xl">
+					Сите Алати
+				</a>
+			</div>
+		</div>
+	</div>
 </Layout>
-
-<script>
-    const form = document.getElementById('generator-form');
-    const loading = document.getElementById('loading');
-    const results = document.getElementById('results');
-    const btnText = document.getElementById('btn-text');
-    const btnIcon = document.getElementById('btn-icon');
-    
-    const modal = document.getElementById('preview-modal');
-    const iframe = document.getElementById('preview-iframe');
-    const iframeLoading = document.getElementById('iframe-loading');
-    const closeModal = document.getElementById('close-modal');
-    
-    let generatedData = null;
-
-    form.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        
-        loading.classList.remove('hidden');
-        results.classList.add('hidden');
-        form.classList.add('opacity-50', 'pointer-events-none');
-        
-        const formData = new FormData(form);
-        const payload = Object.fromEntries(formData.entries());
-
-        try {
-            const response = await fetch('/api/generate-test', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(payload)
-            });
-
-            if (!response.ok) throw new Error('Failed to generate');
-            
-            generatedData = await response.json();
-            results.classList.remove('hidden');
-        } catch (err) {
-            alert('Грешка при генерирање на тестот. Проверете дали имате доволно задачи за оваа област.');
-        } finally {
-            loading.classList.add('hidden');
-            form.classList.remove('opacity-50', 'pointer-events-none');
-        }
-    });
-
-    document.getElementById('view-student').addEventListener('click', () => {
-        if (!generatedData) return;
-        showModal('Работен лист за ученици', generatedData.studentHtml);
-    });
-
-    document.getElementById('view-teacher').addEventListener('click', () => {
-        if (!generatedData) return;
-        showModal('Клуч со решенија (Наставници)', generatedData.teacherHtml);
-    });
-
-    function showModal(title, html) {
-        document.getElementById('modal-title').innerText = title;
-        modal.classList.remove('hidden');
-        iframeLoading.classList.remove('hidden');
-        
-        const blob = new Blob([html], { type: 'text/html' });
-        const url = URL.createObjectURL(blob);
-        
-        iframe.src = url;
-        iframe.onload = () => iframeLoading.classList.add('hidden');
-    }
-
-    closeModal.addEventListener('click', () => {
-        modal.classList.add('hidden');
-        iframe.src = 'about:blank';
-    });
-</script>
