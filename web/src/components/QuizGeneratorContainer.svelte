@@ -26,15 +26,16 @@
 	// Extract unique BRO codes from curriculum
 	$: {
 		const unique = new Set<string>();
-		if (curriculumData) {
-			curriculumData.forEach((item: any) => {
+		const dataArray = Array.isArray(curriculumData) ? curriculumData : [];
+		if (dataArray.length > 0) {
+			dataArray.forEach((item: any) => {
 				if (item.bro_code) {
 					unique.add(item.bro_code);
 				}
 			});
 		}
 		availableBroCodes = Array.from(unique).map(code => {
-			const item = curriculumData.find((i: any) => i.bro_code === code);
+			const item = dataArray.find((i: any) => i.bro_code === code);
 			return {
 				code,
 				topic: item?.topic || item?.title || code,

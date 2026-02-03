@@ -31,7 +31,8 @@
 
 	// Extract BRO codes from curriculum
 	$: if (curriculumData && selectedGrade) {
-		availableBroCodes = curriculumData
+		const dataArray = Array.isArray(curriculumData) ? curriculumData : [];
+		availableBroCodes = dataArray
 			.filter((item: any) => item.grade === selectedGrade.toString())
 			.map((item: any) => ({
 				code: item.bro_code,
