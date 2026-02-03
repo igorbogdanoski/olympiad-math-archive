@@ -542,6 +542,7 @@ async def join_live_quiz(data: JoinRequest):
     try:
         db = get_database()
         quizzes_collection = db["live_quizzes"]
+        sessions_collection = db["quiz_sessions"]  # 🔒 NEW: Track sessions
         
         # Find quiz
         quiz = await quizzes_collection.find_one({"access_code": data.access_code.upper()})
@@ -557,6 +558,16 @@ async def join_live_quiz(data: JoinRequest):
             {"_id": quiz["_id"]},
             {"$addToSet": {"participants": data.student_name}}
         )
+        
+        # 🔒 SECURITY: Record session start time
+        session_doc = {
+            "access_code": data.access_code.upper(),
+            "student_name": data.student_name,
+            "quiz_id": str(quiz["_id"]),
+            "start_time": datetime.now(),
+            "created_at": datetime.now()
+        }
+        await sessions_collection.insert_one(session_doc)
         
         return {"status": "joined", "message": f"{data.student_name} се приклучи"}
     
@@ -615,12 +626,34 @@ async def submit_live_quiz(submission: SubmissionRequest):
         db = get_database()
         quizzes_collection = db["live_quizzes"]
         submissions_collection = db["quiz_submissions"]
+        sessions_collection = db["quiz_sessions"]
         
         # Get quiz with answers
         quiz = await quizzes_collection.find_one({"access_code": submission.access_code.upper()})
         
         if not quiz:
             raise HTTPException(status_code=404, detail="Квиз не е пронајден")
+        
+        # 🔒 SECURITY: Server-side time validation
+        session = await sessions_collection.find_one({
+            "access_code": submission.access_code.upper(),
+            "student_name": submission.student_name
+        })
+        
+        flags = []
+        if session:
+            server_duration = (datetime.now() - session["start_time"]).total_seconds()
+            reported_duration = sum(ans.time_spent for ans in submission.answers)
+            
+            # Allow 10 second buffer for network latency
+            buffer_seconds = 10
+            
+            if reported_duration < (server_duration - buffer_seconds):
+                flags.append("time_manipulation")
+                # Log suspicious activity
+                print(f"⚠️ SUSPICIOUS: {submission.student_name} reported {reported_duration}s but server recorded {server_duration}s")
+        else:
+            flags.append("no_session_found")
         
         # Create answer key
         answer_key = {q["id"]: q["correct_answer"] for q in quiz["questions"]}
@@ -689,6 +722,7 @@ async def submit_live_quiz(submission: SubmissionRequest):
             "max_score": max_possible_score,
             "correct_count": correct_count,
             "streak": max_streak,
+            "flags": flags,  # 🔒 Security flags
             "submitted_at": datetime.now()
         }
         

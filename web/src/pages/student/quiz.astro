@@ -7,6 +7,11 @@ const pageTitle = "Квиз Портал | МатАрхива";
 <Layout title={pageTitle}>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
+<!-- 🔊 Sound Toggle Button -->
+<button id="sound-toggle" class="sound-btn" onclick="toggleSound()">
+    🔊
+</button>
+
 <div class="quiz-app">
     
     <!-- View 1: CODE ENTRY -->
@@ -83,6 +88,13 @@ const pageTitle = "Квиз Портал | МатАрхива";
     <div id="view-quiz" class="view">
         <div class="quiz-header">
             <div class="timer" id="timer">45:00</div>
+            
+            <!-- 🔥 Live Streak Indicator -->
+            <div class="streak-container">
+                <span class="fire-icon" id="fire-icon">🔥</span>
+                <span id="live-streak">0</span>
+            </div>
+            
             <div class="progress-bar">
                 <div class="fill" id="progress-fill"></div>
             </div>
@@ -275,6 +287,31 @@ button {
     font-size: 1rem;
 }
 
+/* 🔊 Sound Toggle Button */
+.sound-btn {
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    background: rgba(255, 255, 255, 0.9);
+    border: none;
+    border-radius: 50%;
+    width: 44px;
+    height: 44px;
+    font-size: 1.3rem;
+    cursor: pointer;
+    z-index: 1000;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transition: transform 0.2s, background 0.3s;
+}
+
+.sound-btn:hover {
+    transform: scale(1.1);
+}
+
+.sound-btn:active {
+    transform: scale(0.9);
+}
+
 .btn-primary, .btn-success, .btn-secondary {
     width: 100%;
     padding: 1rem;
@@ -395,6 +432,39 @@ button {
     padding: 0.5rem 1rem;
     border-radius: 8px;
     white-space: nowrap;
+}
+
+/* 🔥 Streak Indicator */
+.streak-container {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: white;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    transition: all 0.3s;
+}
+
+.fire-icon {
+    font-size: 1.3rem;
+    transition: transform 0.3s;
+}
+
+.streak-container.streak-active {
+    background: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%);
+    color: white;
+    box-shadow: 0 0 15px rgba(245, 158, 11, 0.5);
+}
+
+.streak-container.streak-active .fire-icon {
+    animation: pulse 0.5s ease-in-out infinite alternate;
+}
+
+@keyframes pulse {
+    from { transform: scale(1); }
+    to { transform: scale(1.2); }
 }
 
 .progress-bar {
@@ -633,10 +703,84 @@ button {
     50% { transform: scale(1.2); opacity: 1; }
     100% { transform: scale(1) translateY(-10px); opacity: 0; }
 }
+
+/* 🎮 FLOATING POINTS ANIMATION */
+.floating-points {
+    position: fixed; /* Float above everything */
+    pointer-events: none; /* Don't block clicks */
+    color: #10b981; /* Emerald green */
+    font-size: 2rem;
+    font-weight: 900;
+    text-shadow: 0 2px 10px rgba(16, 185, 129, 0.4);
+    z-index: 9999;
+    font-family: 'Inter', sans-serif;
+    animation: floatUp 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+@keyframes floatUp {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, 0) scale(0.5);
+    }
+    20% {
+        opacity: 1;
+        transform: translate(-50%, -20px) scale(1.2); /* Pop effect */
+    }
+    100% {
+        opacity: 0;
+        transform: translate(-50%, -100px) scale(1);
+    }
+}
 </style>
 
 <script is:inline>
 const API_BASE = window.location.origin;
+
+// ====================
+// 🎵 AUDIO ENGINE - Sound Effects System
+// ====================
+const SoundManager = {
+    enabled: true, // Default ON
+    sounds: {},
+
+    init() {
+        // Preload sounds (from /public/sounds/)
+        this.sounds['click'] = new Audio('/sounds/click.mp3');
+        this.sounds['success'] = new Audio('/sounds/success.mp3');
+        this.sounds['streak'] = new Audio('/sounds/streak.mp3');
+        
+        // Set volume (not too loud)
+        Object.values(this.sounds).forEach(s => s.volume = 0.4);
+    },
+
+    play(name) {
+        if (!this.enabled || !this.sounds[name]) return;
+
+        // TRICK: Use cloneNode() for "Rapid Fire" support
+        // Allows same sound to play multiple times overlapping
+        const clone = this.sounds[name].cloneNode(true);
+        clone.volume = 0.4;
+        clone.play().catch(e => console.log("Audio autoplay blocked", e));
+    },
+
+    toggle() {
+        this.enabled = !this.enabled;
+        return this.enabled;
+    }
+};
+
+// Initialize audio system
+SoundManager.init();
+
+// Global function for mute button
+window.toggleSound = () => {
+    const isOn = SoundManager.toggle();
+    const btn = document.getElementById('sound-toggle');
+    if (btn) {
+        btn.textContent = isOn ? '🔊' : '🔇';
+        btn.style.background = isOn ? 'rgba(255, 255, 255, 0.8)' : '#fee2e2';
+    }
+};
 
 // ====================
 // OFFLINE MANAGER - THE BULLETPROOF LOGIC 🛡️
@@ -708,7 +852,9 @@ const quizApp = {
         timerInterval: null,
         accessCode: '',
         questionStartTime: 0, // ⚡ NEW: Track question start time
-        studentName: ''
+        studentName: '',
+        currentStreak: 0, // 🔥 NEW: Track live streak
+        correctAnswers: new Set() // Track which questions were answered correctly
     },
 
     async verifyCode() {
@@ -814,7 +960,10 @@ const quizApp = {
                 btn.classList.add('selected');
             }
 
-            btn.onclick = () => {
+            btn.onclick = (e) => {  // ⚠️ ВАЖНО: Accept event parameter
+                // 🎵 SOUND FEEDBACK
+                SoundManager.play('click');
+                
                 document.querySelectorAll('.opt-btn').forEach(b => b.classList.remove('selected'));
                 btn.classList.add('selected');
                 
@@ -829,10 +978,22 @@ const quizApp = {
                     time: timeSpentSec
                 };
 
-                // ⚡ GAMIFICATION: Visual Feedback for speed
+                // 🔥 UPDATE STREAK (consecutive answers)
+                const answeredCount = Object.keys(this.data.answers).length;
+                this.updateStreakDisplay(answeredCount);
+
+                // ⚡ GAMIFICATION: Speed Badge
                 if (timeSpentSec < 5) {
                     this.showFloatingBadge("⚡ БРЗО!", btn);
                 }
+
+                // 🎮 FLOATING POINTS (Optimistic UI)
+                // Formula: Base 500 + Speed Bonus (up to 500)
+                const speedFactor = Math.max(0, 1 - (timeSpentSec / 30));
+                const estimatedPoints = Math.round(500 + (500 * speedFactor));
+                
+                // Show at click coordinates
+                this.showFloatingPoints(estimatedPoints, e.clientX, e.clientY);
             };
 
             container.appendChild(btn);
@@ -933,6 +1094,9 @@ const quizApp = {
     },
 
     handleSuccess(result) {
+        // 🎵 VICTORY SOUND!
+        SoundManager.play('success');
+        
         // Стандардниот код за приказ на резултати
         document.getElementById('final-score').textContent = result.score;
         document.getElementById('final-max').textContent = result.max_score;
@@ -945,7 +1109,8 @@ const quizApp = {
         // ⚡ GAMIFICATION: Enhanced Confetti for high scores
         if (typeof confetti !== 'undefined') {
             if (result.streak && result.streak >= 5) {
-                // 🔥 GOD MODE - Extra confetti for streak!
+                // 🔥 GOD MODE - Extra confetti + Streak sound!
+                SoundManager.play('streak');
                 confetti({ particleCount: 300, spread: 100, startVelocity: 40 });
             } else if (result.score > 1000) {
                 // ⭐ High score celebration
@@ -968,6 +1133,38 @@ const quizApp = {
         element.style.position = 'relative'; // Ensure parent is positioned
         element.appendChild(badge);
         setTimeout(() => badge.remove(), 1000);
+    },
+
+    // 🎮 NEW: Floating points for immediate reward
+    showFloatingPoints(points, x, y) {
+        const el = document.createElement('div');
+        el.className = 'floating-points';
+        el.textContent = `+${points}`;
+        
+        // Position at click coordinates
+        el.style.left = `${x}px`;
+        el.style.top = `${y}px`;
+        
+        document.body.appendChild(el);
+        
+        // Remove after animation (1s)
+        setTimeout(() => el.remove(), 1000);
+    },
+
+    // 🔥 NEW: Update streak display
+    updateStreakDisplay(count) {
+        const streakEl = document.getElementById('live-streak');
+        const containerEl = document.querySelector('.streak-container');
+        const fireEl = document.getElementById('fire-icon');
+        
+        if (streakEl) streakEl.textContent = count;
+        
+        // Visual feedback for high streak
+        if (count >= 3 && containerEl) {
+            containerEl.classList.add('streak-active');
+        } else if (containerEl) {
+            containerEl.classList.remove('streak-active');
+        }
     },
 
     showToast(msg, type = 'info') {
