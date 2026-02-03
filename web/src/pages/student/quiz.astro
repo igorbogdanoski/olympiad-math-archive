@@ -611,6 +611,28 @@ button {
     from { transform: translate(-50%, 100%); opacity: 0; }
     to { transform: translate(-50%, 0); opacity: 1; }
 }
+
+/* ⚡ SPEED BADGE ANIMATION */
+.speed-badge {
+    position: absolute;
+    right: 10px;
+    top: -10px;
+    background: #facc15;
+    color: #000;
+    font-weight: bold;
+    padding: 4px 8px;
+    border-radius: 10px;
+    font-size: 0.8rem;
+    animation: popUp 0.5s ease-out forwards;
+    pointer-events: none;
+    z-index: 10;
+}
+
+@keyframes popUp {
+    0% { transform: scale(0); opacity: 0; }
+    50% { transform: scale(1.2); opacity: 1; }
+    100% { transform: scale(1) translateY(-10px); opacity: 0; }
+}
 </style>
 
 <script is:inline>
@@ -680,11 +702,13 @@ const OfflineManager = {
 const quizApp = {
     data: {
         quiz: null,
-        answers: {},
+        answers: {}, // Now stores {option, time}
         currentIdx: 0,
         startTime: null,
         timerInterval: null,
-        accessCode: ''
+        accessCode: '',
+        questionStartTime: 0, // ⚡ NEW: Track question start time
+        studentName: ''
     },
 
     async verifyCode() {
@@ -753,6 +777,9 @@ const quizApp = {
     renderQuestion() {
         const q = this.data.quiz.questions[this.data.currentIdx];
 
+        // ⚡ RESET TIMER for this question
+        this.data.questionStartTime = Date.now();
+
         document.getElementById('q-current').textContent = this.data.currentIdx + 1;
         document.getElementById('q-total').textContent = this.data.quiz.question_count;
         document.getElementById('q-num-badge').textContent = q.question_number;
@@ -781,14 +808,31 @@ const quizApp = {
             btn.className = 'opt-btn';
             btn.textContent = opt;
 
-            if (this.data.answers[q.id] === opt) {
+            // Check if already answered
+            const existingAnswer = this.data.answers[q.id];
+            if (existingAnswer && existingAnswer.option === opt) {
                 btn.classList.add('selected');
             }
 
             btn.onclick = () => {
                 document.querySelectorAll('.opt-btn').forEach(b => b.classList.remove('selected'));
                 btn.classList.add('selected');
-                this.data.answers[q.id] = opt;
+                
+                // ⚡ CALCULATE TIME (in seconds)
+                const now = Date.now();
+                const timeSpentMs = now - this.data.questionStartTime;
+                const timeSpentSec = Math.min(Math.round(timeSpentMs / 1000), 60); // Max 60 sec
+
+                // Save answer WITH time
+                this.data.answers[q.id] = {
+                    option: opt,
+                    time: timeSpentSec
+                };
+
+                // ⚡ GAMIFICATION: Visual Feedback for speed
+                if (timeSpentSec < 5) {
+                    this.showFloatingBadge("⚡ БРЗО!", btn);
+                }
             };
 
             container.appendChild(btn);
@@ -838,15 +882,18 @@ const quizApp = {
 
         clearInterval(this.data.timerInterval);
 
-        // Prepare Payload
+        // Prepare Payload with TIME data
         const payload = {
             access_code: this.data.accessCode,
             student_name: this.data.studentName,
-            answers: this.data.quiz.questions.map(q => ({
-                problem_id: q.id,
-                selected_option: this.data.answers[q.id] || "",
-                time_spent: 0
-            }))
+            answers: this.data.quiz.questions.map(q => {
+                const answer = this.data.answers[q.id];
+                return {
+                    problem_id: q.id,
+                    selected_option: answer?.option || "",
+                    time_spent: answer?.time || 0  // ⚡ Send actual time
+                };
+            })
         };
 
         // UI: Show Processing State
@@ -895,13 +942,32 @@ const quizApp = {
         
         this.switchView('view-results');
         
-        // Confetti
+        // ⚡ GAMIFICATION: Enhanced Confetti for high scores
         if (typeof confetti !== 'undefined') {
-            confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
+            if (result.streak && result.streak >= 5) {
+                // 🔥 GOD MODE - Extra confetti for streak!
+                confetti({ particleCount: 300, spread: 100, startVelocity: 40 });
+            } else if (result.score > 1000) {
+                // ⭐ High score celebration
+                confetti({ particleCount: 200, spread: 80, origin: { y: 0.6 } });
+            } else {
+                // Standard celebration
+                confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
+            }
         }
         
         // Исчисти queue за секој случај
         OfflineManager.clear();
+    },
+
+    // ⚡ NEW: Floating badge for speed feedback
+    showFloatingBadge(text, element) {
+        const badge = document.createElement('div');
+        badge.className = 'speed-badge';
+        badge.textContent = text;
+        element.style.position = 'relative'; // Ensure parent is positioned
+        element.appendChild(badge);
+        setTimeout(() => badge.remove(), 1000);
     },
 
     showToast(msg, type = 'info') {

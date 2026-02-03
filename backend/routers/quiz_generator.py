@@ -626,29 +626,57 @@ async def submit_live_quiz(submission: SubmissionRequest):
         answer_key = {q["id"]: q["correct_answer"] for q in quiz["questions"]}
         points_map = {q["id"]: q["points"] for q in quiz["questions"]}
         
-        # Grade answers
+        # ⚡ GAMIFICATION: Speed Bonus Scoring (Kahoot-style)
         total_score = 0
-        max_score = sum(points_map.values())
+        max_possible_score = 0  # Dynamic max based on perfect speed
         correct_count = 0
+        current_streak = 0
+        max_streak = 0
         graded = []
         
         for ans in submission.answers:
             is_correct = False
+            base_points = points_map.get(ans.problem_id, 0)
+            
+            # Max possible = base points × 2 (if answered instantly)
+            max_possible_score += (base_points * 2)
+            
             correct_val = answer_key.get(ans.problem_id, "")
             student_val = ans.selected_option.strip()
             
             # Simple comparison (case-insensitive)
             if correct_val and str(correct_val).strip().lower() == student_val.lower():
                 is_correct = True
-                total_score += points_map.get(ans.problem_id, 0)
                 correct_count += 1
+                current_streak += 1
+                if current_streak > max_streak:
+                    max_streak = current_streak
+                
+                # ⚡ SPEED BONUS FORMULA
+                # Time Factor: 1.0 (instant) to 0.5 (slow)
+                time_limit_per_q = 30  # 30 seconds is "slow" threshold
+                time_taken = min(ans.time_spent, time_limit_per_q)
+                
+                # Formula: factor = 1 - (time / (2 * limit))
+                # 0 sec -> factor 1.0 -> 200% points
+                # 15 sec -> factor 0.75 -> 150% points  
+                # 30 sec -> factor 0.5 -> 100% points
+                time_factor = 1 - (time_taken / (2 * time_limit_per_q))
+                
+                earned_points = int(base_points * 2 * time_factor)
+                total_score += earned_points
+                
+            else:
+                current_streak = 0  # Reset streak
+                earned_points = 0
             
             graded.append({
                 "problem_id": ans.problem_id,
                 "student_answer": student_val,
                 "correct_answer": correct_val,
                 "is_correct": is_correct,
-                "points_earned": points_map.get(ans.problem_id, 0) if is_correct else 0
+                "points_earned": earned_points,
+                "time_spent": ans.time_spent
             })
         
         # Save submission
@@ -658,22 +686,32 @@ async def submit_live_quiz(submission: SubmissionRequest):
             "student_name": submission.student_name,
             "answers": graded,
             "total_score": total_score,
-            "max_score": max_score,
+            "max_score": max_possible_score,
             "correct_count": correct_count,
+            "streak": max_streak,
             "submitted_at": datetime.now()
         }
         
         await submissions_collection.insert_one(submission_doc)
         
-        percentage = (total_score / max_score * 100) if max_score > 0 else 0
+        percentage = (total_score / max_possible_score * 100) if max_possible_score > 0 else 0
+        
+        # 🔥 Dynamic feedback with streak info
+        feedback = f"Браво {submission.student_name}!"
+        if max_streak >= 5:
+            feedback += f" 🔥 Невероватен Streak: {max_streak}!"
+        elif max_streak >= 3:
+            feedback += f" ⚡ Одличен Streak: {max_streak}!"
+        feedback += f" Освои {total_score}/{max_possible_score} поени ({percentage:.1f}%)"
         
         return {
             "score": total_score,
-            "max_score": max_score,
+            "max_score": max_possible_score,
             "correct_count": correct_count,
             "total_questions": len(quiz["questions"]),
             "percentage": round(percentage, 1),
-            "feedback": f"Браво {submission.student_name}! Освои {total_score}/{max_score} поени ({percentage:.1f}%)"
+            "streak": max_streak,
+            "feedback": feedback
         }
     
     except HTTPException:
