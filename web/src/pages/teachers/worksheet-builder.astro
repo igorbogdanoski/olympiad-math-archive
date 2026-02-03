@@ -1699,12 +1699,12 @@ const totalProblems = problems.length;
       }, 1000); // Wait 1 second for allProblems to load
     });
 
-    async function loadTemplates() {
-      console.log('[loadTemplates] Loading templates from API...');
+    window.loadTemplates = async function() {
+      console.log('[loadTemplates] Loading templates (hardcoded)...');
       try {
-        const response = await fetchTemplates();
-        worksheetTemplates = response.templates;
-        console.log(`[loadTemplates] ✅ Loaded ${response.count} templates`, worksheetTemplates);
+        // Templates are already defined in worksheetTemplates object
+        const count = Object.keys(worksheetTemplates).length;
+        console.log(`[loadTemplates] ✅ Loaded ${count} templates`, worksheetTemplates);
         renderTemplates();
       } catch (error) {
         console.error('[loadTemplates] ❌ Failed to load templates:', error);
@@ -1799,7 +1799,7 @@ const totalProblems = problems.length;
     }
 
     // Step 1: Template Selection
-    function selectTemplate(templateId, element) {
+    window.selectTemplate = function(templateId, element) {
       // Remove previous selection
       document.querySelectorAll('.template-card').forEach(card => {
         card.classList.remove('selected');
@@ -1847,7 +1847,7 @@ const totalProblems = problems.length;
       renderProblems();
     }
 
-    function resetFilters() {
+    window.resetFilters = function() {
       document.getElementById('filter-subject').value = '';
       document.getElementById('filter-grade').value = '';
       document.getElementById('filter-difficulty').value = '';
@@ -1902,7 +1902,7 @@ const totalProblems = problems.length;
       });
     }
 
-    function addProblem(problemId) {
+    window.addProblem = function(problemId) {
       const problem = filteredProblems.find(p => p.id === problemId);
       if (!problem) return;
       
@@ -2133,13 +2133,13 @@ const totalProblems = problems.length;
       alert(`✅ Избрани ${visibleProblems.length} проблеми!`);
     }
 
-    function deselectAll() {
+    window.deselectAll = function() {
       selectedProblems = [];
       updateSelectedProblems();
       alert('❌ Сите проблеми се откажани.');
     }
 
-    function selectRandomProblems(count) {
+    window.selectRandomProblems = function(count) {
       const available = filteredProblems.filter(p => !selectedProblems.find(sp => sp.id === p.id));
       if (available.length === 0) {
         alert('Сите проблеми се веќе избрани!');
@@ -2155,7 +2155,7 @@ const totalProblems = problems.length;
       alert(`🎲 Избрани ${toSelect} random проблеми!`);
     }
 
-    async function generatePDF() {
+    window.generatePDF = async function() {
       if (selectedProblems.length === 0) {
         alert('⚠️ Изберете барем еден проблем пред да генерирате PDF!');
         return;

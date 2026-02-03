@@ -61,6 +61,11 @@ self.addEventListener('fetch', (event) => {
   const { request } = event;
   const url = new URL(request.url);
 
+  // 🛑 IGNORE NON-HTTP SCHEMES (chrome-extension, etc.)
+  if (!url.protocol.startsWith('http')) {
+    return; // Let browser handle extensions and other protocols
+  }
+
   // Handle different types of requests
   if (request.method !== 'GET') {
     return; // Don't cache POST, PUT, DELETE, etc.
@@ -172,10 +177,29 @@ async function handleStaticRequest(request) {
     }
     return networkResponse;
   } catch (error) {
+    // 🛑 RETURN VALID ERROR RESPONSE (не undefined!)
+    console.log('[SW] Static asset fetch failed:', request.url);
+    
     // Return offline page for HTML requests
-    if (request.headers.get('accept').includes('text/html')) {
+    if (request.headers.get('accept')?.includes('text/html')) {
       return caches.match('/offline.html');
     }
+    
+    // For images/icons that failed, return a placeholder response
+    if (request.url.includes('.png') || request.url.includes('.jpg') || request.url.includes('.svg')) {
+      return new Response('', {
+        status: 404,
+        statusText: 'Not Found',
+        headers: { 'Content-Type': 'text/plain' }
+      });
+    }
+    
+    // Generic fallback
+    return new Response('Network error occurred', {
+      status: 503,
+      statusText: 'Service Unavailable',
+      headers: { 'Content-Type': 'text/plain' }
+    });
   }
 }
 
