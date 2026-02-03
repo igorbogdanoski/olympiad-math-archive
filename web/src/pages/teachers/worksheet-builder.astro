@@ -4,6 +4,8 @@
 // Purpose: Teacher interface for creating custom worksheets
 import Layout from '../../layouts/Layout.astro';
 import { WORKSHEET_TEMPLATES } from '../../data/worksheet_templates';
+import ProblemList from '../../components/worksheet/ProblemList.astro';
+import ExportModal from '../../components/worksheet/ExportModal.astro';
 
 // Load problems data for filtering
 import problemsData from '../../data/problems.json';
@@ -150,13 +152,8 @@ const totalProblems = problems.length;
         </div>
       </div>
 
-      <!-- Selected Problems -->
-      <div class="selected-problems-container">
-        <h3>Избрани задачи за worksheet (<span id="selected-problems-count">0</span>)</h3>
-        <div class="selected-problems-list" id="selected-problems-list">
-          <p class="empty-state">Избери задачи од листата погоре...</p>
-        </div>
-      </div>
+      <!-- New ProblemList Component with Drag & Drop -->
+      <ProblemList />
 
       <!-- Action Buttons -->
       <div class="action-buttons">
@@ -268,6 +265,9 @@ const totalProblems = problems.length;
       </div>
     </section>
   </div>
+
+  <!-- Export Modal Component -->
+  <ExportModal />
 
   <style>
     .worksheet-builder {
@@ -839,13 +839,369 @@ const totalProblems = problems.length;
   </script>
 
   <script is:inline>
-    // Global state
-    let selectedTemplate = null;
-    let selectedProblems = [];
+    // ==========================================================================
+    // WORKSHEET BUILDER - COMPLETE JAVASCRIPT LOGIC
+    // Version: 2.0 with Drag & Drop, Export Modal, and Easter Eggs
+    // ==========================================================================
+
+    // --- GLOBAL STATE ---
+    let currentProblems = []; // Problems in the worksheet (with order preserved)
+    let selectedProblems = []; // For backward compatibility
     let allProblems = [];
+    let currentTemplate = null;
+    let worksheetTemplates = null;
+    let selectedTemplate = null;
     let filteredProblems = [];
     let problemRenderer = null;
-    let worksheetTemplates = []; // Will be loaded from API
+    window.sortableInstance = null;
+    window.lastTotal = null; // For Perfect 100 Easter Egg
+
+    // --- 1. PROBLEM LIST RENDERING WITH DRAG & DROP ---
+    window.renderProblemList = (problems) => {
+      currentProblems = problems;
+      selectedProblems = problems; // Keep for backward compatibility
+      const container = document.getElementById('worksheet-preview');
+      const countBadge = document.getElementById('problem-count-badge');
+      const totalPointsDisplay = document.getElementById('total-points-display');
+      
+      if (!container) return;
+      
+      // Update count
+      if (countBadge) countBadge.textContent = problems.length;
+      
+      // Update total points
+      const totalPoints = problems.reduce((sum, p) => sum + (p.points || 5), 0);
+      if (totalPointsDisplay) totalPointsDisplay.textContent = totalPoints;
+      
+      // Check for Perfect 100 Easter Egg
+      checkPerfectScore(problems);
+
+      // Clear container
+      container.innerHTML = '';
+
+      if (problems.length === 0) {
+        container.innerHTML = `
+          <div class="empty-state">
+            <div class="empty-icon">📋</div>
+            <p>Изберете темплејт за да генерирате задачи</p>
+          </div>
+        `;
+        return;
+      }
+
+      // Generate HTML for each problem
+      problems.forEach((problem, index) => {
+        const difficulty = problem.difficulty || 2;
+        const difficultyLabels = ['Лесно', 'Лесно', 'Средно', 'Тешко', 'Олимписко'];
+        const difficultyClasses = ['easy', 'easy', 'medium', 'hard', 'hard'];
+        const difficultyLabel = difficultyLabels[difficulty] || 'Средно';
+        const difficultyClass = difficultyClasses[difficulty] || 'medium';
+
+        const div = document.createElement('div');
+        div.className = 'problem-card';
+        div.dataset.id = problem.id;
+        div.innerHTML = `
+          <div class="drag-handle" title="Премести">⋮⋮</div>
+          <div class="problem-content">
+            <div class="problem-text">${problem.text ? problem.text.substring(0, 120) : problem.content?.substring(0, 120) || 'No content'}${(problem.text || problem.content || '').length > 120 ? '...' : ''}</div>
+            <div class="problem-meta">
+              <span class="tag ${difficultyClass}">${difficultyLabel}</span>
+              <span class="tag">📝 ${problem.topic || problem.subject || 'Алгебра'}</span>
+              <span class="tag points">${problem.points || 5} поени</span>
+            </div>
+          </div>
+          <div class="problem-actions">
+            <button class="action-btn" onclick="window.replaceProblem(${problem.id})" title="Замени со друга">🔄</button>
+            <button class="action-btn delete" onclick="window.removeProblem(${problem.id})" title="Избриши">🗑️</button>
+          </div>
+        `;
+        container.appendChild(div);
+      });
+
+      // Initialize SortableJS
+      initSortable();
+    };
+
+    // --- 2. DRAG & DROP INITIALIZATION ---
+    function initSortable() {
+      const el = document.getElementById('worksheet-preview');
+      if (!el) return;
+
+      // Kill old instance if exists (to avoid memory leaks)
+      if (window.sortableInstance) {
+        try {
+          window.sortableInstance.destroy();
+        } catch (e) {
+          console.warn('Failed to destroy old Sortable instance:', e);
+        }
+      }
+
+      window.sortableInstance = new Sortable(el, {
+        animation: 150,
+        handle: '.drag-handle',
+        ghostClass: 'sortable-ghost',
+        onEnd: function (evt) {
+          // Update internal array order after drag
+          const item = currentProblems.splice(evt.oldIndex, 1)[0];
+          currentProblems.splice(evt.newIndex, 0, item);
+          selectedProblems = currentProblems; // Keep synced
+          console.log('Нов редослед:', currentProblems.map(p => p.id));
+        },
+      });
+    }
+
+    // --- 3. PROBLEM ACTIONS: REMOVE & REPLACE ---
+    window.removeProblem = (id) => {
+      currentProblems = currentProblems.filter(p => p.id !== id);
+      selectedProblems = currentProblems;
+      window.renderProblemList(currentProblems);
+    };
+
+    window.replaceProblem = async (id) => {
+      // Find the problem to replace
+      const oldProblem = currentProblems.find(p => p.id === id);
+      if (!oldProblem) return;
+
+      const btn = document.querySelector(`[data-id="${id}"] .action-btn`);
+      if (btn) btn.innerHTML = '⏳';
+
+      try {
+        // Filter problems with same difficulty and different ID
+        const candidates = allProblems.filter(p => 
+          p.id !== id && 
+          p.difficulty === oldProblem.difficulty &&
+          !currentProblems.find(cp => cp.id === p.id) // Not already selected
+        );
+
+        if (candidates.length === 0) {
+          alert('Нема други задачи со иста тежина.');
+          if (btn) btn.innerHTML = '🔄';
+          return;
+        }
+
+        // Pick random candidate
+        const newProblem = candidates[Math.floor(Math.random() * candidates.length)];
+
+        // Replace in array
+        const index = currentProblems.findIndex(p => p.id === id);
+        currentProblems[index] = newProblem;
+        selectedProblems = currentProblems;
+        
+        // Re-render
+        window.renderProblemList(currentProblems);
+      } catch (e) {
+        console.error('Replace error:', e);
+        alert("Не можев да најдам замена во моментов.");
+        if (btn) btn.innerHTML = '🔄';
+      }
+    };
+
+    // --- 4. EXPORT MODAL CONTROL ---
+    window.openExportModal = () => {
+      if (currentProblems.length === 0) {
+        alert('⚠️ Изберете барем еден проблем пред да експортирате!');
+        return;
+      }
+      
+      // Calculate and display total points
+      const total = currentProblems.reduce((sum, p) => sum + (p.points || 5), 0);
+      const display = document.getElementById('total-points-display');
+      if (display) display.innerText = total;
+      
+      const modal = document.getElementById('export-modal');
+      if (modal) modal.classList.remove('hidden');
+    };
+
+    window.closeExportModal = () => {
+      const modal = document.getElementById('export-modal');
+      if (modal) modal.classList.add('hidden');
+    };
+
+    // --- 5. FINAL PDF GENERATION ---
+    window.generateFinalPDF = async () => {
+      const btn = document.querySelector('.btn-primary.large');
+      const status = document.getElementById('export-status');
+      const btnText = btn?.querySelector('.btn-text');
+      const btnLoader = btn?.querySelector('.btn-loader');
+      
+      if (!btn) return;
+      
+      const originalHtml = btn.innerHTML;
+
+      // UI Loading State
+      btn.disabled = true;
+      if (btnText) btnText.classList.add('hidden');
+      if (btnLoader) btnLoader.classList.remove('hidden');
+      if (status) status.innerText = "Подготовка на податоци...";
+
+      try {
+        // Gather data
+        const titleInput = document.getElementById('worksheet-title');
+        const payload = {
+          title: titleInput?.value || 'Работен Лист по Математика',
+          tasks: currentProblems.map((p, idx) => ({
+            id: p.id,
+            number: idx + 1,
+            text: p.text || p.content || 'No content',
+            image: p.image_url || p.image || null,
+            points: p.points || 5,
+            bro_standard: p.bro_standard || ""
+          })),
+          options: {
+            solutions: document.getElementById('opt-solutions')?.checked || false,
+            workspace: document.getElementById('opt-space')?.checked || true,
+            bro_codes: document.getElementById('opt-bro')?.checked || false,
+            qr_code: document.getElementById('opt-qr')?.checked || false
+          },
+          labels: {
+            school: "Училиште:",
+            teacher: "Наставник:",
+            grade: "Одделение:",
+            student: "Ученик:",
+            date: "Датум:"
+          }
+        };
+
+        if (status) status.innerText = "Испраќање до сервер...";
+
+        // API Call
+        const API_BASE = window.location.hostname === 'localhost' 
+          ? 'http://localhost:8000/api'
+          : '/api';
+          
+        const response = await fetch(`${API_BASE}/worksheet/generate-pdf`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        if (!response.ok) {
+          const errorText = await response.text();
+          throw new Error(`Server error: ${response.status} - ${errorText}`);
+        }
+
+        if (status) status.innerText = "Преземање...";
+
+        // Handle PDF Blob (Download)
+        const blob = await response.blob();
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `Worksheet_${new Date().toISOString().slice(0,10)}.pdf`;
+        document.body.appendChild(a);
+        a.click();
+        window.URL.revokeObjectURL(url);
+        a.remove();
+
+        // Success State
+        if (status) status.innerText = "✅ Успешно!";
+        setTimeout(() => window.closeExportModal(), 1500);
+
+      } catch (error) {
+        console.error('PDF Generation Error:', error);
+        if (status) status.innerText = "❌ Грешка при генерирање.";
+        alert(`Грешка: ${error.message}\n\nПроверете ја конзолата за детали.`);
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = originalHtml;
+      }
+    };
+
+    // ==========================================================================
+    // EASTER EGGS
+    // ==========================================================================
+
+    // --- EASTER EGG 1: Perfect 100 Score Confetti 🎉 ---
+    function checkPerfectScore(problems) {
+      const total = problems.reduce((sum, p) => sum + (p.points || 5), 0);
+
+      // Trigger confetti only if exactly 100 and wasn't 100 before
+      if (total === 100 && window.lastTotal !== 100) {
+        if (typeof confetti === 'function') {
+          confetti({
+            particleCount: 150,
+            spread: 70,
+            origin: { y: 0.6 },
+            colors: ['#2563eb', '#facc15', '#ef4444']
+          });
+        }
+        
+        // Toast notification
+        const toast = document.createElement('div');
+        toast.className = 'toast-notification';
+        toast.innerHTML = '💯 Совршени 100 поени!';
+        document.body.appendChild(toast);
+        setTimeout(() => toast.remove(), 3000);
+      }
+      window.lastTotal = total;
+    }
+
+    // --- EASTER EGG 2: Konami Code (God Mode) 🕹️ ---
+    let konamiCode = ['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a'];
+    let currentPos = 0;
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === konamiCode[currentPos]) {
+        currentPos++;
+        if (currentPos === konamiCode.length) {
+          activateGodMode();
+          currentPos = 0;
+        }
+      } else {
+        currentPos = 0;
+      }
+    });
+
+    function activateGodMode() {
+      if (typeof confetti === 'function') {
+        confetti({ particleCount: 300, spread: 360 });
+      }
+      
+      alert("🔓 GOD MODE ACTIVATED: Отклучен е темплејтот 'IMO Final'!");
+      
+      // Add secret template to grid
+      const grid = document.querySelector('.template-grid');
+      if (!grid) return;
+      
+      const secretCard = document.createElement('button');
+      secretCard.className = 'template-card';
+      secretCard.style.borderColor = '#8b5cf6';
+      secretCard.style.background = '#f5f3ff';
+      secretCard.innerHTML = `
+        <div class="card-header">
+          <span class="template-icon">🏆</span>
+          <span class="badge" style="background:#8b5cf6; color:white">EXTREME</span>
+        </div>
+        <h3>IMO Final</h3>
+        <p class="template-desc">Само за најхрабрите. 3 пеколно тешки задачи.</p>
+        <div class="card-footer">
+          <span class="meta-item">⏱️ 270 мин</span>
+          <div class="difficulty-viz">
+            <div class="bar hard" style="width: 100%; background: #7c3aed"></div>
+          </div>
+        </div>
+      `;
+      
+      secretCard.onclick = () => {
+        // Select 3 hardest problems
+        const hardest = allProblems
+          .filter(p => p.difficulty >= 4)
+          .sort(() => Math.random() - 0.5)
+          .slice(0, 3);
+        
+        if (hardest.length > 0) {
+          window.renderProblemList(hardest);
+        } else {
+          alert('Нема доволно тешки задачи!');
+        }
+      };
+      
+      grid.prepend(secretCard);
+    }
+
+    // ==========================================================================
+    // TEMPLATE LOADING & SELECTION (EXISTING CODE)
+    // ==========================================================================
     
     // Initialize problem renderer and load templates
     document.addEventListener('DOMContentLoaded', () => {
