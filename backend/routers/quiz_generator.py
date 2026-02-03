@@ -437,3 +437,301 @@ async def get_question_banks():
         return {"banks": banks}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+
+# ====================
+# LIVE QUIZ ENDPOINTS
+# ====================
+
+class LiveQuizCreate(BaseModel):
+    """Create a live quiz session"""
+    teacher_id: str
+    quiz_title: str
+    bro_codes: List[str]
+    question_count: int = 10
+    time_limit: int = 45
+    formats: List[str] = ["multiple_choice", "true_false"]
+
+class JoinRequest(BaseModel):
+    """Student joins quiz lobby"""
+    access_code: str
+    student_name: str
+
+class StudentAnswer(BaseModel):
+    """Single answer from student"""
+    problem_id: str
+    selected_option: str
+    time_spent: int = 0
+
+class SubmissionRequest(BaseModel):
+    """Complete quiz submission"""
+    access_code: str
+    student_name: str
+    answers: List[StudentAnswer]
+
+def generate_access_code(length: int = 6) -> str:
+    """Generate random 6-character code"""
+    import string
+    chars = string.ascii_uppercase + string.digits
+    return ''.join(random.choices(chars, k=length))
+
+@router.post("/live/create")
+async def create_live_quiz(quiz_data: LiveQuizCreate):
+    """Create live quiz and generate access code"""
+    try:
+        db = get_database()
+        
+        # Generate unique access code
+        access_code = generate_access_code()
+        quizzes_collection = db["live_quizzes"]
+        
+        # Check for collision (unlikely but possible)
+        while await quizzes_collection.find_one({"access_code": access_code}):
+            access_code = generate_access_code()
+        
+        # Fetch problems
+        problems = await fetch_problems_by_bro_codes(db, quiz_data.bro_codes, quiz_data.question_count * 2)
+        
+        if not problems:
+            raise HTTPException(status_code=404, detail="Нема пронајдено задачи за избраните БРО кодови")
+        
+        # Balance and format questions
+        balanced = balance_quiz_by_difficulty(problems, "mixed", quiz_data.question_count)
+        formatted_questions = []
+        
+        for idx, prob in enumerate(balanced, 1):
+            # Convert to multiple choice by default
+            format_type = random.choice(quiz_data.formats)
+            
+            if format_type == "multiple_choice":
+                question = convert_to_multiple_choice(prob)
+            elif format_type == "true_false":
+                question = convert_to_true_false(prob)
+            else:
+                question = convert_to_short_answer(prob)
+            
+            question.question_number = idx
+            formatted_questions.append(question.dict())
+        
+        # Create quiz document
+        quiz_doc = {
+            "access_code": access_code,
+            "teacher_id": quiz_data.teacher_id,
+            "title": quiz_data.quiz_title,
+            "time_limit": quiz_data.time_limit,
+            "questions": formatted_questions,
+            "participants": [],  # Students who joined
+            "status": "active",
+            "created_at": datetime.now()
+        }
+        
+        result = await quizzes_collection.insert_one(quiz_doc)
+        
+        return {
+            "quiz_id": str(result.inserted_id),
+            "access_code": access_code,
+            "question_count": len(formatted_questions),
+            "message": f"Live квиз креиран! Код: {access_code}"
+        }
+    
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@router.post("/live/join")
+async def join_live_quiz(data: JoinRequest):
+    """Student joins quiz lobby"""
+    try:
+        db = get_database()
+        quizzes_collection = db["live_quizzes"]
+        
+        # Find quiz
+        quiz = await quizzes_collection.find_one({"access_code": data.access_code.upper()})
+        
+        if not quiz:
+            raise HTTPException(status_code=404, detail="Невалиден код за квиз")
+        
+        if quiz.get("status") != "active":
+            raise HTTPException(status_code=403, detail="Квизот е затворен")
+        
+        # Add student to participants
+        await quizzes_collection.update_one(
+            {"_id": quiz["_id"]},
+            {"$addToSet": {"participants": data.student_name}}
+        )
+        
+        return {"status": "joined", "message": f"{data.student_name} се приклучи"}
+    
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@router.get("/live/access/{access_code}")
+async def get_quiz_for_student(access_code: str):
+    """Get quiz questions for student (NO ANSWERS!)"""
+    try:
+        db = get_database()
+        quizzes_collection = db["live_quizzes"]
+        
+        quiz = await quizzes_collection.find_one({"access_code": access_code.upper()})
+        
+        if not quiz:
+            raise HTTPException(status_code=404, detail="Невалиден код")
+        
+        if quiz.get("status") != "active":
+            raise HTTPException(status_code=403, detail="Квизот е затворен")
+        
+        # SECURITY: Remove correct answers from response
+        sanitized_questions = []
+        for q in quiz["questions"]:
+            safe_q = {
+                "id": q["id"],
+                "question_number": q["question_number"],
+                "format": q["format"],
+                "question_text": q["question_text"],
+                "options": q.get("options"),
+                "points": q["points"],
+                "bro_code": q["bro_code"],
+                "image_url": q.get("image_url")
+            }
+            # NEVER include correct_answer here!
+            sanitized_questions.append(safe_q)
+        
+        return {
+            "title": quiz["title"],
+            "time_limit": quiz["time_limit"],
+            "question_count": len(sanitized_questions),
+            "questions": sanitized_questions
+        }
+    
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@router.post("/live/submit")
+async def submit_live_quiz(submission: SubmissionRequest):
+    """Auto-grade and save submission"""
+    try:
+        db = get_database()
+        quizzes_collection = db["live_quizzes"]
+        submissions_collection = db["quiz_submissions"]
+        
+        # Get quiz with answers
+        quiz = await quizzes_collection.find_one({"access_code": submission.access_code.upper()})
+        
+        if not quiz:
+            raise HTTPException(status_code=404, detail="Квиз не е пронајден")
+        
+        # Create answer key
+        answer_key = {q["id"]: q["correct_answer"] for q in quiz["questions"]}
+        points_map = {q["id"]: q["points"] for q in quiz["questions"]}
+        
+        # Grade answers
+        total_score = 0
+        max_score = sum(points_map.values())
+        correct_count = 0
+        graded = []
+        
+        for ans in submission.answers:
+            is_correct = False
+            correct_val = answer_key.get(ans.problem_id, "")
+            student_val = ans.selected_option.strip()
+            
+            # Simple comparison (case-insensitive)
+            if correct_val and str(correct_val).strip().lower() == student_val.lower():
+                is_correct = True
+                total_score += points_map.get(ans.problem_id, 0)
+                correct_count += 1
+            
+            graded.append({
+                "problem_id": ans.problem_id,
+                "student_answer": student_val,
+                "correct_answer": correct_val,
+                "is_correct": is_correct,
+                "points_earned": points_map.get(ans.problem_id, 0) if is_correct else 0
+            })
+        
+        # Save submission
+        submission_doc = {
+            "quiz_id": str(quiz["_id"]),
+            "access_code": submission.access_code.upper(),
+            "student_name": submission.student_name,
+            "answers": graded,
+            "total_score": total_score,
+            "max_score": max_score,
+            "correct_count": correct_count,
+            "submitted_at": datetime.now()
+        }
+        
+        await submissions_collection.insert_one(submission_doc)
+        
+        percentage = (total_score / max_score * 100) if max_score > 0 else 0
+        
+        return {
+            "score": total_score,
+            "max_score": max_score,
+            "correct_count": correct_count,
+            "total_questions": len(quiz["questions"]),
+            "percentage": round(percentage, 1),
+            "feedback": f"Браво {submission.student_name}! Освои {total_score}/{max_score} поени ({percentage:.1f}%)"
+        }
+    
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@router.get("/live/{quiz_id}/stats")
+async def get_live_stats(quiz_id: str):
+    """Real-time stats for teacher dashboard"""
+    try:
+        from bson import ObjectId
+        
+        db = get_database()
+        quizzes_collection = db["live_quizzes"]
+        submissions_collection = db["quiz_submissions"]
+        
+        # Get quiz
+        quiz = await quizzes_collection.find_one({"_id": ObjectId(quiz_id)})
+        
+        if not quiz:
+            raise HTTPException(status_code=404, detail="Квиз не е пронајден")
+        
+        # Get submissions
+        cursor = submissions_collection.find({"quiz_id": quiz_id})
+        submissions = []
+        async for doc in cursor:
+            submissions.append(doc)
+        
+        # Build student list
+        participants = quiz.get("participants", [])
+        finished_names = {s["student_name"] for s in submissions}
+        
+        students = []
+        for name in participants:
+            sub = next((s for s in submissions if s["student_name"] == name), None)
+            
+            students.append({
+                "name": name,
+                "status": "finished" if sub else "working",
+                "score": sub["total_score"] if sub else 0,
+                "max_score": sub["max_score"] if sub else 0,
+                "percentage": round(sub["total_score"] / sub["max_score"] * 100, 1) if sub else 0
+            })
+        
+        # Sort by score (finished first)
+        students.sort(key=lambda x: (x["status"] == "finished", x["score"]), reverse=True)
+        
+        return {
+            "access_code": quiz["access_code"],
+            "title": quiz["title"],
+            "total_participants": len(participants),
+            "finished_count": len(submissions),
+            "students": students,
+            "avg_score": sum(s["score"] for s in students if s["status"] == "finished") / len(submissions) if submissions else 0
+        }
+    
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
