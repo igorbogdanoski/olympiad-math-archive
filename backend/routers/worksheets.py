@@ -1,72 +1,29 @@
+# -*- coding: utf-8 -*-
 """
 Worksheet Router - PDF Generation API
 Created: February 3, 2026
 Purpose: Generate PDF worksheets from selected problems
+Updated: February 3, 2026 - Migrated from ReportLab to WeasyPrint for native Cyrillic support
 """
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Request
 from fastapi.responses import Response
 from pydantic import BaseModel
 from typing import List, Optional
 from io import BytesIO
 from datetime import datetime
-from reportlab.lib.pagesizes import A4
-from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
-from reportlab.lib.units import cm
-from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, PageBreak, Table, TableStyle
-from reportlab.lib import colors
-from reportlab.lib.enums import TA_CENTER, TA_LEFT
-from reportlab.pdfbase import pdfmetrics
-from reportlab.pdfbase.ttfonts import TTFont
+from weasyprint import HTML
+from jinja2 import Environment, FileSystemLoader, select_autoescape
 import os
-import html
+import json
 
 router = APIRouter()
 
-# Register Unicode font for Cyrillic support
-# Use Arial (available on all Windows systems)
-font_paths = [
-    "C:\\Windows\\Fonts\\arial.ttf",  # Arial Regular
-    "C:\\Windows\\Fonts\\Arial.ttf",  # Case variation
-    "/usr/share/fonts/truetype/liberation/LiberationSans-Regular.ttf",  # Linux
-]
-
-font_registered = False
-for font_path in font_paths:
-    if os.path.exists(font_path):
-        try:
-            # Register font for Cyrillic support (TrueType fonts support Unicode by default)
-            pdfmetrics.registerFont(TTFont('CustomFont', font_path))
-            pdfmetrics.registerFont(TTFont('CustomFont-Bold', font_path))  # Reuse for bold
-            font_registered = True
-            break
-        except Exception as e:
-            print(f"Font registration error: {e}")
-            continue
-
-# If no font found, we'll use built-in fonts (limited Cyrillic support)
-DEFAULT_FONT = 'CustomFont' if font_registered else 'Helvetica'
-
-
-def encode_for_reportlab(text: str) -> str:
-    """Encode Unicode (Cyrillic) characters as numeric HTML entities for ReportLab"""
-    if not text:
-        return ""
-    result = []
-    for char in text:
-        # ASCII characters pass through (except special HTML chars)
-        if ord(char) < 128:
-            if char == '&':
-                result.append('&amp;')
-            elif char == '<':
-                result.append('&lt;')
-            elif char == '>':
-                result.append('&gt;')
-            else:
-                result.append(char)
-        else:
-            # Non-ASCII (Cyrillic, Greek, etc.) as numeric entities
-            result.append(f'&#{ord(char)};')
-    return ''.join(result)
+# Initialize Jinja2 environment for HTML templates
+template_dir = os.path.join(os.path.dirname(__file__), '..', 'templates')
+env = Environment(
+    loader=FileSystemLoader(template_dir),
+    autoescape=select_autoescape(['html', 'xml'])
+)
 
 
 class Problem(BaseModel):
@@ -92,21 +49,22 @@ class WorksheetRequest(BaseModel):
     labels: Optional[dict] = None  # Macedonian labels from frontend (Approach 3)
 
 
-def clean_text_for_pdf(text: str) -> str:
-    """Clean text for PDF rendering - remove LaTeX delimiters and encode for ReportLab"""
+def clean_text_for_html(text: str) -> str:
+    """Clean text for HTML rendering - remove LaTeX delimiters, convert to Unicode"""
     if not text:
         return ""
     
-    # Ensure text is properly decoded/encoded as UTF-8
+    # Ensure text is string (not bytes)
     if isinstance(text, bytes):
         text = text.decode('utf-8')
     
-    # Remove LaTeX math delimiters (we'll render them as plain text for now)
+    # Remove LaTeX math delimiters
     text = text.replace('\\(', '').replace('\\)', '')
-    text = text.replace('\\[', '\n').replace('\\]', '\n')
-    text = text.replace('$$', '\n').replace('$$', '\n')
+    text = text.replace('\\[', '<br>').replace('\\]', '<br>')
+    text = text.replace('$$', '<br>')
     text = text.replace('$', '')
-    # Replace common LaTeX symbols with Unicode
+    
+    # Replace common LaTeX symbols with Unicode equivalents
     text = text.replace('\\pi', 'π')
     text = text.replace('\\alpha', 'α')
     text = text.replace('\\beta', 'β')
@@ -120,14 +78,12 @@ def clean_text_for_pdf(text: str) -> str:
     text = text.replace('\\times', '×')
     text = text.replace('\\div', '÷')
     
-    # Encode Cyrillic and other Unicode as numeric HTML entities for ReportLab
-    text = encode_for_reportlab(text)
-    
+    # Note: No need to escape HTML - Jinja2 autoescape handles this
     return text
 
 
 def generate_worksheet_pdf(data: WorksheetRequest) -> BytesIO:
-    """Generate PDF worksheet using ReportLab"""
+    """Generate PDF worksheet using WeasyPrint (native UTF-8/Cyrillic support)"""
     # Approach 3 (Hybrid): Default labels (English fallback)
     default_labels = {
         "school": "School:",
@@ -143,171 +99,71 @@ def generate_worksheet_pdf(data: WorksheetRequest) -> BytesIO:
         "generated_via": "Generated via"
     }
     
-    # Use labels from frontend or fallback to English
-    raw_labels = data.labels if data.labels else default_labels
+    # Use labels from frontend or fallback to English (Approach 3)
+    labels = data.labels if data.labels else default_labels
     
-    # Encode all label values for ReportLab (handles Cyrillic)
-    labels = {}
-    for key, value in raw_labels.items():
-        labels[key] = encode_for_reportlab(value) if value else ""
-    
-    buffer = BytesIO()
-    
-    # Create PDF document
-    doc = SimpleDocTemplate(
-        buffer,
-        pagesize=A4,
-        rightMargin=2*cm,
-        leftMargin=2*cm,
-        topMargin=2*cm,
-        bottomMargin=2*cm
-    )
-    
-    # Define styles
-    styles = getSampleStyleSheet()
-    
-    # Custom styles
-    title_style = ParagraphStyle(
-        'CustomTitle',
-        parent=styles['Heading1'],
-        fontSize=18,
-        textColor=colors.HexColor('#2C3E50'),
-        spaceAfter=12,
-        alignment=TA_CENTER,
-        fontName=DEFAULT_FONT
-    )
-    
-    heading_style = ParagraphStyle(
-        'CustomHeading',
-        parent=styles['Heading2'],
-        fontSize=12,
-        textColor=colors.HexColor('#4CAF50'),
-        spaceAfter=8,
-        spaceBefore=8,
-        fontName=DEFAULT_FONT
-    )
-    
-    normal_style = ParagraphStyle(
-        'CustomNormal',
-        parent=styles['Normal'],
-        fontSize=11,
-        spaceAfter=6,
-        fontName=DEFAULT_FONT
-    )
-    
-    solution_style = ParagraphStyle(
-        'Solution',
-        parent=styles['Normal'],
-        fontSize=10,
-        leftIndent=20,
-        textColor=colors.HexColor('#2E7D32'),
-        fontName=DEFAULT_FONT
-    )
-    
-    # Build document content
-    story = []
-    
-    # Title
-    story.append(Paragraph(clean_text_for_pdf(data.title), title_style))
-    story.append(Spacer(1, 0.5*cm))
-    
-    # Metadata as paragraphs (avoid Table with Cyrillic)
-    meta_style = ParagraphStyle(
-        'Meta',
-        parent=styles['Normal'],
-        fontSize=10,
-        textColor=colors.grey,
-        fontName=DEFAULT_FONT
-    )
-    
-    # Use dynamic labels from request (Approach 3)
+    # Prepare metadata
+    metadata = {}
     if data.school_name:
-        label = clean_text_for_pdf(labels.get('school', 'School:'))
-        value = clean_text_for_pdf(data.school_name)
-        story.append(Paragraph(f"<b>{label}</b> {value}", meta_style))
+        metadata['school'] = data.school_name
     if data.teacher_name:
-        label = clean_text_for_pdf(labels.get('teacher', 'Teacher:'))
-        value = clean_text_for_pdf(data.teacher_name)
-        story.append(Paragraph(f"<b>{label}</b> {value}", meta_style))
+        metadata['teacher'] = data.teacher_name
     if data.grade:
-        label = clean_text_for_pdf(labels.get('grade', 'Grade:'))
-        story.append(Paragraph(f"<b>{label}</b> {data.grade}", meta_style))
+        metadata['grade'] = data.grade
     if data.description:
-        label = clean_text_for_pdf(labels.get('description', 'Description:'))
-        value = clean_text_for_pdf(data.description)
-        story.append(Paragraph(f"<b>{label}</b> {value}", meta_style))
+        metadata['description'] = data.description
+    metadata['date'] = True
+    metadata['problem_count'] = True
+    metadata['student'] = True  # Show student name field
     
-    date_label = clean_text_for_pdf(labels.get('date', 'Date:'))
-    story.append(Paragraph(f"<b>{date_label}</b> {datetime.now().strftime('%d.%m.%Y')}", meta_style))
+    # Clean problem content
+    problems = []
+    for problem in data.problems:
+        problems.append({
+            'id': problem.id,
+            'content': clean_text_for_html(problem.content),
+            'solution': clean_text_for_html(problem.solution) if problem.solution else None
+        })
     
-    count_label = clean_text_for_pdf(labels.get('problem_count', 'Number of Problems:'))
-    story.append(Paragraph(f"<b>{count_label}</b> {len(data.problems)}", meta_style))
-    story.append(Spacer(1, 0.8*cm))
+    # Footer text
+    footer_text = f"{labels.get('generated_via', 'Generated via')} Olympiad Math Archive | app.mismath.net | {datetime.now().strftime('%d.%m.%Y %H:%M')}"
     
-    # Problems
-    for i, problem in enumerate(data.problems, 1):
-        # Clean title or use fallback
-        if problem.problem_id:
-            problem_title = clean_text_for_pdf(problem.problem_id)
-        else:
-            problem_label = labels.get('problem', 'Problem')
-            problem_title = f"{problem_label} {i}"
-        
-        # Problem header
-        story.append(Paragraph(
-            f"<b>{i}. {problem_title}</b>",
-            heading_style
-        ))
-        
-        # Problem content
-        content = clean_text_for_pdf(problem.content)
-        story.append(Paragraph(content, normal_style))
-        story.append(Spacer(1, 0.5*cm))
+    # Render HTML template
+    template = env.get_template('worksheet_template.html')
+    html_content = template.render(
+        title=data.title,
+        labels=labels,
+        metadata=metadata,
+        problems=problems,
+        include_solutions=data.include_solutions,
+        footer_text=footer_text
+    )
     
-    # Solutions section
-    if data.include_solutions:
-        story.append(PageBreak())
-        solutions_title = clean_text_for_pdf(labels.get('solutions', 'Solutions'))
-        story.append(Paragraph(solutions_title, title_style))
-        story.append(Spacer(1, 0.5*cm))
-        
-        for i, problem in enumerate(data.problems, 1):
-            if problem.solution:
-                if problem.problem_id:
-                    problem_title = clean_text_for_pdf(problem.problem_id)
-                else:
-                    problem_label = labels.get('problem', 'Problem')
-                    problem_title = f"{problem_label} {i}"
-                solution_label = clean_text_for_pdf(labels.get('solution', 'Solution'))
-                story.append(Paragraph(
-                    f"<b>{i}. {problem_title} - {solution_label}</b>",
-                    heading_style
-                ))
-                solution = clean_text_for_pdf(problem.solution)
-                story.append(Paragraph(solution, solution_style))
-                story.append(Spacer(1, 0.4*cm))
-    
-    # Footer
-    story.append(Spacer(1, 1*cm))
-    generated_label = clean_text_for_pdf(labels.get('generated_via', 'Generated via'))
-    footer_text = f"{generated_label} Olympiad Math Archive | app.mismath.net | {datetime.now().strftime('%d.%m.%Y %H:%M')}"
-    story.append(Paragraph(footer_text, ParagraphStyle(
-        'Footer',
-        parent=styles['Normal'],
-        fontSize=8,
-        textColor=colors.grey,
-        alignment=TA_CENTER,
-        fontName=DEFAULT_FONT
-    )))
-    
-    # Build PDF
-    doc.build(story)
+    # Generate PDF with WeasyPrint
+    buffer = BytesIO()
+    HTML(string=html_content).write_pdf(buffer)
     buffer.seek(0)
     return buffer
 
 
 @router.post("/worksheet/generate-pdf")
-async def generate_worksheet_pdf_endpoint(data: WorksheetRequest):
+async def generate_worksheet_pdf_endpoint(request: Request):
+    """Generate worksheet PDF with UTF-8 Cyrillic support"""
+    try:
+        # Manually parse request body as UTF-8 to avoid latin-1 encoding issues
+        body_bytes = await request.body()
+        body_str = body_bytes.decode('utf-8')
+        data_dict = json.loads(body_str)
+        
+        # Convert dict to WorksheetRequest model
+        data = WorksheetRequest(**data_dict)
+    except UnicodeDecodeError as e:
+        raise HTTPException(status_code=400, detail=f"Invalid UTF-8 encoding: {str(e)}")
+    except json.JSONDecodeError as e:
+        raise HTTPException(status_code=400, detail=f"Invalid JSON: {str(e)}")
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=f"Request parsing failed: {str(e)}")
+    
     """
     Generate PDF worksheet from selected problems
     
@@ -345,8 +201,9 @@ async def generate_worksheet_pdf_endpoint(data: WorksheetRequest):
         # Generate PDF
         pdf_buffer = generate_worksheet_pdf(data)
         
-        # Generate filename
-        filename = f"worksheet_{data.title.replace(' ', '_')}_{datetime.now().strftime('%Y%m%d')}.pdf"
+        # Generate filename (ASCII-safe to avoid HTTP header encoding issues)
+        safe_title = data.title.encode('ascii', 'ignore').decode('ascii') or 'worksheet'
+        filename = f"worksheet_{safe_title.replace(' ', '_')}_{datetime.now().strftime('%Y%m%d')}.pdf"
         
         # Return PDF
         return Response(
