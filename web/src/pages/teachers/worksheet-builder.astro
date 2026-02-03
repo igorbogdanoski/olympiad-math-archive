@@ -334,78 +334,104 @@ const totalProblems = problems.length;
     }
 
     .template-card {
-      border: 2px solid #e0e0e0;
+      border: 1px solid #e0e0e0;
       border-radius: 12px;
-      padding: 1.5rem;
+      padding: 1.25rem;
       cursor: pointer;
-      transition: all 0.3s ease;
-      text-align: center;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      text-align: left;
+      background: #ffffff;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      position: relative;
+      overflow: hidden;
     }
 
     .template-card:hover {
       border-color: #667eea;
       transform: translateY(-4px);
-      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+      box-shadow: 0 12px 24px -10px rgba(102, 126, 234, 0.2);
     }
 
     .template-card.selected {
       border-color: #667eea;
       background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
       border-width: 3px;
+      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.75rem;
     }
 
     .template-icon {
-      font-size: 3rem;
-      margin-bottom: 1rem;
+      font-size: 2rem;
+      background: #f1f5f9;
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+    }
+
+    .badge {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: #64748b;
+      background: #f8fafc;
+      padding: 4px 10px;
+      border-radius: 20px;
+      border: 1px solid #e2e8f0;
     }
 
     .template-card h3 {
-      font-size: 1.3rem;
-      margin-bottom: 0.5rem;
+      font-size: 1.15rem;
+      margin: 0 0 0.5rem 0;
       color: #2c3e50;
+      font-weight: 700;
     }
 
     .template-desc {
       color: #7f8c8d;
-      font-size: 0.9rem;
-      margin-bottom: 1rem;
+      font-size: 0.875rem;
+      margin-bottom: 1.5rem;
+      line-height: 1.4;
+      flex-grow: 1;
     }
 
-    .template-meta {
+    .card-footer {
       display: flex;
-      justify-content: space-around;
-      padding-top: 1rem;
-      border-top: 1px solid #e0e0e0;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid #f1f5f9;
+      padding-top: 0.75rem;
+      margin-top: auto;
     }
 
     .meta-item {
-      font-size: 0.85rem;
-      color: #34495e;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: #475569;
     }
 
-    /* Template Difficulty Visualization */
-    .template-difficulty {
-      margin-top: 1rem;
-      padding-top: 1rem;
-      border-top: 1px solid #e0e0e0;
-    }
-
-    .difficulty-bar {
+    /* Difficulty Visualization (Inspired by Library) */
+    .difficulty-viz {
       display: flex;
-      height: 24px;
-      border-radius: 6px;
+      width: 100px;
+      height: 6px;
+      border-radius: 3px;
       overflow: hidden;
-      margin-bottom: 0.5rem;
+      background: #e2e8f0;
     }
 
-    .bar-segment {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      font-size: 0.75rem;
-      font-weight: 600;
-      transition: all 0.3s ease;
+    .difficulty-viz .bar {
+      height: 100%;
+      transition: width 0.3s ease;
     }
 
     .bar-easy {
@@ -418,19 +444,6 @@ const totalProblems = problems.length;
 
     .bar-hard {
       background: linear-gradient(135deg, #c0392b 0%, #e74c3c 100%);
-    }
-
-    .difficulty-labels {
-      display: flex;
-      justify-content: space-between;
-      gap: 0.5rem;
-      font-size: 0.7rem;
-      color: #7f8c8d;
-    }
-
-    .difficulty-labels small {
-      flex: 1;
-      text-align: center;
     }
 
     /* Loading State */
@@ -877,29 +890,23 @@ const totalProblems = problems.length;
           data-template-id="${id}"
           onclick="selectTemplate('${id}', this)"
         >
-          <div class="template-icon">${template.icon}</div>
+          <div class="card-header">
+            <span class="template-icon">${template.icon}</span>
+            <span class="badge">${template.problems} задачи</span>
+          </div>
+          
           <h3>${template.name}</h3>
           <p class="template-desc">${template.description}</p>
-          <div class="template-meta">
-            <span class="meta-item">
-              <strong>${template.problems}</strong> задачи
-            </span>
+          
+          <div class="card-footer">
             ${template.time_limit ? `
-            <span class="meta-item">
-              <strong>${template.time_limit}</strong> мин
-            </span>
-            ` : ''}
-          </div>
-          <div class="template-difficulty">
-            <div class="difficulty-bar">
-              <div class="bar-segment bar-easy" style="width: ${template.difficulty.easy * 100}%"></div>
-              <div class="bar-segment bar-medium" style="width: ${template.difficulty.medium * 100}%"></div>
-              <div class="bar-segment bar-hard" style="width: ${template.difficulty.hard * 100}%"></div>
-            </div>
-            <div class="difficulty-labels">
-              <small>${Math.round(template.difficulty.easy * 100)}% Лесно</small>
-              <small>${Math.round(template.difficulty.medium * 100)}% Средно</small>
-              <small>${Math.round(template.difficulty.hard * 100)}% Тешко</small>
+              <span class="meta-item">⏱️ ${template.time_limit} мин</span>
+            ` : '<span class="meta-item">Без ограничување</span>'}
+            
+            <div class="difficulty-viz" title="Баланс: ${Math.round(template.difficulty.easy * 100)}% Лесно / ${Math.round(template.difficulty.medium * 100)}% Средно / ${Math.round(template.difficulty.hard * 100)}% Тешко">
+              <div class="bar bar-easy" style="width: ${template.difficulty.easy * 100}%"></div>
+              <div class="bar bar-medium" style="width: ${template.difficulty.medium * 100}%"></div>
+              <div class="bar bar-hard" style="width: ${template.difficulty.hard * 100}%"></div>
             </div>
           </div>
         </div>
