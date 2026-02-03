@@ -12,17 +12,6 @@
   "dir": "ltr",
   "icons": [],
   "screenshots": [],
-  "shortcuts": [
-    {
-      "name": "Планирање настава",
-      "short_name": "Планирање",
-      "description": "Создај нова настава",
-      "url": "/curriculum-planner?action=create",
-      "icons": [{ "src": "/icons/shortcut-lesson.png", "sizes": "96x96" }]
-    },
-    {
-      "name": "Оценување ученици",
-      "short_name": "Оценување",
-      "description": "Оцени ученици",
-      "url": "/curriculum-planner?action=assess",
-      "icons": [
+  "shortcuts": [],
+  "related_applications": []
+}

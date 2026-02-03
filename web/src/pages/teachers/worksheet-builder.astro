@@ -71,11 +71,11 @@ const totalProblems = problems.length;
       <!-- Filters -->
       <div class="filters-panel">
         <div class="filter-group">
-          <label>Предмет:</label>
-          <select id="filter-subject" onchange="applyFilters()">
-            <option value="">Сите</option>
-            <option value="geometry">Геометрија ({geometryProblems.length})</option>
-            <option value="algebra">Алгебра ({algebraProblems.length})</option>
+          <label>Област (Наставна програма):</label>
+          <select id="filter-subject" onchange="window.triggerFilterUpdate()">
+            <option value="">Сите области</option>
+            <option value="geometry">Геометрија</option>
+            <option value="algebra">Алгебра</option>
             <option value="number_theory">Теорија на броеви</option>
             <option value="combinatorics">Комбинаторика</option>
           </select>
@@ -115,6 +115,22 @@ const totalProblems = problems.length;
         <button class="btn-filter-reset" onclick="resetFilters()">
           Reset филтри
         </button>
+        
+        <!-- BRO Code Legend -->
+        <div class="bro-legend" style="margin-top: 1rem; padding: 0.75rem; background: #ecf0f1; border-radius: 6px; font-size: 0.85rem;">
+          <details>
+            <summary style="cursor: pointer; font-weight: 600; color: #16a085;">
+              🎯 Што значат БРО кодовите?
+            </summary>
+            <div style="margin-top: 0.5rem; line-height: 1.6; color: #2c3e50;">
+              <p style="margin-bottom: 0.5rem;"><strong>БРО</strong> = <strong>Б</strong>роен <strong>Р</strong>екорд на <strong>О</strong>бјективи</p>
+              <p style="margin-bottom: 0.25rem;"><strong>Формат:</strong> Предмет.Одд.Тема.Цел</p>
+              <p style="margin: 0; padding-left: 1rem; font-family: 'Courier New', monospace; color: #16a085;">
+                Пример: <strong>М.7.2.3</strong> = Математика, 7мо одд., Тема 2, Цел 3
+              </p>
+            </div>
+          </details>
+        </div>
       </div>
 
       <!-- Problem Count and Balance -->
@@ -408,9 +424,34 @@ const totalProblems = problems.length;
     .template-desc {
       color: #7f8c8d;
       font-size: 0.875rem;
-      margin-bottom: 1.5rem;
+      margin-bottom: 1rem;
       line-height: 1.4;
-      flex-grow: 1;
+    }
+    
+    .template-features {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+      padding: 0.75rem;
+      background: #f8fafc;
+      border-radius: 8px;
+    }
+    
+    .feature-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.8rem;
+    }
+    
+    .feature-icon {
+      font-size: 1rem;
+    }
+    
+    .feature-text {
+      color: #64748b;
+      font-weight: 500;
     }
 
     .card-footer {
@@ -420,6 +461,25 @@ const totalProblems = problems.length;
       border-top: 1px solid #f1f5f9;
       padding-top: 0.75rem;
       margin-top: auto;
+      gap: 0.75rem;
+    }
+    
+    .btn-select {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+    
+    .btn-select:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
     }
 
     .meta-item {
@@ -798,13 +858,37 @@ const totalProblems = problems.length;
     .badge-easy { background: #27ae60; color: white; }
     .badge-medium { background: #f39c12; color: white; }
     .badge-hard { background: #e74c3c; color: white; }
+    .badge-olympiad { background: #8e44ad; color: white; }
     .badge-grade { background: #3498db; color: white; }
+    .badge-bro { 
+      background: #16a085; 
+      color: white; 
+      font-family: 'Courier New', monospace;
+      font-size: 0.7rem;
+    }
 
     .problem-title {
       font-size: 0.9rem;
+      font-weight: 600;
       color: #2c3e50;
       margin-bottom: 0.5rem;
       line-height: 1.3;
+    }
+    
+    .problem-preview {
+      font-size: 0.8rem;
+      color: #7f8c8d;
+      margin-bottom: 0.5rem;
+      line-height: 1.4;
+      max-height: 3.6em;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    
+    .bro-code {
+      background: #16a085 !important;
+      color: white !important;
+      font-family: 'Courier New', monospace;
     }
 
     .problem-meta {
@@ -882,7 +966,72 @@ const totalProblems = problems.length;
     let selectedProblems = []; // For backward compatibility
     let allProblems = [];
     let currentTemplate = null;
-    let worksheetTemplates = null;
+    let worksheetTemplates = {
+      weekly_test: {
+        name: "Неделен тест",
+        icon: "📝",
+        description: "Кратка провера за завршена тема",
+        problems: 5,
+        time_limit: 15,
+        difficulty: { easy: 0.6, medium: 0.3, hard: 0.1 }
+      },
+      midterm: {
+        name: "Среден тест",
+        icon: "📊",
+        description: "Средносеместриална проверка",
+        problems: 10,
+        time_limit: 45,
+        difficulty: { easy: 0.4, medium: 0.4, hard: 0.2 }
+      },
+      final_exam: {
+        name: "Завршен испит",
+        icon: "🎓",
+        description: "Сеопфатен испит",
+        problems: 15,
+        time_limit: 90,
+        difficulty: { easy: 0.3, medium: 0.4, hard: 0.3 }
+      },
+      homework: {
+        name: "Домашна",
+        icon: "🏠",
+        description: "Практични задачи за дома",
+        problems: 8,
+        time_limit: null,
+        difficulty: { easy: 0.5, medium: 0.4, hard: 0.1 }
+      },
+      quick_quiz: {
+        name: "Брз квиз",
+        icon: "⚡",
+        description: "5-минутна проверка на знаење",
+        problems: 3,
+        time_limit: 5,
+        difficulty: { easy: 0.8, medium: 0.2, hard: 0 }
+      },
+      olympiad_prep: {
+        name: "Олимписки тренинг",
+        icon: "🏆",
+        description: "Напредни олимписки задачи",
+        problems: 6,
+        time_limit: 60,
+        difficulty: { easy: 0.1, medium: 0.3, hard: 0.6 }
+      },
+      makeup_test: {
+        name: "Поправен испит",
+        icon: "🔄",
+        description: "Втора шанса за подобрување",
+        problems: 8,
+        time_limit: 40,
+        difficulty: { easy: 0.5, medium: 0.3, hard: 0.2 }
+      },
+      diagnostic: {
+        name: "Дијагностички тест",
+        icon: "🔍",
+        description: "Идентификација на слабости",
+        problems: 12,
+        time_limit: null,
+        difficulty: { easy: 0.4, medium: 0.4, hard: 0.2 }
+      }
+    };
     let selectedTemplate = null;
     let filteredProblems = [];
     let problemRenderer = null;
@@ -1134,6 +1283,11 @@ const totalProblems = problems.length;
 
     // Apply filters to problem list (client-side filtering)
     window.applyFilters = (problems) => {
+      if (!problems || !Array.isArray(problems)) {
+        console.warn('[applyFilters] Invalid problems array:', problems);
+        return [];
+      }
+      
       const filters = window.getFilters();
       let filtered = [...problems];
       
@@ -1214,7 +1368,8 @@ const totalProblems = problems.length;
       // If we have allProblems loaded, re-filter and render
       if (allProblems && allProblems.length > 0) {
         const filtered = window.applyFilters(allProblems);
-        window.renderProblemList(filtered);
+        filteredProblems = filtered;
+        renderProblems();
       }
       
       // If we have a template selected, re-run template selection with new filters
@@ -1376,13 +1531,31 @@ const totalProblems = problems.length;
         const div = document.createElement('div');
         div.className = 'problem-card';
         div.dataset.id = problem.id;
+        
+        // Extract text from various sources
+        let displayText = '';
+        if (problem.content_markdown) {
+          // Remove markdown headers and extract first paragraph
+          displayText = problem.content_markdown
+            .split('\n\n')[1] || problem.content_markdown.split('\n')[0];
+          displayText = displayText.replace(/^#+\s*/g, '').replace(/\*\*/g, '').substring(0, 150);
+        } else if (problem.statement) {
+          displayText = problem.statement.substring(0, 150);
+        } else if (problem.text) {
+          displayText = problem.text.substring(0, 150);
+        } else if (problem.content) {
+          displayText = problem.content.substring(0, 150);
+        } else {
+          displayText = problem.title || `Задача ${problem.problem_id || problem.id}`;
+        }
+        
         div.innerHTML = `
           <div class="drag-handle" title="Премести">⋮⋮</div>
           <div class="problem-content">
-            <div class="problem-text">${problem.text ? problem.text.substring(0, 120) : problem.content?.substring(0, 120) || 'No content'}${(problem.text || problem.content || '').length > 120 ? '...' : ''}</div>
+            <div class="problem-text">${displayText}${displayText.length >= 150 ? '...' : ''}</div>
             <div class="problem-meta">
               <span class="tag ${difficultyClass}">${difficultyLabel}</span>
-              <span class="tag">📝 ${problem.topic || problem.subject || 'Алгебра'}</span>
+              <span class="tag">📝 ${problem.topic || problem.subject || problem.tags?.[0] || 'Алгебра'}</span>
               <span class="tag points">${problem.points || 5} поени</span>
             </div>
           </div>
@@ -1725,7 +1898,6 @@ const totalProblems = problems.length;
         <div 
           class="template-card" 
           data-template-id="${id}"
-          onclick="selectTemplate('${id}', this)"
         >
           <div class="card-header">
             <span class="template-icon">${template.icon}</span>
@@ -1735,19 +1907,43 @@ const totalProblems = problems.length;
           <h3>${template.name}</h3>
           <p class="template-desc">${template.description}</p>
           
+          <div class="template-features">
+            <div class="feature-item">
+              <span class="feature-icon">⏱️</span>
+              <span class="feature-text">${template.time_limit ? `${template.time_limit} мин` : 'Без ограничување'}</span>
+            </div>
+            <div class="feature-item">
+              <span class="feature-icon">🎯</span>
+              <span class="feature-text">${Math.round(template.difficulty.easy * 100)}% Лесно</span>
+            </div>
+            <div class="feature-item">
+              <span class="feature-icon">⚡</span>
+              <span class="feature-text">${Math.round(template.difficulty.medium * 100)}% Средно</span>
+            </div>
+            <div class="feature-item">
+              <span class="feature-icon">🔥</span>
+              <span class="feature-text">${Math.round(template.difficulty.hard * 100)}% Тешко</span>
+            </div>
+          </div>
+          
           <div class="card-footer">
-            ${template.time_limit ? `
-              <span class="meta-item">⏱️ ${template.time_limit} мин</span>
-            ` : '<span class="meta-item">Без ограничување</span>'}
-            
-            <div class="difficulty-viz" title="Баланс: ${Math.round(template.difficulty.easy * 100)}% Лесно / ${Math.round(template.difficulty.medium * 100)}% Средно / ${Math.round(template.difficulty.hard * 100)}% Тешко">
+            <div class="difficulty-viz" title="Баланс на тежина">
               <div class="bar bar-easy" style="width: ${template.difficulty.easy * 100}%"></div>
               <div class="bar bar-medium" style="width: ${template.difficulty.medium * 100}%"></div>
               <div class="bar bar-hard" style="width: ${template.difficulty.hard * 100}%"></div>
             </div>
+            <button class="btn-select">Избери</button>
           </div>
         </div>
       `).join('');
+      
+      // Add event listeners
+      grid.querySelectorAll('.template-card').forEach(card => {
+        card.addEventListener('click', function() {
+          const templateId = this.dataset.templateId;
+          selectTemplate(templateId, this);
+        });
+      });
       
       console.log('[renderTemplates] ✅ Rendered', templateEntries.length, 'templates');
     }
@@ -1764,7 +1960,12 @@ const totalProblems = problems.length;
             max_difficulty: 10
           });
           console.log('[loadProblems] API response:', response);
-          allProblems = response;
+          
+          // Normalize problem IDs (_id → id for MongoDB compatibility)
+          allProblems = response.map(p => ({
+            ...p,
+            id: p._id || p.id || p.problem_id
+          }));
           filteredProblems = [...allProblems];
           
           console.log(`[loadProblems] ✅ Loaded ${allProblems.length} problems from API`);
@@ -1865,40 +2066,53 @@ const totalProblems = problems.length;
         return;
       }
       
-      // Render problem cards (simplified version for selection)
+      // Render problem cards with rich details
       grid.innerHTML = filteredProblems.slice(0, 50).map(problem => {
-        // Fix Untitled Problem - try multiple fields
-        let displayTitle = problem.title || '';
+        const displayTitle = problem.title || problem.problem_id || `Задача ${problem.id}`;
+        const broCode = problem.primary_skill || problem.curriculum_codes?.[0] || '';
+        const difficulty = problem.difficulty || 2;
+        const diffLabels = ['Лесно', 'Лесно', 'Средно', 'Тешко', 'Олимписко'];
+        const diffClasses = ['easy', 'easy', 'medium', 'hard', 'olympiad'];
         
-        // If title has encoding issues (contains ???? or is very short)
-        if (!displayTitle || displayTitle.includes('????') || (displayTitle.includes('?') && displayTitle.length > 10)) {
-          displayTitle = problem.problem_id || `Задача ${problem.id || 'N/A'}`;
-        }
-        
-        // If still empty, use content preview
-        if (!displayTitle || displayTitle === 'Untitled Problem') {
-          const content = problem.content_markdown || problem.content || '';
-          displayTitle = content.substring(0, 60).replace(/[#*]/g, '').trim() || `Задача ${problem.id}`;
+        // Extract preview text
+        let preview = '';
+        if (problem.content_markdown) {
+          preview = problem.content_markdown.split('\n\n')[1] || problem.content_markdown.split('\n')[0];
+          preview = preview.replace(/^#+\s*/g, '').replace(/\*\*/g, '').substring(0, 100);
         }
         
         return `
-        <div class="problem-card-mini" onclick="addProblem(${problem.id})" data-problem-id="${problem.id}">
+        <div class="problem-card-mini" data-problem-id="${problem.id}" data-selected="false">
           <div class="problem-header">
-            <span class="badge badge-${problem.difficulty}">${problem.difficulty || 'medium'}</span>
-            <span class="badge badge-grade">Одд. ${problem.grade || 'N/A'}</span>
+            <span class="badge badge-${diffClasses[difficulty]}">${diffLabels[difficulty]}</span>
+            <span class="badge badge-grade">Одд. ${problem.grade || 7}</span>
+            ${broCode ? `<span class="badge badge-bro" title="БРО Код">${broCode.substring(0, 20)}</span>` : ''}
           </div>
           <div class="problem-title">${displayTitle}</div>
+          ${preview ? `<div class="problem-preview">${preview}...</div>` : ''}
           <div class="problem-meta">
-            ${problem.primary_skill ? `<span class="bro-tag" title="${problem.primary_skill}">${problem.primary_skill.substring(0, 15)}...</span>` : ''}
             <span class="points-tag">${problem.points || 3} поени</span>
+            <span class="topic-tag">${problem.topic || 'Алгебра'}</span>
           </div>
         </div>
       `}).join('');
       
+      // Add event listeners to cards
+      grid.querySelectorAll('.problem-card-mini').forEach(card => {
+        card.addEventListener('click', () => {
+          const problemId = card.dataset.problemId;
+          window.addProblem(problemId);
+        });
+      });
+      
       // Highlight already selected problems
-      selectedProblems.forEach(p => {
-        const card = grid.querySelector(`[onclick="addProblem(${p.id})"]`);
-        if (card) card.classList.add('selected');
+      const currentGroupProblems = window.groups[window.activeGroup] || [];
+      currentGroupProblems.forEach(p => {
+        const card = grid.querySelector(`[data-problem-id="${p.id}"]`);
+        if (card) {
+          card.classList.add('selected');
+          card.dataset.selected = 'true';
+        }
       });
     }
 
@@ -1906,15 +2120,28 @@ const totalProblems = problems.length;
       const problem = filteredProblems.find(p => p.id === problemId);
       if (!problem) return;
       
-      // Check if already added
-      if (selectedProblems.find(p => p.id === problemId)) {
-        removeProblem(problemId);
-        return;
+      // Get current group's problems
+      const currentGroupProblems = window.groups[window.activeGroup] || [];
+      
+      // Check if already added - TOGGLE behavior
+      const existingIndex = currentGroupProblems.findIndex(p => p.id === problemId);
+      if (existingIndex >= 0) {
+        // Remove from current group
+        window.groups[window.activeGroup].splice(existingIndex, 1);
+        console.log(`[addProblem] Removed problem ${problemId} from Group ${window.activeGroup}`);
+      } else {
+        // Add to current group
+        window.groups[window.activeGroup].push(problem);
+        console.log(`[addProblem] Added problem ${problemId} to Group ${window.activeGroup}`);
       }
       
-      selectedProblems.push(problem);
-      updateSelectedProblems();
-      renderProblems(); // Re-render to update selection state
+      // Update both systems for compatibility
+      selectedProblems = window.groups[window.activeGroup];
+      currentProblems = window.groups[window.activeGroup];
+      
+      // Re-render both lists
+      renderProblems(); // Re-render available problems to update selection state
+      window.renderProblemList(window.groups[window.activeGroup]); // Render selected problems list
     }
 
     function removeProblem(problemId) {
@@ -1928,8 +2155,10 @@ const totalProblems = problems.length;
       const countSpan = document.getElementById('selected-problems-count');
       const selectedCountSpan = document.getElementById('selected-count');
       
-      countSpan.textContent = selectedProblems.length;
-      selectedCountSpan.textContent = selectedProblems.length;
+      if (countSpan) countSpan.textContent = selectedProblems.length;
+      if (selectedCountSpan) selectedCountSpan.textContent = selectedProblems.length;
+      
+      if (!container) return;
       
       if (selectedProblems.length === 0) {
         container.innerHTML = '<p class="empty-state">Избери задачи од листата погоре...</p>';
