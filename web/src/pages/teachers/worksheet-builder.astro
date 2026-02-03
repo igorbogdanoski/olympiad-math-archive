@@ -889,6 +889,230 @@ const totalProblems = problems.length;
     window.sortableInstance = null;
     window.lastTotal = null; // For Perfect 100 Easter Egg
 
+    // --- GROUP MANAGEMENT (Група А / Група Б) ---
+    window.groups = {
+      A: [],
+      B: []
+    };
+    window.activeGroup = 'A';
+
+    // Switch between Group A and Group B
+    window.switchGroup = (group) => {
+      console.log(`[switchGroup] Switching to Group ${group}`);
+      window.activeGroup = group;
+      
+      // UI Update: Active Tab
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.group === group);
+      });
+      
+      // Render the selected group
+      currentProblems = window.groups[group];
+      window.renderProblemList(currentProblems);
+      
+      // Update export button text
+      const exportBtn = document.querySelector('.btn-success');
+      if (exportBtn) {
+        exportBtn.innerHTML = `🚀 Експортирај Група ${group} (${currentProblems.length})`;
+      }
+    };
+
+    // Generate Group B (Variant Generator)
+    window.generateGroupB = async () => {
+      const btn = document.getElementById('btn-gen-variant');
+      const originalText = btn.innerHTML;
+      
+      // Validation: Check if Group A has problems
+      if (!window.groups.A || window.groups.A.length === 0) {
+        alert("⚠️ Прво додајте задачи во Група А!");
+        return;
+      }
+
+      // Loading State
+      btn.innerHTML = '⚙️ Се генерира...';
+      btn.disabled = true;
+      
+      // Show skeleton while generating
+      document.getElementById('skeleton-loader').style.display = 'block';
+      document.getElementById('worksheet-preview').style.display = 'none';
+
+      try {
+        console.log('[generateGroupB] Starting variant generation');
+        
+        // Strategy: 70% shuffled + 30% replaced with new random problems
+        const groupA = window.groups.A;
+        const totalCount = groupA.length;
+        const replaceCount = Math.floor(totalCount * 0.3); // Replace 30%
+        const keepCount = totalCount - replaceCount;
+        
+        // Shuffle Group A
+        const shuffled = [...groupA].sort(() => Math.random() - 0.5);
+        
+        // Keep 70% of shuffled problems
+        const kept = shuffled.slice(0, keepCount);
+        
+        // Replace 30% with new random problems (similar grade + difficulty)
+        const replaced = [];
+        for (let i = 0; i < replaceCount; i++) {
+          const original = shuffled[keepCount + i];
+          
+          // Filter allProblems by similar criteria
+          const candidates = allProblems.filter(p => 
+            p.id !== original.id && // Different problem
+            (p.grade || p.target_grade || 7) === (original.grade || original.target_grade || 7) && // Same grade
+            (p.difficulty || 2) === (original.difficulty || 2) // Same difficulty
+          );
+          
+          if (candidates.length > 0) {
+            const randomPick = candidates[Math.floor(Math.random() * candidates.length)];
+            replaced.push(randomPick);
+          } else {
+            // Fallback: Use the shuffled problem if no candidates found
+            replaced.push(shuffled[keepCount + i]);
+          }
+        }
+        
+        // Combine and shuffle final list
+        window.groups.B = [...kept, ...replaced].sort(() => Math.random() - 0.5);
+        
+        console.log(`[generateGroupB] Generated Group B: ${window.groups.B.length} problems (${kept.length} shuffled + ${replaced.length} replaced)`);
+        
+        // Hide skeleton, show results
+        document.getElementById('skeleton-loader').style.display = 'none';
+        document.getElementById('worksheet-preview').style.display = 'block';
+        
+        // Auto-switch to Group B
+        window.switchGroup('B');
+        
+        // Success notification (mini confetti)
+        if (window.confetti) {
+          confetti({ 
+            particleCount: 50, 
+            origin: { x: 0.8, y: 0.2 },
+            colors: ['#6366f1', '#8b5cf6', '#ec4899']
+          });
+        }
+        
+        // Auto-save Group B
+        saveWorksheetDraft();
+        
+      } catch (error) {
+        console.error('[generateGroupB] Error:', error);
+        alert("❌ Грешка при генерирање на варијантата. Обидете се повторно.");
+        
+        // Hide skeleton
+        document.getElementById('skeleton-loader').style.display = 'none';
+        document.getElementById('worksheet-preview').style.display = 'block';
+        
+      } finally {
+        btn.innerHTML = originalText;
+        btn.disabled = false;
+      }
+    };
+
+    // --- AUTO-SAVE DRAFTS ---
+    let autoSaveTimeout;
+    
+    function saveWorksheetDraft() {
+      const draft = {
+        groups: window.groups,
+        activeGroup: window.activeGroup,
+        template: selectedTemplate,
+        timestamp: new Date().toISOString(),
+        metadata: {
+          title: document.getElementById('worksheet-title')?.value || '',
+          school: document.getElementById('school-name')?.value || '',
+          teacher: document.getElementById('teacher-name')?.value || '',
+          grade: document.getElementById('grade-select')?.value || ''
+        }
+      };
+      
+      localStorage.setItem('worksheet_draft', JSON.stringify(draft));
+      
+      // Show indicator briefly
+      const indicator = document.getElementById('draft-indicator');
+      if (indicator) {
+        indicator.style.display = 'inline-block';
+        
+        // Hide after 2 seconds
+        clearTimeout(autoSaveTimeout);
+        autoSaveTimeout = setTimeout(() => {
+          indicator.style.display = 'none';
+        }, 2000);
+      }
+      
+      console.log('[saveWorksheetDraft] Draft saved to localStorage');
+    }
+    
+    function loadWorksheetDraft() {
+      const draftStr = localStorage.getItem('worksheet_draft');
+      if (!draftStr) return false;
+      
+      try {
+        const draft = JSON.parse(draftStr);
+        const draftDate = new Date(draft.timestamp);
+        const hoursSince = (Date.now() - draftDate.getTime()) / (1000 * 60 * 60);
+        
+        // Only restore if draft is < 24 hours old
+        if (hoursSince > 24) {
+          localStorage.removeItem('worksheet_draft');
+          return false;
+        }
+        
+        // Ask user if they want to restore
+        const lastSaved = draftDate.toLocaleString('mk-MK', {
+          day: 'numeric',
+          month: 'short',
+          hour: '2-digit',
+          minute: '2-digit'
+        });
+        
+        const shouldRestore = confirm(
+          `💾 Пронајдовме незавршен тест од ${lastSaved}.\n\n` +
+          `Сакате ли да го вратите?`
+        );
+        
+        if (!shouldRestore) {
+          localStorage.removeItem('worksheet_draft');
+          return false;
+        }
+        
+        // Restore state
+        window.groups = draft.groups || { A: [], B: [] };
+        window.activeGroup = draft.activeGroup || 'A';
+        selectedTemplate = draft.template;
+        
+        // Restore metadata
+        if (draft.metadata) {
+          if (draft.metadata.title) document.getElementById('worksheet-title').value = draft.metadata.title;
+          if (draft.metadata.school) document.getElementById('school-name').value = draft.metadata.school;
+          if (draft.metadata.teacher) document.getElementById('teacher-name').value = draft.metadata.teacher;
+          if (draft.metadata.grade) document.getElementById('grade-select').value = draft.metadata.grade;
+        }
+        
+        // Render restored group
+        currentProblems = window.groups[window.activeGroup];
+        window.renderProblemList(currentProblems);
+        window.switchGroup(window.activeGroup);
+        
+        console.log('[loadWorksheetDraft] Draft restored successfully');
+        return true;
+        
+      } catch (error) {
+        console.error('[loadWorksheetDraft] Error restoring draft:', error);
+        localStorage.removeItem('worksheet_draft');
+        return false;
+      }
+    }
+    
+    // Auto-save on any problem list change
+    function triggerAutoSave() {
+      clearTimeout(autoSaveTimeout);
+      autoSaveTimeout = setTimeout(() => {
+        saveWorksheetDraft();
+      }, 1000); // Save 1 second after last change
+    }
+
     // --- FILTER INTEGRATION LOGIC ---
     
     // Collect all active filter values
@@ -1043,16 +1267,28 @@ const totalProblems = problems.length;
       
       console.log('[selectProblemsByTemplate] Selecting for template:', templateId, template);
       
-      // Apply filters first
-      const filteredPool = window.applyFilters(allProblems);
+      // Show skeleton while loading
+      const skeletonLoader = document.getElementById('skeleton-loader');
+      const worksheetPreview = document.getElementById('worksheet-preview');
+      if (skeletonLoader) skeletonLoader.style.display = 'block';
+      if (worksheetPreview) worksheetPreview.style.display = 'none';
       
-      if (filteredPool.length === 0) {
-        alert('⚠️ Нема задачи кои одговараат на филтрите. Обидете се со помалку филтри.');
-        return;
-      }
-      
-      // Calculate counts per difficulty
-      const targetCount = template.problems;
+      // Simulate a small delay for better UX (skeleton visibility)
+      setTimeout(() => {
+        // Apply filters first
+        const filteredPool = window.applyFilters(allProblems);
+        
+        if (filteredPool.length === 0) {
+          // Hide skeleton
+          if (skeletonLoader) skeletonLoader.style.display = 'none';
+          if (worksheetPreview) worksheetPreview.style.display = 'block';
+          
+          alert('⚠️ Нема задачи кои одговараат на филтрите. Обидете се со помалку филтри.');
+          return;
+        }
+        
+        // Calculate counts per difficulty
+        const targetCount = template.problems;
       const easyCount = Math.floor(targetCount * template.difficulty.easy);
       const mediumCount = Math.floor(targetCount * template.difficulty.medium);
       const hardCount = targetCount - easyCount - mediumCount;
@@ -1074,14 +1310,23 @@ const totalProblems = problems.length;
       
       console.log(`[selectProblemsByTemplate] Selected ${selected.length} problems (E:${selectedEasy.length} M:${selectedMedium.length} H:${selectedHard.length})`);
       
-      // Render the problem list
-      window.renderProblemList(selected);
+        // Hide skeleton, show results
+        if (skeletonLoader) skeletonLoader.style.display = 'none';
+        if (worksheetPreview) worksheetPreview.style.display = 'block';
+        
+        // Render the problem list
+        window.renderProblemList(selected);
+      }, 300); // 300ms delay for skeleton visibility
     }
 
     // --- 1. PROBLEM LIST RENDERING WITH DRAG & DROP ---
     window.renderProblemList = (problems) => {
       currentProblems = problems;
       selectedProblems = problems; // Keep for backward compatibility
+      
+      // Update active group in state
+      window.groups[window.activeGroup] = problems;
+      
       const container = document.getElementById('worksheet-preview');
       const countBadge = document.getElementById('problem-count-badge');
       const totalPointsDisplay = document.getElementById('total-points-display');
@@ -1097,6 +1342,15 @@ const totalProblems = problems.length;
       
       // Check for Perfect 100 Easter Egg
       checkPerfectScore(problems);
+
+      // Update export button text (include group indicator)
+      const exportBtn = document.querySelector('.btn-success');
+      if (exportBtn) {
+        exportBtn.innerHTML = `🚀 Експортирај Група ${window.activeGroup} (${problems.length})`;
+      }
+
+      // Auto-save draft
+      triggerAutoSave();
 
       // Clear container
       container.innerHTML = '';
@@ -1438,6 +1692,11 @@ const totalProblems = problems.length;
       
       // Load problems data (fallback to JSON if API not available)
       loadProblems();
+      
+      // Try to restore draft (if available)
+      setTimeout(() => {
+        loadWorksheetDraft();
+      }, 1000); // Wait 1 second for allProblems to load
     });
 
     async function loadTemplates() {
