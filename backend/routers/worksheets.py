@@ -199,7 +199,7 @@ def generate_worksheet_pdf(data: WorksheetRequest) -> BytesIO:
         if problem.problem_id:
             problem_title = clean_text_for_pdf(problem.problem_id)
         else:
-            problem_title = clean_text_for_pdf(f"Задача {i}")
+            problem_title = f"Problem {i}"  # U+0417 U+0430 U+0434 U+0430 U+0447 U+0430 {i}
         
         # Problem header
         story.append(Paragraph(
@@ -215,7 +215,7 @@ def generate_worksheet_pdf(data: WorksheetRequest) -> BytesIO:
     # Solutions section
     if data.include_solutions:
         story.append(PageBreak())
-        solutions_title = clean_text_for_pdf("📖 Решенија")
+        solutions_title = "Solutions"  # U+1F4D6 U+0420 U+0435 U+0448 U+0435 U+043D U+0438 U+0458 U+0430
         story.append(Paragraph(solutions_title, title_style))
         story.append(Spacer(1, 0.5*cm))
         
@@ -224,8 +224,8 @@ def generate_worksheet_pdf(data: WorksheetRequest) -> BytesIO:
                 if problem.problem_id:
                     problem_title = clean_text_for_pdf(problem.problem_id)
                 else:
-                    problem_title = clean_text_for_pdf(f"Задача {i}")
-                solution_label = clean_text_for_pdf("Решение")
+                    problem_title = f"Problem {i}"  # U+0417 U+0430 U+0434 U+0430 U+0447 U+0430 {i}
+                solution_label = "Solution"  # U+0420 U+0435 U+0448 U+0435 U+043D U+0438 U+0435
                 story.append(Paragraph(
                     f"<b>{i}. {problem_title} - {solution_label}</b>",
                     heading_style
@@ -236,7 +236,7 @@ def generate_worksheet_pdf(data: WorksheetRequest) -> BytesIO:
     
     # Footer
     story.append(Spacer(1, 1*cm))
-    footer_text = clean_text_for_pdf(f"Генерирано преку Olympiad Math Archive • app.mismath.net • {datetime.now().strftime('%d.%m.%Y во %H:%M')}")
+    footer_text = f"Generated via Olympiad Math Archive | app.mismath.net | {datetime.now().strftime('%d.%m.%Y %H:%M')}"  # U+0413 U+0435 U+043D U+0435 U+0440 U+0438 U+0440 U+0430 U+043D U+043E U+043F U+0440 U+0435 U+043A U+0443...
     story.append(Paragraph(footer_text, ParagraphStyle(
         'Footer',
         parent=styles['Normal'],
