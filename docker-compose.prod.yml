@@ -14,7 +14,7 @@ services:
       - postgres_data:/var/lib/postgresql/data
       - ./backend/database/worksheets_schema.sql:/docker-entrypoint-initdb.d/init.sql
     ports:
-      - "5432:5432"
+      - "127.0.0.1:5432:5432"   # само локално (SSH-тунел), никогаш кон интернет
     networks:
       - app_network
     healthcheck:
@@ -28,15 +28,17 @@ services:
     image: redis:7-alpine
     container_name: math_archive_redis
     restart: always
-    command: redis-server --appendonly yes
+    command: ["sh", "-c", "exec redis-server --appendonly yes --requirepass \"$$REDIS_PASSWORD\""]
+    environment:
+      REDIS_PASSWORD: ${REDIS_PASSWORD:?REDIS_PASSWORD мора да е во .env}
     volumes:
       - redis_data:/data
     ports:
-      - "6379:6379"
+      - "127.0.0.1:6379:6379"   # само локално, со лозинка
     networks:
       - app_network
     healthcheck:
-      test: ["CMD", "redis-cli", "ping"]
+      test: ["CMD-SHELL", "redis-cli -a \"$$REDIS_PASSWORD\" --no-auth-warning ping | grep -q PONG"]
       interval: 10s
       timeout: 3s
       retries: 5
@@ -52,7 +54,7 @@ services:
       NODE_ENV: production
       PORT: 3000
       DATABASE_URL: postgresql://mathuser:${DB_PASSWORD}@postgres:5432/math_archive
-      REDIS_URL: redis://redis:6379
+      REDIS_URL: redis://:${REDIS_PASSWORD}@redis:6379
       JWT_SECRET: ${JWT_SECRET}
       GEMINI_API_KEY: ${GEMINI_API_KEY}
       CORS_ORIGIN: ${SERVER_URL}
@@ -62,7 +64,7 @@ services:
       redis:
         condition: service_healthy
     ports:
-      - "3000:3000"
+      - "127.0.0.1:3000:3000"   # API само преку nginx
     networks:
       - app_network
     volumes:
@@ -83,7 +85,7 @@ services:
     container_name: math_archive_manim
     restart: always
     environment:
-      REDIS_URL: redis://redis:6379
+      REDIS_URL: redis://:${REDIS_PASSWORD}@redis:6379
       NODE_ENV: production
     depends_on:
       redis:
